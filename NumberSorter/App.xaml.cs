@@ -24,9 +24,12 @@ namespace NumberSorter
 
         public App()
         {
+            Locator.CurrentMutable.RegisterViewsForViewModels(Assembly.GetCallingAssembly());
+
             var dialogService = new DialogService<ReactiveObject>();
             dialogService.RegisterWindowType<MainWindowViewModel, MainWindow>(x => new MainWindow(x as MainWindowViewModel));
             dialogService.RegisterWindowType<NumberGeneratorViewModel, NumberGeneratorWindow>(x => new NumberGeneratorWindow(x as NumberGeneratorViewModel));
+            dialogService.RegisterWindowType<SortTypeViewModel, SortTypeDialog>(x => new SortTypeDialog(x as SortTypeViewModel));
 
             _dialogService = dialogService;
         }
@@ -36,7 +39,6 @@ namespace NumberSorter
         {
             base.OnStartup(eventArgs);
 
-            Locator.CurrentMutable.RegisterViewsForViewModels(Assembly.GetCallingAssembly());
 
             var mainWindowViewModel = new MainWindowViewModel(_dialogService);
             await _dialogService.ShowModalPresentation(null, mainWindowViewModel).ConfigureAwait(false);

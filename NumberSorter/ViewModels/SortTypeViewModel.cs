@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using NumberSorter.Interactions;
 using System.IO;
 using System.Text.RegularExpressions;
+using DynamicData;
 
 namespace NumberSorter.ViewModels
 {
@@ -22,10 +23,13 @@ namespace NumberSorter.ViewModels
     {
         #region Fields
 
+        private SourceList<SortTypeLineViewModel> _sortTypes = new SourceList<SortTypeLineViewModel>();
 
         #endregion Fields
 
         #region Properties
+
+        public IEnumerable<SortTypeLineViewModel> SortTypes => _sortTypes.Items;
 
         #endregion Properties
 
@@ -39,6 +43,9 @@ namespace NumberSorter.ViewModels
 
         public SortTypeViewModel()
         {
+            _sortTypes.Add(new SortTypeLineViewModel("Bubble sort"));
+            _sortTypes.Add(new SortTypeLineViewModel("Bubble sort"));
+            _sortTypes.Add(new SortTypeLineViewModel("Bubble sort"));
         }
 
         #endregion Constructors

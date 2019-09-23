@@ -23,15 +23,14 @@ namespace NumberSorter.Forms
     /// </summary>
     public partial class SortTypeLineControl : ReactiveUserControl<SortTypeLineViewModel>
     {
-        public SortTypeLineControl(String name)
+        public SortTypeLineControl()
         {
             InitializeComponent();
-            ViewModel = new SortTypeLineViewModel(name);
             this.WhenActivated(disposableRegistration =>
             {
                 this.OneWayBind(ViewModel,
-                        viewModel => viewModel.Description,
-                        view => view.DescriptionTextBlock.Text)
+                        x => x.Description,
+                        x => x.DescriptionTextBlock.Text)
                         .DisposeWith(disposableRegistration);
 
                 //this.OneWayBind(ViewModel,

@@ -1,6 +1,9 @@
-﻿using System;
+﻿using NumberSorter.ViewModels;
+using ReactiveUI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Disposables;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,13 +20,21 @@ namespace NumberSorter.Forms
     /// <summary>
     /// Interaction logic for SortTypeDialog.xaml
     /// </summary>
-    public partial class SortTypeDialog : Window
+    public partial class SortTypeDialog : ReactiveWindow<SortTypeViewModel>
     {
-        public SortTypeDialog()
+        public SortTypeDialog(SortTypeViewModel viewModel)
         {
             InitializeComponent();
+            DataContext = viewModel;
+            ViewModel = viewModel;
 
-
+            this.WhenActivated(disposableRegistration =>
+            {
+                this.OneWayBind(ViewModel,
+                    x => x.SortTypes,
+                    x => x.SortTypeList.ItemsSource)
+                    .DisposeWith(disposableRegistration);
+            });
         }
     }
 }

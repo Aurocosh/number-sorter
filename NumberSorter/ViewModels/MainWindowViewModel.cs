@@ -105,6 +105,8 @@ namespace NumberSorter.ViewModels
 
         private void SortData()
         {
+            var viewModel = new SortTypeViewModel();
+            _dialogService.ShowModalPresentation(this, viewModel);
         }
 
         #endregion Command functions

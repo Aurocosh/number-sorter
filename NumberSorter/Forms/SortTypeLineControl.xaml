@@ -10,7 +10,14 @@
              xmlns:reactiveui="http://reactiveui.net"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <TextBlock Name="DescriptionTextBlock">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Column="0" Content="XOXOX"/>
+        <TextBlock Grid.Column="1" Name="DescriptionTextBlock"/>
 
-    </TextBlock>
+
+    </Grid>
+
 </reactiveui:ReactiveUserControl>
