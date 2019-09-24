@@ -13,11 +13,9 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Label Grid.Column="0" Content="XOXOX"/>
-        <TextBlock Grid.Column="1" Name="DescriptionTextBlock"/>
-
-
+        <TextBlock Grid.Column="1" Name="DescriptionTextBlock" VerticalAlignment="Center"/>
     </Grid>
-
 </reactiveui:ReactiveUserControl>

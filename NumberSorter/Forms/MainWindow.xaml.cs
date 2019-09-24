@@ -25,15 +25,11 @@ namespace NumberSorter.Forms
     /// </summary>
     public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
     {
-        public MainWindow(MainWindowViewModel viewModel)
+        public MainWindow()
         {
             InitializeComponent();
-            ViewModel = viewModel;
-            DataContext = viewModel;
             this.WhenActivated(disposable =>
             {
-                //this.Bind(this.ViewModel, x => x.TheText, x => x.TheTextBox.Text)
-                //.DisposeWith(disposable);
                 this.OneWayBind(ViewModel, x => x.InputText, x => x.InputTextBox.Text)
                     .DisposeWith(disposable);
                 this.OneWayBind(ViewModel, x => x.OutputText, x => x.OutputTextBox.Text)

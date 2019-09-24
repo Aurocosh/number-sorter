@@ -27,9 +27,9 @@ namespace NumberSorter
             Locator.CurrentMutable.RegisterViewsForViewModels(Assembly.GetCallingAssembly());
 
             var dialogService = new DialogService<ReactiveObject>();
-            dialogService.RegisterWindowType<MainWindowViewModel, MainWindow>(x => new MainWindow(x as MainWindowViewModel));
-            dialogService.RegisterWindowType<NumberGeneratorViewModel, NumberGeneratorWindow>(x => new NumberGeneratorWindow(x as NumberGeneratorViewModel));
-            dialogService.RegisterWindowType<SortTypeViewModel, SortTypeDialog>(x => new SortTypeDialog(x as SortTypeViewModel));
+            dialogService.RegisterWindowType<MainWindowViewModel, MainWindow>(new WindowViewInitializer<MainWindowViewModel>());
+            dialogService.RegisterWindowType<NumberGeneratorViewModel, NumberGeneratorWindow>(new WindowViewInitializer<NumberGeneratorViewModel>());
+            dialogService.RegisterWindowType<SortTypeViewModel, SortTypeDialog>(new WindowViewInitializer<SortTypeViewModel>());
 
             _dialogService = dialogService;
         }
@@ -38,10 +38,8 @@ namespace NumberSorter
         protected override async void OnStartup(StartupEventArgs eventArgs)
         {
             base.OnStartup(eventArgs);
-
-
             var mainWindowViewModel = new MainWindowViewModel(_dialogService);
-            await _dialogService.ShowModalPresentation(null, mainWindowViewModel).ConfigureAwait(false);
+            await _dialogService.ShowModalPresentationAsync(null, mainWindowViewModel).ConfigureAwait(false);
         }
     }
 }

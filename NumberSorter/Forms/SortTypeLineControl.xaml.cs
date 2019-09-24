@@ -32,21 +32,6 @@ namespace NumberSorter.Forms
                         x => x.Description,
                         x => x.DescriptionTextBlock.Text)
                         .DisposeWith(disposableRegistration);
-
-                //this.OneWayBind(ViewModel,
-                //    viewModel => viewModel.Title,
-                //    view => view.titleRun.Text)
-                //    .DisposeWith(disposableRegistration);
-
-                //this.OneWayBind(ViewModel,
-                //    viewModel => viewModel.Description,
-                //    view => view.descriptionRun.Text)
-                //    .DisposeWith(disposableRegistration);
-
-                //this.BindCommand(ViewModel,
-                //    viewModel => viewModel.OpenPage,
-                //    view => view.openButton)
-                //    .DisposeWith(disposableRegistration);
             });
         }
     }

@@ -31,8 +31,7 @@ namespace NumberSorter.ViewModels
 
         [Reactive] public string InputText { get; set; }
         [Reactive] public string OutputText { get; set; }
-
-        public List<int> InputNumbers { [ObservableAsProperty]get; }
+        [Reactive] public IEnumerable<int> InputNumbers { get; set; }
 
         #endregion Properties
 
@@ -58,15 +57,15 @@ namespace NumberSorter.ViewModels
             GenerateDataCommand = ReactiveCommand.CreateFromObservable(GenerateData);
             PerformSortCommand = ReactiveCommand.Create(SortData);
 
-            GenerateDataCommand
-                .Where(x => x?.Count > 0)
-                .ToPropertyEx(this, x => x.InputNumbers);
-
-            LoadDataCommand.
-                Where(x => !string.IsNullOrEmpty(x))
+            LoadDataCommand
+                .Where(x => !string.IsNullOrEmpty(x))
                 .Select(LoadNumbersFromFile)
                 .Where(x => x.Count > 0)
-                .ToPropertyEx(this, x => x.InputNumbers);
+                .Subscribe(x => InputNumbers = x);
+
+            GenerateDataCommand
+                .Where(x => x.Count > 0)
+                .Subscribe(x => InputNumbers = x);
 
             this.WhenAnyValue(x => x.InputNumbers)
                 .Subscribe(UpdateInputText);
@@ -117,7 +116,7 @@ namespace NumberSorter.ViewModels
 
         #endregion Command predicates
 
-        private void UpdateInputText(List<int> values)
+        private void UpdateInputText(IEnumerable<int> values)
         {
             if (values != null)
                 InputText = String.Join(", ", values.Select(x => x.ToString()));

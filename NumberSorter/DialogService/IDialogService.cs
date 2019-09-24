@@ -7,6 +7,7 @@ namespace NumberSorter.DialogService
     {
         void ShowPresentation(TViewModel viewModel);
         void HidePresentation(TViewModel viewModel);
-        Task ShowModalPresentation(TViewModel parentViewModel, TViewModel viewModel);
+        void ShowModalPresentation(TViewModel parentViewModel, TViewModel viewModel);
+        Task ShowModalPresentationAsync(TViewModel parentViewModel, TViewModel viewModel);
     }
 }

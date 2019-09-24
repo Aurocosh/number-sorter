@@ -22,12 +22,9 @@ namespace NumberSorter.Forms
     /// </summary>
     public partial class SortTypeDialog : ReactiveWindow<SortTypeViewModel>
     {
-        public SortTypeDialog(SortTypeViewModel viewModel)
+        public SortTypeDialog()
         {
             InitializeComponent();
-            DataContext = viewModel;
-            ViewModel = viewModel;
-
             this.WhenActivated(disposableRegistration =>
             {
                 this.OneWayBind(ViewModel,

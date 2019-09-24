@@ -24,11 +24,9 @@ namespace NumberSorter.Forms
     {
         public List<int> Numbers => ViewModel.Numbers;
 
-        public NumberGeneratorWindow(NumberGeneratorViewModel viewModel)
+        public NumberGeneratorWindow()
         {
             InitializeComponent();
-            ViewModel = viewModel;
-            DataContext = viewModel;
             this.WhenActivated(disposable =>
             {
                 this.Bind(ViewModel, x => x.Minimum, x => x.MinimumUpDown.Value)

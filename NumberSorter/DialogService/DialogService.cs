@@ -7,39 +7,53 @@ namespace NumberSorter.DialogService
 {
     public class DialogService<TViewModel> : IDialogService<TViewModel> where TViewModel : class
     {
+        private readonly Dictionary<Type, Type> _viewModelToViewMapping = new Dictionary<Type, Type>();
         private readonly Dictionary<TViewModel, Window> _openWindows = new Dictionary<TViewModel, Window>();
-        private readonly Dictionary<Type, Func<TViewModel, Window>> _viewFactoryMapping = new Dictionary<Type, Func<TViewModel, Window>>();
+        private readonly Dictionary<Type, IViewInitializer> _viewInitializerMapping = new Dictionary<Type, IViewInitializer>();
 
-        public void RegisterWindowType<TSpecificViewModel, TWindow>(Func<TViewModel, TWindow> viewFactory) where TWindow : Window
+        public void RegisterWindowType<TSpecificViewModel, TWindow>(IViewInitializer viewInitializer) where TWindow : Window
         {
+            var viewType = typeof(TWindow);
             var viewModelType = typeof(TSpecificViewModel);
             if (viewModelType.IsInterface)
                 throw new ArgumentException("Cannot register interfaces");
-            if (_viewFactoryMapping.ContainsKey(viewModelType))
+            if (_viewModelToViewMapping.ContainsKey(viewModelType))
                 throw new InvalidOperationException($"Type {viewModelType.FullName} is already registered");
-            _viewFactoryMapping[viewModelType] = viewFactory;
+            _viewModelToViewMapping[viewModelType] = viewType;
+            _viewInitializerMapping[viewModelType] = viewInitializer;
         }
 
         public void UnregisterWindowType()
         {
             var viewModelType = typeof(TViewModel);
-            if (viewModelType.IsInterface)
-                throw new ArgumentException("Cannot register interfaces");
-            if (!_viewFactoryMapping.ContainsKey(viewModelType))
-                throw new InvalidOperationException($"Type {viewModelType.FullName} is not registered");
-            _viewFactoryMapping.Remove(viewModelType);
+            _viewModelToViewMapping.Remove(viewModelType);
         }
 
-        public Window CreateWindowInstanceWithVM(TViewModel viewModel)
+        public Window CreateWindowInstanceWithVM(TViewModel parentViewModel, TViewModel viewModel)
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
 
             var viewModelType = viewModel.GetType();
-            if (!_viewFactoryMapping.TryGetValue(viewModelType, out Func<TViewModel, Window> viewFactory))
+            if (!_viewModelToViewMapping.TryGetValue(viewModelType, out Type viewType))
                 throw new ArgumentException($"No registered window type for argument type {viewModel.GetType().FullName}");
+            if (!_viewInitializerMapping.TryGetValue(viewModelType, out IViewInitializer viewInitializer))
+                throw new ArgumentException($"No registered view initializer for argument type {viewModel.GetType().FullName}");
 
-            return viewFactory.Invoke(viewModel);
+            var window = (Window)Activator.CreateInstance(viewType);
+            viewInitializer.Initialize(window, viewModel);
+
+            if (parentViewModel != null && _openWindows.TryGetValue(parentViewModel, out Window parentWindow))
+            {
+                window.Owner = parentWindow;
+                window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            }
+            else
+            {
+                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            }
+
+            return window;
         }
 
         public void ShowPresentation(TViewModel viewModel)
@@ -48,7 +62,7 @@ namespace NumberSorter.DialogService
                 throw new ArgumentNullException(nameof(viewModel));
             if (_openWindows.ContainsKey(viewModel))
                 throw new InvalidOperationException("UI for this VM is already displayed");
-            var window = CreateWindowInstanceWithVM(viewModel);
+            var window = CreateWindowInstanceWithVM(null, viewModel);
             window.Show();
             _openWindows[viewModel] = window;
         }
@@ -61,18 +75,15 @@ namespace NumberSorter.DialogService
             _openWindows.Remove(viewModel);
         }
 
-        public async Task ShowModalPresentation(TViewModel parentViewModel, TViewModel viewModel)
+        public void ShowModalPresentation(TViewModel parentViewModel, TViewModel viewModel)
         {
-            var window = CreateWindowInstanceWithVM(viewModel);
-            if (parentViewModel != null && _openWindows.TryGetValue(parentViewModel, out Window parentWindow))
-            {
-                window.Owner = parentWindow;
-                window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            }
-            else
-            {
-                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            }
+            var window = CreateWindowInstanceWithVM(parentViewModel, viewModel);
+            window.ShowDialog();
+        }
+
+        public async Task ShowModalPresentationAsync(TViewModel parentViewModel, TViewModel viewModel)
+        {
+            var window = CreateWindowInstanceWithVM(parentViewModel, viewModel);
             await window.Dispatcher.InvokeAsync(() => window.ShowDialog());
         }
     }

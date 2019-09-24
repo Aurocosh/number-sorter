@@ -110,6 +110,8 @@
     </ApplicationDefinition>
     <Compile Include="DialogService\IDialogService.cs" />
     <Compile Include="DialogService\DialogService.cs" />
+    <Compile Include="DialogService\IViewInitializer.cs" />
+    <Compile Include="DialogService\WindowViewInitializer.cs" />
     <Compile Include="Forms\SortTypeDialog.xaml.cs">
       <DependentUpon>SortTypeDialog.xaml</DependentUpon>
     </Compile>
