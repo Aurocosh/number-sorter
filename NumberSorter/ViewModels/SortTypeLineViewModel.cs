@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+﻿using NumberSorter.Logic;
+using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,13 @@ namespace NumberSorter.ViewModels
 {
     public class SortTypeLineViewModel : ReactiveObject
     {
-        private readonly String _name;
+        public string Description { get; }
+        public AlgorhythmType AlgorhythmType { get; }
 
-        public SortTypeLineViewModel(String name)
+        public SortTypeLineViewModel(AlgorhythmType algorhythmType, String name)
         {
-            _name = name;
+            AlgorhythmType = AlgorhythmType;
+            Description = name;
         }
-
-        public string Description => _name;
     }
 }

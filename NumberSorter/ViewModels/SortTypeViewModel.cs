@@ -16,6 +16,7 @@ using NumberSorter.Interactions;
 using System.IO;
 using System.Text.RegularExpressions;
 using DynamicData;
+using NumberSorter.Logic;
 
 namespace NumberSorter.ViewModels
 {
@@ -23,18 +24,22 @@ namespace NumberSorter.ViewModels
     {
         #region Fields
 
-        private SourceList<SortTypeLineViewModel> _sortTypes = new SourceList<SortTypeLineViewModel>();
+
+        private readonly SourceList<SortTypeLineViewModel> _sortTypes = new SourceList<SortTypeLineViewModel>();
 
         #endregion Fields
 
         #region Properties
-
+        [Reactive] public bool? DialogResult { get; set; }
+        [Reactive] public SortTypeLineViewModel SelectedSortType { get; set; }
         public IEnumerable<SortTypeLineViewModel> SortTypes => _sortTypes.Items;
 
         #endregion Properties
 
 
         #region Commands
+
+        public ReactiveCommand<Unit, Unit> AcceptCommand { get; }
 
         #endregion Commands
 
@@ -43,9 +48,13 @@ namespace NumberSorter.ViewModels
 
         public SortTypeViewModel()
         {
-            _sortTypes.Add(new SortTypeLineViewModel("Bubble sort"));
-            _sortTypes.Add(new SortTypeLineViewModel("Bubble sort"));
-            _sortTypes.Add(new SortTypeLineViewModel("Bubble sort"));
+            AcceptCommand = ReactiveCommand.Create(Accept);
+
+            _sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.BubbleSort, "Bubble sort"));
+            _sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.MergeSort, "Merge sort"));
+            _sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.QuickSort, "Quick sort"));
+
+            SelectedSortType = SortTypes.First();
         }
 
         #endregion Constructors
@@ -53,6 +62,10 @@ namespace NumberSorter.ViewModels
 
         #region Command functions
 
+        private void Accept()
+        {
+            DialogResult = SelectedSortType != null;
+        }
         #endregion Command functions
     }
 }

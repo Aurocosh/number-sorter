@@ -25,12 +25,19 @@ namespace NumberSorter.Forms
         public SortTypeDialog()
         {
             InitializeComponent();
-            this.WhenActivated(disposableRegistration =>
+            this.WhenActivated(disposable =>
             {
                 this.OneWayBind(ViewModel,
                     x => x.SortTypes,
                     x => x.SortTypeList.ItemsSource)
-                    .DisposeWith(disposableRegistration);
+                    .DisposeWith(disposable);
+                this.Bind(ViewModel,
+                    x => x.SelectedSortType,
+                    x => x.SortTypeList.SelectedItem)
+                    .DisposeWith(disposable);
+
+                this.BindCommand(ViewModel, x => x.AcceptCommand, x => x.AcceptButton)
+                    .DisposeWith(disposable);
             });
         }
     }
