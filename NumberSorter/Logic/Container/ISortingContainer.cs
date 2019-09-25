@@ -10,7 +10,9 @@ namespace NumberSorter.Algorhythm
     {
         int Count { get; }
 
-        // -1 first is less, 0 first and second are same, 1 second is less
+        // negative if first is less then second
+        // 0 if first and second are equal
+        // positive if second is less then first
         int Compare(int first, int second);
         void Swap(int first, int second);
         void Clear();

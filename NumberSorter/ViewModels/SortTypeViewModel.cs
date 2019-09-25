@@ -40,7 +40,6 @@ namespace NumberSorter.ViewModels
         #region Commands
 
         public ReactiveCommand<Unit, Unit> AcceptCommand { get; }
-        public ReactiveCommand<Unit, Unit> TestCommand { get; }
 
         #endregion Commands
 
@@ -50,7 +49,6 @@ namespace NumberSorter.ViewModels
         public SortTypeViewModel()
         {
             AcceptCommand = ReactiveCommand.Create(Accept);
-            TestCommand = ReactiveCommand.Create(Test);
 
             _sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.BubbleSort, "Bubble sort"));
             _sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.MergeSort, "Merge sort"));
@@ -67,10 +65,6 @@ namespace NumberSorter.ViewModels
         private void Accept()
         {
             DialogResult = SelectedSortType != null;
-        }
-        private void Test()
-        {
-            Console.WriteLine("Test 1");
         }
         #endregion Command functions
     }

@@ -20,7 +20,7 @@ namespace NumberSorter.Logic.Algorhythm
                 for (int i = 0; i < count - 1; i++)
                 {
                     int comparrassion = sortingContainer.Compare(i, i + 1);
-                    if (comparrassion == 1)
+                    if (comparrassion > 0)
                     {
                         sortingContainer.Swap(i, i + 1);
                         fullySorted = false;
