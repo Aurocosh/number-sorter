@@ -16,6 +16,9 @@ using NumberSorter.Interactions;
 using System.IO;
 using System.Text.RegularExpressions;
 using NumberSorter.DialogService;
+using NumberSorter.Logic;
+using NumberSorter.Algorhythm.Container;
+using NumberSorter.Logic.Comparer;
 
 namespace NumberSorter.ViewModels
 {
@@ -32,6 +35,7 @@ namespace NumberSorter.ViewModels
         [Reactive] public string InputText { get; set; }
         [Reactive] public string OutputText { get; set; }
         [Reactive] public IEnumerable<int> InputNumbers { get; set; }
+        [Reactive] public IEnumerable<int> OutputNumbers { get; set; }
 
         #endregion Properties
 
@@ -40,7 +44,7 @@ namespace NumberSorter.ViewModels
 
         public ReactiveCommand<Unit, String> LoadDataCommand { get; }
         public ReactiveCommand<Unit, List<int>> GenerateDataCommand { get; }
-        public ReactiveCommand<Unit, Unit> PerformSortCommand { get; }
+        public ReactiveCommand<Unit, List<int>> PerformSortCommand { get; }
 
         #endregion Commands
 
@@ -53,9 +57,12 @@ namespace NumberSorter.ViewModels
         {
             _dialogService = dialogService;
 
+            InputNumbers = new List<int>();
+            OutputNumbers = new List<int>();
+
             LoadDataCommand = ReactiveCommand.CreateFromObservable(FindFileToLoad);
             GenerateDataCommand = ReactiveCommand.CreateFromObservable(GenerateData);
-            PerformSortCommand = ReactiveCommand.Create(SortData);
+            PerformSortCommand = ReactiveCommand.CreateFromObservable(SortData);
 
             LoadDataCommand
                 .Where(x => !string.IsNullOrEmpty(x))
@@ -67,8 +74,15 @@ namespace NumberSorter.ViewModels
                 .Where(x => x.Count > 0)
                 .Subscribe(x => InputNumbers = x);
 
+            PerformSortCommand
+                .Where(x => x.Count > 0)
+                .Subscribe(x => OutputNumbers = x);
+
             this.WhenAnyValue(x => x.InputNumbers)
                 .Subscribe(UpdateInputText);
+
+            this.WhenAnyValue(x => x.OutputNumbers)
+                .Subscribe(UpdateOutputText);
         }
 
         #endregion Constructors
@@ -102,10 +116,23 @@ namespace NumberSorter.ViewModels
             return Observable.Return(viewModel.Numbers);
         }
 
-        private void SortData()
+        private IObservable<List<int>> SortData()
         {
             var viewModel = new SortTypeViewModel();
             _dialogService.ShowModalPresentation(this, viewModel);
+
+            if (viewModel.DialogResult == false || viewModel.SelectedSortType == null)
+                return Observable.Return(new List<int>());
+
+            var algorhythmType = viewModel.SelectedSortType.AlgorhythmType;
+            var factory = new AlgorhythmFactory();
+            var algorhythm = factory.GetAlgorhythm(algorhythmType);
+
+            var sortingContainer = new ListSortingContainer<int>(InputNumbers, new IntComparer());
+            algorhythm.Sort(sortingContainer);
+            var result = sortingContainer.ToList();
+
+            return Observable.Return(result);
         }
 
         #endregion Command functions
@@ -116,10 +143,7 @@ namespace NumberSorter.ViewModels
 
         #endregion Command predicates
 
-        private void UpdateInputText(IEnumerable<int> values)
-        {
-            if (values != null)
-                InputText = String.Join(", ", values.Select(x => x.ToString()));
-        }
+        private void UpdateInputText(IEnumerable<int> values) => InputText = string.Join(", ", values.Select(x => x.ToString()));
+        private void UpdateOutputText(IEnumerable<int> values) => OutputText = String.Join(", ", values.Select(x => x.ToString()));
     }
 }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Logic.Algorhythm
 {
-    public class BubbleSortAlgorhythm<T> : ISortAlgorhythm<T>
+    public class BubbleSortAlgorhythm : ISortAlgorhythm
     {
-        public void Sort(ISortingContainer<T> sortingContainer)
+        public void Sort(ISortingContainer sortingContainer)
         {
             bool fullySorted = false;
             int count = sortingContainer.Count;

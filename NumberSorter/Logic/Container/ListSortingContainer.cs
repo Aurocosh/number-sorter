@@ -24,11 +24,7 @@ namespace NumberSorter.Algorhythm.Container
 
         public int Count => _list.Count;
         public void Clear() => _list.Clear();
-
-        public int Compare(int first, int second)
-        {
-            return _comparer.Compare(_list[first], _list[second]);
-        }
+        public int Compare(int first, int second) => _comparer.Compare(_list[first], _list[second]);
 
         public void Swap(int first, int second)
         {
@@ -38,5 +34,6 @@ namespace NumberSorter.Algorhythm.Container
         }
 
         public T[] ToArray() => _list.ToArray();
+        public List<T> ToList() => _list.ToList();
     }
 }

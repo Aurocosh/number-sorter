@@ -36,8 +36,10 @@ namespace NumberSorter.Forms
                     x => x.SortTypeList.SelectedItem)
                     .DisposeWith(disposable);
 
-                this.BindCommand(ViewModel, x => x.AcceptCommand, x => x.AcceptButton)
-                    .DisposeWith(disposable);
+                //this.BindCommand(ViewModel, x => x.AcceptCommand, x => x.AcceptButton)
+                //    .DisposeWith(disposable);
+                //this.BindCommand(ViewModel, x => x.AcceptCommand, x => x.SortTypeDoubleClick)
+                //.DisposeWith(disposable);
             });
         }
     }

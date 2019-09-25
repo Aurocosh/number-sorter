@@ -75,10 +75,10 @@ namespace NumberSorter.DialogService
             _openWindows.Remove(viewModel);
         }
 
-        public void ShowModalPresentation(TViewModel parentViewModel, TViewModel viewModel)
+        public bool ShowModalPresentation(TViewModel parentViewModel, TViewModel viewModel)
         {
             var window = CreateWindowInstanceWithVM(parentViewModel, viewModel);
-            window.ShowDialog();
+            return window.ShowDialog() == true;
         }
 
         public async Task ShowModalPresentationAsync(TViewModel parentViewModel, TViewModel viewModel)

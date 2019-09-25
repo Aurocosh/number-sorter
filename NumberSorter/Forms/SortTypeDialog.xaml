@@ -11,13 +11,20 @@
         xmlns:utility="clr-namespace:NumberSorter.Utility"
         utility:DialogCloser.DialogResult = "{Binding DialogResult}"
         mc:Ignorable="d"
-        Title="SortTypeDialog" Height="450" Width="400">
+        Title="SortTypeDialog" Height="450" Width="400"
+        d:DataContext="{d:DesignInstance viewmodel:SortTypeViewModel}">
     <DockPanel>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Name="AcceptButton" Content="Accept" Width="80" Margin="5"/>
+            <Button Name="AcceptButton" Content="Accept" Width="80" Margin="5">
+                <Button.InputBindings>
+                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding AcceptCommand}" />
+                </Button.InputBindings>
+            </Button>
             <Button IsCancel="True" Content="Cancel" Width="80" Margin="5"/>
         </StackPanel>
         <ListBox Name="SortTypeList" HorizontalContentAlignment="Stretch"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+
+        </ListBox>
     </DockPanel>
 </reactiveui:ReactiveWindow>

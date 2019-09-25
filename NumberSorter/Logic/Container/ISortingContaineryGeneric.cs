@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Algorhythm
 {
-    public interface ISortAlgorhythm
+    public interface ISortingContainer<T> : ISortingContainer
     {
-        void Sort(ISortingContainer sortingContainer);
+        T this[int index] { get; set; }
+        T[] ToArray();
+        List<T> ToList();
     }
 }
