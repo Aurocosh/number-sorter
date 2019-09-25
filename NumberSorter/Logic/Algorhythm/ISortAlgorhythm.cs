@@ -8,6 +8,6 @@ namespace NumberSorter.Algorhythm
 {
     public interface ISortAlgorhythm
     {
-        void Sort(ISortingContainer sortingContainer);
+        void Sort<T>(IList<T> list, IComparer<T> comparer);
     }
 }

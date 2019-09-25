@@ -1,4 +1,5 @@
 ﻿using NumberSorter.Algorhythm;
+using NumberSorter.Logic.Container;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +10,23 @@ namespace NumberSorter.Logic.Algorhythm
 {
     public class BubbleSortAlgorhythm : ISortAlgorhythm
     {
-        public void Sort(ISortingContainer sortingContainer)
+        public void Sort<T>(IList<T> list, IComparer<T> comparer)
         {
             bool fullySorted = false;
-            int count = sortingContainer.Count;
+            int count = list.Count;
 
             while (!fullySorted)
             {
                 fullySorted = true;
                 for (int i = 0; i < count - 1; i++)
                 {
-                    int comparrassion = sortingContainer.Compare(i, i + 1);
+                    var first = list[i];
+                    var second = list[i + 1];
+
+                    int comparrassion = comparer.Compare(first, second);
                     if (comparrassion > 0)
                     {
-                        sortingContainer.Swap(i, i + 1);
+                        list.Swap(i, i + 1);
                         fullySorted = false;
                     }
                 }

@@ -34,8 +34,8 @@ namespace NumberSorter.ViewModels
 
         [Reactive] public string InputText { get; set; }
         [Reactive] public string OutputText { get; set; }
-        [Reactive] public IEnumerable<int> InputNumbers { get; set; }
-        [Reactive] public IEnumerable<int> OutputNumbers { get; set; }
+        [Reactive] public IList<int> InputNumbers { get; set; }
+        [Reactive] public IList<int> OutputNumbers { get; set; }
 
         #endregion Properties
 
@@ -128,8 +128,8 @@ namespace NumberSorter.ViewModels
             var factory = new AlgorhythmFactory();
             var algorhythm = factory.GetAlgorhythm(algorhythmType);
 
-            var sortingContainer = new ListSortingContainer<int>(InputNumbers, new IntComparer());
-            algorhythm.Sort(sortingContainer);
+            var sortingContainer = new AccessTrackingList<int>(InputNumbers);
+            algorhythm.Sort(sortingContainer, new IntComparer());
             var result = sortingContainer.ToList();
 
             return Observable.Return(result);

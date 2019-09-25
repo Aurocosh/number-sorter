@@ -122,10 +122,9 @@
     <Compile Include="Logic\Algorhythm\BubbleSortAlgorhythm.cs" />
     <Compile Include="Logic\AlgorhythmType.cs" />
     <Compile Include="Logic\Comparer\IntComparer.cs" />
-    <Compile Include="Logic\Container\ISortingContaineryGeneric.cs" />
+    <Compile Include="Logic\Container\IListExtensions.cs" />
     <Compile Include="Logic\Container\ListSortingContainer.cs" />
     <Compile Include="Logic\Algorhythm\ISortAlgorhythm.cs" />
-    <Compile Include="Logic\Container\ISortingContainer.cs" />
     <Compile Include="Interactions\DialogInteractions.cs" />
     <Compile Include="Utility\DialogCloser.cs" />
     <Compile Include="Forms\NumberGeneratorWindow.xaml.cs">
