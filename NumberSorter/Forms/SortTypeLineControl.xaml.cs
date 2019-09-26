@@ -1,4 +1,4 @@
-﻿using NumberSorter.ViewModels;
+﻿using NumberSorter.Domain.ViewModels;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;

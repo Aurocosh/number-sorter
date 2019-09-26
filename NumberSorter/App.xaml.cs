@@ -7,9 +7,9 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using NumberSorter.DialogService;
+using NumberSorter.Domain.DialogService;
+using NumberSorter.Domain.ViewModels;
 using NumberSorter.Forms;
-using NumberSorter.Interactions;
-using NumberSorter.ViewModels;
 using ReactiveUI;
 using Splat;
 

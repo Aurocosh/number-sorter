@@ -1,6 +1,6 @@
 ﻿using Microsoft.Win32;
-using NumberSorter.Interactions;
-using NumberSorter.ViewModels;
+using NumberSorter.Domain.Interactions;
+using NumberSorter.Domain.ViewModels;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
