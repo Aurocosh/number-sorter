@@ -24,7 +24,9 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1.5*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -34,6 +36,11 @@
             <Label Grid.Row="0" Grid.Column="1" Content="Отсортированные данные"/>
             <TextBox Grid.Row="1" Grid.Column="0" Name="InputTextBox" Margin="5" VerticalAlignment="Stretch" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"/>
             <TextBox Grid.Row="1" Grid.Column="1" x:Name="OutputTextBox" Margin="5" VerticalAlignment="Stretch" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"/>
+
+            <Label Grid.Row="2" Grid.Column="0" Content="Информация"/>
+            <Label Grid.Row="2" Grid.Column="1" Content="Результат"/>
+            <TextBox Grid.Row="3" Grid.Column="0" Name="InfoTextBox" Margin="5" VerticalAlignment="Stretch" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"/>
+            <TextBox Grid.Row="3" Grid.Column="1" x:Name="ResultTextBox" Margin="5" VerticalAlignment="Stretch" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"/>
         </Grid>
     </DockPanel>
 </reactiveui:ReactiveWindow>

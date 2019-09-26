@@ -126,6 +126,7 @@
     <Compile Include="Logic\Container\ListSortingContainer.cs" />
     <Compile Include="Logic\Algorhythm\ISortAlgorhythm.cs" />
     <Compile Include="Interactions\DialogInteractions.cs" />
+    <Compile Include="Logic\SortingResult.cs" />
     <Compile Include="Utility\DialogCloser.cs" />
     <Compile Include="Forms\NumberGeneratorWindow.xaml.cs">
       <DependentUpon>NumberGeneratorWindow.xaml</DependentUpon>

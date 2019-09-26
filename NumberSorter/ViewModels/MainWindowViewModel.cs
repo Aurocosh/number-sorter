@@ -34,17 +34,20 @@ namespace NumberSorter.ViewModels
 
         [Reactive] public string InputText { get; set; }
         [Reactive] public string OutputText { get; set; }
-        [Reactive] public IList<int> InputNumbers { get; set; }
-        [Reactive] public IList<int> OutputNumbers { get; set; }
+        [Reactive] public string InfoText { get; set; }
+        [Reactive] public string ResultText { get; set; }
+
+        [Reactive] public List<int> InputNumbers { get; set; }
+        [Reactive] public SortingResult<int> SortingResult { get; set; }
 
         #endregion Properties
 
 
         #region Commands
 
-        public ReactiveCommand<Unit, String> LoadDataCommand { get; }
+        public ReactiveCommand<Unit, string> LoadDataCommand { get; }
         public ReactiveCommand<Unit, List<int>> GenerateDataCommand { get; }
-        public ReactiveCommand<Unit, List<int>> PerformSortCommand { get; }
+        public ReactiveCommand<Unit, Unit> PerformSortCommand { get; }
 
         #endregion Commands
 
@@ -58,11 +61,11 @@ namespace NumberSorter.ViewModels
             _dialogService = dialogService;
 
             InputNumbers = new List<int>();
-            OutputNumbers = new List<int>();
+            SortingResult = new SortingResult<int>();
 
             LoadDataCommand = ReactiveCommand.CreateFromObservable(FindFileToLoad);
             GenerateDataCommand = ReactiveCommand.CreateFromObservable(GenerateData);
-            PerformSortCommand = ReactiveCommand.CreateFromObservable(SortData);
+            PerformSortCommand = ReactiveCommand.Create(SortData);
 
             LoadDataCommand
                 .Where(x => !string.IsNullOrEmpty(x))
@@ -74,14 +77,10 @@ namespace NumberSorter.ViewModels
                 .Where(x => x.Count > 0)
                 .Subscribe(x => InputNumbers = x);
 
-            PerformSortCommand
-                .Where(x => x.Count > 0)
-                .Subscribe(x => OutputNumbers = x);
-
             this.WhenAnyValue(x => x.InputNumbers)
                 .Subscribe(UpdateInputText);
 
-            this.WhenAnyValue(x => x.OutputNumbers)
+            this.WhenAnyValue(x => x.SortingResult)
                 .Subscribe(UpdateOutputText);
         }
 
@@ -116,23 +115,26 @@ namespace NumberSorter.ViewModels
             return Observable.Return(viewModel.Numbers);
         }
 
-        private IObservable<List<int>> SortData()
+        private void SortData()
         {
             var viewModel = new SortTypeViewModel();
             _dialogService.ShowModalPresentation(this, viewModel);
 
             if (viewModel.DialogResult == false || viewModel.SelectedSortType == null)
-                return Observable.Return(new List<int>());
+                return;
 
             var algorhythmType = viewModel.SelectedSortType.AlgorhythmType;
             var factory = new AlgorhythmFactory();
             var algorhythm = factory.GetAlgorhythm(algorhythmType);
 
-            var sortingContainer = new AccessTrackingList<int>(InputNumbers);
-            algorhythm.Sort(sortingContainer, new IntComparer());
-            var result = sortingContainer.ToList();
+            var accessTrackingList = new AccessTrackingList<int>(InputNumbers);
+            algorhythm.Sort(accessTrackingList, new IntComparer());
+            var sortedList = accessTrackingList.ToList();
 
-            return Observable.Return(result);
+            int writeCount = accessTrackingList.WriteCount;
+            int readCount = accessTrackingList.ReadCount;
+
+            SortingResult = new SortingResult<int>(writeCount, readCount, 0, sortedList);
         }
 
         #endregion Command functions
@@ -143,7 +145,16 @@ namespace NumberSorter.ViewModels
 
         #endregion Command predicates
 
-        private void UpdateInputText(IEnumerable<int> values) => InputText = string.Join(", ", values.Select(x => x.ToString()));
-        private void UpdateOutputText(IEnumerable<int> values) => OutputText = String.Join(", ", values.Select(x => x.ToString()));
+        private void UpdateInputText(List<int> values)
+        {
+            InputText = string.Join(", ", values.Select(x => x.ToString()));
+            InfoText = $"Input number count: {values.Count}";
+        }
+
+        private void UpdateOutputText(SortingResult<int> result)
+        {
+            OutputText = string.Join(", ", result.SortedList.Select(x => x.ToString()));
+            ResultText = result.Valid ? $"Write count: {result.WriteCount}\nRead count: {result.ReadCount}" : "";
+        }
     }
 }

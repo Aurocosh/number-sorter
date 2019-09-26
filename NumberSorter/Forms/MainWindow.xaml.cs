@@ -34,6 +34,10 @@ namespace NumberSorter.Forms
                     .DisposeWith(disposable);
                 this.OneWayBind(ViewModel, x => x.OutputText, x => x.OutputTextBox.Text)
                     .DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.InfoText, x => x.InfoTextBox.Text)
+                    .DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.ResultText, x => x.ResultTextBox.Text)
+                    .DisposeWith(disposable);
 
                 this.BindCommand(ViewModel, x => x.LoadDataCommand, x => x.LoadFromFileButton)
                     .DisposeWith(disposable);
