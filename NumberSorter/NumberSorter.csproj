@@ -119,6 +119,7 @@
       <DependentUpon>SortTypeLineControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logic\AlgorhythmFactory.cs" />
+    <Compile Include="Logic\Algorhythm\InsertionSortAlgorhythm.cs" />
     <Compile Include="Logic\Algorhythm\BubbleSortAlgorhythm.cs" />
     <Compile Include="Logic\AlgorhythmType.cs" />
     <Compile Include="Logic\Comparer\IntComparer.cs" />

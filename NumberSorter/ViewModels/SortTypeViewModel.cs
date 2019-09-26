@@ -51,7 +51,7 @@ namespace NumberSorter.ViewModels
             AcceptCommand = ReactiveCommand.Create(Accept);
 
             _sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.BubbleSort, "Bubble sort"));
-            _sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.MergeSort, "Merge sort"));
+            _sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.InsertionSort, "Insertion sort"));
             _sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.QuickSort, "Quick sort"));
 
             SelectedSortType = SortTypes.First();

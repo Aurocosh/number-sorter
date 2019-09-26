@@ -9,7 +9,7 @@ namespace NumberSorter.Logic
     public enum AlgorhythmType
     {
         BubbleSort,
-        MergeSort,
+        InsertionSort,
         QuickSort
     }
 }

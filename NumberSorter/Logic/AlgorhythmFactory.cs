@@ -16,8 +16,8 @@ namespace NumberSorter.Logic
             {
                 case AlgorhythmType.BubbleSort:
                     return new BubbleSortAlgorhythm();
-                case AlgorhythmType.MergeSort:
-                    return new BubbleSortAlgorhythm();
+                case AlgorhythmType.InsertionSort:
+                    return new InsertionSortAlgorhythm();
                 case AlgorhythmType.QuickSort:
                     return new BubbleSortAlgorhythm();
                 default:

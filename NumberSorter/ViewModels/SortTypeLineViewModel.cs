@@ -15,7 +15,7 @@ namespace NumberSorter.ViewModels
 
         public SortTypeLineViewModel(AlgorhythmType algorhythmType, String name)
         {
-            AlgorhythmType = AlgorhythmType;
+            AlgorhythmType = algorhythmType;
             Description = name;
         }
     }
