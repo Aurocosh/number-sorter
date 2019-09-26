@@ -1,4 +1,5 @@
 ﻿using NumberSorter.Algorhythm;
+using NumberSorter.Logic.Algorhythm.QuickSort;
 using NumberSorter.Logic.Container;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,14 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Logic.Algorhythm
 {
-    public class QuickSort<T> : ComparerSort<T>
+    public class QuickSort<T> : GenericSortAlgorhythm<T>
     {
-        private readonly Random _random = new Random();
+        private readonly QuickSortPivotSelector<T> _pivotSelector;
 
-        public QuickSort(IComparer<T> comparer) : base(comparer) { }
+        public QuickSort(IComparer<T> comparer, QuickSortPivotSelector<T> pivotSelector) : base(comparer)
+        {
+            _pivotSelector = pivotSelector;
+        }
 
         public override void Sort(IList<T> list)
         {
@@ -24,7 +28,7 @@ namespace NumberSorter.Logic.Algorhythm
             if (firstIndex >= lastIndex)
                 return;
 
-            int pivotIndex = SelectPivot(firstIndex, lastIndex);
+            int pivotIndex = _pivotSelector.SelectPivot(list, firstIndex, lastIndex, GetComparer());
             var pivot = list[pivotIndex];
 
             list.Swap(firstIndex, pivotIndex);
@@ -43,11 +47,6 @@ namespace NumberSorter.Logic.Algorhythm
             }
             SortRange(list, firstIndex, pivotIndex - 1);
             SortRange(list, pivotIndex + 1, lastIndex);
-        }
-
-        private int SelectPivot(int firstIndex, int lastIndex)
-        {
-            return _random.Next(firstIndex, lastIndex);
         }
     }
 }

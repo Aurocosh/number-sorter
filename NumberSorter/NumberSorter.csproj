@@ -120,7 +120,10 @@
     </Compile>
     <Compile Include="Logic\AlgorhythmFactory.cs" />
     <Compile Include="Logic\Algorhythm\ComparerSort.cs" />
-    <Compile Include="Logic\Algorhythm\QuickSort.cs" />
+    <Compile Include="Logic\Algorhythm\QuickSort\PivotSelectors\MedianThreePivotSelector.cs" />
+    <Compile Include="Logic\Algorhythm\QuickSort\PivotSelectors\RandomPivotSelector.cs" />
+    <Compile Include="Logic\Algorhythm\QuickSort\QuickSort.cs" />
+    <Compile Include="Logic\Algorhythm\QuickSort\PivotSelectors\QuickSortPivotSelector.cs" />
     <Compile Include="Logic\Algorhythm\RecursiveMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\InsertionSort.cs" />
     <Compile Include="Logic\Algorhythm\BubbleSort.cs" />

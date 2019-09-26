@@ -8,7 +8,8 @@ namespace NumberSorter.Algorhythm
 {
     public interface ISortAlgorhythm<T>
     {
-        int Compare(T first, T second);
         void Sort(IList<T> list);
+        IComparer<T> GetComparer();
+        int Compare(T first, T second);
     }
 }

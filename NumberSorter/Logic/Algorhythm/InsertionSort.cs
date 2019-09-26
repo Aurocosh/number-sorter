@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Logic.Algorhythm
 {
-    public class InsertionSort<T> : ComparerSort<T>
+    public class InsertionSort<T> : GenericSortAlgorhythm<T>
     {
         public InsertionSort(IComparer<T> comparer) : base(comparer) { }
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Logic.Algorhythm
 {
-    public class BubbleSort<T> : ComparerSort<T>
+    public class BubbleSort<T> : GenericSortAlgorhythm<T>
     {
         public BubbleSort(IComparer<T> comparer) : base(comparer) { }
 

@@ -11,6 +11,7 @@ namespace NumberSorter.Logic
         BubbleSort,
         InsertionSort,
         RecursiveMergeSort,
-        QuickSort
+        QuickSortRandomPivot,
+        QuickSortMedianOfThree
     }
 }

@@ -1,5 +1,6 @@
 ﻿using NumberSorter.Algorhythm;
 using NumberSorter.Logic.Algorhythm;
+using NumberSorter.Logic.Algorhythm.QuickSort.PivotSelectors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,10 @@ namespace NumberSorter.Logic
                     return new InsertionSort<T>(comparer);
                 case AlgorhythmType.RecursiveMergeSort:
                     return new RecursiveMergeSort<T>(comparer);
-                case AlgorhythmType.QuickSort:
-                    return new QuickSort<T>(comparer);
+                case AlgorhythmType.QuickSortRandomPivot:
+                    return new QuickSort<T>(comparer, new RandomPivotSelector<T>());
+                case AlgorhythmType.QuickSortMedianOfThree:
+                    return new QuickSort<T>(comparer, new MedianThreePivotSelector<T>());
                 default:
                     return null;
             }
