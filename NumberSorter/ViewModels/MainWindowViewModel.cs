@@ -19,6 +19,7 @@ using NumberSorter.DialogService;
 using NumberSorter.Logic;
 using NumberSorter.Algorhythm.Container;
 using NumberSorter.Logic.Comparer;
+using System.Diagnostics;
 
 namespace NumberSorter.ViewModels
 {
@@ -97,9 +98,9 @@ namespace NumberSorter.ViewModels
         private List<int> LoadNumbersFromFile(string filepath)
         {
             var fileText = File.ReadAllText(filepath);
-            fileText = Regex.Replace(fileText, @"[^\d\-,.]", " ");
+            fileText = Regex.Replace(fileText, @"[^\d\-]", " ");
             fileText = Regex.Replace(fileText, @"\-\s", " ");
-            fileText = Regex.Replace(fileText, @"(\d+)\-(\d+)", "%1 $2");
+            fileText = Regex.Replace(fileText, @"(\d+)\-(\d+)", "%1 -$2");
             fileText = Regex.Replace(fileText, @"\s+", " ");
             fileText = fileText.Trim();
 
@@ -126,15 +127,21 @@ namespace NumberSorter.ViewModels
             var algorhythmType = viewModel.SelectedSortType.AlgorhythmType;
             var factory = new AlgorhythmFactory();
             var algorhythm = factory.GetAlgorhythm(algorhythmType);
-
             var accessTrackingList = new AccessTrackingList<int>(InputNumbers);
+
+            GC.Collect();
+            var stopwatch = Stopwatch.StartNew();
+
             algorhythm.Sort(accessTrackingList, new IntComparer());
+
+            stopwatch.Stop();
+
             var sortedList = accessTrackingList.ToList();
 
             int writeCount = accessTrackingList.WriteCount;
             int readCount = accessTrackingList.ReadCount;
 
-            SortingResult = new SortingResult<int>(writeCount, readCount, 0, sortedList);
+            SortingResult = new SortingResult<int>(writeCount, readCount, stopwatch.ElapsedMilliseconds, sortedList);
         }
 
         #endregion Command functions
@@ -154,7 +161,7 @@ namespace NumberSorter.ViewModels
         private void UpdateOutputText(SortingResult<int> result)
         {
             OutputText = string.Join(", ", result.SortedList.Select(x => x.ToString()));
-            ResultText = result.Valid ? $"Write count: {result.WriteCount}\nRead count: {result.ReadCount}" : "";
+            ResultText = result.Valid ? $"Write count: {result.WriteCount}\nRead count: {result.ReadCount}\nTime: {result.TimeSpent}" : "";
         }
     }
 }

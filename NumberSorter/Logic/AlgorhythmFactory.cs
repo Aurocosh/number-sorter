@@ -15,11 +15,11 @@ namespace NumberSorter.Logic
             switch (algorhythmType)
             {
                 case AlgorhythmType.BubbleSort:
-                    return new BubbleSortAlgorhythm();
+                    return new BubbleSort();
                 case AlgorhythmType.InsertionSort:
-                    return new InsertionSortAlgorhythm();
-                case AlgorhythmType.QuickSort:
-                    return new BubbleSortAlgorhythm();
+                    return new InsertionSort();
+                case AlgorhythmType.RecursiveMergeSort:
+                    return new RecursiveMergeSort();
                 default:
                     return null;
             }

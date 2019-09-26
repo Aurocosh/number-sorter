@@ -10,6 +10,6 @@ namespace NumberSorter.Logic
     {
         BubbleSort,
         InsertionSort,
-        QuickSort
+        RecursiveMergeSort
     }
 }
