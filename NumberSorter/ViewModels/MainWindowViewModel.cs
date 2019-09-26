@@ -121,18 +121,17 @@ namespace NumberSorter.ViewModels
             var viewModel = new SortTypeViewModel();
             _dialogService.ShowModalPresentation(this, viewModel);
 
-            if (viewModel.DialogResult == false || viewModel.SelectedSortType == null)
+            if (viewModel.DialogResult != true || viewModel.SelectedSortType == null)
                 return;
 
             var algorhythmType = viewModel.SelectedSortType.AlgorhythmType;
-            var factory = new AlgorhythmFactory();
-            var algorhythm = factory.GetAlgorhythm(algorhythmType);
+            var algorhythm = AlgorhythmFactory.GetAlgorhythm(algorhythmType, new IntComparer());
             var accessTrackingList = new AccessTrackingList<int>(InputNumbers);
 
             GC.Collect();
             var stopwatch = Stopwatch.StartNew();
 
-            algorhythm.Sort(accessTrackingList, new IntComparer());
+            algorhythm.Sort(accessTrackingList);
 
             stopwatch.Stop();
 

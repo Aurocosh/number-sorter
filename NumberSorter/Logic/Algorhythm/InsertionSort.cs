@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Logic.Algorhythm
 {
-    public class InsertionSort : ISortAlgorhythm
+    public class InsertionSort<T> : ComparerSort<T>
     {
-        public void Sort<T>(IList<T> list, IComparer<T> comparer)
+        public InsertionSort(IComparer<T> comparer) : base(comparer) { }
+
+        public override void Sort(IList<T> list)
         {
             int count = list.Count;
 
@@ -20,7 +22,7 @@ namespace NumberSorter.Logic.Algorhythm
                 var testIndex = i - 1;
                 var currentValue = list[currentIndex];
 
-                while (testIndex > -1 && comparer.Compare(list[testIndex], currentValue) > 0)
+                while (testIndex > -1 && Compare(list[testIndex], currentValue) > 0)
                 {
                     list.Swap(currentIndex, testIndex);
                     currentIndex = testIndex;

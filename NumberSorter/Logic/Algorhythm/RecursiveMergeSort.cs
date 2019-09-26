@@ -8,14 +8,16 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Logic.Algorhythm
 {
-    public class RecursiveMergeSort : ISortAlgorhythm
+    public class RecursiveMergeSort<T> : ComparerSort<T>
     {
-        private sealed class ArrayHalves<T>
-        {
-            public T[] First { get; }
-            public T[] Second { get; }
+        public RecursiveMergeSort(IComparer<T> comparer) : base(comparer) { }
 
-            public ArrayHalves(T[] first, T[] second)
+        private sealed class ArrayHalves<K>
+        {
+            public K[] First { get; }
+            public K[] Second { get; }
+
+            public ArrayHalves(K[] first, K[] second)
             {
                 First = first;
                 Second = second;
@@ -29,30 +31,52 @@ namespace NumberSorter.Logic.Algorhythm
             Both
         }
 
-        public void Sort<T>(IList<T> list, IComparer<T> comparer)
+        public override void Sort(IList<T> list)
         {
             var array = list.ToArray();
-            var sortedArray = MergeSort(array, comparer);
+            var sortedArray = MergeSort(array);
 
             var length = list.Count;
             for (int i = 0; i < length; i++)
                 list[i] = sortedArray[i];
         }
 
-        private static T[] MergeSort<T>(T[] array, IComparer<T> comparer)
+        private T[] MergeSort(T[] array)
         {
             if (array.Length == 1)
                 return array;
 
             var halvesOfArray = SplitArray(array);
-            var firstSorted = MergeSort(halvesOfArray.First, comparer);
-            var secondSorted = MergeSort(halvesOfArray.Second, comparer);
+            var firstSorted = MergeSort(halvesOfArray.First);
+            var secondSorted = MergeSort(halvesOfArray.Second);
 
-            return Merge(firstSorted, secondSorted, comparer);
+            return Merge(firstSorted, secondSorted);
 
         }
 
-        private static T[] Merge<T>(T[] firstArray, T[] secondArray, IComparer<T> comparer)
+        private static ArrayHalves<T> SplitArray(T[] array)
+        {
+            if (array.Length == 0)
+                return new ArrayHalves<T>(new T[0], new T[0]);
+            if (array.Length == 1)
+                return new ArrayHalves<T>(array.ToArray(), new T[0]);
+
+            const int firstIndex = 0;
+            int secondIndex = array.Length / 2;
+
+            int firstLength = secondIndex;
+            int secondLength = array.Length - firstLength;
+
+            var firstArray = new T[firstLength];
+            var secondArray = new T[secondLength];
+
+            Array.Copy(array, firstIndex, firstArray, 0, firstLength);
+            Array.Copy(array, secondIndex, secondArray, 0, secondLength);
+
+            return new ArrayHalves<T>(firstArray, secondArray);
+        }
+
+        private T[] Merge(T[] firstArray, T[] secondArray)
         {
             int mergedCount = firstArray.Length + secondArray.Length;
             var mergedArray = new T[mergedCount];
@@ -80,7 +104,7 @@ namespace NumberSorter.Logic.Algorhythm
                     var nextFromFirst = firstArray[firstIndex];
                     var nextFromSecond = secondArray[secondIndex];
 
-                    int comparassion = comparer.Compare(nextFromFirst, nextFromSecond);
+                    int comparassion = Compare(nextFromFirst, nextFromSecond);
                     if (comparassion > 0)
                     {
                         secondIndex++;
@@ -104,26 +128,5 @@ namespace NumberSorter.Logic.Algorhythm
             return mergedArray;
         }
 
-        private static ArrayHalves<T> SplitArray<T>(T[] array)
-        {
-            if (array.Length == 0)
-                return new ArrayHalves<T>(new T[0], new T[0]);
-            if (array.Length == 1)
-                return new ArrayHalves<T>(array.ToArray(), new T[0]);
-
-            const int firstIndex = 0;
-            int secondIndex = array.Length / 2;
-
-            int firstLength = secondIndex;
-            int secondLength = array.Length - firstLength;
-
-            var firstArray = new T[firstLength];
-            var secondArray = new T[secondLength];
-
-            Array.Copy(array, firstIndex, firstArray, 0, firstLength);
-            Array.Copy(array, secondIndex, secondArray, 0, secondLength);
-
-            return new ArrayHalves<T>(firstArray, secondArray);
-        }
     }
 }

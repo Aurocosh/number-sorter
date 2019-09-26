@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Logic.Algorhythm
 {
-    public class BubbleSort : ISortAlgorhythm
+    public class BubbleSort<T> : ComparerSort<T>
     {
-        public void Sort<T>(IList<T> list, IComparer<T> comparer)
+        public BubbleSort(IComparer<T> comparer) : base(comparer) { }
+
+        public override void Sort(IList<T> list)
         {
             bool fullySorted = false;
             int count = list.Count;
@@ -23,7 +25,7 @@ namespace NumberSorter.Logic.Algorhythm
                     var first = list[i];
                     var second = list[i + 1];
 
-                    int comparrassion = comparer.Compare(first, second);
+                    int comparrassion = Compare(first, second);
                     if (comparrassion > 0)
                     {
                         list.Swap(i, i + 1);

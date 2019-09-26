@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Algorhythm
 {
-    public interface ISortAlgorhythm
+    public interface ISortAlgorhythm<T>
     {
-        void Sort<T>(IList<T> list, IComparer<T> comparer);
+        int Compare(T first, T second);
+        void Sort(IList<T> list);
     }
 }

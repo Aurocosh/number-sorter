@@ -8,18 +8,20 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Logic
 {
-    public class AlgorhythmFactory
+    public static class AlgorhythmFactory
     {
-        public ISortAlgorhythm GetAlgorhythm(AlgorhythmType algorhythmType)
+        public static ISortAlgorhythm<T> GetAlgorhythm<T>(AlgorhythmType algorhythmType, IComparer<T> comparer)
         {
             switch (algorhythmType)
             {
                 case AlgorhythmType.BubbleSort:
-                    return new BubbleSort();
+                    return new BubbleSort<T>(comparer);
                 case AlgorhythmType.InsertionSort:
-                    return new InsertionSort();
+                    return new InsertionSort<T>(comparer);
                 case AlgorhythmType.RecursiveMergeSort:
-                    return new RecursiveMergeSort();
+                    return new RecursiveMergeSort<T>(comparer);
+                case AlgorhythmType.QuickSort:
+                    return new QuickSort<T>(comparer);
                 default:
                     return null;
             }
