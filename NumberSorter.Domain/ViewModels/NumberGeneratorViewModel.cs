@@ -10,6 +10,7 @@ using ReactiveUI;
 using System.Reactive.Linq;
 using System.Reactive;
 using ReactiveUI.Fody.Helpers;
+using NumberSorter.Domain.Generators;
 
 namespace NumberSorter.Domain.ViewModels
 {
@@ -66,21 +67,12 @@ namespace NumberSorter.Domain.ViewModels
 
         private void Accept()
         {
-            _numbers = Generate(Minimum, Maximum, NumberCount);
+            var generator = new RandomIntegerGenerator();
+            _numbers = generator.Generate(Minimum, Maximum, NumberCount);
             DialogResult = true;
         }
 
         #endregion Command functions
 
-        public List<int> Generate(int min, int max, int count)
-        {
-            var random = new Random();
-            var numbers = new List<int>(count);
-
-            for (int i = 0; i < count; i++)
-                numbers.Add(random.Next(min, max));
-
-            return numbers;
-        }
     }
 }

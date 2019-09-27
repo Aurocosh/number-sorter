@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Domain.Logic.Algorhythm.QuickSort.PivotSelectors
 {
-    internal sealed class RandomPivotSelector<T> : QuickSortPivotSelector<T>
+    public sealed class RandomPivotSelector<T> : QuickSortPivotSelector<T>
     {
         private readonly Random _random = new Random();
 

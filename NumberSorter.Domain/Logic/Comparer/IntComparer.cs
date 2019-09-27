@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Domain.Logic.Comparer
 {
-    class IntComparer : IComparer<int>
+    public class IntComparer : IComparer<int>
     {
         public int Compare(int x, int y)
         {

@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberSorter.Client", "NumberSorter\NumberSorter.Client.csproj", "{998B1FFA-6734-42E2-A8E7-CD8B9D4A9DAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberSorter.Domain", "NumberSorter.Domain\NumberSorter.Domain.csproj", "{1A8A032C-F130-4CA1-98D8-0B11ACC5633D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NumberSorter.Domain", "NumberSorter.Domain\NumberSorter.Domain.csproj", "{1A8A032C-F130-4CA1-98D8-0B11ACC5633D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberSorter.Domain.Tests", "NumberSorter.Domain.Tests\NumberSorter.Domain.Tests.csproj", "{A399CEB0-0DA9-407D-8113-713013AD65A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1A8A032C-F130-4CA1-98D8-0B11ACC5633D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A8A032C-F130-4CA1-98D8-0B11ACC5633D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A8A032C-F130-4CA1-98D8-0B11ACC5633D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A399CEB0-0DA9-407D-8113-713013AD65A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A399CEB0-0DA9-407D-8113-713013AD65A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A399CEB0-0DA9-407D-8113-713013AD65A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A399CEB0-0DA9-407D-8113-713013AD65A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

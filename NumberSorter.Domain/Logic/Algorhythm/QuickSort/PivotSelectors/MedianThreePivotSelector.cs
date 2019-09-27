@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Domain.Logic.Algorhythm.QuickSort.PivotSelectors
 {
-    internal sealed class MedianThreePivotSelector<T> : QuickSortPivotSelector<T>
+    public sealed class MedianThreePivotSelector<T> : QuickSortPivotSelector<T>
     {
         public override int SelectPivot(IList<T> list, int firstIndex, int lastIndex, IComparer<T> comparer)
         {
