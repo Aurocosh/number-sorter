@@ -10,7 +10,6 @@ variables:
   test: "NumberSorter.Domain.Test"
   
 before_script:
-  - "cd src"
   - "dotnet restore"
   
 build:
