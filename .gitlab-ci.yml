@@ -10,7 +10,7 @@ variables:
   test: "NumberSorter.Domain.Test"
   
 before_script:
-  - "dotnet restore"
+  - "nuget restore"
   
 build:
   stage: build
