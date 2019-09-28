@@ -1,0 +1,24 @@
+image: docker.io/aurocosh/buildtools2019:1.0
+
+stages:
+  - build
+  - test
+  
+variables:
+  client: "NumberSorter.Client"
+  domain: "NumberSorter.Domain"
+  test: "NumberSorter.Domain.Test"
+  
+before_script:
+  - "nuget restore"
+  
+build:
+  stage: build
+  script:
+    - "msbuild"
+    
+test:
+  stage: test
+  script:
+    - "cd $test"
+    - "dotnet test"
