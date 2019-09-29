@@ -42,11 +42,22 @@ namespace NumberSorter.Domain.Tests.SortTests
             TestSort(testData);
         }
 
-        private void TestSort(IList<int> testData)
+        private void TestSort(IList<int> input)
         {
-            _sort.Sort(testData);
-            bool fullySorted = ListUtility.IsSorted(testData, _comparer);
-            Assert.True(fullySorted);
+            var result = new List<int>(input);
+            _sort.Sort(result);
+            bool fullySorted = ListUtility.IsSorted(result, _comparer);
+            var message = GetResultMessage(fullySorted, input, result);
+            Assert.True(fullySorted, message);
+        }
+
+        private static string GetResultMessage(bool isFullySorted, IList<int> input, IList<int> result)
+        {
+            if (isFullySorted)
+                return "";
+            var inputString = string.Join("\t", input);
+            var resultString = string.Join("\t", result);
+            return $"Failed to sort list:\n Input: {inputString}\n Result: {resultString}";
         }
     }
 }
