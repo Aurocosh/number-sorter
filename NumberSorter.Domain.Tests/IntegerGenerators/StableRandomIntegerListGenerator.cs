@@ -7,21 +7,27 @@ namespace NumberSorter.Domain.Tests
 {
     public class StaticRandom100IntegerListGenerator : IEnumerable<object[]>
     {
-        private readonly List<object[]> _data = new List<object[]>
+        private static readonly List<object[]> _data;
+
+        static StaticRandom100IntegerListGenerator()
         {
-            new object[] {new List<int>(_list1)},
-            new object[] {new List<int>(_list2)},
-            new object[] {new List<int>(_list3)},
-            new object[] {new List<int>(_list4)},
-            new object[] {new List<int>(_list5)},
+            _data = new List<object[]>
+            {
+                new object[] {new List<int>(_list1)},
+                new object[] {new List<int>(_list2)},
+                new object[] {new List<int>(_list3)},
+                new object[] {new List<int>(_list4)},
+                new object[] {new List<int>(_list5)},
 
-            new object[] {new List<int>(_list6)},
-            new object[] {new List<int>(_list7)},
-            new object[] {new List<int>(_list8)},
-            new object[] {new List<int>(_list9)},
-            new object[] {new List<int>(_list10)},
-        };
+                new object[] {new List<int>(_list6)},
+                new object[] {new List<int>(_list7)},
+                new object[] {new List<int>(_list8)},
+                new object[] {new List<int>(_list9)},
+                new object[] {new List<int>(_list10)},
+            };
+        }
 
+        public IEnumerable<object[]> GetEnumerable() => _data;
         public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 

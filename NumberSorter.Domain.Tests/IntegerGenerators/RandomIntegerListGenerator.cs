@@ -9,22 +9,27 @@ namespace NumberSorter.Domain.Tests
     public class DynamicRandom100IntegerListGenerator : IEnumerable<object[]>
     {
         private static readonly RandomIntegerGenerator _generator = new RandomIntegerGenerator();
+        private static readonly List<object[]> _data;
 
-        private readonly List<object[]> _data = new List<object[]>
+        static DynamicRandom100IntegerListGenerator()
         {
-            new object[] {_generator.Generate(-100,100,100)},
-            new object[] {_generator.Generate(-100,100,100)},
-            new object[] {_generator.Generate(-100,100,100)},
-            new object[] {_generator.Generate(-100,100,100)},
-            new object[] {_generator.Generate(-100,100,100)},
+            _data = new List<object[]>
+            {
+                new object[] {_generator.Generate(-100,100,100)},
+                new object[] {_generator.Generate(-100,100,100)},
+                new object[] {_generator.Generate(-100,100,100)},
+                new object[] {_generator.Generate(-100,100,100)},
+                new object[] {_generator.Generate(-100,100,100)},
 
-            new object[] {_generator.Generate(-100,100,100)},
-            new object[] {_generator.Generate(-100,100,100)},
-            new object[] {_generator.Generate(-100,100,100)},
-            new object[] {_generator.Generate(-100,100,100)},
-            new object[] {_generator.Generate(-100,100,100)},
-        };
+                new object[] {_generator.Generate(-100,100,100)},
+                new object[] {_generator.Generate(-100,100,100)},
+                new object[] {_generator.Generate(-100,100,100)},
+                new object[] {_generator.Generate(-100,100,100)},
+                new object[] {_generator.Generate(-100,100,100)},
+            };
+        }
 
+        public IEnumerable<object[]> GetEnumerable() => _data;
         public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }

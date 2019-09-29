@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NumberSorter.Domain.Tests
 {
-    internal static class ListUtility
+    public static class ListUtility
     {
         public static bool IsSorted<T>(IList<T> list, IComparer<T> comparer)
         {
