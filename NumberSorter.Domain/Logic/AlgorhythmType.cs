@@ -2,6 +2,7 @@
 {
     public enum AlgorhythmType
     {
+        HeapSort,
         BubbleSort,
         InsertionSort,
         RecursiveMergeSort,

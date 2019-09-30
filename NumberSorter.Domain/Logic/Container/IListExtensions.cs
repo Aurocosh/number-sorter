@@ -14,5 +14,10 @@ namespace NumberSorter.Domain.Logic.Container
             list[first] = list[second];
             list[second] = temp;
         }
+
+        //public static int Compare<T>(this IList<T> list, int first, int second, IComparer<T> comparer)
+        //{
+        //    return comparer.Compare(list[first], list[second]);
+        //}
     }
 }

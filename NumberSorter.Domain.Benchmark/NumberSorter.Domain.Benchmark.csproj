@@ -214,9 +214,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Benchmarks\BubbleSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\InsertionSortBenchmarks.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SortBenchmarks.cs" />
+    <Compile Include="Benchmarks\QuickSortMedianThreePivotBenchmarks.cs" />
+    <Compile Include="Benchmarks\QuickSortRandomPivotBenchmarks.cs" />
+    <Compile Include="Benchmarks\RecursiveMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\Base\SortBenchmarks.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

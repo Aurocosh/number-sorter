@@ -11,6 +11,8 @@ namespace NumberSorter.Domain.Logic
         {
             switch (algorhythmType)
             {
+                case AlgorhythmType.HeapSort:
+                    return new HeapSort<T>(comparer);
                 case AlgorhythmType.BubbleSort:
                     return new BubbleSort<T>(comparer);
                 case AlgorhythmType.InsertionSort:

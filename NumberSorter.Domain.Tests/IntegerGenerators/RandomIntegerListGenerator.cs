@@ -15,8 +15,8 @@ namespace NumberSorter.Domain.Tests
         static DynamicRandom100IntegerListGenerator()
         {
             var first = Enumerable.Range(0, 15)
-                        .Select(_ => _generator.Generate(-100, 100, 100))
-                        .Select(x => new object[] { x });
+                .Select(_ => _generator.Generate(-100, 100, 100))
+                .Select(x => new object[] { x });
             var second = Enumerable.Range(0, 15)
                 .Select(_ => _generator.Generate(int.MinValue, int.MaxValue, 100))
                 .Select(x => new object[] { x });

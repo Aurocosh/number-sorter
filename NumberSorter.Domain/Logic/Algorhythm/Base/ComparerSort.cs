@@ -15,5 +15,6 @@ namespace NumberSorter.Domain.Logic.Algorhythm
         public abstract void Sort(IList<T> list);
         public IComparer<T> GetComparer() => _comparer;
         public int Compare(T first, T second) => _comparer.Compare(first, second);
+        public int Compare(IList<T> list, int first, int second) => _comparer.Compare(list[first], list[second]);
     }
 }

@@ -11,7 +11,8 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Domain.Benchmark
 {
-    public class SortBenchmarks
+    [RPlotExporter]
+    public abstract class SortBenchmarks
     {
         private static List<object> _staticRandom100IntegerList;
         private static List<object> _dynamicRandom100IntegerList;
@@ -34,10 +35,7 @@ namespace NumberSorter.Domain.Benchmark
         public IEnumerable<object> StaticRandom100IntegerList() => _staticRandom100IntegerList;
         public IEnumerable<object> DynamicRandom100IntegerList() => _dynamicRandom100IntegerList;
 
-        protected ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
-        {
-            return new BubbleSort<int>(comparer);
-        }
+        protected abstract ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer);
 
         [Benchmark]
         [ArgumentsSource(nameof(StaticRandom100IntegerList))]
