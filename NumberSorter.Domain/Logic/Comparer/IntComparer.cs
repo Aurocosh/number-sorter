@@ -10,7 +10,7 @@ namespace NumberSorter.Domain.Logic.Comparer
     {
         public int Compare(int x, int y)
         {
-            return x - y;
+            return x.CompareTo(y);
         }
     }
 }
