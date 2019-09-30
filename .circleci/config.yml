@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: docker.io/aurocosh/buildtools2019:1.0
+
+    steps:
+      - checkout
+      - run:
+          name: Restore
+          command: dotnet restore
+          working_directory: Nubersorter.Domain
+      - run:
+          name: Build
+          command: dotnet build -c Release
+          working_directory: Nubersorter.Domain
+      - run:
+          name: Running Tests
+          command: dotnet test
+          working_directory: Nubersorter.Domain.Tests
+      - setup_remote_docker:
+          docker_layer_caching: true
