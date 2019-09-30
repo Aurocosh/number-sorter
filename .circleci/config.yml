@@ -18,5 +18,3 @@ jobs:
           name: Running Tests
           command: dotnet test
           working_directory: Nubersorter.Domain.Tests
-      - setup_remote_docker:
-          docker_layer_caching: true
