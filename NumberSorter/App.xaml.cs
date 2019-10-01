@@ -30,6 +30,7 @@ namespace NumberSorter
             dialogService.RegisterWindowType<MainWindowViewModel, MainWindow>(new WindowViewInitializer<MainWindowViewModel>());
             dialogService.RegisterWindowType<NumberGeneratorViewModel, NumberGeneratorWindow>(new WindowViewInitializer<NumberGeneratorViewModel>());
             dialogService.RegisterWindowType<SortTypeViewModel, SortTypeDialog>(new WindowViewInitializer<SortTypeViewModel>());
+            dialogService.RegisterWindowType<PartialSortedGeneratorViewModel, PartialSortedGeneratorDialog>(new WindowViewInitializer<PartialSortedGeneratorViewModel>());
 
             _dialogService = dialogService;
         }

@@ -45,7 +45,8 @@ namespace NumberSorter.Domain.ViewModels
         #region Commands
 
         public ReactiveCommand<Unit, string> LoadDataCommand { get; }
-        public ReactiveCommand<Unit, List<int>> GenerateDataCommand { get; }
+        public ReactiveCommand<Unit, List<int>> GenerateRandomCommand { get; }
+        public ReactiveCommand<Unit, List<int>> GeneratePartiallySortedCommand { get; }
         public ReactiveCommand<Unit, Unit> PerformSortCommand { get; }
 
         #endregion Commands
@@ -63,7 +64,8 @@ namespace NumberSorter.Domain.ViewModels
             SortingResult = new SortingResult<int>();
 
             LoadDataCommand = ReactiveCommand.CreateFromObservable(FindFileToLoad);
-            GenerateDataCommand = ReactiveCommand.CreateFromObservable(GenerateData);
+            GenerateRandomCommand = ReactiveCommand.CreateFromObservable(GenerateRandom);
+            GeneratePartiallySortedCommand = ReactiveCommand.CreateFromObservable(GeneratePartiallySorted);
             PerformSortCommand = ReactiveCommand.Create(SortData);
 
             LoadDataCommand
@@ -72,7 +74,10 @@ namespace NumberSorter.Domain.ViewModels
                 .Where(x => x.Count > 0)
                 .Subscribe(x => InputNumbers = x);
 
-            GenerateDataCommand
+            GenerateRandomCommand
+                .Where(x => x.Count > 0)
+                .Subscribe(x => InputNumbers = x);
+            GeneratePartiallySortedCommand
                 .Where(x => x.Count > 0)
                 .Subscribe(x => InputNumbers = x);
 
@@ -107,9 +112,16 @@ namespace NumberSorter.Domain.ViewModels
                 .ToList();
         }
 
-        private IObservable<List<int>> GenerateData()
+        private IObservable<List<int>> GenerateRandom()
         {
             var viewModel = new NumberGeneratorViewModel();
+            _dialogService.ShowModalPresentation(this, viewModel);
+            return Observable.Return(viewModel.Numbers);
+        }
+
+        private IObservable<List<int>> GeneratePartiallySorted()
+        {
+            var viewModel = new PartialSortedGeneratorViewModel();
             _dialogService.ShowModalPresentation(this, viewModel);
             return Observable.Return(viewModel.Numbers);
         }

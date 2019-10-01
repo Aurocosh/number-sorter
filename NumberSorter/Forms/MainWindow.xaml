@@ -15,7 +15,8 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Исходные данные">
                 <MenuItem Header="Загрузить из файла" Name="LoadFromFileButton"/>
-                <MenuItem Header="Сгенерировать" Name="GenerateButton"/>
+                <MenuItem Header="Сгенерировать случайный массив" Name="GenerateRandomButton"/>
+                <MenuItem Header="Сгенерировать частично сортированный массив" Name="GeneratePartiallySortedButton"/>
             </MenuItem>
             <MenuItem Header="Сортировка">
                 <MenuItem Header="Отсортировать" Name="SortButton"/>

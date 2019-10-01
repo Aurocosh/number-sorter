@@ -110,6 +110,9 @@
     </ApplicationDefinition>
     <Compile Include="DialogService\DialogService.cs" />
     <Compile Include="DialogService\WindowViewInitializer.cs" />
+    <Compile Include="Forms\PartialSortedGeneratorDialog.xaml.cs">
+      <DependentUpon>PartialSortedGeneratorDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SortTypeDialog.xaml.cs">
       <DependentUpon>SortTypeDialog.xaml</DependentUpon>
     </Compile>
@@ -136,6 +139,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Forms\PartialSortedGeneratorDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\SortTypeDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

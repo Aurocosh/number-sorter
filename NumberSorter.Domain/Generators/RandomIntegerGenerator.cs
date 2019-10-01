@@ -13,11 +13,14 @@ namespace NumberSorter.Domain.Generators
             _random = new Random();
         }
 
-        public List<int> Generate(int minimum, int maximum, int count)
+        public List<int> Generate(int minimumValue, int maximumValue, int count)
         {
+            if (minimumValue > maximumValue)
+                throw new ArgumentException($"Value of {nameof(maximumValue)} cannot be less then value of {nameof(minimumValue)}");
+
             var numbers = new List<int>(count);
             for (int i = 0; i < count; i++)
-                numbers.Add(_random.Next(minimum, maximum));
+                numbers.Add(_random.Next(minimumValue, maximumValue + 1));
             return numbers;
         }
     }

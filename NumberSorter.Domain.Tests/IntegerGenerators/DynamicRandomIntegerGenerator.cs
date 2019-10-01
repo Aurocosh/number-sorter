@@ -7,12 +7,12 @@ using System.Text;
 
 namespace NumberSorter.Domain.Tests
 {
-    public class DynamicRandom100IntegerListGenerator : IEnumerable<object[]>
+    public class DynamicRandomIntegerGenerator : IEnumerable<object[]>
     {
         private static readonly RandomIntegerGenerator _generator = new RandomIntegerGenerator();
         private static readonly List<object[]> _data;
 
-        static DynamicRandom100IntegerListGenerator()
+        static DynamicRandomIntegerGenerator()
         {
             var first = Enumerable.Range(0, 15)
                 .Select(_ => _generator.Generate(-100, 100, 100))

@@ -19,8 +19,8 @@ namespace NumberSorter.Domain.Benchmark
 
         static SortBenchmarks()
         {
-            _staticRandom100IntegerList = new StaticRandom100IntegerListGenerator().GetEnumerable().Select(x => x[0]).ToList();
-            _dynamicRandom100IntegerList = new DynamicRandom100IntegerListGenerator().GetEnumerable().Select(x => x[0]).ToList();
+            _staticRandom100IntegerList = new StaticRandomIntegerGenerator().GetEnumerable().Select(x => x[0]).ToList();
+            _dynamicRandom100IntegerList = new DynamicRandomIntegerGenerator().GetEnumerable().Select(x => x[0]).ToList();
         }
 
         private IComparer<int> _comparer;

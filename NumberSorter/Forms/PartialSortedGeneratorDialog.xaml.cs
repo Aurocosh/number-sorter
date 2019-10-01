@@ -18,13 +18,11 @@ using System.Windows.Shapes;
 namespace NumberSorter.Forms
 {
     /// <summary>
-    /// Interaction logic for NumberGeneratorWindow.xaml
+    /// Interaction logic for PartialSortedGeneratorDialog.xaml
     /// </summary>
-    public partial class NumberGeneratorWindow : ReactiveWindow<NumberGeneratorViewModel>
+    public partial class PartialSortedGeneratorDialog : ReactiveWindow<PartialSortedGeneratorViewModel>
     {
-        public List<int> Numbers => ViewModel.Numbers;
-
-        public NumberGeneratorWindow()
+        public PartialSortedGeneratorDialog()
         {
             InitializeComponent();
             this.WhenActivated(disposable =>
@@ -34,8 +32,21 @@ namespace NumberSorter.Forms
                 this.Bind(ViewModel, x => x.Maximum, x => x.MaximumUpDown.Value)
                     .DisposeWith(disposable);
 
+                this.Bind(ViewModel, x => x.MinimumRunLength, x => x.MinimumRunLengthUpDown.Value)
+                    .DisposeWith(disposable);
+                this.Bind(ViewModel, x => x.MaximumRunLength, x => x.MaximumRunLengthUpDown.Value)
+                    .DisposeWith(disposable);
+
+                this.Bind(ViewModel, x => x.MinimumRunStep, x => x.MinimumRunStepUpDown.Value)
+                    .DisposeWith(disposable);
+                this.Bind(ViewModel, x => x.MaximumRunStep, x => x.MaximumRunStepUpDown.Value)
+                    .DisposeWith(disposable);
+
+                this.Bind(ViewModel, x => x.RandomRunProbability, x => x.RandomRunUpDown.Value)
+                    .DisposeWith(disposable);
                 this.Bind(ViewModel, x => x.NumberCount, x => x.CountUpDown.Value)
                     .DisposeWith(disposable);
+
                 this.BindCommand(ViewModel, x => x.AcceptCommand, x => x.AcceptButton)
                     .DisposeWith(disposable);
             });

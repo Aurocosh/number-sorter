@@ -41,7 +41,9 @@ namespace NumberSorter.Forms
 
                 this.BindCommand(ViewModel, x => x.LoadDataCommand, x => x.LoadFromFileButton)
                     .DisposeWith(disposable);
-                this.BindCommand(ViewModel, x => x.GenerateDataCommand, x => x.GenerateButton)
+                this.BindCommand(ViewModel, x => x.GenerateRandomCommand, x => x.GenerateRandomButton)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.GeneratePartiallySortedCommand, x => x.GeneratePartiallySortedButton)
                     .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.PerformSortCommand, x => x.SortButton)
                     .DisposeWith(disposable);

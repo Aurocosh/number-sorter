@@ -23,15 +23,22 @@ namespace NumberSorter.Domain.Tests.SortTests
         protected abstract ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer);
 
         [Theory]
-        [ClassData(typeof(StaticRandom100IntegerListGenerator))]
-        public void TestSort100RandomStatic(List<int> testData)
+        [ClassData(typeof(StaticRandomIntegerGenerator))]
+        public void TestSortStaticRandom(List<int> testData)
         {
             TestSort(testData);
         }
 
         [Theory]
-        [ClassData(typeof(DynamicRandom100IntegerListGenerator))]
-        public void TestSort100RandomDynamic(List<int> testData)
+        [ClassData(typeof(StaticPartiallySortedIntegerGenerator))]
+        public void TestSortStaticPartiallySorted(List<int> testData)
+        {
+            TestSort(testData);
+        }
+
+        [Theory]
+        [ClassData(typeof(DynamicRandomIntegerGenerator))]
+        public void TestSort100DynamicRandom(List<int> testData)
         {
             TestSort(testData);
         }
