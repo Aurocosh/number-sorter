@@ -9,9 +9,12 @@ namespace NumberSorter.Domain.Logic.Algorhythm
 
         public override void Sort(IList<T> list)
         {
-            int count = list.Count;
+            Sort(list, 0, list.Count);
+        }
 
-            for (int i = 1; i < count; i++)
+        public void Sort(IList<T> list, int startingIndex, int length)
+        {
+            for (int i = startingIndex + 1; i < length; i++)
             {
                 var currentIndex = i;
                 var testIndex = i - 1;

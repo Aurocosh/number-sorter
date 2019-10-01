@@ -47,6 +47,7 @@ namespace NumberSorter.Domain.ViewModels
         {
             AcceptCommand = ReactiveCommand.Create(Accept);
 
+            _sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.TimSort, "Tim Sort"));
             _sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.HeapSort, "Heap sort"));
             _sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.BubbleSort, "Bubble sort"));
             _sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.InsertionSort, "Insertion sort"));
