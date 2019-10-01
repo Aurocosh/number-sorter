@@ -10,12 +10,12 @@ namespace NumberSorter.Domain.Logic.Algorhythm
         public override void Sort(IList<T> list)
         {
             bool fullySorted = false;
-            int count = list.Count;
+            int count = list.Count - 1;
 
             while (!fullySorted)
             {
                 fullySorted = true;
-                for (int i = 0; i < count - 1; i++)
+                for (int i = 0; i < count; i++)
                 {
                     var first = list[i];
                     var second = list[i + 1];
@@ -27,6 +27,7 @@ namespace NumberSorter.Domain.Logic.Algorhythm
                         fullySorted = false;
                     }
                 }
+                count--;
             }
         }
     }
