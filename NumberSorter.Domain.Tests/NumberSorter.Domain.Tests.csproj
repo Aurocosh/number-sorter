@@ -77,6 +77,7 @@
     <Compile Include="SortTests\HeapSortTests.cs" />
     <Compile Include="SortTests\QuickSortMedianThreePivotTests.cs" />
     <Compile Include="SortTests\QuickSortRandomPivotTests.cs" />
+    <Compile Include="SortTests\DequeMergeSortTests.cs" />
     <Compile Include="SortTests\RecursiveMergeSortTests.cs" />
     <Compile Include="SortTests\InsertionSortTests.cs" />
     <Compile Include="SortTests\BubbleSortTests.cs" />

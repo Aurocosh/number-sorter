@@ -19,21 +19,6 @@ namespace NumberSorter.Domain.Logic.Algorhythm
             Second,
             Both
         }
-
-        private sealed class SortRun
-        {
-            public int Start { get; }
-            public int Length { get; }
-
-            public SortRun() : this(0, 0) { }
-
-            public SortRun(int start, int length)
-            {
-                Start = start;
-                Length = length;
-            }
-        }
-
         private sealed class SortRunStack
         {
             private readonly LinkedList<SortRun> _sortRuns;
