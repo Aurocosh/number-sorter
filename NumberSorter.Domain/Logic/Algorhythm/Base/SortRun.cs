@@ -12,5 +12,10 @@ namespace NumberSorter.Domain.Logic.Algorhythm
             Start = start;
             Length = length;
         }
+
+        public override string ToString()
+        {
+            return $"Start: {Start} Length: {Length}";
+        }
     }
 }

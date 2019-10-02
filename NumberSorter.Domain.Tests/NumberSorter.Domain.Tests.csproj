@@ -74,6 +74,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SortTests\InPlaceMergeSort.cs" />
     <Compile Include="SortTests\HeapSortTests.cs" />
     <Compile Include="SortTests\QuickSortMedianThreePivotTests.cs" />
     <Compile Include="SortTests\QuickSortRandomPivotTests.cs" />

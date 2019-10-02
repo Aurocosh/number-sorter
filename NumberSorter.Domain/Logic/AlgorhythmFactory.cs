@@ -21,6 +21,8 @@ namespace NumberSorter.Domain.Logic
                     return new InsertionSort<T>(comparer);
                 case AlgorhythmType.DequeMergeSort:
                     return new DequeMergeSort<T>(comparer);
+                case AlgorhythmType.InPlaceMergeSort:
+                    return new InPlaceMergeSort<T>(comparer);
                 case AlgorhythmType.RecursiveMergeSort:
                     return new RecursiveMergeSort<T>(comparer);
                 case AlgorhythmType.QuickSortRandomPivot:

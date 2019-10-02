@@ -7,6 +7,7 @@
         BubbleSort,
         InsertionSort,
         DequeMergeSort,
+        InPlaceMergeSort,
         RecursiveMergeSort,
         QuickSortRandomPivot,
         QuickSortMedianOfThree

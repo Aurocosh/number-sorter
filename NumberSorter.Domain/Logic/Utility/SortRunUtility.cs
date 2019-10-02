@@ -8,7 +8,7 @@ namespace NumberSorter.Domain.Logic.Utility
 {
     public static class SortRunUtility
     {
-        public static string RunToString(IList<object> list, SortRun sortRun)
+        public static string RunToString<T>(IList<T> list, SortRun sortRun)
         {
             if (list is IList<int> intList)
             {
