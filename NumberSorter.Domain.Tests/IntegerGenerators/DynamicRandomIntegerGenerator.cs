@@ -14,14 +14,26 @@ namespace NumberSorter.Domain.Tests
 
         static DynamicRandomIntegerGenerator()
         {
-            var first = Enumerable.Range(0, 15)
+            var first = Enumerable.Range(0, 8)
+                .Select(_ => _generator.Generate(-100, 100, 8))
+                .Select(x => new object[] { x });
+            var second = Enumerable.Range(0, 8)
+                .Select(_ => _generator.Generate(int.MinValue, int.MaxValue, 8))
+                .Select(x => new object[] { x });
+            var third = Enumerable.Range(0, 8)
+                .Select(_ => _generator.Generate(-100, 100, 9))
+                .Select(x => new object[] { x });
+            var fourth = Enumerable.Range(0, 8)
+                .Select(_ => _generator.Generate(int.MinValue, int.MaxValue, 9))
+                .Select(x => new object[] { x });
+            var fifth = Enumerable.Range(0, 15)
                 .Select(_ => _generator.Generate(-100, 100, 100))
                 .Select(x => new object[] { x });
-            var second = Enumerable.Range(0, 15)
+            var sixth = Enumerable.Range(0, 15)
                 .Select(_ => _generator.Generate(int.MinValue, int.MaxValue, 100))
                 .Select(x => new object[] { x });
 
-            _data = first.Concat(second).ToList();
+            _data = first.Concat(second).Concat(third).Concat(fourth).Concat(fifth).Concat(sixth).ToList();
         }
 
         public IEnumerable<object[]> GetEnumerable() => _data;

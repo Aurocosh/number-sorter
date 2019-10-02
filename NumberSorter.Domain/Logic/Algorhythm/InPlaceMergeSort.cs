@@ -79,14 +79,13 @@ namespace NumberSorter.Domain.Logic.Algorhythm
             int tempStartIndex = secondRun.Start;
             int tempCurrentIndex = secondRun.Start;
 
-            while (firstIndex != secondIndex && secondIndex <= lastSecondIndex && tempStartIndex <= lastSecondIndex)
+            while (firstIndex != secondIndex && tempStartIndex <= lastSecondIndex)
             {
                 bool isUsingTemp = tempLength > 0;
+                bool hasSecond = secondIndex <= lastSecondIndex;
                 var nextFromFirst = isUsingTemp ? list[tempCurrentIndex] : list[firstIndex];
-                var nextFromSecond = list[secondIndex];
 
-                int comparassion = Compare(nextFromFirst, nextFromSecond);
-                if (comparassion > 0)
+                if (hasSecond && Compare(nextFromFirst, list[secondIndex]) > 0)
                 {
                     list.Swap(firstIndex, secondIndex);
                     secondIndex++;
@@ -106,9 +105,10 @@ namespace NumberSorter.Domain.Logic.Algorhythm
                     for (int i = firstIndex; i < limit; i++)
                     {
                         if (i != tempCurrentIndex)
-                            list.Swap(firstIndex, tempCurrentIndex);
+                            list.Swap(i, tempCurrentIndex);
                         tempLength--;
                         tempStartIndex++;
+                        tempCurrentIndex++;
                         tempCurrentIndex = WrapOverflow(tempCurrentIndex, tempStartIndex, tempStartIndex + tempLength - 1);
                     }
                 }
