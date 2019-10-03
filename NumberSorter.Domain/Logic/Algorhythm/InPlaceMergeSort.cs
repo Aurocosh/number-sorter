@@ -68,6 +68,11 @@ namespace NumberSorter.Domain.Logic.Algorhythm
             //Console.WriteLine($"\n\nFirst ({firstRun.Start},{firstRun.Length}) Second ({secondRun.Start},{secondRun.Length})");
             //Console.WriteLine($"\nStart {first}   {second}");
 
+            if (firstRun.Length + secondRun.Length < 2)
+                return;
+            if (Compare(list, firstRun.LastIndex, secondRun.FirstIndex) <= 0)
+                return;
+
             int firstIndex = firstRun.Start;
             int secondIndex = secondRun.Start;
 
