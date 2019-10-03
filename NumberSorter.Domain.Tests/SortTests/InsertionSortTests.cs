@@ -8,11 +8,11 @@ using NumberSorter.Domain.Logic.Algorhythm;
 
 namespace NumberSorter.Domain.Tests.SortTests
 {
-    //public class InsertionSortTests : SortTests
-    //{
-    //    protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
-    //    {
-    //        return new InsertionSort<int>(comparer);
-    //    }
-    //}
+    public class InsertionSortTests : SortTests
+    {
+        protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
+        {
+            return new InsertionSort<int>(comparer);
+        }
+    }
 }

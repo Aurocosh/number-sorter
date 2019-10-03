@@ -70,7 +70,7 @@ namespace NumberSorter.Domain.Logic.Algorhythm
             var second = SortRunUtility.RunToString(list, secondRun);
 
             Console.WriteLine($"\n\nFirst ({firstRun.Start},{firstRun.Length}) Second ({secondRun.Start},{secondRun.Length})");
-            Console.WriteLine($"\nBefore {first}   {second}");
+            Console.WriteLine($"\nStart {first}   {second}");
 
             int firstIndex = firstRun.Start;
             int secondIndex = secondRun.Start;
@@ -84,10 +84,26 @@ namespace NumberSorter.Domain.Logic.Algorhythm
                 bool isUsingTemp = tempLength > 0;
                 bool hasSecond = secondIndex <= lastSecondIndex;
                 var nextFromFirst = isUsingTemp ? list[tempCurrentIndex] : list[firstIndex];
+                var nextFromSecond = hasSecond ? list[secondIndex].ToString() : "X";
+
+                first = SortRunUtility.RunToString(list, firstRun, firstIndex, secondIndex);
+                second = SortRunUtility.RunToString(list, secondRun, firstIndex, secondIndex);
+                var temp = SortRunUtility.RunToString(list, new SortRun(tempStartIndex, tempLength));
+                Console.WriteLine($"\n\nBefore");
+                Console.WriteLine($"First {nextFromFirst} g({firstIndex}) l({firstIndex - firstRun.Start})   Second {nextFromSecond} g({secondIndex}) l({secondIndex - secondRun.Start})");
+                Console.WriteLine($"{firstIndex} \n{first}\n{second}");
+                Console.WriteLine($"Temporary S({tempStartIndex}) C({tempCurrentIndex}) L({tempLength}) V({temp})");
 
                 if (hasSecond && Compare(nextFromFirst, list[secondIndex]) > 0)
                 {
                     list.Swap(firstIndex, secondIndex);
+                    if (tempStartIndex != tempCurrentIndex)
+                    {
+                        //MergeSort(list, new SortRun(tempStartIndex, tempLength));
+                        SortTemporary(list, tempStartIndex, tempLength, tempCurrentIndex);
+                        tempCurrentIndex = tempStartIndex;
+                    }
+
                     secondIndex++;
                     tempLength++;
                 }
@@ -95,45 +111,92 @@ namespace NumberSorter.Domain.Logic.Algorhythm
                 {
                     list.Swap(firstIndex, tempCurrentIndex);
                     tempCurrentIndex++;
-                    tempCurrentIndex = WrapOverflow(tempCurrentIndex, tempStartIndex, tempStartIndex + tempLength - 1);
+                    tempCurrentIndex = WrapTempIndex(tempCurrentIndex, tempStartIndex, tempStartIndex + tempLength - 1);
                 }
 
                 firstIndex++;
                 if (firstIndex == tempStartIndex && tempLength > 0)
                 {
-                    int limit = firstIndex + tempLength;
-                    for (int i = firstIndex; i < limit; i++)
-                    {
-                        if (i != tempCurrentIndex)
-                            list.Swap(i, tempCurrentIndex);
-                        tempLength--;
-                        tempStartIndex++;
-                        tempCurrentIndex++;
-                        tempCurrentIndex = WrapOverflow(tempCurrentIndex, tempStartIndex, tempStartIndex + tempLength - 1);
-                    }
+                    //MergeSort(list, new SortRun(tempStartIndex, tempLength));
+                    SortTemporary(list, tempStartIndex, tempLength, tempCurrentIndex);
+                    tempStartIndex += tempLength;
+                    tempCurrentIndex = tempStartIndex;
+                    tempLength = 0;
                 }
 
-                first = SortRunUtility.RunToString(list, firstRun);
-                second = SortRunUtility.RunToString(list, secondRun);
-                Console.WriteLine($"\n{firstIndex} After {first}   {second}");
+                first = SortRunUtility.RunToString(list, firstRun, firstIndex, secondIndex);
+                second = SortRunUtility.RunToString(list, secondRun, firstIndex, secondIndex);
+                temp = SortRunUtility.RunToString(list, new SortRun(tempStartIndex, tempLength));
+                Console.WriteLine($"\nAfter");
+                Console.WriteLine($"First {firstIndex - firstRun.Start}   Second {secondIndex - secondRun.Start}");
+                Console.WriteLine($"{firstIndex} After \n{first}\n{second}");
+                Console.WriteLine($"Temporary S({tempStartIndex}) C({tempCurrentIndex}) L({tempLength}) V({temp})");
+                if (!IsSorted(list, firstRun.Start, firstRun.Start - firstIndex - 1))
+                    Console.WriteLine("Sort error");
             }
-
 
             first = SortRunUtility.RunToString(list, firstRun);
             second = SortRunUtility.RunToString(list, secondRun);
             Console.WriteLine($"\nAfter {first}   {second}");
+            if (!IsSorted(list, firstRun.Start, firstRun.Length + secondRun.Length))
+                Console.WriteLine("Not sorted");
         }
 
-        private int WrapOverflow(int index, int start, int max)
+        private void SortTemporary(IList<T> list, int tempStartIndex, int tempLength, int tempCurrentIndex)
+        {
+            if (tempCurrentIndex == tempStartIndex)
+                return;
+
+            var firstIndex = tempStartIndex;
+            var secondIndex = tempCurrentIndex;
+            var lastIndex = tempStartIndex + tempLength - 1;
+
+            var firstLength = tempCurrentIndex - tempStartIndex;
+            var simpleForwardMoves = ((tempLength / firstLength) - 1) * firstLength;
+
+            var temp = SortRunUtility.RunToString(list, new SortRun(tempStartIndex, tempLength));
+            Console.WriteLine($"\nTemp \n{temp}");
+
+            var movesLeft = simpleForwardMoves;
+            while (movesLeft-- > 0)
+                list.Swap(firstIndex++, secondIndex++);
+
+
+            var rightRunStart = firstIndex + firstLength;
+            var rightRunLength = tempLength - simpleForwardMoves - firstLength;
+
+            if (rightRunLength > 0)
+            {
+                var leftRun = new SortRun(firstIndex, firstLength);
+                var rightRun = new SortRun(rightRunStart, rightRunLength);
+                Merge(list, leftRun, rightRun);
+            }
+
+            var stemp = SortRunUtility.RunToString(list, new SortRun(tempStartIndex, tempLength));
+            Console.WriteLine($"\nSorted Temp \n{stemp}");
+            if (!IsSorted(list, tempStartIndex, tempLength))
+                Console.WriteLine("Temp not sorted");
+        }
+
+        private int WrapTempIndex(int index, int start, int max)
         {
             if (index < start || index > max)
                 return start;
             return index;
         }
 
-        public static int Clamp(int value, int min, int max)
+        public bool IsSorted(IList<T> list, int start, int length)
         {
-            return (value < min) ? min : (value > max) ? max : value;
+            for (int i = start; i < length - 1; i++)
+            {
+                var first = list[i];
+                var second = list[i + 1];
+
+                int comparassion = Compare(first, second);
+                if (comparassion > 0)
+                    return false;
+            }
+            return true;
         }
     }
 }
