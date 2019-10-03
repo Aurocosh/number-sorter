@@ -80,7 +80,8 @@ namespace NumberSorter.Domain.Logic.Algorhythm
             {
                 bool isUsingTemp = tempLength > 0;
                 bool hasSecond = secondIndex <= lastSecondIndex;
-                var nextFromFirst = isUsingTemp ? list[tempCurrentIndex] : list[firstIndex];
+
+                //var nextFromFirst = isUsingTemp ? list[tempCurrentIndex] : list[firstIndex];
                 //var nextFromSecond = hasSecond ? list[secondIndex].ToString() : "X";
 
                 //first = SortRunUtility.RunToString(list, firstRun, firstIndex, secondIndex);
@@ -91,7 +92,7 @@ namespace NumberSorter.Domain.Logic.Algorhythm
                 //Console.WriteLine($"{firstIndex} \n{first}\n{second}");
                 //Console.WriteLine($"Temporary S({tempStartIndex}) C({tempCurrentIndex}) L({tempLength}) V({temp})");
 
-                if (hasSecond && Compare(nextFromFirst, list[secondIndex]) > 0)
+                if (hasSecond && Compare(isUsingTemp ? list[tempCurrentIndex] : list[firstIndex], list[secondIndex]) > 0)
                 {
                     list.Swap(firstIndex, secondIndex);
                     if (tempStartIndex != tempCurrentIndex)
