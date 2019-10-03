@@ -75,12 +75,12 @@ namespace NumberSorter.Domain.Logic.Algorhythm
 
             int firstIndex = firstRun.Start;
             int secondIndex = secondRun.Start;
+            int lastSecondIndex = secondRun.LastIndex;
 
             int tempLength = 0;
             int tempStartIndex = secondRun.Start;
             int tempCurrentIndex = secondRun.Start;
 
-            var lastSecondIndex = secondRun.Start + secondRun.Length - 1;
             while (firstIndex != secondIndex && tempStartIndex <= lastSecondIndex)
             {
                 bool isUsingTemp = tempLength > 0;
@@ -97,12 +97,11 @@ namespace NumberSorter.Domain.Logic.Algorhythm
                 //Console.WriteLine($"{firstIndex} \n{first}\n{second}");
                 //Console.WriteLine($"Temporary S({tempStartIndex}) C({tempCurrentIndex}) L({tempLength}) V({temp})");
 
-                if (hasSecond && Compare(isUsingTemp ? list[tempCurrentIndex] : list[firstIndex], list[secondIndex]) > 0)
+                if (hasSecond && Compare(list, isUsingTemp ? tempCurrentIndex : firstIndex, secondIndex) > 0)
                 {
                     list.Swap(firstIndex, secondIndex);
                     if (tempStartIndex != tempCurrentIndex)
                     {
-                        //MergeSort(list, new SortRun(tempStartIndex, tempLength));
                         SortTemporary(list, tempStartIndex, tempLength, tempCurrentIndex);
                         tempCurrentIndex = tempStartIndex;
                     }
