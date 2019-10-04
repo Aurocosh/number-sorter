@@ -5,11 +5,11 @@ using System.Text;
 
 namespace NumberSorter.Domain.Tests
 {
-    public class StaticPartiallySortedIntegerGenerator : IEnumerable<object[]>
+    public class PartiallySorted_StaticListGenerator : IEnumerable<object[]>
     {
         private static readonly List<object[]> _data;
 
-        static StaticPartiallySortedIntegerGenerator()
+        static PartiallySorted_StaticListGenerator()
         {
             _data = new List<object[]>
             {

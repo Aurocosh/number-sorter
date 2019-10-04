@@ -6,15 +6,15 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Xunit;
 
-namespace NumberSorter.Domain.Tests.SortTests
+namespace NumberSorter.Domain.Tests.SortTests.Base
 {
-    public abstract class SortTests
+    public abstract class SortTestsBase
     {
         private IComparer<int> _comparer;
         private readonly ISortAlgorhythm<int> _sort;
 
 
-        protected SortTests()
+        protected SortTestsBase()
         {
             _comparer = new IntComparer();
             _sort = GetAlgorhythm(_comparer);
@@ -23,28 +23,29 @@ namespace NumberSorter.Domain.Tests.SortTests
         protected abstract ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer);
 
         [Theory]
-        [ClassData(typeof(StaticRandomIntegerGenerator))]
-        public void TestSortStaticRandom(List<int> testData)
+        [ClassData(typeof(RandomUnsorted_StaticListGenerator))]
+        public void ListSort_RandomUnsorted_StaticList(List<int> testData)
+        {
+            TestSort(testData);
+        }
+
+
+        [Theory]
+        [ClassData(typeof(RandomUnsorted_DynamicListGenerator))]
+        public void ListSort_RandomUnsorted_RandomList(List<int> testData)
         {
             TestSort(testData);
         }
 
         [Theory]
-        [ClassData(typeof(StaticPartiallySortedIntegerGenerator))]
-        public void TestSortStaticPartiallySorted(List<int> testData)
-        {
-            TestSort(testData);
-        }
-
-        [Theory]
-        [ClassData(typeof(DynamicRandomIntegerGenerator))]
-        public void TestSort100DynamicRandom(List<int> testData)
+        [ClassData(typeof(PartiallySorted_StaticListGenerator))]
+        public void ListSort_PartiallySorted_StaticList(List<int> testData)
         {
             TestSort(testData);
         }
 
         [Theory, AutoData]
-        public void TestAutoData([MinLength(10), MaxLength(50)]int[] testData)
+        public void ListSort_RandomUnsorted_AutoData([MinLength(10), MaxLength(50)]int[] testData)
         {
             TestSort(testData);
         }

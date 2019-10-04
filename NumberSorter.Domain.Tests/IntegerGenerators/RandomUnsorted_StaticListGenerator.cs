@@ -5,11 +5,11 @@ using System.Text;
 
 namespace NumberSorter.Domain.Tests
 {
-    public class StaticRandomIntegerGenerator : IEnumerable<object[]>
+    public class RandomUnsorted_StaticListGenerator : IEnumerable<object[]>
     {
         private static readonly List<object[]> _data;
 
-        static StaticRandomIntegerGenerator()
+        static RandomUnsorted_StaticListGenerator()
         {
             _data = new List<object[]>
             {

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using NumberSorter.Domain.Algorhythm;
 using NumberSorter.Domain.Logic.Algorhythm;
 using NumberSorter.Domain.Logic.Algorhythm.QuickSort.PivotSelectors;
+using NumberSorter.Domain.Tests.SortTests.Base;
 
 namespace NumberSorter.Domain.Tests.SortTests
 {
-    public class QuickSortMedianThreePivotTests : SortTests
+    public class QuickSortMedianThreePivotTests : SortTestsBase
     {
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {

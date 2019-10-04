@@ -69,7 +69,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IntegerGenerators\StaticPartiallySortedIntegerGenerator.cs" />
+    <Compile Include="IntegerGenerators\TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator.cs" />
+    <Compile Include="IntegerGenerators\PartiallySorted_StaticListGenerator.cs" />
+    <Compile Include="IntegerGenerators\Vector2Int.cs" />
+    <Compile Include="MergeTests\Base\MergeTestsBase.cs" />
+    <Compile Include="MergeTests\RecursiveInPlaceMergeTests.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -83,10 +87,10 @@
     <Compile Include="SortTests\RecursiveMergeSortTests.cs" />
     <Compile Include="SortTests\InsertionSortTests.cs" />
     <Compile Include="SortTests\BubbleSortTests.cs" />
-    <Compile Include="SortTests\Base\SortTests.cs" />
+    <Compile Include="SortTests\Base\SortTestsBase.cs" />
     <Compile Include="IntegerGenerators\DynamicRandomIntegerGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IntegerGenerators\StaticRandomIntegerGenerator.cs" />
+    <Compile Include="IntegerGenerators\RandomUnsorted_StaticListGenerator.cs" />
     <Compile Include="Utility\ListUtility.cs" />
   </ItemGroup>
   <ItemGroup>

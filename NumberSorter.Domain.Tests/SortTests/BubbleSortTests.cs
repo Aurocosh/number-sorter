@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using NumberSorter.Domain.Algorhythm;
 using NumberSorter.Domain.Logic.Algorhythm;
+using NumberSorter.Domain.Tests.SortTests.Base;
 
 namespace NumberSorter.Domain.Tests.SortTests
 {
-    public class BubbleSortTests : SortTests
+    public class BubbleSortTests : SortTestsBase
     {
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {
