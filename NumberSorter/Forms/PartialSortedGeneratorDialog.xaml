@@ -49,18 +49,14 @@
             <Label Grid.Row="1" Grid.Column="1" Content="Min."/>
             <xctk:IntegerUpDown Grid.Row="1" Grid.Column="2" Name="MinimumRunLengthUpDown" Value="5" Minimum="1"/>
             <Label Grid.Row="1" Grid.Column="3" Content="Max."/>
-            <xctk:IntegerUpDown Grid.Row="1" Grid.Column="4" Name="MaximumRunLengthUpDown" Value="20" Minimum="1"/>
+            <xctk:IntegerUpDown Grid.Row="1" Grid.Column="4" Name="MaximumRunLengthUpDown" Value="30" Minimum="1"/>
 
-            <Label Grid.Row="2" Grid.Column="0" Content="Run step"/>
-            <Label Grid.Row="2" Grid.Column="1" Content="Min."/>
-            <xctk:IntegerUpDown Grid.Row="2" Grid.Column="2" Name="MinimumRunStepUpDown" Value="1" Minimum="1"/>
-            <Label Grid.Row="2" Grid.Column="3" Content="Max."/>
-            <xctk:IntegerUpDown Grid.Row="2" Grid.Column="4" Name="MaximumRunStepUpDown" Value="10" Minimum="1"/>
-
+            <Label Grid.Row="6" Grid.Column="0" Content="Inverted run chance"/>
+            <xctk:DoubleUpDown Grid.Row="6" Grid.Column="4" Name="InvertedRunUpDown" Value="0.5" Minimum="0" Maximum="1" Increment="0.05"/>
             <Label Grid.Row="7" Grid.Column="0" Content="Random run chance"/>
             <xctk:DoubleUpDown Grid.Row="7" Grid.Column="4" Name="RandomRunUpDown" Value="0" Minimum="0" Maximum="1" Increment="0.05"/>
-            <Label Grid.Row="8" Grid.Column="0" Content="Numbers to generate"/>
-            <xctk:IntegerUpDown Grid.Row="8" Grid.Column="4" Name="CountUpDown" Value="1" Minimum="1"/>
+            <Label Grid.Row="8" Grid.Column="0" Content="Runs to generate"/>
+            <xctk:IntegerUpDown Grid.Row="8" Grid.Column="4" Name="CountUpDown" Value="5" Minimum="1"/>
         </Grid>
     </DockPanel>
 </reactiveui:ReactiveWindow>

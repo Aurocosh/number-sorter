@@ -1,4 +1,5 @@
 ﻿using NumberSorter.Domain.Logic.Algorhythm;
+using NumberSorter.Domain.Logic.Container;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,15 @@ namespace NumberSorter.Domain.Logic.Utility
             var firstSortRun = new SortRun(firstIndex, firstLength);
             var secondSortRun = new SortRun(secondIndex, secondLength);
             return new ArrayRunHalves(firstSortRun, secondSortRun);
+        }
+
+        public static void InvertRun<T>(IList<T> list, SortRun sortRun)
+        {
+            int leftIndex = sortRun.Start;
+            int rightIndex = sortRun.Start + sortRun.Length - 1;
+            int swapCount = sortRun.Length / 2;
+            for (int i = 0; i < swapCount; i++)
+                list.Swap(leftIndex++, rightIndex--);
         }
 
         public static string RunToString<T>(IList<T> list, SortRun sortRun)

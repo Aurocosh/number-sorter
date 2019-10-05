@@ -32,19 +32,16 @@ namespace NumberSorter.Forms
                 this.Bind(ViewModel, x => x.Maximum, x => x.MaximumUpDown.Value)
                     .DisposeWith(disposable);
 
-                this.Bind(ViewModel, x => x.MinimumRunLength, x => x.MinimumRunLengthUpDown.Value)
+                this.Bind(ViewModel, x => x.MinimumRunSize, x => x.MinimumRunLengthUpDown.Value)
                     .DisposeWith(disposable);
-                this.Bind(ViewModel, x => x.MaximumRunLength, x => x.MaximumRunLengthUpDown.Value)
-                    .DisposeWith(disposable);
-
-                this.Bind(ViewModel, x => x.MinimumRunStep, x => x.MinimumRunStepUpDown.Value)
-                    .DisposeWith(disposable);
-                this.Bind(ViewModel, x => x.MaximumRunStep, x => x.MaximumRunStepUpDown.Value)
+                this.Bind(ViewModel, x => x.MaximumRunSize, x => x.MaximumRunLengthUpDown.Value)
                     .DisposeWith(disposable);
 
+                this.Bind(ViewModel, x => x.InversionProbability, x => x.InvertedRunUpDown.Value)
+                    .DisposeWith(disposable);
                 this.Bind(ViewModel, x => x.RandomRunProbability, x => x.RandomRunUpDown.Value)
                     .DisposeWith(disposable);
-                this.Bind(ViewModel, x => x.NumberCount, x => x.CountUpDown.Value)
+                this.Bind(ViewModel, x => x.RunCount, x => x.CountUpDown.Value)
                     .DisposeWith(disposable);
 
                 this.BindCommand(ViewModel, x => x.AcceptCommand, x => x.AcceptButton)

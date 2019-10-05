@@ -12,7 +12,7 @@ namespace NumberSorter.Domain.Benchmark.IntegerGenerators
 
         static SortBenchmark_RandomUnsorted_DynamicListGenerator()
         {
-            var arrayLengths = new List<int> { 8, 9, 10, 1000, 10000, 100000 };
+            var arrayLengths = new List<int> { 10, 100, 1000, 10000, 1000000 };
 
             var query =
                 from length in arrayLengths
@@ -24,8 +24,8 @@ namespace NumberSorter.Domain.Benchmark.IntegerGenerators
             for (int i = 0; i < 1; i++)
             {
                 var arguments = inputValues
-                    .Select(x => new object[] {
-                        _generator.Generate(int.MinValue, int.MaxValue, x.length) });
+                    .Select(x => new { input = x, list = _generator.Generate(int.MinValue, int.MaxValue, x.length) })
+                    .Select(x => new object[] { x.list.Count, x.list });
                 _data.AddRange(arguments);
             }
         }

@@ -8,18 +8,20 @@ using System.Text;
 
 namespace NumberSorter.Domain.Tests
 {
-    public class SortTest_RandomUnsorted_DynamicListGenerator : IEnumerable<object[]>
+    public class SortTest_PartiallySorted_DynamicListGenerator : IEnumerable<object[]>
     {
-        private static readonly RandomIntegerGenerator _generator = new RandomIntegerGenerator();
+        private static readonly RandomPartialSortedIntegerGenerator _generator = new RandomPartialSortedIntegerGenerator();
         private static readonly List<object[]> _data;
 
-        static SortTest_RandomUnsorted_DynamicListGenerator()
+        static SortTest_PartiallySorted_DynamicListGenerator()
         {
-            var arrayLengths = new List<int> { 8, 9, 10, 100, 1000 };
+            var runCounts = new List<int> { 1, 2, 3, 10, 100 };
+            var runSizeRanges = new List<Vector2Int> { new Vector2Int(1, 10), new Vector2Int(10, 100) };
 
             var query =
-                from length in arrayLengths
-                select new { length };
+                from runCount in runCounts
+                from runSizeRange in runSizeRanges
+                select new { runCount, runSizeRange };
 
             _data = new List<object[]>();
 
@@ -28,7 +30,7 @@ namespace NumberSorter.Domain.Tests
             {
                 var arguments = inputValues
                     .Select(x => new object[] {
-                        _generator.Generate(int.MinValue, int.MaxValue, x.length) });
+                        _generator.Generate(int.MinValue, int.MaxValue, x.runSizeRange.Min, x.runSizeRange.Max, x.runCount,0,0) });
                 _data.AddRange(arguments);
             }
         }

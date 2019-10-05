@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IntegerGenerators\SortTest_PartiallySorted_DynamicListGenerator.cs" />
     <Compile Include="IntegerGenerators\SortTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator.cs" />
     <Compile Include="IntegerGenerators\SortTest_PartiallySorted_StaticListGenerator.cs" />
     <Compile Include="IntegerGenerators\Vector2Int.cs" />

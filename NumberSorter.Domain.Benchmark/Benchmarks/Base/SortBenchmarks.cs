@@ -1,5 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Exporters;
+using BenchmarkDotNet.Order;
 using NumberSorter.Domain.Algorhythm;
 using NumberSorter.Domain.Benchmark.IntegerGenerators;
 using NumberSorter.Domain.Logic.Algorhythm;
@@ -13,8 +14,9 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks.Base
 {
-    [RPlotExporter]
+    //[RPlotExporter]
     [CsvMeasurementsExporter]
+    [Orderer(SummaryOrderPolicy.Method, MethodOrderPolicy.Alphabetical)]
     public abstract class SortBenchmarks
     {
         static SortBenchmarks()
@@ -30,21 +32,29 @@ namespace NumberSorter.Domain.Benchmark.Benchmarks.Base
             _sort = GetAlgorhythm(_comparer);
         }
 
-        public IEnumerable<object> TwoFullySortedParts_FirstBiggerThenSecond_DynamicList() => new SortBenchmark_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator().GetEnumerable().Select(x => x[0]).ToList();
-        public IEnumerable<object> RandomUnsorted_DynamicList() => new SortBenchmark_RandomUnsorted_DynamicListGenerator().GetEnumerable().Select(x => x[0]).ToList();
+        public IEnumerable<object[]> TwoFullySortedParts_FirstBiggerThenSecond_DynamicList() => new SortBenchmark_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator().ToList();
+        public IEnumerable<object[]> RandomUnsorted_DynamicList() => new SortBenchmark_RandomUnsorted_DynamicListGenerator().ToList();
+        public IEnumerable<object[]> PartiallySorted_DynamicList() => new SortBenchmark_PartiallySorted_DynamicListGenerator().ToList();
 
         protected abstract ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer);
 
         [Benchmark]
         [ArgumentsSource(nameof(TwoFullySortedParts_FirstBiggerThenSecond_DynamicList))]
-        public void TwoFullySortedParts_FirstBiggerThenSecond_Dynamic(List<int> testData)
+        public void TwoFullySortedParts_FirstBiggerThenSecond_Dynamic(int size, List<int> testData)
         {
             _sort.Sort(testData);
         }
 
         [Benchmark]
         [ArgumentsSource(nameof(RandomUnsorted_DynamicList))]
-        public void RandomUnsorted_Dynamic(List<int> testData)
+        public void RandomUnsorted_Dynamic(int size, List<int> testData)
+        {
+            _sort.Sort(testData);
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(PartiallySorted_DynamicList))]
+        public void PartiallySorted_Dynamic(int size, List<int> testData)
         {
             _sort.Sort(testData);
         }

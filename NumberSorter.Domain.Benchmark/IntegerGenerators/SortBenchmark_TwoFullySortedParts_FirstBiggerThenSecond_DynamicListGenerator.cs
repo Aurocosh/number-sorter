@@ -22,7 +22,7 @@ namespace NumberSorter.Domain.Benchmark.IntegerGenerators
 
         static SortBenchmark_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator()
         {
-            var lengths = new List<int> { 10, 1000, 100000 };
+            var lengths = new List<int> { 10, 1000, 50000 };
 
             var query =
                 from firstLength in lengths
@@ -35,10 +35,8 @@ namespace NumberSorter.Domain.Benchmark.IntegerGenerators
             for (int i = 0; i < 1; i++)
             {
                 var arguments = inputValues
-                    .Select(x => new object[] {
-                        _generator.Generate(int.MinValue, int.MaxValue, x.firstLength, x.SecondLength),
-                        new SortRun(0, x.firstLength),
-                        new SortRun(x.firstLength, x.SecondLength) });
+                    .Select(x => new { input = x, list = _generator.Generate(int.MinValue, int.MaxValue, x.firstLength, x.SecondLength) })
+                    .Select(x => new object[] { x.list.Count, x.list });
                 _data.AddRange(arguments);
             }
         }

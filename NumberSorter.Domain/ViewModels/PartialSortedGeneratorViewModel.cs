@@ -21,13 +21,12 @@ namespace NumberSorter.Domain.ViewModels
 
         [Reactive] public int Minimum { get; set; }
         [Reactive] public int Maximum { get; set; }
-        [Reactive] public int MinimumRunLength { get; set; }
-        [Reactive] public int MaximumRunLength { get; set; }
-        [Reactive] public int MinimumRunStep { get; set; }
-        [Reactive] public int MaximumRunStep { get; set; }
+        [Reactive] public int MinimumRunSize { get; set; }
+        [Reactive] public int MaximumRunSize { get; set; }
 
+        [Reactive] public double InversionProbability { get; set; }
         [Reactive] public double RandomRunProbability { get; set; }
-        [Reactive] public int NumberCount { get; set; }
+        [Reactive] public int RunCount { get; set; }
         [Reactive] public bool? DialogResult { get; set; }
 
         public List<int> Numbers => new List<int>(_numbers);
@@ -47,13 +46,12 @@ namespace NumberSorter.Domain.ViewModels
         {
             Minimum = -100;
             Maximum = 100;
-            MinimumRunLength = 5;
-            MaximumRunLength = 30;
-            MinimumRunStep = 1;
-            MaximumRunStep = 10;
+            MinimumRunSize = 5;
+            MaximumRunSize = 30;
 
+            InversionProbability = 0.5;
             RandomRunProbability = 0.0;
-            NumberCount = 100;
+            RunCount = 5;
 
             AcceptCommand = ReactiveCommand.Create(Accept);
 
@@ -64,20 +62,12 @@ namespace NumberSorter.Domain.ViewModels
                 .Where(x => x < Minimum)
                 .Subscribe(x => Minimum = x);
 
-            this.WhenAnyValue(x => x.MinimumRunLength)
-                .Where(x => x > MaximumRunLength)
-                .Subscribe(x => MaximumRunLength = x);
-            this.WhenAnyValue(x => x.MaximumRunLength)
-                .Where(x => x < MinimumRunLength)
-                .Subscribe(x => MinimumRunLength = x);
-
-            this.WhenAnyValue(x => x.MinimumRunStep)
-                .Where(x => x > MaximumRunStep)
-                .Subscribe(x => MaximumRunStep = x);
-            this.WhenAnyValue(x => x.MaximumRunStep)
-                .Where(x => x < MinimumRunStep)
-                .Subscribe(x => MinimumRunStep = x);
-
+            this.WhenAnyValue(x => x.MinimumRunSize)
+                .Where(x => x > MaximumRunSize)
+                .Subscribe(x => MaximumRunSize = x);
+            this.WhenAnyValue(x => x.MaximumRunSize)
+                .Where(x => x < MinimumRunSize)
+                .Subscribe(x => MinimumRunSize = x);
         }
 
         #endregion Constructors
@@ -87,7 +77,7 @@ namespace NumberSorter.Domain.ViewModels
         private void Accept()
         {
             var generator = new RandomPartialSortedIntegerGenerator();
-            _numbers = generator.Generate(Minimum, Maximum, MinimumRunLength, MaximumRunLength, MinimumRunStep, MaximumRunStep, NumberCount, RandomRunProbability);
+            _numbers = generator.Generate(Minimum, Maximum, MinimumRunSize, MaximumRunSize, RunCount, InversionProbability, RandomRunProbability);
             DialogResult = true;
         }
 

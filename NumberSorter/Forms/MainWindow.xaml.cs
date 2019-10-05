@@ -54,6 +54,8 @@ namespace NumberSorter.Forms
                 var dialog = new OpenFileDialog { Filter = context.Input };
                 if (dialog.ShowDialog() == true)
                     context.SetOutput(dialog.FileName);
+                else
+                    context.SetOutput("");
             });
         }
     }

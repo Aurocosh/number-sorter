@@ -1,4 +1,5 @@
 ﻿using NumberSorter.Domain.Logic.Container;
+using NumberSorter.Domain.Logic.Utility;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,8 +20,7 @@ namespace NumberSorter.Domain.Generators
             var size = secondSize + firstSize;
             var numbers = new int[size];
 
-            for (int i = 0; i < size; i++)
-                numbers[i] = _random.Next(minimumValue, maximumValue + 1);
+            IListUtility.Randomize(numbers, minimumValue, maximumValue);
             Array.Sort(numbers);
 
             var firstPart = new int[secondSize];
