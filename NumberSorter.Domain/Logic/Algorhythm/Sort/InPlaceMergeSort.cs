@@ -52,10 +52,9 @@ namespace NumberSorter.Domain.Logic.Algorhythm
             int secondIndex = secondRun.Start;
             int lastSecondIndex = secondRun.LastIndex;
 
-            int sourceIndex = firstIndex;
-
             int tempLength = 0;
             int tempStartIndex = secondRun.Start;
+            int firstSourceIndex = firstRun.Start;
 
             while (firstIndex != secondIndex && tempStartIndex <= lastSecondIndex)
             {
@@ -72,33 +71,36 @@ namespace NumberSorter.Domain.Logic.Algorhythm
                 //Console.WriteLine($"Temporary S({tempStartIndex}) C({tempCurrentIndex}) L({tempLength}) V({temp})");
 
                 bool hasSecond = secondIndex <= lastSecondIndex;
-                if (hasSecond && Compare(list, sourceIndex, secondIndex) > 0)
+                if (hasSecond && Compare(list, firstSourceIndex, secondIndex) > 0)
                 {
                     list.Swap(firstIndex, secondIndex);
-                    if (sourceIndex > tempStartIndex)
-                        SortTemporary(list, tempStartIndex, tempLength, sourceIndex);
+                    if (firstSourceIndex > tempStartIndex)
+                        SortTemporary(list, tempStartIndex, tempLength, firstSourceIndex);
 
-                    sourceIndex = tempStartIndex;
+                    firstSourceIndex = tempStartIndex;
                     secondIndex++;
                     tempLength++;
                 }
-                else if (firstIndex != sourceIndex)
+                else if (firstIndex != firstSourceIndex)
                 {
-                    list.Swap(firstIndex, sourceIndex);
-                    sourceIndex++;
-                    sourceIndex = WrapTempIndex(sourceIndex, tempStartIndex, tempStartIndex + tempLength - 1);
+                    list.Swap(firstIndex, firstSourceIndex);
+                    firstSourceIndex++;
+                    firstSourceIndex = WrapTempIndex(firstSourceIndex, tempStartIndex, tempStartIndex + tempLength - 1);
                 }
                 else
                 {
-                    sourceIndex++;
+                    firstSourceIndex++;
                 }
 
                 firstIndex++;
                 if (firstIndex == tempStartIndex && tempLength > 0)
                 {
-                    SortTemporary(list, tempStartIndex, tempLength, sourceIndex);
+                    if (firstSourceIndex != tempStartIndex)
+                    {
+                        SortTemporary(list, tempStartIndex, tempLength, firstSourceIndex);
+                        firstSourceIndex = firstIndex;
+                    }
                     tempStartIndex += tempLength;
-                    sourceIndex = firstIndex;
                     tempLength = 0;
                 }
 
@@ -122,9 +124,6 @@ namespace NumberSorter.Domain.Logic.Algorhythm
 
         private void SortTemporary(IList<T> list, int tempStartIndex, int tempLength, int tempCurrentIndex)
         {
-            if (tempCurrentIndex == tempStartIndex)
-                return;
-
             var firstLength = tempCurrentIndex - tempStartIndex;
             var secondLength = tempLength - firstLength;
 
