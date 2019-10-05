@@ -47,9 +47,12 @@ namespace NumberSorter.Domain.Logic.Algorhythm
             if (Compare(list, firstRun.LastIndex, secondRun.FirstIndex) <= 0)
                 return;
 
+
             int firstIndex = firstRun.Start;
             int secondIndex = secondRun.Start;
             int lastSecondIndex = secondRun.LastIndex;
+
+            int sourceIndex = firstIndex;
 
             int tempLength = 0;
             int tempStartIndex = secondRun.Start;
@@ -57,7 +60,6 @@ namespace NumberSorter.Domain.Logic.Algorhythm
 
             while (firstIndex != secondIndex && tempStartIndex <= lastSecondIndex)
             {
-                bool isUsingTemp = tempLength > 0;
                 bool hasSecond = secondIndex <= lastSecondIndex;
 
                 //var nextFromFirst = isUsingTemp ? list[tempCurrentIndex] : list[firstIndex];
@@ -71,7 +73,7 @@ namespace NumberSorter.Domain.Logic.Algorhythm
                 //Console.WriteLine($"{firstIndex} \n{first}\n{second}");
                 //Console.WriteLine($"Temporary S({tempStartIndex}) C({tempCurrentIndex}) L({tempLength}) V({temp})");
 
-                if (hasSecond && Compare(list, isUsingTemp ? tempCurrentIndex : firstIndex, secondIndex) > 0)
+                if (hasSecond && Compare(list, sourceIndex, secondIndex) > 0)
                 {
                     list.Swap(firstIndex, secondIndex);
                     if (tempStartIndex != tempCurrentIndex)
@@ -80,14 +82,20 @@ namespace NumberSorter.Domain.Logic.Algorhythm
                         tempCurrentIndex = tempStartIndex;
                     }
 
+                    sourceIndex = tempStartIndex;
                     secondIndex++;
                     tempLength++;
                 }
-                else if (isUsingTemp)
+                else if (firstIndex != sourceIndex)
                 {
                     list.Swap(firstIndex, tempCurrentIndex);
                     tempCurrentIndex++;
                     tempCurrentIndex = WrapTempIndex(tempCurrentIndex, tempStartIndex, tempStartIndex + tempLength - 1);
+                    sourceIndex = tempCurrentIndex;
+                }
+                else
+                {
+                    sourceIndex = firstIndex + 1;
                 }
 
                 firstIndex++;
@@ -97,6 +105,7 @@ namespace NumberSorter.Domain.Logic.Algorhythm
                     tempStartIndex += tempLength;
                     tempCurrentIndex = tempStartIndex;
                     tempLength = 0;
+                    sourceIndex = firstIndex;
                 }
 
                 //first = SortRunUtility.RunToString(list, firstRun, firstIndex, secondIndex);
