@@ -14,7 +14,7 @@ namespace NumberSorter.Domain.Logic.Utility
             if (sortRun.Length == 0)
                 return new ArrayRunHalves(sortRun, sortRun);
             if (sortRun.Length == 1)
-                return new ArrayRunHalves(sortRun, new SortRun());
+                return new ArrayRunHalves(sortRun, new SortRun(0, 0));
 
             int firstIndex = sortRun.Start;
             int firstLength = sortRun.Length / 2;

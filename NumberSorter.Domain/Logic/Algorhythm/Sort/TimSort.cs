@@ -31,9 +31,9 @@ namespace NumberSorter.Domain.Logic.Algorhythm
             {
                 _sortRuns = new LinkedList<SortRun>();
 
-                _sortRunA = new SortRun();
-                _sortRunB = new SortRun();
-                _sortRunC = new SortRun();
+                _sortRunA = new SortRun(0, 0);
+                _sortRunB = new SortRun(0, 0);
+                _sortRunC = new SortRun(0, 0);
             }
 
             public int Count => _sortRuns.Count;
@@ -49,7 +49,7 @@ namespace NumberSorter.Domain.Logic.Algorhythm
             public SortRun Pop()
             {
                 if (_sortRuns.Count == 0)
-                    return null;
+                    return new SortRun(0, 0);
                 var sortRun = _sortRunA;
                 _sortRunA = _sortRunB;
                 _sortRunB = _sortRunC;
@@ -107,7 +107,7 @@ namespace NumberSorter.Domain.Logic.Algorhythm
 
         private SortRun MergeRuns(IList<T> list, SortRun leftRun, SortRun rightRun)
         {
-            return new SortRun();
+            return new SortRun(0, 0);
         }
 
         private SortRun FindNextSortRun(IList<T> list, int runStart)
