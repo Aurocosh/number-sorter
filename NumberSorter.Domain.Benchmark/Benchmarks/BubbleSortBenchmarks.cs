@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using NumberSorter.Domain.Algorhythm;
-using NumberSorter.Domain.Benchmark;
+using NumberSorter.Domain.Benchmark.Benchmarks.Base;
 using NumberSorter.Domain.Logic.Algorhythm;
 
-namespace NumberSorter.Domain.Tests.SortTests
+namespace NumberSorter.Domain.Benchmark.Benchmarks
 {
     public class BubbleSortBenchmarks : SortBenchmarks
     {

@@ -25,7 +25,7 @@ namespace NumberSorter.Domain.Tests.MergeTests.Base
         protected abstract ILocalMergeAlgothythm<int> GetAlgorhythm(IComparer<int> comparer);
 
         [Theory]
-        [ClassData(typeof(TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator))]
+        [ClassData(typeof(SortTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator))]
         public void MergingTwoSorted_JustNeedToSwapParts_RandomArray(List<int> input, SortRun firstRun, SortRun secondRun)
         {
             var result = new List<int>(input);

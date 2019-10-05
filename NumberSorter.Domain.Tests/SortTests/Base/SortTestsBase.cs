@@ -23,7 +23,7 @@ namespace NumberSorter.Domain.Tests.SortTests.Base
         protected abstract ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer);
 
         [Theory]
-        [ClassData(typeof(RandomUnsorted_StaticListGenerator))]
+        [ClassData(typeof(SortTest_RandomUnsorted_StaticListGenerator))]
         public void ListSort_RandomUnsorted_StaticList(List<int> testData)
         {
             TestSort(testData);
@@ -31,14 +31,14 @@ namespace NumberSorter.Domain.Tests.SortTests.Base
 
 
         [Theory]
-        [ClassData(typeof(RandomUnsorted_DynamicListGenerator))]
+        [ClassData(typeof(SortTest_RandomUnsorted_DynamicListGenerator))]
         public void ListSort_RandomUnsorted_RandomList(List<int> testData)
         {
             TestSort(testData);
         }
 
         [Theory]
-        [ClassData(typeof(PartiallySorted_StaticListGenerator))]
+        [ClassData(typeof(SortTest_PartiallySorted_StaticListGenerator))]
         public void ListSort_PartiallySorted_StaticList(List<int> testData)
         {
             TestSort(testData);
