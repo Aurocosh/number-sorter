@@ -12,18 +12,6 @@ namespace NumberSorter.Domain.Logic.Algorhythm
         {
         }
 
-        private sealed class ArrayHalves<K>
-        {
-            public SortRun First { get; }
-            public SortRun Second { get; }
-
-            public ArrayHalves(SortRun first, SortRun second)
-            {
-                First = first;
-                Second = second;
-            }
-        }
-
         public override void Merge(IList<T> list, SortRun leftRun, SortRun rightRun)
         {
             if (leftRun.Length < rightRun.Length)

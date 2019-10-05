@@ -9,7 +9,7 @@ namespace NumberSorter.Domain.Logic.Algorhythm
 {
     public class InPlaceMergeSort<T> : GenericSortAlgorhythm<T>
     {
-        private ILocalMergeAlgothythm<T> _localMergeAlgothythm;
+        private readonly ILocalMergeAlgothythm<T> _localMergeAlgothythm;
 
         public InPlaceMergeSort(IComparer<T> comparer) : base(comparer)
         {
@@ -47,7 +47,6 @@ namespace NumberSorter.Domain.Logic.Algorhythm
             if (Compare(list, firstRun.LastIndex, secondRun.FirstIndex) <= 0)
                 return;
 
-
             int firstIndex = firstRun.Start;
             int secondIndex = secondRun.Start;
             int lastSecondIndex = secondRun.LastIndex;
@@ -58,7 +57,6 @@ namespace NumberSorter.Domain.Logic.Algorhythm
 
             while (firstIndex != secondIndex && tempStartIndex <= lastSecondIndex)
             {
-
                 //var nextFromFirst = isUsingTemp ? list[tempCurrentIndex] : list[firstIndex];
                 //var nextFromSecond = hasSecond ? list[secondIndex].ToString() : "X";
 
@@ -122,13 +120,13 @@ namespace NumberSorter.Domain.Logic.Algorhythm
             //    Console.WriteLine("Not sorted");
         }
 
-        private void SortTemporary(IList<T> list, int tempStartIndex, int tempLength, int tempCurrentIndex)
+        private void SortTemporary(IList<T> list, int tempStartIndex, int tempLength, int firstSourceIndex)
         {
-            var firstLength = tempCurrentIndex - tempStartIndex;
+            var firstLength = firstSourceIndex - tempStartIndex;
             var secondLength = tempLength - firstLength;
 
             var leftRun = new SortRun(tempStartIndex, firstLength);
-            var rightRun = new SortRun(tempCurrentIndex, secondLength);
+            var rightRun = new SortRun(firstSourceIndex, secondLength);
 
             _localMergeAlgothythm.Merge(list, leftRun, rightRun);
         }
