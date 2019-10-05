@@ -12,7 +12,7 @@ namespace NumberSorter.Domain.Logic.Utility
         {
             int size = list.Count;
             for (int i = 0; i < size; i++)
-                list[i] = _random.Next(minimum, maximum + 1);
+                list[i] = _random.Next(minimum, maximum);
         }
     }
 }

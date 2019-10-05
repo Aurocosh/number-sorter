@@ -30,7 +30,7 @@ namespace NumberSorter.Domain.Tests
             {
                 var arguments = inputValues
                     .Select(x => new object[] {
-                        _generator.Generate(int.MinValue, int.MaxValue, x.runSizeRange.Min, x.runSizeRange.Max, x.runCount,0,0) });
+                        _generator.Generate(int.MinValue, int.MaxValue, x.runSizeRange.Min, x.runSizeRange.Max, x.runCount,0.5,0) });
                 _data.AddRange(arguments);
             }
         }

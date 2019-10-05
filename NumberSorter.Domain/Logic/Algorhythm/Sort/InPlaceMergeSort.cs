@@ -56,11 +56,9 @@ namespace NumberSorter.Domain.Logic.Algorhythm
 
             int tempLength = 0;
             int tempStartIndex = secondRun.Start;
-            int tempCurrentIndex = secondRun.Start;
 
             while (firstIndex != secondIndex && tempStartIndex <= lastSecondIndex)
             {
-                bool hasSecond = secondIndex <= lastSecondIndex;
 
                 //var nextFromFirst = isUsingTemp ? list[tempCurrentIndex] : list[firstIndex];
                 //var nextFromSecond = hasSecond ? list[secondIndex].ToString() : "X";
@@ -73,14 +71,12 @@ namespace NumberSorter.Domain.Logic.Algorhythm
                 //Console.WriteLine($"{firstIndex} \n{first}\n{second}");
                 //Console.WriteLine($"Temporary S({tempStartIndex}) C({tempCurrentIndex}) L({tempLength}) V({temp})");
 
+                bool hasSecond = secondIndex <= lastSecondIndex;
                 if (hasSecond && Compare(list, sourceIndex, secondIndex) > 0)
                 {
                     list.Swap(firstIndex, secondIndex);
-                    if (tempStartIndex != tempCurrentIndex)
-                    {
-                        SortTemporary(list, tempStartIndex, tempLength, tempCurrentIndex);
-                        tempCurrentIndex = tempStartIndex;
-                    }
+                    if (sourceIndex > tempStartIndex)
+                        SortTemporary(list, tempStartIndex, tempLength, sourceIndex);
 
                     sourceIndex = tempStartIndex;
                     secondIndex++;
@@ -88,24 +84,22 @@ namespace NumberSorter.Domain.Logic.Algorhythm
                 }
                 else if (firstIndex != sourceIndex)
                 {
-                    list.Swap(firstIndex, tempCurrentIndex);
-                    tempCurrentIndex++;
-                    tempCurrentIndex = WrapTempIndex(tempCurrentIndex, tempStartIndex, tempStartIndex + tempLength - 1);
-                    sourceIndex = tempCurrentIndex;
+                    list.Swap(firstIndex, sourceIndex);
+                    sourceIndex++;
+                    sourceIndex = WrapTempIndex(sourceIndex, tempStartIndex, tempStartIndex + tempLength - 1);
                 }
                 else
                 {
-                    sourceIndex = firstIndex + 1;
+                    sourceIndex++;
                 }
 
                 firstIndex++;
                 if (firstIndex == tempStartIndex && tempLength > 0)
                 {
-                    SortTemporary(list, tempStartIndex, tempLength, tempCurrentIndex);
+                    SortTemporary(list, tempStartIndex, tempLength, sourceIndex);
                     tempStartIndex += tempLength;
-                    tempCurrentIndex = tempStartIndex;
-                    tempLength = 0;
                     sourceIndex = firstIndex;
+                    tempLength = 0;
                 }
 
                 //first = SortRunUtility.RunToString(list, firstRun, firstIndex, secondIndex);
