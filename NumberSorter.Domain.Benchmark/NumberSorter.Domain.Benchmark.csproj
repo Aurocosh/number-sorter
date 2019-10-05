@@ -214,6 +214,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Benchmarks\HalfInPlaceMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\KindaInPlaceMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\InPlaceMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\BubbleSortBenchmarks.cs" />
     <Compile Include="Benchmarks\InsertionSortBenchmarks.cs" />

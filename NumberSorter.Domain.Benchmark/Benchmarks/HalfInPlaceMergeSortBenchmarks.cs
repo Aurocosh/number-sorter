@@ -5,11 +5,11 @@ using NumberSorter.Domain.Logic.Algorhythm;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks
 {
-    public class KindaInPlaceMergeSortBenchmarks : SortBenchmarks
+    public class HalfInPlaceMergeSortBenchmarks : SortBenchmarks
     {
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {
-            return new KindaInPlaceMergeSort<int>(comparer);
+            return new HalfInPlaceMergeSort<int>(comparer);
         }
     }
 }
