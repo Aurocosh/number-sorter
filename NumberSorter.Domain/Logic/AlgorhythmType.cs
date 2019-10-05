@@ -9,7 +9,9 @@
         DequeMergeSort,
         InPlaceMergeSort,
         RecursiveMergeSort,
+        HalfInPlaceMergeSort,
         QuickSortRandomPivot,
+        KindaInPlaceMergeSort,
         QuickSortMedianOfThree
     }
 }

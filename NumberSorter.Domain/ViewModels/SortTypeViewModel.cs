@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
-using System.Windows.Input;
-using System.Windows;
 using ReactiveUI;
 using System.Reactive;
 using System.Reactive.Linq;
 using ReactiveUI.Fody.Helpers;
-using System.IO;
-using System.Text.RegularExpressions;
 using DynamicData;
 using NumberSorter.Domain.Logic;
 
@@ -20,7 +12,6 @@ namespace NumberSorter.Domain.ViewModels
     public class SortTypeViewModel : ReactiveObject
     {
         #region Fields
-
 
         private readonly SourceList<SortTypeLineViewModel> _sortTypes = new SourceList<SortTypeLineViewModel>();
 
@@ -33,13 +24,11 @@ namespace NumberSorter.Domain.ViewModels
 
         #endregion Properties
 
-
         #region Commands
 
         public ReactiveCommand<Unit, Unit> AcceptCommand { get; }
 
         #endregion Commands
-
 
         #region Constructors
 
@@ -47,21 +36,26 @@ namespace NumberSorter.Domain.ViewModels
         {
             AcceptCommand = ReactiveCommand.Create(Accept);
 
-            _sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.TimSort, "Tim Sort"));
-            _sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.HeapSort, "Heap sort"));
-            _sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.BubbleSort, "Bubble sort"));
-            _sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.InsertionSort, "Insertion sort"));
-            _sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.DequeMergeSort, "Custom merge sort"));
-            _sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.InPlaceMergeSort, "In place merge sort"));
-            _sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.RecursiveMergeSort, "Recursive merge sort"));
-            _sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.QuickSortRandomPivot, "Quick sort (Random pivot)"));
-            _sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.QuickSortMedianOfThree, "Quick sort (Median of three pivot)"));
+            var sortTypes = new List<SortTypeLineViewModel>();
+            sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.TimSort, "Tim Sort"));
+            sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.HeapSort, "Heap sort"));
+            sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.BubbleSort, "Bubble sort"));
+            sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.InsertionSort, "Insertion sort"));
+            sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.DequeMergeSort, "Deque merge sort"));
+            sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.InPlaceMergeSort, "In place merge sort"));
+            sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.RecursiveMergeSort, "Recursive merge sort"));
+            sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.HalfInPlaceMergeSort, "Half in place merge sort"));
+            sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.QuickSortRandomPivot, "Quick sort (Random pivot)"));
+            sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.KindaInPlaceMergeSort, "Kinda in place merge sort"));
+            sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.QuickSortMedianOfThree, "Quick sort (Median of three pivot)"));
+
+            sortTypes.Sort((x, y) => x.Description.CompareTo(y.Description));
+            _sortTypes.AddRange(sortTypes);
 
             SelectedSortType = SortTypes.First();
         }
 
         #endregion Constructors
-
 
         #region Command functions
 

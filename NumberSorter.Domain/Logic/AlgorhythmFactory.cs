@@ -25,6 +25,10 @@ namespace NumberSorter.Domain.Logic
                     return new InPlaceMergeSort<T>(comparer);
                 case AlgorhythmType.RecursiveMergeSort:
                     return new RecursiveMergeSort<T>(comparer);
+                case AlgorhythmType.HalfInPlaceMergeSort:
+                    return new HalfInPlaceMergeSort<T>(comparer);
+                case AlgorhythmType.KindaInPlaceMergeSort:
+                    return new KindaInPlaceMergeSort<T>(comparer);
                 case AlgorhythmType.QuickSortRandomPivot:
                     return new QuickSort<T>(comparer, new RandomPivotSelector<T>());
                 case AlgorhythmType.QuickSortMedianOfThree:
