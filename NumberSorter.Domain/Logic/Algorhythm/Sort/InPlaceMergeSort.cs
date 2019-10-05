@@ -1,4 +1,5 @@
-﻿using NumberSorter.Domain.Logic.Container;
+﻿using NumberSorter.Domain.Logic.Algorhythm.Merge.Base;
+using NumberSorter.Domain.Logic.Container;
 using NumberSorter.Domain.Logic.Utility;
 using System;
 using System.Collections.Generic;
@@ -8,20 +9,11 @@ namespace NumberSorter.Domain.Logic.Algorhythm
 {
     public class InPlaceMergeSort<T> : GenericSortAlgorhythm<T>
     {
+        private ILocalMergeAlgothythm<T> _localMergeAlgothythm;
+
         public InPlaceMergeSort(IComparer<T> comparer) : base(comparer)
         {
-        }
-
-        private sealed class ArrayHalves<K>
-        {
-            public SortRun First { get; }
-            public SortRun Second { get; }
-
-            public ArrayHalves(SortRun first, SortRun second)
-            {
-                First = first;
-                Second = second;
-            }
+            _localMergeAlgothythm = new RecursiveInPlaceMerge<T>(comparer);
         }
 
         public override void Sort(IList<T> list)
@@ -35,29 +27,11 @@ namespace NumberSorter.Domain.Logic.Algorhythm
             if (sortRun.Length <= 1)
                 return;
 
-            var halvesOfSortRun = SplitSortRun(sortRun);
+            var halvesOfSortRun = SortRunUtility.SplitSortRun(sortRun);
             MergeSort(list, halvesOfSortRun.First);
             MergeSort(list, halvesOfSortRun.Second);
 
             Merge(list, halvesOfSortRun.First, halvesOfSortRun.Second);
-        }
-
-        private static ArrayHalves<T> SplitSortRun(SortRun sortRun)
-        {
-            if (sortRun.Length == 0)
-                return new ArrayHalves<T>(sortRun, sortRun);
-            if (sortRun.Length == 1)
-                return new ArrayHalves<T>(sortRun, new SortRun(sortRun.Start, 0));
-
-            int firstIndex = sortRun.Start;
-            int firstLength = sortRun.Length / 2;
-
-            int secondIndex = sortRun.Start + firstLength;
-            int secondLength = sortRun.Length - firstLength;
-
-            var firstSortRun = new SortRun(firstIndex, firstLength);
-            var secondSortRun = new SortRun(secondIndex, secondLength);
-            return new ArrayHalves<T>(firstSortRun, secondSortRun);
         }
 
         private void Merge(IList<T> list, SortRun firstRun, SortRun secondRun)
@@ -148,31 +122,13 @@ namespace NumberSorter.Domain.Logic.Algorhythm
             if (tempCurrentIndex == tempStartIndex)
                 return;
 
-            var firstIndex = tempStartIndex;
-            var secondIndex = tempCurrentIndex;
-
             var firstLength = tempCurrentIndex - tempStartIndex;
-            var simpleForwardMoves = ((tempLength / firstLength) - 1) * firstLength;
+            var secondLength = tempLength - firstLength;
 
-            //var temp = SortRunUtility.RunToString(list, new SortRun(tempStartIndex, tempLength));
-            //Console.WriteLine($"\nTemp \n{temp}");
+            var leftRun = new SortRun(tempStartIndex, firstLength);
+            var rightRun = new SortRun(tempCurrentIndex, secondLength);
 
-            var movesLeft = simpleForwardMoves;
-            while (movesLeft-- > 0)
-                list.Swap(firstIndex++, secondIndex++);
-
-            var rightRunLength = tempLength - simpleForwardMoves - firstLength;
-            if (rightRunLength > 0)
-            {
-                var leftRun = new SortRun(firstIndex, firstLength);
-                var rightRun = new SortRun(firstIndex + firstLength, rightRunLength);
-                Merge(list, leftRun, rightRun);
-            }
-
-            //var stemp = SortRunUtility.RunToString(list, new SortRun(tempStartIndex, tempLength));
-            //Console.WriteLine($"\nSorted Temp \n{stemp}");
-            //if (!IsSorted(list, tempStartIndex, tempLength))
-            //    Console.WriteLine("Temp not sorted");
+            _localMergeAlgothythm.Merge(list, leftRun, rightRun);
         }
 
         private static int WrapTempIndex(int index, int start, int max)
