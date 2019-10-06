@@ -3,6 +3,7 @@ using NumberSorter.Domain.Algorhythm;
 using NumberSorter.Domain.Logic.Algorhythm;
 using NumberSorter.Domain.Logic.Algorhythm.Merge.Base;
 using NumberSorter.Domain.Logic.Comparer;
+using NumberSorter.Domain.Tests.SortTests.Base.IntegerGenerators.Dynamic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -25,7 +26,7 @@ namespace NumberSorter.Domain.Tests.MergeTests.Base
         protected abstract ILocalMergeAlgothythm<int> GetAlgorhythm(IComparer<int> comparer);
 
         [Theory]
-        [ClassData(typeof(SortTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator))]
+        [ClassData(typeof(MergeTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator))]
         public void MergingTwoSorted_JustNeedToSwapParts_RandomArray(List<int> input, SortRun firstRun, SortRun secondRun)
         {
             var result = new List<int>(input);

@@ -15,19 +15,19 @@ namespace NumberSorter.Domain.Tests.SortTests.Base.IntegerGenerators.Dynamic
     // 5,6,1,2,3
     // 12,14,15,20,1,3
 
-    public partial class SortTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator : IEnumerable<object[]>
+    public partial class MergeTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator : IEnumerable<object[]>
     {
         private static readonly UnmergedFullySortedGenerator _generator = new UnmergedFullySortedGenerator(TestsRandomProvider.Random);
         private static readonly List<object[]> _data;
 
-        static SortTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator()
+        static MergeTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator()
         {
             var lengths = new List<int> { 1, 2, 3, 10, 1000 };
 
             var query =
                 from firstLength in lengths
-                from SecondLength in lengths
-                select new { firstLength, SecondLength };
+                from secondLength in lengths
+                select new { firstLength, secondLength };
 
             _data = new List<object[]>();
 
@@ -36,7 +36,9 @@ namespace NumberSorter.Domain.Tests.SortTests.Base.IntegerGenerators.Dynamic
             {
                 var arguments = inputValues
                     .Select(x => new object[] {
-                        _generator.Generate(int.MinValue, int.MaxValue, x.firstLength, x.SecondLength)});
+                        _generator.Generate(int.MinValue, int.MaxValue, x.firstLength, x.secondLength),
+                        new SortRun(0,x.firstLength),
+                        new SortRun(x.firstLength,x.secondLength)});
                 _data.AddRange(arguments);
             }
         }

@@ -69,11 +69,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IntegerGenerators\TestsRandomProvider.cs" />
-    <Compile Include="IntegerGenerators\SortTest_PartiallySorted_DynamicListGenerator.cs" />
-    <Compile Include="IntegerGenerators\SortTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator.cs" />
-    <Compile Include="IntegerGenerators\SortTest_PartiallySorted_StaticListGenerator.cs" />
-    <Compile Include="IntegerGenerators\Vector2Int.cs" />
+    <Compile Include="MergeTests\IntegerGenerators\Dynamic\MergeTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator.cs" />
+    <Compile Include="TestsRandomProvider.cs" />
+    <Compile Include="SortTests\IntegerGenerators\Dynamic\SortTest_PartiallySorted_DynamicListGenerator.cs" />
+    <Compile Include="SortTests\IntegerGenerators\Dynamic\SortTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator.cs" />
+    <Compile Include="SortTests\IntegerGenerators\Static\SortTest_PartiallySorted_StaticListGenerator.cs" />
+    <Compile Include="Utility\Vector2Int.cs" />
     <Compile Include="MergeTests\Base\MergeTestsBase.cs" />
     <Compile Include="MergeTests\RecursiveInPlaceMergeTests.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -93,9 +94,9 @@
     <Compile Include="SortTests\InsertionSortTests.cs" />
     <Compile Include="SortTests\BubbleSortTests.cs" />
     <Compile Include="SortTests\Base\SortTestsBase.cs" />
-    <Compile Include="IntegerGenerators\SortTest_RandomUnsorted_DynamicListGenerator.cs" />
+    <Compile Include="SortTests\IntegerGenerators\Dynamic\SortTest_RandomUnsorted_DynamicListGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IntegerGenerators\SortTest_RandomUnsorted_StaticListGenerator.cs" />
+    <Compile Include="SortTests\IntegerGenerators\Static\SortTest_RandomUnsorted_StaticListGenerator.cs" />
     <Compile Include="Utility\ListUtility.cs" />
   </ItemGroup>
   <ItemGroup>

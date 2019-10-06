@@ -1,6 +1,8 @@
 ﻿using AutoFixture.Xunit2;
 using NumberSorter.Domain.Algorhythm;
 using NumberSorter.Domain.Logic.Comparer;
+using NumberSorter.Domain.Tests.SortTests.Base.IntegerGenerators.Dynamic;
+using NumberSorter.Domain.Tests.SortTests.Base.IntegerGenerators.Static;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -32,7 +34,7 @@ namespace NumberSorter.Domain.Tests.SortTests.Base
 
         [Theory]
         [ClassData(typeof(SortTest_RandomUnsorted_DynamicListGenerator))]
-        public void ListSort_RandomUnsorted_RandomList(List<int> testData)
+        public void ListSort_RandomUnsorted_DynamicList(List<int> testData)
         {
             TestSort(testData);
         }
@@ -46,23 +48,23 @@ namespace NumberSorter.Domain.Tests.SortTests.Base
 
         [Theory]
         [ClassData(typeof(SortTest_PartiallySorted_DynamicListGenerator))]
-        public void SortTest_PartiallySorted_DynamicList(List<int> testData)
+        public void ListSort_PartiallySorted_DynamicList(List<int> testData)
         {
             TestSort(testData);
         }
 
         [Theory]
         [ClassData(typeof(SortTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator))]
-        public void SortTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicList(List<int> testData)
+        public void ListSort_TwoFullySortedParts_FirstBiggerThenSecond_DynamicList(List<int> testData)
         {
             TestSort(testData);
         }
 
-        [Theory, AutoData]
-        public void ListSort_RandomUnsorted_AutoData([MinLength(10), MaxLength(50)]int[] testData)
-        {
-            TestSort(testData);
-        }
+        //[Theory, AutoData]
+        //public void ListSort_RandomUnsorted_AutoData([MinLength(10), MaxLength(50)]int[] testData)
+        //{
+        //    TestSort(testData);
+        //}
 
         private void TestSort(IList<int> input)
         {

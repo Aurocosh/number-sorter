@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NumberSorter.Domain.Tests.IntegerGenerators
+namespace NumberSorter.Domain.Tests
 {
     public static class TestsRandomProvider
     {

@@ -1,5 +1,4 @@
 ﻿using NumberSorter.Domain.Generators;
-using NumberSorter.Domain.Tests.IntegerGenerators;
 using System;
 using System.Collections;
 using System.Collections.Generic;
