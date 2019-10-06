@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MergeTests\IntegerGenerators\Dynamic\MergeTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator.cs" />
+    <Compile Include="SortTests\GallopingRecursiveMergeSortTests.cs" />
     <Compile Include="TestsRandomProvider.cs" />
     <Compile Include="SortTests\IntegerGenerators\Dynamic\SortTest_PartiallySorted_DynamicListGenerator.cs" />
     <Compile Include="SortTests\IntegerGenerators\Dynamic\SortTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator.cs" />

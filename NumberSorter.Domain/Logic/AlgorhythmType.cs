@@ -12,6 +12,7 @@
         HalfInPlaceMergeSort,
         QuickSortRandomPivot,
         KindaInPlaceMergeSort,
-        QuickSortMedianOfThree
+        QuickSortMedianOfThree,
+        GallopingRecursiveMergeSort,
     }
 }

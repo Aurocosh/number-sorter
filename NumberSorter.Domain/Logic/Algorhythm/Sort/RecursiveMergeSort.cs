@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NumberSorter.Domain.Logic.Utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,34 +24,12 @@ namespace NumberSorter.Domain.Logic.Algorhythm
             if (array.Length == 1)
                 return array;
 
-            var halvesOfArray = SplitArray(array);
+            var halvesOfArray = ArrayUtility.SplitArray(array);
             var firstSorted = MergeSort(halvesOfArray.First);
             var secondSorted = MergeSort(halvesOfArray.Second);
 
             return Merge(firstSorted, secondSorted);
 
-        }
-
-        private static ArrayHalves<T> SplitArray(T[] array)
-        {
-            if (array.Length == 0)
-                return new ArrayHalves<T>(new T[0], new T[0]);
-            if (array.Length == 1)
-                return new ArrayHalves<T>(array.ToArray(), new T[0]);
-
-            const int firstIndex = 0;
-            int secondIndex = array.Length / 2;
-
-            int firstLength = secondIndex;
-            int secondLength = array.Length - firstLength;
-
-            var firstArray = new T[firstLength];
-            var secondArray = new T[secondLength];
-
-            Array.Copy(array, firstIndex, firstArray, 0, firstLength);
-            Array.Copy(array, secondIndex, secondArray, 0, secondLength);
-
-            return new ArrayHalves<T>(firstArray, secondArray);
         }
 
         private T[] Merge(T[] firstArray, T[] secondArray)
