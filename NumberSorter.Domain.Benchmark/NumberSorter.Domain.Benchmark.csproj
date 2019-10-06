@@ -215,6 +215,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Benchmarks\GallopingRecursiveMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\BinarySortBenchmarks.cs" />
     <Compile Include="Benchmarks\OpRecursiveMergeSorBenchmarkst.cs" />
     <Compile Include="Benchmarks\CSharpDefaultSortBenchmarks.cs" />
     <Compile Include="Benchmarks\DequeMergeSortBenchmarks.cs" />
