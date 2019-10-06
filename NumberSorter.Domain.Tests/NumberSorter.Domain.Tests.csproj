@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IntegerGenerators\TestsRandomProvider.cs" />
     <Compile Include="IntegerGenerators\SortTest_PartiallySorted_DynamicListGenerator.cs" />
     <Compile Include="IntegerGenerators\SortTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator.cs" />
     <Compile Include="IntegerGenerators\SortTest_PartiallySorted_StaticListGenerator.cs" />
@@ -80,6 +81,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SortTests\OpRecursiveMergeSortTests.cs" />
     <Compile Include="SortTests\HalfInPlaceMergeSortTests.cs" />
     <Compile Include="SortTests\KindaInPlaceMergeSortTests.cs" />
     <Compile Include="SortTests\InPlaceMergeSort.cs" />

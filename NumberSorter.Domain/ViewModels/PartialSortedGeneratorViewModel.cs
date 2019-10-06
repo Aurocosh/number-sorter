@@ -76,7 +76,7 @@ namespace NumberSorter.Domain.ViewModels
 
         private void Accept()
         {
-            var generator = new RandomPartialSortedIntegerGenerator();
+            var generator = new RandomPartialSortedIntegerGenerator(new Random());
             _numbers = generator.Generate(Minimum, Maximum, MinimumRunSize, MaximumRunSize, RunCount, InversionProbability, RandomRunProbability);
             DialogResult = true;
         }

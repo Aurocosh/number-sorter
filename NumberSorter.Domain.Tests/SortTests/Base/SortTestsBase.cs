@@ -51,6 +51,13 @@ namespace NumberSorter.Domain.Tests.SortTests.Base
             TestSort(testData);
         }
 
+        [Theory]
+        [ClassData(typeof(SortTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator))]
+        public void SortTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicList(List<int> testData)
+        {
+            TestSort(testData);
+        }
+
         [Theory, AutoData]
         public void ListSort_RandomUnsorted_AutoData([MinLength(10), MaxLength(50)]int[] testData)
         {

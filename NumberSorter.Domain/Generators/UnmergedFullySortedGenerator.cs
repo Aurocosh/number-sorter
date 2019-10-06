@@ -6,13 +6,10 @@ using System.Text;
 
 namespace NumberSorter.Domain.Generators
 {
-    public class UnmergedFullySortedGenerator
+    public class UnmergedFullySortedGenerator : AbstractRandomGenerator
     {
-        private readonly Random _random;
-
-        public UnmergedFullySortedGenerator()
+        public UnmergedFullySortedGenerator(Random random) : base(random)
         {
-            _random = new Random();
         }
 
         public List<int> Generate(int minimumValue, int maximumValue, int firstSize, int secondSize)
@@ -20,7 +17,7 @@ namespace NumberSorter.Domain.Generators
             var size = secondSize + firstSize;
             var numbers = new int[size];
 
-            IListUtility.Randomize(numbers, minimumValue, maximumValue);
+            IListUtility.Randomize(numbers, minimumValue, maximumValue, Random);
             Array.Sort(numbers);
 
             var firstPart = new int[secondSize];

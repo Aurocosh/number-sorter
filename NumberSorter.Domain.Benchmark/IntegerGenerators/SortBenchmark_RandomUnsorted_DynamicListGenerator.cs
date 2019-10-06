@@ -7,7 +7,7 @@ namespace NumberSorter.Domain.Benchmark.IntegerGenerators
 {
     public class SortBenchmark_RandomUnsorted_DynamicListGenerator : IEnumerable<object[]>
     {
-        private static readonly RandomIntegerGenerator _generator = new RandomIntegerGenerator();
+        private static readonly RandomIntegerGenerator _generator = new RandomIntegerGenerator(BenchmarkRandomProvider.Random);
         private static readonly List<object[]> _data;
 
         static SortBenchmark_RandomUnsorted_DynamicListGenerator()

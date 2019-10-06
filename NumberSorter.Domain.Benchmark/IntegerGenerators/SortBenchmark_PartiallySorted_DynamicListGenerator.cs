@@ -1,4 +1,5 @@
-﻿using NumberSorter.Domain.Generators;
+﻿using NumberSorter.Domain.Benchmark.IntegerGenerators;
+using NumberSorter.Domain.Generators;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace NumberSorter.Domain.Tests
 {
     public class SortBenchmark_PartiallySorted_DynamicListGenerator : IEnumerable<object[]>
     {
-        private static readonly RandomPartialSortedIntegerGenerator _generator = new RandomPartialSortedIntegerGenerator();
+        private static readonly RandomPartialSortedIntegerGenerator _generator = new RandomPartialSortedIntegerGenerator(BenchmarkRandomProvider.Random);
         private static readonly List<object[]> _data;
 
         static SortBenchmark_PartiallySorted_DynamicListGenerator()

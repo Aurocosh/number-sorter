@@ -214,12 +214,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Benchmarks\OpRecursiveMergeSorBenchmarkst.cs" />
     <Compile Include="Benchmarks\CSharpDefaultSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\DequeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\HalfInPlaceMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\KindaInPlaceMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\InPlaceMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\BubbleSortBenchmarks.cs" />
     <Compile Include="Benchmarks\InsertionSortBenchmarks.cs" />
+    <Compile Include="IntegerGenerators\BenchmarkRandomProvider.cs" />
     <Compile Include="IntegerGenerators\SortBenchmark_RandomUnsorted_DynamicListGenerator.cs" />
     <Compile Include="IntegerGenerators\SortBenchmark_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator.cs" />
     <Compile Include="IntegerGenerators\SortBenchmark_PartiallySorted_DynamicListGenerator.cs" />

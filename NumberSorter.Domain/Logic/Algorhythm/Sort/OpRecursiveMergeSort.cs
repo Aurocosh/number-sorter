@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace NumberSorter.Domain.Logic.Algorhythm
 {
-    public class RecursiveMergeSort<T> : GenericSortAlgorhythm<T>
+    public class OpRecursiveMergeSort<T> : GenericSortAlgorhythm<T>
     {
-        public RecursiveMergeSort(IComparer<T> comparer) : base(comparer) { }
+        public OpRecursiveMergeSort(IComparer<T> comparer) : base(comparer) { }
 
         public override void Sort(IList<T> list)
         {
@@ -61,14 +61,37 @@ namespace NumberSorter.Domain.Logic.Algorhythm
             int firstLength = firstArray.Length;
             int secondLength = secondArray.Length;
 
+            int firstLimit = firstArray.Length - 1;
+            int secondLimit = secondArray.Length - 1;
+
             int firstIndex = 0;
             int secondIndex = 0;
             int mergedIndex = 0;
 
+            var nextFromFirst = firstArray[firstIndex];
+            var nextFromSecond = secondArray[secondIndex];
+
+            while (firstIndex != firstLimit && secondIndex != secondLimit)
+            {
+                int comparassion = Compare(nextFromFirst, nextFromSecond);
+                if (comparassion > 0)
+                {
+                    secondIndex++;
+                    mergedArray[mergedIndex++] = nextFromSecond;
+                    nextFromSecond = secondArray[secondIndex];
+                }
+                else
+                {
+                    firstIndex++;
+                    mergedArray[mergedIndex++] = nextFromFirst;
+                    nextFromFirst = firstArray[firstIndex];
+                }
+            }
+
             while (firstIndex != firstLength && secondIndex != secondLength)
             {
-                var nextFromFirst = firstArray[firstIndex];
-                var nextFromSecond = secondArray[secondIndex];
+                nextFromFirst = firstArray[firstIndex];
+                nextFromSecond = secondArray[secondIndex];
 
                 int comparassion = Compare(nextFromFirst, nextFromSecond);
                 if (comparassion > 0)
@@ -90,5 +113,6 @@ namespace NumberSorter.Domain.Logic.Algorhythm
 
             return mergedArray;
         }
+
     }
 }

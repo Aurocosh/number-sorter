@@ -7,13 +7,10 @@ using System.Text;
 
 namespace NumberSorter.Domain.Generators
 {
-    public class RandomPartialSortedIntegerGenerator
+    public class RandomPartialSortedIntegerGenerator : AbstractRandomGenerator
     {
-        private readonly Random _random;
-
-        public RandomPartialSortedIntegerGenerator()
+        public RandomPartialSortedIntegerGenerator(Random random) : base(random)
         {
-            _random = new Random();
         }
 
         public List<int> Generate(int minimumValue, int maximumValue, int minRunSize, int maxRunSize, int runCount, double inversionProbability, double randomRunProbability)
@@ -23,16 +20,16 @@ namespace NumberSorter.Domain.Generators
             int runsToMake = runCount;
             while (runsToMake-- > 0)
             {
-                var runSize = _random.Next(minRunSize, maxRunSize + 1);
+                var runSize = Random.Next(minRunSize, maxRunSize + 1);
                 var runArray = new int[runSize];
 
-                IListUtility.Randomize(runArray, minimumValue, maximumValue);
+                IListUtility.Randomize(runArray, minimumValue, maximumValue, Random);
 
-                bool isRandom = _random.NextDouble() < randomRunProbability;
+                bool isRandom = Random.NextDouble() < randomRunProbability;
                 if (!isRandom)
                     Array.Sort(runArray);
 
-                bool isInverted = _random.NextDouble() < inversionProbability;
+                bool isInverted = Random.NextDouble() < inversionProbability;
                 if (isInverted)
                     SortRunUtility.InvertRun(runArray, new SortRun(0, runArray.Length));
 

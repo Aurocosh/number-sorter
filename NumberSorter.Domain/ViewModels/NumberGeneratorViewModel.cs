@@ -67,7 +67,7 @@ namespace NumberSorter.Domain.ViewModels
 
         private void Accept()
         {
-            var generator = new RandomIntegerGenerator();
+            var generator = new RandomIntegerGenerator(new Random());
             _numbers = generator.Generate(Minimum, Maximum, NumberCount);
             DialogResult = true;
         }

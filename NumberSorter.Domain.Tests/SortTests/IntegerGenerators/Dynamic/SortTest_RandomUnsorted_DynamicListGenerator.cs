@@ -1,4 +1,5 @@
 ﻿using NumberSorter.Domain.Generators;
+using NumberSorter.Domain.Tests.IntegerGenerators;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,16 +7,16 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 
-namespace NumberSorter.Domain.Tests
+namespace NumberSorter.Domain.Tests.SortTests.Base.IntegerGenerators.Dynamic
 {
     public class SortTest_RandomUnsorted_DynamicListGenerator : IEnumerable<object[]>
     {
-        private static readonly RandomIntegerGenerator _generator = new RandomIntegerGenerator();
+        private static readonly RandomIntegerGenerator _generator = new RandomIntegerGenerator(TestsRandomProvider.Random);
         private static readonly List<object[]> _data;
 
         static SortTest_RandomUnsorted_DynamicListGenerator()
         {
-            var arrayLengths = new List<int> { 8, 9, 10, 100, 1000 };
+            var arrayLengths = new List<int> { 1, 2, 3, 8, 9, 30, 50, 100, 1000, 2500 };
 
             var query =
                 from length in arrayLengths

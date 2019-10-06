@@ -17,7 +17,7 @@ namespace NumberSorter.Domain.Benchmark.IntegerGenerators
 
     public partial class SortBenchmark_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator : IEnumerable<object[]>
     {
-        private static readonly UnmergedFullySortedGenerator _generator = new UnmergedFullySortedGenerator();
+        private static readonly UnmergedFullySortedGenerator _generator = new UnmergedFullySortedGenerator(BenchmarkRandomProvider.Random);
         private static readonly List<object[]> _data;
 
         static SortBenchmark_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator()

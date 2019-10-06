@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NumberSorter.Domain.Tests
+namespace NumberSorter.Domain.Tests.SortTests.Base.IntegerGenerators.Static
 {
     public class SortTest_RandomUnsorted_StaticListGenerator : IEnumerable<object[]>
     {

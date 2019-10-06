@@ -6,9 +6,9 @@ using System.Text;
 
 namespace NumberSorter.Domain.Generators
 {
-    public class RandomIntegerGenerator
+    public class RandomIntegerGenerator : AbstractRandomGenerator
     {
-        public RandomIntegerGenerator()
+        public RandomIntegerGenerator(Random random) : base(random)
         {
         }
 
@@ -18,7 +18,7 @@ namespace NumberSorter.Domain.Generators
                 throw new ArgumentException($"Value of {nameof(maximumValue)} cannot be less then value of {nameof(minimumValue)}");
 
             var numbers = new int[count];
-            IListUtility.Randomize(numbers, minimumValue, maximumValue);
+            IListUtility.Randomize(numbers, minimumValue, maximumValue, Random);
             return new List<int>(numbers);
         }
     }
