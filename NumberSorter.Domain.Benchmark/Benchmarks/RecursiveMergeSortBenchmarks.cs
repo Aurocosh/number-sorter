@@ -3,7 +3,7 @@ using NumberSorter.Domain.Algorhythm;
 using NumberSorter.Domain.Benchmark.Benchmarks.Base;
 using NumberSorter.Domain.Logic.Algorhythm;
 
-namespace NumberSorter.Domain.Tests.SortTests
+namespace NumberSorter.Domain.Benchmark.Benchmarks
 {
     public class RecursiveMergeSortBenchmarks : SortBenchmarks
     {
