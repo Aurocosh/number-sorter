@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using NumberSorter.Domain.Algorhythm;
+using NumberSorter.Core.Algorhythm;
 using NumberSorter.Domain.Benchmark.Benchmarks.Base;
-using NumberSorter.Domain.Logic.Algorhythm;
-using NumberSorter.Domain.Logic.Algorhythm.QuickSort.PivotSelectors;
+using NumberSorter.Core.Logic.Algorhythm;
+using NumberSorter.Core.Logic.Algorhythm.QuickSort.PivotSelectors;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks
 {

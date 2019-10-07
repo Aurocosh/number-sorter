@@ -81,6 +81,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
+    <Reference Include="WriteableBitmapEx.Wpf, Version=1.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WriteableBitmapEx.1.6.3\lib\net40\WriteableBitmapEx.Wpf.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DialogService\IDialogService.cs" />
@@ -93,6 +96,8 @@
     <Compile Include="ViewModels\PartialSortedGeneratorViewModel.cs" />
     <Compile Include="ViewModels\SortTypeLineViewModel.cs" />
     <Compile Include="ViewModels\SortTypeViewModel.cs" />
+    <Compile Include="Visualizers\Base\IListVisualizer.cs" />
+    <Compile Include="Visualizers\ColumnListVisualizer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FodyWeavers.xml" />

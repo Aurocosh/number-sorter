@@ -1,10 +1,10 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Exporters;
 using BenchmarkDotNet.Order;
-using NumberSorter.Domain.Algorhythm;
+using NumberSorter.Core.Algorhythm;
 using NumberSorter.Domain.Benchmark.IntegerGenerators;
-using NumberSorter.Domain.Logic.Algorhythm;
-using NumberSorter.Domain.Logic.Comparer;
+using NumberSorter.Core.Logic.Algorhythm;
+using NumberSorter.Core.Logic.Comparer;
 using NumberSorter.Domain.Tests;
 using System;
 using System.Collections.Generic;

@@ -1,5 +1,5 @@
-﻿using NumberSorter.Domain.Generators;
-using NumberSorter.Domain.Logic.Algorhythm;
+﻿using NumberSorter.Core.Generators;
+using NumberSorter.Core.Logic.Algorhythm;
 using System;
 using System.Collections;
 using System.Collections.Generic;

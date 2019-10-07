@@ -1,6 +1,6 @@
 ﻿using AutoFixture.Xunit2;
-using NumberSorter.Domain.Algorhythm;
-using NumberSorter.Domain.Logic.Comparer;
+using NumberSorter.Core.Algorhythm;
+using NumberSorter.Core.Logic.Comparer;
 using NumberSorter.Domain.Tests.SortTests.Base.IntegerGenerators.Dynamic;
 using NumberSorter.Domain.Tests.SortTests.Base.IntegerGenerators.Static;
 using System;

@@ -244,6 +244,10 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.2.6.1\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NumberSorter.Core\NumberSorter.Core.csproj">
+      <Project>{daeddc6b-c8c6-4f5f-a714-d7b1e61ca6cb}</Project>
+      <Name>NumberSorter.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NumberSorter.Domain.Tests\NumberSorter.Domain.Tests.csproj">
       <Project>{a399ceb0-0da9-407d-8113-713013ad65a3}</Project>
       <Name>NumberSorter.Domain.Tests</Name>

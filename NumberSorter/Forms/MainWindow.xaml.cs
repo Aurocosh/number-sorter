@@ -5,7 +5,9 @@ using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -39,6 +41,9 @@ namespace NumberSorter.Forms
                 this.OneWayBind(ViewModel, x => x.ResultText, x => x.ResultTextBox.Text)
                     .DisposeWith(disposable);
 
+                this.OneWayBind(ViewModel, x => x.VisualizationImage, x => x.VisualizationImage.Source)
+                .DisposeWith(disposable);
+
                 this.BindCommand(ViewModel, x => x.LoadDataCommand, x => x.LoadFromFileButton)
                     .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.GenerateRandomCommand, x => x.GenerateRandomButton)
@@ -46,6 +51,13 @@ namespace NumberSorter.Forms
                 this.BindCommand(ViewModel, x => x.GeneratePartiallySortedCommand, x => x.GeneratePartiallySortedButton)
                     .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.PerformSortCommand, x => x.SortButton)
+                    .DisposeWith(disposable);
+
+                VisualizationCanvas.Events()
+                    .SizeChanged
+                    .Throttle(TimeSpan.FromSeconds(0.25f))
+                    .ObserveOn(RxApp.MainThreadScheduler)
+                    .InvokeCommand(this, x => x.ViewModel.ResizeCanvasCommand)
                     .DisposeWith(disposable);
             });
 

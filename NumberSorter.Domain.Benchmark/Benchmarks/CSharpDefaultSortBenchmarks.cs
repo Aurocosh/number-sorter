@@ -1,6 +1,6 @@
-﻿using NumberSorter.Domain.Algorhythm;
+﻿using NumberSorter.Core.Algorhythm;
 using NumberSorter.Domain.Benchmark.Benchmarks.Base;
-using NumberSorter.Domain.Logic.Algorhythm;
+using NumberSorter.Core.Logic.Algorhythm;
 using System;
 using System.Collections.Generic;
 using System.Linq;

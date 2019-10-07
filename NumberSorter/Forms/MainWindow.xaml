@@ -8,9 +8,10 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:reactiveui="http://reactiveui.net"
         xmlns:viewmodels="clr-namespace:NumberSorter.Domain.ViewModels;assembly=NumberSorter.Domain"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:NumberSorter"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Width="800" Height="580">
     <DockPanel d:DataContext="{d:DesignInstance viewmodels:MainWindowViewModel}">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Исходные данные">
@@ -22,26 +23,35 @@
                 <MenuItem Header="Отсортировать" Name="SortButton"/>
             </MenuItem>
         </Menu>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="2*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="1.5*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Content="Исходные данные"/>
-            <Label Grid.Row="0" Grid.Column="1" Content="Отсортированные данные"/>
-            <TextBox Grid.Row="1" Grid.Column="0" Name="InputTextBox" Margin="5" VerticalAlignment="Stretch" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"/>
-            <TextBox Grid.Row="1" Grid.Column="1" x:Name="OutputTextBox" Margin="5" VerticalAlignment="Stretch" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"/>
+        <TabControl>
+            <TabItem Header="Main">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="1.5*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Content="Исходные данные"/>
+                    <Label Grid.Row="0" Grid.Column="1" Content="Отсортированные данные"/>
+                    <TextBox Grid.Row="1" Grid.Column="0" Name="InputTextBox" Margin="5" VerticalAlignment="Stretch" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" x:Name="OutputTextBox" Margin="5" VerticalAlignment="Stretch" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"/>
 
-            <Label Grid.Row="2" Grid.Column="0" Content="Информация"/>
-            <Label Grid.Row="2" Grid.Column="1" Content="Результат"/>
-            <TextBox Grid.Row="3" Grid.Column="0" Name="InfoTextBox" Margin="5" VerticalAlignment="Stretch" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"/>
-            <TextBox Grid.Row="3" Grid.Column="1" x:Name="ResultTextBox" Margin="5" VerticalAlignment="Stretch" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"/>
-        </Grid>
+                    <Label Grid.Row="2" Grid.Column="0" Content="Информация"/>
+                    <Label Grid.Row="2" Grid.Column="1" Content="Результат"/>
+                    <TextBox Grid.Row="3" Grid.Column="0" Name="InfoTextBox" Margin="5" VerticalAlignment="Stretch" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" x:Name="ResultTextBox" Margin="5" VerticalAlignment="Stretch" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Image">
+                <Border Background="LightGray" Margin="10" Name="VisualizationCanvas">
+                    <Image Name="VisualizationImage"/>
+                </Border>
+            </TabItem>
+        </TabControl>
     </DockPanel>
 </reactiveui:ReactiveWindow>

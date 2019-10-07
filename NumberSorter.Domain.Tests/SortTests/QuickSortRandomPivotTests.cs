@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NumberSorter.Domain.Algorhythm;
-using NumberSorter.Domain.Logic.Algorhythm;
-using NumberSorter.Domain.Logic.Algorhythm.QuickSort.PivotSelectors;
+using NumberSorter.Core.Algorhythm;
+using NumberSorter.Core.Logic.Algorhythm;
+using NumberSorter.Core.Logic.Algorhythm.QuickSort.PivotSelectors;
 using NumberSorter.Domain.Tests.SortTests.Base;
 
 namespace NumberSorter.Domain.Tests.SortTests

@@ -1,5 +1,5 @@
 ﻿using NumberSorter.Domain.Benchmark.IntegerGenerators;
-using NumberSorter.Domain.Generators;
+using NumberSorter.Core.Generators;
 using System;
 using System.Collections;
 using System.Collections.Generic;
