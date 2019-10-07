@@ -1,11 +1,10 @@
-﻿using NumberSorter.Domain.Generators;
+﻿using NumberSorter.Core.Generators;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Text;
 
 namespace NumberSorter.Domain.ViewModels
 {
@@ -38,7 +37,6 @@ namespace NumberSorter.Domain.ViewModels
         public ReactiveCommand<Unit, Unit> AcceptCommand { get; }
 
         #endregion Commands
-
 
         #region Constructors
 

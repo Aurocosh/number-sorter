@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DAEDDC6B-C8C6-4F5F-A714-D7B1E61CA6CB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NumberSorter.Core</RootNamespace>
+    <AssemblyName>NumberSorter.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Generators\Base\AbstractIntegerGenerator.cs" />
+    <Compile Include="Generators\RandomIntegerGenerator.cs" />
+    <Compile Include="Generators\RandomPartialSortedIntegerGenerator.cs" />
+    <Compile Include="Generators\UnmergedFullySortedGenerator.cs" />
+    <Compile Include="Logic\AlgorhythmFactory.cs" />
+    <Compile Include="Logic\AlgorhythmType.cs" />
+    <Compile Include="Logic\Algorhythm\Base\ArrayHalves.cs" />
+    <Compile Include="Logic\Algorhythm\Base\ArrayRunHalves.cs" />
+    <Compile Include="Logic\Algorhythm\Base\SortRun.cs" />
+    <Compile Include="Logic\Algorhythm\Merge\Base\GenericMergeAlgorhythm.cs" />
+    <Compile Include="Logic\Algorhythm\Merge\Base\ILocalMergeAlgothythm.cs" />
+    <Compile Include="Logic\Algorhythm\Merge\RecursiveInPlaceMerge.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\Base\ComparerSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\Base\ISortAlgorhythm.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\BinarySort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\BubbleSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\CSharpDefaultSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\DequeMergeSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\GallopingRecursiveMergeSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\HalfInPlaceMergeSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\HeapSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\InPlaceMergeSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\InsertionSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\KindaInPlaceMergeSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\OpRecursiveMergeSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\QuickSort\PivotSelectors\MedianThreePivotSelector.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\QuickSort\PivotSelectors\QuickSortPivotSelector.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\QuickSort\PivotSelectors\RandomPivotSelector.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\QuickSort\QuickSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\RecursiveMergeSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\TempSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\TimSort.cs" />
+    <Compile Include="Logic\Comparer\IntComparer.cs" />
+    <Compile Include="Logic\Container\IListExtensions.cs" />
+    <Compile Include="Logic\Container\ListSortingContainer.cs" />
+    <Compile Include="Logic\SortingResult.cs" />
+    <Compile Include="Logic\Utility\ArrayUtility.cs" />
+    <Compile Include="Logic\Utility\IListUtility.cs" />
+    <Compile Include="Logic\Utility\SortRunUtility.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

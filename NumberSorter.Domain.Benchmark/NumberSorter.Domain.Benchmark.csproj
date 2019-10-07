@@ -248,10 +248,6 @@
       <Project>{a399ceb0-0da9-407d-8113-713013ad65a3}</Project>
       <Name>NumberSorter.Domain.Tests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NumberSorter.Domain\NumberSorter.Domain.csproj">
-      <Project>{1A8A032C-F130-4CA1-98D8-0B11ACC5633D}</Project>
-      <Name>NumberSorter.Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

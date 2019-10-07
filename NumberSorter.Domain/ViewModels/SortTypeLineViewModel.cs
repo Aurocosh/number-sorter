@@ -1,4 +1,4 @@
-﻿using NumberSorter.Domain.Logic;
+﻿using NumberSorter.Core.Logic;
 using ReactiveUI;
 using System;
 

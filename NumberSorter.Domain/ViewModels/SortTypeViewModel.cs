@@ -5,7 +5,7 @@ using System.Reactive;
 using System.Reactive.Linq;
 using ReactiveUI.Fody.Helpers;
 using DynamicData;
-using NumberSorter.Domain.Logic;
+using NumberSorter.Core.Logic;
 
 namespace NumberSorter.Domain.ViewModels
 {

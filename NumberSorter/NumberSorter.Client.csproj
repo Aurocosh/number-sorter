@@ -183,8 +183,12 @@
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NumberSorter.Core\NumberSorter.Core.csproj">
+      <Project>{daeddc6b-c8c6-4f5f-a714-d7b1e61ca6cb}</Project>
+      <Name>NumberSorter.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NumberSorter.Domain\NumberSorter.Domain.csproj">
-      <Project>{1a8a032c-f130-4ca1-98d8-0b11acc5633d}</Project>
+      <Project>{5a9fd833-fc99-4873-a654-570f2858eeae}</Project>
       <Name>NumberSorter.Domain</Name>
     </ProjectReference>
   </ItemGroup>

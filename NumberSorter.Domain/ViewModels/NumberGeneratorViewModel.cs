@@ -10,7 +10,7 @@ using ReactiveUI;
 using System.Reactive.Linq;
 using System.Reactive;
 using ReactiveUI.Fody.Helpers;
-using NumberSorter.Domain.Generators;
+using NumberSorter.Core.Generators;
 
 namespace NumberSorter.Domain.ViewModels
 {

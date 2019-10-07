@@ -13,9 +13,9 @@ using ReactiveUI.Fody.Helpers;
 using System.IO;
 using System.Text.RegularExpressions;
 using NumberSorter.Domain.DialogService;
-using NumberSorter.Domain.Logic;
-using NumberSorter.Domain.Algorhythm.Container;
-using NumberSorter.Domain.Logic.Comparer;
+using NumberSorter.Core.Logic;
+using NumberSorter.Core.Algorhythm.Container;
+using NumberSorter.Core.Logic.Comparer;
 using System.Diagnostics;
 using NumberSorter.Domain.Interactions;
 
