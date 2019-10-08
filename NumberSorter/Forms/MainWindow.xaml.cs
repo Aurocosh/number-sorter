@@ -32,6 +32,8 @@ namespace NumberSorter.Forms
             InitializeComponent();
             this.WhenActivated(disposable =>
             {
+                #region Main binds
+
                 this.OneWayBind(ViewModel, x => x.InputText, x => x.InputTextBox.Text)
                     .DisposeWith(disposable);
                 this.OneWayBind(ViewModel, x => x.OutputText, x => x.OutputTextBox.Text)
@@ -40,9 +42,6 @@ namespace NumberSorter.Forms
                     .DisposeWith(disposable);
                 this.OneWayBind(ViewModel, x => x.ResultText, x => x.ResultTextBox.Text)
                     .DisposeWith(disposable);
-
-                this.OneWayBind(ViewModel, x => x.VisualizationImage, x => x.VisualizationImage.Source)
-                .DisposeWith(disposable);
 
                 this.BindCommand(ViewModel, x => x.LoadDataCommand, x => x.LoadFromFileButton)
                     .DisposeWith(disposable);
@@ -53,12 +52,44 @@ namespace NumberSorter.Forms
                 this.BindCommand(ViewModel, x => x.PerformSortCommand, x => x.SortButton)
                     .DisposeWith(disposable);
 
+                #endregion
+
+                #region Visualization binds
+
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.VisualizationImage, x => x.VisualizationImage.Source)
+                    .DisposeWith(disposable);
+
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.CurrentReads, x => x.CurrentReadsLabel.Content)
+                    .DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.CurrentWrites, x => x.CurrentWritesLabel.Content)
+                    .DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.CurrentComparassions, x => x.CurrentComparesLabel.Content)
+                    .DisposeWith(disposable);
+
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.SortingLog.TotalReadCount, x => x.TotalReadsLabel.Content)
+                    .DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.SortingLog.TotalWriteCount, x => x.TotalWritesLabel.Content)
+                    .DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.SortingLog.TotalComparassionCount, x => x.TotalComparesLabel.Content)
+                    .DisposeWith(disposable);
+
+                this.BindCommand(ViewModel, x => x.VisualizationViewModel.PlayPauseCommand, x => x.PlayButton)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.VisualizationViewModel.ResetCommand, x => x.ResetButton)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.VisualizationViewModel.PreviousStepCommand, x => x.PreviousButton)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.VisualizationViewModel.NextStepCommand, x => x.NextButton)
+                    .DisposeWith(disposable);
+
                 VisualizationCanvas.Events()
                     .SizeChanged
                     .Throttle(TimeSpan.FromSeconds(0.25f))
                     .ObserveOn(RxApp.MainThreadScheduler)
-                    .InvokeCommand(this, x => x.ViewModel.ResizeCanvasCommand)
+                    .InvokeCommand(this, x => x.ViewModel.VisualizationViewModel.ResizeCanvasCommand)
                     .DisposeWith(disposable);
+
+                #endregion
             });
 
             DialogInteractions.FindFileWithType.RegisterHandler(context =>

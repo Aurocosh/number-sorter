@@ -9,6 +9,6 @@ namespace NumberSorter.Domain.Base.Visualizers
 {
     public interface IListVisualizer
     {
-        void Redraw(WriteableBitmap writeableBitmap, IList<int> list);
+        void Redraw(WriteableBitmap writeableBitmap, IReadOnlyList<int> list);
     }
 }

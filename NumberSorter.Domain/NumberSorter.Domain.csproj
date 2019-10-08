@@ -99,7 +99,8 @@
     <Compile Include="Interactions\DialogInteractions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\FileOpenViewModel.cs" />
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\Main\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\Main\VisualizationViewModel.cs" />
     <Compile Include="ViewModels\NumberGeneratorViewModel.cs" />
     <Compile Include="ViewModels\PartialSortedGeneratorViewModel.cs" />
     <Compile Include="ViewModels\SortTypeLineViewModel.cs" />

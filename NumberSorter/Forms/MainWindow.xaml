@@ -54,8 +54,8 @@
                             <Button Name="PlayButton" Content="Play" Width="80" Margin="0 0 5 0"/>
                             <Button Name="ResetButton" Content="Reset" Width="80" Margin="0 0 20 0"/>
 
-                            <Button Name="ForwardButton" Content="Forward" Width="80" Margin="0 0 5 0"/>
-                            <Button Name="BackButton" Content="Back" Width="80" Margin="0 0 5 0"/>
+                            <Button Name="PreviousButton" Content="Previous" Width="80" Margin="0 0 5 0"/>
+                            <Button Name="NextButton" Content="Next" Width="80" Margin="0 0 5 0"/>
 
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
@@ -103,8 +103,8 @@
                         <Label Grid.Column="0" Grid.Row="9" Content="Spacer width"/>
                         <xctk:IntegerUpDown Grid.Column="1" Grid.Row="9" Value="1" Minimum="1" Maximum="15" Name="SpaceWidthUpDown"/>
                     </Grid>
-                    <Border Background="LightGray" Name="VisualizationCanvas">
-                        <Image Margin="5 0 5 0" Name="VisualizationImage"/>
+                    <Border Background="LightGray" Margin="5 0 5 0" Name="VisualizationCanvas">
+                        <Image Name="VisualizationImage"/>
                     </Border>
                 </DockPanel>
             </TabItem>

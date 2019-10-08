@@ -19,7 +19,7 @@ namespace NumberSorter.Domain.Visualizers
 
         private float _columnProportion = 0.8f;
 
-        public void Redraw(WriteableBitmap writeableBitmap, IList<int> list)
+        public void Redraw(WriteableBitmap writeableBitmap, IReadOnlyList<int> list)
         {
             int width = (int)Math.Floor(writeableBitmap.Width);
             int height = (int)Math.Floor(writeableBitmap.Height);
