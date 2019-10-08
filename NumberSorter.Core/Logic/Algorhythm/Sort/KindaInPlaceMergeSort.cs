@@ -1,5 +1,4 @@
-﻿using NumberSorter.Core.Logic.Container;
-using NumberSorter.Core.Logic.Utility;
+﻿using NumberSorter.Core.Logic.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;

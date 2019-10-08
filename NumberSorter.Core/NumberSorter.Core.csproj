@@ -74,9 +74,7 @@
     <Compile Include="Logic\Algorhythm\Sort\TempSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\TimSort.cs" />
     <Compile Include="Logic\Comparer\IntComparer.cs" />
-    <Compile Include="Logic\Container\IListExtensions.cs" />
-    <Compile Include="Logic\Container\ListSortingContainer.cs" />
-    <Compile Include="Logic\SortingResult.cs" />
+    <Compile Include="Logic\Utility\IListExtensions.cs" />
     <Compile Include="Logic\Utility\ArrayUtility.cs" />
     <Compile Include="Logic\Utility\IListUtility.cs" />
     <Compile Include="Logic\Utility\SortRunUtility.cs" />

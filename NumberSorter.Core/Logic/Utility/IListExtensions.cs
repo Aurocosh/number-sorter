@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NumberSorter.Core.Logic.Container
+namespace NumberSorter.Core.Logic.Utility
 {
     public static class IListExtensions
     {

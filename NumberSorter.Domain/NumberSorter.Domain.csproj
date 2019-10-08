@@ -86,6 +86,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comparer\IntComparer.cs" />
+    <Compile Include="Container\LoggingList.cs" />
+    <Compile Include="Container\Actions\Base\LogAction.cs" />
+    <Compile Include="Container\Actions\LogRead.cs" />
+    <Compile Include="Container\Actions\LogWrite.cs" />
+    <Compile Include="Container\Actions\LogComparassion.cs" />
+    <Compile Include="Container\LogValue.cs" />
+    <Compile Include="Container\SortLog.cs" />
     <Compile Include="DialogService\IDialogService.cs" />
     <Compile Include="DialogService\IViewInitializer.cs" />
     <Compile Include="Interactions\DialogInteractions.cs" />

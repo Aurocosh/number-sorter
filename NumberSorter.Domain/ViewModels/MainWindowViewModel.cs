@@ -14,7 +14,6 @@ using System.IO;
 using System.Text.RegularExpressions;
 using NumberSorter.Domain.DialogService;
 using NumberSorter.Core.Logic;
-using NumberSorter.Core.Algorhythm.Container;
 using NumberSorter.Core.Logic.Comparer;
 using System.Diagnostics;
 using NumberSorter.Domain.Interactions;
@@ -22,6 +21,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using NumberSorter.Domain.Base.Visualizers;
 using NumberSorter.Domain.Visualizers;
+using NumberSorter.Domain.Container;
 
 namespace NumberSorter.Domain.ViewModels
 {
@@ -42,12 +42,11 @@ namespace NumberSorter.Domain.ViewModels
         [Reactive] public string ResultText { get; set; }
 
         [Reactive] public List<int> InputNumbers { get; set; }
-        [Reactive] public SortingResult<int> SortingResult { get; set; }
+        [Reactive] public SortLog<int> SortingLog { get; set; }
 
         [Reactive] public WriteableBitmap VisualizationImage { get; set; }
 
         #endregion Properties
-
 
         #region Commands
 
@@ -69,7 +68,7 @@ namespace NumberSorter.Domain.ViewModels
             _dialogService = dialogService;
 
             InputNumbers = new List<int>();
-            SortingResult = new SortingResult<int>();
+            SortingLog = new SortLog<int>();
 
             LoadDataCommand = ReactiveCommand.CreateFromObservable(FindFileToLoad);
             GenerateRandomCommand = ReactiveCommand.CreateFromObservable(GenerateRandom);
@@ -95,10 +94,8 @@ namespace NumberSorter.Domain.ViewModels
             this.WhenAnyValue(x => x.InputNumbers)
                 .Subscribe(UpdateInputText);
 
-            this.WhenAnyValue(x => x.SortingResult)
+            this.WhenAnyValue(x => x.SortingLog)
                 .Subscribe(UpdateOutputText);
-
-
         }
 
         #endregion Constructors
@@ -188,9 +185,10 @@ namespace NumberSorter.Domain.ViewModels
             if (viewModel.DialogResult != true || viewModel.SelectedSortType == null)
                 return;
 
+            var accessTrackingList = new LoggingList<int>(InputNumbers, new IntComparer());
+
             var algorhythmType = viewModel.SelectedSortType.AlgorhythmType;
-            var algorhythm = AlgorhythmFactory.GetAlgorhythm(algorhythmType, new IntComparer());
-            var accessTrackingList = new AccessTrackingList<int>(InputNumbers);
+            var algorhythm = AlgorhythmFactory.GetAlgorhythm<LogValue<int>>(algorhythmType, accessTrackingList);
 
             GC.Collect();
             var stopwatch = Stopwatch.StartNew();
@@ -198,13 +196,9 @@ namespace NumberSorter.Domain.ViewModels
             algorhythm.Sort(accessTrackingList);
 
             stopwatch.Stop();
+            var elapsedTime = stopwatch.ElapsedMilliseconds;
 
-            var sortedList = accessTrackingList.ToList();
-
-            int writeCount = accessTrackingList.WriteCount;
-            int readCount = accessTrackingList.ReadCount;
-
-            SortingResult = new SortingResult<int>(writeCount, readCount, stopwatch.ElapsedMilliseconds, sortedList);
+            SortingLog = accessTrackingList.GetSortLog(elapsedTime);
         }
 
         private void ResizeCanvas(SizeChangedEventArgs e)
@@ -232,10 +226,10 @@ namespace NumberSorter.Domain.ViewModels
             _listVisualizer.Redraw(VisualizationImage, values);
         }
 
-        private void UpdateOutputText(SortingResult<int> result)
+        private void UpdateOutputText(SortLog<int> sortLog)
         {
-            OutputText = string.Join(", ", result.SortedList.Select(x => x.ToString()));
-            ResultText = result.Valid ? $"Write count: {result.WriteCount}\nRead count: {result.ReadCount}\nTime: {result.TimeSpent}" : "";
+            OutputText = string.Join(", ", sortLog.FinalState.Select(x => x.ToString()));
+            ResultText = sortLog.FullySorted ? $"Write count: {sortLog.TotalWriteCount}\nRead count: {sortLog.TotalReadCount}\nTime: {sortLog.ElapsedTime}" : "";
         }
     }
 }
