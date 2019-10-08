@@ -14,13 +14,13 @@
         Title="MainWindow" Width="800" Height="580">
     <DockPanel d:DataContext="{d:DesignInstance viewmodels:MainWindowViewModel}">
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Исходные данные">
-                <MenuItem Header="Загрузить из файла" Name="LoadFromFileButton"/>
-                <MenuItem Header="Сгенерировать случайный массив" Name="GenerateRandomButton"/>
-                <MenuItem Header="Сгенерировать частично сортированный массив" Name="GeneratePartiallySortedButton"/>
+            <MenuItem Header="Input data">
+                <MenuItem Header="Load from file" Name="LoadFromFileButton"/>
+                <MenuItem Header="Generate random list" Name="GenerateRandomButton"/>
+                <MenuItem Header="Generate partially sorted list" Name="GeneratePartiallySortedButton"/>
             </MenuItem>
-            <MenuItem Header="Сортировка">
-                <MenuItem Header="Отсортировать" Name="SortButton"/>
+            <MenuItem Header="Sort">
+                <MenuItem Header="Sort list" Name="SortButton"/>
             </MenuItem>
         </Menu>
         <TabControl>
@@ -36,29 +36,75 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Content="Исходные данные"/>
-                    <Label Grid.Row="0" Grid.Column="1" Content="Отсортированные данные"/>
+                    <Label Grid.Row="0" Grid.Column="0" Content="Input data"/>
+                    <Label Grid.Row="0" Grid.Column="1" Content="Sorted data"/>
                     <TextBox Grid.Row="1" Grid.Column="0" Name="InputTextBox" Margin="5" VerticalAlignment="Stretch" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"/>
                     <TextBox Grid.Row="1" Grid.Column="1" x:Name="OutputTextBox" Margin="5" VerticalAlignment="Stretch" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"/>
 
-                    <Label Grid.Row="2" Grid.Column="0" Content="Информация"/>
-                    <Label Grid.Row="2" Grid.Column="1" Content="Результат"/>
+                    <Label Grid.Row="2" Grid.Column="0" Content="Information"/>
+                    <Label Grid.Row="2" Grid.Column="1" Content="Result"/>
                     <TextBox Grid.Row="3" Grid.Column="0" Name="InfoTextBox" Margin="5" VerticalAlignment="Stretch" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"/>
                     <TextBox Grid.Row="3" Grid.Column="1" x:Name="ResultTextBox" Margin="5" VerticalAlignment="Stretch" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Image">
+            <TabItem Header="Sort vizualization">
                 <DockPanel Margin="5">
-                    <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Name="PlayButton" Content="Play" Width="80" Margin="0 0 5 0"/>
-                        <Button Name="ResetButton" Content="Reset" Width="80" Margin="0 0 20 0"/>
+                    <DockPanel DockPanel.Dock="Bottom">
+                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Name="PlayButton" Content="Play" Width="80" Margin="0 0 5 0"/>
+                            <Button Name="ResetButton" Content="Reset" Width="80" Margin="0 0 20 0"/>
 
-                        <Button Name="ForwardButton" Content="Forward" Width="80" Margin="0 0 5 0"/>
-                        <Button Name="BackButton" Content="Back" Width="80" Margin="0 0 5 0"/>
+                            <Button Name="ForwardButton" Content="Forward" Width="80" Margin="0 0 5 0"/>
+                            <Button Name="BackButton" Content="Back" Width="80" Margin="0 0 5 0"/>
 
-                    </StackPanel>
-                    <Border Background="LightGray" Margin="5" Name="VisualizationCanvas">
-                        <Image Name="VisualizationImage"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Button Name="InfoButton" Content="Log info" Width="80" Margin="5 0 0 0"/>
+                        </StackPanel>
+                    </DockPanel>
+                    <Grid DockPanel.Dock="Left" Name="SortLogInfoPanel">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="70"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0" Content="Current reads"/>
+                        <Label Grid.Column="1" Grid.Row="0" Content="0" Name="CurrentReadsLabel"/>
+
+                        <Label Grid.Column="0" Grid.Row="1" Content="Current writes"/>
+                        <Label Grid.Column="1" Grid.Row="1" Content="0" Name="CurrentWritesLabel"/>
+
+                        <Label Grid.Column="0" Grid.Row="2" Content="Current compares"/>
+                        <Label Grid.Column="1" Grid.Row="2" Content="0" Name="CurrentComparesLabel"/>
+
+                        <Label Grid.Column="0" Grid.Row="4" Content="Total reads"/>
+                        <Label Grid.Column="1" Grid.Row="4" Content="0" Name="TotalReadsLabel"/>
+
+                        <Label Grid.Column="0" Grid.Row="5" Content="Total writes"/>
+                        <Label Grid.Column="1" Grid.Row="5" Content="0" Name="TotalWritesLabel"/>
+
+                        <Label Grid.Column="0" Grid.Row="6" Content="Total compares"/>
+                        <Label Grid.Column="1" Grid.Row="6" Content="0" Name="TotalComparesLabel"/>
+
+                        <Label Grid.Column="0" Grid.Row="8" Content="Column width"/>
+                        <xctk:IntegerUpDown Grid.Column="1" Grid.Row="8" Value="20" Minimum="1" Maximum="30" Name="ColumnWidthUpDown"/>
+
+                        <Label Grid.Column="0" Grid.Row="9" Content="Spacer width"/>
+                        <xctk:IntegerUpDown Grid.Column="1" Grid.Row="9" Value="1" Minimum="1" Maximum="15" Name="SpaceWidthUpDown"/>
+                    </Grid>
+                    <Border Background="LightGray" Name="VisualizationCanvas">
+                        <Image Margin="5 0 5 0" Name="VisualizationImage"/>
                     </Border>
                 </DockPanel>
             </TabItem>
