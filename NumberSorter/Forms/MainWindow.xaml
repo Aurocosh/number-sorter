@@ -124,7 +124,13 @@
                                 <CheckBox Content="Writes" Name="WritesCheck" IsChecked="True"/>
                                 <CheckBox Content="Comparassions" Name="ComparassionsCheck" IsChecked="False"/>
                             </StackPanel>
-                            <ListBox Name="LogActionList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                            <ListBox Name="LogActionList" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel IsVirtualizing="True"
+                                        VirtualizationMode="Recycling" />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
                             </ListBox>
                         </DockPanel>
                     </Grid>

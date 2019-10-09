@@ -184,16 +184,16 @@ namespace NumberSorter.Domain.ViewModels
             if (index >= SortingLog.ActionLog.Count)
                 return SortingLog.FinalState;
 
+            var actionIndex = index;
             var actionsToApply = new List<LogAction<int>>();
             do
             {
-                actionsToApply.Add(actionLog[index--]);
-                state = GetCachedState(index);
+                actionsToApply.Add(actionLog[actionIndex--]);
+                state = GetCachedState(actionIndex);
             } while (state == null);
 
             for (int i = actionsToApply.Count - 1; i >= 0; i--)
             {
-                CacheState(index++, state);
                 var action = actionsToApply[i];
                 state = action.TransformState(state);
             }
