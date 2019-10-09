@@ -47,6 +47,10 @@ namespace NumberSorter.Domain.ViewModels
         [Reactive] public int CurrentWrites { get; private set; }
         [Reactive] public int CurrentComparassions { get; private set; }
 
+        [Reactive] public bool ReadActions { get; set; }
+        [Reactive] public bool WriteActions { get; set; }
+        [Reactive] public bool ComparassionActions { get; set; }
+
         [Reactive] public SortLog<int> SortingLog { get; set; }
         [Reactive] public SortState<int> SortState { get; private set; }
 
@@ -85,13 +89,17 @@ namespace NumberSorter.Domain.ViewModels
             CurrentReads = 0;
             CurrentComparassions = 0;
 
+            ReadActions = false;
+            WriteActions = true;
+            ComparassionActions = false;
+
             SortingLog = new SortLog<int>();
             SortState = SortingLog.StartingState;
             VisualizationImage = BitmapFactory.New(700, 480);
 
             var actions = _logActions
               .Connect()
-              //.Filter(x => !(x is LogComparassion<int>))
+              .Filter(ActionFilter)
               .Transform(x => new LogActionLineViewModel(x))
               .ObserveOnDispatcher()
               .Bind(out _logActionViewModels)
@@ -112,7 +120,14 @@ namespace NumberSorter.Domain.ViewModels
 
             this.WhenAnyValue(x => x.SortingLog)
                 .Do(x => SortState = x.StartingState)
-                .Subscribe(x => UpdateActionLog(x.ActionLog));
+                .Subscribe(_ => UpdateActionLog());
+
+            this.WhenAnyValue(x => x.ReadActions)
+                .Subscribe(_ => UpdateActionLog());
+            this.WhenAnyValue(x => x.WriteActions)
+                .Subscribe(_ => UpdateActionLog());
+            this.WhenAnyValue(x => x.ComparassionActions)
+                .Subscribe(_ => UpdateActionLog());
         }
 
         #endregion Constructors
@@ -131,6 +146,20 @@ namespace NumberSorter.Domain.ViewModels
         private void PreviousStep() => CurrentIndex = ComparableUtility.Clamp(CurrentIndex - 1, 0, _logActionViewModels.Count);
         private void NextStep() => CurrentIndex = ComparableUtility.Clamp(CurrentIndex + 1, 0, _logActionViewModels.Count);
 
+        private bool ActionFilter(LogAction<int> logAction)
+        {
+            switch (logAction.ActionType)
+            {
+                case LogActionType.LogRead:
+                    return ReadActions;
+                case LogActionType.LogWrite:
+                    return WriteActions;
+                case LogActionType.LogComparassion:
+                    return ComparassionActions;
+            }
+            return false;
+        }
+
         private void UpdateState(LogActionLineViewModel lineViewModel)
         {
             if (lineViewModel == null)
@@ -145,7 +174,7 @@ namespace NumberSorter.Domain.ViewModels
 
         private SortState<int> GetState(int index)
         {
-            SortState<int> state = getCachedState(index);
+            SortState<int> state = GetCachedState(index);
             if (state != null)
                 return state;
 
@@ -159,7 +188,7 @@ namespace NumberSorter.Domain.ViewModels
             do
             {
                 actionsToApply.Add(actionLog[index--]);
-                state = getCachedState(index);
+                state = GetCachedState(index);
             } while (state == null);
 
             for (int i = actionsToApply.Count - 1; i >= 0; i--)
@@ -173,7 +202,7 @@ namespace NumberSorter.Domain.ViewModels
             return state;
         }
 
-        private SortState<int> getCachedState(int index)
+        private SortState<int> GetCachedState(int index)
         {
             if (_sortStateCache.TryGetValue(index, out SortState<int> state))
                 return state;
@@ -215,10 +244,10 @@ namespace NumberSorter.Domain.ViewModels
             _listVisualizer.Redraw(VisualizationImage, currentListState.State);
         }
 
-        private void UpdateActionLog(IReadOnlyList<LogAction<int>> logActions)
+        private void UpdateActionLog()
         {
             _logActions.Clear();
-            _logActions.AddRange(logActions);
+            _logActions.AddRange(SortingLog.ActionLog);
         }
     }
 }

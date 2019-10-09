@@ -12,7 +12,7 @@ namespace NumberSorter.Domain.Container.Actions
         public int Index { get; }
         public T Value { get; }
 
-        public LogWrite(int actionIndex, int index, T value) : base(actionIndex)
+        public LogWrite(int actionIndex, int index, T value) : base(actionIndex, LogActionType.LogWrite)
         {
             Index = index;
             Value = value;

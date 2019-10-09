@@ -9,10 +9,12 @@ namespace NumberSorter.Domain.Container.Actions.Base
     public abstract class LogAction<T> where T : IEquatable<T>
     {
         public int ActionIndex { get; }
+        public LogActionType ActionType { get; }
 
-        public LogAction(int actionIndex)
+        protected LogAction(int actionIndex, LogActionType actionType)
         {
             ActionIndex = actionIndex;
+            ActionType = actionType;
         }
 
         public abstract SortState<T> TransformState(SortState<T> state);

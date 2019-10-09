@@ -56,6 +56,13 @@ namespace NumberSorter.Forms
 
                 #region Visualization binds
 
+                this.Bind(ViewModel, x => x.VisualizationViewModel.ReadActions, x => x.ReadsCheck.IsChecked)
+                    .DisposeWith(disposable);
+                this.Bind(ViewModel, x => x.VisualizationViewModel.WriteActions, x => x.WritesCheck.IsChecked)
+                    .DisposeWith(disposable);
+                this.Bind(ViewModel, x => x.VisualizationViewModel.ComparassionActions, x => x.ComparassionsCheck.IsChecked)
+                    .DisposeWith(disposable);
+
                 this.OneWayBind(ViewModel, x => x.VisualizationViewModel.VisualizationImage, x => x.VisualizationImage.Source)
                     .DisposeWith(disposable);
 

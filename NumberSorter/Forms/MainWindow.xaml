@@ -118,8 +118,15 @@
                             <Image Name="VisualizationImage"/>
                         </Border>
                         <GridSplitter Grid.Column="3" ShowsPreview="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                        <ListBox Grid.Column="4" Name="LogActionList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
-                        </ListBox>
+                        <DockPanel Grid.Column="4" >
+                            <StackPanel DockPanel.Dock="Bottom">
+                                <CheckBox Content="Reads" Name="ReadsCheck" IsChecked="False"/>
+                                <CheckBox Content="Writes" Name="WritesCheck" IsChecked="True"/>
+                                <CheckBox Content="Comparassions" Name="ComparassionsCheck" IsChecked="False"/>
+                            </StackPanel>
+                            <ListBox Name="LogActionList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                            </ListBox>
+                        </DockPanel>
                     </Grid>
                 </DockPanel>
             </TabItem>
