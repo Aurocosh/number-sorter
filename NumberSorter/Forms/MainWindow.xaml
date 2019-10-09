@@ -50,62 +50,77 @@
             <TabItem Header="Sort vizualization">
                 <DockPanel Margin="5">
                     <DockPanel DockPanel.Dock="Bottom">
-                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Button Name="PlayButton" Content="Play" Width="80" Margin="0 0 5 0"/>
-                            <Button Name="ResetButton" Content="Reset" Width="80" Margin="0 0 20 0"/>
-
-                            <Button Name="PreviousButton" Content="Previous" Width="80" Margin="0 0 5 0"/>
-                            <Button Name="NextButton" Content="Next" Width="80" Margin="0 0 5 0"/>
-
+                        <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Button Name="InfoButton" Content="Log info" Width="80"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                            <Button Name="InfoButton" Content="Log info" Width="80" Margin="5 0 0 0"/>
+                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Name="LogButton" Content="Loged actions" Width="80"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Name="PlayButton" Content="Play" Width="80" Margin="0 0 5 0"/>
+                            <Button Name="ResetButton" Content="Reset" Width="80" Margin="0 0 10 0"/>
+
+                            <Button Name="PreviousButton" Content="Previous" Width="80" Margin="10 0 5 0"/>
+                            <Button Name="NextButton" Content="Next" Width="80"/>
                         </StackPanel>
                     </DockPanel>
-                    <Grid DockPanel.Dock="Left" Name="SortLogInfoPanel">
+                    <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="110"/>
-                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="20"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="20"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Label Grid.Column="0" Grid.Row="0" Content="Current reads"/>
-                        <Label Grid.Column="1" Grid.Row="0" Content="0" Name="CurrentReadsLabel"/>
+                        <Grid Grid.Column="0" Name="SortLogInfoPanel">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Grid.Row="0" Content="Current reads"/>
+                            <Label Grid.Column="1" Grid.Row="0" Content="0" Name="CurrentReadsLabel"/>
 
-                        <Label Grid.Column="0" Grid.Row="1" Content="Current writes"/>
-                        <Label Grid.Column="1" Grid.Row="1" Content="0" Name="CurrentWritesLabel"/>
+                            <Label Grid.Column="0" Grid.Row="1" Content="Current writes"/>
+                            <Label Grid.Column="1" Grid.Row="1" Content="0" Name="CurrentWritesLabel"/>
 
-                        <Label Grid.Column="0" Grid.Row="2" Content="Current compares"/>
-                        <Label Grid.Column="1" Grid.Row="2" Content="0" Name="CurrentComparesLabel"/>
+                            <Label Grid.Column="0" Grid.Row="2" Content="Current compares"/>
+                            <Label Grid.Column="1" Grid.Row="2" Content="0" Name="CurrentComparesLabel"/>
 
-                        <Label Grid.Column="0" Grid.Row="4" Content="Total reads"/>
-                        <Label Grid.Column="1" Grid.Row="4" Content="0" Name="TotalReadsLabel"/>
+                            <Label Grid.Column="0" Grid.Row="4" Content="Total reads"/>
+                            <Label Grid.Column="1" Grid.Row="4" Content="0" Name="TotalReadsLabel"/>
 
-                        <Label Grid.Column="0" Grid.Row="5" Content="Total writes"/>
-                        <Label Grid.Column="1" Grid.Row="5" Content="0" Name="TotalWritesLabel"/>
+                            <Label Grid.Column="0" Grid.Row="5" Content="Total writes"/>
+                            <Label Grid.Column="1" Grid.Row="5" Content="0" Name="TotalWritesLabel"/>
 
-                        <Label Grid.Column="0" Grid.Row="6" Content="Total compares"/>
-                        <Label Grid.Column="1" Grid.Row="6" Content="0" Name="TotalComparesLabel"/>
+                            <Label Grid.Column="0" Grid.Row="6" Content="Total compares"/>
+                            <Label Grid.Column="1" Grid.Row="6" Content="0" Name="TotalComparesLabel"/>
 
-                        <Label Grid.Column="0" Grid.Row="8" Content="Column width"/>
-                        <xctk:IntegerUpDown Grid.Column="1" Grid.Row="8" Value="20" Minimum="1" Maximum="30" Name="ColumnWidthUpDown"/>
+                            <Label Grid.Column="0" Grid.Row="8" Content="Column width"/>
+                            <xctk:IntegerUpDown Grid.Column="1" Grid.Row="8" Value="20" Minimum="1" Maximum="30" Name="ColumnWidthUpDown"/>
 
-                        <Label Grid.Column="0" Grid.Row="9" Content="Spacer width"/>
-                        <xctk:IntegerUpDown Grid.Column="1" Grid.Row="9" Value="1" Minimum="1" Maximum="15" Name="SpaceWidthUpDown"/>
+                            <Label Grid.Column="0" Grid.Row="9" Content="Spacer width"/>
+                            <xctk:IntegerUpDown Grid.Column="1" Grid.Row="9" Value="1" Minimum="1" Maximum="15" Name="SpaceWidthUpDown"/>
+                        </Grid>
+                        <GridSplitter Grid.Column="1" ShowsPreview="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                        <Border Grid.Column="2" Background="LightGray" Margin="5 0 5 0" Name="VisualizationCanvas">
+                            <Image Name="VisualizationImage"/>
+                        </Border>
+                        <GridSplitter Grid.Column="3" ShowsPreview="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                        <ListBox Grid.Column="4" Name="LogActionList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                        </ListBox>
                     </Grid>
-                    <Border Background="LightGray" Margin="5 0 5 0" Name="VisualizationCanvas">
-                        <Image Name="VisualizationImage"/>
-                    </Border>
                 </DockPanel>
             </TabItem>
         </TabControl>

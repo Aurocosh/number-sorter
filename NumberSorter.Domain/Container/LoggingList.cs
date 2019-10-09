@@ -32,10 +32,7 @@ namespace NumberSorter.Domain.Container
             _actionLog = new List<LogAction<T>>();
 
             for (int i = 0; i < _list.Count; i++)
-            {
-                var value = _list[i];
-                _logValueIndexes[value.Index] = i;
-            }
+                _logValueIndexes.Add(i);
         }
 
         public LogValue<T> this[int index] {
@@ -64,13 +61,13 @@ namespace NumberSorter.Domain.Container
 
         private void LogRead(int index, LogValue<T> item)
         {
-            _actionLog.Add(new LogRead<T>(index, item.Value));
+            _actionLog.Add(new LogRead<T>(_actionLog.Count, index, item.Value));
             _logValueIndexes[item.Index] = index;
         }
 
         private void LogWrite(int index, LogValue<T> item)
         {
-            _actionLog.Add(new LogWrite<T>(index, item.Value));
+            _actionLog.Add(new LogWrite<T>(_actionLog.Count, index, item.Value));
         }
 
         public void Add(LogValue<T> item)
@@ -116,7 +113,7 @@ namespace NumberSorter.Domain.Container
             T secondValue = y.Value;
 
             int comparassionResult = _comparer.Compare(firstValue, secondValue);
-            var comparassion = new LogComparassion<T>(firstIndex, secondIndex, firstValue, secondValue, comparassionResult);
+            var comparassion = new LogComparassion<T>(_actionLog.Count, firstIndex, secondIndex, firstValue, secondValue, comparassionResult);
 
             _actionLog.Add(comparassion);
             return comparassionResult;

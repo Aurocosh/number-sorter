@@ -73,6 +73,9 @@ namespace NumberSorter.Forms
                 this.OneWayBind(ViewModel, x => x.VisualizationViewModel.SortingLog.TotalComparassionCount, x => x.TotalComparesLabel.Content)
                     .DisposeWith(disposable);
 
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.LogActions, x => x.LogActionList.ItemsSource)
+                    .DisposeWith(disposable);
+
                 this.BindCommand(ViewModel, x => x.VisualizationViewModel.PlayPauseCommand, x => x.PlayButton)
                     .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.VisualizationViewModel.ResetCommand, x => x.ResetButton)

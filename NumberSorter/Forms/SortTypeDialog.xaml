@@ -22,9 +22,9 @@
             </Button>
             <Button IsCancel="True" Content="Cancel" Width="80" Margin="5"/>
         </StackPanel>
-        <ListBox Name="SortTypeList" HorizontalContentAlignment="Stretch"
+        <ListBox Name="SortTypeList"
+                 HorizontalContentAlignment="Stretch"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
-
         </ListBox>
     </DockPanel>
 </reactiveui:ReactiveWindow>

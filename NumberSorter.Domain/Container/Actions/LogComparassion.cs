@@ -17,7 +17,7 @@ namespace NumberSorter.Domain.Container.Actions
 
         public int ComparassionResult { get; }
 
-        public LogComparassion(int firstIndex, int secondIndex, T firstValue, T secondValue, int comparassionResult)
+        public LogComparassion(int actionIndex, int firstIndex, int secondIndex, T firstValue, T secondValue, int comparassionResult) : base(actionIndex)
         {
             FirstIndex = firstIndex;
             SecondIndex = secondIndex;

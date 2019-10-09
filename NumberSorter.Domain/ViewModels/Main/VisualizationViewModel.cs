@@ -1,13 +1,18 @@
-﻿using NumberSorter.Domain.Base.Visualizers;
+﻿using DynamicData;
+using NumberSorter.Domain.Base.Visualizers;
 using NumberSorter.Domain.Container;
+using NumberSorter.Domain.Container.Actions;
+using NumberSorter.Domain.Container.Actions.Base;
 using NumberSorter.Domain.DialogService;
 using NumberSorter.Domain.Visualizers;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,8 +24,11 @@ namespace NumberSorter.Domain.ViewModels
     {
         #region Fields
 
-        private readonly IDialogService<ReactiveObject> _dialogService;
         private IListVisualizer _listVisualizer = new ColumnListVisualizer();
+
+        private readonly SourceList<LogAction<int>> _logActions;
+        private readonly IDialogService<ReactiveObject> _dialogService;
+        private readonly ReadOnlyObservableCollection<LogActionLineViewModel> _logActionViewModels;
 
         #endregion Fields
 
@@ -34,6 +42,8 @@ namespace NumberSorter.Domain.ViewModels
         [Reactive] public List<int> CurrentListState { get; private set; }
 
         [Reactive] public WriteableBitmap VisualizationImage { get; private set; }
+
+        public ReadOnlyObservableCollection<LogActionLineViewModel> LogActions => _logActionViewModels;
 
         #endregion Properties
 
@@ -56,6 +66,7 @@ namespace NumberSorter.Domain.ViewModels
         public VisualizationViewModel(IDialogService<ReactiveObject> dialogService)
         {
             _dialogService = dialogService;
+            _logActions = new SourceList<LogAction<int>>();
 
             CurrentWrites = 0;
             CurrentReads = 0;
@@ -65,6 +76,15 @@ namespace NumberSorter.Domain.ViewModels
             CurrentListState = new List<int>();
             VisualizationImage = BitmapFactory.New(700, 480);
 
+            var actions = _logActions
+              .Connect()
+              //.Filter(x => !(x is LogComparassion<int>))
+              .Transform(x => new LogActionLineViewModel(x.ActionIndex, x.ToString()))
+              .ObserveOnDispatcher()
+              .Bind(out _logActionViewModels)
+              .DisposeMany()
+              .Subscribe();
+
             PlayPauseCommand = ReactiveCommand.Create(PlayOrPause);
             ResetCommand = ReactiveCommand.Create(Reset);
             PreviousStepCommand = ReactiveCommand.Create(PreviousStep);
@@ -73,6 +93,12 @@ namespace NumberSorter.Domain.ViewModels
 
             this.WhenAnyValue(x => x.CurrentListState)
                 .Subscribe(UpdateVisualization);
+
+            this.WhenAnyValue(x => x.SortingLog)
+                .Subscribe(x => CurrentListState = new List<int>(x.StartingState));
+
+            this.WhenAnyValue(x => x.SortingLog)
+                .Subscribe(x => UpdateActionLog(x.ActionLog));
         }
 
         #endregion Constructors
@@ -119,6 +145,12 @@ namespace NumberSorter.Domain.ViewModels
         private void UpdateVisualization(List<int> currentListState)
         {
             _listVisualizer.Redraw(VisualizationImage, currentListState);
+        }
+
+        private void UpdateActionLog(IReadOnlyList<LogAction<int>> logActions)
+        {
+            _logActions.Clear();
+            _logActions.AddRange(logActions);
         }
     }
 }

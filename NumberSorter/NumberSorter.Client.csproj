@@ -123,19 +123,26 @@
     </ApplicationDefinition>
     <Compile Include="DialogService\DialogService.cs" />
     <Compile Include="DialogService\WindowViewInitializer.cs" />
+    <Compile Include="Forms\Control\LogActionLineControl.xaml.cs">
+      <DependentUpon>LogActionLineControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\PartialSortedGeneratorDialog.xaml.cs">
       <DependentUpon>PartialSortedGeneratorDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\SortTypeDialog.xaml.cs">
       <DependentUpon>SortTypeDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SortTypeLineControl.xaml.cs">
+    <Compile Include="Forms\Control\SortTypeLineControl.xaml.cs">
       <DependentUpon>SortTypeLineControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utility\DialogCloser.cs" />
     <Compile Include="Forms\NumberGeneratorWindow.xaml.cs">
       <DependentUpon>NumberGeneratorWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Forms\Control\LogActionLineControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\NumberGeneratorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -160,7 +167,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Forms\SortTypeLineControl.xaml">
+    <Page Include="Forms\Control\SortTypeLineControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

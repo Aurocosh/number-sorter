@@ -26,12 +26,12 @@ namespace NumberSorter.Forms
         public SortTypeLineControl()
         {
             InitializeComponent();
-            this.WhenActivated(disposableRegistration =>
+            this.WhenActivated(disposable =>
             {
                 this.OneWayBind(ViewModel,
                         x => x.Description,
                         x => x.DescriptionTextBlock.Text)
-                        .DisposeWith(disposableRegistration);
+                        .DisposeWith(disposable);
             });
         }
     }
