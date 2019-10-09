@@ -1,4 +1,5 @@
 ﻿using NumberSorter.Core.Logic;
+using NumberSorter.Domain.Container.Actions.Base;
 using ReactiveUI;
 using System;
 
@@ -8,11 +9,13 @@ namespace NumberSorter.Domain.ViewModels
     {
         public int Index { get; }
         public string Description { get; }
+        public LogAction<int> LogAction { get; }
 
-        public LogActionLineViewModel(int index, string description)
+        public LogActionLineViewModel(LogAction<int> logAction)
         {
-            Index = index;
-            Description = description;
+            LogAction = logAction;
+            Index = logAction.ActionIndex;
+            Description = logAction.ToString();
         }
     }
 }

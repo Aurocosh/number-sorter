@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Domain.Container.Actions.Base
 {
-    public class LogAction<T> where T : IEquatable<T>
+    public abstract class LogAction<T> where T : IEquatable<T>
     {
         public int ActionIndex { get; }
 
@@ -14,5 +14,7 @@ namespace NumberSorter.Domain.Container.Actions.Base
         {
             ActionIndex = actionIndex;
         }
+
+        public abstract SortState<T> TransformState(SortState<T> state);
     }
 }

@@ -19,5 +19,12 @@ namespace NumberSorter.Domain.Container.Actions
         }
 
         public override string ToString() => $"Value {Value} written to index {Index}.";
+
+        public override SortState<T> TransformState(SortState<T> state)
+        {
+            var stateList = new List<T>(state.State);
+            stateList[Index] = Value;
+            return new SortState<T>(stateList, -1, Index, -1, -1);
+        }
     }
 }

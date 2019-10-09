@@ -57,7 +57,6 @@ namespace NumberSorter.Domain.ViewModels
 
         #endregion Commands
 
-
         #region Constructors
 
         public MainWindowViewModel() : this(null) { }
@@ -174,7 +173,7 @@ namespace NumberSorter.Domain.ViewModels
 
         private void UpdateOutputText(SortLog<int> sortLog)
         {
-            OutputText = string.Join(", ", sortLog.FinalState.Select(x => x.ToString()));
+            OutputText = string.Join(", ", sortLog.FinalState.State.Select(x => x.ToString()));
             ResultText = sortLog.FullySorted ? $"Write count: {sortLog.TotalWriteCount}\nRead count: {sortLog.TotalReadCount}\nTime: {sortLog.ElapsedTime}" : "";
         }
     }

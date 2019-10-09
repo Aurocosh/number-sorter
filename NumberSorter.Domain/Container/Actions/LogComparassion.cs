@@ -27,5 +27,10 @@ namespace NumberSorter.Domain.Container.Actions
         }
 
         public override string ToString() => $"Element {FirstValue} ({FirstIndex}) compared to {SecondValue} ({SecondIndex}). Result: {ComparassionResult}.";
+
+        public override SortState<T> TransformState(SortState<T> state)
+        {
+            return new SortState<T>(state.State, -1, -1, FirstIndex, SecondIndex);
+        }
     }
 }

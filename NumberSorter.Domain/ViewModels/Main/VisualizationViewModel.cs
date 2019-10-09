@@ -1,9 +1,11 @@
 ﻿using DynamicData;
+using NumberSorter.Core.Logic.Utility;
 using NumberSorter.Domain.Base.Visualizers;
 using NumberSorter.Domain.Container;
 using NumberSorter.Domain.Container.Actions;
 using NumberSorter.Domain.Container.Actions.Base;
 using NumberSorter.Domain.DialogService;
+using NumberSorter.Domain.Lib;
 using NumberSorter.Domain.Visualizers;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -24,11 +26,18 @@ namespace NumberSorter.Domain.ViewModels
     {
         #region Fields
 
+        private int _cacheSize = 60;
+        private int _waypointRange = 20;
+        private int _waypointCacheSize = 60;
+
         private IListVisualizer _listVisualizer = new ColumnListVisualizer();
 
         private readonly SourceList<LogAction<int>> _logActions;
         private readonly IDialogService<ReactiveObject> _dialogService;
+        private readonly LimitedDictionary<int, SortState<int>> _sortStateCache;
+        private readonly LimitedDictionary<int, SortState<int>> _sortWaypointStateCache;
         private readonly ReadOnlyObservableCollection<LogActionLineViewModel> _logActionViewModels;
+
 
         #endregion Fields
 
@@ -39,8 +48,10 @@ namespace NumberSorter.Domain.ViewModels
         [Reactive] public int CurrentComparassions { get; private set; }
 
         [Reactive] public SortLog<int> SortingLog { get; set; }
-        [Reactive] public List<int> CurrentListState { get; private set; }
+        [Reactive] public SortState<int> SortState { get; private set; }
 
+        [Reactive] public int CurrentIndex { get; set; }
+        [Reactive] public LogActionLineViewModel CurrentAction { get; set; }
         [Reactive] public WriteableBitmap VisualizationImage { get; private set; }
 
         public ReadOnlyObservableCollection<LogActionLineViewModel> LogActions => _logActionViewModels;
@@ -67,19 +78,21 @@ namespace NumberSorter.Domain.ViewModels
         {
             _dialogService = dialogService;
             _logActions = new SourceList<LogAction<int>>();
+            _sortStateCache = new LimitedDictionary<int, SortState<int>>(_cacheSize);
+            _sortWaypointStateCache = new LimitedDictionary<int, SortState<int>>(_waypointCacheSize);
 
             CurrentWrites = 0;
             CurrentReads = 0;
             CurrentComparassions = 0;
 
             SortingLog = new SortLog<int>();
-            CurrentListState = new List<int>();
+            SortState = SortingLog.StartingState;
             VisualizationImage = BitmapFactory.New(700, 480);
 
             var actions = _logActions
               .Connect()
               //.Filter(x => !(x is LogComparassion<int>))
-              .Transform(x => new LogActionLineViewModel(x.ActionIndex, x.ToString()))
+              .Transform(x => new LogActionLineViewModel(x))
               .ObserveOnDispatcher()
               .Bind(out _logActionViewModels)
               .DisposeMany()
@@ -91,13 +104,14 @@ namespace NumberSorter.Domain.ViewModels
             NextStepCommand = ReactiveCommand.Create(NextStep);
             ResizeCanvasCommand = ReactiveCommand.Create<SizeChangedEventArgs>(ResizeCanvas);
 
-            this.WhenAnyValue(x => x.CurrentListState)
+            this.WhenAnyValue(x => x.SortState)
                 .Subscribe(UpdateVisualization);
 
-            this.WhenAnyValue(x => x.SortingLog)
-                .Subscribe(x => CurrentListState = new List<int>(x.StartingState));
+            this.WhenAnyValue(x => x.CurrentAction)
+                .Subscribe(UpdateState);
 
             this.WhenAnyValue(x => x.SortingLog)
+                .Do(x => SortState = x.StartingState)
                 .Subscribe(x => UpdateActionLog(x.ActionLog));
         }
 
@@ -114,14 +128,68 @@ namespace NumberSorter.Domain.ViewModels
 
         }
 
-        private void PreviousStep()
-        {
+        private void PreviousStep() => CurrentIndex = ComparableUtility.Clamp(CurrentIndex - 1, 0, _logActionViewModels.Count);
+        private void NextStep() => CurrentIndex = ComparableUtility.Clamp(CurrentIndex + 1, 0, _logActionViewModels.Count);
 
+        private void UpdateState(LogActionLineViewModel lineViewModel)
+        {
+            if (lineViewModel == null)
+            {
+                SortState = SortingLog.StartingState;
+                return;
+            }
+
+            int index = lineViewModel.LogAction.ActionIndex;
+            SortState = GetState(index);
         }
 
-        private void NextStep()
+        private SortState<int> GetState(int index)
         {
+            SortState<int> state = getCachedState(index);
+            if (state != null)
+                return state;
 
+            var actionLog = SortingLog.ActionLog;
+            if (actionLog.Count == 0)
+                return SortingLog.StartingState;
+            if (index >= SortingLog.ActionLog.Count)
+                return SortingLog.FinalState;
+
+            var actionsToApply = new List<LogAction<int>>();
+            do
+            {
+                actionsToApply.Add(actionLog[index--]);
+                state = getCachedState(index);
+            } while (state == null);
+
+            for (int i = actionsToApply.Count - 1; i >= 0; i--)
+            {
+                CacheState(index++, state);
+                var action = actionsToApply[i];
+                state = action.TransformState(state);
+            }
+
+            CacheState(index, state);
+            return state;
+        }
+
+        private SortState<int> getCachedState(int index)
+        {
+            if (_sortStateCache.TryGetValue(index, out SortState<int> state))
+                return state;
+            else if (_sortWaypointStateCache.TryGetValue(index, out SortState<int> waypointState))
+                return waypointState;
+            else if (index < 0)
+                return SortingLog.StartingState;
+            return null;
+        }
+
+        private void CacheState(int index, SortState<int> state)
+        {
+            if (index % _waypointRange == 0)
+                _sortWaypointStateCache[index] = state;
+            else
+                _sortStateCache[index] = state;
         }
 
         private void ResizeCanvas(SizeChangedEventArgs e)
@@ -131,7 +199,7 @@ namespace NumberSorter.Domain.ViewModels
             int heigth = (int)size.Height;
 
             VisualizationImage = BitmapFactory.New(width, heigth);
-            UpdateVisualization(CurrentListState);
+            UpdateVisualization(SortState);
         }
 
         #endregion Command functions
@@ -142,9 +210,9 @@ namespace NumberSorter.Domain.ViewModels
 
         #endregion Command predicates
 
-        private void UpdateVisualization(List<int> currentListState)
+        private void UpdateVisualization(SortState<int> currentListState)
         {
-            _listVisualizer.Redraw(VisualizationImage, currentListState);
+            _listVisualizer.Redraw(VisualizationImage, currentListState.State);
         }
 
         private void UpdateActionLog(IReadOnlyList<LogAction<int>> logActions)

@@ -10,9 +10,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="300">
     <Grid>
-        <Grid.InputBindings>
-            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=DataContext.AcceptCommand}"/>
-        </Grid.InputBindings>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="*"/>

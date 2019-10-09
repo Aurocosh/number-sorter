@@ -19,5 +19,10 @@ namespace NumberSorter.Domain.Container.Actions
         }
 
         public override string ToString() => $"Value {Value} read from index {Index}.";
+
+        public override SortState<T> TransformState(SortState<T> state)
+        {
+            return new SortState<T>(state.State, Index, -1, -1, -1);
+        }
     }
 }

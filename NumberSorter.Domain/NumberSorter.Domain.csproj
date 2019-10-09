@@ -94,9 +94,11 @@
     <Compile Include="Container\Actions\LogComparassion.cs" />
     <Compile Include="Container\LogValue.cs" />
     <Compile Include="Container\SortLog.cs" />
+    <Compile Include="Container\SortState.cs" />
     <Compile Include="DialogService\IDialogService.cs" />
     <Compile Include="DialogService\IViewInitializer.cs" />
     <Compile Include="Interactions\DialogInteractions.cs" />
+    <Compile Include="Lib\LimitedDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Controls\LogActionLineViewModel.cs" />
     <Compile Include="ViewModels\FileOpenViewModel.cs" />
