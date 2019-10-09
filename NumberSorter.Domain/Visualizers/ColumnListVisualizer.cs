@@ -57,8 +57,6 @@ namespace NumberSorter.Domain.Visualizers
                 spacerSize = spacePerElement - columnSize;
             }
 
-
-
             int maxModule = list.Max(Math.Abs);
             double scaleCoefficient = yRange / maxModule;
 
@@ -70,11 +68,11 @@ namespace NumberSorter.Domain.Visualizers
                 int scaledValue = (int)(value * scaleCoefficient);
                 if (scaledValue > 0)
                 {
-                    writeableBitmap.FillRectangle(xCurrent, yOrigin + 1, xCurrent + columnSize - 1, yOrigin + scaledValue, columnColor);
+                    writeableBitmap.FillRectangle(xCurrent, yOrigin - scaledValue, xCurrent + columnSize - 1, yOrigin, columnColor);
                 }
                 else if (scaledValue < 0)
                 {
-                    writeableBitmap.FillRectangle(xCurrent, yOrigin + scaledValue, xCurrent + columnSize - 1, yOrigin, columnColor);
+                    writeableBitmap.FillRectangle(xCurrent, yOrigin + 1, xCurrent + columnSize - 1, yOrigin - scaledValue, columnColor);
                 }
 
                 xCurrent += columnSize + spacerSize;
