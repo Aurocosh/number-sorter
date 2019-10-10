@@ -37,17 +37,17 @@ namespace NumberSorter.Domain.ViewModels
             AcceptCommand = ReactiveCommand.Create(Accept);
 
             var sortTypes = new List<SortTypeLineViewModel>();
-            sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.TimSort, "Tim Sort"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.HeapSort, "Heap sort"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.BinarySort, "Binary sort"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.BubbleSort, "Bubble sort"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.InsertionSort, "Insertion sort"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.DequeMergeSort, "Deque merge sort"));
-            sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.InPlaceMergeSort, "In place merge sort"));
+            sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.WindowMergeSort, "Window merge sort"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.RecursiveMergeSort, "Recursive merge sort"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.HalfInPlaceMergeSort, "Half in place merge sort"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.QuickSortRandomPivot, "Quick sort (Random pivot)"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.KindaInPlaceMergeSort, "Kinda in place merge sort"));
+            sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.InsertionWindowTimSort, "Tim Sort (Insertion, Window merge)"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.QuickSortMedianOfThree, "Quick sort (Median of three pivot)"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.GallopingRecursiveMergeSort, "Galloping recursive merge sort"));
 

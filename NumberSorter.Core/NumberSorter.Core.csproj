@@ -54,6 +54,7 @@
     <Compile Include="Logic\Algorhythm\Merge\Base\ILocalMergeAlgothythm.cs" />
     <Compile Include="Logic\Algorhythm\Merge\RecursiveInPlaceMerge.cs" />
     <Compile Include="Logic\Algorhythm\Sort\Base\ComparerSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\Base\IPartialSortAlgorhythm.cs" />
     <Compile Include="Logic\Algorhythm\Sort\Base\ISortAlgorhythm.cs" />
     <Compile Include="Logic\Algorhythm\Sort\BinarySort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\BubbleSort.cs" />
@@ -62,7 +63,7 @@
     <Compile Include="Logic\Algorhythm\Sort\GallopingRecursiveMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\HalfInPlaceMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\HeapSort.cs" />
-    <Compile Include="Logic\Algorhythm\Sort\InPlaceMergeSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\WindowMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\InsertionSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\KindaInPlaceMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\OpRecursiveMergeSort.cs" />

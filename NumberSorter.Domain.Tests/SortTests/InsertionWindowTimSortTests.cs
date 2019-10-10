@@ -9,11 +9,11 @@ using NumberSorter.Domain.Tests.SortTests.Base;
 
 namespace NumberSorter.Domain.Tests.SortTests
 {
-    public class InPlaceMergeSortTests : SortTestsBase
+    public class InsertionWindowTimSortTests : SortTestsBase
     {
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {
-            return new InPlaceMergeSort<int>(comparer);
+            return new TimSort<int>(comparer, x => new InsertionSort<int>(x), x => new WindowMergeSort<int>(x));
         }
     }
 }

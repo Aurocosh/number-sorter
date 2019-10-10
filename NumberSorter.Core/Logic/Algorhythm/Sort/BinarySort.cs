@@ -1,9 +1,10 @@
-﻿using NumberSorter.Core.Logic.Utility;
+﻿using NumberSorter.Core.Algorhythm;
+using NumberSorter.Core.Logic.Utility;
 using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class BinarySort<T> : GenericSortAlgorhythm<T>
+    public class BinarySort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
     {
         public BinarySort(IComparer<T> comparer) : base(comparer) { }
 

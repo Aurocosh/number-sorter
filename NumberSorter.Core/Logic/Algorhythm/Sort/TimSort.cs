@@ -1,4 +1,6 @@
-﻿using NumberSorter.Core.Logic.Utility;
+﻿using NumberSorter.Core.Algorhythm;
+using NumberSorter.Core.Logic.Algorhythm.Merge.Base;
+using NumberSorter.Core.Logic.Utility;
 using System;
 using System.Collections.Generic;
 
@@ -6,19 +8,15 @@ namespace NumberSorter.Core.Logic.Algorhythm
 {
     public class TimSort<T> : GenericSortAlgorhythm<T>
     {
-        private InsertionSort<T> _insertionSort;
+        private IPartialSortAlgorhythm<T> _smallSortAlgorhythm; // Used when sorting something smaller then Minrun
+        private ILocalMergeAlgothythm<T> _mergeAlgorhythm; // Used to merge sorted runs
 
-        public TimSort(IComparer<T> comparer) : base(comparer)
+        public TimSort(IComparer<T> comparer, Func<IComparer<T>, IPartialSortAlgorhythm<T>> smallSortFactory, Func<IComparer<T>, ILocalMergeAlgothythm<T>> mergeFactory) : base(comparer)
         {
-            _insertionSort = new InsertionSort<T>(comparer);
+            _smallSortAlgorhythm = smallSortFactory.Invoke(comparer);
+            _mergeAlgorhythm = mergeFactory.Invoke(comparer);
         }
 
-        private enum ArrayLeftover
-        {
-            First,
-            Second,
-            Both
-        }
         private sealed class SortRunStack
         {
             private readonly LinkedList<SortRun> _sortRuns;
@@ -54,6 +52,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 _sortRunA = _sortRunB;
                 _sortRunB = _sortRunC;
                 _sortRunC = _sortRuns.Last.Value;
+                _sortRuns.RemoveLast();
                 return sortRun;
             }
 
@@ -67,7 +66,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
         {
             if (list.Count < 64)
             {
-                _insertionSort.Sort(list);
+                _smallSortAlgorhythm.Sort(list);
                 return;
             }
 
@@ -75,39 +74,43 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
             int currentIndex = 0;
             int listSize = list.Count;
+            int elementsLeft = listSize;
             int minimalRunLength = GetMinrun(listSize);
-            while (currentIndex < listSize)
+            while (elementsLeft > 0)
             {
                 var sortRun = FindNextSortRun(list, currentIndex);
                 if (sortRun.Length < minimalRunLength)
                 {
-                    sortRun = new SortRun(sortRun.Start, minimalRunLength);
-                    _insertionSort.Sort(list, sortRun.Start, sortRun.Length);
+                    sortRun = new SortRun(sortRun.Start, Math.Min(minimalRunLength, elementsLeft));
+                    _smallSortAlgorhythm.Sort(list, sortRun.Start, sortRun.Length);
                 }
                 sortRuns.AddLast(sortRun);
+                elementsLeft -= sortRun.Length;
                 currentIndex += sortRun.Length;
             }
 
             var runStack = new SortRunStack();
-            while (sortRuns.Count > 0 && runStack.Count > 1)
+            while (sortRuns.Count > 0 || runStack.Count > 1)
             {
-                if (runStack.MergeNeeded())
+                if (runStack.MergeNeeded() || sortRuns.Count == 0)
                 {
-                    var rightSortRun = runStack.Pop();
                     var leftSortRun = runStack.Pop();
+                    var rightSortRun = runStack.Pop();
                     var mergedRun = MergeRuns(list, leftSortRun, rightSortRun);
                     runStack.Push(mergedRun);
                 }
                 else
                 {
                     runStack.Push(sortRuns.Last.Value);
+                    sortRuns.RemoveLast();
                 }
             }
         }
 
         private SortRun MergeRuns(IList<T> list, SortRun leftRun, SortRun rightRun)
         {
-            return new SortRun(0, 0);
+            _mergeAlgorhythm.Merge(list, leftRun, rightRun);
+            return new SortRun(leftRun.Start, leftRun.Length + rightRun.Length);
         }
 
         private SortRun FindNextSortRun(IList<T> list, int runStart)

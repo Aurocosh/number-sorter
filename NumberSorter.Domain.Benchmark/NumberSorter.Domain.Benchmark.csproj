@@ -221,7 +221,7 @@
     <Compile Include="Benchmarks\DequeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\HalfInPlaceMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\KindaInPlaceMergeSortBenchmarks.cs" />
-    <Compile Include="Benchmarks\InPlaceMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\WindowMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\BubbleSortBenchmarks.cs" />
     <Compile Include="Benchmarks\InsertionSortBenchmarks.cs" />
     <Compile Include="IntegerGenerators\BenchmarkRandomProvider.cs" />

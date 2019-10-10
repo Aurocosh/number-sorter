@@ -2,13 +2,13 @@
 {
     public enum AlgorhythmType
     {
-        TimSort,
+        InsertionWindowTimSort,
         HeapSort,
         BinarySort,
         BubbleSort,
         InsertionSort,
         DequeMergeSort,
-        InPlaceMergeSort,
+        WindowMergeSort,
         RecursiveMergeSort,
         HalfInPlaceMergeSort,
         QuickSortRandomPivot,

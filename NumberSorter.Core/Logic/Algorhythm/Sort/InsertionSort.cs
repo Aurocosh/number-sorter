@@ -1,9 +1,10 @@
-﻿using NumberSorter.Core.Logic.Utility;
+﻿using NumberSorter.Core.Algorhythm;
+using NumberSorter.Core.Logic.Utility;
 using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class InsertionSort<T> : GenericSortAlgorhythm<T>
+    public class InsertionSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
     {
         public InsertionSort(IComparer<T> comparer) : base(comparer) { }
 
@@ -14,13 +15,15 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
         public void Sort(IList<T> list, int startingIndex, int length)
         {
-            for (int i = startingIndex + 1; i < length; i++)
+            int lowerLimit = startingIndex - 1;
+            int upperLimit = startingIndex + length;
+            for (int i = startingIndex + 1; i < upperLimit; i++)
             {
                 var currentIndex = i;
                 var testIndex = i - 1;
                 var currentValue = list[currentIndex];
 
-                while (testIndex > -1 && Compare(list[testIndex], currentValue) > 0)
+                while (testIndex > lowerLimit && Compare(list[testIndex], currentValue) > 0)
                 {
                     list.Swap(currentIndex, testIndex);
                     currentIndex = testIndex;
