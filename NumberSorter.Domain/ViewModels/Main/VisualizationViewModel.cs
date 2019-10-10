@@ -29,6 +29,7 @@ namespace NumberSorter.Domain.ViewModels
         private int _cacheSize = 60;
         private int _waypointRange = 20;
         private int _waypointCacheSize = 60;
+        private int _currentWaypointCount = 0;
 
         private IListVisualizer _listVisualizer = new ColumnListVisualizer();
 
@@ -215,10 +216,19 @@ namespace NumberSorter.Domain.ViewModels
 
         private void CacheState(int index, SortState<int> state)
         {
-            if (index % _waypointRange == 0)
+            if (_sortStateCache.ContainsKey(index) || _sortWaypointStateCache.ContainsKey(index))
+                return;
+
+            _currentWaypointCount++;
+            if (_currentWaypointCount > _waypointRange)
+            {
+                _currentWaypointCount = 0;
                 _sortWaypointStateCache[index] = state;
+            }
             else
+            {
                 _sortStateCache[index] = state;
+            }
         }
 
         private void ResizeCanvas(SizeChangedEventArgs e)

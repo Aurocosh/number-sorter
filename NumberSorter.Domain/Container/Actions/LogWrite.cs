@@ -24,7 +24,7 @@ namespace NumberSorter.Domain.Container.Actions
         {
             var stateList = new List<T>(state.State);
             stateList[Index] = Value;
-            return new SortState<T>(stateList, -1, Index, -1, -1);
+            return new SortState<T>(stateList, -1, Index, -1, -1, -1);
         }
     }
 }

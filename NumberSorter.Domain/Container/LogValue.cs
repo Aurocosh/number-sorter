@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Domain.Container
 {
-    public class LogValue<T> : IEquatable<LogValue<T>> where T : IEquatable<T>
+    public class LogValue<T> : IEquatable<LogValue<T>>
     {
         public int Index { get; }
         public T Value { get; }
@@ -21,9 +21,9 @@ namespace NumberSorter.Domain.Container
 
         public bool Equals(LogValue<T> other)
         {
-            return other != null &&
-                   Index == other.Index &&
-                   Value.Equals(other.Value);
+            return other is LogValue<T> value &&
+                   Index == value.Index &&
+                   Value.Equals(value.Value);
         }
 
         public override bool Equals(object obj)
@@ -39,17 +39,6 @@ namespace NumberSorter.Domain.Container
             hashCode = (hashCode * -1521134295) + Index.GetHashCode();
             hashCode = (hashCode * -1521134295) + Value.GetHashCode();
             return hashCode;
-        }
-
-
-        public static bool operator ==(LogValue<T> left, LogValue<T> right)
-        {
-            return left.Equals(right);
-        }
-
-        public static bool operator !=(LogValue<T> left, LogValue<T> right)
-        {
-            return !left.Equals(right);
         }
 
         #endregion

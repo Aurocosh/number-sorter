@@ -13,6 +13,7 @@ namespace NumberSorter.Domain.Container
     public class LoggingList<T> : IList<LogValue<T>>, IComparer<LogValue<T>> where T : IEquatable<T>
     {
         private readonly IComparer<T> _comparer;
+        private LogValueWrite<T> _previousValueWrite;
 
         private readonly List<T> _startingState;
         private readonly List<LogValue<T>> _list;
@@ -20,9 +21,11 @@ namespace NumberSorter.Domain.Container
         private readonly List<int> _logValueIndexes;
         private readonly List<LogAction<T>> _actionLog;
 
+
         public LoggingList(IList<T> list, IComparer<T> comparer)
         {
             _comparer = comparer;
+            _previousValueWrite = null;
 
             int index = 0;
             _startingState = new List<T>(list);
@@ -30,6 +33,7 @@ namespace NumberSorter.Domain.Container
 
             _logValueIndexes = new List<int>(list.Count);
             _actionLog = new List<LogAction<T>>();
+
 
             for (int i = 0; i < _list.Count; i++)
                 _logValueIndexes.Add(i);
@@ -61,13 +65,38 @@ namespace NumberSorter.Domain.Container
 
         private void LogRead(int index, LogValue<T> item)
         {
+            if (_previousValueWrite != null)
+            {
+                _actionLog.Add(new LogWrite<T>(_actionLog.Count, _previousValueWrite.Index, _previousValueWrite.WrittenValue.Value));
+                _previousValueWrite = null;
+            }
+
             _actionLog.Add(new LogRead<T>(_actionLog.Count, index, item.Value));
             _logValueIndexes[item.Index] = index;
         }
 
         private void LogWrite(int index, LogValue<T> item)
         {
-            _actionLog.Add(new LogWrite<T>(_actionLog.Count, index, item.Value));
+            var replacedValue = _list[index];
+            var valueWrite = new LogValueWrite<T>(index, item, replacedValue);
+
+            if (_previousValueWrite == null)
+            {
+                _previousValueWrite = valueWrite;
+            }
+            else
+            {
+                if (_previousValueWrite.ReplacedValue == valueWrite.WrittenValue && _previousValueWrite.WrittenValue == valueWrite.ReplacedValue)
+                {
+                    _actionLog.Add(new LogSwap<T>(_actionLog.Count, _previousValueWrite.Index, valueWrite.Index, _previousValueWrite.WrittenValue.Value, valueWrite.WrittenValue.Value));
+                    _previousValueWrite = null;
+                }
+                else
+                {
+                    _actionLog.Add(new LogWrite<T>(_actionLog.Count, _previousValueWrite.Index, _previousValueWrite.WrittenValue.Value));
+                    _previousValueWrite = valueWrite;
+                }
+            }
         }
 
         public void Add(LogValue<T> item)

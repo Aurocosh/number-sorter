@@ -22,7 +22,7 @@ namespace NumberSorter.Domain.Container.Actions
 
         public override SortState<T> TransformState(SortState<T> state)
         {
-            return new SortState<T>(state.State, Index, -1, -1, -1);
+            return new SortState<T>(state.State, Index, -1, -1, -1, -1);
         }
     }
 }

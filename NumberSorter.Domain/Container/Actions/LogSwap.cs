@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Domain.Container.Actions
 {
-    public class LogComparassion<T> : LogAction<T> where T : IEquatable<T>
+    public class LogSwap<T> : LogAction<T> where T : IEquatable<T>
     {
         public int FirstIndex { get; }
         public int SecondIndex { get; }
@@ -15,22 +15,24 @@ namespace NumberSorter.Domain.Container.Actions
         public T FirstValue { get; }
         public T SecondValue { get; }
 
-        public int ComparassionResult { get; }
-
-        public LogComparassion(int actionIndex, int firstIndex, int secondIndex, T firstValue, T secondValue, int comparassionResult) : base(actionIndex, LogActionType.LogComparassion)
+        public LogSwap(int actionIndex, int firstIndex, int secondIndex, T firstValue, T secondValue) : base(actionIndex, LogActionType.LogWrite)
         {
             FirstIndex = firstIndex;
             SecondIndex = secondIndex;
             FirstValue = firstValue;
             SecondValue = secondValue;
-            ComparassionResult = comparassionResult;
         }
 
-        public override string ToString() => $"Element {FirstValue} ({FirstIndex}) compared to {SecondValue} ({SecondIndex}). Result: {ComparassionResult}.";
+        public override string ToString() => $"Swapped {FirstValue} ({SecondIndex}) with {SecondValue} ({FirstIndex}).";
 
         public override SortState<T> TransformState(SortState<T> state)
         {
-            return new SortState<T>(state.State, -1, -1, -1, FirstIndex, SecondIndex);
+            var stateList = new List<T>(state.State)
+            {
+                [FirstIndex] = FirstValue,
+                [SecondIndex] = SecondValue
+            };
+            return new SortState<T>(stateList, -1, FirstIndex, SecondIndex, -1, -1);
         }
     }
 }
