@@ -21,11 +21,14 @@ namespace NumberSorter.Domain.Lib
         {
             _orderedKeys.Enqueue(key);
             if (MaxItemsToHold != 0 && Count >= MaxItemsToHold)
-            {
                 Remove(_orderedKeys.Dequeue());
-            }
 
             base.Add(key, value);
+        }
+
+        new public TValue this[TKey key] {
+            get => base[key];
+            set => Add(key, value);
         }
     }
 }

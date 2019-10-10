@@ -26,12 +26,18 @@ namespace NumberSorter.Domain.ViewModels
     {
         #region Fields
 
-        private int _cacheSize = 60;
+        private int _cacheSize = 100;
         private int _waypointRange = 20;
-        private int _waypointCacheSize = 60;
+        private int _waypointCacheSize = 100;
         private int _currentWaypointCount = 0;
 
+        private int _lowerLimit = 200;
+        private int _upperLimit = 400;
+
         private IListVisualizer _listVisualizer = new ColumnListVisualizer();
+
+        //private readonly List<LogAction<int>> previousHidden;
+        //private readonly List<LogAction<int>> nextHidden;
 
         private readonly SourceList<LogAction<int>> _logActions;
         private readonly IDialogService<ReactiveObject> _dialogService;
@@ -39,14 +45,9 @@ namespace NumberSorter.Domain.ViewModels
         private readonly LimitedDictionary<int, SortState<int>> _sortWaypointStateCache;
         private readonly ReadOnlyObservableCollection<LogActionLineViewModel> _logActionViewModels;
 
-
         #endregion Fields
 
         #region Properties
-
-        [Reactive] public int CurrentReads { get; private set; }
-        [Reactive] public int CurrentWrites { get; private set; }
-        [Reactive] public int CurrentComparassions { get; private set; }
 
         [Reactive] public bool ReadActions { get; set; }
         [Reactive] public bool WriteActions { get; set; }
@@ -86,10 +87,6 @@ namespace NumberSorter.Domain.ViewModels
             _sortStateCache = new LimitedDictionary<int, SortState<int>>(_cacheSize);
             _sortWaypointStateCache = new LimitedDictionary<int, SortState<int>>(_waypointCacheSize);
 
-            CurrentWrites = 0;
-            CurrentReads = 0;
-            CurrentComparassions = 0;
-
             ReadActions = false;
             WriteActions = true;
             ComparassionActions = false;
@@ -117,7 +114,7 @@ namespace NumberSorter.Domain.ViewModels
                 .Subscribe(UpdateVisualization);
 
             this.WhenAnyValue(x => x.CurrentAction)
-                .Subscribe(UpdateState);
+                .Subscribe(UpdateState)
 
             this.WhenAnyValue(x => x.SortingLog)
                 .Do(x => SortState = x.StartingState)
@@ -196,7 +193,7 @@ namespace NumberSorter.Domain.ViewModels
             for (int i = actionsToApply.Count - 1; i >= 0; i--)
             {
                 var action = actionsToApply[i];
-                state = action.TransformState(state);
+                state = state.TransformState(action);
             }
 
             CacheState(index, state);

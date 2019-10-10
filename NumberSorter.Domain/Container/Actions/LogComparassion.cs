@@ -9,28 +9,24 @@ namespace NumberSorter.Domain.Container.Actions
 {
     public class LogComparassion<T> : LogAction<T> where T : IEquatable<T>
     {
-        public int FirstIndex { get; }
-        public int SecondIndex { get; }
-
         public T FirstValue { get; }
         public T SecondValue { get; }
-
         public int ComparassionResult { get; }
 
-        public LogComparassion(int actionIndex, int firstIndex, int secondIndex, T firstValue, T secondValue, int comparassionResult) : base(actionIndex, LogActionType.LogComparassion)
+        public override int ComparassionCount => 1;
+        public override int FirstComparedIndex { get; }
+        public override int SecondComparedIndex { get; }
+
+
+        public LogComparassion(int actionIndex, int firstComparedIndex, int secondComparedIndex, T firstValue, T secondValue, int comparassionResult) : base(actionIndex, LogActionType.LogComparassion)
         {
-            FirstIndex = firstIndex;
-            SecondIndex = secondIndex;
+            FirstComparedIndex = firstComparedIndex;
+            SecondComparedIndex = secondComparedIndex;
             FirstValue = firstValue;
             SecondValue = secondValue;
             ComparassionResult = comparassionResult;
         }
 
-        public override string ToString() => $"Element {FirstValue} ({FirstIndex}) compared to {SecondValue} ({SecondIndex}). Result: {ComparassionResult}.";
-
-        public override SortState<T> TransformState(SortState<T> state)
-        {
-            return new SortState<T>(state.State, -1, -1, -1, FirstIndex, SecondIndex);
-        }
+        public override string ToString() => $"Element {FirstValue} ({FirstComparedIndex}) compared to {SecondValue} ({SecondComparedIndex}). Result: {ComparassionResult}.";
     }
 }

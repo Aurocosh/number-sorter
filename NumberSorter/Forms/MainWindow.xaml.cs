@@ -66,11 +66,11 @@ namespace NumberSorter.Forms
                 this.OneWayBind(ViewModel, x => x.VisualizationViewModel.VisualizationImage, x => x.VisualizationImage.Source)
                     .DisposeWith(disposable);
 
-                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.CurrentReads, x => x.CurrentReadsLabel.Content)
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.SortState.ReadCount, x => x.CurrentReadsLabel.Content)
                     .DisposeWith(disposable);
-                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.CurrentWrites, x => x.CurrentWritesLabel.Content)
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.SortState.WriteCount, x => x.CurrentWritesLabel.Content)
                     .DisposeWith(disposable);
-                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.CurrentComparassions, x => x.CurrentComparesLabel.Content)
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.SortState.ComparassionCount, x => x.CurrentComparesLabel.Content)
                     .DisposeWith(disposable);
 
                 this.OneWayBind(ViewModel, x => x.VisualizationViewModel.SortingLog.TotalReadCount, x => x.TotalReadsLabel.Content)

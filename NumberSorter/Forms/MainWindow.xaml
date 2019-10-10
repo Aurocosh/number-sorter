@@ -125,12 +125,6 @@
                                 <CheckBox Content="Comparassions" Name="ComparassionsCheck" IsChecked="False"/>
                             </StackPanel>
                             <ListBox Name="LogActionList" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                                <ListBox.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <VirtualizingStackPanel IsVirtualizing="True"
-                                        VirtualizationMode="Recycling" />
-                                    </ItemsPanelTemplate>
-                                </ListBox.ItemsPanel>
                             </ListBox>
                         </DockPanel>
                     </Grid>

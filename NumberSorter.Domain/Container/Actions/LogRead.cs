@@ -9,20 +9,17 @@ namespace NumberSorter.Domain.Container.Actions
 {
     public class LogRead<T> : LogAction<T> where T : IEquatable<T>
     {
-        public int Index { get; }
         public T Value { get; }
 
-        public LogRead(int actionIndex, int index, T value) : base(actionIndex, LogActionType.LogRead)
+        public override int ReadCount => 1;
+        public override int ReadIndex { get; }
+
+        public LogRead(int actionIndex, int readIndex, T value) : base(actionIndex, LogActionType.LogRead)
         {
-            Index = index;
             Value = value;
+            ReadIndex = readIndex;
         }
 
-        public override string ToString() => $"Value {Value} read from index {Index}.";
-
-        public override SortState<T> TransformState(SortState<T> state)
-        {
-            return new SortState<T>(state.State, Index, -1, -1, -1, -1);
-        }
+        public override string ToString() => $"Value {Value} read from index {ReadIndex}.";
     }
 }

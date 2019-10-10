@@ -31,8 +31,8 @@ namespace NumberSorter.Domain.Container
             TotalWriteCount = 0;
             TotalComparassionCount = 0;
 
-            StartingState = new SortState<T>(new List<T>());
-            FinalState = new SortState<T>(new List<T>());
+            StartingState = new SortState<T>(new T[0]);
+            FinalState = new SortState<T>(new T[0]);
             ActionLog = new List<LogAction<T>>();
         }
 
@@ -41,13 +41,13 @@ namespace NumberSorter.Domain.Container
             ElapsedTime = elapsedTime;
             FullySorted = IListUtility.IsSorted(finalState, comparer);
 
-            StartingState = new SortState<T>(startingState);
-            FinalState = new SortState<T>(finalState);
+            StartingState = new SortState<T>(startingState.ToArray());
+            FinalState = new SortState<T>(finalState.ToArray());
             ActionLog = actionLog;
 
-            TotalReadCount = actionLog.Count(x => x is LogRead<T>);
-            TotalWriteCount = actionLog.Count(x => x is LogWrite<T>);
-            TotalComparassionCount = actionLog.Count(x => x is LogComparassion<T>);
+            TotalReadCount = actionLog.Sum(x => x.ReadCount);
+            TotalWriteCount = actionLog.Sum(x => x.WriteCount);
+            TotalComparassionCount = actionLog.Sum(x => x.ComparassionCount);
         }
     }
 }

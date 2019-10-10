@@ -9,22 +9,22 @@ namespace NumberSorter.Domain.Container.Actions
 {
     public class LogWrite<T> : LogAction<T> where T : IEquatable<T>
     {
-        public int Index { get; }
         public T Value { get; }
+
+        public override int WriteCount => 1;
+        public override int FirstWrittenIndex { get; }
 
         public LogWrite(int actionIndex, int index, T value) : base(actionIndex, LogActionType.LogWrite)
         {
-            Index = index;
+            FirstWrittenIndex = index;
             Value = value;
         }
 
-        public override string ToString() => $"Value {Value} written to index {Index}.";
+        public override string ToString() => $"Value {Value} written to index {FirstWrittenIndex}.";
 
-        public override SortState<T> TransformState(SortState<T> state)
+        public override void TransformStateArray(T[] stateArray)
         {
-            var stateList = new List<T>(state.State);
-            stateList[Index] = Value;
-            return new SortState<T>(stateList, -1, Index, -1, -1, -1);
+            stateArray[FirstWrittenIndex] = Value;
         }
     }
 }

@@ -11,12 +11,24 @@ namespace NumberSorter.Domain.Container.Actions.Base
         public int ActionIndex { get; }
         public LogActionType ActionType { get; }
 
+        public virtual int ReadIndex => -1;
+
+        public virtual int FirstWrittenIndex => -1;
+        public virtual int SecondtWrittenIndex => -1;
+
+        public virtual int FirstComparedIndex => -1;
+        public virtual int SecondComparedIndex => -1;
+
+        public virtual int ReadCount => 0;
+        public virtual int WriteCount => 0;
+        public virtual int ComparassionCount => 0;
+
         protected LogAction(int actionIndex, LogActionType actionType)
         {
             ActionIndex = actionIndex;
             ActionType = actionType;
         }
 
-        public abstract SortState<T> TransformState(SortState<T> state);
+        public virtual void TransformStateArray(T[] stateArray) { }
     }
 }

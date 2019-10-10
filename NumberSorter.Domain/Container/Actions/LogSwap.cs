@@ -9,30 +9,28 @@ namespace NumberSorter.Domain.Container.Actions
 {
     public class LogSwap<T> : LogAction<T> where T : IEquatable<T>
     {
-        public int FirstIndex { get; }
-        public int SecondIndex { get; }
-
         public T FirstValue { get; }
         public T SecondValue { get; }
 
-        public LogSwap(int actionIndex, int firstIndex, int secondIndex, T firstValue, T secondValue) : base(actionIndex, LogActionType.LogWrite)
+        public override int WriteCount => 2;
+        public override int FirstWrittenIndex { get; }
+        public override int SecondtWrittenIndex { get; }
+
+        public LogSwap(int actionIndex, int firstWrittenIndex, int secondWrittenIndex, T firstValue, T secondValue) : base(actionIndex, LogActionType.LogWrite)
         {
-            FirstIndex = firstIndex;
-            SecondIndex = secondIndex;
+            FirstWrittenIndex = firstWrittenIndex;
+            SecondtWrittenIndex = secondWrittenIndex;
+
             FirstValue = firstValue;
             SecondValue = secondValue;
         }
 
-        public override string ToString() => $"Swapped {FirstValue} ({SecondIndex}) with {SecondValue} ({FirstIndex}).";
+        public override string ToString() => $"Swapped {FirstValue} ({SecondtWrittenIndex}) with {SecondValue} ({FirstWrittenIndex}).";
 
-        public override SortState<T> TransformState(SortState<T> state)
+        public override void TransformStateArray(T[] stateArray)
         {
-            var stateList = new List<T>(state.State)
-            {
-                [FirstIndex] = FirstValue,
-                [SecondIndex] = SecondValue
-            };
-            return new SortState<T>(stateList, -1, FirstIndex, SecondIndex, -1, -1);
+            stateArray[FirstWrittenIndex] = FirstValue;
+            stateArray[SecondtWrittenIndex] = SecondValue;
         }
     }
 }
