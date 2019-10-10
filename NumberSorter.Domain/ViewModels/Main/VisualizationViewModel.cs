@@ -257,6 +257,8 @@ namespace NumberSorter.Domain.ViewModels
         private void UpdateActionLog()
         {
             _logActions.Clear();
+            _sortStateCache.Clear();
+            _sortWaypointStateCache.Clear();
             _logActions.AddRange(SortingLog.ActionLog);
         }
     }

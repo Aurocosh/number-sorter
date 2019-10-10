@@ -39,6 +39,7 @@ namespace NumberSorter.Domain.ViewModels
             var sortTypes = new List<SortTypeLineViewModel>();
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.TimSort, "Tim Sort"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.HeapSort, "Heap sort"));
+            sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.BinarySort, "Binary sort"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.BubbleSort, "Bubble sort"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.InsertionSort, "Insertion sort"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.DequeMergeSort, "Deque merge sort"));

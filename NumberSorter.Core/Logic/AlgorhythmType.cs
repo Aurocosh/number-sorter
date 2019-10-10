@@ -4,6 +4,7 @@
     {
         TimSort,
         HeapSort,
+        BinarySort,
         BubbleSort,
         InsertionSort,
         DequeMergeSort,
