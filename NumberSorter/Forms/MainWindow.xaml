@@ -88,6 +88,8 @@
                                 <RowDefinition Height="20"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Label Grid.Column="0" Grid.Row="0" Content="Current reads"/>
                             <Label Grid.Column="1" Grid.Row="0" Content="0" Name="CurrentReadsLabel"/>
@@ -107,26 +109,35 @@
                             <Label Grid.Column="0" Grid.Row="6" Content="Total compares"/>
                             <Label Grid.Column="1" Grid.Row="6" Content="0" Name="TotalComparesLabel"/>
 
-                            <Label Grid.Column="0" Grid.Row="8" Content="Column width"/>
-                            <xctk:IntegerUpDown Grid.Column="1" Grid.Row="8" Value="20" Minimum="1" Maximum="30" Name="ColumnWidthUpDown"/>
+                            <Label Grid.Column="0" Grid.Row="8" Content="Total actions"/>
+                            <Label Grid.Column="1" Grid.Row="8" Content="0" Name="TotalActionsLabel"/>
 
-                            <Label Grid.Column="0" Grid.Row="9" Content="Spacer width"/>
-                            <xctk:IntegerUpDown Grid.Column="1" Grid.Row="9" Value="1" Minimum="1" Maximum="15" Name="SpaceWidthUpDown"/>
+                            <Label Grid.Column="0" Grid.Row="9" Content="Current action index"/>
+                            <xctk:IntegerUpDown Grid.Column="1" Grid.Row="9" Value="0" Minimum="0" Name="ActionIndexUpDown"/>
+
+                            <Label Grid.Column="0" Grid.Row="10" Content="Column width"/>
+                            <xctk:IntegerUpDown Grid.Column="1" Grid.Row="10" Value="20" Minimum="1" Maximum="30" Name="ColumnWidthUpDown"/>
+
+                            <Label Grid.Column="0" Grid.Row="11" Content="Spacer width"/>
+                            <xctk:IntegerUpDown Grid.Column="1" Grid.Row="11" Value="1" Minimum="1" Maximum="15" Name="SpaceWidthUpDown"/>
                         </Grid>
                         <GridSplitter Grid.Column="1" ShowsPreview="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                         <Border Grid.Column="2" Background="LightGray" Margin="5 0 5 0" Name="VisualizationCanvas">
                             <Image Name="VisualizationImage"/>
                         </Border>
                         <GridSplitter Grid.Column="3" ShowsPreview="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                        <DockPanel Grid.Column="4" >
-                            <StackPanel DockPanel.Dock="Bottom">
+                        <Grid Grid.Column="4" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <ListBox Grid.Row="0" Name="LogActionList" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+                            <StackPanel Grid.Row="1">
                                 <CheckBox Content="Reads" Name="ReadsCheck" IsChecked="False"/>
                                 <CheckBox Content="Writes" Name="WritesCheck" IsChecked="True"/>
                                 <CheckBox Content="Comparassions" Name="ComparassionsCheck" IsChecked="False"/>
                             </StackPanel>
-                            <ListBox Name="LogActionList" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                            </ListBox>
-                        </DockPanel>
+                        </Grid>
                     </Grid>
                 </DockPanel>
             </TabItem>

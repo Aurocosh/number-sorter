@@ -16,7 +16,7 @@ namespace NumberSorter.Core.Generators
                 throw new ArgumentException($"Value of {nameof(maximumValue)} cannot be less then value of {nameof(minimumValue)}");
 
             var numbers = new int[count];
-            IListUtility.Randomize(numbers, minimumValue, maximumValue, Random);
+            ListUtility.Randomize(numbers, minimumValue, maximumValue, Random);
             return new List<int>(numbers);
         }
     }

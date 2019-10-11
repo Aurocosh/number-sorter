@@ -22,7 +22,7 @@ namespace NumberSorter.Core.Generators
                 var runSize = Random.Next(minRunSize, maxRunSize + 1);
                 var runArray = new int[runSize];
 
-                IListUtility.Randomize(runArray, minimumValue, maximumValue, Random);
+                ListUtility.Randomize(runArray, minimumValue, maximumValue, Random);
 
                 bool isRandom = Random.NextDouble() < randomRunProbability;
                 if (!isRandom)

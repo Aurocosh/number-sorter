@@ -77,7 +77,7 @@
     <Compile Include="Logic\Comparer\IntComparer.cs" />
     <Compile Include="Logic\Utility\IListExtensions.cs" />
     <Compile Include="Logic\Utility\ArrayUtility.cs" />
-    <Compile Include="Logic\Utility\IListUtility.cs" />
+    <Compile Include="Logic\Utility\ListUtility.cs" />
     <Compile Include="Logic\Utility\IntUtility.cs" />
     <Compile Include="Logic\Utility\SortRunUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

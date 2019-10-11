@@ -39,7 +39,7 @@ namespace NumberSorter.Domain.Container
         public SortLog(IReadOnlyList<T> startingState, IReadOnlyList<T> finalState, IReadOnlyList<LogAction<T>> actionLog, IComparer<T> comparer, float elapsedTime)
         {
             ElapsedTime = elapsedTime;
-            FullySorted = IListUtility.IsSorted(finalState, comparer);
+            FullySorted = ListUtility.IsSorted(finalState, comparer);
 
             StartingState = new SortState<T>(startingState.ToArray());
             FinalState = new SortState<T>(finalState.ToArray());

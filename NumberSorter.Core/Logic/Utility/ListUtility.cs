@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NumberSorter.Core.Logic.Utility
 {
-    public static class IListUtility
+    public static class ListUtility
     {
         public static void Randomize(IList<int> list, int minimum, int maximum, Random random)
         {
@@ -39,6 +39,21 @@ namespace NumberSorter.Core.Logic.Utility
                     return false;
             }
             return true;
+        }
+
+        public static IEnumerable<List<T>> SplitList<T>(IReadOnlyList<T> list, int chunkSize)
+        {
+            for (int i = 0; i < list.Count; i += chunkSize)
+                yield return list.GetRange(i, Math.Min(chunkSize, list.Count - i));
+        }
+
+        public static List<T> GetRange<T>(this IReadOnlyList<T> list, int index, int count)
+        {
+            int upperLimit = index + count;
+            var result = new List<T>(count);
+            for (int i = index; i < upperLimit; i++)
+                result.Add(list[i]);
+            return result;
         }
     }
 }

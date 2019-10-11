@@ -15,7 +15,7 @@ namespace NumberSorter.Core.Generators
             var size = secondSize + firstSize;
             var numbers = new int[size];
 
-            IListUtility.Randomize(numbers, minimumValue, maximumValue, Random);
+            ListUtility.Randomize(numbers, minimumValue, maximumValue, Random);
             Array.Sort(numbers);
 
             var firstPart = new int[secondSize];
