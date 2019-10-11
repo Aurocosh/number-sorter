@@ -56,6 +56,9 @@ namespace NumberSorter.Forms
 
                 #region Visualization binds
 
+
+                #region Action filters
+
                 this.Bind(ViewModel, x => x.VisualizationViewModel.ReadActions, x => x.ReadsCheck.IsChecked)
                     .DisposeWith(disposable);
                 this.Bind(ViewModel, x => x.VisualizationViewModel.WriteActions, x => x.WritesCheck.IsChecked)
@@ -63,8 +66,9 @@ namespace NumberSorter.Forms
                 this.Bind(ViewModel, x => x.VisualizationViewModel.ComparassionActions, x => x.ComparassionsCheck.IsChecked)
                     .DisposeWith(disposable);
 
-                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.VisualizationImage, x => x.VisualizationImage.Source)
-                    .DisposeWith(disposable);
+                #endregion
+
+                #region Action counters
 
                 this.OneWayBind(ViewModel, x => x.VisualizationViewModel.SortState.ReadCount, x => x.CurrentReadsLabel.Content)
                     .DisposeWith(disposable);
@@ -80,13 +84,23 @@ namespace NumberSorter.Forms
                 this.OneWayBind(ViewModel, x => x.VisualizationViewModel.SortingLog.TotalComparassionCount, x => x.TotalComparesLabel.Content)
                     .DisposeWith(disposable);
 
+                #endregion
+
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.VisualizationImage, x => x.VisualizationImage.Source)
+                    .DisposeWith(disposable);
+
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.LogActions, x => x.LogActionList.ItemsSource)
+                    .DisposeWith(disposable);
+
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.AnimationDelay, x => x.AnimationSpeedUpDown.Value)
+                    .DisposeWith(disposable);
+
                 this.Bind(ViewModel, x => x.VisualizationViewModel.CurrentActionIndex, x => x.ActionIndexUpDown.Value)
                     .DisposeWith(disposable);
                 this.OneWayBind(ViewModel, x => x.VisualizationViewModel.MaxActionIndex, x => x.ActionIndexUpDown.Maximum)
                     .DisposeWith(disposable);
 
-                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.LogActions, x => x.LogActionList.ItemsSource)
-                    .DisposeWith(disposable);
+                #region Commands
 
                 this.BindCommand(ViewModel, x => x.VisualizationViewModel.PlayPauseCommand, x => x.PlayButton)
                     .DisposeWith(disposable);
@@ -109,6 +123,8 @@ namespace NumberSorter.Forms
                     .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.VisualizationViewModel.PlusThousandStepsCommand, x => x.PlusThousandStepButton)
                     .DisposeWith(disposable);
+
+                #endregion
 
                 VisualizationCanvas.Events()
                     .SizeChanged

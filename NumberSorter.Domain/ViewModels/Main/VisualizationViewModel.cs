@@ -17,9 +17,11 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace NumberSorter.Domain.ViewModels
 {
@@ -32,7 +34,9 @@ namespace NumberSorter.Domain.ViewModels
         private int _waypointCacheSize = 100;
         private int _currentWaypointCount = 0;
         private int _displayedActionCount = 5;
+        private double _animationDelay = 0.25f;
 
+        private Thread _animationThread;
         private IListVisualizer _listVisualizer = new ColumnListVisualizer();
 
         //private readonly List<LogAction<int>> previousHidden;
@@ -52,10 +56,12 @@ namespace NumberSorter.Domain.ViewModels
 
         #region Properties
 
+        [Reactive] public bool IsAnimating { get; set; }
         [Reactive] public bool ReadActions { get; set; }
         [Reactive] public bool WriteActions { get; set; }
         [Reactive] public bool ComparassionActions { get; set; }
 
+        [Reactive] public double AnimationDelay { get; set; }
         [Reactive] public int CurrentActionIndex { get; set; }
 
         [Reactive] public SortLog<int> SortingLog { get; set; }
@@ -98,9 +104,11 @@ namespace NumberSorter.Domain.ViewModels
             _logActions = new SourceList<LogAction<int>>();
             _displayedLogActions = new SourceList<LogAction<int>>();
 
+            _animationThread = new Thread(new ThreadStart(AnimateSort));
             _sortStateCache = new LimitedDictionary<int, SortState<int>>(_cacheSize);
             _sortWaypointStateCache = new LimitedDictionary<int, SortState<int>>(_waypointCacheSize);
 
+            IsAnimating = false;
             ReadActions = false;
             WriteActions = true;
             ComparassionActions = false;
@@ -147,6 +155,9 @@ namespace NumberSorter.Domain.ViewModels
                 .DisposeMany()
                 .Subscribe();
 
+            this.WhenAnyValue(x => x.IsAnimating)
+                .Subscribe(ToggleAnimation);
+
             this.WhenAnyValue(x => x.SortState)
                 .Subscribe(UpdateVisualization);
 
@@ -175,11 +186,13 @@ namespace NumberSorter.Domain.ViewModels
 
         private void PlayOrPause()
         {
+            IsAnimating = !IsAnimating;
         }
 
         private void Reset()
         {
-
+            IsAnimating = false;
+            CurrentActionIndex = 0;
         }
 
         private void GoToStart() => CurrentActionIndex = 0;
@@ -282,6 +295,23 @@ namespace NumberSorter.Domain.ViewModels
 
             VisualizationImage = BitmapFactory.New(width, heigth);
             UpdateVisualization(SortState);
+        }
+
+        private void ToggleAnimation(bool isAnimating)
+        {
+            if (!_animationThread.IsAlive && isAnimating)
+                _animationThread.Start();
+        }
+
+        private void AnimateSort()
+        {
+            while (IsAnimating && CurrentActionIndex != MaxActionIndex)
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(AnimationDelay));
+                Application.Current.Dispatcher.Invoke(() => CurrentActionIndex++);
+            }
+            Application.Current.Dispatcher.Invoke(() => IsAnimating = false);
+
         }
 
         #endregion Command functions
