@@ -92,9 +92,22 @@ namespace NumberSorter.Forms
                     .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.VisualizationViewModel.ResetCommand, x => x.ResetButton)
                     .DisposeWith(disposable);
-                this.BindCommand(ViewModel, x => x.VisualizationViewModel.PreviousStepCommand, x => x.PreviousButton)
+
+                this.BindCommand(ViewModel, x => x.VisualizationViewModel.GoToStartCommand, x => x.StartButton)
                     .DisposeWith(disposable);
-                this.BindCommand(ViewModel, x => x.VisualizationViewModel.NextStepCommand, x => x.NextButton)
+                this.BindCommand(ViewModel, x => x.VisualizationViewModel.GoToFinishCommand, x => x.FinishButton)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.VisualizationViewModel.MinusOneStepCommand, x => x.MinusOneStepButton)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.VisualizationViewModel.PlusOneStepCommand, x => x.PlusOneStepButton)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.VisualizationViewModel.MinusHundredStepsCommand, x => x.MinusHundredStepButton)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.VisualizationViewModel.PlusHundredStepsCommand, x => x.PlusHundredStepButton)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.VisualizationViewModel.MinusThousandStepsCommand, x => x.MinusThousandStepButton)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.VisualizationViewModel.PlusThousandStepsCommand, x => x.PlusThousandStepButton)
                     .DisposeWith(disposable);
 
                 VisualizationCanvas.Events()

@@ -72,8 +72,17 @@ namespace NumberSorter.Domain.ViewModels
         public ReactiveCommand<Unit, Unit> PlayPauseCommand { get; }
         public ReactiveCommand<Unit, Unit> ResetCommand { get; }
 
-        public ReactiveCommand<Unit, Unit> PreviousStepCommand { get; }
-        public ReactiveCommand<Unit, Unit> NextStepCommand { get; }
+        public ReactiveCommand<Unit, Unit> GoToStartCommand { get; }
+        public ReactiveCommand<Unit, Unit> GoToFinishCommand { get; }
+
+        public ReactiveCommand<Unit, Unit> MinusOneStepCommand { get; }
+        public ReactiveCommand<Unit, Unit> PlusOneStepCommand { get; }
+
+        public ReactiveCommand<Unit, Unit> MinusHundredStepsCommand { get; }
+        public ReactiveCommand<Unit, Unit> PlusHundredStepsCommand { get; }
+
+        public ReactiveCommand<Unit, Unit> MinusThousandStepsCommand { get; }
+        public ReactiveCommand<Unit, Unit> PlusThousandStepsCommand { get; }
 
         public ReactiveCommand<SizeChangedEventArgs, Unit> ResizeCanvasCommand { get; }
 
@@ -102,8 +111,19 @@ namespace NumberSorter.Domain.ViewModels
 
             PlayPauseCommand = ReactiveCommand.Create(PlayOrPause);
             ResetCommand = ReactiveCommand.Create(Reset);
-            PreviousStepCommand = ReactiveCommand.Create(PreviousStep);
-            NextStepCommand = ReactiveCommand.Create(NextStep);
+
+            GoToStartCommand = ReactiveCommand.Create(GoToStart);
+            GoToFinishCommand = ReactiveCommand.Create(GoToFinish);
+
+            MinusOneStepCommand = ReactiveCommand.Create(MinusOneStep);
+            PlusOneStepCommand = ReactiveCommand.Create(PlusOneStep);
+
+            MinusHundredStepsCommand = ReactiveCommand.Create(MinusHundredSteps);
+            PlusHundredStepsCommand = ReactiveCommand.Create(PlusHundredSteps);
+
+            MinusThousandStepsCommand = ReactiveCommand.Create(MinusThousandSteps);
+            PlusThousandStepsCommand = ReactiveCommand.Create(PlusThousandSteps);
+
             ResizeCanvasCommand = ReactiveCommand.Create<SizeChangedEventArgs>(ResizeCanvas);
 
             _logActions
@@ -162,8 +182,17 @@ namespace NumberSorter.Domain.ViewModels
 
         }
 
-        private void PreviousStep() => CurrentActionIndex = ComparableUtility.Clamp(CurrentActionIndex - 1, 0, _logActionViewModels.Count);
-        private void NextStep() => CurrentActionIndex = ComparableUtility.Clamp(CurrentActionIndex + 1, 0, _logActionViewModels.Count);
+        private void GoToStart() => CurrentActionIndex = 0;
+        private void GoToFinish() => CurrentActionIndex = MaxActionIndex;
+
+        private void MinusOneStep() => CurrentActionIndex = ComparableUtility.Clamp(CurrentActionIndex - 1, 0, MaxActionIndex);
+        private void PlusOneStep() => CurrentActionIndex = ComparableUtility.Clamp(CurrentActionIndex + 1, 0, MaxActionIndex);
+
+        private void MinusHundredSteps() => CurrentActionIndex = ComparableUtility.Clamp(CurrentActionIndex - 100, 0, MaxActionIndex);
+        private void PlusHundredSteps() => CurrentActionIndex = ComparableUtility.Clamp(CurrentActionIndex + 100, 0, MaxActionIndex);
+
+        private void MinusThousandSteps() => CurrentActionIndex = ComparableUtility.Clamp(CurrentActionIndex - 1000, 0, MaxActionIndex);
+        private void PlusThousandSteps() => CurrentActionIndex = ComparableUtility.Clamp(CurrentActionIndex + 1000, 0, MaxActionIndex);
 
         private bool ActionFilter(LogAction<int> logAction)
         {

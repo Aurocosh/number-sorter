@@ -115,11 +115,17 @@
                             <Label Grid.Column="0" Grid.Row="9" Content="Current action index"/>
                             <xctk:IntegerUpDown Grid.Column="1" Grid.Row="9" Value="0" Minimum="0" Name="ActionIndexUpDown"/>
 
-                            <Label Grid.Column="0" Grid.Row="10" Content="Column width"/>
-                            <xctk:IntegerUpDown Grid.Column="1" Grid.Row="10" Value="20" Minimum="1" Maximum="30" Name="ColumnWidthUpDown"/>
-
-                            <Label Grid.Column="0" Grid.Row="11" Content="Spacer width"/>
-                            <xctk:IntegerUpDown Grid.Column="1" Grid.Row="11" Value="1" Minimum="1" Maximum="15" Name="SpaceWidthUpDown"/>
+                            <UniformGrid Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2"
+                                         Columns="2" >
+                                <Button Content="Start" Name="StartButton"/>
+                                <Button Content="Finish" Name="FinishButton"/>
+                                <Button Content="-1" Name="MinusOneStepButton"/>
+                                <Button Content="+1" Name="PlusOneStepButton"/>
+                                <Button Content="-100" Name="MinusHundredStepButton"/>
+                                <Button Content="+100" Name="PlusHundredStepButton"/>
+                                <Button Content="-1000" Name="MinusThousandStepButton"/>
+                                <Button Content="+1000" Name="PlusThousandStepButton"/>
+                            </UniformGrid>
                         </Grid>
                         <GridSplitter Grid.Column="1" ShowsPreview="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                         <Border Grid.Column="2" Background="LightGray" Margin="5 0 5 0" Name="VisualizationCanvas">
