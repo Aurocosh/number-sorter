@@ -41,8 +41,8 @@ namespace NumberSorter.Domain.Benchmark.IntegerGenerators
             }
         }
 
-        public IEnumerable<object[]> GetEnumerable() => _data;
         public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();
+        public static IEnumerable<object[]> GetEnumerable() => _data;
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

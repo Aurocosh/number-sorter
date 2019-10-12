@@ -1,11 +1,11 @@
 ﻿namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public sealed class ArrayHalves<K>
+    public sealed class ArrayHalves<T>
     {
-        public K[] First { get; }
-        public K[] Second { get; }
+        public T[] First { get; }
+        public T[] Second { get; }
 
-        public ArrayHalves(K[] first, K[] second)
+        public ArrayHalves(T[] first, T[] second)
         {
             First = first;
             Second = second;

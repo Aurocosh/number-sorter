@@ -17,6 +17,7 @@
         InsertionWindowTimSort,
         QuickSortMedianOfThree,
         GallopingRecursiveMergeSort,
+        InsertionTripleWindowTimSort,
         QuickSortRandomPivotCutoffWindow,
         QuickSortRandomPivotCutoffInsertion,
     }
