@@ -11,7 +11,7 @@ namespace NumberSorter.Domain.Benchmark.Benchmarks
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {
             var pivotSelector = new RandomPivotSelector<int>();
-            return new QuickSort<int>(comparer, pivotSelector);
+            return new QuickSort<int>(comparer, pivotSelector, x => new DummySort<int>(x), 0);
         }
     }
 }

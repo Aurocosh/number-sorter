@@ -58,7 +58,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
             public bool MergeNeeded()
             {
-                return (_sortRunA.Length > _sortRunB.Length + _sortRunC.Length) && (_sortRunB.Length > _sortRunC.Length);
+                return Count > 1 && !((Count < 3 || _sortRunC.Length > _sortRunB.Length + _sortRunA.Length) && _sortRunB.Length > _sortRunA.Length);
             }
         }
 
@@ -90,20 +90,50 @@ namespace NumberSorter.Core.Logic.Algorhythm
             }
 
             var runStack = new SortRunStack();
-            while (sortRuns.Count > 0 || runStack.Count > 1)
+            while (sortRuns.Count > 0 || runStack.Count > 2)
             {
-                if (runStack.MergeNeeded() || sortRuns.Count == 0)
+                if (runStack.MergeNeeded())
                 {
-                    var leftSortRun = runStack.Pop();
-                    var rightSortRun = runStack.Pop();
-                    var mergedRun = MergeRuns(list, leftSortRun, rightSortRun);
-                    runStack.Push(mergedRun);
+                    if (runStack.Count < 3)
+                    {
+                        var X = runStack.Pop();
+                        var Y = runStack.Pop();
+                        var mergedRun = MergeRuns(list, Y, X);
+                        runStack.Push(mergedRun);
+                    }
+                    else
+                    {
+                        var X = runStack.Pop();
+                        var Y = runStack.Pop();
+                        var Z = runStack.Pop();
+
+                        if (Z.Length <= X.Length)
+                        {
+                            var mergedRun = MergeRuns(list, Z, Y);
+                            runStack.Push(mergedRun);
+                            runStack.Push(X);
+                        }
+                        else
+                        {
+                            var mergedRun = MergeRuns(list, Y, X);
+                            runStack.Push(Z);
+                            runStack.Push(mergedRun);
+                        }
+                    }
+
                 }
                 else
                 {
-                    runStack.Push(sortRuns.Last.Value);
-                    sortRuns.RemoveLast();
+                    runStack.Push(sortRuns.First.Value);
+                    sortRuns.RemoveFirst();
                 }
+            }
+
+            if (runStack.Count == 2)
+            {
+                var X = runStack.Pop();
+                var Y = runStack.Pop();
+                MergeRuns(list, Y, X);
             }
         }
 
