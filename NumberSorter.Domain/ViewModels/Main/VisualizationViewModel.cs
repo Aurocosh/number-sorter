@@ -57,6 +57,8 @@ namespace NumberSorter.Domain.ViewModels
         #region Properties
 
         [Reactive] public bool IsAnimating { get; set; }
+        [Reactive] public bool ShowActionLog { get; set; }
+
         [Reactive] public bool ReadActions { get; set; }
         [Reactive] public bool WriteActions { get; set; }
         [Reactive] public bool ComparassionActions { get; set; }
@@ -109,6 +111,8 @@ namespace NumberSorter.Domain.ViewModels
             _sortWaypointStateCache = new LimitedDictionary<int, SortState<int>>(_waypointCacheSize);
 
             IsAnimating = false;
+            ShowActionLog = true;
+
             ReadActions = false;
             WriteActions = true;
             ComparassionActions = false;
@@ -324,7 +328,7 @@ namespace NumberSorter.Domain.ViewModels
 
         private void UpdateVisualization(SortState<int> currentListState)
         {
-            _listVisualizer.Redraw(VisualizationImage, currentListState.State);
+            _listVisualizer.Redraw(VisualizationImage, currentListState);
         }
 
         private void UpdataDisplayedActions()

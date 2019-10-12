@@ -16,6 +16,7 @@ namespace NumberSorter.Domain.Container.Actions.Base
         public virtual int FirstWrittenIndex => -1;
         public virtual int SecondtWrittenIndex => -1;
 
+        public virtual int ComparassionResult => 0;
         public virtual int FirstComparedIndex => -1;
         public virtual int SecondComparedIndex => -1;
 

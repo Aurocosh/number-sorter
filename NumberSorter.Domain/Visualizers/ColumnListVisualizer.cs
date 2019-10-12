@@ -1,4 +1,5 @@
 ﻿using NumberSorter.Domain.Base.Visualizers;
+using NumberSorter.Domain.Container;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,15 @@ namespace NumberSorter.Domain.Visualizers
 
         private float _columnProportion = 0.8f;
 
-        public void Redraw(WriteableBitmap writeableBitmap, IReadOnlyList<int> list)
+        private Color _readColor = Colors.Yellow;
+        private Color _writeColor = Colors.Purple;
+        private Color _normalColor = Colors.White;
+
+        private Color _compareEqualColor = Colors.Blue;
+        private Color _compareBiggerColor = Colors.Red;
+        private Color _compareLesserColor = Colors.Green;
+
+        public void Redraw(WriteableBitmap writeableBitmap, SortState<int> sortState)
         {
             int width = (int)Math.Floor(writeableBitmap.Width);
             int height = (int)Math.Floor(writeableBitmap.Height);
@@ -29,6 +38,8 @@ namespace NumberSorter.Domain.Visualizers
 
             writeableBitmap.Clear(Colors.LightGray);
             writeableBitmap.DrawLine(0, yOrigin, width, yOrigin, Colors.Gray);
+
+            var list = sortState.State;
 
             if (list.Count == 0)
                 return;
@@ -60,22 +71,56 @@ namespace NumberSorter.Domain.Visualizers
             int maxModule = list.Max(Math.Abs);
             double scaleCoefficient = yRange / maxModule;
 
-            Color columnColor = Colors.White;
-
             int xCurrent = 0;
-            foreach (int value in list)
+            for (int i = 0; i < list.Count; i++)
             {
-                int scaledValue = (int)(value * scaleCoefficient);
+                var currentColor = GetColumnColor(sortState, i);
+
+                int scaledValue = (int)(list[i] * scaleCoefficient);
                 if (scaledValue > 0)
                 {
-                    writeableBitmap.FillRectangle(xCurrent, yOrigin - scaledValue, xCurrent + columnSize - 1, yOrigin, columnColor);
+                    writeableBitmap.FillRectangle(xCurrent, yOrigin - scaledValue, xCurrent + columnSize - 1, yOrigin, currentColor);
                 }
                 else if (scaledValue < 0)
                 {
-                    writeableBitmap.FillRectangle(xCurrent, yOrigin + 1, xCurrent + columnSize - 1, yOrigin - scaledValue, columnColor);
+                    writeableBitmap.FillRectangle(xCurrent, yOrigin + 1, xCurrent + columnSize - 1, yOrigin - scaledValue, currentColor);
                 }
 
                 xCurrent += columnSize + spacerSize;
+            }
+        }
+
+        private Color GetColumnColor(SortState<int> sortState, int columnIndex)
+        {
+            if (columnIndex == sortState.FirstComparedIndex)
+            {
+                if (sortState.ComparassionResult < 1)
+                    return _compareLesserColor;
+                else if (sortState.ComparassionResult > 1)
+                    return _compareBiggerColor;
+                else
+                    return _compareEqualColor;
+            }
+            else if (columnIndex == sortState.SecondComparedIndex)
+            {
+                if (sortState.ComparassionResult < 1)
+                    return _compareBiggerColor;
+                else if (sortState.ComparassionResult > 1)
+                    return _compareLesserColor;
+                else
+                    return _compareEqualColor;
+            }
+            else if (columnIndex == sortState.ReadIndex)
+            {
+                return _readColor;
+            }
+            else if (columnIndex == sortState.FirstWrittenIndex || columnIndex == sortState.SecondWrittenIndex)
+            {
+                return _writeColor;
+            }
+            else
+            {
+                return _normalColor;
             }
         }
     }

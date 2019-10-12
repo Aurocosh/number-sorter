@@ -18,6 +18,7 @@ namespace NumberSorter.Domain.Container
         public int FirstWrittenIndex { get; }
         public int SecondWrittenIndex { get; }
 
+        public int ComparassionResult { get; }
         public int FirstComparedIndex { get; }
         public int SecondComparedIndex { get; }
 
@@ -39,7 +40,7 @@ namespace NumberSorter.Domain.Container
             SecondComparedIndex = -1;
         }
 
-        public SortState(T[] stateArray, int readIndex, int firstWrittenIndex, int secondWrittenIndex, int firstComparedIndex, int secondComparedIndex, int readCount, int writeCount, int comparassionCount)
+        public SortState(T[] stateArray, int readIndex, int firstWrittenIndex, int secondWrittenIndex, int comparassionResult, int firstComparedIndex, int secondComparedIndex, int readCount, int writeCount, int comparassionCount)
         {
             _stateArray = stateArray;
 
@@ -48,6 +49,7 @@ namespace NumberSorter.Domain.Container
             FirstWrittenIndex = firstWrittenIndex;
             SecondWrittenIndex = secondWrittenIndex;
 
+            ComparassionResult = comparassionResult;
             FirstComparedIndex = firstComparedIndex;
             SecondComparedIndex = secondComparedIndex;
 
@@ -63,6 +65,7 @@ namespace NumberSorter.Domain.Container
             int firstWrittenIndex = logAction.FirstWrittenIndex;
             int secondWrittenIndex = logAction.SecondtWrittenIndex;
 
+            int comparassionResult = logAction.ComparassionResult;
             int firstComparedIndex = logAction.FirstComparedIndex;
             int secondComparedIndex = logAction.SecondComparedIndex;
 
@@ -77,7 +80,7 @@ namespace NumberSorter.Domain.Container
                 logAction.TransformStateArray(arrayState);
             }
 
-            return new SortState<T>(arrayState, readIndex, firstWrittenIndex, secondWrittenIndex, firstComparedIndex, secondComparedIndex, readCount, writeCount, comparassionCount);
+            return new SortState<T>(arrayState, readIndex, firstWrittenIndex, secondWrittenIndex, comparassionResult, firstComparedIndex, secondComparedIndex, readCount, writeCount, comparassionCount);
         }
 
         private T[] CopyState()

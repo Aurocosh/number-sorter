@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using NumberSorter.Domain.Converters;
 using NumberSorter.Domain.Interactions;
 using NumberSorter.Domain.ViewModels;
 using ReactiveUI;
@@ -99,6 +100,13 @@ namespace NumberSorter.Forms
                     .DisposeWith(disposable);
                 this.OneWayBind(ViewModel, x => x.VisualizationViewModel.MaxActionIndex, x => x.ActionIndexUpDown.Maximum)
                     .DisposeWith(disposable);
+
+                //this.Bind(ViewModel, x => x.VisualizationViewModel.ShowActionLog, x => x.LogButton.IsChecked)
+                //    .DisposeWith(disposable);
+                //this.OneWayBind(ViewModel, x => x.VisualizationViewModel.ShowActionLog, x => x.LogActionPanel.Visibility, vmToViewConverterOverride: new VisibilityBindingTypeConverter())
+                //    .DisposeWith(disposable);
+                //this.OneWayBind(ViewModel, x => x.VisualizationViewModel.ShowActionLog, x => x.LogActionPanelSplitter.Visibility, vmToViewConverterOverride: new VisibilityBindingTypeConverter())
+                //    .DisposeWith(disposable);
 
                 #region Commands
 

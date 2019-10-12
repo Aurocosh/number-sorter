@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NumberSorter.Domain.Container;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,6 @@ namespace NumberSorter.Domain.Base.Visualizers
 {
     public interface IListVisualizer
     {
-        void Redraw(WriteableBitmap writeableBitmap, IReadOnlyList<int> list);
+        void Redraw(WriteableBitmap writeableBitmap, SortState<int> sortState);
     }
 }

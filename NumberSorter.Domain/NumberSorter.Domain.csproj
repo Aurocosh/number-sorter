@@ -102,6 +102,7 @@
     <Compile Include="Container\LogValueWrite.cs" />
     <Compile Include="Container\SortLog.cs" />
     <Compile Include="Container\SortState.cs" />
+    <Compile Include="Converters\VisibilityBindingTypeConverter.cs" />
     <Compile Include="DialogService\IDialogService.cs" />
     <Compile Include="DialogService\IViewInitializer.cs" />
     <Compile Include="Interactions\DialogInteractions.cs" />

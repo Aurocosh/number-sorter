@@ -54,7 +54,7 @@
                             <Button Name="InfoButton" Content="Log info" Width="80"/>
                         </StackPanel>
                         <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Button Name="LogButton" Content="Loged actions" Width="80"/>
+                            <ToggleButton Name="LogButton" Content="Loged actions" Width="80"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <Button Name="PlayButton" Content="Play" Width="80" Margin="0 0 5 0"/>
@@ -129,18 +129,18 @@
                             <Label Grid.Column="0" Grid.Row="11" Content="Animation delay"/>
                             <xctk:DoubleUpDown Grid.Column="1" Grid.Row="11" Name="AnimationSpeedUpDown" Value="0.25" Minimum="0.05" Maximum="1" Increment="0.05"/>
                         </Grid>
-                        <GridSplitter Grid.Column="1" ShowsPreview="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                        <GridSplitter Grid.Column="1" Width="10" ShowsPreview="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                         <Border Grid.Column="2" Background="LightGray" Margin="5 0 5 0" Name="VisualizationCanvas">
                             <Image Name="VisualizationImage"/>
                         </Border>
-                        <GridSplitter Grid.Column="3" ShowsPreview="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                        <Grid Grid.Column="4" >
+                        <GridSplitter Grid.Column="3" Name="LogActionPanelSplitter" Width="10" ShowsPreview="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                        <Grid Grid.Column="4" Name="LogActionPanel" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <ListBox Grid.Row="0" Name="LogActionList" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
-                            <StackPanel Grid.Row="1">
+                            <ListBox Grid.Row="0" Name="LogActionList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2"/>
+                            <StackPanel Grid.Row="2">
                                 <CheckBox Content="Reads" Name="ReadsCheck" IsChecked="False"/>
                                 <CheckBox Content="Writes" Name="WritesCheck" IsChecked="True"/>
                                 <CheckBox Content="Comparassions" Name="ComparassionsCheck" IsChecked="False"/>

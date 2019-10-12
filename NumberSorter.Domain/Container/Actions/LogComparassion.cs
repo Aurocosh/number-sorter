@@ -11,9 +11,9 @@ namespace NumberSorter.Domain.Container.Actions
     {
         public T FirstValue { get; }
         public T SecondValue { get; }
-        public int ComparassionResult { get; }
 
         public override int ComparassionCount => 1;
+        public override int ComparassionResult { get; }
         public override int FirstComparedIndex { get; }
         public override int SecondComparedIndex { get; }
 
