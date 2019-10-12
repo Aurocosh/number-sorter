@@ -1,16 +1,22 @@
-﻿using NumberSorter.Core.Logic.Algorhythm.QuickSort;
+﻿using NumberSorter.Core.Algorhythm;
+using NumberSorter.Core.Logic.Algorhythm.QuickSort;
 using NumberSorter.Core.Logic.Utility;
+using System;
 using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
     public class QuickSort<T> : GenericSortAlgorhythm<T>
     {
+        private readonly int _cutoffValue;
         private readonly QuickSortPivotSelector<T> _pivotSelector;
+        private readonly IPartialSortAlgorhythm<T> _cutoffAlgorhythm;
 
-        public QuickSort(IComparer<T> comparer, QuickSortPivotSelector<T> pivotSelector) : base(comparer)
+        public QuickSort(IComparer<T> comparer, QuickSortPivotSelector<T> pivotSelector, Func<IComparer<T>, IPartialSortAlgorhythm<T>> cutoffAlgorhythmFactory, int cutoffValue) : base(comparer)
         {
+            _cutoffValue = cutoffValue;
             _pivotSelector = pivotSelector;
+            _cutoffAlgorhythm = cutoffAlgorhythmFactory.Invoke(comparer);
         }
 
         public override void Sort(IList<T> list)
@@ -22,6 +28,13 @@ namespace NumberSorter.Core.Logic.Algorhythm
         {
             if (firstIndex >= lastIndex)
                 return;
+
+            int runRange = lastIndex - firstIndex + 1;
+            if (runRange < _cutoffValue)
+            {
+                _cutoffAlgorhythm.Sort(list, firstIndex, runRange);
+                return;
+            }
 
             int pivotIndex = _pivotSelector.SelectPivot(list, firstIndex, lastIndex, GetComparer());
             var pivot = list[pivotIndex];

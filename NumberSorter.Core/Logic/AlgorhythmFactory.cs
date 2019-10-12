@@ -32,11 +32,17 @@ namespace NumberSorter.Core.Logic
                 case AlgorhythmType.GallopingRecursiveMergeSort:
                     return new GallopingRecursiveMergeSort<T>(comparer);
                 case AlgorhythmType.QuickSortRandomPivot:
-                    return new QuickSort<T>(comparer, new RandomPivotSelector<T>());
+                    return new QuickSort<T>(comparer, new RandomPivotSelector<T>(), x => new DummySort<T>(x), 0);
                 case AlgorhythmType.QuickSortMedianOfThree:
-                    return new QuickSort<T>(comparer, new MedianThreePivotSelector<T>());
+                    return new QuickSort<T>(comparer, new MedianThreePivotSelector<T>(), x => new DummySort<T>(x), 0);
                 case AlgorhythmType.InsertionWindowTimSort:
                     return new TimSort<T>(comparer, x => new InsertionSort<T>(x), x => new WindowMergeSort<T>(x));
+                case AlgorhythmType.WindowWindowTimSort:
+                    return new TimSort<T>(comparer, x => new WindowMergeSort<T>(x), x => new WindowMergeSort<T>(x));
+                case AlgorhythmType.QuickSortRandomPivotCutoffInsertion:
+                    return new QuickSort<T>(comparer, new RandomPivotSelector<T>(), x => new InsertionSort<T>(x), 32);
+                case AlgorhythmType.QuickSortRandomPivotCutoffWindow:
+                    return new QuickSort<T>(comparer, new RandomPivotSelector<T>(), x => new WindowMergeSort<T>(x), 32);
                 default:
                     return null;
             }

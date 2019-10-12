@@ -64,7 +64,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
         public override void Sort(IList<T> list)
         {
-            if (list.Count < 64)
+            if (list.Count < 32)
             {
                 _smallSortAlgorhythm.Sort(list);
                 return;
