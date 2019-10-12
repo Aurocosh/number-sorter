@@ -41,6 +41,11 @@ namespace NumberSorter.Domain.Container
             return hashCode;
         }
 
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
+
         #endregion
     }
 }

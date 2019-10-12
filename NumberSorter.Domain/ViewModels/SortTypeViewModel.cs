@@ -46,6 +46,7 @@ namespace NumberSorter.Domain.ViewModels
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.RecursiveMergeSort, "Recursive merge sort"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.HalfInPlaceMergeSort, "Half in place merge sort"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.QuickSortRandomPivot, "Quick sort (Random pivot)"));
+            sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.TripleWindowMergeSort, "Triple window merge sort"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.KindaInPlaceMergeSort, "Kinda in place merge sort"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.WindowWindowTimSort, "Tim Sort (Window sort, Window merge)"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.InsertionWindowTimSort, "Tim Sort (Insertion, Window merge)"));

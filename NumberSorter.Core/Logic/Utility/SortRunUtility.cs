@@ -37,40 +37,34 @@ namespace NumberSorter.Core.Logic.Utility
 
         public static string RunToString<T>(IList<T> list, SortRun sortRun)
         {
-            if (list is IList<int> intList)
-            {
-                var values = new int[sortRun.Length];
-                for (int i = 0; i < sortRun.Length; i++)
-                    values[i] = intList[sortRun.Start + i];
-                return string.Join(", ", values.Select(x => x.ToString()));
-            }
-            return "";
+            if (sortRun.Length < 0)
+                return "";
+            var values = new T[sortRun.Length];
+            for (int i = 0; i < sortRun.Length; i++)
+                values[i] = list[sortRun.Start + i];
+            return string.Join(", ", values.Select(x => x.ToString()));
         }
 
-        public static string RunToString<T>(IList<T> list, SortRun sortRun, int firstIndex, int secondIndex)
+        public static string RunToString<T>(IList<T> list, SortRun sortRun, int firstIndex, int secondIndex, int firstSource)
         {
-            if (list is IList<int> intList)
+            var values = new T[sortRun.Length];
+            var strings = new string[sortRun.Length];
+            for (int i = 0; i < sortRun.Length; i++)
             {
-                var values = new int[sortRun.Length];
-                var strings = new string[sortRun.Length];
-                for (int i = 0; i < sortRun.Length; i++)
-                {
-                    var index = sortRun.Start + i;
-                    var value = intList[index].ToString();
+                var index = sortRun.Start + i;
+                var value = list[index].ToString();
 
-                    if (index == firstIndex && index == secondIndex)
-                        value = "{" + value + "}";
-                    else if (index == firstIndex)
-                        value = "(" + value + ")";
-                    else if (index == secondIndex)
-                        value = "[" + value + "]";
+                if (index == firstIndex)
+                    value = "(" + value + ")";
+                if (index == secondIndex)
+                    value = "[" + value + "]";
+                if (index == firstSource)
+                    value = "<" + value + ">";
 
-                    strings[i] = value;
-                }
-
-                return string.Join(", ", strings.Select(x => x));
+                strings[i] = value;
             }
-            return "";
+
+            return string.Join(", ", strings.Select(x => x));
         }
     }
 }

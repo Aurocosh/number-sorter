@@ -13,6 +13,7 @@
         HalfInPlaceMergeSort,
         QuickSortRandomPivot,
         KindaInPlaceMergeSort,
+        TripleWindowMergeSort,
         InsertionWindowTimSort,
         QuickSortMedianOfThree,
         GallopingRecursiveMergeSort,
