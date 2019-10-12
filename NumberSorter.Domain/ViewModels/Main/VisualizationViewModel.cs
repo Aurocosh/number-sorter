@@ -43,7 +43,7 @@ namespace NumberSorter.Domain.ViewModels
         //private readonly List<LogAction<int>> nextHidden;
 
         private readonly SourceList<LogAction<int>> _logActions;
-        private readonly SourceList<LogAction<int>> _displayedLogActions;
+        private readonly SourceList<LogActionLineViewModel> _displayedLogActions;
 
         private readonly IDialogService<ReactiveObject> _dialogService;
         private readonly LimitedDictionary<int, SortState<int>> _sortStateCache;
@@ -104,7 +104,7 @@ namespace NumberSorter.Domain.ViewModels
         {
             _dialogService = dialogService;
             _logActions = new SourceList<LogAction<int>>();
-            _displayedLogActions = new SourceList<LogAction<int>>();
+            _displayedLogActions = new SourceList<LogActionLineViewModel>();
 
             _animationThread = new Thread(new ThreadStart(AnimateSort));
             _sortStateCache = new LimitedDictionary<int, SortState<int>>(_cacheSize);
@@ -153,7 +153,6 @@ namespace NumberSorter.Domain.ViewModels
 
             _displayedLogActions
                 .Connect()
-                .Transform(x => new LogActionLineViewModel(x))
                 .ObserveOnDispatcher()
                 .Bind(out _logActionViewModels)
                 .DisposeMany()
@@ -174,7 +173,8 @@ namespace NumberSorter.Domain.ViewModels
 
             this.WhenAnyValue(x => x.SortingLog)
                 .Do(x => SortState = x.StartingState)
-                .Subscribe(_ => UpdateActionLog());
+                .Do(_ => UpdateActionLog())
+                .Subscribe(_ => UpdataDisplayedActions());
 
             this.WhenAnyValue(x => x.ReadActions)
                 .Subscribe(_ => UpdateActionLog());
@@ -341,7 +341,10 @@ namespace NumberSorter.Domain.ViewModels
             int finalIndex = ComparableUtility.Clamp(CurrentActionIndex + _displayedActionCount, 0, MaxActionIndex);
 
             while (currentIndex <= finalIndex)
-                _displayedLogActions.Add(_filteredLogActions[currentIndex++]);
+            {
+                var viewModel = new LogActionLineViewModel(currentIndex == CurrentActionIndex, _filteredLogActions[currentIndex++]);
+                _displayedLogActions.Add(viewModel);
+            }
         }
 
         private void UpdateActionLog()

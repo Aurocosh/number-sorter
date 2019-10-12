@@ -11,10 +11,16 @@
              d:DesignHeight="30" d:DesignWidth="300">
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="0" Name="IndexTextBlock" VerticalAlignment="Center"/>
-        <TextBlock Grid.Column="1" Name="DescriptionTextBlock" VerticalAlignment="Center"/>
+        <Polygon Grid.Column="0" Name="CurrentActionMarker"  Points="0,0 20,10, 0,20" Stroke="Black" Fill="Green" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Ellipse Grid.Column="1" Name="TypeMarker"  Width="20" Height="20" Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock Grid.Column="2" Name="TypeTextBlock" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="3" Name="IndexTextBlock" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="4" Name="DescriptionTextBlock" VerticalAlignment="Center"/>
     </Grid>
 </reactiveui:ReactiveUserControl>

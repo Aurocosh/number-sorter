@@ -94,18 +94,18 @@ namespace NumberSorter.Domain.Visualizers
         {
             if (columnIndex == sortState.FirstComparedIndex)
             {
-                if (sortState.ComparassionResult < 1)
+                if (sortState.ComparassionResult < 0)
                     return _compareLesserColor;
-                else if (sortState.ComparassionResult > 1)
+                else if (sortState.ComparassionResult > 0)
                     return _compareBiggerColor;
                 else
                     return _compareEqualColor;
             }
             else if (columnIndex == sortState.SecondComparedIndex)
             {
-                if (sortState.ComparassionResult < 1)
+                if (sortState.ComparassionResult < 0)
                     return _compareBiggerColor;
-                else if (sortState.ComparassionResult > 1)
+                else if (sortState.ComparassionResult > 0)
                     return _compareLesserColor;
                 else
                     return _compareEqualColor;

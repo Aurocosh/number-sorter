@@ -1,4 +1,5 @@
-﻿using NumberSorter.Domain.ViewModels;
+﻿using NumberSorter.Domain.Converters;
+using NumberSorter.Domain.ViewModels;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,20 @@ namespace NumberSorter.Forms
                 this.OneWayBind(ViewModel,
                         x => x.Index,
                         x => x.IndexTextBlock.Text)
+                        .DisposeWith(disposable);
+                this.OneWayBind(ViewModel,
+                        x => x.IsCurrent,
+                        x => x.CurrentActionMarker.Visibility,
+                        vmToViewConverterOverride: new VisibilityBindingTypeConverter())
+                        .DisposeWith(disposable);
+                this.OneWayBind(ViewModel,
+                        x => x.TypeColor,
+                        x => x.TypeMarker.Fill,
+                        vmToViewConverterOverride: new ColorToBrushBindingTypeConverter())
+                        .DisposeWith(disposable);
+                this.OneWayBind(ViewModel,
+                        x => x.Type,
+                        x => x.TypeTextBlock.Text)
                         .DisposeWith(disposable);
                 this.OneWayBind(ViewModel,
                         x => x.Description,
