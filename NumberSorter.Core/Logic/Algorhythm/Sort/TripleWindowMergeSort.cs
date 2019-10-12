@@ -113,7 +113,8 @@ namespace NumberSorter.Core.Logic.Algorhythm
                     if (firstTempLength != 0 && mainTempLength != 0)
                         SortTemporary(list, mainTempStartIndex, firstTempLength + mainTempLength, firstSourceIndex);
                     if (firstTempLength != 0 && secondTempLength != 0)
-                        MergeSort(list, new SortRun(mainTempStartIndex + mainTempLength, firstTempLength + secondTempLength));
+                        Merge(list, new SortRun(mainTempStartIndex + mainTempLength, firstTempLength), new SortRun(mainTempStartIndex + mainTempLength + firstTempLength, secondTempLength));
+
                     mainTempLength = 0;
                     firstTempLength = 0;
                     secondTempLength = 0;
@@ -122,7 +123,8 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 }
                 else if (mainTempLength == 0 && firstTempLength + secondTempLength > 0)
                 {
-                    MergeSort(list, new SortRun(mainTempStartIndex, firstTempLength + secondTempLength));
+                    if (firstTempLength != 0 && secondTempLength != 0)
+                        Merge(list, new SortRun(mainTempStartIndex, firstTempLength), new SortRun(mainTempStartIndex + firstTempLength, secondTempLength));
                     mainTempLength = firstTempLength + secondTempLength;
                     firstTempLength = 0;
                     secondTempLength = 0;
