@@ -92,7 +92,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
             var runStack = new SortRunStack();
             while (sortRuns.Count > 0 || runStack.Count > 2)
             {
-                if (runStack.MergeNeeded())
+                if (sortRuns.Count == 0 || runStack.MergeNeeded())
                 {
                     if (runStack.Count < 3)
                     {
