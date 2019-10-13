@@ -13,30 +13,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace NumberSorter.Forms
 {
     /// <summary>
-    /// Interaction logic for NumberGeneratorWindow.xaml
+    /// Interaction logic for SortTypeLineControl.xaml
     /// </summary>
-    public partial class NumberGeneratorWindow : ReactiveWindow<NumberGeneratorViewModel>
+    public partial class RandomizeValuesProcessorLineControl : ReactiveUserControl<RandomizeValuesProcessorLineViewModel>
     {
-        public List<int> Numbers => ViewModel.Numbers;
-
-        public NumberGeneratorWindow()
+        public RandomizeValuesProcessorLineControl()
         {
             InitializeComponent();
             this.WhenActivated(disposable =>
             {
-                this.Bind(ViewModel, x => x.Minimum, x => x.MinimumUpDown.Value)
+                this.Bind(ViewModel, x => x.Minimum, x => x.MinSizeUpDown.Value)
                     .DisposeWith(disposable);
-                this.Bind(ViewModel, x => x.Maximum, x => x.MaximumUpDown.Value)
-                    .DisposeWith(disposable);
-
-                this.Bind(ViewModel, x => x.NumberCount, x => x.CountUpDown.Value)
-                    .DisposeWith(disposable);
-                this.BindCommand(ViewModel, x => x.AcceptCommand, x => x.AcceptButton)
+                this.Bind(ViewModel, x => x.Maximum, x => x.MaxSizeUpDown.Value)
                     .DisposeWith(disposable);
             });
         }

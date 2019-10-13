@@ -28,8 +28,10 @@ namespace NumberSorter
 
             var dialogService = new DialogService<ReactiveObject>();
             dialogService.RegisterWindowType<MainWindowViewModel, MainWindow>(new WindowViewInitializer<MainWindowViewModel>());
-            dialogService.RegisterWindowType<NumberGeneratorViewModel, NumberGeneratorWindow>(new WindowViewInitializer<NumberGeneratorViewModel>());
+            dialogService.RegisterWindowType<NumberGeneratorsViewModel, NumberGeneratorsWindow>(new WindowViewInitializer<NumberGeneratorsViewModel>());
             dialogService.RegisterWindowType<SortTypeViewModel, SortTypeDialog>(new WindowViewInitializer<SortTypeViewModel>());
+            dialogService.RegisterWindowType<GeneratorsDialogViewModel, GeneratorsDialog>(new WindowViewInitializer<GeneratorsDialogViewModel>());
+            dialogService.RegisterWindowType<GeneratorEditDialogViewModel, GeneratorEditDialog>(new WindowViewInitializer<GeneratorEditDialogViewModel>());
             dialogService.RegisterWindowType<PartialSortedGeneratorViewModel, PartialSortedGeneratorDialog>(new WindowViewInitializer<PartialSortedGeneratorViewModel>());
 
             _dialogService = dialogService;

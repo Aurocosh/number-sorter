@@ -52,6 +52,7 @@ namespace NumberSorter.Domain.ViewModels
 
         public ReactiveCommand<Unit, string> LoadDataCommand { get; }
         public ReactiveCommand<Unit, List<int>> GenerateRandomCommand { get; }
+        public ReactiveCommand<Unit, List<int>> GenerateCustomCommand { get; }
         public ReactiveCommand<Unit, List<int>> GeneratePartiallySortedCommand { get; }
         public ReactiveCommand<Unit, Unit> PerformSortCommand { get; }
 
@@ -72,6 +73,7 @@ namespace NumberSorter.Domain.ViewModels
 
             LoadDataCommand = ReactiveCommand.CreateFromObservable(FindFileToLoad);
             GenerateRandomCommand = ReactiveCommand.CreateFromObservable(GenerateRandom);
+            GenerateCustomCommand = ReactiveCommand.CreateFromObservable(GenerateCustom);
             GeneratePartiallySortedCommand = ReactiveCommand.CreateFromObservable(GeneratePartiallySorted);
             PerformSortCommand = ReactiveCommand.Create(SortData);
 
@@ -121,7 +123,14 @@ namespace NumberSorter.Domain.ViewModels
 
         private IObservable<List<int>> GenerateRandom()
         {
-            var viewModel = new NumberGeneratorViewModel();
+            var viewModel = new NumberGeneratorsViewModel();
+            _dialogService.ShowModalPresentation(this, viewModel);
+            return Observable.Return(viewModel.Numbers);
+        }
+
+        private IObservable<List<int>> GenerateCustom()
+        {
+            var viewModel = new GeneratorsDialogViewModel(_dialogService);
             _dialogService.ShowModalPresentation(this, viewModel);
             return Observable.Return(viewModel.Numbers);
         }

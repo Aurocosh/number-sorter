@@ -127,29 +127,95 @@
     </ApplicationDefinition>
     <Compile Include="DialogService\DialogService.cs" />
     <Compile Include="DialogService\WindowViewInitializer.cs" />
-    <Compile Include="Forms\Control\LogActionLineControl.xaml.cs">
+    <Compile Include="Forms\Generators\GeneratorEditDialog.xaml.cs">
+      <DependentUpon>GeneratorEditDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LineControls\ListProcessorSetLineControl.xaml.cs">
+      <DependentUpon>ListProcessorSetLineControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LineControls\LogActionLineControl.xaml.cs">
       <DependentUpon>LogActionLineControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PartialSortedGeneratorDialog.xaml.cs">
+    <Compile Include="Forms\LineControls\ListGeneratorLineControl.xaml.cs">
+      <DependentUpon>ListGeneratorLineControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Generators\PartialSortedGeneratorDialog.xaml.cs">
       <DependentUpon>PartialSortedGeneratorDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Generators\GeneratorsDialog.xaml.cs">
+      <DependentUpon>GeneratorsDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LineControls\Processors\ShuffleValuesProcessorLineControl.xaml.cs">
+      <DependentUpon>ShuffleValuesProcessorLineControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LineControls\Processors\RandomizeValuesProcessorLineControl.xaml.cs">
+      <DependentUpon>RandomizeValuesProcessorLineControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LineControls\Processors\NewVariableListProcessorLineControl.xaml.cs">
+      <DependentUpon>NewVariableListProcessorLineControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LineControls\Processors\NewListProcessorLineControl.xaml.cs">
+      <DependentUpon>NewListProcessorLineControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LineControls\Processors\NewConsecutiveListProcessorLineControl.xaml.cs">
+      <DependentUpon>NewConsecutiveListProcessorLineControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LineControls\Processors\DuplicateValuesProcessorLineControl.xaml.cs">
+      <DependentUpon>DuplicateValuesProcessorLineControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\SortTypeDialog.xaml.cs">
       <DependentUpon>SortTypeDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Control\SortTypeLineControl.xaml.cs">
+    <Compile Include="Forms\LineControls\SortTypeLineControl.xaml.cs">
       <DependentUpon>SortTypeLineControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utility\DialogCloser.cs" />
-    <Compile Include="Forms\NumberGeneratorWindow.xaml.cs">
-      <DependentUpon>NumberGeneratorWindow.xaml</DependentUpon>
+    <Compile Include="Forms\Generators\NumberGeneratorsWindow.xaml.cs">
+      <DependentUpon>NumberGeneratorsWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="Forms\Control\LogActionLineControl.xaml">
+    <Page Include="Forms\Generators\GeneratorEditDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\LineControls\ListProcessorSetLineControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\LineControls\LogActionLineControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Forms\NumberGeneratorWindow.xaml">
+    <Page Include="Forms\LineControls\ListGeneratorLineControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\Generators\NumberGeneratorsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\LineControls\Processors\ShuffleValuesProcessorLineControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\LineControls\Processors\RandomizeValuesProcessorLineControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\LineControls\Processors\NewVariableListProcessorLineControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\LineControls\Processors\NewListProcessorLineControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\LineControls\Processors\NewConsecutiveListProcessorLineControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\LineControls\Processors\DuplicateValuesProcessorLineControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Forms\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -163,15 +229,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Forms\PartialSortedGeneratorDialog.xaml">
+    <Page Include="Forms\Generators\PartialSortedGeneratorDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Generators\GeneratorsDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Forms\SortTypeDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Forms\Control\SortTypeLineControl.xaml">
+    <Page Include="Forms\LineControls\SortTypeLineControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

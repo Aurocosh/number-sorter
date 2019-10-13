@@ -1,0 +1,36 @@
+﻿<reactiveui:ReactiveUserControl
+             x:Class="NumberSorter.Forms.NewConsecutiveListProcessorLineControl"
+             xmlns:viewmodels="clr-namespace:NumberSorter.Domain.ViewModels;assembly=NumberSorter.Domain"
+             x:TypeArguments="viewmodels:NewConsecutiveListProcessorLineViewModel"
+             xmlns:reactiveui="http://reactiveui.net"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:local="clr-namespace:NumberSorter.Forms"
+             mc:Ignorable="d" 
+             d:DesignHeight="80" d:DesignWidth="400">
+    <Grid>
+        <Grid.InputBindings>
+            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=DataContext.EditProcessorCommand}"/>
+        </Grid.InputBindings>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="Size"/>
+        <xctk:IntegerUpDown Grid.Row="0" Grid.Column="1" Name="SizeUpDown" VerticalAlignment="Center" Value="5" Minimum="1" Maximum="1000000"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Step"/>
+        <xctk:IntegerUpDown Grid.Row="1" Grid.Column="1" Name="StepUpDown" VerticalAlignment="Center" Value="5" Minimum="1" Maximum="10000"/>
+
+        <Label Grid.Row="2"  Grid.Column="0" Content="Start"/>
+        <xctk:IntegerUpDown Grid.Row="2" Grid.Column="1" Name="StartUpDown" VerticalAlignment="Center" Value="0" />
+    </Grid>
+</reactiveui:ReactiveUserControl>

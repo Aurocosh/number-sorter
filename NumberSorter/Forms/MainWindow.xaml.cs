@@ -44,7 +44,11 @@ namespace NumberSorter.Forms
                 this.OneWayBind(ViewModel, x => x.ResultText, x => x.ResultTextBox.Text)
                     .DisposeWith(disposable);
 
+                #region Commands
+
                 this.BindCommand(ViewModel, x => x.LoadDataCommand, x => x.LoadFromFileButton)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.GenerateCustomCommand, x => x.GenerateCustomButton)
                     .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.GenerateRandomCommand, x => x.GenerateRandomButton)
                     .DisposeWith(disposable);
@@ -52,6 +56,8 @@ namespace NumberSorter.Forms
                     .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.PerformSortCommand, x => x.SortButton)
                     .DisposeWith(disposable);
+
+                #endregion
 
                 #endregion
 

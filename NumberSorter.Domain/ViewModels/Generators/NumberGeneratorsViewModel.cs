@@ -14,7 +14,7 @@ using NumberSorter.Core.Generators;
 
 namespace NumberSorter.Domain.ViewModels
 {
-    public class NumberGeneratorViewModel : ReactiveObject
+    public class NumberGeneratorsViewModel : ReactiveObject
     {
         #region Fields
 
@@ -43,7 +43,7 @@ namespace NumberSorter.Domain.ViewModels
 
         #region Constructors
 
-        public NumberGeneratorViewModel()
+        public NumberGeneratorsViewModel()
         {
             Minimum = -100;
             Maximum = 100;

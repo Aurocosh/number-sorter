@@ -47,6 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomGenerators\Base\IConverterContext.cs" />
+    <Compile Include="CustomGenerators\Base\IListProcessor.cs" />
+    <Compile Include="CustomGenerators\Context\StandardConverterContext.cs" />
+    <Compile Include="CustomGenerators\CustomListGenerator.cs" />
+    <Compile Include="CustomGenerators\ListProcessorSet.cs" />
+    <Compile Include="CustomGenerators\Processors\Generators\NewVariableListProcessor.cs" />
+    <Compile Include="CustomGenerators\Processors\Generators\NewListProcessor.cs" />
+    <Compile Include="CustomGenerators\Processors\Converters\ShuffleValuesProcessor.cs" />
+    <Compile Include="CustomGenerators\Processors\Converters\DuplicateValuesProcessor.cs" />
+    <Compile Include="CustomGenerators\Processors\Generators\NewConsecutiveListProcessor.cs" />
+    <Compile Include="CustomGenerators\Processors\Converters\RandomizeValuesProcessor.cs" />
     <Compile Include="Generators\Base\AbstractIntegerGenerator.cs" />
     <Compile Include="Generators\RandomIntegerGenerator.cs" />
     <Compile Include="Generators\RandomPartialSortedIntegerGenerator.cs" />
@@ -104,6 +115,7 @@
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

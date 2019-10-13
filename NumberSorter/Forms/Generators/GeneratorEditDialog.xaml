@@ -1,0 +1,84 @@
+﻿<reactiveui:ReactiveWindow
+        x:TypeArguments="viewmodels:GeneratorEditDialogViewModel"
+        x:Class="NumberSorter.Forms.GeneratorEditDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NumberSorter.Forms"
+        xmlns:reactiveui="http://reactiveui.net"
+        xmlns:viewmodels="clr-namespace:NumberSorter.Domain.ViewModels;assembly=NumberSorter.Domain"
+        xmlns:utility="clr-namespace:NumberSorter.Utility"
+        utility:DialogCloser.DialogResult = "{Binding DialogResult}"
+        mc:Ignorable="d"
+        Title="Custom generator" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance viewmodels:GeneratorEditDialogViewModel}">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Edit sets">
+                <MenuItem Name="AddListProcessorSetMenuItem" Header="Add new processor set"/>
+                <MenuItem Name="RemoveSelectedProcessorSetMenuItem" Header="Remove selected processor set"/>
+            </MenuItem>
+            <MenuItem Header="Generators">
+                <MenuItem Name="AddNewListProcessorMenuItem" Header="Add fixed list generator"/>
+                <MenuItem Name="AddNewVariableListProcessorMenuItem" Header="Add variable list generator"/>
+                <MenuItem Name="AddNewConsequtiveListProcessorMenuItem" Header="Add consecutive list generator"/>
+            </MenuItem>
+            <MenuItem Header="Converters">
+                <MenuItem Name="AddShuffleValuesProcessorMenuItem" Header="Add suffle converter"/>
+                <MenuItem Name="AddRandomizeValuesProcessorMenuItem" Header="Add randomizer converter"/>
+                <MenuItem Name="AddDuplicateValuesProcessorProcessorMenuItem" Header="Add duplicating converter"/>
+            </MenuItem>
+            <MenuItem Header="Edit processors">
+                <MenuItem Name="RemoveSelectedProcessorMenuItem" Header="Remove selected processor"/>
+                <MenuItem Name="ClearAllProcessorsMenuItem" Header="Clear all processors"/>
+            </MenuItem>
+        </Menu>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Name="GenerateButton" Content="Generate" Width="80" Margin="5"/>
+            <Button Name="AcceptButton" Content="Accept" Width="80" Margin="5"/>
+            <Button IsCancel="True" Content="Cancel" Width="80" Margin="5"/>
+        </StackPanel>
+        <TabControl>
+            <TabItem Header="Settings">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Content="Name"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Name="NameTextBox" AcceptsReturn="False" TextWrapping="NoWrap"/>
+                    <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Shuffle" Name="ShuffleCheckBox"/>
+                    <Label Grid.Row="2" Grid.Column="0" Content="Description"/>
+                    <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Name="DescriptionTextBox" VerticalAlignment="Stretch" AcceptsReturn="True" TextWrapping="Wrap"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Processors">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox Grid.Column="0"
+                 Name="SetsList"
+                 Margin="5" 
+                 HorizontalContentAlignment="Stretch"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
+                    <GridSplitter Grid.Column="1"/>
+                    <ListBox Grid.Column="2"
+                 Name="ProcessorsList"
+                 Margin="5" 
+                 HorizontalContentAlignment="Stretch"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</reactiveui:ReactiveWindow>
