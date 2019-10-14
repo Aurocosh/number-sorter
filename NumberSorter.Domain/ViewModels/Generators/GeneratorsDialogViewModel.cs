@@ -24,8 +24,8 @@ namespace NumberSorter.Domain.ViewModels
         #region Fields
 
         private List<int> _numbers = new List<int>();
+        private readonly string _appDataFolder;
         private readonly IDialogService<ReactiveObject> _dialogService;
-        private readonly JsonSerializerSettings _jsonSerializerSettings;
         private readonly SourceList<CustomListGenerator> _listGenerators = new SourceList<CustomListGenerator>();
         private readonly ReadOnlyObservableCollection<ListGeneratorLineViewModel> _listGeneratorsViewModels;
         private readonly IConverterContext _converterContext = new StandardConverterContext();
@@ -86,11 +86,9 @@ namespace NumberSorter.Domain.ViewModels
                 .DisposeMany()
                 .Subscribe();
 
-            _jsonSerializerSettings = new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.All,
-                Formatting = Formatting.Indented
-            };
+            _appDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NumberSorter");
+
+            _listGenerators.AddRange(LoadGenerators());
         }
 
         #endregion Constructors
@@ -117,22 +115,18 @@ namespace NumberSorter.Domain.ViewModels
             return DialogInteractions.FindFileToSaveWithType.Handle("Json files (*.json)|*.json");
         }
 
-        private void SerializeGenerator(string filepath)
+        private void SerializeGenerator(string filePath)
         {
-            if (filepath.Length == 0)
+            if (filePath.Length == 0)
                 return;
             if (SelectedListGenerator.ListGenerator == null)
                 return;
-
-            var generator = SelectedListGenerator.ListGenerator;
-            string json = JsonConvert.SerializeObject(generator, _jsonSerializerSettings);
-            File.WriteAllText(filepath, json);
+            SaveCustomGenerator(filePath, SelectedListGenerator.ListGenerator);
         }
 
-        private void DeserializeGenerator(string filepath)
+        private void DeserializeGenerator(string filePath)
         {
-            var json = File.ReadAllText(filepath);
-            var generator = JsonConvert.DeserializeObject<CustomListGenerator>(json, _jsonSerializerSettings);
+            var generator = LoadCustomGenerator(filePath);
             if (generator != null)
                 _listGenerators.Add(generator);
         }
@@ -150,6 +144,8 @@ namespace NumberSorter.Domain.ViewModels
             {
                 var newGenerator = viewModel.GetCustomListGenerator();
                 _listGenerators.Replace(generator, newGenerator);
+                var filePath = GetGeneratorPath(newGenerator);
+                SaveCustomGenerator(filePath, newGenerator);
             }
         }
 
@@ -164,5 +160,67 @@ namespace NumberSorter.Domain.ViewModels
         }
 
         #endregion Command functions
+
+        #region Functions
+
+        private IEnumerable<CustomListGenerator> LoadGenerators()
+        {
+            if (!Directory.Exists(_appDataFolder))
+                return Enumerable.Empty<CustomListGenerator>();
+
+            string[] filePaths = Directory.GetFiles(_appDataFolder);
+            return filePaths.Select(LoadCustomGenerator).Where(x => x != null);
+        }
+
+        private string GetGeneratorPath(CustomListGenerator listGenerator)
+        {
+            return Path.Combine(_appDataFolder, $"generator-{listGenerator.Id}.json");
+        }
+
+        private void SaveCustomGenerator(string filePath, CustomListGenerator listGenerator)
+        {
+            var direcoryPath = Path.GetDirectoryName(filePath);
+            Directory.CreateDirectory(direcoryPath);
+
+            var errors = new List<string>();
+            var jsonSerializerSettings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All,
+                Formatting = Formatting.Indented,
+                Error = (sender, args) =>
+                {
+                    errors.Add(args.ErrorContext.Error.Message);
+                    args.ErrorContext.Handled = true;
+                }
+            };
+
+            string json = JsonConvert.SerializeObject(listGenerator, jsonSerializerSettings);
+            File.WriteAllText(filePath, json);
+        }
+
+        private CustomListGenerator LoadCustomGenerator(string filePath)
+        {
+            if (!File.Exists(filePath))
+                return null;
+            var json = File.ReadAllText(filePath);
+
+            var errors = new List<string>();
+            var jsonSerializerSettings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All,
+                Formatting = Formatting.Indented,
+                Error = (sender, args) =>
+                {
+                    errors.Add(args.ErrorContext.Error.Message);
+                    args.ErrorContext.Handled = true;
+                }
+            };
+
+            // TODO deal with serialization errors
+
+            return JsonConvert.DeserializeObject<CustomListGenerator>(json, jsonSerializerSettings);
+        }
+
+        #endregion
     }
 }

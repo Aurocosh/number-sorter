@@ -10,6 +10,8 @@ namespace NumberSorter.Core.CustomGenerators
 {
     public class CustomListGenerator : ICloneable
     {
+        public Guid Id { get; set; }
+
         public string Name { get; set; }
         public bool Shuffle { get; set; }
         public string Description { get; set; }
@@ -17,6 +19,7 @@ namespace NumberSorter.Core.CustomGenerators
 
         public CustomListGenerator()
         {
+            Id = Guid.NewGuid();
             Name = "New generator";
             Shuffle = false;
             ListProcessorSets = new List<ListProcessorSet>();
@@ -24,9 +27,19 @@ namespace NumberSorter.Core.CustomGenerators
 
         public CustomListGenerator(string name, string description, bool shuffle, List<ListProcessorSet> listProcessorSets)
         {
+            Id = Guid.NewGuid();
             Name = name;
             Description = description;
             Shuffle = shuffle;
+            ListProcessorSets = listProcessorSets;
+        }
+
+        public CustomListGenerator(Guid id, string name, bool shuffle, string description, List<ListProcessorSet> listProcessorSets)
+        {
+            Id = id;
+            Name = name;
+            Shuffle = shuffle;
+            Description = description;
             ListProcessorSets = listProcessorSets;
         }
 
@@ -40,7 +53,7 @@ namespace NumberSorter.Core.CustomGenerators
 
         public object Clone()
         {
-            return new CustomListGenerator(Name, Description, Shuffle, ListProcessorSets.Select(x => x.Clone()).Cast<ListProcessorSet>().ToList());
+            return new CustomListGenerator(Id, Name, Shuffle, Description, ListProcessorSets.Select(x => x.Clone()).Cast<ListProcessorSet>().ToList());
         }
     }
 }

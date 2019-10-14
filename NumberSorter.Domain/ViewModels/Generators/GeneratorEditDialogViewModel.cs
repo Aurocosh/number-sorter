@@ -47,6 +47,7 @@ namespace NumberSorter.Domain.ViewModels
         {
             _dialogService = dialogService;
             _listGenerator = (CustomListGenerator)listGenerator.Clone();
+
             ListGenerator = new CustomListGeneratorViewModel(_listGenerator);
 
             GenerateCommand = ReactiveCommand.Create(Generate);
