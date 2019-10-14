@@ -27,6 +27,13 @@ namespace NumberSorter.Forms
             InitializeComponent();
             this.WhenActivated(disposable =>
             {
+                this.Bind(ViewModel,
+                    x => x.SelectedListGenerator.Description,
+                    x => x.DescriptionTextBox.Text)
+                    .DisposeWith(disposable);
+
+                #region ListBox
+
                 this.OneWayBind(ViewModel,
                     x => x.ListGeneratorLineViewModels,
                     x => x.ListGeneratorsList.ItemsSource)
@@ -35,6 +42,10 @@ namespace NumberSorter.Forms
                     x => x.SelectedListGenerator,
                     x => x.ListGeneratorsList.SelectedItem)
                     .DisposeWith(disposable);
+
+                #endregion
+
+                #region Commands
 
                 this.BindCommand(ViewModel, x => x.AddNewGeneratorCommand, x => x.NewGeneratorMenuItem)
                     .DisposeWith(disposable);
@@ -46,10 +57,10 @@ namespace NumberSorter.Forms
                 this.BindCommand(ViewModel, x => x.DeserializeGeneratorCommand, x => x.DeserializeGeneratorMenuItem)
                     .DisposeWith(disposable);
 
-                this.BindCommand(ViewModel, x => x.GenerateCommand, x => x.GenerateButton)
-                    .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.AcceptCommand, x => x.AcceptButton)
                     .DisposeWith(disposable);
+
+                #endregion
             });
         }
     }

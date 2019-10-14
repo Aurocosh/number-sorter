@@ -9,23 +9,19 @@ using System.Windows.Media;
 
 namespace NumberSorter.Domain.ViewModels
 {
-    public class NewConsecutiveListProcessorLineViewModel : ListProcessorViewModel
+    public class ConsecutiveValuesProcessorLineViewModel : ListProcessorViewModel
     {
-        [Reactive] public int Size { get; set; }
         [Reactive] public int Step { get; set; }
         [Reactive] public int Start { get; set; }
 
-        private NewConsecutiveListProcessor ListProcessor { get; }
+        private ConsecutiveValuesProcessor ListProcessor { get; }
 
-        public NewConsecutiveListProcessorLineViewModel(NewConsecutiveListProcessor listProcessor) : base(listProcessor)
+        public ConsecutiveValuesProcessorLineViewModel(ConsecutiveValuesProcessor listProcessor) : base(listProcessor)
         {
-            Size = listProcessor.Size;
             Step = listProcessor.Step;
             Start = listProcessor.Start;
             ListProcessor = listProcessor;
 
-            this.WhenAnyValue(x => x.Size)
-                .Subscribe(x => ListProcessor.Size = x);
             this.WhenAnyValue(x => x.Step)
                 .Subscribe(x => ListProcessor.Step = x);
             this.WhenAnyValue(x => x.Start)

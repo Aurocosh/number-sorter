@@ -5,6 +5,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:NumberSorter.Forms"
         xmlns:reactiveui="http://reactiveui.net"
         xmlns:viewmodels="clr-namespace:NumberSorter.Domain.ViewModels;assembly=NumberSorter.Domain"
@@ -23,11 +24,12 @@
                 <MenuItem Header="Generators">
                     <MenuItem Name="AddNewListProcessorMenuItem" Header="Add fixed list generator"/>
                     <MenuItem Name="AddNewVariableListProcessorMenuItem" Header="Add variable list generator"/>
-                    <MenuItem Name="AddNewConsequtiveListProcessorMenuItem" Header="Add consecutive list generator"/>
                 </MenuItem>
                 <MenuItem Header="Converters">
+                    <MenuItem Name="AddInvertValuesProcessorMenuItem" Header="Add invert converter"/>
                     <MenuItem Name="AddShuffleValuesProcessorMenuItem" Header="Add suffle converter"/>
                     <MenuItem Name="AddRandomizeValuesProcessorMenuItem" Header="Add randomizer converter"/>
+                    <MenuItem Name="AddConsequtiveValuesProcessorMenuItem" Header="Add consecutive converter"/>
                     <MenuItem Name="AddDuplicateValuesProcessorProcessorMenuItem" Header="Add duplicating converter"/>
                 </MenuItem>
                 <MenuItem Header="Edit processors">
@@ -42,6 +44,51 @@
             <Button IsCancel="True" Content="Cancel" Width="80" Margin="5"/>
         </StackPanel>
         <TabControl>
+            <TabItem Header="Processors">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox Grid.Column="0"
+                         Name="SetsList"
+                         Margin="5" 
+                         HorizontalContentAlignment="Stretch"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
+                    <GridSplitter Grid.Column="1"/>
+                    <TabControl Grid.Column="2">
+                        <TabItem Header="Processors">
+                            <ListBox Grid.Column="2"
+                                     Name="ProcessorsList"
+                                     Margin="5" 
+                                     HorizontalContentAlignment="Stretch"
+                                     ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
+                        </TabItem>
+                        <TabItem Header="Settings">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Content="Name"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" Name="SetNameTextBox"/>
+                                <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Name="SetIsSameListCheckBox" Content="Is same list"/>
+                                <Label Grid.Row="2" Grid.Column="0" Content="Minimum repeats"/>
+                                <xctk:IntegerUpDown Grid.Row="2" Grid.Column="1" Name="SetMinRepeatValue" Value="1" Minimum="1"/>
+                                <Label Grid.Row="3" Grid.Column="0" Content="Maximum repeats"/>
+                                <xctk:IntegerUpDown Grid.Row="3" Grid.Column="1" Name="SetMaxRepeatValue" Value="1" Minimum="1"/>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
             <TabItem Header="Settings">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -59,26 +106,6 @@
                     <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Shuffle" Name="ShuffleCheckBox"/>
                     <Label Grid.Row="2" Grid.Column="0" Content="Description"/>
                     <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Name="DescriptionTextBox" VerticalAlignment="Stretch" AcceptsReturn="True" TextWrapping="Wrap"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Processors">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <ListBox Grid.Column="0"
-                 Name="SetsList"
-                 Margin="5" 
-                 HorizontalContentAlignment="Stretch"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
-                    <GridSplitter Grid.Column="1"/>
-                    <ListBox Grid.Column="2"
-                 Name="ProcessorsList"
-                 Margin="5" 
-                 HorizontalContentAlignment="Stretch"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
                 </Grid>
             </TabItem>
         </TabControl>

@@ -69,7 +69,16 @@ namespace NumberSorter.Forms
 
                 #endregion
 
-                #region List processor
+                #region List processor set
+
+                this.Bind(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.Name, x => x.SetNameTextBox.Text)
+                    .DisposeWith(disposable);
+                this.Bind(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.IsSameList, x => x.SetIsSameListCheckBox.IsChecked)
+                    .DisposeWith(disposable);
+                this.Bind(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.MinRepeatValue, x => x.SetMinRepeatValue.Value)
+                    .DisposeWith(disposable);
+                this.Bind(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.MaxRepeatValue, x => x.SetMaxRepeatValue.Value)
+                    .DisposeWith(disposable);
 
                 #region Listbox
 
@@ -90,12 +99,14 @@ namespace NumberSorter.Forms
                     .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.AddNewVariableListProcessorCommand, x => x.AddNewVariableListProcessorMenuItem)
                     .DisposeWith(disposable);
-                this.BindCommand(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.AddNewConsequtiveListProcessorCommand, x => x.AddNewConsequtiveListProcessorMenuItem)
-                    .DisposeWith(disposable);
 
+                this.BindCommand(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.AddInvertValuesProcessorCommand, x => x.AddInvertValuesProcessorMenuItem)
+                    .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.AddShuffleValuesProcessorCommand, x => x.AddShuffleValuesProcessorMenuItem)
                     .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.AddRandomizeValuesProcessorCommand, x => x.AddRandomizeValuesProcessorMenuItem)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.AddConsequtiveValuesProcessorCommand, x => x.AddConsequtiveValuesProcessorMenuItem)
                     .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.AddDuplicateValuesProcessorProcessorCommand, x => x.AddDuplicateValuesProcessorProcessorMenuItem)
                     .DisposeWith(disposable);

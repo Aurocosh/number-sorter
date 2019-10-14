@@ -27,7 +27,6 @@
             </MenuItem>
         </Menu>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Name="GenerateButton" Content="Generate" Width="80" Margin="5"/>
             <Button Name="AcceptButton" Content="Accept" Width="80" Margin="5"/>
             <Button IsCancel="True" Content="Cancel" Width="80" Margin="5"/>
         </StackPanel>
@@ -44,7 +43,7 @@
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
             <GridSplitter Grid.Column="1"/>
             <TextBox Grid.Column="2"
-                 Name="OutputTextBox"
+                 Name="DescriptionTextBox"
                  Margin="5"
                  VerticalAlignment="Stretch"
                  AcceptsReturn="True"

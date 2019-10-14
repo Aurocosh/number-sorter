@@ -83,6 +83,9 @@ namespace NumberSorter.Domain.ViewModels
                 .Where(x => x.Count > 0)
                 .Subscribe(x => InputNumbers = x);
 
+            GenerateCustomCommand
+                .Where(x => x.Count > 0)
+                .Subscribe(x => InputNumbers = x);
             GenerateRandomCommand
                 .Where(x => x.Count > 0)
                 .Subscribe(x => InputNumbers = x);

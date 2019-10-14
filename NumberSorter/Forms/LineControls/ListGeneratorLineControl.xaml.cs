@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,10 +29,16 @@ namespace NumberSorter.Forms
             InitializeComponent();
             this.WhenActivated(disposable =>
             {
-                this.OneWayBind(ViewModel,
-                        x => x.Name,
-                        x => x.NameTextBlock.Text)
-                        .DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.Name, x => x.NameTextBlock.Text)
+                    .DisposeWith(disposable);
+
+                //LineGrid.Events()
+                //    .MouseDown
+                //    .Where(x => x.ClickCount == 2)
+                //    .Where(x => x.ChangedButton == MouseButton.Left)
+                //    .ObserveOn(RxApp.MainThreadScheduler)
+                //    .InvokeCommand(this, x => x.ViewModel.DoubleClickCommand)
+                //    .DisposeWith(disposable);
             });
         }
     }

@@ -54,6 +54,7 @@ namespace NumberSorter.Domain.ViewModels
             Description = listGenerator.Description;
             _listProcessorsSets = new SourceList<ListProcessorSet>();
             _listProcessorsSets.AddRange(listGenerator.ListProcessorSets);
+            listGenerator.ListProcessorSets.Clear();
 
             AddListProcessorSetCommand = ReactiveCommand.Create(AddListProcessorSet);
             ClearAllProcessorsSetsCommand = ReactiveCommand.Create(ClearAllProcessorSets);

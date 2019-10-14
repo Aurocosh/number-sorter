@@ -8,33 +8,29 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Core.CustomGenerators.Processors.Generators
 {
-    public class NewConsecutiveListProcessor : IListProcessor
+    public class ConsecutiveValuesProcessor : IListProcessor
     {
-        public int Size { get; set; }
         public int Step { get; set; }
         public int Start { get; set; }
         public string Description => "Consecutive list generator";
 
-        public NewConsecutiveListProcessor()
+        public ConsecutiveValuesProcessor()
         {
-            Size = 0;
             Step = 0;
             Start = 0;
         }
 
-        public NewConsecutiveListProcessor(int size, int step, int start)
+        public ConsecutiveValuesProcessor(int step, int start)
         {
-            Size = size;
             Step = step;
             Start = start;
         }
 
         public void ConvertList(ref int[] list, IConverterContext context)
         {
-            list = new int[Size];
             int current = Start;
-
-            for (int i = 0; i < Size; i++)
+            int size = list.Length;
+            for (int i = 0; i < size; i++)
             {
                 list[i] = current;
                 var next = current + Step;
@@ -47,7 +43,7 @@ namespace NumberSorter.Core.CustomGenerators.Processors.Generators
 
         public object Clone()
         {
-            return new NewConsecutiveListProcessor(Size, Step, Start);
+            return new ConsecutiveValuesProcessor(Step, Start);
         }
     }
 }

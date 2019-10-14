@@ -12,5 +12,6 @@ namespace NumberSorter.Domain.Interactions
     {
         public static Interaction<string, string> FindFileToOpenWithType { get; } = new Interaction<string, string>();
         public static Interaction<string, string> FindFileToSaveWithType { get; } = new Interaction<string, string>();
+        public static Interaction<YesNoQuestionData, bool> AskYesNoQuestion { get; } = new Interaction<YesNoQuestionData, bool>();
     }
 }

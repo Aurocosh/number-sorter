@@ -23,7 +23,6 @@ namespace NumberSorter.Domain.ViewModels
 
         private readonly CustomListGenerator _listGenerator;
         private readonly IDialogService<ReactiveObject> _dialogService;
-        private readonly IConverterContext _converterContext = new StandardConverterContext();
 
         #endregion Fields
 

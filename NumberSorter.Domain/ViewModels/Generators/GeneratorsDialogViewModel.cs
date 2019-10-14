@@ -23,12 +23,11 @@ namespace NumberSorter.Domain.ViewModels
     {
         #region Fields
 
-        private List<int> _numbers = new List<int>();
+        private int[] _numbers;
         private readonly string _appDataFolder;
         private readonly IDialogService<ReactiveObject> _dialogService;
         private readonly SourceList<CustomListGenerator> _listGenerators = new SourceList<CustomListGenerator>();
         private readonly ReadOnlyObservableCollection<ListGeneratorLineViewModel> _listGeneratorsViewModels;
-        private readonly IConverterContext _converterContext = new StandardConverterContext();
 
         #endregion Fields
 
@@ -46,13 +45,12 @@ namespace NumberSorter.Domain.ViewModels
         #region Commands
 
         public ReactiveCommand<Unit, Unit> AddNewGeneratorCommand { get; }
-        public ReactiveCommand<Unit, Unit> RemoveSelectedGeneratorCommand { get; }
+        public ReactiveCommand<Unit, bool> RemoveSelectedGeneratorCommand { get; }
 
         public ReactiveCommand<Unit, string> SerializeGeneratorCommand { get; }
         public ReactiveCommand<Unit, string> DeserializeGeneratorCommand { get; }
 
         public ReactiveCommand<Unit, Unit> EditGeneratorCommand { get; }
-        public ReactiveCommand<Unit, Unit> GenerateCommand { get; }
         public ReactiveCommand<Unit, Unit> AcceptCommand { get; }
 
         #endregion Commands
@@ -63,16 +61,20 @@ namespace NumberSorter.Domain.ViewModels
         {
             _dialogService = dialogService;
 
+            var canAcceptPredicate = this.WhenAnyValue(x => x.SelectedListGenerator).Select(x => x != null);
+
             AddNewGeneratorCommand = ReactiveCommand.Create(AddNewGenerator);
-            RemoveSelectedGeneratorCommand = ReactiveCommand.Create(RemoveSelectedGenerator);
+            RemoveSelectedGeneratorCommand = ReactiveCommand.CreateFromObservable(AskToRemoveSelectedGenerator);
 
             SerializeGeneratorCommand = ReactiveCommand.CreateFromObservable(FindFileToSave);
             DeserializeGeneratorCommand = ReactiveCommand.CreateFromObservable(FindFileToOpen);
 
             EditGeneratorCommand = ReactiveCommand.Create(EditGenerator);
-            GenerateCommand = ReactiveCommand.Create(Generate);
-            AcceptCommand = ReactiveCommand.Create(Accept);
+            AcceptCommand = ReactiveCommand.Create(Accept, canAcceptPredicate);
 
+            RemoveSelectedGeneratorCommand
+                .Where(x => x)
+                .Subscribe(_ => RemoveSelectedGenerator());
             SerializeGeneratorCommand
                 .Subscribe(SerializeGenerator);
             DeserializeGeneratorCommand
@@ -86,8 +88,8 @@ namespace NumberSorter.Domain.ViewModels
                 .DisposeMany()
                 .Subscribe();
 
+            _numbers = Array.Empty<int>();
             _appDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NumberSorter");
-
             _listGenerators.AddRange(LoadGenerators());
         }
 
@@ -100,9 +102,22 @@ namespace NumberSorter.Domain.ViewModels
             _listGenerators.Add(new CustomListGenerator());
         }
 
+        private IObservable<bool> AskToRemoveSelectedGenerator()
+        {
+            var questionData = new YesNoQuestionData("Remove selected generator", "Are you sure you want to delete current generator? This operation cannot be reversed.");
+            return DialogInteractions.AskYesNoQuestion.Handle(questionData);
+        }
+
         private void RemoveSelectedGenerator()
         {
-            _listGenerators.Remove(SelectedListGenerator.ListGenerator);
+            if (SelectedListGenerator == null)
+                return;
+
+            var generator = SelectedListGenerator.ListGenerator;
+            _listGenerators.Remove(generator);
+
+            var filePath = GetGeneratorPath(generator);
+            File.Delete(filePath);
         }
 
         private IObservable<string> FindFileToOpen()
@@ -149,13 +164,12 @@ namespace NumberSorter.Domain.ViewModels
             }
         }
 
-        private void Generate()
-        {
-
-        }
-
         private void Accept()
         {
+            var generator = SelectedListGenerator.ListGenerator;
+            var context = new StandardConverterContext();
+            _numbers = generator.GenerateList(context);
+
             DialogResult = SelectedListGenerator != null;
         }
 

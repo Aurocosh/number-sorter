@@ -41,10 +41,11 @@ namespace NumberSorter.Domain.ViewModels
 
         public ReactiveCommand<Unit, Unit> AddNewListProcessorCommand { get; }
         public ReactiveCommand<Unit, Unit> AddNewVariableListProcessorCommand { get; }
-        public ReactiveCommand<Unit, Unit> AddNewConsequtiveListProcessorCommand { get; }
 
+        public ReactiveCommand<Unit, Unit> AddInvertValuesProcessorCommand { get; }
         public ReactiveCommand<Unit, Unit> AddShuffleValuesProcessorCommand { get; }
         public ReactiveCommand<Unit, Unit> AddRandomizeValuesProcessorCommand { get; }
+        public ReactiveCommand<Unit, Unit> AddConsequtiveValuesProcessorCommand { get; }
         public ReactiveCommand<Unit, Unit> AddDuplicateValuesProcessorProcessorCommand { get; }
 
         public ReactiveCommand<Unit, Unit> ClearAllProcessorsCommand { get; }
@@ -63,13 +64,15 @@ namespace NumberSorter.Domain.ViewModels
 
             _listProcessors = new SourceList<IListProcessor>();
             _listProcessors.AddRange(listProcessorSet.ListProcessors);
+            listProcessorSet.ListProcessors.Clear();
 
             AddNewListProcessorCommand = ReactiveCommand.Create(AddNewListProcessor);
             AddNewVariableListProcessorCommand = ReactiveCommand.Create(AddNewVariableListProcessor);
-            AddNewConsequtiveListProcessorCommand = ReactiveCommand.Create(AddNewConsequtiveListProcessor);
 
+            AddInvertValuesProcessorCommand = ReactiveCommand.Create(AddInvertValuesProcessor);
             AddShuffleValuesProcessorCommand = ReactiveCommand.Create(AddShuffleValuesProcessor);
             AddRandomizeValuesProcessorCommand = ReactiveCommand.Create(AddRandomizeValuesProcessor);
+            AddConsequtiveValuesProcessorCommand = ReactiveCommand.Create(AddConsequtiveValuesProcessor);
             AddDuplicateValuesProcessorProcessorCommand = ReactiveCommand.Create(AddDuplicateValuesProcessorProcessor);
 
             ClearAllProcessorsCommand = ReactiveCommand.Create(ClearAllProcessors);
@@ -83,6 +86,13 @@ namespace NumberSorter.Domain.ViewModels
                 .BindTo(ListProcessorSet, x => x.MinRepeatValue);
             this.WhenAnyValue(x => x.MaxRepeatValue)
                 .BindTo(ListProcessorSet, x => x.MaxRepeatValue);
+
+            this.WhenAnyValue(x => x.MinRepeatValue)
+                .Where(x => x > MaxRepeatValue)
+                .Subscribe(x => MaxRepeatValue = x);
+            this.WhenAnyValue(x => x.MaxRepeatValue)
+                .Where(x => x < MinRepeatValue)
+                .Subscribe(x => MinRepeatValue = x);
 
             _listProcessors
                 .Connect()
@@ -106,10 +116,11 @@ namespace NumberSorter.Domain.ViewModels
 
         private void AddNewListProcessor() => _listProcessors.Add(new NewListProcessor());
         private void AddNewVariableListProcessor() => _listProcessors.Add(new NewVariableListProcessor());
-        private void AddNewConsequtiveListProcessor() => _listProcessors.Add(new NewConsecutiveListProcessor());
 
+        private void AddInvertValuesProcessor() => _listProcessors.Add(new InvertValuesProcessor());
         private void AddShuffleValuesProcessor() => _listProcessors.Add(new ShuffleValuesProcessor());
         private void AddRandomizeValuesProcessor() => _listProcessors.Add(new RandomizeValuesProcessor());
+        private void AddConsequtiveValuesProcessor() => _listProcessors.Add(new ConsecutiveValuesProcessor());
         private void AddDuplicateValuesProcessorProcessor() => _listProcessors.Add(new DuplicateValuesProcessor());
 
         private void ClearAllProcessors() => _listProcessors.Remove(SelectedListProcessor.IListProcessor);
@@ -123,8 +134,8 @@ namespace NumberSorter.Domain.ViewModels
                 return new NewListProcessorLineViewModel(listProcessor);
             else if (processor is NewVariableListProcessor variableListProcessor)
                 return new NewVariableListProcessorLineViewModel(variableListProcessor);
-            else if (processor is NewConsecutiveListProcessor consecutiveListProcessor)
-                return new NewConsecutiveListProcessorLineViewModel(consecutiveListProcessor);
+            else if (processor is ConsecutiveValuesProcessor consecutiveListProcessor)
+                return new ConsecutiveValuesProcessorLineViewModel(consecutiveListProcessor);
             else if (processor is ShuffleValuesProcessor shuffleValuesProcessor)
                 return new ShuffleValuesProcessorLineViewModel(shuffleValuesProcessor);
             else if (processor is RandomizeValuesProcessor randomizeValuesProcessor)
