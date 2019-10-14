@@ -15,23 +15,25 @@
         d:DataContext="{d:DesignInstance viewmodels:GeneratorEditDialogViewModel}">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Edit sets">
+            <MenuItem Header="Processor sets">
                 <MenuItem Name="AddListProcessorSetMenuItem" Header="Add new processor set"/>
                 <MenuItem Name="RemoveSelectedProcessorSetMenuItem" Header="Remove selected processor set"/>
             </MenuItem>
-            <MenuItem Header="Generators">
-                <MenuItem Name="AddNewListProcessorMenuItem" Header="Add fixed list generator"/>
-                <MenuItem Name="AddNewVariableListProcessorMenuItem" Header="Add variable list generator"/>
-                <MenuItem Name="AddNewConsequtiveListProcessorMenuItem" Header="Add consecutive list generator"/>
-            </MenuItem>
-            <MenuItem Header="Converters">
-                <MenuItem Name="AddShuffleValuesProcessorMenuItem" Header="Add suffle converter"/>
-                <MenuItem Name="AddRandomizeValuesProcessorMenuItem" Header="Add randomizer converter"/>
-                <MenuItem Name="AddDuplicateValuesProcessorProcessorMenuItem" Header="Add duplicating converter"/>
-            </MenuItem>
-            <MenuItem Header="Edit processors">
-                <MenuItem Name="RemoveSelectedProcessorMenuItem" Header="Remove selected processor"/>
-                <MenuItem Name="ClearAllProcessorsMenuItem" Header="Clear all processors"/>
+            <MenuItem Header="Processors">
+                <MenuItem Header="Generators">
+                    <MenuItem Name="AddNewListProcessorMenuItem" Header="Add fixed list generator"/>
+                    <MenuItem Name="AddNewVariableListProcessorMenuItem" Header="Add variable list generator"/>
+                    <MenuItem Name="AddNewConsequtiveListProcessorMenuItem" Header="Add consecutive list generator"/>
+                </MenuItem>
+                <MenuItem Header="Converters">
+                    <MenuItem Name="AddShuffleValuesProcessorMenuItem" Header="Add suffle converter"/>
+                    <MenuItem Name="AddRandomizeValuesProcessorMenuItem" Header="Add randomizer converter"/>
+                    <MenuItem Name="AddDuplicateValuesProcessorProcessorMenuItem" Header="Add duplicating converter"/>
+                </MenuItem>
+                <MenuItem Header="Edit processors">
+                    <MenuItem Name="RemoveSelectedProcessorMenuItem" Header="Remove selected processor"/>
+                    <MenuItem Name="ClearAllProcessorsMenuItem" Header="Clear all processors"/>
+                </MenuItem>
             </MenuItem>
         </Menu>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">

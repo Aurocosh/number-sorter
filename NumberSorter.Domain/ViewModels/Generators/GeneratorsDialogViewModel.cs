@@ -13,6 +13,9 @@ using NumberSorter.Core.CustomGenerators.Base;
 using NumberSorter.Core.CustomGenerators.Context;
 using NumberSorter.Core.CustomGenerators.Processors.Generators;
 using NumberSorter.Domain.DialogService;
+using NumberSorter.Domain.Interactions;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace NumberSorter.Domain.ViewModels
 {
@@ -22,6 +25,7 @@ namespace NumberSorter.Domain.ViewModels
 
         private List<int> _numbers = new List<int>();
         private readonly IDialogService<ReactiveObject> _dialogService;
+        private readonly JsonSerializerSettings _jsonSerializerSettings;
         private readonly SourceList<CustomListGenerator> _listGenerators = new SourceList<CustomListGenerator>();
         private readonly ReadOnlyObservableCollection<ListGeneratorLineViewModel> _listGeneratorsViewModels;
         private readonly IConverterContext _converterContext = new StandardConverterContext();
@@ -42,8 +46,10 @@ namespace NumberSorter.Domain.ViewModels
         #region Commands
 
         public ReactiveCommand<Unit, Unit> AddNewGeneratorCommand { get; }
-        public ReactiveCommand<Unit, Unit> ClearAllGeneratorsCommand { get; }
         public ReactiveCommand<Unit, Unit> RemoveSelectedGeneratorCommand { get; }
+
+        public ReactiveCommand<Unit, string> SerializeGeneratorCommand { get; }
+        public ReactiveCommand<Unit, string> DeserializeGeneratorCommand { get; }
 
         public ReactiveCommand<Unit, Unit> EditGeneratorCommand { get; }
         public ReactiveCommand<Unit, Unit> GenerateCommand { get; }
@@ -58,12 +64,19 @@ namespace NumberSorter.Domain.ViewModels
             _dialogService = dialogService;
 
             AddNewGeneratorCommand = ReactiveCommand.Create(AddNewGenerator);
-            ClearAllGeneratorsCommand = ReactiveCommand.Create(ClearAllGenerators);
             RemoveSelectedGeneratorCommand = ReactiveCommand.Create(RemoveSelectedGenerator);
+
+            SerializeGeneratorCommand = ReactiveCommand.CreateFromObservable(FindFileToSave);
+            DeserializeGeneratorCommand = ReactiveCommand.CreateFromObservable(FindFileToOpen);
 
             EditGeneratorCommand = ReactiveCommand.Create(EditGenerator);
             GenerateCommand = ReactiveCommand.Create(Generate);
             AcceptCommand = ReactiveCommand.Create(Accept);
+
+            SerializeGeneratorCommand
+                .Subscribe(SerializeGenerator);
+            DeserializeGeneratorCommand
+                .Subscribe(DeserializeGenerator);
 
             _listGenerators
                 .Connect()
@@ -72,6 +85,12 @@ namespace NumberSorter.Domain.ViewModels
                 .Bind(out _listGeneratorsViewModels)
                 .DisposeMany()
                 .Subscribe();
+
+            _jsonSerializerSettings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All,
+                Formatting = Formatting.Indented
+            };
         }
 
         #endregion Constructors
@@ -88,8 +107,34 @@ namespace NumberSorter.Domain.ViewModels
             _listGenerators.Remove(SelectedListGenerator.ListGenerator);
         }
 
-        private void ClearAllGenerators()
+        private IObservable<string> FindFileToOpen()
         {
+            return DialogInteractions.FindFileToOpenWithType.Handle("Json files (*.json)|*.json");
+        }
+
+        private IObservable<string> FindFileToSave()
+        {
+            return DialogInteractions.FindFileToSaveWithType.Handle("Json files (*.json)|*.json");
+        }
+
+        private void SerializeGenerator(string filepath)
+        {
+            if (filepath.Length == 0)
+                return;
+            if (SelectedListGenerator.ListGenerator == null)
+                return;
+
+            var generator = SelectedListGenerator.ListGenerator;
+            string json = JsonConvert.SerializeObject(generator, _jsonSerializerSettings);
+            File.WriteAllText(filepath, json);
+        }
+
+        private void DeserializeGenerator(string filepath)
+        {
+            var json = File.ReadAllText(filepath);
+            var generator = JsonConvert.DeserializeObject<CustomListGenerator>(json, _jsonSerializerSettings);
+            if (generator != null)
+                _listGenerators.Add(generator);
         }
 
         private void EditGenerator()

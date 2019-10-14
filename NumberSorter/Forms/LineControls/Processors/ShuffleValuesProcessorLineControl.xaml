@@ -11,17 +11,19 @@
              xmlns:local="clr-namespace:NumberSorter.Forms"
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="400">
-    <Grid>
-        <Grid.InputBindings>
-            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=DataContext.EditProcessorCommand}"/>
-        </Grid.InputBindings>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="Shuffle list"/>
-    </Grid>
+    <Border BorderBrush="Gray" BorderThickness="1">
+        <Grid Margin="2">
+            <Grid.InputBindings>
+                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=DataContext.EditProcessorCommand}"/>
+            </Grid.InputBindings>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Shuffle list"/>
+        </Grid>
+    </Border>
 </reactiveui:ReactiveUserControl>

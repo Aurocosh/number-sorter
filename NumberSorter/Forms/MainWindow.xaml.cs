@@ -150,9 +150,18 @@ namespace NumberSorter.Forms
                 #endregion
             });
 
-            DialogInteractions.FindFileWithType.RegisterHandler(context =>
+            DialogInteractions.FindFileToOpenWithType.RegisterHandler(context =>
             {
                 var dialog = new OpenFileDialog { Filter = context.Input };
+                if (dialog.ShowDialog() == true)
+                    context.SetOutput(dialog.FileName);
+                else
+                    context.SetOutput("");
+            });
+
+            DialogInteractions.FindFileToSaveWithType.RegisterHandler(context =>
+            {
+                var dialog = new SaveFileDialog { Filter = context.Input };
                 if (dialog.ShowDialog() == true)
                     context.SetOutput(dialog.FileName);
                 else

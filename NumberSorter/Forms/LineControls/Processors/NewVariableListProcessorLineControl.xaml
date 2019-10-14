@@ -10,23 +10,28 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:local="clr-namespace:NumberSorter.Forms"
              mc:Ignorable="d" 
-             d:DesignHeight="60" d:DesignWidth="400">
-    <Grid>
-        <Grid.InputBindings>
-            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=DataContext.EditProcessorCommand}"/>
-        </Grid.InputBindings>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="100"/>
-        </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="Min list size"/>
-        <xctk:IntegerUpDown Grid.Row="0" Grid.Column="1" Name="MinSizeUpDown" VerticalAlignment="Center" Value="50" Minimum="1"/>
+             d:DesignHeight="90" d:DesignWidth="400">
+    <Border BorderBrush="Gray" BorderThickness="1">
+        <Grid Margin="2">
+            <Grid.InputBindings>
+                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=DataContext.EditProcessorCommand}"/>
+            </Grid.InputBindings>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Generate randomly sized list filled with zeroes"/>
 
-        <Label Grid.Row="1" Grid.Column="0" Content="Max list size"/>
-        <xctk:IntegerUpDown Grid.Row="1" Grid.Column="1" Name="MaxSizeUpDown" VerticalAlignment="Center" Value="100" Minimum="1"/>
-    </Grid>
+            <Label Grid.Row="1" Grid.Column="0" Content="Min list size"/>
+            <xctk:IntegerUpDown Grid.Row="1" Grid.Column="1" Name="MinSizeUpDown" VerticalAlignment="Center" Value="50" Minimum="1"/>
+
+            <Label Grid.Row="2" Grid.Column="0" Content="Max list size"/>
+            <xctk:IntegerUpDown Grid.Row="2" Grid.Column="1" Name="MaxSizeUpDown" VerticalAlignment="Center" Value="100" Minimum="1"/>
+        </Grid>
+    </Border>
 </reactiveui:ReactiveUserControl>

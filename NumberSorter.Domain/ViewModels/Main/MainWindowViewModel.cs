@@ -102,9 +102,9 @@ namespace NumberSorter.Domain.ViewModels
 
         #region Command functions
 
-        private IObservable<String> FindFileToLoad()
+        private IObservable<string> FindFileToLoad()
         {
-            return DialogInteractions.FindFileWithType.Handle("Txt files (*.txt)|*.txt");
+            return DialogInteractions.FindFileToOpenWithType.Handle("Txt files (*.txt)|*.txt");
         }
 
         private List<int> LoadNumbersFromFile(string filepath)

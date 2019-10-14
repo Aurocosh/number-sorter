@@ -21,6 +21,10 @@
                 <Separator />
                 <MenuItem Header="Remove all" />
             </MenuItem>
+            <MenuItem Header="Serialization">
+                <MenuItem Name="SerializeGeneratorMenuItem" Header="Serialize generator" />
+                <MenuItem Name="DeserializeGeneratorMenuItem" Header="Deserialize generator" />
+            </MenuItem>
         </Menu>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Name="GenerateButton" Content="Generate" Width="80" Margin="5"/>
