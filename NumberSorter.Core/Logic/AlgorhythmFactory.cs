@@ -19,6 +19,8 @@ namespace NumberSorter.Core.Logic
                     return new BubbleSort<T>(comparer);
                 case AlgorhythmType.InsertionSort:
                     return new InsertionSort<T>(comparer);
+                case AlgorhythmType.SelectionSort:
+                    return new SelectionSort<T>(comparer);
                 case AlgorhythmType.DequeMergeSort:
                     return new DequeMergeSort<T>(comparer);
                 case AlgorhythmType.WindowMergeSort:

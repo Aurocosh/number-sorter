@@ -76,6 +76,7 @@
     <Compile Include="MergeTests\IntegerGenerators\Dynamic\MergeTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator.cs" />
     <Compile Include="SortTests\GallopingRecursiveMergeSortTests.cs" />
     <Compile Include="SortTests\BinarySortTests.cs" />
+    <Compile Include="SortTests\SelectionSortTests.cs" />
     <Compile Include="SortTests\InsertionWindowTimSortTests.cs" />
     <Compile Include="SortTests\TripleWindowMergeSortTests.cs" />
     <Compile Include="TestsRandomProvider.cs" />

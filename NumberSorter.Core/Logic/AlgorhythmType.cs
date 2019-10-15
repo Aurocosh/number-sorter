@@ -5,6 +5,7 @@
         HeapSort,
         BinarySort,
         BubbleSort,
+        SelectionSort,
         InsertionSort,
         DequeMergeSort,
         WindowMergeSort,

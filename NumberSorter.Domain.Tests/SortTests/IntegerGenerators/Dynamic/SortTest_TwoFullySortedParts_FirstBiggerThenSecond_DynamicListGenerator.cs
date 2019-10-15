@@ -22,7 +22,7 @@ namespace NumberSorter.Domain.Tests.SortTests.Base.IntegerGenerators.Dynamic
 
         static SortTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator()
         {
-            var lengths = new List<int> { 1, 2, 3, 10, 1000 };
+            var lengths = new List<int> { 1, 2, 3, 10, 100 };
 
             var query =
                 from firstLength in lengths

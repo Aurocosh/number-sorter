@@ -15,7 +15,7 @@ namespace NumberSorter.Domain.Tests.SortTests.Base.IntegerGenerators.Dynamic
 
         static SortTest_RandomUnsorted_DynamicListGenerator()
         {
-            var arrayLengths = new List<int> { 1, 2, 3, 8, 9, 30, 50, 100, 1000, 2500 };
+            var arrayLengths = new List<int> { 1, 2, 3, 8, 9, 10, 25, 30, 50, 100 };
 
             var query =
                 from length in arrayLengths

@@ -16,7 +16,7 @@ namespace NumberSorter.Domain.Tests.SortTests.Base.IntegerGenerators.Dynamic
         static SortTest_PartiallySorted_DynamicListGenerator()
         {
             var runCounts = new List<int> { 1, 2, 3, 10, 100 };
-            var runSizeRanges = new List<Vector2Int> { new Vector2Int(1, 10), new Vector2Int(500, 1000) };
+            var runSizeRanges = new List<Vector2Int> { new Vector2Int(1, 10), new Vector2Int(10, 30) };
 
             var query =
                 from runCount in runCounts

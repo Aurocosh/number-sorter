@@ -74,6 +74,7 @@
     <Compile Include="Logic\Algorhythm\Sort\Base\ComparerSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\Base\IPartialSortAlgorhythm.cs" />
     <Compile Include="Logic\Algorhythm\Sort\Base\ISortAlgorhythm.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\SelectionSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\BinarySort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\BubbleSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\CSharpDefaultSort.cs" />
