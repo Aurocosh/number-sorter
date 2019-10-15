@@ -17,6 +17,8 @@ namespace NumberSorter.Core.Logic
                     return new BinarySort<T>(comparer);
                 case AlgorhythmType.BubbleSort:
                     return new BubbleSort<T>(comparer);
+                case AlgorhythmType.OddEvenSort:
+                    return new OddEvenSort<T>(comparer);
                 case AlgorhythmType.InsertionSort:
                     return new InsertionSort<T>(comparer);
                 case AlgorhythmType.SelectionSort:

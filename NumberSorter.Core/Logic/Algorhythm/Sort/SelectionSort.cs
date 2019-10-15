@@ -22,14 +22,13 @@ namespace NumberSorter.Core.Logic.Algorhythm
             int upperLimitIndex = startingIndex + length;
             while (lowerLimitIndex != upperLimitIndex)
             {
-                T currentMinimum = list[lowerLimitIndex];
                 int lowestIndex = lowerLimitIndex;
                 int currentIndex = lowerLimitIndex;
+                T currentMinimum = list[lowerLimitIndex];
                 while (currentIndex < upperLimitIndex)
                 {
                     T currentValue = list[currentIndex];
-                    int comparassion = Compare(currentMinimum, currentValue);
-                    if (comparassion > 0)
+                    if (Compare(currentMinimum, currentValue) > 0)
                     {
                         lowestIndex = currentIndex;
                         currentMinimum = currentValue;
