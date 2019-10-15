@@ -53,8 +53,10 @@ namespace NumberSorter.Domain.ViewModels
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.QuickSortMedianOfThree, "Quick sort (Median of three pivot)"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.GallopingRecursiveMergeSort, "Galloping recursive merge sort"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.InsertionTripleWindowTimSort, "Tim Sort (Insertion, Triple window merge)"));
+            sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.TripleWindowTripleWindowTimSort, "Tim Sort (Triple window sort, Triple window merge)"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.QuickSortRandomPivotCutoffWindow, "Quick sort (Median of three pivot, Window cutoff)"));
             sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.QuickSortRandomPivotCutoffInsertion, "Quick sort (Median of three pivot, Insertion cutoff)"));
+            sortTypes.Add(new SortTypeLineViewModel(AlgorhythmType.QuickSortRandomPivotCutoffTripleWindow, "Quick sort (Median of three pivot, Triple window cutoff)"));
 
             sortTypes.Sort((x, y) => x.Description.CompareTo(y.Description));
             _sortTypes.AddRange(sortTypes);

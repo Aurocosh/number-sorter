@@ -172,7 +172,7 @@
     <Compile Include="Forms\LineControls\SortTypeLineControl.xaml.cs">
       <DependentUpon>SortTypeLineControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Interactions\Interactions.cs" />
+    <Compile Include="Interactions\WpfInteractions.cs" />
     <Compile Include="Utility\DialogCloser.cs" />
     <Compile Include="Forms\Generators\NumberGeneratorsWindow.xaml.cs">
       <DependentUpon>NumberGeneratorsWindow.xaml</DependentUpon>

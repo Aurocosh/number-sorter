@@ -80,6 +80,8 @@ namespace NumberSorter.Domain.Container
             var replacedValue = _list[index];
             var valueWrite = new LogValueWrite<T>(index, item, replacedValue);
 
+            _logValueIndexes[item.Index] = index;
+
             if (_previousValueWrite == null)
             {
                 _previousValueWrite = valueWrite;

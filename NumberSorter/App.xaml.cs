@@ -10,6 +10,7 @@ using NumberSorter.DialogService;
 using NumberSorter.Domain.DialogService;
 using NumberSorter.Domain.ViewModels;
 using NumberSorter.Forms;
+using NumberSorter.Interactions;
 using ReactiveUI;
 using Splat;
 
@@ -33,6 +34,8 @@ namespace NumberSorter
             dialogService.RegisterWindowType<GeneratorsDialogViewModel, GeneratorsDialog>(new WindowViewInitializer<GeneratorsDialogViewModel>());
             dialogService.RegisterWindowType<GeneratorEditDialogViewModel, GeneratorEditDialog>(new WindowViewInitializer<GeneratorEditDialogViewModel>());
             dialogService.RegisterWindowType<PartialSortedGeneratorViewModel, PartialSortedGeneratorDialog>(new WindowViewInitializer<PartialSortedGeneratorViewModel>());
+
+            WpfInteractions.RegisterInteractions();
 
             _dialogService = dialogService;
         }

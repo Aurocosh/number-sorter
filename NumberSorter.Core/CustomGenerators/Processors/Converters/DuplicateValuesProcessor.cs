@@ -41,6 +41,7 @@ namespace NumberSorter.Core.CustomGenerators.Processors.Converters
                     duplicateCount = DuplicateCount;
                 }
             }
+            list = newList;
         }
 
         public object Clone()

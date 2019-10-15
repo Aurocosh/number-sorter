@@ -9,9 +9,9 @@ using System.Windows;
 
 namespace NumberSorter.Interactions
 {
-    static class Interactions
+    static class WpfInteractions
     {
-        static Interactions()
+        public static void RegisterInteractions()
         {
             DialogInteractions.AskYesNoQuestion.RegisterHandler(context =>
             {
@@ -27,6 +27,7 @@ namespace NumberSorter.Interactions
                 else
                     context.SetOutput("");
             });
+
             DialogInteractions.FindFileToSaveWithType.RegisterHandler(context =>
             {
                 var dialog = new SaveFileDialog { Filter = context.Input };

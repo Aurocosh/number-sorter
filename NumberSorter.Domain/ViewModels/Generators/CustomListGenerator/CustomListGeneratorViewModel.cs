@@ -56,9 +56,11 @@ namespace NumberSorter.Domain.ViewModels
             _listProcessorsSets.AddRange(listGenerator.ListProcessorSets);
             listGenerator.ListProcessorSets.Clear();
 
+            var canRemoveCurrent = this.WhenAnyValue(x => x.SelectedListProcessorSet).Select(x => x != null);
+
             AddListProcessorSetCommand = ReactiveCommand.Create(AddListProcessorSet);
             ClearAllProcessorsSetsCommand = ReactiveCommand.Create(ClearAllProcessorSets);
-            RemoveSelectedProcessorSetCommand = ReactiveCommand.Create(RemoveSelectedProcessorSet);
+            RemoveSelectedProcessorSetCommand = ReactiveCommand.Create(RemoveSelectedProcessorSet, canRemoveCurrent);
 
             this.WhenAnyValue(x => x.Name)
                 .BindTo(_listGenerator, x => x.Name);

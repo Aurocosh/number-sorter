@@ -71,11 +71,15 @@ namespace NumberSorter.Domain.ViewModels
             InputNumbers = new List<int>();
             SortingLog = new SortLog<int>();
 
+            var canPerformSort = this.WhenAnyValue(x => x.InputNumbers)
+                .Select(x => x.Count > 0);
+
             LoadDataCommand = ReactiveCommand.CreateFromObservable(FindFileToLoad);
             GenerateRandomCommand = ReactiveCommand.CreateFromObservable(GenerateRandom);
             GenerateCustomCommand = ReactiveCommand.CreateFromObservable(GenerateCustom);
             GeneratePartiallySortedCommand = ReactiveCommand.CreateFromObservable(GeneratePartiallySorted);
-            PerformSortCommand = ReactiveCommand.Create(SortData);
+
+            PerformSortCommand = ReactiveCommand.Create(SortData, canPerformSort);
 
             LoadDataCommand
                 .Where(x => !string.IsNullOrEmpty(x))

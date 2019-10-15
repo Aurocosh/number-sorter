@@ -66,6 +66,11 @@ namespace NumberSorter.Domain.ViewModels
             _listProcessors.AddRange(listProcessorSet.ListProcessors);
             listProcessorSet.ListProcessors.Clear();
 
+            var sharedProcessorConnection = _listProcessors.Connect().Publish();
+
+            var canClearProcessors = sharedProcessorConnection.Count().Select(x => x != 0);
+            var canRemoveProcessor = this.WhenAnyValue(x => x.SelectedListProcessor).Select(x => x != null);
+
             AddNewListProcessorCommand = ReactiveCommand.Create(AddNewListProcessor);
             AddNewVariableListProcessorCommand = ReactiveCommand.Create(AddNewVariableListProcessor);
 
@@ -75,8 +80,8 @@ namespace NumberSorter.Domain.ViewModels
             AddConsequtiveValuesProcessorCommand = ReactiveCommand.Create(AddConsequtiveValuesProcessor);
             AddDuplicateValuesProcessorProcessorCommand = ReactiveCommand.Create(AddDuplicateValuesProcessorProcessor);
 
-            ClearAllProcessorsCommand = ReactiveCommand.Create(ClearAllProcessors);
-            RemoveSelectedProcessorCommand = ReactiveCommand.Create(RemoveSelectedProcessor);
+            ClearAllProcessorsCommand = ReactiveCommand.Create(ClearAllProcessors, canClearProcessors);
+            RemoveSelectedProcessorCommand = ReactiveCommand.Create(RemoveSelectedProcessor, canRemoveProcessor);
 
             this.WhenAnyValue(x => x.Name)
                 .BindTo(ListProcessorSet, x => x.Name);
@@ -123,12 +128,12 @@ namespace NumberSorter.Domain.ViewModels
         private void AddConsequtiveValuesProcessor() => _listProcessors.Add(new ConsecutiveValuesProcessor());
         private void AddDuplicateValuesProcessorProcessor() => _listProcessors.Add(new DuplicateValuesProcessor());
 
-        private void ClearAllProcessors() => _listProcessors.Remove(SelectedListProcessor.IListProcessor);
-        private void RemoveSelectedProcessor() => _listProcessors.Clear();
+        private void ClearAllProcessors() => _listProcessors.Clear();
+        private void RemoveSelectedProcessor() => _listProcessors.Remove(SelectedListProcessor.IListProcessor);
 
         #endregion
 
-        private static ListProcessorViewModel ConvertProcessor(IListProcessor processor)
+        private ListProcessorViewModel ConvertProcessor(IListProcessor processor)
         {
             if (processor is NewListProcessor listProcessor)
                 return new NewListProcessorLineViewModel(listProcessor);

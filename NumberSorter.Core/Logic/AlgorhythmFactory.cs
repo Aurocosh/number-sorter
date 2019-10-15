@@ -47,6 +47,10 @@ namespace NumberSorter.Core.Logic
                     return new TimSort<T>(comparer, x => new InsertionSort<T>(x), x => new TripleWindowMergeSort<T>(x));
                 case AlgorhythmType.QuickSortRandomPivotCutoffWindow:
                     return new QuickSort<T>(comparer, new RandomPivotSelector<T>(), x => new WindowMergeSort<T>(x), 32);
+                case AlgorhythmType.QuickSortRandomPivotCutoffTripleWindow:
+                    return new QuickSort<T>(comparer, new RandomPivotSelector<T>(), x => new TripleWindowMergeSort<T>(x), 32);
+                case AlgorhythmType.TripleWindowTripleWindowTimSort:
+                    return new TimSort<T>(comparer, x => new TripleWindowMergeSort<T>(x), x => new TripleWindowMergeSort<T>(x));
                 default:
                     return null;
             }
