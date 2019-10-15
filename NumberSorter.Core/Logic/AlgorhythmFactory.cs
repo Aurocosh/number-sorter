@@ -11,6 +11,8 @@ namespace NumberSorter.Core.Logic
         {
             switch (algorhythmType)
             {
+                case AlgorhythmType.CombSort:
+                    return new CombSort<T>(comparer);
                 case AlgorhythmType.HeapSort:
                     return new HeapSort<T>(comparer);
                 case AlgorhythmType.BinarySort:
