@@ -1,4 +1,5 @@
-﻿using NumberSorter.Domain.Container.Actions.Base;
+﻿using Newtonsoft.Json;
+using NumberSorter.Domain.Container.Actions.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,11 @@ namespace NumberSorter.Domain.Container.Actions
 {
     public class LogRead<T> : LogAction<T> where T : IEquatable<T>
     {
+        [JsonProperty]
         public T Value { get; }
 
         public override int ReadCount => 1;
+        [JsonProperty]
         public override int ReadIndex { get; }
 
         public LogRead(int actionIndex, int readIndex, T value) : base(actionIndex, LogActionType.LogRead)

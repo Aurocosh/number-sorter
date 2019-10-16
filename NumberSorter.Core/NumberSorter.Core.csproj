@@ -63,6 +63,7 @@
     <Compile Include="Generators\RandomIntegerGenerator.cs" />
     <Compile Include="Generators\RandomPartialSortedIntegerGenerator.cs" />
     <Compile Include="Generators\UnmergedFullySortedGenerator.cs" />
+    <Compile Include="Logic\AlgorhythmNameProvider.cs" />
     <Compile Include="Logic\AlgorhythmFactory.cs" />
     <Compile Include="Logic\AlgorhythmType.cs" />
     <Compile Include="Logic\Algorhythm\Base\ArrayHalves.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Logic\Algorhythm\Sort\TempSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\TimSort.cs" />
     <Compile Include="Logic\Comparer\IntComparer.cs" />
+    <Compile Include="Logic\Utility\EnumUtils.cs" />
     <Compile Include="Logic\Utility\IListExtensions.cs" />
     <Compile Include="Logic\Utility\ArrayUtility.cs" />
     <Compile Include="Logic\Utility\ListUtility.cs" />

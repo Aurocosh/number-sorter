@@ -37,6 +37,8 @@ namespace NumberSorter.Domain.ViewModels
                     return Color.FromRgb(61, 18, 130);
                 case LogActionType.LogComparassion:
                     return Color.FromRgb(19, 171, 22);
+                case LogActionType.LogMarker:
+                    return Color.FromRgb(252, 98, 3);
             }
             return Color.FromRgb(255, 255, 255);
         }
@@ -51,6 +53,8 @@ namespace NumberSorter.Domain.ViewModels
                     return "Write";
                 case LogActionType.LogComparassion:
                     return "Comp.";
+                case LogActionType.LogMarker:
+                    return "Mark";
             }
             return "";
 

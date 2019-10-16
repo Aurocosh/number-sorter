@@ -61,6 +61,7 @@ namespace NumberSorter.Domain.ViewModels
 
         [Reactive] public bool ReadActions { get; set; }
         [Reactive] public bool WriteActions { get; set; }
+        [Reactive] public bool MarkersActions { get; set; }
         [Reactive] public bool ComparassionActions { get; set; }
 
         [Reactive] public double AnimationDelay { get; set; }
@@ -115,10 +116,11 @@ namespace NumberSorter.Domain.ViewModels
 
             ReadActions = false;
             WriteActions = true;
+            MarkersActions = true;
             ComparassionActions = false;
 
             SortingLog = new SortLog<int>();
-            SortState = SortingLog.StartingState;
+            SortState = SortingLog.InputState;
             VisualizationImage = BitmapFactory.New(700, 480);
 
             PlayPauseCommand = ReactiveCommand.Create(PlayOrPause);
@@ -172,13 +174,15 @@ namespace NumberSorter.Domain.ViewModels
                 .Subscribe(_ => UpdataDisplayedActions());
 
             this.WhenAnyValue(x => x.SortingLog)
-                .Do(x => SortState = x.StartingState)
+                .Do(x => SortState = x.InputState)
                 .Do(_ => UpdateActionLog())
                 .Subscribe(_ => UpdataDisplayedActions());
 
             this.WhenAnyValue(x => x.ReadActions)
                 .Subscribe(_ => UpdateActionLog());
             this.WhenAnyValue(x => x.WriteActions)
+                .Subscribe(_ => UpdateActionLog());
+            this.WhenAnyValue(x => x.MarkersActions)
                 .Subscribe(_ => UpdateActionLog());
             this.WhenAnyValue(x => x.ComparassionActions)
                 .Subscribe(_ => UpdateActionLog());
@@ -219,6 +223,8 @@ namespace NumberSorter.Domain.ViewModels
                     return ReadActions;
                 case LogActionType.LogWrite:
                     return WriteActions;
+                case LogActionType.LogMarker:
+                    return MarkersActions;
                 case LogActionType.LogComparassion:
                     return ComparassionActions;
             }
@@ -241,7 +247,7 @@ namespace NumberSorter.Domain.ViewModels
 
             var actionLog = SortingLog.ActionLog;
             if (actionLog.Count == 0)
-                return SortingLog.StartingState;
+                return SortingLog.InputState;
             if (index >= SortingLog.ActionLog.Count)
                 return SortingLog.FinalState;
 
@@ -270,7 +276,7 @@ namespace NumberSorter.Domain.ViewModels
             else if (_sortWaypointStateCache.TryGetValue(index, out SortState<int> waypointState))
                 return waypointState;
             else if (index < 0)
-                return SortingLog.StartingState;
+                return SortingLog.InputState;
             return null;
         }
 

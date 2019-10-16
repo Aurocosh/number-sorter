@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Domain.Container
 {
-    public class LoggingList<T> : IList<LogValue<T>>, IComparer<LogValue<T>> where T : IEquatable<T>
+    public sealed class LoggingList<T> : IList<LogValue<T>>, IComparer<LogValue<T>> where T : IEquatable<T>
     {
         private readonly IComparer<T> _comparer;
         private LogValueWrite<T> _previousValueWrite;
@@ -20,7 +20,6 @@ namespace NumberSorter.Domain.Container
 
         private readonly List<int> _logValueIndexes;
         private readonly List<LogAction<T>> _actionLog;
-
 
         public LoggingList(IList<T> list, IComparer<T> comparer)
         {
@@ -33,7 +32,7 @@ namespace NumberSorter.Domain.Container
 
             _logValueIndexes = new List<int>(list.Count);
             _actionLog = new List<LogAction<T>>();
-
+            LogMarker("Initial state of list");
 
             for (int i = 0; i < _list.Count; i++)
                 _logValueIndexes.Add(i);
@@ -54,23 +53,27 @@ namespace NumberSorter.Domain.Container
         public int Count => _list.Count;
         public bool IsReadOnly => ((IList)_list).IsReadOnly;
 
-        public SortLog<T> GetSortLog(float elapsedTime)
+        public SortLog<T> GetSortLog(string algorhythmName, float elapsedTime)
         {
+            LogPreviousWrite();
+            LogMarker("Final state of list");
+
             var startingState = new List<T>(_startingState);
             var finalState = _list.Select(x => x.Value).ToList();
             var actionLog = new List<LogAction<T>>(_actionLog);
 
-            return new SortLog<T>(startingState, finalState, actionLog, _comparer, elapsedTime);
+            return new SortLog<T>(startingState, finalState, actionLog, _comparer, elapsedTime, algorhythmName);
+        }
+
+        private void LogMarker(string markerText)
+        {
+            LogPreviousWrite();
+            _actionLog.Add(new LogMarker<T>(_actionLog.Count, markerText));
         }
 
         private void LogRead(int index, LogValue<T> item)
         {
-            if (_previousValueWrite != null)
-            {
-                _actionLog.Add(new LogWrite<T>(_actionLog.Count, _previousValueWrite.Index, _previousValueWrite.WrittenValue.Value));
-                _previousValueWrite = null;
-            }
-
+            LogPreviousWrite();
             _actionLog.Add(new LogRead<T>(_actionLog.Count, index, item.Value));
             _logValueIndexes[item.Index] = index;
         }
@@ -101,6 +104,15 @@ namespace NumberSorter.Domain.Container
             }
         }
 
+        private void LogPreviousWrite()
+        {
+            if (_previousValueWrite != null)
+            {
+                _actionLog.Add(new LogWrite<T>(_actionLog.Count, _previousValueWrite.Index, _previousValueWrite.WrittenValue.Value));
+                _previousValueWrite = null;
+            }
+        }
+
         public void Add(LogValue<T> item)
         {
             LogWrite(_list.Count, item);
@@ -113,6 +125,7 @@ namespace NumberSorter.Domain.Container
             _startingState.Clear();
             _actionLog.Clear();
             _logValueIndexes.Clear();
+            LogMarker("Initial state of list");
         }
 
         public void Insert(int index, LogValue<T> item)

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Domain.Container
 {
-    public class SortState<T> where T : IEquatable<T>
+    public sealed class SortState<T> where T : IEquatable<T>
     {
         private readonly T[] _stateArray;
 

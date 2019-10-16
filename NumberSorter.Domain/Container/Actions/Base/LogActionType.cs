@@ -10,6 +10,7 @@ namespace NumberSorter.Domain.Container.Actions.Base
     {
         LogRead,
         LogWrite,
+        LogMarker,
         LogComparassion
     }
 }

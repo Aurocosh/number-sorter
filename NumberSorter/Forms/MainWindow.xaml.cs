@@ -84,11 +84,11 @@ namespace NumberSorter.Forms
                 this.OneWayBind(ViewModel, x => x.VisualizationViewModel.SortState.ComparassionCount, x => x.CurrentComparesLabel.Content)
                     .DisposeWith(disposable);
 
-                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.SortingLog.TotalReadCount, x => x.TotalReadsLabel.Content)
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.SortingLog.Summary.TotalReadCount, x => x.TotalReadsLabel.Content)
                     .DisposeWith(disposable);
-                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.SortingLog.TotalWriteCount, x => x.TotalWritesLabel.Content)
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.SortingLog.Summary.TotalWriteCount, x => x.TotalWritesLabel.Content)
                     .DisposeWith(disposable);
-                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.SortingLog.TotalComparassionCount, x => x.TotalComparesLabel.Content)
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.SortingLog.Summary.TotalComparassionCount, x => x.TotalComparesLabel.Content)
                     .DisposeWith(disposable);
 
                 #endregion

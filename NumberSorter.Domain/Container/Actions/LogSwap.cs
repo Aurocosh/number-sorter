@@ -1,4 +1,5 @@
-﻿using NumberSorter.Domain.Container.Actions.Base;
+﻿using Newtonsoft.Json;
+using NumberSorter.Domain.Container.Actions.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,15 @@ namespace NumberSorter.Domain.Container.Actions
 {
     public class LogSwap<T> : LogAction<T> where T : IEquatable<T>
     {
+        [JsonProperty]
         public T FirstValue { get; }
+        [JsonProperty]
         public T SecondValue { get; }
 
         public override int WriteCount => 2;
+        [JsonProperty]
         public override int FirstWrittenIndex { get; }
+        [JsonProperty]
         public override int SecondtWrittenIndex { get; }
 
         public LogSwap(int actionIndex, int firstWrittenIndex, int secondWrittenIndex, T firstValue, T secondValue) : base(actionIndex, LogActionType.LogWrite)

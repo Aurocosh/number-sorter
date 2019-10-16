@@ -11,43 +11,30 @@ namespace NumberSorter.Domain.Container
 {
     public class SortLog<T> where T : IEquatable<T>
     {
-        public float ElapsedTime { get; }
-        public bool FullySorted { get; }
-
-        public int TotalReadCount { get; }
-        public int TotalWriteCount { get; }
-        public int TotalComparassionCount { get; }
-
-        public SortState<T> StartingState { get; }
+        public SortSummary Summary { get; }
+        public SortState<T> InputState { get; }
         public SortState<T> FinalState { get; }
         public IReadOnlyList<LogAction<T>> ActionLog { get; }
 
         public SortLog()
         {
-            ElapsedTime = 0;
-            FullySorted = true;
-
-            TotalReadCount = 0;
-            TotalWriteCount = 0;
-            TotalComparassionCount = 0;
-
-            StartingState = new SortState<T>(new T[0]);
-            FinalState = new SortState<T>(new T[0]);
+            Summary = new SortSummary();
+            InputState = new SortState<T>(Array.Empty<T>());
+            FinalState = new SortState<T>(Array.Empty<T>());
             ActionLog = new List<LogAction<T>>();
         }
 
-        public SortLog(IReadOnlyList<T> startingState, IReadOnlyList<T> finalState, IReadOnlyList<LogAction<T>> actionLog, IComparer<T> comparer, float elapsedTime)
+        public SortLog(IReadOnlyList<T> startingState, IReadOnlyList<T> finalState, IReadOnlyList<LogAction<T>> actionLog, IComparer<T> comparer, float elapsedTime, string algorhythmName)
         {
-            ElapsedTime = elapsedTime;
-            FullySorted = ListUtility.IsSorted(finalState, comparer);
+            var fullySorted = ListUtility.IsSorted(finalState, comparer);
+            var totalReadCount = actionLog.Sum(x => x.ReadCount);
+            var totalWriteCount = actionLog.Sum(x => x.WriteCount);
+            var totalComparassionCount = actionLog.Sum(x => x.ComparassionCount);
+            Summary = new SortSummary(fullySorted, elapsedTime, algorhythmName, startingState.Count, totalReadCount, totalWriteCount, totalComparassionCount);
 
-            StartingState = new SortState<T>(startingState.ToArray());
+            InputState = new SortState<T>(startingState.ToArray());
             FinalState = new SortState<T>(finalState.ToArray());
             ActionLog = actionLog;
-
-            TotalReadCount = actionLog.Sum(x => x.ReadCount);
-            TotalWriteCount = actionLog.Sum(x => x.WriteCount);
-            TotalComparassionCount = actionLog.Sum(x => x.ComparassionCount);
         }
     }
 }

@@ -22,6 +22,9 @@ using System.Windows.Media;
 using NumberSorter.Domain.Base.Visualizers;
 using NumberSorter.Domain.Visualizers;
 using NumberSorter.Domain.Container;
+using NumberSorter.Domain.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace NumberSorter.Domain.ViewModels
 {
@@ -30,6 +33,7 @@ namespace NumberSorter.Domain.ViewModels
         #region Fields
 
         private readonly IDialogService<ReactiveObject> _dialogService;
+        private readonly JsonFileSerializer<SortLog<int>> _jsonFileSerializer;
 
         #endregion Fields
 
@@ -65,6 +69,13 @@ namespace NumberSorter.Domain.ViewModels
         public MainWindowViewModel(IDialogService<ReactiveObject> dialogService)
         {
             _dialogService = dialogService;
+
+            var jsonSerializerSettings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All,
+                Formatting = Formatting.Indented
+            };
+            _jsonFileSerializer = new JsonFileSerializer<SortLog<int>>(jsonSerializerSettings);
 
             VisualizationViewModel = new VisualizationViewModel(_dialogService);
 
@@ -160,7 +171,7 @@ namespace NumberSorter.Domain.ViewModels
             var accessTrackingList = new LoggingList<int>(InputNumbers, new IntComparer());
 
             var algorhythmType = viewModel.SelectedSortType.AlgorhythmType;
-            var algorhythm = AlgorhythmFactory.GetAlgorhythm<LogValue<int>>(algorhythmType, accessTrackingList);
+            var algorhythm = AlgorhythmFactory.GetAlgorhythm(algorhythmType, accessTrackingList);
 
             GC.Collect();
             var stopwatch = Stopwatch.StartNew();
@@ -170,27 +181,33 @@ namespace NumberSorter.Domain.ViewModels
             stopwatch.Stop();
             var elapsedTime = stopwatch.ElapsedMilliseconds;
 
-            SortingLog = accessTrackingList.GetSortLog(elapsedTime);
+            var algorhythmName = AlgorhythmNamer.GetName(algorhythmType);
+            SortingLog = accessTrackingList.GetSortLog(algorhythmName, elapsedTime);
+
+            var filePath = GetLogPath(SortingLog);
+            _jsonFileSerializer.SaveToJsonFile(filePath, SortingLog);
         }
 
         #endregion Command functions
 
-        #region Command predicates
-
-        private bool CanAnalizeSeries => true;
-
-        #endregion Command predicates
+        private static string GetLogPath(SortLog<int> sortLog)
+        {
+            var guid = Guid.NewGuid();
+            var currentDateTime = DateTime.Now;
+            return Path.Combine(FilePaths.LogFolder, $"log-{guid.ToString()}.json");
+        }
 
         private void UpdateInputText(List<int> values)
         {
-            InputText = string.Join(", ", values.Select(x => x.ToString()));
+            InputText = string.Join(", ", values.Take(1000).Select(x => x.ToString()));
             InfoText = $"Input number count: {values.Count}";
         }
 
         private void UpdateOutputText(SortLog<int> sortLog)
         {
-            OutputText = string.Join(", ", sortLog.FinalState.State.Select(x => x.ToString()));
-            ResultText = sortLog.FullySorted ? $"Write count: {sortLog.TotalWriteCount}\nRead count: {sortLog.TotalReadCount}\nTime: {sortLog.ElapsedTime}" : "";
+            var summary = sortLog.Summary;
+            OutputText = string.Join(", ", sortLog.FinalState.State.Take(1000).Select(x => x.ToString()));
+            ResultText = summary.FullySorted ? $"Write count: {summary.TotalWriteCount}\nRead count: {summary.TotalReadCount}\nTime: {summary.ElapsedTime}" : "";
         }
     }
 }

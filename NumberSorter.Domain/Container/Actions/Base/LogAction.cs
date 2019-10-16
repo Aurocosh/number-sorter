@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,13 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Domain.Container.Actions.Base
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public abstract class LogAction<T> where T : IEquatable<T>
     {
+        [JsonProperty]
         public int ActionIndex { get; }
+
+        [JsonProperty]
         public LogActionType ActionType { get; }
 
         public virtual int ReadIndex => -1;
