@@ -29,11 +29,11 @@ namespace NumberSorter.Forms
             {
                 this.OneWayBind(ViewModel,
                     x => x.LogGroupLineViewModels,
-                    x => x.InputGroupsList.ItemsSource)
+                    x => x.LogGroupDataGrid.ItemsSource)
                     .DisposeWith(disposable);
                 this.Bind(ViewModel,
                     x => x.SelectedLogGroup,
-                    x => x.InputGroupsList.SelectedItem)
+                    x => x.LogGroupDataGrid.SelectedItem)
                     .DisposeWith(disposable);
 
                 this.OneWayBind(ViewModel,

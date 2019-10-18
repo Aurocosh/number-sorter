@@ -169,9 +169,6 @@
     <Compile Include="Forms\LogHistory\LogHistoryDialog.xaml.cs">
       <DependentUpon>LogHistoryDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LogHistory\LogGroupLineControl.xaml.cs">
-      <DependentUpon>LogGroupLineControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Forms\SortTypeDialog.xaml.cs">
       <DependentUpon>SortTypeDialog.xaml</DependentUpon>
     </Compile>
@@ -232,10 +229,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Forms\LogHistory\LogHistoryDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Forms\LogHistory\LogGroupLineControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -15,6 +15,8 @@ namespace NumberSorter.Domain.ViewModels
 
         public int Size => LogGroup.Size;
         public string Id => LogGroup.Id.ToString();
+        public DateTime Created => LogGroup.FirstCreated;
+
         public LogGroup LogGroup { get; }
 
         #endregion

@@ -14,6 +14,7 @@ using NumberSorter.Domain.Serialization;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using DynamicData.Binding;
 
 namespace NumberSorter.Domain.ViewModels
 {
@@ -87,8 +88,8 @@ namespace NumberSorter.Domain.ViewModels
 
             _logGroups
                 .Connect()
-                .ObserveOnDispatcher()
                 .Transform(x => new LogGroupLineViewModel(x))
+                .ObserveOnDispatcher()
                 .Bind(out _logGroupLineViewModels)
                 .DisposeMany()
                 .Subscribe();

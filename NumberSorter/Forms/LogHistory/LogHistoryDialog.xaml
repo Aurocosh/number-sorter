@@ -35,11 +35,17 @@
                 <ColumnDefinition Width="10"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <ListBox Grid.Column="0"
-                         Name="InputGroupsList"
-                         Margin="5" 
-                         HorizontalContentAlignment="Stretch"
-                         ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
+            <DataGrid Grid.Column="0"
+                      Name="LogGroupDataGrid"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      d:DataContext="{d:DesignInstance viewmodels:LogGroupLineViewModel}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Created" Binding="{Binding Created}"/>
+                    <DataGridTextColumn Header="Size" Binding="{Binding Size}"/>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                </DataGrid.Columns>
+            </DataGrid>
             <GridSplitter Grid.Column="1"/>
             <DataGrid Grid.Column="2" Name="LogsDataGrid"
                       AutoGenerateColumns="False"
@@ -48,13 +54,11 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Created" Binding="{Binding Created}"/>
                     <DataGridTextColumn Header="Algorhythm" Binding="{Binding AlgorhythmName}"/>
-                    <DataGridTextColumn Header="StartId" Binding="{Binding StartId}"/>
-                    <DataGridTextColumn Header="ElementCount" Binding="{Binding ElementCount}"/>
-                    <DataGridTextColumn Header="TotalReadCount" Binding="{Binding TotalReadCount}"/>
-                    <DataGridTextColumn Header="TotalWriteCount" Binding="{Binding TotalWriteCount}"/>
-                    <DataGridTextColumn Header="TotalComparassionCount" Binding="{Binding TotalComparassionCount}"/>
-                    <DataGridTextColumn Header="TotalActionCount" Binding="{Binding TotalActionCount}"/>
-                    <DataGridTextColumn Header="Elapsed time" Binding="{Binding ElapsedTime}"/>
+                    <DataGridTextColumn Header="Total reads" Binding="{Binding TotalReadCount}"/>
+                    <DataGridTextColumn Header="Total writes" Binding="{Binding TotalWriteCount}"/>
+                    <DataGridTextColumn Header="Total comparassions" Binding="{Binding TotalComparassionCount}"/>
+                    <DataGridTextColumn Header="Total actions" Binding="{Binding TotalActionCount}"/>
+                    <DataGridTextColumn Header="Elapsed milliseconds" Binding="{Binding ElapsedTime}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
