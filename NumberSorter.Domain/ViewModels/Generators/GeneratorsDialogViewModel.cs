@@ -26,7 +26,7 @@ namespace NumberSorter.Domain.ViewModels
 
         private int[] _numbers;
         private readonly IDialogService<ReactiveObject> _dialogService;
-        private readonly JsonFileSerializer<CustomListGenerator> _jsonFileSerializer;
+        private readonly JsonFileSerializer _jsonFileSerializer;
 
         private readonly SourceList<CustomListGenerator> _listGenerators;
         private readonly ReadOnlyObservableCollection<ListGeneratorLineViewModel> _listGeneratorsViewModels;
@@ -69,7 +69,7 @@ namespace NumberSorter.Domain.ViewModels
                 TypeNameHandling = TypeNameHandling.All,
                 Formatting = Formatting.Indented
             };
-            _jsonFileSerializer = new JsonFileSerializer<CustomListGenerator>(jsonSerializerSettings);
+            _jsonFileSerializer = new JsonFileSerializer(jsonSerializerSettings);
 
             var canAcceptPredicate = this.WhenAnyValue(x => x.SelectedListGenerator).Select(x => x != null);
 
@@ -150,7 +150,7 @@ namespace NumberSorter.Domain.ViewModels
 
         private void DeserializeGenerator(string filePath)
         {
-            var generator = _jsonFileSerializer.LoadFromJsonFile(filePath);
+            var generator = _jsonFileSerializer.LoadFromJsonFile<CustomListGenerator>(filePath);
             if (generator != null)
                 _listGenerators.Add(generator);
         }
@@ -192,7 +192,7 @@ namespace NumberSorter.Domain.ViewModels
                 return Enumerable.Empty<CustomListGenerator>();
 
             string[] filePaths = Directory.GetFiles(FilePaths.GeneratorFolder);
-            return filePaths.Select(_jsonFileSerializer.LoadFromJsonFile).Where(x => x != null);
+            return filePaths.Select(x => _jsonFileSerializer.LoadFromJsonFile<CustomListGenerator>(x)).Where(x => x != null);
         }
 
         private static string GetGeneratorPath(CustomListGenerator listGenerator)

@@ -1,0 +1,19 @@
+﻿<reactiveui:ReactiveUserControl
+             x:Class="NumberSorter.Forms.ListGeneratorLineControl"
+             xmlns:viewmodels="clr-namespace:NumberSorter.Domain.ViewModels;assembly=NumberSorter.Domain"
+             x:TypeArguments="viewmodels:ListGeneratorLineViewModel"
+             xmlns:reactiveui="http://reactiveui.net"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NumberSorter.Forms"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="400">
+    <Grid Name="LineGrid">
+        <Grid.InputBindings>
+            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=DataContext.EditGeneratorCommand}"/>
+        </Grid.InputBindings>
+        <TextBlock Name="NameTextBlock" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+    </Grid>
+</reactiveui:ReactiveUserControl>

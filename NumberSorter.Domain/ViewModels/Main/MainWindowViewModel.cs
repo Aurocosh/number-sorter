@@ -33,7 +33,7 @@ namespace NumberSorter.Domain.ViewModels
         #region Fields
 
         private readonly IDialogService<ReactiveObject> _dialogService;
-        private readonly JsonFileSerializer<SortLog<int>> _jsonFileSerializer;
+        private readonly JsonFileSerializer _jsonFileSerializer;
 
         #endregion Fields
 
@@ -46,7 +46,7 @@ namespace NumberSorter.Domain.ViewModels
         [Reactive] public string InfoText { get; set; }
         [Reactive] public string ResultText { get; set; }
 
-        [Reactive] public List<int> InputNumbers { get; set; }
+        [Reactive] public UnsortedInput<int> InputNumbers { get; set; }
         [Reactive] public SortLog<int> SortingLog { get; set; }
 
 
@@ -58,7 +58,9 @@ namespace NumberSorter.Domain.ViewModels
         public ReactiveCommand<Unit, List<int>> GenerateRandomCommand { get; }
         public ReactiveCommand<Unit, List<int>> GenerateCustomCommand { get; }
         public ReactiveCommand<Unit, List<int>> GeneratePartiallySortedCommand { get; }
+
         public ReactiveCommand<Unit, Unit> PerformSortCommand { get; }
+        public ReactiveCommand<Unit, Unit> SortHistoryCommand { get; }
 
         #endregion Commands
 
@@ -73,13 +75,13 @@ namespace NumberSorter.Domain.ViewModels
             var jsonSerializerSettings = new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.All,
-                Formatting = Formatting.Indented
+                Formatting = Formatting.None
             };
-            _jsonFileSerializer = new JsonFileSerializer<SortLog<int>>(jsonSerializerSettings);
+            _jsonFileSerializer = new JsonFileSerializer(jsonSerializerSettings);
 
             VisualizationViewModel = new VisualizationViewModel(_dialogService);
 
-            InputNumbers = new List<int>();
+            InputNumbers = new UnsortedInput<int>();
             SortingLog = new SortLog<int>();
 
             var canPerformSort = this.WhenAnyValue(x => x.InputNumbers)
@@ -91,22 +93,19 @@ namespace NumberSorter.Domain.ViewModels
             GeneratePartiallySortedCommand = ReactiveCommand.CreateFromObservable(GeneratePartiallySorted);
 
             PerformSortCommand = ReactiveCommand.Create(SortData, canPerformSort);
+            SortHistoryCommand = ReactiveCommand.Create(SortHistory);
 
             LoadDataCommand
                 .Where(x => !string.IsNullOrEmpty(x))
                 .Select(LoadNumbersFromFile)
-                .Where(x => x.Count > 0)
-                .Subscribe(x => InputNumbers = x);
+                .Subscribe(SetUnsortedInput);
 
             GenerateCustomCommand
-                .Where(x => x.Count > 0)
-                .Subscribe(x => InputNumbers = x);
+                .Subscribe(SetUnsortedInput);
             GenerateRandomCommand
-                .Where(x => x.Count > 0)
-                .Subscribe(x => InputNumbers = x);
+                .Subscribe(SetUnsortedInput);
             GeneratePartiallySortedCommand
-                .Where(x => x.Count > 0)
-                .Subscribe(x => InputNumbers = x);
+                .Subscribe(SetUnsortedInput);
 
             this.WhenAnyValue(x => x.InputNumbers)
                 .Subscribe(UpdateInputText);
@@ -168,7 +167,7 @@ namespace NumberSorter.Domain.ViewModels
             if (viewModel.DialogResult != true || viewModel.SelectedSortType == null)
                 return;
 
-            var accessTrackingList = new LoggingList<int>(InputNumbers, new IntComparer());
+            var accessTrackingList = new LoggingList<int>(InputNumbers.Values, new IntComparer());
 
             var algorhythmType = viewModel.SelectedSortType.AlgorhythmType;
             var algorhythm = AlgorhythmFactory.GetAlgorhythm(algorhythmType, accessTrackingList);
@@ -182,25 +181,40 @@ namespace NumberSorter.Domain.ViewModels
             var elapsedTime = stopwatch.ElapsedMilliseconds;
 
             var algorhythmName = AlgorhythmNamer.GetName(algorhythmType);
-            SortingLog = accessTrackingList.GetSortLog(algorhythmName, elapsedTime);
+            SortingLog = accessTrackingList.GetSortLog(InputNumbers.Id, algorhythmName, elapsedTime);
+            SaveLogSummary(SortingLog);
+        }
 
-            var filePath = GetLogPath(SortingLog);
-            _jsonFileSerializer.SaveToJsonFile(filePath, SortingLog);
+        private void SortHistory()
+        {
+            var viewModel = new LogHistoryDialogViewModel(_dialogService);
+            _dialogService.ShowModalPresentation(this, viewModel);
+            if (viewModel.DialogResult == true)
+                InputNumbers = new UnsortedInput<int>(viewModel.InputNumbers);
         }
 
         #endregion Command functions
 
-        private static string GetLogPath(SortLog<int> sortLog)
+        private void SaveLogSummary(SortLog<int> sortLog)
         {
-            var guid = Guid.NewGuid();
-            var currentDateTime = DateTime.Now;
-            return Path.Combine(FilePaths.LogFolder, $"log-{guid.ToString()}.json");
+            var inputId = sortLog.Summary.StartId.ToString();
+            var resultId = sortLog.Summary.FinishId.ToString();
+            var summaryFilePath = Path.Combine(FilePaths.LogFolder, inputId, $"{resultId}.json");
+            _jsonFileSerializer.SaveToJsonFile(summaryFilePath, sortLog.Summary);
+
+            var inputFilePath = Path.Combine(FilePaths.InputsListsFolder, $"{inputId}.json");
+            _jsonFileSerializer.SaveToJsonFile(inputFilePath, sortLog.InputState.State);
         }
 
-        private void UpdateInputText(List<int> values)
+        private void SetUnsortedInput(IEnumerable<int> input)
         {
-            InputText = string.Join(", ", values.Take(1000).Select(x => x.ToString()));
-            InfoText = $"Input number count: {values.Count}";
+            InputNumbers = new UnsortedInput<int>(input);
+        }
+
+        private void UpdateInputText(UnsortedInput<int> input)
+        {
+            InputText = string.Join(", ", input.Values.Take(1000).Select(x => x.ToString()));
+            InfoText = $"Input number count: {input.Count}";
         }
 
         private void UpdateOutputText(SortLog<int> sortLog)

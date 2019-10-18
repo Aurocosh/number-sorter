@@ -1,14 +1,11 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NumberSorter.Domain.Serialization
 {
-    internal sealed class JsonFileSerializer<T> where T : class
+    internal sealed class JsonFileSerializer
     {
         private readonly JsonErrorLogger _jsonErrorLogger;
         private readonly JsonSerializerSettings _jsonSerializerSettings;
@@ -20,7 +17,7 @@ namespace NumberSorter.Domain.Serialization
             _jsonSerializerSettings.Error = _jsonErrorLogger.LogError;
         }
 
-        public bool SaveToJsonFile(string filePath, T objectToSerialize)
+        public bool SaveToJsonFile<T>(string filePath, T objectToSerialize) where T : class
         {
             var direcoryPath = Path.GetDirectoryName(filePath);
             Directory.CreateDirectory(direcoryPath);
@@ -32,14 +29,36 @@ namespace NumberSorter.Domain.Serialization
             return !_jsonErrorLogger.HasErrors;
         }
 
-        public T LoadFromJsonFile(string filePath)
+        public T LoadFromJsonFile<T>(string filePath) where T : class
         {
             if (!File.Exists(filePath))
                 return null;
             var json = File.ReadAllText(filePath);
 
             _jsonErrorLogger.Clear();
-            return JsonConvert.DeserializeObject<T>(json, _jsonSerializerSettings);
+            var obj = JsonConvert.DeserializeObject<T>(json, _jsonSerializerSettings);
+            return obj;
+        }
+
+        public T LoadPartFromJsonFile<T>(string filePath, Func<JObject, JToken> partExtractor) where T : class
+        {
+            if (!File.Exists(filePath))
+                return null;
+            var json = File.ReadAllText(filePath);
+
+            var jObject = JObject.Parse(json);
+            var jToken = partExtractor.Invoke(jObject);
+
+            var serializer = JsonSerializer.Create(_jsonSerializerSettings);
+            _jsonErrorLogger.Clear();
+            var value = jToken.ToObject<T>(serializer);
+            if (_jsonErrorLogger.HasErrors)
+            {
+                var errorString = string.Join("\n", _jsonErrorLogger.Errors);
+                Console.WriteLine(errorString);
+                return null;
+            }
+            return value;
         }
     }
 }

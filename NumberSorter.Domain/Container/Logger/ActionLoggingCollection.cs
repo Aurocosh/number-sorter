@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Domain.Container
 {
-    public sealed class LoggingList<T> : IList<LogValue<T>>, IComparer<LogValue<T>> where T : IEquatable<T>
+    public sealed class ActionLoggingCollection<T> : IList<LogValue<T>>, IComparer<LogValue<T>> where T : IEquatable<T>
     {
         private readonly IComparer<T> _comparer;
         private LogValueWrite<T> _previousValueWrite;
@@ -21,7 +21,7 @@ namespace NumberSorter.Domain.Container
         private readonly List<int> _logValueIndexes;
         private readonly List<LogAction<T>> _actionLog;
 
-        public LoggingList(IReadOnlyList<T> list, IComparer<T> comparer)
+        public ActionLoggingCollection(IList<T> list, IComparer<T> comparer)
         {
             _comparer = comparer;
             _previousValueWrite = null;
@@ -53,7 +53,7 @@ namespace NumberSorter.Domain.Container
         public int Count => _list.Count;
         public bool IsReadOnly => ((IList)_list).IsReadOnly;
 
-        public SortLog<T> GetSortLog(Guid startId, string algorhythmName, float elapsedTime)
+        public SortLog<T> GetSortLog(string algorhythmName, float elapsedTime)
         {
             LogPreviousWrite();
             LogMarker("Final state of list");
@@ -62,8 +62,10 @@ namespace NumberSorter.Domain.Container
             var finalState = _list.Select(x => x.Value).ToList();
             var actionLog = new List<LogAction<T>>(_actionLog);
 
-            return new SortLog<T>(startId, startingState, finalState, actionLog, _comparer, elapsedTime, algorhythmName);
+            return new SortLog<T>(startingState, finalState, actionLog, _comparer, elapsedTime, algorhythmName);
         }
+
+        #region Main logging functions
 
         private void LogMarker(string markerText)
         {
@@ -113,6 +115,10 @@ namespace NumberSorter.Domain.Container
             }
         }
 
+        #endregion
+
+        #region List function overrides
+
         public void Add(LogValue<T> item)
         {
             LogWrite(_list.Count, item);
@@ -147,6 +153,8 @@ namespace NumberSorter.Domain.Container
             LogWrite(index, item);
             _list.RemoveAt(index);
         }
+
+        #endregion
 
         public int Compare(LogValue<T> x, LogValue<T> y)
         {

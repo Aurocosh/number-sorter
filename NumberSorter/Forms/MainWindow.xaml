@@ -21,7 +21,8 @@
                 <MenuItem Header="Generate partially sorted list" Name="GeneratePartiallySortedButton"/>
             </MenuItem>
             <MenuItem Header="Sort">
-                <MenuItem Header="Sort list" Name="SortButton"/>
+                <MenuItem Header="Perform sort" Name="PerformSortButton"/>
+                <MenuItem Header="Sort history" Name="SortHistoryButton"/>
             </MenuItem>
         </Menu>
         <TabControl>
