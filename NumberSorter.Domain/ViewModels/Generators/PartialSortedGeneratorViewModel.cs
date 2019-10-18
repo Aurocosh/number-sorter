@@ -1,4 +1,5 @@
 ﻿using NumberSorter.Core.Generators;
+using NumberSorter.Domain.Container;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
@@ -10,12 +11,6 @@ namespace NumberSorter.Domain.ViewModels
 {
     public class PartialSortedGeneratorViewModel : ReactiveObject
     {
-        #region Fields
-
-        private List<int> _numbers = new List<int>();
-
-        #endregion
-
         #region Properties
 
         [Reactive] public int Minimum { get; set; }
@@ -28,7 +23,7 @@ namespace NumberSorter.Domain.ViewModels
         [Reactive] public int RunCount { get; set; }
         [Reactive] public bool? DialogResult { get; set; }
 
-        public List<int> Numbers => new List<int>(_numbers);
+        public UnsortedInput<int> InputNumbers { get; private set; }
 
         #endregion Properties
 
@@ -42,6 +37,8 @@ namespace NumberSorter.Domain.ViewModels
 
         public PartialSortedGeneratorViewModel()
         {
+            InputNumbers = new UnsortedInput<int>();
+
             Minimum = -100;
             Maximum = 100;
             MinimumRunSize = 5;
@@ -75,11 +72,17 @@ namespace NumberSorter.Domain.ViewModels
         private void Accept()
         {
             var generator = new RandomPartialSortedIntegerGenerator(new Random());
-            _numbers = generator.Generate(Minimum, Maximum, MinimumRunSize, MaximumRunSize, RunCount, InversionProbability, RandomRunProbability);
+            var numbers = generator.Generate(Minimum, Maximum, MinimumRunSize, MaximumRunSize, RunCount, InversionProbability, RandomRunProbability);
+            InputNumbers = new UnsortedInput<int>(InputName, numbers);
             DialogResult = true;
         }
 
         #endregion Command functions
 
+        #region Functions
+
+        private string InputName => $"Partially sorted list. Run count: {RunCount}, Range: {Minimum} to {Maximum}";
+
+        #endregion
     }
 }

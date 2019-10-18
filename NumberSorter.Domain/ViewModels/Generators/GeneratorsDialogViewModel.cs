@@ -17,6 +17,7 @@ using NumberSorter.Domain.Interactions;
 using Newtonsoft.Json;
 using System.IO;
 using NumberSorter.Domain.Serialization;
+using NumberSorter.Domain.Container;
 
 namespace NumberSorter.Domain.ViewModels
 {
@@ -24,7 +25,6 @@ namespace NumberSorter.Domain.ViewModels
     {
         #region Fields
 
-        private int[] _numbers;
         private readonly IDialogService<ReactiveObject> _dialogService;
         private readonly JsonFileSerializer _jsonFileSerializer;
 
@@ -38,7 +38,7 @@ namespace NumberSorter.Domain.ViewModels
         [Reactive] public bool? DialogResult { get; set; }
         [Reactive] public ListGeneratorLineViewModel SelectedListGenerator { get; set; }
 
-        public List<int> Numbers => new List<int>(_numbers);
+        public UnsortedInput<int> InputNumbers { get; private set; }
         public ReadOnlyObservableCollection<ListGeneratorLineViewModel> ListGeneratorLineViewModels => _listGeneratorsViewModels;
 
 
@@ -63,6 +63,8 @@ namespace NumberSorter.Domain.ViewModels
         {
             _dialogService = dialogService;
             _listGenerators = new SourceList<CustomListGenerator>();
+
+            InputNumbers = new UnsortedInput<int>();
 
             var jsonSerializerSettings = new JsonSerializerSettings
             {
@@ -98,7 +100,6 @@ namespace NumberSorter.Domain.ViewModels
                 .DisposeMany()
                 .Subscribe();
 
-            _numbers = Array.Empty<int>();
             _listGenerators.AddRange(LoadGenerators());
         }
 
@@ -177,8 +178,8 @@ namespace NumberSorter.Domain.ViewModels
         {
             var generator = SelectedListGenerator.ListGenerator;
             var context = new StandardConverterContext();
-            _numbers = generator.GenerateList(context);
-
+            var numbers = generator.GenerateList(context);
+            InputNumbers = new UnsortedInput<int>(generator.Name, numbers);
             DialogResult = SelectedListGenerator != null;
         }
 

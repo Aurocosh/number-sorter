@@ -55,9 +55,9 @@ namespace NumberSorter.Domain.ViewModels
         #region Commands
 
         public ReactiveCommand<Unit, string> LoadDataCommand { get; }
-        public ReactiveCommand<Unit, List<int>> GenerateRandomCommand { get; }
-        public ReactiveCommand<Unit, List<int>> GenerateCustomCommand { get; }
-        public ReactiveCommand<Unit, List<int>> GeneratePartiallySortedCommand { get; }
+        public ReactiveCommand<Unit, UnsortedInput<int>> GenerateRandomCommand { get; }
+        public ReactiveCommand<Unit, UnsortedInput<int>> GenerateCustomCommand { get; }
+        public ReactiveCommand<Unit, UnsortedInput<int>> GeneratePartiallySortedCommand { get; }
 
         public ReactiveCommand<Unit, Unit> PerformSortCommand { get; }
         public ReactiveCommand<Unit, Unit> SortHistoryCommand { get; }
@@ -124,39 +124,42 @@ namespace NumberSorter.Domain.ViewModels
             return DialogInteractions.FindFileToOpenWithType.Handle("Txt files (*.txt)|*.txt");
         }
 
-        private List<int> LoadNumbersFromFile(string filepath)
+        private UnsortedInput<int> LoadNumbersFromFile(string filePath)
         {
-            var fileText = File.ReadAllText(filepath);
+            var fileName = Path.GetFileName(filePath);
+            var fileText = File.ReadAllText(filePath);
             fileText = Regex.Replace(fileText, @"[^\d\-]", " ");
             fileText = Regex.Replace(fileText, @"\-\s", " ");
             fileText = Regex.Replace(fileText, @"(\d+)\-(\d+)", "%1 -$2");
             fileText = Regex.Replace(fileText, @"\s+", " ");
             fileText = fileText.Trim();
 
-            return fileText.Split(' ')
+            var numbers = fileText.Split(' ')
                 .Select(x => int.Parse(x))
                 .ToList();
+
+            return new UnsortedInput<int>(fileName, numbers);
         }
 
-        private IObservable<List<int>> GenerateRandom()
+        private IObservable<UnsortedInput<int>> GenerateRandom()
         {
             var viewModel = new NumberGeneratorsViewModel();
             _dialogService.ShowModalPresentation(this, viewModel);
-            return Observable.Return(viewModel.Numbers);
+            return Observable.Return(viewModel.InputNumbers);
         }
 
-        private IObservable<List<int>> GenerateCustom()
+        private IObservable<UnsortedInput<int>> GenerateCustom()
         {
             var viewModel = new GeneratorsDialogViewModel(_dialogService);
             _dialogService.ShowModalPresentation(this, viewModel);
-            return Observable.Return(viewModel.Numbers);
+            return Observable.Return(viewModel.InputNumbers);
         }
 
-        private IObservable<List<int>> GeneratePartiallySorted()
+        private IObservable<UnsortedInput<int>> GeneratePartiallySorted()
         {
             var viewModel = new PartialSortedGeneratorViewModel();
             _dialogService.ShowModalPresentation(this, viewModel);
-            return Observable.Return(viewModel.Numbers);
+            return Observable.Return(viewModel.InputNumbers);
         }
 
         private void SortData()
@@ -181,7 +184,7 @@ namespace NumberSorter.Domain.ViewModels
             var elapsedTime = stopwatch.ElapsedMilliseconds;
 
             var algorhythmName = AlgorhythmNamer.GetName(algorhythmType);
-            SortingLog = accessTrackingList.GetSortLog(InputNumbers.Id, algorhythmName, elapsedTime);
+            SortingLog = accessTrackingList.GetSortLog(InputNumbers.Name, InputNumbers.Id, algorhythmName, elapsedTime);
             SaveLogSummary(SortingLog);
         }
 
@@ -190,25 +193,22 @@ namespace NumberSorter.Domain.ViewModels
             var viewModel = new LogHistoryDialogViewModel(_dialogService);
             _dialogService.ShowModalPresentation(this, viewModel);
             if (viewModel.DialogResult == true)
-                InputNumbers = new UnsortedInput<int>(viewModel.InputNumbers);
+                InputNumbers = viewModel.InputNumbers;
         }
 
         #endregion Command functions
 
+        private void SetUnsortedInput(UnsortedInput<int> input) => InputNumbers = input;
+
         private void SaveLogSummary(SortLog<int> sortLog)
         {
-            var inputId = sortLog.Summary.StartId.ToString();
+            var inputId = sortLog.Summary.InputId.ToString();
             var resultId = sortLog.Summary.FinishId.ToString();
             var summaryFilePath = Path.Combine(FilePaths.LogFolder, inputId, $"{resultId}.json");
             _jsonFileSerializer.SaveToJsonFile(summaryFilePath, sortLog.Summary);
 
             var inputFilePath = Path.Combine(FilePaths.InputsListsFolder, $"{inputId}.json");
-            _jsonFileSerializer.SaveToJsonFile(inputFilePath, sortLog.InputState.State);
-        }
-
-        private void SetUnsortedInput(IEnumerable<int> input)
-        {
-            InputNumbers = new UnsortedInput<int>(input);
+            _jsonFileSerializer.SaveToJsonFile(inputFilePath, InputNumbers);
         }
 
         private void UpdateInputText(UnsortedInput<int> input)

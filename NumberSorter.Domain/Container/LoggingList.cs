@@ -53,7 +53,7 @@ namespace NumberSorter.Domain.Container
         public int Count => _list.Count;
         public bool IsReadOnly => ((IList)_list).IsReadOnly;
 
-        public SortLog<T> GetSortLog(Guid startId, string algorhythmName, float elapsedTime)
+        public SortLog<T> GetSortLog(string inputName, Guid inputId, string algorhythmName, float elapsedTime)
         {
             LogPreviousWrite();
             LogMarker("Final state of list");
@@ -62,7 +62,7 @@ namespace NumberSorter.Domain.Container
             var finalState = _list.Select(x => x.Value).ToList();
             var actionLog = new List<LogAction<T>>(_actionLog);
 
-            return new SortLog<T>(startId, startingState, finalState, actionLog, _comparer, elapsedTime, algorhythmName);
+            return new SortLog<T>(inputName, inputId, startingState, finalState, actionLog, _comparer, elapsedTime, algorhythmName);
         }
 
         private void LogMarker(string markerText)

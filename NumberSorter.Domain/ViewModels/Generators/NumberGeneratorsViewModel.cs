@@ -11,17 +11,12 @@ using System.Reactive.Linq;
 using System.Reactive;
 using ReactiveUI.Fody.Helpers;
 using NumberSorter.Core.Generators;
+using NumberSorter.Domain.Container;
 
 namespace NumberSorter.Domain.ViewModels
 {
     public class NumberGeneratorsViewModel : ReactiveObject
     {
-        #region Fields
-
-        private List<int> _numbers = new List<int>();
-
-        #endregion
-
         #region Properties
 
         [Reactive] public int Minimum { get; set; }
@@ -29,17 +24,15 @@ namespace NumberSorter.Domain.ViewModels
         [Reactive] public int NumberCount { get; set; }
         [Reactive] public bool? DialogResult { get; set; }
 
-        public List<int> Numbers => new List<int>(_numbers);
+        public UnsortedInput<int> InputNumbers { get; private set; }
 
         #endregion Properties
-
 
         #region Commands
 
         public ReactiveCommand<Unit, Unit> AcceptCommand { get; }
 
         #endregion Commands
-
 
         #region Constructors
 
@@ -48,6 +41,8 @@ namespace NumberSorter.Domain.ViewModels
             Minimum = -100;
             Maximum = 100;
             NumberCount = 100;
+
+            InputNumbers = new UnsortedInput<int>();
 
             AcceptCommand = ReactiveCommand.Create(Accept);
 
@@ -68,11 +63,18 @@ namespace NumberSorter.Domain.ViewModels
         private void Accept()
         {
             var generator = new RandomIntegerGenerator(new Random());
-            _numbers = generator.Generate(Minimum, Maximum, NumberCount);
+            var numbers = generator.Generate(Minimum, Maximum, NumberCount);
+            InputNumbers = new UnsortedInput<int>(InputName, numbers);
             DialogResult = true;
         }
 
         #endregion Command functions
+
+        #region Functions
+
+        private string InputName => $"Random list. Size: {NumberCount}, Range: {Minimum} to {Maximum}";
+
+        #endregion
 
     }
 }

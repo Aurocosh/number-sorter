@@ -18,7 +18,7 @@ namespace NumberSorter.Domain.ViewModels
         public float ElapsedTime => LogSummary.ElapsedTime;
         public string AlgorhythmName => LogSummary.AlgorhythmName;
 
-        public string StartId => LogSummary.StartId.ToString();
+        public string StartId => LogSummary.InputId.ToString();
         public string FinishId => LogSummary.FinishId.ToString();
 
         public int ElementCount => LogSummary.ElementCount;

@@ -22,8 +22,6 @@ namespace NumberSorter.Forms
     /// </summary>
     public partial class NumberGeneratorsWindow : ReactiveWindow<NumberGeneratorsViewModel>
     {
-        public List<int> Numbers => ViewModel.Numbers;
-
         public NumberGeneratorsWindow()
         {
             InitializeComponent();

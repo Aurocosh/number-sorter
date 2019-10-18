@@ -41,8 +41,9 @@
                       IsReadOnly="True"
                       d:DataContext="{d:DesignInstance viewmodels:LogGroupLineViewModel}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Created" Binding="{Binding Created}"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                     <DataGridTextColumn Header="Size" Binding="{Binding Size}"/>
+                    <DataGridTextColumn Header="Created" Binding="{Binding Created}"/>
                     <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                 </DataGrid.Columns>
             </DataGrid>

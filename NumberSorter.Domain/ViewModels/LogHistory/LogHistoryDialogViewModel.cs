@@ -35,7 +35,7 @@ namespace NumberSorter.Domain.ViewModels
 
         #region Properties
 
-        public IReadOnlyList<int> InputNumbers { get; private set; }
+        public UnsortedInput<int> InputNumbers { get; private set; }
 
         [Reactive] public LogGroupLineViewModel SelectedLogGroup { get; set; }
         [Reactive] public LogSummaryLineViewModel SelectedLogSummary { get; set; }
@@ -62,7 +62,7 @@ namespace NumberSorter.Domain.ViewModels
         public LogHistoryDialogViewModel(IDialogService<ReactiveObject> dialogService)
         {
             _dialogService = dialogService;
-            InputNumbers = Array.Empty<int>();
+            InputNumbers = new UnsortedInput<int>();
 
             var jsonSerializerSettings = new JsonSerializerSettings
             {
@@ -118,9 +118,9 @@ namespace NumberSorter.Domain.ViewModels
             if (SelectedLogSummary != null)
             {
                 var logSummary = SelectedLogSummary.LogSummary;
-                var inputId = logSummary.StartId.ToString();
+                var inputId = logSummary.InputId.ToString();
                 var inputFilePath = Path.Combine(FilePaths.InputsListsFolder, $"{inputId}.json");
-                InputNumbers = _jsonFileSerializer.LoadFromJsonFile<int[]>(inputFilePath);
+                InputNumbers = _jsonFileSerializer.LoadFromJsonFile<UnsortedInput<int>>(inputFilePath);
             }
             DialogResult = true;
         }
@@ -131,7 +131,7 @@ namespace NumberSorter.Domain.ViewModels
         {
             if (logSummary == null)
                 return false;
-            var inputId = logSummary.StartId.ToString();
+            var inputId = logSummary.InputId.ToString();
             var inputFilePath = Path.Combine(FilePaths.InputsListsFolder, $"{inputId}.json");
             return File.Exists(inputFilePath);
         }
@@ -139,10 +139,12 @@ namespace NumberSorter.Domain.ViewModels
         public void LoadLogGroups()
         {
             var logDirectory = FilePaths.LogFolder;
+            if (!Directory.Exists(logDirectory))
+                return;
             var logPaths = Directory.GetFiles(logDirectory, "*", SearchOption.AllDirectories);
             var logGroups = logPaths
                 .Select(x => _jsonFileSerializer.LoadFromJsonFile<LogSummary>(x))
-                .GroupBy(x => x.StartId)
+                .GroupBy(x => x.InputId)
                 .Select(x => new LogGroup(x.Key, x))
                 .ToList();
             _logGroups.AddRange(logGroups);
@@ -161,6 +163,9 @@ namespace NumberSorter.Domain.ViewModels
 
             var logDirectory = FilePaths.LogFolder;
             var logGroupDirectory = Path.Combine(logDirectory, logGroupId);
+
+            if (!Directory.Exists(logGroupDirectory))
+                return;
 
             var logPaths = Directory.GetFiles(logGroupDirectory);
             var logSummaries = logPaths.Select(x => _jsonFileSerializer.LoadFromJsonFile<LogSummary>(x)).ToList();

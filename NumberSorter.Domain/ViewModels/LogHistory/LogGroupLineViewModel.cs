@@ -14,6 +14,7 @@ namespace NumberSorter.Domain.ViewModels
         #region Properties
 
         public int Size => LogGroup.Size;
+        public string Name => LogGroup.Name;
         public string Id => LogGroup.Id.ToString();
         public DateTime Created => LogGroup.FirstCreated;
 
@@ -24,7 +25,6 @@ namespace NumberSorter.Domain.ViewModels
         public LogGroupLineViewModel(LogGroup logGroup)
         {
             LogGroup = logGroup;
-
         }
     }
 }
