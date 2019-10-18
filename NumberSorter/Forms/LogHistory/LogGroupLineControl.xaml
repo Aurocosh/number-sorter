@@ -10,5 +10,16 @@
              xmlns:local="clr-namespace:NumberSorter.Forms"
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="400">
-    <TextBlock Name="NameTextBlock" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="64"/>
+            <ColumnDefinition Width="64"/>
+            <ColumnDefinition Width="64"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Column="0" Content="Input size"/>
+        <TextBlock Grid.Column="1" Name="SizeTextBlock" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+        <Label Grid.Column="2" Content="Input id"/>
+        <TextBlock Grid.Column="3" Name="IdeTextBlock" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+    </Grid>
 </reactiveui:ReactiveUserControl>

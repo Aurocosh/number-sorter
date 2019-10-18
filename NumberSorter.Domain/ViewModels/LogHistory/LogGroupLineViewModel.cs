@@ -13,6 +13,7 @@ namespace NumberSorter.Domain.ViewModels
     {
         #region Properties
 
+        public int Size => LogGroup.Size;
         public string Id => LogGroup.Id.ToString();
         public LogGroup LogGroup { get; }
 
@@ -21,6 +22,7 @@ namespace NumberSorter.Domain.ViewModels
         public LogGroupLineViewModel(LogGroup logGroup)
         {
             LogGroup = logGroup;
+
         }
     }
 }
