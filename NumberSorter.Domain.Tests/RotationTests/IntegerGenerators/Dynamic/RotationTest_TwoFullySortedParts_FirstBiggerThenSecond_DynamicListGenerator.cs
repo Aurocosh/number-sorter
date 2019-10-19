@@ -7,7 +7,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 
-namespace NumberSorter.Domain.Tests.SortTests.Base.IntegerGenerators.Dynamic
+namespace NumberSorter.Domain.Tests.RotationTests.Base.IntegerGenerators.Dynamic
 {
     // Generates a very specific array of integers that consists of two fully sorted parts.
     // Also all elements from first part is bigger than any element from second part
@@ -15,12 +15,12 @@ namespace NumberSorter.Domain.Tests.SortTests.Base.IntegerGenerators.Dynamic
     // 5,6,1,2,3
     // 12,14,15,20,1,3
 
-    public partial class MergeTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator : IEnumerable<object[]>
+    public class RotationTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator : IEnumerable<object[]>
     {
         private static readonly UnmergedFullySortedGenerator _generator = new UnmergedFullySortedGenerator(TestsRandomProvider.Random);
         private static readonly List<object[]> _data;
 
-        static MergeTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator()
+        static RotationTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator()
         {
             var lengths = new List<int> { 1, 2, 3, 10, 1000 };
 

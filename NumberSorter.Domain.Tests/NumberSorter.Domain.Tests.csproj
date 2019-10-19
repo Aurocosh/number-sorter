@@ -73,7 +73,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MergeTests\IntegerGenerators\Dynamic\MergeTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator.cs" />
+    <Compile Include="RotationTests\IntegerGenerators\Dynamic\RotationTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator.cs" />
     <Compile Include="SortTests\GallopingRecursiveMergeSortTests.cs" />
     <Compile Include="SortTests\BinarySortTests.cs" />
     <Compile Include="SortTests\CombSortTests.cs" />
@@ -87,8 +87,8 @@
     <Compile Include="SortTests\IntegerGenerators\Dynamic\SortTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator.cs" />
     <Compile Include="SortTests\IntegerGenerators\Static\SortTest_PartiallySorted_StaticListGenerator.cs" />
     <Compile Include="Utility\Vector2Int.cs" />
-    <Compile Include="MergeTests\Base\MergeTestsBase.cs" />
-    <Compile Include="MergeTests\RecursiveInPlaceMergeTests.cs" />
+    <Compile Include="RotationTests\Base\RotationTestsBase.cs" />
+    <Compile Include="RotationTests\RecursiveInPlaceRotationTests.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

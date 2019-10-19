@@ -1,17 +1,18 @@
-﻿using NumberSorter.Core.Logic.Utility;
+﻿using NumberSorter.Core.Logic.Algorhythm.Merge.Base;
+using NumberSorter.Core.Logic.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class RecursiveInPlaceMerge<T> : GenericMergeAlgorhythm<T>
+    public class RecursiveInPlaceRotation<T> : ILocalRotationAlgothythm<T>
     {
-        public RecursiveInPlaceMerge(IComparer<T> comparer) : base(comparer)
+        public RecursiveInPlaceRotation()
         {
         }
 
-        public override void Merge(IList<T> list, SortRun leftRun, SortRun rightRun)
+        public void Rotate(IList<T> list, SortRun leftRun, SortRun rightRun)
         {
             if (leftRun.Length < rightRun.Length)
                 MergeForward(list, leftRun, rightRun);

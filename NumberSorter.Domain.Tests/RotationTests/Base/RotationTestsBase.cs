@@ -3,34 +3,32 @@ using NumberSorter.Core.Algorhythm;
 using NumberSorter.Core.Logic.Algorhythm;
 using NumberSorter.Core.Logic.Algorhythm.Merge.Base;
 using NumberSorter.Core.Logic.Comparer;
-using NumberSorter.Domain.Tests.SortTests.Base.IntegerGenerators.Dynamic;
+using NumberSorter.Domain.Tests.RotationTests.Base.IntegerGenerators.Dynamic;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using Xunit;
 
-namespace NumberSorter.Domain.Tests.MergeTests.Base
+namespace NumberSorter.Domain.Tests.RotationTests.Base
 {
-    public abstract class MergeTestsBase
+    public abstract class RotationTestsBase
     {
         private IComparer<int> _comparer;
-        private readonly ILocalMergeAlgothythm<int> _merge;
+        private readonly ILocalRotationAlgothythm<int> _rotation;
 
-
-        protected MergeTestsBase()
+        protected RotationTestsBase()
         {
             _comparer = new IntComparer();
-            _merge = GetAlgorhythm(_comparer);
+            _rotation = GetAlgorhythm();
         }
 
-        protected abstract ILocalMergeAlgothythm<int> GetAlgorhythm(IComparer<int> comparer);
+        protected abstract ILocalRotationAlgothythm<int> GetAlgorhythm();
 
         [Theory]
-        [ClassData(typeof(MergeTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator))]
-        public void MergingTwoSorted_JustNeedToSwapParts_RandomArray(List<int> input, SortRun firstRun, SortRun secondRun)
+        [ClassData(typeof(RotationTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator))]
+        public void RotateTwoSortedParts_RandomArray(List<int> input, SortRun firstRun, SortRun secondRun)
         {
             var result = new List<int>(input);
-            _merge.Merge(result, firstRun, secondRun);
+            _rotation.Rotate(result, firstRun, secondRun);
             bool fullySorted = ListUtility.IsSorted(result, _comparer);
             var message = GetResultMessage(fullySorted, input, result, firstRun, secondRun);
             Assert.True(fullySorted, message);
@@ -42,7 +40,7 @@ namespace NumberSorter.Domain.Tests.MergeTests.Base
                 return "";
             var inputString = string.Join("\t", input);
             var resultString = string.Join("\t", result);
-            return $"Failed to sort list:\nFirst run: {firstRun}\nSecond run: {secondRun}\nInput: {inputString}\nResult: {resultString}";
+            return $"Failed to rotate list:\nFirst run: {firstRun}\nSecond run: {secondRun}\nInput: {inputString}\nResult: {resultString}";
         }
     }
 }

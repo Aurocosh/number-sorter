@@ -9,11 +9,11 @@ namespace NumberSorter.Core.Logic.Algorhythm
 {
     public class TripleWindowMergeSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>, ILocalMergeAlgothythm<T>
     {
-        private readonly ILocalMergeAlgothythm<T> _localMergeAlgothythm;
+        private readonly ILocalRotationAlgothythm<T> _localMergeAlgothythm;
 
         public TripleWindowMergeSort(IComparer<T> comparer) : base(comparer)
         {
-            _localMergeAlgothythm = new RecursiveInPlaceMerge<T>(comparer);
+            _localMergeAlgothythm = new RecursiveInPlaceRotation<T>();
         }
 
         public override void Sort(IList<T> list)
@@ -160,7 +160,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
             var leftRun = new SortRun(tempStartIndex, firstLength);
             var rightRun = new SortRun(firstSourceIndex, secondLength);
 
-            _localMergeAlgothythm.Merge(list, leftRun, rightRun);
+            _localMergeAlgothythm.Rotate(list, leftRun, rightRun);
         }
 
         private static int WrapTempIndex(int index, int start, int max)
