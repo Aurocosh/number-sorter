@@ -166,8 +166,14 @@
     <Compile Include="Forms\LineControls\Processors\DuplicateValuesProcessorLineControl.xaml.cs">
       <DependentUpon>DuplicateValuesProcessorLineControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Visualization\VisualizationTypeLineControl.xaml.cs">
+      <DependentUpon>VisualizationTypeLineControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\LogHistory\LogHistoryDialog.xaml.cs">
       <DependentUpon>LogHistoryDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Visualization\VisualizationTypeDialog.xaml.cs">
+      <DependentUpon>VisualizationTypeDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\SortTypeDialog.xaml.cs">
       <DependentUpon>SortTypeDialog.xaml</DependentUpon>
@@ -228,6 +234,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Forms\Visualization\VisualizationTypeLineControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Forms\LogHistory\LogHistoryDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -249,6 +259,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\Generators\GeneratorsDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\Visualization\VisualizationTypeDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

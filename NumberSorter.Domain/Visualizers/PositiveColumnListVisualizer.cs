@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 
 namespace NumberSorter.Domain.Visualizers
 {
-    public class ColumnListVisualizer : IListVisualizer
+    public class PositiveColumnListVisualizer : IListVisualizer
     {
         private const int _minColumnSize = 1;
         private const int _desiredColumnSize = 30;
@@ -20,12 +20,13 @@ namespace NumberSorter.Domain.Visualizers
 
         private float _columnProportion = 0.8f;
 
+
         public void Redraw(WriteableBitmap writeableBitmap, SortState<int> sortState)
         {
             int width = (int)Math.Floor(writeableBitmap.Width);
             int height = (int)Math.Floor(writeableBitmap.Height);
 
-            int yRange = height / 2;
+            int yRange = height;
             int yOrigin = yRange;
 
             writeableBitmap.Clear(Colors.LightGray);
@@ -60,27 +61,20 @@ namespace NumberSorter.Domain.Visualizers
                 spacerSize = spacePerElement - columnSize;
             }
 
+            int shift = Math.Abs(list.Min());
             int maxModule = list.Max(Math.Abs);
-            double scaleCoefficient = yRange / maxModule;
+            double scaleCoefficient = (yRange - 10) / (maxModule + shift);
 
             int xCurrent = 0;
             for (int i = 0; i < list.Count; i++)
             {
                 var currentColor = VisualizationColors.GetColumnColor(sortState, i);
-
-                int scaledValue = (int)(list[i] * scaleCoefficient);
+                int scaledValue = (int)((list[i] + shift) * scaleCoefficient);
                 if (scaledValue > 0)
-                {
-                    writeableBitmap.FillRectangle(xCurrent, yOrigin - scaledValue, xCurrent + columnSize - 1, yOrigin, currentColor);
-                }
-                else if (scaledValue < 0)
-                {
-                    writeableBitmap.FillRectangle(xCurrent, yOrigin + 1, xCurrent + columnSize - 1, yOrigin - scaledValue, currentColor);
-                }
+                    writeableBitmap.FillRectangle(xCurrent, yOrigin - scaledValue, xCurrent + columnSize - 1, yOrigin - 5, currentColor);
 
                 xCurrent += columnSize + spacerSize;
             }
         }
-
     }
 }

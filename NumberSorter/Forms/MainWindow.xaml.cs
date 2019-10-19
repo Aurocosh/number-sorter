@@ -44,12 +44,12 @@ namespace NumberSorter.Forms
                 this.OneWayBind(ViewModel, x => x.ResultText, x => x.ResultTextBox.Text)
                     .DisposeWith(disposable);
 
-                this.OneWayBind(ViewModel, x => x.ShowActions, x => x.ActionListColumn.Width, vmToViewConverterOverride: new BoolToColumnVisibilityBindingTypeConverter(new GridLength(0, GridUnitType.Auto)))
+                this.OneWayBind(ViewModel, x => x.ShowActions, x => x.ActionListColumn.Width, vmToViewConverterOverride: new BoolToColumnVisibilityBindingTypeConverter(new GridLength(1, GridUnitType.Star)))
                     .DisposeWith(disposable);
                 this.OneWayBind(ViewModel, x => x.ShowActions, x => x.ActionsSplitterColumn.Width, vmToViewConverterOverride: new BoolToColumnVisibilityBindingTypeConverter(new GridLength(0, GridUnitType.Auto)))
                     .DisposeWith(disposable);
 
-                this.OneWayBind(ViewModel, x => x.ShowControls, x => x.ControlPanelColumn.Width, vmToViewConverterOverride: new BoolToColumnVisibilityBindingTypeConverter(new GridLength(0, GridUnitType.Auto)))
+                this.OneWayBind(ViewModel, x => x.ShowControls, x => x.ControlPanelColumn.Width, vmToViewConverterOverride: new BoolToColumnVisibilityBindingTypeConverter(new GridLength(1, GridUnitType.Star)))
                     .DisposeWith(disposable);
                 this.OneWayBind(ViewModel, x => x.ShowControls, x => x.ControlSplitterColumn.Width, vmToViewConverterOverride: new BoolToColumnVisibilityBindingTypeConverter(new GridLength(0, GridUnitType.Auto)))
                     .DisposeWith(disposable);
@@ -159,6 +159,9 @@ namespace NumberSorter.Forms
                 this.BindCommand(ViewModel, x => x.VisualizationViewModel.MinusThousandStepsCommand, x => x.MinusThousandStepButton)
                     .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.VisualizationViewModel.PlusThousandStepsCommand, x => x.PlusThousandStepButton)
+                    .DisposeWith(disposable);
+
+                this.BindCommand(ViewModel, x => x.VisualizationViewModel.ChangeVisualizationTypeCommand, x => x.ChangeVisualizationButton)
                     .DisposeWith(disposable);
 
                 #endregion

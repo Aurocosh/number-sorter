@@ -93,6 +93,7 @@ namespace NumberSorter.Domain.ViewModels
         public ReactiveCommand<Unit, Unit> MinusThousandStepsCommand { get; }
         public ReactiveCommand<Unit, Unit> PlusThousandStepsCommand { get; }
 
+        public ReactiveCommand<Unit, Unit> ChangeVisualizationTypeCommand { get; }
         public ReactiveCommand<SizeChangedEventArgs, Unit> ResizeCanvasCommand { get; }
 
         #endregion Commands
@@ -149,6 +150,7 @@ namespace NumberSorter.Domain.ViewModels
             MinusThousandStepsCommand = ReactiveCommand.Create(MinusThousandSteps, isLogSet);
             PlusThousandStepsCommand = ReactiveCommand.Create(PlusThousandSteps, isLogSet);
 
+            ChangeVisualizationTypeCommand = ReactiveCommand.Create(ChangeVisualizationType);
             ResizeCanvasCommand = ReactiveCommand.Create<SizeChangedEventArgs>(ResizeCanvas);
 
             _logActions.Connect()
@@ -309,6 +311,19 @@ namespace NumberSorter.Domain.ViewModels
             {
                 _sortStateCache[index] = state;
             }
+        }
+
+        private void ChangeVisualizationType()
+        {
+            var viewModel = new VisualizationTypeViewModel();
+            _dialogService.ShowModalPresentation(this, viewModel);
+
+            if (viewModel.DialogResult != true || viewModel.SelectedSortType == null)
+                return;
+
+            var visualizationType = viewModel.SelectedSortType.VisualizationType;
+            _listVisualizer = VisualizationFactory.GetVisualizer(visualizationType);
+            UpdateVisualization(SortState);
         }
 
         private void ResizeCanvas(SizeChangedEventArgs e)

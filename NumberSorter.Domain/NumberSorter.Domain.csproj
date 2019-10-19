@@ -93,6 +93,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Visualizers\Base\VisualizationFactory.cs" />
+    <Compile Include="Visualizers\Base\VisualizationType.cs" />
     <Compile Include="Comparer\IntComparer.cs" />
     <Compile Include="Container\Actions\Base\LogActionType.cs" />
     <Compile Include="Container\Actions\LogMarker.cs" />
@@ -142,11 +144,15 @@
     <Compile Include="ViewModels\Main\VisualizationViewModel.cs" />
     <Compile Include="ViewModels\Generators\NumberGeneratorsViewModel.cs" />
     <Compile Include="ViewModels\Generators\PartialSortedGeneratorViewModel.cs" />
-    <Compile Include="ViewModels\Controls\SortTypeLineViewModel.cs" />
+    <Compile Include="ViewModels\SortType\SortTypeLineViewModel.cs" />
     <Compile Include="ViewModels\Generators\GeneratorsDialogViewModel.cs" />
-    <Compile Include="ViewModels\SortTypeViewModel.cs" />
+    <Compile Include="ViewModels\VisualizationType\VisualizationTypeLineViewModel.cs" />
+    <Compile Include="ViewModels\VisualizationType\VisualizationTypeViewModel.cs" />
+    <Compile Include="ViewModels\SortType\SortTypeViewModel.cs" />
     <Compile Include="Visualizers\Base\IListVisualizer.cs" />
+    <Compile Include="Visualizers\PositiveColumnListVisualizer.cs" />
     <Compile Include="Visualizers\ColumnListVisualizer.cs" />
+    <Compile Include="Visualizers\Base\VisualizationColors.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FodyWeavers.xml" />
@@ -169,9 +175,7 @@
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.6.0.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.0.0\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

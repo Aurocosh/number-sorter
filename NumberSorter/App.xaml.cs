@@ -34,13 +34,13 @@ namespace NumberSorter
             dialogService.RegisterWindowType<LogHistoryDialogViewModel, LogHistoryDialog>(new WindowViewInitializer<LogHistoryDialogViewModel>());
             dialogService.RegisterWindowType<NumberGeneratorsViewModel, NumberGeneratorsWindow>(new WindowViewInitializer<NumberGeneratorsViewModel>());
             dialogService.RegisterWindowType<GeneratorEditDialogViewModel, GeneratorEditDialog>(new WindowViewInitializer<GeneratorEditDialogViewModel>());
+            dialogService.RegisterWindowType<VisualizationTypeViewModel, VisualizationTypeDialog>(new WindowViewInitializer<VisualizationTypeViewModel>());
             dialogService.RegisterWindowType<PartialSortedGeneratorViewModel, PartialSortedGeneratorDialog>(new WindowViewInitializer<PartialSortedGeneratorViewModel>());
 
             WpfInteractions.RegisterInteractions();
 
             _dialogService = dialogService;
         }
-
 
         protected override async void OnStartup(StartupEventArgs eventArgs)
         {

@@ -11,7 +11,7 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:NumberSorter"
         mc:Ignorable="d"
-        Title="MainWindow" Width="800" Height="580">
+        Title="MainWindow" Width="1200" Height="800">
     <DockPanel d:DataContext="{d:DesignInstance viewmodels:MainWindowViewModel}">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Input data">
@@ -23,6 +23,9 @@
             <MenuItem Header="Sort">
                 <MenuItem Header="Perform sort" Name="PerformSortButton"/>
                 <MenuItem Header="Sort history" Name="SortHistoryButton"/>
+            </MenuItem>
+            <MenuItem Header="Visualization">
+                <MenuItem Header="Change visualization type" Name="ChangeVisualizationButton"/>
             </MenuItem>
         </Menu>
         <TabControl>
@@ -51,7 +54,7 @@
             </TabItem>
             <TabItem Header="Sort vizualization">
                 <DockPanel Margin="5">
-                    <DockPanel DockPanel.Dock="Bottom">
+                    <DockPanel DockPanel.Dock="Bottom" Margin="0 5 0 0">
                         <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" HorizontalAlignment="Left">
                             <Button Name="ToggleControlsButton" Content="Toggle controls" Width="100"/>
                         </StackPanel>
@@ -68,11 +71,11 @@
                     </DockPanel>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" x:Name="ControlPanelColumn"/>
+                            <ColumnDefinition Width="1*" x:Name="ControlPanelColumn"/>
                             <ColumnDefinition Width="Auto" x:Name="ControlSplitterColumn"/>
                             <ColumnDefinition Width="4*"/>
                             <ColumnDefinition Width="Auto" x:Name="ActionsSplitterColumn"/>
-                            <ColumnDefinition Width="Auto" x:Name="ActionListColumn"/>
+                            <ColumnDefinition Width="1*" x:Name="ActionListColumn"/>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Name="SortLogInfoPanel">
                             <Grid.ColumnDefinitions>
@@ -87,37 +90,40 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="20"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Label Grid.Column="0" Grid.Row="0" Content="Current reads"/>
-                            <Label Grid.Column="1" Grid.Row="0" Content="0" Name="CurrentReadsLabel"/>
+                            <Label Grid.Column="1" Grid.Row="0" Content="0" Name="CurrentReadsLabel" HorizontalContentAlignment="Right"/>
 
                             <Label Grid.Column="0" Grid.Row="1" Content="Current writes"/>
-                            <Label Grid.Column="1" Grid.Row="1" Content="0" Name="CurrentWritesLabel"/>
+                            <Label Grid.Column="1" Grid.Row="1" Content="0" Name="CurrentWritesLabel" HorizontalContentAlignment="Right"/>
 
                             <Label Grid.Column="0" Grid.Row="2" Content="Current compares"/>
-                            <Label Grid.Column="1" Grid.Row="2" Content="0" Name="CurrentComparesLabel"/>
+                            <Label Grid.Column="1" Grid.Row="2" Content="0" Name="CurrentComparesLabel" HorizontalContentAlignment="Right"/>
 
                             <Label Grid.Column="0" Grid.Row="4" Content="Total reads"/>
-                            <Label Grid.Column="1" Grid.Row="4" Content="0" Name="TotalReadsLabel"/>
+                            <Label Grid.Column="1" Grid.Row="4" Content="0" Name="TotalReadsLabel" HorizontalContentAlignment="Right"/>
 
                             <Label Grid.Column="0" Grid.Row="5" Content="Total writes"/>
-                            <Label Grid.Column="1" Grid.Row="5" Content="0" Name="TotalWritesLabel"/>
+                            <Label Grid.Column="1" Grid.Row="5" Content="0" Name="TotalWritesLabel" HorizontalContentAlignment="Right"/>
 
                             <Label Grid.Column="0" Grid.Row="6" Content="Total compares"/>
-                            <Label Grid.Column="1" Grid.Row="6" Content="0" Name="TotalComparesLabel"/>
+                            <Label Grid.Column="1" Grid.Row="6" Content="0" Name="TotalComparesLabel" HorizontalContentAlignment="Right"/>
 
-                            <Label Grid.Column="0" Grid.Row="8" Content="Total actions"/>
-                            <Label Grid.Column="1" Grid.Row="8" Content="0" Name="TotalActionsLabel"/>
+                            <Label Grid.Column="0" Grid.Row="7" Content="Total actions"/>
+                            <Label Grid.Column="1" Grid.Row="7" Content="0" Name="TotalActionsLabel" HorizontalContentAlignment="Right"/>
 
-                            <Label Grid.Column="0" Grid.Row="9" Content="Current action index"/>
-                            <xctk:IntegerUpDown Grid.Column="1" Grid.Row="9" Value="0" Minimum="0" Name="ActionIndexUpDown"/>
+                            <Label Grid.Column="0" Grid.Row="9" Content="Animation delay"/>
+                            <xctk:DoubleUpDown Grid.Column="1" Grid.Row="9" Name="AnimationSpeedUpDown" Value="0.05" Minimum="0.005" Maximum="1" Increment="0.005" FormatString="F2"/>
 
-                            <UniformGrid Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2"
+                            <Label Grid.Column="0" Grid.Row="10" Content="Current action index"/>
+                            <xctk:IntegerUpDown Grid.Column="1" Grid.Row="10" Value="0" Minimum="0" Name="ActionIndexUpDown"/>
+
+                            <UniformGrid Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="2"
                                          Columns="2" >
                                 <Button Content="Start" Name="StartButton"/>
                                 <Button Content="Finish" Name="FinishButton"/>
@@ -128,8 +134,6 @@
                                 <Button Content="-1000" Name="MinusThousandStepButton"/>
                                 <Button Content="+1000" Name="PlusThousandStepButton"/>
                             </UniformGrid>
-                            <Label Grid.Column="0" Grid.Row="11" Content="Animation delay"/>
-                            <xctk:DoubleUpDown Grid.Column="1" Grid.Row="11" Name="AnimationSpeedUpDown" Value="0.5" Minimum="0.025" Maximum="1" Increment="0.025" FormatString="F2"/>
                         </Grid>
                         <GridSplitter Grid.Column="1" Width="10" ShowsPreview="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                         <Border Grid.Column="2" Background="LightGray" Margin="5 0 5 0" Name="VisualizationCanvas">
