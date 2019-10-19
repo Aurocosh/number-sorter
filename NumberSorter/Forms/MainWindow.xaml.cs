@@ -161,6 +161,11 @@ namespace NumberSorter.Forms
                 this.BindCommand(ViewModel, x => x.VisualizationViewModel.PlusThousandStepsCommand, x => x.PlusThousandStepButton)
                     .DisposeWith(disposable);
 
+                this.BindCommand(ViewModel, x => x.VisualizationViewModel.MinusOneStepCommand, x => x.PreviousButton)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.VisualizationViewModel.PlusOneStepCommand, x => x.NextButton)
+                    .DisposeWith(disposable);
+
                 this.BindCommand(ViewModel, x => x.VisualizationViewModel.ChangeVisualizationTypeCommand, x => x.ChangeVisualizationButton)
                     .DisposeWith(disposable);
 

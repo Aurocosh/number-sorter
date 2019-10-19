@@ -119,7 +119,7 @@ namespace NumberSorter.Domain.ViewModels
             MarkersActions = true;
             ComparassionActions = false;
 
-            AnimationDelay = 0.2f;
+            AnimationDelay = 0.05f;
             CurrentActionIndex = 0;
 
             ActionButtonText = "Animate";
