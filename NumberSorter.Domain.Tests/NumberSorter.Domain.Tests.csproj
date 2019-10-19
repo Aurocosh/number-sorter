@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="RotationTests\IntegerGenerators\Dynamic\RotationTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator.cs" />
+    <Compile Include="RotationTests\InversionInPlaceRotationTests.cs" />
     <Compile Include="SortTests\GallopingRecursiveMergeSortTests.cs" />
     <Compile Include="SortTests\BinarySortTests.cs" />
     <Compile Include="SortTests\CombSortTests.cs" />
