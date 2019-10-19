@@ -152,11 +152,9 @@ namespace NumberSorter.Domain.ViewModels
 
         public void UpdateLogSummaries(LogGroupLineViewModel logGroupLineView)
         {
+            _logSummaries.Clear();
             if (logGroupLineView == null)
-            {
-                _logSummaries.Clear();
                 return;
-            }
 
             var logGroup = logGroupLineView.LogGroup;
             var logGroupId = logGroup.Id.ToString();

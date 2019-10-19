@@ -81,6 +81,7 @@
     <Compile Include="SortTests\SelectionSortTests.cs" />
     <Compile Include="SortTests\InsertionWindowTimSortTests.cs" />
     <Compile Include="SortTests\TripleWindowMergeSortTests.cs" />
+    <Compile Include="SortTests\WorkAreaInPlaceMergeSortTests.cs" />
     <Compile Include="TestsRandomProvider.cs" />
     <Compile Include="SortTests\IntegerGenerators\Dynamic\SortTest_PartiallySorted_DynamicListGenerator.cs" />
     <Compile Include="SortTests\IntegerGenerators\Dynamic\SortTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator.cs" />

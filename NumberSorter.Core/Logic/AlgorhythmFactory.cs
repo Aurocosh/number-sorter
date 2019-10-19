@@ -37,6 +37,8 @@ namespace NumberSorter.Core.Logic
                     return new KindaInPlaceMergeSort<T>(comparer);
                 case AlgorhythmType.TripleWindowMergeSort:
                     return new TripleWindowMergeSort<T>(comparer);
+                case AlgorhythmType.WorkAreaInPlaceMergeSort:
+                    return new WorkAreaInPlaceMergeSort<T>(comparer);
                 case AlgorhythmType.GallopingRecursiveMergeSort:
                     return new GallopingRecursiveMergeSort<T>(comparer);
                 case AlgorhythmType.QuickSortRandomPivot:

@@ -19,6 +19,7 @@
         TripleWindowMergeSort,
         InsertionWindowTimSort,
         QuickSortMedianOfThree,
+        WorkAreaInPlaceMergeSort,
         GallopingRecursiveMergeSort,
         InsertionTripleWindowTimSort,
         TripleWindowTripleWindowTimSort,

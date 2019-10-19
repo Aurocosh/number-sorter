@@ -87,6 +87,7 @@
     <Compile Include="Logic\Algorhythm\Sort\HeapSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\DummySort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\TripleWindowMergeSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\WorkAreaInPlaceMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\WindowMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\InsertionSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\KindaInPlaceMergeSort.cs" />

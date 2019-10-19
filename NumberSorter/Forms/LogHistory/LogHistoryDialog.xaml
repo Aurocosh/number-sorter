@@ -43,7 +43,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                     <DataGridTextColumn Header="Size" Binding="{Binding Size}"/>
-                    <DataGridTextColumn Header="Created" Binding="{Binding Created}"/>
+                    <DataGridTextColumn Header="Created" Binding="{Binding Created}" SortMemberPath="{Binding Created.Ticks}" SortDirection="Descending" />
                     <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                 </DataGrid.Columns>
             </DataGrid>
@@ -53,7 +53,7 @@
                       IsReadOnly="True"
                       d:DataContext="{d:DesignInstance viewmodels:LogSummaryLineViewModel}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Created" Binding="{Binding Created}"/>
+                    <DataGridTextColumn Header="Created" Binding="{Binding Created}" SortMemberPath="{Binding Created.Ticks}"/>
                     <DataGridTextColumn Header="Algorhythm" Binding="{Binding AlgorhythmName}"/>
                     <DataGridTextColumn Header="Total reads" Binding="{Binding TotalReadCount}"/>
                     <DataGridTextColumn Header="Total writes" Binding="{Binding TotalWriteCount}"/>
