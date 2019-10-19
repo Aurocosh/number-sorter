@@ -163,13 +163,6 @@ namespace NumberSorter.Core.Logic.Algorhythm
             _localMergeAlgothythm.Rotate(list, leftRun, rightRun);
         }
 
-        private static int WrapTempIndex(int index, int start, int max)
-        {
-            if (index < start || index > max)
-                return start;
-            return index;
-        }
-
         public bool IsSorted(IList<T> list, int start, int length)
         {
             for (int i = start; i < length - 1; i++)

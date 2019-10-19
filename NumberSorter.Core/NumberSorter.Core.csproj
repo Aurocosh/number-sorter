@@ -72,7 +72,7 @@
     <Compile Include="Logic\Algorhythm\Merge\Base\GenericMergeAlgorhythm.cs" />
     <Compile Include="Logic\Algorhythm\Merge\Base\ILocalMergeAlgothythm.cs" />
     <Compile Include="Logic\Algorhythm\Rotation\Base\ILocalRotationAlgothythm.cs" />
-    <Compile Include="Logic\Algorhythm\Rotation\RecursiveInPlaceRotation - Copy.cs" />
+    <Compile Include="Logic\Algorhythm\Rotation\InversionInPlaceRotation.cs" />
     <Compile Include="Logic\Algorhythm\Rotation\RecursiveInPlaceRotation.cs" />
     <Compile Include="Logic\Algorhythm\Sort\Base\ComparerSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\Base\IPartialSortAlgorhythm.cs" />

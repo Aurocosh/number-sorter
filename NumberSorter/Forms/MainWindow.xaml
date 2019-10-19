@@ -129,7 +129,7 @@
                                 <Button Content="+1000" Name="PlusThousandStepButton"/>
                             </UniformGrid>
                             <Label Grid.Column="0" Grid.Row="11" Content="Animation delay"/>
-                            <xctk:DoubleUpDown Grid.Column="1" Grid.Row="11" Name="AnimationSpeedUpDown" Value="0.25" Minimum="0.05" Maximum="1" Increment="0.05"/>
+                            <xctk:DoubleUpDown Grid.Column="1" Grid.Row="11" Name="AnimationSpeedUpDown" Value="0.5" Minimum="0.025" Maximum="1" Increment="0.025" FormatString="F2"/>
                         </Grid>
                         <GridSplitter Grid.Column="1" Width="10" ShowsPreview="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                         <Border Grid.Column="2" Background="LightGray" Margin="5 0 5 0" Name="VisualizationCanvas">

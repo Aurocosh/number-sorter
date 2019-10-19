@@ -34,9 +34,7 @@ namespace NumberSorter.Domain.ViewModels
         private int _waypointCacheSize = 100;
         private int _currentWaypointCount = 0;
         private int _displayedActionCount = 5;
-        private double _animationDelay = 0.25f;
 
-        private Thread _animationThread;
         private IListVisualizer _listVisualizer = new ColumnListVisualizer();
 
         //private readonly List<LogAction<int>> previousHidden;
@@ -67,11 +65,13 @@ namespace NumberSorter.Domain.ViewModels
         [Reactive] public double AnimationDelay { get; set; }
         [Reactive] public int CurrentActionIndex { get; set; }
 
+        [Reactive] public string ActionButtonText { get; set; }
         [Reactive] public SortLog<int> SortingLog { get; set; }
         [Reactive] public SortState<int> SortState { get; private set; }
         [Reactive] public WriteableBitmap VisualizationImage { get; private set; }
 
         public int MaxActionIndex { [ObservableAsProperty]get; }
+        public int TotalActionCount { [ObservableAsProperty]get; }
         public ReadOnlyObservableCollection<LogActionLineViewModel> LogActions => _logActionViewModels;
 
         #endregion Properties
@@ -107,7 +107,6 @@ namespace NumberSorter.Domain.ViewModels
             _logActions = new SourceList<LogAction<int>>();
             _displayedLogActions = new SourceList<LogActionLineViewModel>();
 
-            _animationThread = new Thread(new ThreadStart(AnimateSort));
             _sortStateCache = new LimitedDictionary<int, SortState<int>>(_cacheSize);
             _sortWaypointStateCache = new LimitedDictionary<int, SortState<int>>(_waypointCacheSize);
 
@@ -119,39 +118,54 @@ namespace NumberSorter.Domain.ViewModels
             MarkersActions = true;
             ComparassionActions = false;
 
+            AnimationDelay = 0.2f;
+            CurrentActionIndex = 0;
+
+            ActionButtonText = "Animate";
+
             SortingLog = new SortLog<int>();
             SortState = SortingLog.InputState;
             VisualizationImage = BitmapFactory.New(700, 480);
 
-            PlayPauseCommand = ReactiveCommand.Create(PlayOrPause);
-            ResetCommand = ReactiveCommand.Create(Reset);
+            var canAnimate = this.WhenAnyValue(x => x.TotalActionCount)
+                .Merge(this.WhenAnyValue(x => x.CurrentActionIndex))
+                .Select(_ => TotalActionCount > 0 && CurrentActionIndex != MaxActionIndex);
 
-            GoToStartCommand = ReactiveCommand.Create(GoToStart);
-            GoToFinishCommand = ReactiveCommand.Create(GoToFinish);
+            var isLogSet = this.WhenAnyValue(x => x.TotalActionCount)
+                .Select(x => x > 0);
 
-            MinusOneStepCommand = ReactiveCommand.Create(MinusOneStep);
-            PlusOneStepCommand = ReactiveCommand.Create(PlusOneStep);
+            PlayPauseCommand = ReactiveCommand.Create(PlayOrPause, canAnimate);
+            ResetCommand = ReactiveCommand.Create(Reset, isLogSet);
 
-            MinusHundredStepsCommand = ReactiveCommand.Create(MinusHundredSteps);
-            PlusHundredStepsCommand = ReactiveCommand.Create(PlusHundredSteps);
+            GoToStartCommand = ReactiveCommand.Create(GoToStart, isLogSet);
+            GoToFinishCommand = ReactiveCommand.Create(GoToFinish, isLogSet);
 
-            MinusThousandStepsCommand = ReactiveCommand.Create(MinusThousandSteps);
-            PlusThousandStepsCommand = ReactiveCommand.Create(PlusThousandSteps);
+            MinusOneStepCommand = ReactiveCommand.Create(MinusOneStep, isLogSet);
+            PlusOneStepCommand = ReactiveCommand.Create(PlusOneStep, isLogSet);
+
+            MinusHundredStepsCommand = ReactiveCommand.Create(MinusHundredSteps, isLogSet);
+            PlusHundredStepsCommand = ReactiveCommand.Create(PlusHundredSteps, isLogSet);
+
+            MinusThousandStepsCommand = ReactiveCommand.Create(MinusThousandSteps, isLogSet);
+            PlusThousandStepsCommand = ReactiveCommand.Create(PlusThousandSteps, isLogSet);
 
             ResizeCanvasCommand = ReactiveCommand.Create<SizeChangedEventArgs>(ResizeCanvas);
 
-            _logActions
-                .Connect()
+            _logActions.Connect()
                 .ObserveOnDispatcher()
                 .Bind(out _filteredLogActions)
                 .DisposeMany()
                 .Subscribe();
 
-            _logActions
-                .Connect()
+            _logActions.Connect()
                 .ToCollection()
                 .Select(x => Math.Max(x.Count - 1, 0))
                 .ToPropertyEx(this, x => x.MaxActionIndex);
+
+            _logActions.Connect()
+                .ToCollection()
+                .Select(x => Math.Max(x.Count, 0))
+                .ToPropertyEx(this, x => x.TotalActionCount);
 
             _displayedLogActions
                 .Connect()
@@ -161,7 +175,7 @@ namespace NumberSorter.Domain.ViewModels
                 .Subscribe();
 
             this.WhenAnyValue(x => x.IsAnimating)
-                .Subscribe(ToggleAnimation);
+                .Subscribe(_ => UpdateAnimationStatus());
 
             this.WhenAnyValue(x => x.SortState)
                 .Subscribe(UpdateVisualization);
@@ -307,30 +321,25 @@ namespace NumberSorter.Domain.ViewModels
             UpdateVisualization(SortState);
         }
 
-        private void ToggleAnimation(bool isAnimating)
+        private void UpdateAnimationStatus()
         {
-            if (!_animationThread.IsAlive && isAnimating)
-                _animationThread.Start();
+            if (IsAnimating)
+                Task.Run(AnimateSort);
+            ActionButtonText = IsAnimating ? "Stop" : "Animate";
         }
 
-        private void AnimateSort()
+        private async Task AnimateSort()
         {
             while (IsAnimating && CurrentActionIndex != MaxActionIndex)
             {
-                Thread.Sleep(TimeSpan.FromSeconds(AnimationDelay));
+                var delay = TimeSpan.FromSeconds(AnimationDelay);
+                await Task.Delay(delay).ConfigureAwait(false);
                 Application.Current.Dispatcher.Invoke(() => CurrentActionIndex++);
             }
             Application.Current.Dispatcher.Invoke(() => IsAnimating = false);
-
         }
 
         #endregion Command functions
-
-        #region Command predicates
-
-        private bool CanAnalizeSeries => true;
-
-        #endregion Command predicates
 
         private void UpdateVisualization(SortState<int> currentListState)
         {
@@ -341,6 +350,8 @@ namespace NumberSorter.Domain.ViewModels
         {
             _displayedLogActions.Clear();
             if (_filteredLogActions.Count == 0)
+                return;
+            if (IsAnimating)
                 return;
 
             int currentIndex = ComparableUtility.Clamp(CurrentActionIndex - _displayedActionCount, 0, MaxActionIndex);

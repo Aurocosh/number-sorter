@@ -102,12 +102,17 @@ namespace NumberSorter.Forms
                 this.OneWayBind(ViewModel, x => x.VisualizationViewModel.LogActions, x => x.LogActionList.ItemsSource)
                     .DisposeWith(disposable);
 
-                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.AnimationDelay, x => x.AnimationSpeedUpDown.Value)
+                this.Bind(ViewModel, x => x.VisualizationViewModel.AnimationDelay, x => x.AnimationSpeedUpDown.Value)
                     .DisposeWith(disposable);
 
                 this.Bind(ViewModel, x => x.VisualizationViewModel.CurrentActionIndex, x => x.ActionIndexUpDown.Value)
                     .DisposeWith(disposable);
                 this.OneWayBind(ViewModel, x => x.VisualizationViewModel.MaxActionIndex, x => x.ActionIndexUpDown.Maximum)
+                    .DisposeWith(disposable);
+
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.TotalActionCount, x => x.TotalActionsLabel.Content)
+                    .DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.ActionButtonText, x => x.PlayButton.Content)
                     .DisposeWith(disposable);
 
                 //this.Bind(ViewModel, x => x.VisualizationViewModel.ShowActionLog, x => x.LogButton.IsChecked)
