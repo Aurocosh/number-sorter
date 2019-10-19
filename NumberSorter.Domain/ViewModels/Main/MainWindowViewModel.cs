@@ -41,6 +41,9 @@ namespace NumberSorter.Domain.ViewModels
 
         public VisualizationViewModel VisualizationViewModel { get; }
 
+        [Reactive] public bool ShowActions { get; set; }
+        [Reactive] public bool ShowControls { get; set; }
+
         [Reactive] public string InputText { get; set; }
         [Reactive] public string OutputText { get; set; }
         [Reactive] public string InfoText { get; set; }
@@ -48,7 +51,6 @@ namespace NumberSorter.Domain.ViewModels
 
         [Reactive] public UnsortedInput<int> InputNumbers { get; set; }
         [Reactive] public SortLog<int> SortingLog { get; set; }
-
 
         #endregion Properties
 
@@ -58,6 +60,9 @@ namespace NumberSorter.Domain.ViewModels
         public ReactiveCommand<Unit, UnsortedInput<int>> GenerateRandomCommand { get; }
         public ReactiveCommand<Unit, UnsortedInput<int>> GenerateCustomCommand { get; }
         public ReactiveCommand<Unit, UnsortedInput<int>> GeneratePartiallySortedCommand { get; }
+
+        public ReactiveCommand<Unit, Unit> ToggleActionsCommand { get; }
+        public ReactiveCommand<Unit, Unit> ToggleControlsCommand { get; }
 
         public ReactiveCommand<Unit, Unit> PerformSortCommand { get; }
         public ReactiveCommand<Unit, Unit> SortHistoryCommand { get; }
@@ -81,6 +86,9 @@ namespace NumberSorter.Domain.ViewModels
 
             VisualizationViewModel = new VisualizationViewModel(_dialogService);
 
+            ShowActions = true;
+            ShowControls = true;
+
             InputNumbers = new UnsortedInput<int>();
             SortingLog = new SortLog<int>();
 
@@ -91,6 +99,9 @@ namespace NumberSorter.Domain.ViewModels
             GenerateRandomCommand = ReactiveCommand.CreateFromObservable(GenerateRandom);
             GenerateCustomCommand = ReactiveCommand.CreateFromObservable(GenerateCustom);
             GeneratePartiallySortedCommand = ReactiveCommand.CreateFromObservable(GeneratePartiallySorted);
+
+            ToggleActionsCommand = ReactiveCommand.Create(ToggleActionPanel);
+            ToggleControlsCommand = ReactiveCommand.Create(ToggleControlPanel);
 
             PerformSortCommand = ReactiveCommand.Create(SortData, canPerformSort);
             SortHistoryCommand = ReactiveCommand.Create(SortHistory);
@@ -161,6 +172,9 @@ namespace NumberSorter.Domain.ViewModels
             _dialogService.ShowModalPresentation(this, viewModel);
             return Observable.Return(viewModel.InputNumbers);
         }
+
+        private void ToggleActionPanel() => ShowActions = !ShowActions;
+        private void ToggleControlPanel() => ShowControls = !ShowControls;
 
         private void SortData()
         {

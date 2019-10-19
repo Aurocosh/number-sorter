@@ -110,6 +110,7 @@
     <Compile Include="Container\Value\LogValue.cs" />
     <Compile Include="Container\Value\LogValueWrite.cs" />
     <Compile Include="Converters\ColorToBrushBindingTypeConverter.cs" />
+    <Compile Include="Converters\BoolToColumnVisibilityBindingTypeConverter.cs" />
     <Compile Include="Converters\VisibilityBindingTypeConverter.cs" />
     <Compile Include="DialogService\IDialogService.cs" />
     <Compile Include="DialogService\IViewInitializer.cs" />

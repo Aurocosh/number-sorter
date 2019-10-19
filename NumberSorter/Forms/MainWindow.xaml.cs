@@ -44,6 +44,16 @@ namespace NumberSorter.Forms
                 this.OneWayBind(ViewModel, x => x.ResultText, x => x.ResultTextBox.Text)
                     .DisposeWith(disposable);
 
+                this.OneWayBind(ViewModel, x => x.ShowActions, x => x.ActionListColumn.Width, vmToViewConverterOverride: new BoolToColumnVisibilityBindingTypeConverter(new GridLength(0, GridUnitType.Auto)))
+                    .DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.ShowActions, x => x.ActionsSplitterColumn.Width, vmToViewConverterOverride: new BoolToColumnVisibilityBindingTypeConverter(new GridLength(0, GridUnitType.Auto)))
+                    .DisposeWith(disposable);
+
+                this.OneWayBind(ViewModel, x => x.ShowControls, x => x.ControlPanelColumn.Width, vmToViewConverterOverride: new BoolToColumnVisibilityBindingTypeConverter(new GridLength(0, GridUnitType.Auto)))
+                    .DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.ShowControls, x => x.ControlSplitterColumn.Width, vmToViewConverterOverride: new BoolToColumnVisibilityBindingTypeConverter(new GridLength(0, GridUnitType.Auto)))
+                    .DisposeWith(disposable);
+
                 #region Commands
 
                 this.BindCommand(ViewModel, x => x.LoadDataCommand, x => x.LoadFromFileButton)
@@ -123,6 +133,11 @@ namespace NumberSorter.Forms
                 //    .DisposeWith(disposable);
 
                 #region Commands
+
+                this.BindCommand(ViewModel, x => x.ToggleActionsCommand, x => x.ToggleActionsButton)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.ToggleControlsCommand, x => x.ToggleControlsButton)
+                    .DisposeWith(disposable);
 
                 this.BindCommand(ViewModel, x => x.VisualizationViewModel.PlayPauseCommand, x => x.PlayButton)
                     .DisposeWith(disposable);
