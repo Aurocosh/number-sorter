@@ -16,6 +16,8 @@ namespace NumberSorter.Domain.Visualizers
                     return new ColumnListVisualizer();
                 case VisualizationType.PositiveColumns:
                     return new PositiveColumnListVisualizer();
+                case VisualizationType.Points:
+                    return new PointsListVisualizer();
                 default:
                     return null;
             }

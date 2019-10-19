@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 
 namespace NumberSorter.Domain.Visualizers
 {
-    public class ColumnListVisualizer : IListVisualizer
+    public class PointsListVisualizer : IListVisualizer
     {
         private const int _minColumnSize = 1;
         private const int _desiredColumnSize = 30;
@@ -25,11 +25,10 @@ namespace NumberSorter.Domain.Visualizers
             int width = (int)Math.Floor(writeableBitmap.Width);
             int height = (int)Math.Floor(writeableBitmap.Height);
 
-            int yRange = height / 2;
-            int yOrigin = yRange;
+            int yRange = height;
+            int yOrigin = yRange - 20;
 
             writeableBitmap.Clear(Colors.LightGray);
-            writeableBitmap.DrawLine(0, yOrigin, width, yOrigin, Colors.Gray);
 
             var list = sortState.State;
 
@@ -60,23 +59,18 @@ namespace NumberSorter.Domain.Visualizers
                 spacerSize = spacePerElement - columnSize;
             }
 
-            int maxModule = list.Max(Math.Abs);
-            double scaleCoefficient = yRange / maxModule;
+            int shift = Math.Abs(Math.Min(list.Min(), 0));
+            int maxPositive = list.Max();
+            double scaleCoefficient = yRange / (maxPositive + shift);
 
             int xCurrent = 0;
             for (int i = 0; i < list.Count; i++)
             {
                 var currentColor = VisualizationColors.GetColumnColor(sortState, i);
-
-                int scaledValue = (int)(list[i] * scaleCoefficient);
+                int scaledValue = (int)((list[i] + shift) * scaleCoefficient);
+                var yPos = yOrigin - scaledValue;
                 if (scaledValue > 0)
-                {
-                    writeableBitmap.FillRectangle(xCurrent, yOrigin - scaledValue, xCurrent + columnSize - 1, yOrigin, currentColor);
-                }
-                else if (scaledValue < 0)
-                {
-                    writeableBitmap.FillRectangle(xCurrent, yOrigin + 1, xCurrent + columnSize - 1, yOrigin - scaledValue, currentColor);
-                }
+                    writeableBitmap.FillEllipse(xCurrent, yPos, xCurrent + columnSize - 1, yPos + columnSize - 1, currentColor);
 
                 xCurrent += columnSize + spacerSize;
             }

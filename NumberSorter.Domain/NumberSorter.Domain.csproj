@@ -150,6 +150,7 @@
     <Compile Include="ViewModels\VisualizationType\VisualizationTypeViewModel.cs" />
     <Compile Include="ViewModels\SortType\SortTypeViewModel.cs" />
     <Compile Include="Visualizers\Base\IListVisualizer.cs" />
+    <Compile Include="Visualizers\PointsListVisualizer.cs" />
     <Compile Include="Visualizers\PositiveColumnListVisualizer.cs" />
     <Compile Include="Visualizers\ColumnListVisualizer.cs" />
     <Compile Include="Visualizers\Base\VisualizationColors.cs" />
