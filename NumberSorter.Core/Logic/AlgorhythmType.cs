@@ -5,6 +5,7 @@
         CombSort,
         HeapSort,
         CycleSort,
+        GnomeSort,
         BinarySort,
         BubbleSort,
         OddEvenSort,
