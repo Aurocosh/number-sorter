@@ -1,5 +1,6 @@
 ﻿using DynamicData;
 using NumberSorter.Core.Logic.Utility;
+using NumberSorter.Domain.AppColors;
 using NumberSorter.Domain.Base.Visualizers;
 using NumberSorter.Domain.Container;
 using NumberSorter.Domain.Container.Actions;
@@ -65,6 +66,7 @@ namespace NumberSorter.Domain.ViewModels
         [Reactive] public double AnimationDelay { get; set; }
         [Reactive] public int CurrentActionIndex { get; set; }
 
+        [Reactive] public ColorSet ColorSet { get; set; }
         [Reactive] public string ActionButtonText { get; set; }
         [Reactive] public SortLog<int> SortingLog { get; set; }
         [Reactive] public SortState<int> SortState { get; private set; }
@@ -93,6 +95,7 @@ namespace NumberSorter.Domain.ViewModels
         public ReactiveCommand<Unit, Unit> MinusThousandStepsCommand { get; }
         public ReactiveCommand<Unit, Unit> PlusThousandStepsCommand { get; }
 
+        public ReactiveCommand<Unit, Unit> ChangeColorSetCommand { get; }
         public ReactiveCommand<Unit, Unit> ChangeVisualizationTypeCommand { get; }
         public ReactiveCommand<SizeChangedEventArgs, Unit> ResizeCanvasCommand { get; }
 
@@ -122,6 +125,7 @@ namespace NumberSorter.Domain.ViewModels
             AnimationDelay = 0.05f;
             CurrentActionIndex = 0;
 
+            ColorSet = new ColorSet();
             ActionButtonText = "Animate";
 
             SortingLog = new SortLog<int>();
@@ -150,6 +154,7 @@ namespace NumberSorter.Domain.ViewModels
             MinusThousandStepsCommand = ReactiveCommand.Create(MinusThousandSteps, isLogSet);
             PlusThousandStepsCommand = ReactiveCommand.Create(PlusThousandSteps, isLogSet);
 
+            ChangeColorSetCommand = ReactiveCommand.Create(ChangeColorSet);
             ChangeVisualizationTypeCommand = ReactiveCommand.Create(ChangeVisualizationType);
             ResizeCanvasCommand = ReactiveCommand.Create<SizeChangedEventArgs>(ResizeCanvas);
 
@@ -313,6 +318,18 @@ namespace NumberSorter.Domain.ViewModels
             }
         }
 
+        private void ChangeColorSet()
+        {
+            var viewModel = new ColorSetSelectDialogViewModel(_dialogService);
+            _dialogService.ShowModalPresentation(this, viewModel);
+
+            if (viewModel.DialogResult != true)
+                return;
+
+            ColorSet = viewModel.ColorSet;
+            UpdateVisualization(SortState);
+        }
+
         private void ChangeVisualizationType()
         {
             var viewModel = new VisualizationTypeViewModel();
@@ -358,7 +375,7 @@ namespace NumberSorter.Domain.ViewModels
 
         private void UpdateVisualization(SortState<int> currentListState)
         {
-            _listVisualizer.Redraw(VisualizationImage, currentListState);
+            _listVisualizer.Redraw(VisualizationImage, currentListState, ColorSet);
         }
 
         private void UpdataDisplayedActions()

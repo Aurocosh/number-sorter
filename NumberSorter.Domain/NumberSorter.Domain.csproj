@@ -93,6 +93,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppColors\ColorSet.cs" />
+    <Compile Include="Utility\ColorConverter.cs" />
+    <Compile Include="ViewModels\ColorSets\ColorSetDialogViewModel.cs" />
+    <Compile Include="ViewModels\ColorSets\ColorSetSelectDialogViewModel.cs" />
+    <Compile Include="ViewModels\ColorSets\ColorSetLineViewModel.cs" />
     <Compile Include="Visualizers\Base\VisualizationFactory.cs" />
     <Compile Include="Visualizers\Base\VisualizationType.cs" />
     <Compile Include="Comparer\IntComparer.cs" />
@@ -153,7 +158,7 @@
     <Compile Include="Visualizers\PointsListVisualizer.cs" />
     <Compile Include="Visualizers\PositiveColumnListVisualizer.cs" />
     <Compile Include="Visualizers\ColumnListVisualizer.cs" />
-    <Compile Include="Visualizers\Base\VisualizationColors.cs" />
+    <Compile Include="AppColors\VisualizationColors.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FodyWeavers.xml" />

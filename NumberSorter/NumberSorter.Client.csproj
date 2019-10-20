@@ -127,6 +127,12 @@
     </ApplicationDefinition>
     <Compile Include="DialogService\DialogService.cs" />
     <Compile Include="DialogService\WindowViewInitializer.cs" />
+    <Compile Include="Forms\ColorSets\ColorSetLineControl.xaml.cs">
+      <DependentUpon>ColorSetLineControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ColorSets\ColorSetSelectDialog.xaml.cs">
+      <DependentUpon>ColorSetSelectDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Generators\GeneratorEditDialog.xaml.cs">
       <DependentUpon>GeneratorEditDialog.xaml</DependentUpon>
     </Compile>
@@ -166,6 +172,9 @@
     <Compile Include="Forms\LineControls\Processors\DuplicateValuesProcessorLineControl.xaml.cs">
       <DependentUpon>DuplicateValuesProcessorLineControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ColorSets\ColorSetDialog.xaml.cs">
+      <DependentUpon>ColorSetDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Visualization\VisualizationTypeLineControl.xaml.cs">
       <DependentUpon>VisualizationTypeLineControl.xaml</DependentUpon>
     </Compile>
@@ -175,10 +184,10 @@
     <Compile Include="Forms\Visualization\VisualizationTypeDialog.xaml.cs">
       <DependentUpon>VisualizationTypeDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SortTypeDialog.xaml.cs">
+    <Compile Include="Forms\SortType\SortTypeDialog.xaml.cs">
       <DependentUpon>SortTypeDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LineControls\SortTypeLineControl.xaml.cs">
+    <Compile Include="Forms\SortType\SortTypeLineControl.xaml.cs">
       <DependentUpon>SortTypeLineControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Interactions\WpfInteractions.cs" />
@@ -186,6 +195,14 @@
     <Compile Include="Forms\Generators\NumberGeneratorsWindow.xaml.cs">
       <DependentUpon>NumberGeneratorsWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Forms\ColorSets\ColorSetLineControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\ColorSets\ColorSetSelectDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Forms\Generators\GeneratorEditDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -234,6 +251,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Forms\ColorSets\ColorSetDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Forms\Visualization\VisualizationTypeLineControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -266,11 +287,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Forms\SortTypeDialog.xaml">
+    <Page Include="Forms\SortType\SortTypeDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Forms\LineControls\SortTypeLineControl.xaml">
+    <Page Include="Forms\SortType\SortTypeLineControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

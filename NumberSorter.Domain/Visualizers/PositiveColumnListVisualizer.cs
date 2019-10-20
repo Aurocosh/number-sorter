@@ -1,4 +1,5 @@
-﻿using NumberSorter.Domain.Base.Visualizers;
+﻿using NumberSorter.Domain.AppColors;
+using NumberSorter.Domain.Base.Visualizers;
 using NumberSorter.Domain.Container;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace NumberSorter.Domain.Visualizers
         private float _columnProportion = 0.8f;
 
 
-        public void Redraw(WriteableBitmap writeableBitmap, SortState<int> sortState)
+        public void Redraw(WriteableBitmap writeableBitmap, SortState<int> sortState, ColorSet colorSet)
         {
             int width = (int)Math.Floor(writeableBitmap.Width);
             int height = (int)Math.Floor(writeableBitmap.Height);
@@ -29,7 +30,7 @@ namespace NumberSorter.Domain.Visualizers
             int yRange = height;
             int yOrigin = yRange;
 
-            writeableBitmap.Clear(Colors.LightGray);
+            writeableBitmap.Clear(colorSet.BackgroundColor);
             writeableBitmap.DrawLine(0, yOrigin, width, yOrigin, Colors.Gray);
 
             var list = sortState.State;
@@ -68,7 +69,7 @@ namespace NumberSorter.Domain.Visualizers
             int xCurrent = 0;
             for (int i = 0; i < list.Count; i++)
             {
-                var currentColor = VisualizationColors.GetColumnColor(sortState, i);
+                var currentColor = VisualizationColors.GetColumnColor(colorSet, sortState, i);
                 int scaledValue = (int)((list[i] + shift) * scaleCoefficient);
                 if (scaledValue > 0)
                     writeableBitmap.FillRectangle(xCurrent, yOrigin - scaledValue, xCurrent + columnSize - 1, yOrigin - 5, currentColor);

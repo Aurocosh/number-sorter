@@ -32,8 +32,8 @@ namespace NumberSorter.Domain.ViewModels
     {
         #region Fields
 
-        private readonly IDialogService<ReactiveObject> _dialogService;
         private readonly JsonFileSerializer _jsonFileSerializer;
+        private readonly IDialogService<ReactiveObject> _dialogService;
 
         #endregion Fields
 

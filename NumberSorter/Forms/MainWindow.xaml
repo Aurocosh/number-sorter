@@ -25,6 +25,7 @@
                 <MenuItem Header="Sort history" Name="SortHistoryButton"/>
             </MenuItem>
             <MenuItem Header="Visualization">
+                <MenuItem Header="Change color set" Name="ChangeColorSetButton"/>
                 <MenuItem Header="Change visualization type" Name="ChangeVisualizationButton"/>
             </MenuItem>
         </Menu>

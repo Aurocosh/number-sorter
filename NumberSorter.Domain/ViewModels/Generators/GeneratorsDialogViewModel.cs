@@ -189,16 +189,16 @@ namespace NumberSorter.Domain.ViewModels
 
         private IEnumerable<CustomListGenerator> LoadGenerators()
         {
-            if (!Directory.Exists(FilePaths.GeneratorFolder))
+            if (!Directory.Exists(FilePaths.GeneratorsFolder))
                 return Enumerable.Empty<CustomListGenerator>();
 
-            string[] filePaths = Directory.GetFiles(FilePaths.GeneratorFolder);
+            string[] filePaths = Directory.GetFiles(FilePaths.GeneratorsFolder);
             return filePaths.Select(x => _jsonFileSerializer.LoadFromJsonFile<CustomListGenerator>(x)).Where(x => x != null);
         }
 
         private static string GetGeneratorPath(CustomListGenerator listGenerator)
         {
-            return Path.Combine(FilePaths.GeneratorFolder, $"generator-{listGenerator.Id}.json");
+            return Path.Combine(FilePaths.GeneratorsFolder, $"generator-{listGenerator.Id}.json");
         }
 
         #endregion

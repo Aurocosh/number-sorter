@@ -1,0 +1,57 @@
+﻿<reactiveui:ReactiveUserControl
+             x:Class="NumberSorter.Forms.ColorSetLineControl"
+             xmlns:viewmodels="clr-namespace:NumberSorter.Domain.ViewModels;assembly=NumberSorter.Domain"
+             x:TypeArguments="viewmodels:ColorSetLineViewModel"
+             xmlns:reactiveui="http://reactiveui.net"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NumberSorter.Forms"
+             mc:Ignorable="d" 
+             d:DesignHeight="120" d:DesignWidth="400">
+    <Grid>
+        <Grid.InputBindings>
+            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=DataContext.AcceptCommand}"/>
+        </Grid.InputBindings>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="82"/>
+            <ColumnDefinition Width="22"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="82"/>
+            <ColumnDefinition Width="22"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="82"/>
+            <ColumnDefinition Width="22"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="Name:" HorizontalContentAlignment="Right"/>
+        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="7" Name="NameTextBlock" VerticalAlignment="Center"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Read color:" HorizontalContentAlignment="Right"/>
+        <Ellipse Grid.Row="1" Grid.Column="1" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Green" Name="ReadColorEllipse"/>
+
+        <Label Grid.Row="1" Grid.Column="3" Content="Write color:" HorizontalContentAlignment="Right"/>
+        <Ellipse Grid.Row="1" Grid.Column="4" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Green" Name="WriteColorEllipse"/>
+
+        <Label Grid.Row="1" Grid.Column="6" Content="Normal color:" HorizontalContentAlignment="Right"/>
+        <Ellipse Grid.Row="1" Grid.Column="7" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Green" Name="NormalColorEllipse"/>
+
+        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Content="Background color:" HorizontalContentAlignment="Right"/>
+        <Ellipse Grid.Row="2" Grid.Column="4" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Green" Name="BackgroundColorEllipse"/>
+
+        <Label Grid.Row="3" Grid.Column="0" Content="Equal color:" HorizontalContentAlignment="Right"/>
+        <Ellipse Grid.Row="3" Grid.Column="1" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Green" Name="EqualColorEllipse"/>
+
+        <Label Grid.Row="3" Grid.Column="3" Content="Bigger color:" HorizontalContentAlignment="Right"/>
+        <Ellipse Grid.Row="3" Grid.Column="4" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Green" Name="BiggerColorEllipse"/>
+
+        <Label Grid.Row="3" Grid.Column="6" Content="Lesser color:" HorizontalContentAlignment="Right"/>
+        <Ellipse Grid.Row="3" Grid.Column="7" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Green" Name="LesserColorEllipse"/>
+    </Grid>
+</reactiveui:ReactiveUserControl>

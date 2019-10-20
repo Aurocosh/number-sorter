@@ -1,11 +1,9 @@
 ﻿using Microsoft.Win32;
 using NumberSorter.Domain.Interactions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NumberSorter.Domain.Utility;
 using System.Windows;
+using WinColorDialog = System.Windows.Forms.ColorDialog;
+using WinDialogResult = System.Windows.Forms.DialogResult;
 
 namespace NumberSorter.Interactions
 {
@@ -13,6 +11,16 @@ namespace NumberSorter.Interactions
     {
         public static void RegisterInteractions()
         {
+            DialogInteractions.PickAnotherColor.RegisterHandler(context =>
+           {
+               var colorDialog = new WinColorDialog();
+               colorDialog.Color = context.Input.ConvertToDrawing();
+               if (colorDialog.ShowDialog() == WinDialogResult.OK)
+                   context.SetOutput(colorDialog.Color.ConvertToMedia());
+               else
+                   context.SetOutput(context.Input);
+           });
+
             DialogInteractions.AskYesNoQuestion.RegisterHandler(context =>
             {
                 var result = MessageBox.Show(context.Input.Text, context.Input.Header, MessageBoxButton.YesNo, MessageBoxImage.Question);

@@ -1,0 +1,61 @@
+﻿<reactiveui:ReactiveWindow
+        x:TypeArguments="viewmodels:ColorSetDialogViewModel"
+        x:Class="NumberSorter.Forms.ColorSetDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NumberSorter.Forms"
+        xmlns:reactiveui="http://reactiveui.net"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:viewmodels="clr-namespace:NumberSorter.Domain.ViewModels;assembly=NumberSorter.Domain"
+        xmlns:utility="clr-namespace:NumberSorter.Utility"
+        utility:DialogCloser.DialogResult = "{Binding DialogResult}"
+        mc:Ignorable="d"
+        Title="SortTypeDialog" Height="450" Width="400"
+        d:DataContext="{d:DesignInstance viewmodels:ColorSetDialogViewModel}">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Name="AcceptButton" Content="Accept" Width="80" Margin="5"/>
+            <Button IsCancel="True" Content="Cancel" Width="80" Margin="5"/>
+        </StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content="Name"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Name="NameTextEdit"/>
+
+            <Label Grid.Row="2" Grid.Column="0" Content="Read color"/>
+            <xctk:ColorPicker Grid.Row="2" Grid.Column="1" Name="ReadColorPicker"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="Write color"/>
+            <xctk:ColorPicker Grid.Row="3" Grid.Column="1" Name="WriteColorPicker"/>
+            <Label Grid.Row="4" Grid.Column="0" Content="Normal color"/>
+            <xctk:ColorPicker Grid.Row="4" Grid.Column="1" Name="NormalColorPicker"/>
+
+            <Label Grid.Row="6" Grid.Column="0" Content="Background color"/>
+            <xctk:ColorPicker Grid.Row="6" Grid.Column="1" Name="BackgroundColorPicker"/>
+
+            <Label Grid.Row="8" Grid.Column="0" Content="Read color"/>
+            <xctk:ColorPicker Grid.Row="8" Grid.Column="1" Name="CompareEqualColorPicker"/>
+            <Label Grid.Row="9" Grid.Column="0" Content="Write color"/>
+            <xctk:ColorPicker Grid.Row="9" Grid.Column="1" Name="CompareBiggerColorPicker"/>
+            <Label Grid.Row="10" Grid.Column="0" Content="Normal color"/>
+            <xctk:ColorPicker Grid.Row="10" Grid.Column="1" Name="CompareLesserColorPicker"/>
+        </Grid>
+    </DockPanel>
+</reactiveui:ReactiveWindow>
