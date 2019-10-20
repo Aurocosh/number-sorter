@@ -10,6 +10,7 @@ namespace NumberSorter.Core.Logic
         {
             _nameDictionary.Add(AlgorhythmType.CombSort, "Comb sort");
             _nameDictionary.Add(AlgorhythmType.HeapSort, "Heap sort");
+            _nameDictionary.Add(AlgorhythmType.CycleSort, "Cycle sort");
             _nameDictionary.Add(AlgorhythmType.BinarySort, "Binary sort");
             _nameDictionary.Add(AlgorhythmType.BubbleSort, "Bubble sort");
             _nameDictionary.Add(AlgorhythmType.OddEvenSort, "Odd even sort");

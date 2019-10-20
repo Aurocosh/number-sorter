@@ -4,6 +4,7 @@
     {
         CombSort,
         HeapSort,
+        CycleSort,
         BinarySort,
         BubbleSort,
         OddEvenSort,

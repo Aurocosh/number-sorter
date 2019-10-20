@@ -21,7 +21,6 @@ namespace NumberSorter.Domain.Visualizers
 
         private float _columnProportion = 0.8f;
 
-
         public void Redraw(WriteableBitmap writeableBitmap, SortState<int> sortState, ColorSet colorSet)
         {
             int width = (int)Math.Floor(writeableBitmap.Width);

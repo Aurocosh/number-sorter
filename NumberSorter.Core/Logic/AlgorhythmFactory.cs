@@ -15,6 +15,8 @@ namespace NumberSorter.Core.Logic
                     return new CombSort<T>(comparer);
                 case AlgorhythmType.HeapSort:
                     return new HeapSort<T>(comparer);
+                case AlgorhythmType.CycleSort:
+                    return new CycleSort<T>(comparer);
                 case AlgorhythmType.BinarySort:
                     return new BinarySort<T>(comparer);
                 case AlgorhythmType.BubbleSort:
