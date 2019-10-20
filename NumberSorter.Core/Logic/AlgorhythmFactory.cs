@@ -37,6 +37,8 @@ namespace NumberSorter.Core.Logic
                     return new CocktailShakerSort<T>(comparer);
                 case AlgorhythmType.RecursiveMergeSort:
                     return new RecursiveMergeSort<T>(comparer);
+                case AlgorhythmType.DoubleSelectionSort:
+                    return new DoubleSelectionSort<T>(comparer);
                 case AlgorhythmType.HalfInPlaceMergeSort:
                     return new HalfInPlaceMergeSort<T>(comparer);
                 case AlgorhythmType.KindaInPlaceMergeSort:

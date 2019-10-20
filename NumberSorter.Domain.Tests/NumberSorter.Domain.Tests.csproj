@@ -81,6 +81,7 @@
     <Compile Include="SortTests\CombSortTests.cs" />
     <Compile Include="SortTests\GnomeSortTests.cs" />
     <Compile Include="SortTests\CocktailShakerSortTests.cs" />
+    <Compile Include="SortTests\DoubleSelectionSortTests.cs" />
     <Compile Include="SortTests\OddEvenSortTests.cs" />
     <Compile Include="SortTests\SelectionSortTests.cs" />
     <Compile Include="SortTests\InsertionWindowTimSortTests.cs" />

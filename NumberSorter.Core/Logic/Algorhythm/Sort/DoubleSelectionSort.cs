@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class SelectionSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
+    public class DoubleSelectionSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
     {
-        public SelectionSort(IComparer<T> comparer) : base(comparer) { }
+        public DoubleSelectionSort(IComparer<T> comparer) : base(comparer) { }
 
         public override void Sort(IList<T> list)
         {
@@ -19,13 +19,16 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 return;
 
             int lowerLimitIndex = startingIndex;
-            int upperLimitIndex = startingIndex + length;
-            while (lowerLimitIndex != upperLimitIndex)
+            int upperLimitIndex = startingIndex + length - 1;
+            while (lowerLimitIndex <= upperLimitIndex)
             {
                 int lowestIndex = lowerLimitIndex;
+                int highestIndex = upperLimitIndex;
                 int currentIndex = lowerLimitIndex;
+
                 T currentMinimum = list[lowerLimitIndex];
-                while (currentIndex < upperLimitIndex)
+                T currentMaximum = list[upperLimitIndex];
+                while (currentIndex <= upperLimitIndex)
                 {
                     T currentValue = list[currentIndex];
                     if (Compare(currentMinimum, currentValue) > 0)
@@ -33,11 +36,21 @@ namespace NumberSorter.Core.Logic.Algorhythm
                         lowestIndex = currentIndex;
                         currentMinimum = currentValue;
                     }
+                    if (Compare(currentMaximum, currentValue) < 0)
+                    {
+                        highestIndex = currentIndex;
+                        currentMaximum = currentValue;
+                    }
                     currentIndex++;
                 }
+                if (highestIndex == lowerLimitIndex)
+                    highestIndex = lowestIndex;
                 if (lowestIndex != lowerLimitIndex)
                     list.Swap(lowerLimitIndex, lowestIndex);
+                if (highestIndex != upperLimitIndex)
+                    list.Swap(upperLimitIndex, highestIndex);
                 lowerLimitIndex++;
+                upperLimitIndex--;
             }
         }
     }

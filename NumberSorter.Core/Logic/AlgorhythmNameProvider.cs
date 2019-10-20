@@ -21,6 +21,7 @@ namespace NumberSorter.Core.Logic
             _nameDictionary.Add(AlgorhythmType.WindowMergeSort, "Window merge sort");
             _nameDictionary.Add(AlgorhythmType.CocktailShakerSort, "Cocktail shaker sort");
             _nameDictionary.Add(AlgorhythmType.RecursiveMergeSort, "Recursive merge sort");
+            _nameDictionary.Add(AlgorhythmType.DoubleSelectionSort, "Double selection sort");
             _nameDictionary.Add(AlgorhythmType.HalfInPlaceMergeSort, "Half in place merge sort");
             _nameDictionary.Add(AlgorhythmType.QuickSortRandomPivot, "Quick sort (Random pivot)");
             _nameDictionary.Add(AlgorhythmType.TripleWindowMergeSort, "Triple window merge sort");

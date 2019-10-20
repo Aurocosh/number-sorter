@@ -15,6 +15,7 @@
         WindowMergeSort,
         CocktailShakerSort,
         RecursiveMergeSort,
+        DoubleSelectionSort,
         WindowWindowTimSort,
         HalfInPlaceMergeSort,
         QuickSortRandomPivot,
