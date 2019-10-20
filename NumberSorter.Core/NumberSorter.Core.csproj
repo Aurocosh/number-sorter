@@ -80,6 +80,7 @@
     <Compile Include="Logic\Algorhythm\Sort\CombSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\CycleSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\GnomeSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\CocktailShakerSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\OddEvenSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\SelectionSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\BinarySort.cs" />

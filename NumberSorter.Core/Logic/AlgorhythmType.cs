@@ -13,6 +13,7 @@
         InsertionSort,
         DequeMergeSort,
         WindowMergeSort,
+        CocktailShakerSort,
         RecursiveMergeSort,
         WindowWindowTimSort,
         HalfInPlaceMergeSort,

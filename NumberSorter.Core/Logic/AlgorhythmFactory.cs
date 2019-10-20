@@ -33,6 +33,8 @@ namespace NumberSorter.Core.Logic
                     return new DequeMergeSort<T>(comparer);
                 case AlgorhythmType.WindowMergeSort:
                     return new WindowMergeSort<T>(comparer);
+                case AlgorhythmType.CocktailShakerSort:
+                    return new CocktailShakerSort<T>(comparer);
                 case AlgorhythmType.RecursiveMergeSort:
                     return new RecursiveMergeSort<T>(comparer);
                 case AlgorhythmType.HalfInPlaceMergeSort:
