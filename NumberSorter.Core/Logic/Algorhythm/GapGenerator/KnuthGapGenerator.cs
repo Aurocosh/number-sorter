@@ -1,4 +1,5 @@
 ﻿using NumberSorter.Core.Logic.Algorhythm.GapGenerator.Base;
+using NumberSorter.Core.Logic.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Core.Logic.Algorhythm.GapGenerator
 {
-    public class TokudaGapGenerator : RecursiveGapGenerator
+    public class KnuthGapGenerator : RecursiveGapGenerator
     {
         protected override int GetNext(int index, int previousValue)
         {
-            return (int)((2.25 * previousValue) + 1);
+            int value = index + 1;
+            return (IntUtility.IntPow(3, (uint)value) - 1) / 2;
         }
     }
 }

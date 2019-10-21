@@ -6,13 +6,19 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Core.Logic.Utility
 {
-    public static class ComparableUtility
+    public static class IntUtility
     {
-        public static T Clamp<T>(T val, T min, T max) where T : IComparable<T>
+        public static int IntPow(int value, uint power)
         {
-            if (val.CompareTo(min) < 0) return min;
-            else if (val.CompareTo(max) > 0) return max;
-            else return val;
+            int result = 1;
+            while (power != 0)
+            {
+                if ((power & 1) == 1)
+                    result *= value;
+                value *= value;
+                power >>= 1;
+            }
+            return result;
         }
     }
 }

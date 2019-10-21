@@ -14,14 +14,17 @@ namespace NumberSorter.Core.Logic.Algorhythm.GapGenerator.Base
             var gaps = new List<int>(16);
 
             int gap = 1;
-            while (gap < arraySize)
+            int index = 0;
+            int maxGap = MaxGap(arraySize);
+            while (gap < maxGap)
             {
                 gaps.Add(gap);
-                gap = GetNext(gap);
+                gap = GetNext(index++, gap);
             }
             return gaps.ToArray();
         }
 
-        protected abstract int GetNext(int value);
+        protected virtual int MaxGap(int arraySize) => arraySize;
+        protected abstract int GetNext(int index, int previousValue);
     }
 }

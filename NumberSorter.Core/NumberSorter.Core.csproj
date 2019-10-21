@@ -71,6 +71,7 @@
     <Compile Include="Logic\Algorhythm\Base\SortRun.cs" />
     <Compile Include="Logic\Algorhythm\GapGenerator\Base\IGapGenerator.cs" />
     <Compile Include="Logic\Algorhythm\GapGenerator\Base\RecursiveGapGenerator.cs" />
+    <Compile Include="Logic\Algorhythm\GapGenerator\KnuthGapGenerator.cs" />
     <Compile Include="Logic\Algorhythm\GapGenerator\TokudaGapGenerator.cs" />
     <Compile Include="Logic\Algorhythm\Merge\Base\GenericMergeAlgorhythm.cs" />
     <Compile Include="Logic\Algorhythm\Merge\Base\ILocalMergeAlgothythm.cs" />
@@ -113,8 +114,9 @@
     <Compile Include="Logic\Utility\EnumUtils.cs" />
     <Compile Include="Logic\Utility\IListExtensions.cs" />
     <Compile Include="Logic\Utility\ArrayUtility.cs" />
-    <Compile Include="Logic\Utility\ListUtility.cs" />
     <Compile Include="Logic\Utility\IntUtility.cs" />
+    <Compile Include="Logic\Utility\ListUtility.cs" />
+    <Compile Include="Logic\Utility\ComparableUtility.cs" />
     <Compile Include="Logic\Utility\SortRunUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
