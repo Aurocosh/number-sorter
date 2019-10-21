@@ -1,5 +1,6 @@
 ﻿using NumberSorter.Core.Algorhythm;
 using NumberSorter.Core.Logic.Algorhythm;
+using NumberSorter.Core.Logic.Algorhythm.GapGenerator;
 using NumberSorter.Core.Logic.Algorhythm.QuickSort.PivotSelectors;
 using System.Collections.Generic;
 
@@ -49,6 +50,8 @@ namespace NumberSorter.Core.Logic
                     return new WorkAreaInPlaceMergeSort<T>(comparer);
                 case AlgorhythmType.GallopingRecursiveMergeSort:
                     return new GallopingRecursiveMergeSort<T>(comparer);
+                case AlgorhythmType.ShellSortTokuda:
+                    return new ShellSort<T>(comparer, new TokudaGapGenerator());
                 case AlgorhythmType.QuickSortRandomPivot:
                     return new QuickSort<T>(comparer, new RandomPivotSelector<T>(), x => new DummySort<T>(x), 0);
                 case AlgorhythmType.QuickSortMedianOfThree:

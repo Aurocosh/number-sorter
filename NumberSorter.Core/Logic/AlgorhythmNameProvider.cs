@@ -19,6 +19,7 @@ namespace NumberSorter.Core.Logic
             _nameDictionary.Add(AlgorhythmType.InsertionSort, "Insertion sort");
             _nameDictionary.Add(AlgorhythmType.DequeMergeSort, "Deque merge sort");
             _nameDictionary.Add(AlgorhythmType.WindowMergeSort, "Window merge sort");
+            _nameDictionary.Add(AlgorhythmType.ShellSortTokuda, "Shell sort (Tokuda)");
             _nameDictionary.Add(AlgorhythmType.CocktailShakerSort, "Cocktail shaker sort");
             _nameDictionary.Add(AlgorhythmType.RecursiveMergeSort, "Recursive merge sort");
             _nameDictionary.Add(AlgorhythmType.DoubleSelectionSort, "Double selection sort");

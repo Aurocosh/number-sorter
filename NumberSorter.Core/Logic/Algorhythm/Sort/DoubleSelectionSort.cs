@@ -22,8 +22,8 @@ namespace NumberSorter.Core.Logic.Algorhythm
             int upperLimitIndex = startingIndex + length - 1;
             while (lowerLimitIndex <= upperLimitIndex)
             {
-                int lowestIndex = lowerLimitIndex;
-                int highestIndex = upperLimitIndex;
+                int minimumIndex = lowerLimitIndex;
+                int maximumIndex = upperLimitIndex;
                 int currentIndex = lowerLimitIndex;
 
                 T currentMinimum = list[lowerLimitIndex];
@@ -33,22 +33,22 @@ namespace NumberSorter.Core.Logic.Algorhythm
                     T currentValue = list[currentIndex];
                     if (Compare(currentMinimum, currentValue) > 0)
                     {
-                        lowestIndex = currentIndex;
+                        minimumIndex = currentIndex;
                         currentMinimum = currentValue;
                     }
                     if (Compare(currentMaximum, currentValue) < 0)
                     {
-                        highestIndex = currentIndex;
+                        maximumIndex = currentIndex;
                         currentMaximum = currentValue;
                     }
                     currentIndex++;
                 }
-                if (highestIndex == lowerLimitIndex)
-                    highestIndex = lowestIndex;
-                if (lowestIndex != lowerLimitIndex)
-                    list.Swap(lowerLimitIndex, lowestIndex);
-                if (highestIndex != upperLimitIndex)
-                    list.Swap(upperLimitIndex, highestIndex);
+                if (maximumIndex == lowerLimitIndex)
+                    maximumIndex = minimumIndex;
+                if (minimumIndex != lowerLimitIndex)
+                    list.Swap(lowerLimitIndex, minimumIndex);
+                if (maximumIndex != upperLimitIndex)
+                    list.Swap(upperLimitIndex, maximumIndex);
                 lowerLimitIndex++;
                 upperLimitIndex--;
             }

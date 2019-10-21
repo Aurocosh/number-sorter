@@ -69,6 +69,9 @@
     <Compile Include="Logic\Algorhythm\Base\ArrayHalves.cs" />
     <Compile Include="Logic\Algorhythm\Base\ArrayRunHalves.cs" />
     <Compile Include="Logic\Algorhythm\Base\SortRun.cs" />
+    <Compile Include="Logic\Algorhythm\GapGenerator\Base\IGapGenerator.cs" />
+    <Compile Include="Logic\Algorhythm\GapGenerator\Base\RecursiveGapGenerator.cs" />
+    <Compile Include="Logic\Algorhythm\GapGenerator\TokudaGapGenerator.cs" />
     <Compile Include="Logic\Algorhythm\Merge\Base\GenericMergeAlgorhythm.cs" />
     <Compile Include="Logic\Algorhythm\Merge\Base\ILocalMergeAlgothythm.cs" />
     <Compile Include="Logic\Algorhythm\Rotation\Base\ILocalRotationAlgothythm.cs" />
@@ -79,6 +82,7 @@
     <Compile Include="Logic\Algorhythm\Sort\Base\ISortAlgorhythm.cs" />
     <Compile Include="Logic\Algorhythm\Sort\CombSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\CycleSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\ShellSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\GnomeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\CocktailShakerSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\OddEvenSort.cs" />
