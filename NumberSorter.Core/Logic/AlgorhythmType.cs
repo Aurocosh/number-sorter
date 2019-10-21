@@ -9,6 +9,7 @@
         BinarySort,
         BubbleSort,
         CircleSort,
+        PancakeSort,
         OddEvenSort,
         SelectionSort,
         InsertionSort,

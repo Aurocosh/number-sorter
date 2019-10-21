@@ -40,6 +40,15 @@ namespace NumberSorter.Core.Logic.Utility
             return true;
         }
 
+        public static void InvertPart<T>(IList<T> list, int startingIndex, int length)
+        {
+            int leftIndex = startingIndex;
+            int rightIndex = startingIndex + length - 1;
+            int swapCount = length / 2;
+            for (int i = 0; i < swapCount; i++)
+                list.Swap(leftIndex++, rightIndex--);
+        }
+
         public static bool IsSorted<T>(IReadOnlyList<T> list, IComparer<T> comparer)
         {
             for (int i = 0; i < list.Count - 1; i++)

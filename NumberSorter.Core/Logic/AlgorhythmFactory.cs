@@ -26,6 +26,8 @@ namespace NumberSorter.Core.Logic
                     return new CircleSort<T>(comparer);
                 case AlgorhythmType.BubbleSort:
                     return new BubbleSort<T>(comparer);
+                case AlgorhythmType.PancakeSort:
+                    return new PancakeSort<T>(comparer);
                 case AlgorhythmType.OddEvenSort:
                     return new OddEvenSort<T>(comparer);
                 case AlgorhythmType.InsertionSort:

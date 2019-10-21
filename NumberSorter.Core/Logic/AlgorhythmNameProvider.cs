@@ -15,6 +15,7 @@ namespace NumberSorter.Core.Logic
             _nameDictionary.Add(AlgorhythmType.BinarySort, "Binary sort");
             _nameDictionary.Add(AlgorhythmType.BubbleSort, "Bubble sort");
             _nameDictionary.Add(AlgorhythmType.CircleSort, "Circle sort");
+            _nameDictionary.Add(AlgorhythmType.PancakeSort, "Pancake sort");
             _nameDictionary.Add(AlgorhythmType.OddEvenSort, "Odd even sort");
             _nameDictionary.Add(AlgorhythmType.SelectionSort, "Selection sort");
             _nameDictionary.Add(AlgorhythmType.InsertionSort, "Insertion sort");
