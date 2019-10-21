@@ -8,6 +8,7 @@
         GnomeSort,
         BinarySort,
         BubbleSort,
+        CircleSort,
         OddEvenSort,
         SelectionSort,
         InsertionSort,

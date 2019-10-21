@@ -22,6 +22,8 @@ namespace NumberSorter.Core.Logic
                     return new GnomeSort<T>(comparer);
                 case AlgorhythmType.BinarySort:
                     return new BinarySort<T>(comparer);
+                case AlgorhythmType.CircleSort:
+                    return new CircleSort<T>(comparer);
                 case AlgorhythmType.BubbleSort:
                     return new BubbleSort<T>(comparer);
                 case AlgorhythmType.OddEvenSort:
