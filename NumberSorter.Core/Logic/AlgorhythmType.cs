@@ -12,6 +12,7 @@
         SelectionSort,
         InsertionSort,
         DequeMergeSort,
+        ShellSortCiura,
         ShellSortKnuth,
         ShellSortTokuda,
         WindowMergeSort,

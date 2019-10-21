@@ -72,6 +72,7 @@
     <Compile Include="Logic\Algorhythm\GapGenerator\Base\IGapGenerator.cs" />
     <Compile Include="Logic\Algorhythm\GapGenerator\Base\RecursiveGapGenerator.cs" />
     <Compile Include="Logic\Algorhythm\GapGenerator\KnuthGapGenerator.cs" />
+    <Compile Include="Logic\Algorhythm\GapGenerator\CiuraGapGenerator.cs" />
     <Compile Include="Logic\Algorhythm\GapGenerator\TokudaGapGenerator.cs" />
     <Compile Include="Logic\Algorhythm\Merge\Base\GenericMergeAlgorhythm.cs" />
     <Compile Include="Logic\Algorhythm\Merge\Base\ILocalMergeAlgothythm.cs" />

@@ -50,6 +50,8 @@ namespace NumberSorter.Core.Logic
                     return new WorkAreaInPlaceMergeSort<T>(comparer);
                 case AlgorhythmType.GallopingRecursiveMergeSort:
                     return new GallopingRecursiveMergeSort<T>(comparer);
+                case AlgorhythmType.ShellSortCiura:
+                    return new ShellSort<T>(comparer, new CiuraGapGenerator());
                 case AlgorhythmType.ShellSortKnuth:
                     return new ShellSort<T>(comparer, new KnuthGapGenerator());
                 case AlgorhythmType.ShellSortTokuda:
