@@ -23,19 +23,20 @@ namespace NumberSorter.Core.Logic.Algorhythm
             var gaps = _gapGenerator.GenerateGaps(length);
 
             int gapIndex = gaps.Length - 1;
-            int indexLimit = startingIndex + length;
+            int upperlimitIndex = startingIndex + length;
             while (gapIndex >= 0)
             {
-                int j;
+                int subIndex;
                 int gap = gaps[gapIndex];
-                for (int i = gap; i != indexLimit; i++)
+                int lowerLimitIndex = startingIndex + gap;
+                for (int index = lowerLimitIndex; index != upperlimitIndex; index++)
                 {
-                    T temp = list[i];
-                    for (j = i; j >= gap && Compare(list[j - gap], temp) > 0; j -= gap)
+                    T temp = list[index];
+                    for (subIndex = index; subIndex >= lowerLimitIndex && Compare(list[subIndex - gap], temp) > 0; subIndex -= gap)
                     {
-                        list[j] = list[j - gap];
+                        list[subIndex] = list[subIndex - gap];
                     }
-                    list[j] = temp;
+                    list[subIndex] = temp;
                 }
 
                 gapIndex--;
