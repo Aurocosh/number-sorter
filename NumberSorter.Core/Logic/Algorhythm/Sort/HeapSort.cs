@@ -10,12 +10,14 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
         public override void Sort(IList<T> list)
         {
-            int heapSize = list.Count;
-            while (heapSize > 1)
+            var heapSize = list.Count;
+            for (int i = heapSize / 2 - 1; i >= 0; i--)
+                MaxHeapify(list, heapSize, i);
+
+            for (int i = heapSize - 1; i >= 0; i--)
             {
-                BuildHeap(list, heapSize);
-                heapSize--;
-                list.Swap(0, heapSize);
+                list.Swap(0, i);
+                MaxHeapify(list, i, 0);
             }
         }
 
