@@ -23,7 +23,7 @@ namespace NumberSorter.Core.CustomGenerators.Processors.Converters
 
         public object Clone()
         {
-            return new ShuffleValuesProcessor();
+            return new InvertValuesProcessor();
         }
     }
 }

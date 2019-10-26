@@ -152,6 +152,8 @@ namespace NumberSorter.Domain.ViewModels
                 return new DuplicateValuesProcessorLineViewModel(duplicateValuesProcessor);
             else if (processor is PartialShuffleValuesProcessor partialShuffleValuesProcessor)
                 return new PartialShuffleValuesProcessorLineViewModel(partialShuffleValuesProcessor);
+            else if (processor is InvertValuesProcessor invertValuesProcessor)
+                return new InvertValuesProcessorLineViewModel(invertValuesProcessor);
             return null;
         }
     }
