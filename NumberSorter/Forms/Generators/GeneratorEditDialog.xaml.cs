@@ -106,9 +106,11 @@ namespace NumberSorter.Forms
                     .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.AddRandomizeValuesProcessorCommand, x => x.AddRandomizeValuesProcessorMenuItem)
                     .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.AddDuplicateValuesProcessorCommand, x => x.AddDuplicateValuesProcessorMenuItem)
+                    .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.AddConsequtiveValuesProcessorCommand, x => x.AddConsequtiveValuesProcessorMenuItem)
                     .DisposeWith(disposable);
-                this.BindCommand(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.AddDuplicateValuesProcessorProcessorCommand, x => x.AddDuplicateValuesProcessorProcessorMenuItem)
+                this.BindCommand(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.AddPartialShuffleValuesProcessorCommand, x => x.AddPartialShuffleValuesProcessorMenuItem)
                     .DisposeWith(disposable);
 
                 this.BindCommand(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.ClearAllProcessorsCommand, x => x.ClearAllProcessorsMenuItem)

@@ -154,6 +154,9 @@
     <Compile Include="Forms\LineControls\Processors\InvertValuesProcessorLineControl.xaml.cs">
       <DependentUpon>InvertValuesProcessorLineControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\LineControls\Processors\PartialShuffleValuesProcessorLineControl.xaml.cs">
+      <DependentUpon>PartialShuffleValuesProcessorLineControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\LineControls\Processors\ShuffleValuesProcessorLineControl.xaml.cs">
       <DependentUpon>ShuffleValuesProcessorLineControl.xaml</DependentUpon>
     </Compile>
@@ -224,6 +227,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\LineControls\Processors\InvertValuesProcessorLineControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\LineControls\Processors\PartialShuffleValuesProcessorLineControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

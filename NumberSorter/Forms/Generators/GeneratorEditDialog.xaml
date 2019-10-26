@@ -29,8 +29,9 @@
                     <MenuItem Name="AddInvertValuesProcessorMenuItem" Header="Add invert converter"/>
                     <MenuItem Name="AddShuffleValuesProcessorMenuItem" Header="Add suffle converter"/>
                     <MenuItem Name="AddRandomizeValuesProcessorMenuItem" Header="Add randomizer converter"/>
+                    <MenuItem Name="AddDuplicateValuesProcessorMenuItem" Header="Add duplicating converter"/>
                     <MenuItem Name="AddConsequtiveValuesProcessorMenuItem" Header="Add consecutive converter"/>
-                    <MenuItem Name="AddDuplicateValuesProcessorProcessorMenuItem" Header="Add duplicating converter"/>
+                    <MenuItem Name="AddPartialShuffleValuesProcessorMenuItem" Header="Add partial suffle converter"/>
                 </MenuItem>
                 <MenuItem Header="Edit processors">
                     <MenuItem Name="RemoveSelectedProcessorMenuItem" Header="Remove selected processor"/>

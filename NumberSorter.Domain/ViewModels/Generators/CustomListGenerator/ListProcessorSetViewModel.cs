@@ -45,8 +45,9 @@ namespace NumberSorter.Domain.ViewModels
         public ReactiveCommand<Unit, Unit> AddInvertValuesProcessorCommand { get; }
         public ReactiveCommand<Unit, Unit> AddShuffleValuesProcessorCommand { get; }
         public ReactiveCommand<Unit, Unit> AddRandomizeValuesProcessorCommand { get; }
+        public ReactiveCommand<Unit, Unit> AddDuplicateValuesProcessorCommand { get; }
         public ReactiveCommand<Unit, Unit> AddConsequtiveValuesProcessorCommand { get; }
-        public ReactiveCommand<Unit, Unit> AddDuplicateValuesProcessorProcessorCommand { get; }
+        public ReactiveCommand<Unit, Unit> AddPartialShuffleValuesProcessorCommand { get; }
 
         public ReactiveCommand<Unit, Unit> ClearAllProcessorsCommand { get; }
         public ReactiveCommand<Unit, Unit> RemoveSelectedProcessorCommand { get; }
@@ -77,8 +78,9 @@ namespace NumberSorter.Domain.ViewModels
             AddInvertValuesProcessorCommand = ReactiveCommand.Create(AddInvertValuesProcessor);
             AddShuffleValuesProcessorCommand = ReactiveCommand.Create(AddShuffleValuesProcessor);
             AddRandomizeValuesProcessorCommand = ReactiveCommand.Create(AddRandomizeValuesProcessor);
+            AddDuplicateValuesProcessorCommand = ReactiveCommand.Create(AddDuplicateValuesProcessor);
             AddConsequtiveValuesProcessorCommand = ReactiveCommand.Create(AddConsequtiveValuesProcessor);
-            AddDuplicateValuesProcessorProcessorCommand = ReactiveCommand.Create(AddDuplicateValuesProcessorProcessor);
+            AddPartialShuffleValuesProcessorCommand = ReactiveCommand.Create(AddPartialShuffleValuesProcessor);
 
             ClearAllProcessorsCommand = ReactiveCommand.Create(ClearAllProcessors, canClearProcessors);
             RemoveSelectedProcessorCommand = ReactiveCommand.Create(RemoveSelectedProcessor, canRemoveProcessor);
@@ -125,8 +127,9 @@ namespace NumberSorter.Domain.ViewModels
         private void AddInvertValuesProcessor() => _listProcessors.Add(new InvertValuesProcessor());
         private void AddShuffleValuesProcessor() => _listProcessors.Add(new ShuffleValuesProcessor());
         private void AddRandomizeValuesProcessor() => _listProcessors.Add(new RandomizeValuesProcessor());
+        private void AddDuplicateValuesProcessor() => _listProcessors.Add(new DuplicateValuesProcessor());
         private void AddConsequtiveValuesProcessor() => _listProcessors.Add(new ConsecutiveValuesProcessor());
-        private void AddDuplicateValuesProcessorProcessor() => _listProcessors.Add(new DuplicateValuesProcessor());
+        private void AddPartialShuffleValuesProcessor() => _listProcessors.Add(new PartialShuffleValuesProcessor());
 
         private void ClearAllProcessors() => _listProcessors.Clear();
         private void RemoveSelectedProcessor() => _listProcessors.Remove(SelectedListProcessor.IListProcessor);
@@ -147,6 +150,8 @@ namespace NumberSorter.Domain.ViewModels
                 return new RandomizeValuesProcessorLineViewModel(randomizeValuesProcessor);
             else if (processor is DuplicateValuesProcessor duplicateValuesProcessor)
                 return new DuplicateValuesProcessorLineViewModel(duplicateValuesProcessor);
+            else if (processor is PartialShuffleValuesProcessor partialShuffleValuesProcessor)
+                return new PartialShuffleValuesProcessorLineViewModel(partialShuffleValuesProcessor);
             return null;
         }
     }
