@@ -5,32 +5,17 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    class FirstRunElementComparer<T> : IComparer<SortRun>
+    public class MultiGroupMergeSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
     {
-        private readonly IList<T> _list;
-        private readonly IComparer<T> _comparer;
-
-        public FirstRunElementComparer(IList<T> list, IComparer<T> comparer)
-        {
-            _list = list;
-            _comparer = comparer;
-        }
-
-        public int Compare(SortRun x, SortRun y)
-        {
-            var first = _list[x.FirstIndex];
-            var second = _list[y.FirstIndex];
-            return _comparer.Compare(first, second);
-        }
-    }
-
-    public class MultiMergeSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
-    {
+        private int MinimalRunLength { get; }
+        private IPartialSortAlgorhythm<T> GroupSortAlgorhythm { get; }
         private Func<IComparer<SortRun>, IPartialSortAlgorhythm<SortRun>> RunSortFactory { get; }
 
-        public MultiMergeSort(IComparer<T> comparer, Func<IComparer<SortRun>, IPartialSortAlgorhythm<SortRun>> runSortFactory) : base(comparer)
+        public MultiGroupMergeSort(IComparer<T> comparer, Func<IComparer<SortRun>, IPartialSortAlgorhythm<SortRun>> runSortFactory, Func<IComparer<T>, IPartialSortAlgorhythm<T>> groupSortAlgorhythmFactory, int minRunLength = 32) : base(comparer)
         {
+            MinimalRunLength = minRunLength;
             RunSortFactory = runSortFactory;
+            GroupSortAlgorhythm = groupSortAlgorhythmFactory.Invoke(comparer);
         }
 
         public override void Sort(IList<T> list)
@@ -40,6 +25,9 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
         public void Sort(IList<T> list, int startingIndex, int length)
         {
+            if (length < 2)
+                return;
+
             var sortRuns = FindSortRuns(list, startingIndex, length);
             var comparer = new FirstRunElementComparer<T>(list, GetComparer());
             var runSorter = RunSortFactory.Invoke(comparer);
@@ -52,7 +40,6 @@ namespace NumberSorter.Core.Logic.Algorhythm
             int runIndexLimit = sortRuns.Count;
 
             int index = startingIndex;
-            int indexLimit = startingIndex + length;
 
             while (currentRunIndex != runIndexLimit)
             {
@@ -77,77 +64,66 @@ namespace NumberSorter.Core.Logic.Algorhythm
                     secondIndex++;
                 }
             }
-
-            //int lowerLimit = startingIndex - 1;
-            //int upperLimit = startingIndex + length;
-            //for (int i = startingIndex + 1; i < upperLimit; i++)
-            //{
-            //    var currentIndex = i;
-            //    var testIndex = i - 1;
-            //    var currentValue = list[currentIndex];
-
-            //    while (testIndex > lowerLimit && Compare(list[testIndex], currentValue) > 0)
-            //    {
-            //        list.Swap(currentIndex, testIndex);
-            //        currentIndex = testIndex;
-            //        testIndex--;
-            //    }
-            //}
         }
 
         List<SortRun> FindSortRuns(IList<T> list, int startingIndex, int length)
         {
             var sortRuns = new List<SortRun>();
 
-            int runStart = startingIndex;
-            int runLength = 0;
-
             int currentIndex = startingIndex;
             int indexLimit = startingIndex + length;
 
-            int previousRunDirection = 0;
-            var previousElement = list[startingIndex];
+            int elementsLeft = length;
+            while (elementsLeft > 0)
+            {
+                var sortRun = FindNextSortRun(list, currentIndex, indexLimit);
+                if (sortRun.Length < MinimalRunLength)
+                {
+                    sortRun = new SortRun(sortRun.Start, Math.Min(MinimalRunLength, elementsLeft));
+                    GroupSortAlgorhythm.Sort(list, sortRun.Start, sortRun.Length);
+                }
+                sortRuns.Add(sortRun);
+                elementsLeft -= sortRun.Length;
+                currentIndex += sortRun.Length;
+            }
 
-            while (currentIndex != indexLimit)
+            return sortRuns;
+        }
+
+        private SortRun FindNextSortRun(IList<T> list, int runStart, int indexLimit)
+        {
+            int runLength = 0;
+            int currentIndex = runStart;
+
+            int previousRunDirection = 0;
+            var previousElement = list[runStart];
+
+            while (currentIndex < indexLimit)
             {
                 var nextElement = list[currentIndex];
                 var runDirection = Math.Sign(Compare(previousElement, nextElement));
-                if (previousRunDirection != 0 && previousRunDirection != runDirection)
+                if (previousRunDirection == 0 || previousRunDirection == runDirection)
                 {
-                    sortRuns.Add(GetSortRun(list, runStart, runLength, previousRunDirection));
-                    previousRunDirection = 0;
-                    runStart = currentIndex;
-                    runLength = 1;
+                    previousRunDirection = runDirection;
+                    previousElement = nextElement;
+                    currentIndex++;
+                    runLength++;
                 }
                 else
                 {
-                    previousRunDirection = runDirection;
-                    runLength++;
+                    break;
                 }
-
-                previousElement = nextElement;
-                currentIndex++;
             }
 
-            sortRuns.Add(GetSortRun(list, runStart, runLength, previousRunDirection));
-            return sortRuns;
+            return GetSortRun(list, runStart, runLength, previousRunDirection);
         }
 
         private static SortRun GetSortRun(IList<T> list, int runStart, int runLength, int runDirection)
         {
             var sortRun = new SortRun(runStart, runLength);
             if (runDirection > 0)
-                InvertRun(list, sortRun);
+                SortRunUtility.InvertRun(list, sortRun);
             return sortRun;
-        }
-
-        private static void InvertRun(IList<T> list, SortRun sortRun)
-        {
-            int leftIndex = sortRun.Start;
-            int rightIndex = sortRun.Start + sortRun.Length - 1;
-            int swapCount = sortRun.Length / 2;
-            for (int i = 0; i < swapCount; i++)
-                list.Swap(leftIndex++, rightIndex--);
         }
     }
 }

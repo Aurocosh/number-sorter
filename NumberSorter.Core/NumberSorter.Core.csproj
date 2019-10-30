@@ -80,13 +80,16 @@
     <Compile Include="Logic\Algorhythm\Rotation\Base\ILocalRotationAlgothythm.cs" />
     <Compile Include="Logic\Algorhythm\Rotation\InversionInPlaceRotation.cs" />
     <Compile Include="Logic\Algorhythm\Rotation\RecursiveInPlaceRotation.cs" />
+    <Compile Include="Logic\Algorhythm\SortRunLocator\Base\ISortAlgorhythm.cs" />
     <Compile Include="Logic\Algorhythm\Sort\Base\ComparerSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\Base\IPartialSortAlgorhythm.cs" />
     <Compile Include="Logic\Algorhythm\Sort\Base\ISortAlgorhythm.cs" />
     <Compile Include="Logic\Algorhythm\Sort\CombSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\CycleSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\CircleSort.cs" />
-    <Compile Include="Logic\Algorhythm\Sort\MultiMergeSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\MultiMergeSort\FirstRunElementComparer.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\MultiMergeSort\MultiGroupMergeSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\MultiMergeSort\MultiMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\PancakeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ShellSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\GnomeSort.cs" />

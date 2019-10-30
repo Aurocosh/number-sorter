@@ -38,6 +38,8 @@ namespace NumberSorter.Core.Logic
                     return new DequeMergeSort<T>(comparer);
                 case AlgorhythmType.MultiMergeSort:
                     return new MultiMergeSort<T>(comparer, x => new InsertionSort<SortRun>(x));
+                case AlgorhythmType.MultiGroupMergeSort:
+                    return new MultiGroupMergeSort<T>(comparer, x => new InsertionSort<SortRun>(x), x => new InsertionSort<T>(x));
                 case AlgorhythmType.WindowMergeSort:
                     return new WindowMergeSort<T>(comparer);
                 case AlgorhythmType.CocktailShakerSort:

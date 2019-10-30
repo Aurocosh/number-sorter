@@ -176,17 +176,8 @@ namespace NumberSorter.Core.Logic.Algorhythm
         {
             var sortRun = new SortRun(runStart, runLength);
             if (runDirection > 0)
-                InvertRun(list, sortRun);
+                SortRunUtility.InvertRun(list, sortRun);
             return sortRun;
-        }
-
-        private static void InvertRun(IList<T> list, SortRun sortRun)
-        {
-            int leftIndex = sortRun.Start;
-            int rightIndex = sortRun.Start + sortRun.Length - 1;
-            int swapCount = sortRun.Length / 2;
-            for (int i = 0; i < swapCount; i++)
-                list.Swap(leftIndex++, rightIndex--);
         }
 
         private static int GetMinrun(int n)
