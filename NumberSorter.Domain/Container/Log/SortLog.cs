@@ -27,14 +27,16 @@ namespace NumberSorter.Domain.Container
 
         public SortLog(string inputName, Guid inputId, IReadOnlyList<T> inputState, IReadOnlyList<T> finalState, IReadOnlyList<LogAction<T>> actionLog, IComparer<T> comparer, float elapsedTime, string algorhythmName)
         {
-            var fullySorted = ListUtility.IsSorted(finalState, comparer);
             var totalReadCount = actionLog.Sum(x => x.ReadCount);
             var totalWriteCount = actionLog.Sum(x => x.WriteCount);
             var totalComparassionCount = actionLog.Sum(x => x.ComparassionCount);
-            Summary = new LogSummary(fullySorted, elapsedTime, algorhythmName, inputId, inputName, inputState.Count, totalReadCount, totalWriteCount, totalComparassionCount);
 
             InputState = new SortState<T>(inputState.ToArray());
             FinalState = new SortState<T>(finalState.ToArray());
+
+            var fullySorted = ListUtility.IsSorted(FinalState.State, comparer);
+            Summary = new LogSummary(fullySorted, elapsedTime, algorhythmName, inputId, inputName, inputState.Count, totalReadCount, totalWriteCount, totalComparassionCount);
+
             ActionLog = actionLog;
         }
     }

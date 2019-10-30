@@ -14,6 +14,7 @@
         SelectionSort,
         InsertionSort,
         DequeMergeSort,
+        MultiMergeSort,
         ShellSortCiura,
         ShellSortKnuth,
         ShellSortTokuda,
