@@ -2,14 +2,15 @@
 using NumberSorter.Core.Algorhythm;
 using NumberSorter.Domain.Benchmark.Benchmarks.Base;
 using NumberSorter.Core.Logic.Algorhythm;
+using NumberSorter.Core.Logic.Algorhythm.SortRunLocator;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks
 {
-    public class MultiGroupMergeSortBenchmarks : SortBenchmarks
+    public class RecursiveSimpleMultiMergeSortBenchmarks : SortBenchmarks
     {
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {
-            return new MultiGroupMergeSort<int>(comparer, x => new InsertionSort<SortRun>(x), x => new InsertionSort<int>(x));
+            return new RecursiveMultiMergeSort<int>(comparer, new SimpleRunLocator<int>(comparer), x => new SimpleRunLocator<SortRun>(x));
         }
     }
 }

@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using NumberSorter.Core.Logic.Algorhythm;
+using System.Collections.Generic;
 
 namespace NumberSorter.Core.Algorhythm
 {
     public interface ISortRunLocator<T>
     {
-        void Sort(IList<T> list);
-        IComparer<T> GetComparer();
+        SortRun FindNextSortRun(IList<T> list, int runStart, int length);
+        IComparer<T> Comparer { get; }
         int Compare(T first, T second);
         int Compare(IList<T> list, int first, int second);
     }

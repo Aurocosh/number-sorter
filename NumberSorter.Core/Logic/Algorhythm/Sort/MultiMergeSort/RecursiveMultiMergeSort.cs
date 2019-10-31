@@ -7,8 +7,11 @@ namespace NumberSorter.Core.Logic.Algorhythm
 {
     public class RecursiveMultiMergeSort<T> : MultiMergeSortBase<T>
     {
-        public RecursiveMultiMergeSort(IComparer<T> comparer) : base(comparer)
+        private Func<IComparer<SortRun>, ISortRunLocator<SortRun>> SortRunLocatorFactory { get; }
+
+        public RecursiveMultiMergeSort(IComparer<T> comparer, ISortRunLocator<T> sortRunLocator, Func<IComparer<SortRun>, ISortRunLocator<SortRun>> sortRunLocatorFactory) : base(comparer, sortRunLocator)
         {
+            SortRunLocatorFactory = sortRunLocatorFactory;
         }
 
         public override void SortRuns(IList<SortRun> list, IList<T> values, IComparer<T> comparer)
@@ -22,7 +25,8 @@ namespace NumberSorter.Core.Logic.Algorhythm
                    }
                );
 
-            var sort = new RecursiveMultiMergeSort<SortRun>(compar);
+            var locator = SortRunLocatorFactory.Invoke(compar);
+            var sort = new RecursiveMultiMergeSort<SortRun>(compar, locator, SortRunLocatorFactory);
             sort.Sort(list);
         }
     }

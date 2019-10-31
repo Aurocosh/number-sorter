@@ -9,7 +9,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
     {
         private Func<IComparer<SortRun>, IPartialSortAlgorhythm<SortRun>> RunSortFactory { get; }
 
-        public MultiMergeSort(IComparer<T> comparer, Func<IComparer<SortRun>, IPartialSortAlgorhythm<SortRun>> runSortFactory) : base(comparer)
+        public MultiMergeSort(IComparer<T> comparer, ISortRunLocator<T> sortRunLocator, Func<IComparer<SortRun>, IPartialSortAlgorhythm<SortRun>> runSortFactory) : base(comparer, sortRunLocator)
         {
             RunSortFactory = runSortFactory;
         }

@@ -220,16 +220,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Benchmarks\MultiMerge\RecursiveGroupMultiMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\WorkAreaInPlaceMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\TripleWindowMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ShellSortTokudaBenchmarks.cs" />
     <Compile Include="Benchmarks\ShellSortCiuraBenchmarks.cs" />
     <Compile Include="Benchmarks\SelectionSortBenchmarks.cs" />
-    <Compile Include="Benchmarks\RecursiveMultiMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\MultiMerge\RecursiveSimpleMultiMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\PancakeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\OddEvenSortBenchmarks.cs" />
-    <Compile Include="Benchmarks\MultiMergeSortBenchmarks.cs" />
-    <Compile Include="Benchmarks\MultiGroupMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\MultiMerge\SimpleMultiMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\MultiMerge\MultiGroupMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\GnomeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\DoubleSelectionSortBenchmarks.cs" />
     <Compile Include="Benchmarks\CycleSortBenchmarks.cs" />
