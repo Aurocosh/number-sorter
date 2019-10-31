@@ -5,13 +5,10 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class MultiMergeSort<T> : MultiMergeSortBase<T>
+    public class RecursiveMultiMergeSort<T> : MultiMergeSortBase<T>
     {
-        private Func<IComparer<SortRun>, IPartialSortAlgorhythm<SortRun>> RunSortFactory { get; }
-
-        public MultiMergeSort(IComparer<T> comparer, Func<IComparer<SortRun>, IPartialSortAlgorhythm<SortRun>> runSortFactory) : base(comparer)
+        public RecursiveMultiMergeSort(IComparer<T> comparer) : base(comparer)
         {
-            RunSortFactory = runSortFactory;
         }
 
         public override void SortRuns(IList<SortRun> list, IList<T> values, IComparer<T> comparer)
@@ -25,7 +22,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
                    }
                );
 
-            var sort = RunSortFactory.Invoke(compar);
+            var sort = new RecursiveMultiMergeSort<SortRun>(compar);
             sort.Sort(list);
         }
     }

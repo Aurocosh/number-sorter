@@ -5,17 +5,10 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class MultiGroupMergeSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
+    public abstract class MultiMergeSortBase<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
     {
-        private int MinimalRunLength { get; }
-        private IPartialSortAlgorhythm<T> GroupSortAlgorhythm { get; }
-        private Func<IComparer<SortRun>, IPartialSortAlgorhythm<SortRun>> RunSortFactory { get; }
-
-        public MultiGroupMergeSort(IComparer<T> comparer, Func<IComparer<SortRun>, IPartialSortAlgorhythm<SortRun>> runSortFactory, Func<IComparer<T>, IPartialSortAlgorhythm<T>> groupSortAlgorhythmFactory, int minRunLength = 32) : base(comparer)
+        public MultiMergeSortBase(IComparer<T> comparer) : base(comparer)
         {
-            MinimalRunLength = minRunLength;
-            RunSortFactory = runSortFactory;
-            GroupSortAlgorhythm = groupSortAlgorhythmFactory.Invoke(comparer);
         }
 
         public override void Sort(IList<T> list)
@@ -23,23 +16,22 @@ namespace NumberSorter.Core.Logic.Algorhythm
             Sort(list, 0, list.Count);
         }
 
+        public abstract void SortRuns(IList<SortRun> list, IList<T> values, IComparer<T> comparer);
+
         public void Sort(IList<T> list, int startingIndex, int length)
         {
             var sortRuns = FindSortRuns(list, startingIndex, length);
             if (sortRuns.Count < 2)
                 return;
 
-            var comparer = new FirstRunElementComparer<T>(list, GetComparer());
-            var runSorter = RunSortFactory.Invoke(comparer);
-
-            runSorter.Sort(sortRuns);
-
+            SortRuns(sortRuns, list, GetComparer());
             var temporartArray = list.GetRangeAsArray(startingIndex, length);
 
             int currentRunIndex = 0;
             int runIndexLimit = sortRuns.Count;
 
             int index = startingIndex;
+            int indexLimit = startingIndex + length;
 
             while (currentRunIndex != runIndexLimit)
             {
@@ -70,52 +62,38 @@ namespace NumberSorter.Core.Logic.Algorhythm
         {
             var sortRuns = new List<SortRun>();
 
+            int runStart = startingIndex;
+            int runLength = 0;
+
             int currentIndex = startingIndex;
             int indexLimit = startingIndex + length;
 
-            int elementsLeft = length;
-            while (elementsLeft > 0)
-            {
-                var sortRun = FindNextSortRun(list, currentIndex, indexLimit);
-                if (sortRun.Length < MinimalRunLength)
-                {
-                    sortRun = new SortRun(sortRun.Start, Math.Min(MinimalRunLength, elementsLeft));
-                    GroupSortAlgorhythm.Sort(list, sortRun.Start, sortRun.Length);
-                }
-                sortRuns.Add(sortRun);
-                elementsLeft -= sortRun.Length;
-                currentIndex += sortRun.Length;
-            }
-
-            return sortRuns;
-        }
-
-        private SortRun FindNextSortRun(IList<T> list, int runStart, int indexLimit)
-        {
-            int runLength = 0;
-            int currentIndex = runStart;
-
             int previousRunDirection = 0;
-            var previousElement = list[runStart];
+            var previousElement = list[startingIndex];
 
-            while (currentIndex < indexLimit)
+            while (currentIndex != indexLimit)
             {
                 var nextElement = list[currentIndex];
                 var runDirection = Math.Sign(Compare(previousElement, nextElement));
-                if (previousRunDirection == 0 || previousRunDirection == runDirection)
+                if (previousRunDirection != 0 && previousRunDirection != runDirection)
                 {
-                    previousRunDirection = runDirection;
-                    previousElement = nextElement;
-                    currentIndex++;
-                    runLength++;
+                    sortRuns.Add(GetSortRun(list, runStart, runLength, previousRunDirection));
+                    previousRunDirection = 0;
+                    runStart = currentIndex;
+                    runLength = 1;
                 }
                 else
                 {
-                    break;
+                    previousRunDirection = runDirection;
+                    runLength++;
                 }
+
+                previousElement = nextElement;
+                currentIndex++;
             }
 
-            return GetSortRun(list, runStart, runLength, previousRunDirection);
+            sortRuns.Add(GetSortRun(list, runStart, runLength, previousRunDirection));
+            return sortRuns;
         }
 
         private static SortRun GetSortRun(IList<T> list, int runStart, int runLength, int runDirection)

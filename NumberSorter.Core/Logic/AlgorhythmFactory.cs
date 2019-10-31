@@ -36,6 +36,8 @@ namespace NumberSorter.Core.Logic
                     return new SelectionSort<T>(comparer);
                 case AlgorhythmType.DequeMergeSort:
                     return new DequeMergeSort<T>(comparer);
+                case AlgorhythmType.RecursiveMultiMergeSort:
+                    return new RecursiveMultiMergeSort<T>(comparer);
                 case AlgorhythmType.MultiMergeSort:
                     return new MultiMergeSort<T>(comparer, x => new InsertionSort<SortRun>(x));
                 case AlgorhythmType.MultiGroupMergeSort:

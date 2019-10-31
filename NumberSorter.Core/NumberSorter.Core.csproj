@@ -89,6 +89,8 @@
     <Compile Include="Logic\Algorhythm\Sort\CircleSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\MultiMergeSort\FirstRunElementComparer.cs" />
     <Compile Include="Logic\Algorhythm\Sort\MultiMergeSort\MultiGroupMergeSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\MultiMergeSort\RecursiveMultiMergeSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\MultiMergeSort\MultiMergeSortBase.cs" />
     <Compile Include="Logic\Algorhythm\Sort\MultiMergeSort\MultiMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\PancakeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ShellSort.cs" />
