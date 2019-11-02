@@ -21,9 +21,6 @@ namespace NumberSorter.Core.Logic
             _nameDictionary.Add(AlgorhythmType.InsertionSort, "Insertion sort");
             _nameDictionary.Add(AlgorhythmType.DequeMergeSort, "Deque merge sort");
             _nameDictionary.Add(AlgorhythmType.WindowMergeSort, "Window merge sort");
-            _nameDictionary.Add(AlgorhythmType.ShellSortCiura, "Shell sort (Ciura)");
-            _nameDictionary.Add(AlgorhythmType.ShellSortKnuth, "Shell sort (Knuth)");
-            _nameDictionary.Add(AlgorhythmType.ShellSortTokuda, "Shell sort (Tokuda)");
             _nameDictionary.Add(AlgorhythmType.CocktailShakerSort, "Cocktail shaker sort");
             _nameDictionary.Add(AlgorhythmType.RecursiveMergeSort, "Recursive merge sort");
             _nameDictionary.Add(AlgorhythmType.DoubleSelectionSort, "Double selection sort");
@@ -36,8 +33,14 @@ namespace NumberSorter.Core.Logic
             _nameDictionary.Add(AlgorhythmType.InsertionTripleWindowTimSort, "Tim Sort (Insertion, Triple window merge)");
             _nameDictionary.Add(AlgorhythmType.TripleWindowTripleWindowTimSort, "Tim Sort (Triple window sort, Triple window merge)");
 
-            _nameDictionary.Add(AlgorhythmType.GroupMultiMergeSort, "Multi merge sort (Grouped runs)");
-            _nameDictionary.Add(AlgorhythmType.SimpleMultiMergeSort, "Multi merge sort (Simple runs)");
+            _nameDictionary.Add(AlgorhythmType.ShellSortCiura, "Shell sort (Ciura)");
+            _nameDictionary.Add(AlgorhythmType.ShellSortKnuth, "Shell sort (Knuth)");
+            _nameDictionary.Add(AlgorhythmType.ShellSortTokuda, "Shell sort (Tokuda)");
+
+            _nameDictionary.Add(AlgorhythmType.MultiMergeGroupLinearSort, "Multi merge sort (Grouped runs, Linear search)");
+            _nameDictionary.Add(AlgorhythmType.MultiMergeSimpleLinearSort, "Multi merge sort (Simple runs, Linear search)");
+            _nameDictionary.Add(AlgorhythmType.MultiMergeGroupBinarySort, "Multi merge sort (Grouped runs, Binary search)");
+            _nameDictionary.Add(AlgorhythmType.MultiMergeSimpleBinarySort, "Multi merge sort (Simple runs, Binary search)");
 
             _nameDictionary.Add(AlgorhythmType.QuickSortRandomPivot, "Quick sort (Random pivot)");
             _nameDictionary.Add(AlgorhythmType.QuickSortMedianOfThree, "Quick sort (Median of three pivot)");

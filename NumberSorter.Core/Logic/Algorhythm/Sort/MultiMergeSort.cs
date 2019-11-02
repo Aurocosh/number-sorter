@@ -1,5 +1,6 @@
 ﻿using NumberSorter.Core.Algorhythm;
 using NumberSorter.Core.Logic.Factories.LocalMerge.Base;
+using NumberSorter.Core.Logic.Factories.PositionLocator.Base;
 using NumberSorter.Core.Logic.Factories.Sort.Base;
 using NumberSorter.Core.Logic.Utility;
 using System.Collections.Generic;
@@ -10,10 +11,12 @@ namespace NumberSorter.Core.Logic.Algorhythm
     {
         private ISortFactory RunSortFactory { get; }
         private ISortRunLocator<T> SortRunLocator { get; }
+        private IPositionLocatorFactory PositionLocatorFactory { get; }
 
-        public MultiMergeSort(IComparer<T> comparer, ISortFactory runSortFactory, ISortRunLocatorFactory sortRunLocatorFactory) : base(comparer)
+        public MultiMergeSort(IComparer<T> comparer, ISortFactory runSortFactory, ISortRunLocatorFactory sortRunLocatorFactory, IPositionLocatorFactory positionLocatorFactory) : base(comparer)
         {
             RunSortFactory = runSortFactory;
+            PositionLocatorFactory = positionLocatorFactory;
             SortRunLocator = sortRunLocatorFactory.GetSortRunLocator(comparer);
         }
 
@@ -28,26 +31,21 @@ namespace NumberSorter.Core.Logic.Algorhythm
             if (sortRuns.Count < 2)
                 return;
 
-            var compar = Comparer<SortRun>.Create((x, y) =>
-                  {
-                      var first = list[x.FirstIndex];
-                      var second = list[y.FirstIndex];
-                      return Compare(first, second);
-                  }
-               );
-            RunSortFactory.Sort(sortRuns, compar);
+            var temporaryArray = list.GetRangeAsArray(startingIndex, length);
 
-            var temporartArray = list.GetRangeAsArray(startingIndex, length);
+            var sortRunComparer = Comparer<SortRun>.Create((x, y) => Compare(temporaryArray[x.FirstIndex], temporaryArray[y.FirstIndex]));
+            RunSortFactory.Sort(sortRuns, sortRunComparer);
 
             int currentRunIndex = 0;
             int runIndexLimit = sortRuns.Count;
 
             int index = startingIndex;
+            var positionLocator = PositionLocatorFactory.GetPositionLocator(sortRunComparer);
 
             while (currentRunIndex != runIndexLimit)
             {
                 var lowestRun = sortRuns[currentRunIndex];
-                list[index++] = temporartArray[lowestRun.FirstIndex];
+                list[index++] = temporaryArray[lowestRun.FirstIndex];
 
                 var newRun = new SortRun(lowestRun.FirstIndex + 1, lowestRun.Length - 1);
                 sortRuns[currentRunIndex] = newRun;
@@ -58,13 +56,22 @@ namespace NumberSorter.Core.Logic.Algorhythm
                     continue;
                 }
 
-                int firstIndex = currentRunIndex;
-                int secondIndex = currentRunIndex + 1;
-                while (secondIndex != runIndexLimit && Compare(temporartArray[sortRuns[firstIndex].FirstIndex], temporartArray[sortRuns[secondIndex].FirstIndex]) > 0)
+                int nextRunIndex = currentRunIndex + 1;
+                if (nextRunIndex != runIndexLimit)
                 {
-                    sortRuns.Swap(firstIndex, secondIndex);
-                    firstIndex++;
-                    secondIndex++;
+                    var nextRun = sortRuns[nextRunIndex];
+                    if (sortRunComparer.Compare(newRun, nextRun) > 0)
+                    {
+                        int searchAreaLength = runIndexLimit - nextRunIndex;
+                        int indexToInsert = positionLocator.FindPosition(sortRuns, newRun, nextRunIndex, searchAreaLength);
+
+                        int newRunIndex = currentRunIndex;
+                        while (newRunIndex != indexToInsert)
+                        {
+                            sortRuns.Swap(newRunIndex, newRunIndex + 1);
+                            newRunIndex++;
+                        }
+                    }
                 }
             }
         }

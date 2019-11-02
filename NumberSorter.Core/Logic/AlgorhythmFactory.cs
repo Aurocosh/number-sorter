@@ -2,6 +2,7 @@
 using NumberSorter.Core.Logic.Algorhythm;
 using NumberSorter.Core.Logic.Algorhythm.GapGenerator;
 using NumberSorter.Core.Logic.Factories.PivotSelector;
+using NumberSorter.Core.Logic.Factories.PositionLocator;
 using NumberSorter.Core.Logic.Factories.Sort;
 using NumberSorter.Core.Logic.Factories.SortRunLocator;
 using System;
@@ -72,10 +73,14 @@ namespace NumberSorter.Core.Logic
                 case AlgorhythmType.ShellSortTokuda:
                     return new ShellSort<T>(comparer, new TokudaGapGenerator());
 
-                case AlgorhythmType.SimpleMultiMergeSort:
-                    return new MultiMergeSort<T>(comparer, new InsertionSortFactory(), new SimpleRunLocatorFactory());
-                case AlgorhythmType.GroupMultiMergeSort:
-                    return new MultiMergeSort<T>(comparer, new InsertionSortFactory(), new GroupingRunLocatorFactory(32, new InsertionSortFactory()));
+                case AlgorhythmType.MultiMergeSimpleLinearSort:
+                    return new MultiMergeSort<T>(comparer, new InsertionSortFactory(), new SimpleRunLocatorFactory(), new LinearPositionLocatorFactory());
+                case AlgorhythmType.MultiMergeGroupLinearSort:
+                    return new MultiMergeSort<T>(comparer, new InsertionSortFactory(), new GroupingRunLocatorFactory(32, new InsertionSortFactory()), new LinearPositionLocatorFactory());
+                case AlgorhythmType.MultiMergeSimpleBinarySort:
+                    return new MultiMergeSort<T>(comparer, new InsertionSortFactory(), new SimpleRunLocatorFactory(), new BinaryPositionLocatorFactory());
+                case AlgorhythmType.MultiMergeGroupBinarySort:
+                    return new MultiMergeSort<T>(comparer, new InsertionSortFactory(), new GroupingRunLocatorFactory(32, new InsertionSortFactory()), new BinaryPositionLocatorFactory());
 
                 case AlgorhythmType.QuickSortRandomPivot:
                     return new QuickSort<T>(comparer, new RandomPivotSelectorFactory(new Random()), new InsertionSortFactory(), 0);

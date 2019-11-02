@@ -14,9 +14,6 @@
         SelectionSort,
         InsertionSort,
         DequeMergeSort,
-        ShellSortCiura,
-        ShellSortKnuth,
-        ShellSortTokuda,
         WindowMergeSort,
         CocktailShakerSort,
         RecursiveMergeSort,
@@ -30,8 +27,14 @@
         InsertionTripleWindowTimSort,
         TripleWindowTripleWindowTimSort,
 
-        GroupMultiMergeSort,
-        SimpleMultiMergeSort,
+        ShellSortCiura,
+        ShellSortKnuth,
+        ShellSortTokuda,
+
+        MultiMergeGroupLinearSort,
+        MultiMergeSimpleLinearSort,
+        MultiMergeGroupBinarySort,
+        MultiMergeSimpleBinarySort,
 
         QuickSortRandomPivot,
         QuickSortMedianOfThree,

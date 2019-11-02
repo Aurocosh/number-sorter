@@ -71,6 +71,10 @@
     <Compile Include="Logic\Algorhythm\Base\ArrayRunHalves.cs" />
     <Compile Include="Logic\Algorhythm\Base\IComparingAlgorhythm.cs" />
     <Compile Include="Logic\Algorhythm\Base\SortRun.cs" />
+    <Compile Include="Logic\Algorhythm\PositionLocator\Base\GenericPositionLocator.cs" />
+    <Compile Include="Logic\Algorhythm\PositionLocator\Base\IPositionLocator.cs" />
+    <Compile Include="Logic\Algorhythm\PositionLocator\BinaryPositionLocator.cs" />
+    <Compile Include="Logic\Algorhythm\PositionLocator\LinearPositionLocator.cs" />
     <Compile Include="Logic\Algorhythm\GapGenerator\Base\IGapGenerator.cs" />
     <Compile Include="Logic\Algorhythm\GapGenerator\Base\RecursiveGapGenerator.cs" />
     <Compile Include="Logic\Algorhythm\GapGenerator\KnuthGapGenerator.cs" />
@@ -83,6 +87,9 @@
     <Compile Include="Logic\Algorhythm\Rotation\Base\ILocalRotationAlgothythm.cs" />
     <Compile Include="Logic\Algorhythm\Rotation\InversionInPlaceRotation.cs" />
     <Compile Include="Logic\Algorhythm\Rotation\RecursiveInPlaceRotation.cs" />
+    <Compile Include="Logic\Factories\PositionLocator\Base\IPositionLocatorFactory.cs" />
+    <Compile Include="Logic\Factories\PositionLocator\BinaryPositionLocatorFactory.cs" />
+    <Compile Include="Logic\Factories\PositionLocator\LinearPositionLocatorFactory.cs" />
     <Compile Include="Logic\Factories\LocalMerge\Base\ILocalMergeFactory.cs" />
     <Compile Include="Logic\Factories\PivotSelector\Base\IPivotSelectorFactory.cs" />
     <Compile Include="Logic\Factories\PivotSelector\MedianOfThreePivotSelectorFactory.cs" />
@@ -119,7 +126,7 @@
     <Compile Include="Logic\Factories\Sort\CocktailShakerSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\BubbleSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\BinarySortFactory.cs" />
-    <Compile Include="Logic\Algorhythm\SortRunLocator\Base\GenericSortAlgorhythm.cs" />
+    <Compile Include="Logic\Algorhythm\SortRunLocator\Base\GenericRunLocator.cs" />
     <Compile Include="Logic\Algorhythm\SortRunLocator\Base\ISortRunLocator.cs" />
     <Compile Include="Logic\Algorhythm\SortRunLocator\GroupingRunLocator.cs" />
     <Compile Include="Logic\Algorhythm\SortRunLocator\SimpleRunLocator.cs" />
@@ -129,7 +136,7 @@
     <Compile Include="Logic\Algorhythm\Sort\CombSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\CycleSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\CircleSort.cs" />
-    <Compile Include="Logic\Algorhythm\Sort\MultiMergeSort\MultiMergeSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\MultiMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\PancakeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ShellSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\GnomeSort.cs" />
@@ -151,7 +158,7 @@
     <Compile Include="Logic\Algorhythm\Sort\OpRecursiveMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\PivotSelector\MedianThreePivotSelector.cs" />
     <Compile Include="Logic\Algorhythm\PivotSelector\RandomPivotSelector.cs" />
-    <Compile Include="Logic\Algorhythm\Sort\QuickSort\QuickSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\QuickSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\RecursiveMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\TempSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\TimSort.cs" />
