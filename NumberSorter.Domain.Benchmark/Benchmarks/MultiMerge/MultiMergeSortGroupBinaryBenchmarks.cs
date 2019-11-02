@@ -12,7 +12,7 @@ namespace NumberSorter.Domain.Benchmark.Benchmarks
     {
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {
-            return new MultiMergeSort<int>(comparer, new InsertionSortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new LinearPositionLocatorFactory());
+            return new MultiMergeSort<int>(comparer, new InsertionSortFactory(), new GroupingRunLocatorFactory(32, new InsertionSortFactory()), new BinaryPositionLocatorFactory());
         }
     }
 }
