@@ -1,22 +1,23 @@
 ﻿using NumberSorter.Core.Algorhythm;
-using NumberSorter.Core.Logic.Algorhythm.QuickSort;
+using NumberSorter.Core.Logic.Algorhythm.PivotSelector;
+using NumberSorter.Core.Logic.Factories.PivotSelector.Base;
+using NumberSorter.Core.Logic.Factories.Sort.Base;
 using NumberSorter.Core.Logic.Utility;
-using System;
 using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
     public class QuickSort<T> : GenericSortAlgorhythm<T>
     {
-        private readonly int _cutoffValue;
-        private readonly QuickSortPivotSelector<T> _pivotSelector;
-        private readonly IPartialSortAlgorhythm<T> _cutoffAlgorhythm;
+        private int CutoffValue { get; }
+        private IPivotSelector<T> PivotSelector { get; }
+        private IPartialSortAlgorhythm<T> CutoffAlgorhythm { get; }
 
-        public QuickSort(IComparer<T> comparer, QuickSortPivotSelector<T> pivotSelector, Func<IComparer<T>, IPartialSortAlgorhythm<T>> cutoffAlgorhythmFactory, int cutoffValue) : base(comparer)
+        public QuickSort(IComparer<T> comparer, IPivotSelectorFactory pivotSelectorFactory, IPartialSortFactory cutoffSortFactory, int cutoffValue) : base(comparer)
         {
-            _cutoffValue = cutoffValue;
-            _pivotSelector = pivotSelector;
-            _cutoffAlgorhythm = cutoffAlgorhythmFactory.Invoke(comparer);
+            CutoffValue = cutoffValue;
+            PivotSelector = pivotSelectorFactory.GetPivotSelector(comparer);
+            CutoffAlgorhythm = cutoffSortFactory.GetPatrialSort(comparer);
         }
 
         public override void Sort(IList<T> list)
@@ -30,13 +31,13 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 return;
 
             int runRange = lastIndex - firstIndex + 1;
-            if (runRange < _cutoffValue)
+            if (runRange < CutoffValue)
             {
-                _cutoffAlgorhythm.Sort(list, firstIndex, runRange);
+                CutoffAlgorhythm.Sort(list, firstIndex, runRange);
                 return;
             }
 
-            int pivotIndex = _pivotSelector.SelectPivot(list, firstIndex, lastIndex, GetComparer());
+            int pivotIndex = PivotSelector.SelectPivot(list, firstIndex, lastIndex);
             var pivot = list[pivotIndex];
 
             list.Swap(firstIndex, pivotIndex);

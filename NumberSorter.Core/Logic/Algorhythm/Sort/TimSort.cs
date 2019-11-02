@@ -1,5 +1,7 @@
 ﻿using NumberSorter.Core.Algorhythm;
 using NumberSorter.Core.Logic.Algorhythm.Merge.Base;
+using NumberSorter.Core.Logic.Factories.LocalMerge.Base;
+using NumberSorter.Core.Logic.Factories.Sort.Base;
 using NumberSorter.Core.Logic.Utility;
 using System;
 using System.Collections.Generic;
@@ -8,13 +10,13 @@ namespace NumberSorter.Core.Logic.Algorhythm
 {
     public class TimSort<T> : GenericSortAlgorhythm<T>
     {
-        private IPartialSortAlgorhythm<T> _smallSortAlgorhythm; // Used when sorting something smaller then Minrun
-        private ILocalMergeAlgothythm<T> _mergeAlgorhythm; // Used to merge sorted runs
+        private ILocalMergeAlgothythm<T> LocalMergeAlgorhythm { get; }   // Used to merge sorted runs
+        private IPartialSortAlgorhythm<T> MinrunSortAlgorhythm { get; }  // Used when sorting something smaller then Minrun
 
-        public TimSort(IComparer<T> comparer, Func<IComparer<T>, IPartialSortAlgorhythm<T>> smallSortFactory, Func<IComparer<T>, ILocalMergeAlgothythm<T>> mergeFactory) : base(comparer)
+        public TimSort(IComparer<T> comparer, ILocalMergeFactory localMergeFactory, IPartialSortFactory minrunSortFactory) : base(comparer)
         {
-            _smallSortAlgorhythm = smallSortFactory.Invoke(comparer);
-            _mergeAlgorhythm = mergeFactory.Invoke(comparer);
+            LocalMergeAlgorhythm = localMergeFactory.GetLocalMerge(comparer);
+            MinrunSortAlgorhythm = minrunSortFactory.GetPatrialSort(comparer);
         }
 
         private sealed class SortRunStack
@@ -66,7 +68,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
         {
             if (list.Count < 32)
             {
-                _smallSortAlgorhythm.Sort(list);
+                MinrunSortAlgorhythm.Sort(list);
                 return;
             }
 
@@ -82,7 +84,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 if (sortRun.Length < minimalRunLength)
                 {
                     sortRun = new SortRun(sortRun.Start, Math.Min(minimalRunLength, elementsLeft));
-                    _smallSortAlgorhythm.Sort(list, sortRun.Start, sortRun.Length);
+                    MinrunSortAlgorhythm.Sort(list, sortRun.Start, sortRun.Length);
                 }
                 sortRuns.AddLast(sortRun);
                 elementsLeft -= sortRun.Length;
@@ -139,7 +141,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
         private SortRun MergeRuns(IList<T> list, SortRun leftRun, SortRun rightRun)
         {
-            _mergeAlgorhythm.Merge(list, leftRun, rightRun);
+            LocalMergeAlgorhythm.Merge(list, leftRun, rightRun);
             return new SortRun(leftRun.Start, leftRun.Length + rightRun.Length);
         }
 

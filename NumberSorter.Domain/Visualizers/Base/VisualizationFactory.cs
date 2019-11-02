@@ -1,8 +1,4 @@
-﻿using NumberSorter.Core.Algorhythm;
-using NumberSorter.Core.Logic.Algorhythm;
-using NumberSorter.Core.Logic.Algorhythm.QuickSort.PivotSelectors;
-using NumberSorter.Domain.Base.Visualizers;
-using System.Collections.Generic;
+﻿using NumberSorter.Domain.Base.Visualizers;
 
 namespace NumberSorter.Domain.Visualizers
 {

@@ -5,16 +5,15 @@ namespace NumberSorter.Core.Logic.Algorhythm
 {
     abstract public class GenericSortAlgorhythm<T> : ISortAlgorhythm<T>
     {
-        private readonly IComparer<T> _comparer;
+        public IComparer<T> Comparer { get; }
 
         protected GenericSortAlgorhythm(IComparer<T> comparer)
         {
-            _comparer = comparer;
+            Comparer = comparer;
         }
 
         public abstract void Sort(IList<T> list);
-        public IComparer<T> GetComparer() => _comparer;
-        public int Compare(T first, T second) => _comparer.Compare(first, second);
-        public int Compare(IList<T> list, int first, int second) => _comparer.Compare(list[first], list[second]);
+        public int Compare(T first, T second) => Comparer.Compare(first, second);
+        public int Compare(IList<T> list, int first, int second) => Comparer.Compare(list[first], list[second]);
     }
 }

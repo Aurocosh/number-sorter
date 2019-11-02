@@ -10,7 +10,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
         {
             if (list is List<T> actualList) // cant sort IList<T> with default c# sort method :(
             {
-                actualList.Sort(GetComparer());
+                actualList.Sort(Comparer);
             }
         }
     }

@@ -33,14 +33,11 @@ namespace NumberSorter.Core.Logic
             _nameDictionary.Add(AlgorhythmType.WorkAreaInPlaceMergeSort, "Work area in place merge sort");
             _nameDictionary.Add(AlgorhythmType.WindowWindowTimSort, "Tim Sort (Window sort, Window merge)");
             _nameDictionary.Add(AlgorhythmType.InsertionWindowTimSort, "Tim Sort (Insertion, Window merge)");
-            _nameDictionary.Add(AlgorhythmType.GallopingRecursiveMergeSort, "Galloping recursive merge sort");
             _nameDictionary.Add(AlgorhythmType.InsertionTripleWindowTimSort, "Tim Sort (Insertion, Triple window merge)");
             _nameDictionary.Add(AlgorhythmType.TripleWindowTripleWindowTimSort, "Tim Sort (Triple window sort, Triple window merge)");
 
-            _nameDictionary.Add(AlgorhythmType.GroupMultiMergeSort, "Group multi merge sort");
-            _nameDictionary.Add(AlgorhythmType.SimpleMultiMergeSort, "Simple multi merge sort");
-            _nameDictionary.Add(AlgorhythmType.RecursiveGroupMultiMergeSort, "Recursive group multi merge sort");
-            _nameDictionary.Add(AlgorhythmType.RecursiveSimpleMultiMergeSort, "Recursive simple multi merge sort");
+            _nameDictionary.Add(AlgorhythmType.GroupMultiMergeSort, "Multi merge sort (Grouped runs)");
+            _nameDictionary.Add(AlgorhythmType.SimpleMultiMergeSort, "Multi merge sort (Simple runs)");
 
             _nameDictionary.Add(AlgorhythmType.QuickSortRandomPivot, "Quick sort (Random pivot)");
             _nameDictionary.Add(AlgorhythmType.QuickSortMedianOfThree, "Quick sort (Median of three pivot)");

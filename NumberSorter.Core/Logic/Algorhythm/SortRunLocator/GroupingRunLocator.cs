@@ -1,10 +1,8 @@
 ﻿using NumberSorter.Core.Algorhythm;
+using NumberSorter.Core.Logic.Factories.Sort.Base;
 using NumberSorter.Core.Logic.Utility;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NumberSorter.Core.Logic.Algorhythm.SortRunLocator
 {
@@ -13,10 +11,10 @@ namespace NumberSorter.Core.Logic.Algorhythm.SortRunLocator
         private int MinimalRunLength { get; }
         private IPartialSortAlgorhythm<T> GroupSortAlgorhythm { get; }
 
-        public GroupingRunLocator(IComparer<T> comparer, IPartialSortAlgorhythm<T> groupSortAlgorhythm, int minimalRunLength) : base(comparer)
+        public GroupingRunLocator(IComparer<T> comparer, IPartialSortFactory groupSortFactory, int minimalRunLength) : base(comparer)
         {
             MinimalRunLength = minimalRunLength;
-            GroupSortAlgorhythm = groupSortAlgorhythm;
+            GroupSortAlgorhythm = groupSortFactory.GetPatrialSort(comparer);
         }
 
         public override SortRun FindNextSortRun(IList<T> list, int runStart, int length)

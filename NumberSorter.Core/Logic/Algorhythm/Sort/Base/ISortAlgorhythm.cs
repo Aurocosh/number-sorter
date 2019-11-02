@@ -2,11 +2,8 @@
 
 namespace NumberSorter.Core.Algorhythm
 {
-    public interface ISortAlgorhythm<T>
+    public interface ISortAlgorhythm<T> : IComparingAlgorhythm<T>
     {
         void Sort(IList<T> list);
-        IComparer<T> GetComparer();
-        int Compare(T first, T second);
-        int Compare(IList<T> list, int first, int second);
     }
 }

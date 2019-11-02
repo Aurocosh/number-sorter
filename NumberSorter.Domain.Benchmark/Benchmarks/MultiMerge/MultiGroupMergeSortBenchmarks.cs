@@ -2,7 +2,8 @@
 using NumberSorter.Core.Algorhythm;
 using NumberSorter.Domain.Benchmark.Benchmarks.Base;
 using NumberSorter.Core.Logic.Algorhythm;
-using NumberSorter.Core.Logic.Algorhythm.SortRunLocator;
+using NumberSorter.Core.Logic.Factories.Sort;
+using NumberSorter.Core.Logic.Factories.SortRunLocator;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks
 {
@@ -10,7 +11,7 @@ namespace NumberSorter.Domain.Benchmark.Benchmarks
     {
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {
-            return new MultiMergeSort<int>(comparer, new GroupingRunLocator<int>(comparer, new InsertionSort<int>(comparer), 32), x => new InsertionSort<SortRun>(x));
+            return new MultiMergeSort<int>(comparer, new InsertionSortFactory(), new GroupingRunLocatorFactory(32, new InsertionSortFactory()));
         }
     }
 }

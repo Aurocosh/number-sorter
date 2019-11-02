@@ -1,4 +1,5 @@
-﻿using NumberSorter.Core.Logic.Utility;
+﻿using NumberSorter.Core.Algorhythm;
+using NumberSorter.Core.Logic.Utility;
 using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm

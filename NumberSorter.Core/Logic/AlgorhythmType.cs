@@ -27,14 +27,11 @@
         TripleWindowMergeSort,
         InsertionWindowTimSort,
         WorkAreaInPlaceMergeSort,
-        GallopingRecursiveMergeSort,
         InsertionTripleWindowTimSort,
         TripleWindowTripleWindowTimSort,
 
         GroupMultiMergeSort,
         SimpleMultiMergeSort,
-        RecursiveGroupMultiMergeSort,
-        RecursiveSimpleMultiMergeSort,
 
         QuickSortRandomPivot,
         QuickSortMedianOfThree,

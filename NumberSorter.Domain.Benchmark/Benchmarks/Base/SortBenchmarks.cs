@@ -23,13 +23,13 @@ namespace NumberSorter.Domain.Benchmark.Benchmarks.Base
         {
         }
 
-        private IComparer<int> _comparer;
+        private IComparer<int> Comparer { get; }
         private readonly ISortAlgorhythm<int> _sort;
 
         public SortBenchmarks()
         {
-            _comparer = new IntComparer();
-            _sort = GetAlgorhythm(_comparer);
+            Comparer = new IntComparer();
+            _sort = GetAlgorhythm(Comparer);
         }
 
         public IEnumerable<object[]> TwoFullySortedParts_FirstBiggerThenSecond_DynamicList() => new SortBenchmark_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator().ToList();

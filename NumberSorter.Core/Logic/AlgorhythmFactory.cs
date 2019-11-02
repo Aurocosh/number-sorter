@@ -1,8 +1,10 @@
 ﻿using NumberSorter.Core.Algorhythm;
 using NumberSorter.Core.Logic.Algorhythm;
 using NumberSorter.Core.Logic.Algorhythm.GapGenerator;
-using NumberSorter.Core.Logic.Algorhythm.QuickSort.PivotSelectors;
-using NumberSorter.Core.Logic.Algorhythm.SortRunLocator;
+using NumberSorter.Core.Logic.Factories.PivotSelector;
+using NumberSorter.Core.Logic.Factories.Sort;
+using NumberSorter.Core.Logic.Factories.SortRunLocator;
+using System;
 using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic
@@ -53,42 +55,38 @@ namespace NumberSorter.Core.Logic
                     return new TripleWindowMergeSort<T>(comparer);
                 case AlgorhythmType.WorkAreaInPlaceMergeSort:
                     return new WorkAreaInPlaceMergeSort<T>(comparer);
-                case AlgorhythmType.GallopingRecursiveMergeSort:
-                    return new GallopingRecursiveMergeSort<T>(comparer);
+
+                case AlgorhythmType.InsertionWindowTimSort:
+                    return new TimSort<T>(comparer, new WindowMergeSortFactory(), new InsertionSortFactory());
+                case AlgorhythmType.WindowWindowTimSort:
+                    return new TimSort<T>(comparer, new WindowMergeSortFactory(), new WindowMergeSortFactory());
+                case AlgorhythmType.InsertionTripleWindowTimSort:
+                    return new TimSort<T>(comparer, new TripleWindowMergeSortFactory(), new InsertionSortFactory());
+                case AlgorhythmType.TripleWindowTripleWindowTimSort:
+                    return new TimSort<T>(comparer, new TripleWindowMergeSortFactory(), new TripleWindowMergeSortFactory());
+
                 case AlgorhythmType.ShellSortCiura:
                     return new ShellSort<T>(comparer, new CiuraGapGenerator());
                 case AlgorhythmType.ShellSortKnuth:
                     return new ShellSort<T>(comparer, new KnuthGapGenerator());
                 case AlgorhythmType.ShellSortTokuda:
                     return new ShellSort<T>(comparer, new TokudaGapGenerator());
-                case AlgorhythmType.InsertionWindowTimSort:
-                    return new TimSort<T>(comparer, x => new InsertionSort<T>(x), x => new WindowMergeSort<T>(x));
-                case AlgorhythmType.WindowWindowTimSort:
-                    return new TimSort<T>(comparer, x => new WindowMergeSort<T>(x), x => new WindowMergeSort<T>(x));
-                case AlgorhythmType.InsertionTripleWindowTimSort:
-                    return new TimSort<T>(comparer, x => new InsertionSort<T>(x), x => new TripleWindowMergeSort<T>(x));
-                case AlgorhythmType.TripleWindowTripleWindowTimSort:
-                    return new TimSort<T>(comparer, x => new TripleWindowMergeSort<T>(x), x => new TripleWindowMergeSort<T>(x));
 
-                case AlgorhythmType.RecursiveGroupMultiMergeSort:
-                    return new RecursiveMultiMergeSort<T>(comparer, new GroupingRunLocator<T>(comparer, new InsertionSort<T>(comparer), 32), x => new GroupingRunLocator<SortRun>(x, new InsertionSort<SortRun>(x), 32));
-                case AlgorhythmType.RecursiveSimpleMultiMergeSort:
-                    return new RecursiveMultiMergeSort<T>(comparer, new SimpleRunLocator<T>(comparer), x => new SimpleRunLocator<SortRun>(x));
                 case AlgorhythmType.SimpleMultiMergeSort:
-                    return new MultiMergeSort<T>(comparer, new SimpleRunLocator<T>(comparer), x => new InsertionSort<SortRun>(x));
+                    return new MultiMergeSort<T>(comparer, new InsertionSortFactory(), new SimpleRunLocatorFactory());
                 case AlgorhythmType.GroupMultiMergeSort:
-                    return new MultiMergeSort<T>(comparer, new GroupingRunLocator<T>(comparer, new InsertionSort<T>(comparer), 32), x => new InsertionSort<SortRun>(x));
+                    return new MultiMergeSort<T>(comparer, new InsertionSortFactory(), new GroupingRunLocatorFactory(32, new InsertionSortFactory()));
 
                 case AlgorhythmType.QuickSortRandomPivot:
-                    return new QuickSort<T>(comparer, new RandomPivotSelector<T>(), x => new DummySort<T>(x), 0);
+                    return new QuickSort<T>(comparer, new RandomPivotSelectorFactory(new Random()), new InsertionSortFactory(), 0);
                 case AlgorhythmType.QuickSortMedianOfThree:
-                    return new QuickSort<T>(comparer, new MedianThreePivotSelector<T>(), x => new DummySort<T>(x), 0);
+                    return new QuickSort<T>(comparer, new MedianOfThreePivotSelectorFactory(), new InsertionSortFactory(), 0);
                 case AlgorhythmType.QuickSortRandomPivotCutoffInsertion:
-                    return new QuickSort<T>(comparer, new RandomPivotSelector<T>(), x => new InsertionSort<T>(x), 32);
+                    return new QuickSort<T>(comparer, new RandomPivotSelectorFactory(new Random()), new InsertionSortFactory(), 32);
                 case AlgorhythmType.QuickSortRandomPivotCutoffWindow:
-                    return new QuickSort<T>(comparer, new RandomPivotSelector<T>(), x => new WindowMergeSort<T>(x), 32);
+                    return new QuickSort<T>(comparer, new RandomPivotSelectorFactory(new Random()), new WindowMergeSortFactory(), 32);
                 case AlgorhythmType.QuickSortRandomPivotCutoffTripleWindow:
-                    return new QuickSort<T>(comparer, new RandomPivotSelector<T>(), x => new TripleWindowMergeSort<T>(x), 32);
+                    return new QuickSort<T>(comparer, new RandomPivotSelectorFactory(new Random()), new TripleWindowMergeSortFactory(), 32);
 
                 default:
                     return null;
