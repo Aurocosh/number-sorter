@@ -81,6 +81,8 @@ namespace NumberSorter.Core.Logic
                     return new MultiMergeSort<T>(comparer, new BinarySortFactory(), new SimpleRunLocatorFactory(), new BinaryPositionLocatorFactory());
                 case AlgorhythmType.MultiMergeGroupBinarySort:
                     return new MultiMergeSort<T>(comparer, new BinarySortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BinaryPositionLocatorFactory());
+                case AlgorhythmType.MultiMergeGroupBinaryWindowSort:
+                    return new MultiMergeSort<T>(comparer, new WindowMergeSortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BinaryPositionLocatorFactory());
                 case AlgorhythmType.MultiMergeGroupBinaryRecursiveSort:
                     return new RecursiveMultiMergeSortFactory(new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BinaryPositionLocatorFactory()).GetSort(comparer);
 

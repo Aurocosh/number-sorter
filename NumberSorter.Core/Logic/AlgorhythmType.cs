@@ -35,6 +35,7 @@
         MultiMergeSimpleLinearSort,
         MultiMergeGroupBinarySort,
         MultiMergeSimpleBinarySort,
+        MultiMergeGroupBinaryWindowSort,
         MultiMergeGroupBinaryRecursiveSort,
 
         QuickSortRandomPivot,
