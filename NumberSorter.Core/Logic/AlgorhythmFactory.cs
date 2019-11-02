@@ -76,11 +76,13 @@ namespace NumberSorter.Core.Logic
                 case AlgorhythmType.MultiMergeSimpleLinearSort:
                     return new MultiMergeSort<T>(comparer, new InsertionSortFactory(), new SimpleRunLocatorFactory(), new LinearPositionLocatorFactory());
                 case AlgorhythmType.MultiMergeGroupLinearSort:
-                    return new MultiMergeSort<T>(comparer, new InsertionSortFactory(), new GroupingRunLocatorFactory(32, new InsertionSortFactory()), new LinearPositionLocatorFactory());
+                    return new MultiMergeSort<T>(comparer, new InsertionSortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new LinearPositionLocatorFactory());
                 case AlgorhythmType.MultiMergeSimpleBinarySort:
-                    return new MultiMergeSort<T>(comparer, new InsertionSortFactory(), new SimpleRunLocatorFactory(), new BinaryPositionLocatorFactory());
+                    return new MultiMergeSort<T>(comparer, new BinarySortFactory(), new SimpleRunLocatorFactory(), new BinaryPositionLocatorFactory());
                 case AlgorhythmType.MultiMergeGroupBinarySort:
-                    return new MultiMergeSort<T>(comparer, new InsertionSortFactory(), new GroupingRunLocatorFactory(32, new InsertionSortFactory()), new BinaryPositionLocatorFactory());
+                    return new MultiMergeSort<T>(comparer, new BinarySortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BinaryPositionLocatorFactory());
+                case AlgorhythmType.MultiMergeGroupBinaryRecursiveSort:
+                    return new RecursiveMultiMergeSortFactory(new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BinaryPositionLocatorFactory()).GetSort(comparer);
 
                 case AlgorhythmType.QuickSortRandomPivot:
                     return new QuickSort<T>(comparer, new RandomPivotSelectorFactory(new Random()), new InsertionSortFactory(), 0);

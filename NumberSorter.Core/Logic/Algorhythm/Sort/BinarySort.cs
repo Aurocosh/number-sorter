@@ -15,10 +15,11 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
         public void Sort(IList<T> list, int startingIndex, int length)
         {
-            for (int index = startingIndex + 1; index < length; index++)
+            int indexLimit = startingIndex + length;
+            for (int index = startingIndex + 1; index != indexLimit; index++)
             {
                 var currentValue = list[index];
-                int indexToInsert = BinarySearch(list, currentValue, 0, index - 1);
+                int indexToInsert = BinarySearch(list, currentValue, startingIndex, index - 1);
 
                 int currentIndex = index;
                 while (currentIndex != indexToInsert)

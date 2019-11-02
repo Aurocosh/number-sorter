@@ -41,6 +41,7 @@ namespace NumberSorter.Core.Logic
             _nameDictionary.Add(AlgorhythmType.MultiMergeSimpleLinearSort, "Multi merge sort (Simple runs, Linear search)");
             _nameDictionary.Add(AlgorhythmType.MultiMergeGroupBinarySort, "Multi merge sort (Grouped runs, Binary search)");
             _nameDictionary.Add(AlgorhythmType.MultiMergeSimpleBinarySort, "Multi merge sort (Simple runs, Binary search)");
+            _nameDictionary.Add(AlgorhythmType.MultiMergeGroupBinaryRecursiveSort, "Multi merge sort (Simple runs, Binary search, Recursive)");
 
             _nameDictionary.Add(AlgorhythmType.QuickSortRandomPivot, "Quick sort (Random pivot)");
             _nameDictionary.Add(AlgorhythmType.QuickSortMedianOfThree, "Quick sort (Median of three pivot)");

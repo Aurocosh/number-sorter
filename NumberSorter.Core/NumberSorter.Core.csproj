@@ -99,6 +99,7 @@
     <Compile Include="Logic\Factories\SortRunLocator\SimpleRunLocatorFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Base\IPartialSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Base\ISortFactory.cs" />
+    <Compile Include="Logic\Factories\Sort\RecursiveMultiMergeSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\MultiMergeSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\WorkAreaInPlaceMergeSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\WindowMergeSortFactory.cs" />
