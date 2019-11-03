@@ -220,6 +220,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Benchmarks\JHeapSortBinaryBenchmarks.cs" />
     <Compile Include="Benchmarks\MultiMerge\MultiMergeSortGroupBinaryWindowBenchmarks.cs" />
     <Compile Include="Benchmarks\MultiMerge\MultiMergeSortGroupBinaryRecursiveBenchmarks.cs" />
     <Compile Include="Benchmarks\MultiMerge\MultiMergeSortGroupBinaryBenchmarks.cs" />

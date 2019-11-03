@@ -87,6 +87,7 @@
     <Compile Include="Logic\Algorhythm\Rotation\Base\ILocalRotationAlgothythm.cs" />
     <Compile Include="Logic\Algorhythm\Rotation\InversionInPlaceRotation.cs" />
     <Compile Include="Logic\Algorhythm\Rotation\RecursiveInPlaceRotation.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\JHeapSort.cs" />
     <Compile Include="Logic\Factories\PositionLocator\Base\IPositionLocatorFactory.cs" />
     <Compile Include="Logic\Factories\PositionLocator\BinaryPositionLocatorFactory.cs" />
     <Compile Include="Logic\Factories\PositionLocator\LinearPositionLocatorFactory.cs" />

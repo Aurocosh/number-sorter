@@ -9,21 +9,16 @@ namespace NumberSorter.Core.Logic
         static AlgorhythmNamer()
         {
             _nameDictionary.Add(AlgorhythmType.CombSort, "Comb sort");
-            _nameDictionary.Add(AlgorhythmType.HeapSort, "Heap sort");
             _nameDictionary.Add(AlgorhythmType.CycleSort, "Cycle sort");
             _nameDictionary.Add(AlgorhythmType.GnomeSort, "Gnome sort");
-            _nameDictionary.Add(AlgorhythmType.BinarySort, "Binary sort");
             _nameDictionary.Add(AlgorhythmType.BubbleSort, "Bubble sort");
             _nameDictionary.Add(AlgorhythmType.CircleSort, "Circle sort");
             _nameDictionary.Add(AlgorhythmType.PancakeSort, "Pancake sort");
             _nameDictionary.Add(AlgorhythmType.OddEvenSort, "Odd even sort");
-            _nameDictionary.Add(AlgorhythmType.SelectionSort, "Selection sort");
-            _nameDictionary.Add(AlgorhythmType.InsertionSort, "Insertion sort");
             _nameDictionary.Add(AlgorhythmType.DequeMergeSort, "Deque merge sort");
             _nameDictionary.Add(AlgorhythmType.WindowMergeSort, "Window merge sort");
             _nameDictionary.Add(AlgorhythmType.CocktailShakerSort, "Cocktail shaker sort");
             _nameDictionary.Add(AlgorhythmType.RecursiveMergeSort, "Recursive merge sort");
-            _nameDictionary.Add(AlgorhythmType.DoubleSelectionSort, "Double selection sort");
             _nameDictionary.Add(AlgorhythmType.HalfInPlaceMergeSort, "Half in place merge sort");
             _nameDictionary.Add(AlgorhythmType.TripleWindowMergeSort, "Triple window merge sort");
             _nameDictionary.Add(AlgorhythmType.KindaInPlaceMergeSort, "Kinda in place merge sort");
@@ -32,6 +27,16 @@ namespace NumberSorter.Core.Logic
             _nameDictionary.Add(AlgorhythmType.InsertionWindowTimSort, "Tim Sort (Insertion, Window merge)");
             _nameDictionary.Add(AlgorhythmType.InsertionTripleWindowTimSort, "Tim Sort (Insertion, Triple window merge)");
             _nameDictionary.Add(AlgorhythmType.TripleWindowTripleWindowTimSort, "Tim Sort (Triple window sort, Triple window merge)");
+
+            _nameDictionary.Add(AlgorhythmType.InsertionSort, "Insertion sort");
+            _nameDictionary.Add(AlgorhythmType.BinarySort, "Binary sort");
+
+            _nameDictionary.Add(AlgorhythmType.SelectionSort, "Selection sort");
+            _nameDictionary.Add(AlgorhythmType.DoubleSelectionSort, "Double selection sort");
+
+            _nameDictionary.Add(AlgorhythmType.HeapSort, "Heap sort");
+            _nameDictionary.Add(AlgorhythmType.JHeapBinarySort, "J heap sort (Binary sort)");
+            _nameDictionary.Add(AlgorhythmType.JHeapInsertionSort, "J heap sort (Insertion sort)");
 
             _nameDictionary.Add(AlgorhythmType.ShellSortCiura, "Shell sort (Ciura)");
             _nameDictionary.Add(AlgorhythmType.ShellSortKnuth, "Shell sort (Knuth)");

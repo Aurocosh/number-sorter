@@ -18,14 +18,10 @@ namespace NumberSorter.Core.Logic
             {
                 case AlgorhythmType.CombSort:
                     return new CombSort<T>(comparer);
-                case AlgorhythmType.HeapSort:
-                    return new HeapSort<T>(comparer);
                 case AlgorhythmType.CycleSort:
                     return new CycleSort<T>(comparer);
                 case AlgorhythmType.GnomeSort:
                     return new GnomeSort<T>(comparer);
-                case AlgorhythmType.BinarySort:
-                    return new BinarySort<T>(comparer);
                 case AlgorhythmType.CircleSort:
                     return new CircleSort<T>(comparer);
                 case AlgorhythmType.BubbleSort:
@@ -34,10 +30,6 @@ namespace NumberSorter.Core.Logic
                     return new PancakeSort<T>(comparer);
                 case AlgorhythmType.OddEvenSort:
                     return new OddEvenSort<T>(comparer);
-                case AlgorhythmType.InsertionSort:
-                    return new InsertionSort<T>(comparer);
-                case AlgorhythmType.SelectionSort:
-                    return new SelectionSort<T>(comparer);
                 case AlgorhythmType.DequeMergeSort:
                     return new DequeMergeSort<T>(comparer);
                 case AlgorhythmType.WindowMergeSort:
@@ -46,8 +38,6 @@ namespace NumberSorter.Core.Logic
                     return new CocktailShakerSort<T>(comparer);
                 case AlgorhythmType.RecursiveMergeSort:
                     return new RecursiveMergeSort<T>(comparer);
-                case AlgorhythmType.DoubleSelectionSort:
-                    return new DoubleSelectionSort<T>(comparer);
                 case AlgorhythmType.HalfInPlaceMergeSort:
                     return new HalfInPlaceMergeSort<T>(comparer);
                 case AlgorhythmType.KindaInPlaceMergeSort:
@@ -56,6 +46,23 @@ namespace NumberSorter.Core.Logic
                     return new TripleWindowMergeSort<T>(comparer);
                 case AlgorhythmType.WorkAreaInPlaceMergeSort:
                     return new WorkAreaInPlaceMergeSort<T>(comparer);
+
+                case AlgorhythmType.BinarySort:
+                    return new BinarySort<T>(comparer);
+                case AlgorhythmType.InsertionSort:
+                    return new InsertionSort<T>(comparer);
+
+                case AlgorhythmType.SelectionSort:
+                    return new SelectionSort<T>(comparer);
+                case AlgorhythmType.DoubleSelectionSort:
+                    return new DoubleSelectionSort<T>(comparer);
+
+                case AlgorhythmType.HeapSort:
+                    return new HeapSort<T>(comparer);
+                case AlgorhythmType.JHeapBinarySort:
+                    return new JHeapSort<T>(comparer, new BinarySortFactory());
+                case AlgorhythmType.JHeapInsertionSort:
+                    return new JHeapSort<T>(comparer, new InsertionSortFactory());
 
                 case AlgorhythmType.InsertionWindowTimSort:
                     return new TimSort<T>(comparer, new WindowMergeSortFactory(), new InsertionSortFactory());

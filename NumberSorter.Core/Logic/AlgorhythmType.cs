@@ -3,21 +3,16 @@
     public enum AlgorhythmType
     {
         CombSort,
-        HeapSort,
         CycleSort,
         GnomeSort,
-        BinarySort,
         BubbleSort,
         CircleSort,
         PancakeSort,
         OddEvenSort,
-        SelectionSort,
-        InsertionSort,
         DequeMergeSort,
         WindowMergeSort,
         CocktailShakerSort,
         RecursiveMergeSort,
-        DoubleSelectionSort,
         WindowWindowTimSort,
         HalfInPlaceMergeSort,
         KindaInPlaceMergeSort,
@@ -26,6 +21,16 @@
         WorkAreaInPlaceMergeSort,
         InsertionTripleWindowTimSort,
         TripleWindowTripleWindowTimSort,
+
+        BinarySort,
+        InsertionSort,
+
+        SelectionSort,
+        DoubleSelectionSort,
+
+        HeapSort,
+        JHeapBinarySort,
+        JHeapInsertionSort,
 
         ShellSortCiura,
         ShellSortKnuth,
