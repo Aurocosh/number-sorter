@@ -54,6 +54,7 @@
     <Compile Include="CustomGenerators\CustomListGenerator.cs" />
     <Compile Include="CustomGenerators\ListProcessorSet.cs" />
     <Compile Include="CustomGenerators\Processors\Converters\InvertValuesProcessor.cs" />
+    <Compile Include="CustomGenerators\Processors\Converters\IntervalValuesProcessor.cs" />
     <Compile Include="CustomGenerators\Processors\Converters\PartialShuffleValuesProcessor.cs" />
     <Compile Include="CustomGenerators\Processors\Generators\NewVariableListProcessor.cs" />
     <Compile Include="CustomGenerators\Processors\Generators\NewListProcessor.cs" />

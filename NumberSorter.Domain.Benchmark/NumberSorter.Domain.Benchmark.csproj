@@ -273,6 +273,10 @@
     <EmbeddedResource Include="IntegerGenerators\Custom\Resources\AlmostSorted\AlmostSorted500000.json" />
     <EmbeddedResource Include="IntegerGenerators\Custom\Resources\FewUnique\FewUnique1000.json" />
     <EmbeddedResource Include="IntegerGenerators\Custom\Resources\FewUnique\FewUnique500000.json" />
+    <EmbeddedResource Include="IntegerGenerators\Custom\Resources\Intervals\Intervals1000.json" />
+    <EmbeddedResource Include="IntegerGenerators\Custom\Resources\Intervals\Intervals500000.json" />
+    <EmbeddedResource Include="IntegerGenerators\Custom\Resources\ShuffledIntervals\ShuffledIntervals1000.json" />
+    <EmbeddedResource Include="IntegerGenerators\Custom\Resources\ShuffledIntervals\ShuffledIntervals500000.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

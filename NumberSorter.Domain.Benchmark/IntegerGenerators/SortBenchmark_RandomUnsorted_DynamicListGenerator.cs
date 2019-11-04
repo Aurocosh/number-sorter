@@ -12,7 +12,7 @@ namespace NumberSorter.Domain.Benchmark.IntegerGenerators
 
         static SortBenchmark_RandomUnsorted_DynamicListGenerator()
         {
-            var arrayLengths = new List<int> { 10, 100, 1000, 10000, 1000000 };
+            var arrayLengths = new List<int> { 10, 100, 1000, 50000, 500000 };
 
             var query =
                 from length in arrayLengths

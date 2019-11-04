@@ -28,6 +28,7 @@
                 <MenuItem Header="Converters">
                     <MenuItem Name="AddInvertValuesProcessorMenuItem" Header="Add invert converter"/>
                     <MenuItem Name="AddShuffleValuesProcessorMenuItem" Header="Add suffle converter"/>
+                    <MenuItem Name="AddIntervalValuesProcessorMenuItem" Header="Add interval converter"/>
                     <MenuItem Name="AddRandomizeValuesProcessorMenuItem" Header="Add randomizer converter"/>
                     <MenuItem Name="AddDuplicateValuesProcessorMenuItem" Header="Add duplicating converter"/>
                     <MenuItem Name="AddConsequtiveValuesProcessorMenuItem" Header="Add consecutive converter"/>

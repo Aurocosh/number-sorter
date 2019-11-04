@@ -98,6 +98,7 @@
     <Compile Include="ViewModels\ColorSets\ColorSetDialogViewModel.cs" />
     <Compile Include="ViewModels\ColorSets\ColorSetSelectDialogViewModel.cs" />
     <Compile Include="ViewModels\ColorSets\ColorSetLineViewModel.cs" />
+    <Compile Include="ViewModels\Generators\CustomListGenerator\Processors\IntervalValuesProcessorLineViewModel.cs" />
     <Compile Include="ViewModels\Generators\CustomListGenerator\Processors\PartialShuffleValuesProcessorLineViewModel.cs" />
     <Compile Include="Visualizers\Base\VisualizationFactory.cs" />
     <Compile Include="Visualizers\Base\VisualizationType.cs" />

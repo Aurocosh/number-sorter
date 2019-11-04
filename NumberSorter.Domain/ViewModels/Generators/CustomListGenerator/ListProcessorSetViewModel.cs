@@ -44,6 +44,7 @@ namespace NumberSorter.Domain.ViewModels
 
         public ReactiveCommand<Unit, Unit> AddInvertValuesProcessorCommand { get; }
         public ReactiveCommand<Unit, Unit> AddShuffleValuesProcessorCommand { get; }
+        public ReactiveCommand<Unit, Unit> AddIntervalValuesProcessorCommand { get; }
         public ReactiveCommand<Unit, Unit> AddRandomizeValuesProcessorCommand { get; }
         public ReactiveCommand<Unit, Unit> AddDuplicateValuesProcessorCommand { get; }
         public ReactiveCommand<Unit, Unit> AddConsequtiveValuesProcessorCommand { get; }
@@ -77,6 +78,7 @@ namespace NumberSorter.Domain.ViewModels
 
             AddInvertValuesProcessorCommand = ReactiveCommand.Create(AddInvertValuesProcessor);
             AddShuffleValuesProcessorCommand = ReactiveCommand.Create(AddShuffleValuesProcessor);
+            AddIntervalValuesProcessorCommand = ReactiveCommand.Create(AddIntervalValuesProcessor);
             AddRandomizeValuesProcessorCommand = ReactiveCommand.Create(AddRandomizeValuesProcessor);
             AddDuplicateValuesProcessorCommand = ReactiveCommand.Create(AddDuplicateValuesProcessor);
             AddConsequtiveValuesProcessorCommand = ReactiveCommand.Create(AddConsequtiveValuesProcessor);
@@ -126,6 +128,7 @@ namespace NumberSorter.Domain.ViewModels
 
         private void AddInvertValuesProcessor() => _listProcessors.Add(new InvertValuesProcessor());
         private void AddShuffleValuesProcessor() => _listProcessors.Add(new ShuffleValuesProcessor());
+        private void AddIntervalValuesProcessor() => _listProcessors.Add(new IntervalValuesProcessor());
         private void AddRandomizeValuesProcessor() => _listProcessors.Add(new RandomizeValuesProcessor());
         private void AddDuplicateValuesProcessor() => _listProcessors.Add(new DuplicateValuesProcessor());
         private void AddConsequtiveValuesProcessor() => _listProcessors.Add(new ConsecutiveValuesProcessor());
@@ -154,6 +157,8 @@ namespace NumberSorter.Domain.ViewModels
                 return new PartialShuffleValuesProcessorLineViewModel(partialShuffleValuesProcessor);
             else if (processor is InvertValuesProcessor invertValuesProcessor)
                 return new InvertValuesProcessorLineViewModel(invertValuesProcessor);
+            else if (processor is IntervalValuesProcessor intervalValuesProcessor)
+                return new IntervalValuesProcessorLineViewModel(intervalValuesProcessor);
             return null;
         }
     }
