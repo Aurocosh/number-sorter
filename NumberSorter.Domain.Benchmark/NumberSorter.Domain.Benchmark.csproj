@@ -223,6 +223,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Benchmarks\IntervalMultiMerge\IntervalMultiMergeSortGroupBiasedBinaryBenchmarks.cs" />
+    <Compile Include="Benchmarks\IntervalMultiMerge\IntervalMultiMergeSortGroupBinaryBenchmarks.cs" />
+    <Compile Include="Benchmarks\IntervalMultiMerge\IntervalMultiMergeSortGroupLinearBenchmarks.cs" />
     <Compile Include="Benchmarks\JHeapSortBinaryBenchmarks.cs" />
     <Compile Include="Benchmarks\MultiMerge\MultiMergeSortGroupBinaryWindowBenchmarks.cs" />
     <Compile Include="Benchmarks\MultiMerge\MultiMergeSortGroupBinaryRecursiveBenchmarks.cs" />
