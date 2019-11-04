@@ -223,6 +223,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Benchmarks\IntervalMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\IntervalMultiMerge\IntervalMultiMergeSortGroupBiasedBinaryBenchmarks.cs" />
     <Compile Include="Benchmarks\IntervalMultiMerge\IntervalMultiMergeSortGroupBinaryBenchmarks.cs" />
     <Compile Include="Benchmarks\IntervalMultiMerge\IntervalMultiMergeSortGroupLinearBenchmarks.cs" />

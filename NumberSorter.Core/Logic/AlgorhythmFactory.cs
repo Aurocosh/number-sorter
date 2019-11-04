@@ -30,22 +30,25 @@ namespace NumberSorter.Core.Logic
                     return new PancakeSort<T>(comparer);
                 case AlgorhythmType.OddEvenSort:
                     return new OddEvenSort<T>(comparer);
+                case AlgorhythmType.CocktailShakerSort:
+                    return new CocktailShakerSort<T>(comparer);
+
                 case AlgorhythmType.DequeMergeSort:
                     return new DequeMergeSort<T>(comparer);
                 case AlgorhythmType.WindowMergeSort:
                     return new WindowMergeSort<T>(comparer);
-                case AlgorhythmType.CocktailShakerSort:
-                    return new CocktailShakerSort<T>(comparer);
                 case AlgorhythmType.RecursiveMergeSort:
                     return new RecursiveMergeSort<T>(comparer);
                 case AlgorhythmType.HalfInPlaceMergeSort:
                     return new HalfInPlaceMergeSort<T>(comparer);
                 case AlgorhythmType.KindaInPlaceMergeSort:
                     return new KindaInPlaceMergeSort<T>(comparer);
-                case AlgorhythmType.TripleWindowMergeSort:
-                    return new TripleWindowMergeSort<T>(comparer);
                 case AlgorhythmType.WorkAreaInPlaceMergeSort:
                     return new WorkAreaInPlaceMergeSort<T>(comparer);
+                case AlgorhythmType.IntervalMergeSort:
+                    return new IntervalMergeSort<T>(comparer, new BiasedBinaryPositionLocatorFactory(2));
+                case AlgorhythmType.TripleWindowMergeSort:
+                    return new TripleWindowMergeSort<T>(comparer);
 
                 case AlgorhythmType.BinarySort:
                     return new BinarySort<T>(comparer);
