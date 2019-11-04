@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Reflection;
 
 namespace NumberSorter.Domain.Tests
 {
@@ -40,7 +41,5 @@ namespace NumberSorter.Domain.Tests
         public IEnumerable<object[]> GetEnumerable() => _data;
         public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-
     }
 }

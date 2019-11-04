@@ -15,14 +15,14 @@ namespace NumberSorter.Domain.Benchmark.IntegerGenerators
     // 5,6,1,2,3
     // 12,14,15,20,1,3
 
-    public partial class SortBenchmark_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator : IEnumerable<object[]>
+    public class SortBenchmark_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator : IEnumerable<object[]>
     {
         private static readonly UnmergedFullySortedGenerator _generator = new UnmergedFullySortedGenerator(BenchmarkRandomProvider.Random);
         private static readonly List<object[]> _data;
 
         static SortBenchmark_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator()
         {
-            var lengths = new List<int> { 10, 1000, 50000 };
+            var lengths = new List<int> { 1000, 50000 };
 
             var query =
                 from firstLength in lengths

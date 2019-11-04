@@ -1,0 +1,35 @@
+{
+  "$type": "NumberSorter.Core.CustomGenerators.CustomListGenerator, NumberSorter.Core",
+  "Id": "702b27d2-230f-4702-974f-5ef4c6a1b0f9",
+  "Name": "Fully sorted -250000 to 250000",
+  "Shuffle": false,
+  "Description": "1",
+  "ListProcessorSets": {
+    "$type": "System.Collections.Generic.List`1[[NumberSorter.Core.CustomGenerators.ListProcessorSet, NumberSorter.Core]], mscorlib",
+    "$values": [
+      {
+        "$type": "NumberSorter.Core.CustomGenerators.ListProcessorSet, NumberSorter.Core",
+        "Name": "Processor set",
+        "IsSameList": false,
+        "MinRepeatValue": 1,
+        "MaxRepeatValue": 1,
+        "ListProcessors": {
+          "$type": "System.Collections.Generic.List`1[[NumberSorter.Core.CustomGenerators.IListProcessor, NumberSorter.Core]], mscorlib",
+          "$values": [
+            {
+              "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.NewListProcessor, NumberSorter.Core",
+              "Size": 500001,
+              "Description": "Fixed list generator"
+            },
+            {
+              "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.ConsecutiveValuesProcessor, NumberSorter.Core",
+              "Step": 1,
+              "Start": -250000,
+              "Description": "Consecutive list generator"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

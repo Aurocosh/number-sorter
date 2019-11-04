@@ -1,10 +1,16 @@
-﻿using NumberSorter.Core.Generators;
+﻿using Newtonsoft.Json;
+using NumberSorter.Core.CustomGenerators;
+using NumberSorter.Core.CustomGenerators.Context;
+using NumberSorter.Core.Generators;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Numerics;
+using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace NumberSorter.Domain.Tests.SortTests.Base.IntegerGenerators.Dynamic
 {
@@ -38,7 +44,5 @@ namespace NumberSorter.Domain.Tests.SortTests.Base.IntegerGenerators.Dynamic
         public IEnumerable<object[]> GetEnumerable() => _data;
         public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-
     }
 }

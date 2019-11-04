@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Reports;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks.Base
 {
@@ -32,6 +34,10 @@ namespace NumberSorter.Domain.Benchmark.Benchmarks.Base
             _sort = GetAlgorhythm(Comparer);
         }
 
+        public IEnumerable<object[]> Custom_Inverted_DynamicList() => new SortBenchmark_Custom_DynamicListGenerator("Inverted").ToList();
+        public IEnumerable<object[]> Custom_FewUnique_DynamicList() => new SortBenchmark_Custom_DynamicListGenerator("FewUnique").ToList();
+        public IEnumerable<object[]> Custom_FullySorted_DynamicList() => new SortBenchmark_Custom_DynamicListGenerator("FullySorted").ToList();
+        public IEnumerable<object[]> Custom_AlmostSorted_DynamicList() => new SortBenchmark_Custom_DynamicListGenerator("AlmostSorted").ToList();
         public IEnumerable<object[]> TwoFullySortedParts_FirstBiggerThenSecond_DynamicList() => new SortBenchmark_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator().ToList();
         public IEnumerable<object[]> RandomUnsorted_DynamicList() => new SortBenchmark_RandomUnsorted_DynamicListGenerator().ToList();
         public IEnumerable<object[]> PartiallySorted_DynamicList() => new SortBenchmark_PartiallySorted_DynamicListGenerator().ToList();
@@ -39,22 +45,50 @@ namespace NumberSorter.Domain.Benchmark.Benchmarks.Base
         protected abstract ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer);
 
         [Benchmark]
+        [ArgumentsSource(nameof(Custom_Inverted_DynamicList))]
+        public void Custom_Inverted_Dynamic(int size, IList<int> testData)
+        {
+            _sort.Sort(testData);
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(Custom_FewUnique_DynamicList))]
+        public void Custom_FewUnique_Dynamic(int size, IList<int> testData)
+        {
+            _sort.Sort(testData);
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(Custom_FullySorted_DynamicList))]
+        public void Custom_FullySorted_Dynamic(int size, IList<int> testData)
+        {
+            _sort.Sort(testData);
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(Custom_AlmostSorted_DynamicList))]
+        public void Custom_AlmostSorted_Dynamic(int size, IList<int> testData)
+        {
+            _sort.Sort(testData);
+        }
+
+        [Benchmark]
         [ArgumentsSource(nameof(TwoFullySortedParts_FirstBiggerThenSecond_DynamicList))]
-        public void TwoFullySortedParts_FirstBiggerThenSecond_Dynamic(int size, List<int> testData)
+        public void TwoFullySortedParts_FirstBiggerThenSecond_Dynamic(int size, string name, List<int> testData)
         {
             _sort.Sort(testData);
         }
 
         [Benchmark]
         [ArgumentsSource(nameof(RandomUnsorted_DynamicList))]
-        public void RandomUnsorted_Dynamic(int size, List<int> testData)
+        public void RandomUnsorted_Dynamic(int size, string name, List<int> testData)
         {
             _sort.Sort(testData);
         }
 
         [Benchmark]
         [ArgumentsSource(nameof(PartiallySorted_DynamicList))]
-        public void PartiallySorted_Dynamic(int size, List<int> testData)
+        public void PartiallySorted_Dynamic(int size, string name, List<int> testData)
         {
             _sort.Sort(testData);
         }

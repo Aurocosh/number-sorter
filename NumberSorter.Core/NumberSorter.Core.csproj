@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="CustomGenerators\Base\IConverterContext.cs" />
     <Compile Include="CustomGenerators\Base\IListProcessor.cs" />
+    <Compile Include="CustomGenerators\Context\CustomConverterContext.cs" />
     <Compile Include="CustomGenerators\Context\StandardConverterContext.cs" />
     <Compile Include="CustomGenerators\CustomListGenerator.cs" />
     <Compile Include="CustomGenerators\ListProcessorSet.cs" />

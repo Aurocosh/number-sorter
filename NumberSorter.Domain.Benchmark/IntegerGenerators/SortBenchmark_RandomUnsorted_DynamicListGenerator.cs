@@ -33,7 +33,5 @@ namespace NumberSorter.Domain.Benchmark.IntegerGenerators
         public IEnumerable<object[]> GetEnumerable() => _data;
         public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-
     }
 }
