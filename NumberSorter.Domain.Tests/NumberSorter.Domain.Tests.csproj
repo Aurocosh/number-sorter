@@ -103,6 +103,8 @@
     <Compile Include="SortTests\OddEvenSortTests.cs" />
     <Compile Include="SortTests\SelectionSortTests.cs" />
     <Compile Include="SortTests\InsertionWindowTimSortTests.cs" />
+    <Compile Include="SortTests\TimSort\TimSortInsertionWindowSortTests.cs" />
+    <Compile Include="SortTests\TimSort\TimSortBinaryIntervalSortTests.cs" />
     <Compile Include="SortTests\TripleWindowMergeSortTests.cs" />
     <Compile Include="SortTests\WorkAreaInPlaceMergeSortTests.cs" />
     <Compile Include="TestsRandomProvider.cs" />

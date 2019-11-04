@@ -16,10 +16,12 @@ namespace NumberSorter.Core.Logic
             _nameDictionary.Add(AlgorhythmType.PancakeSort, "Pancake sort");
             _nameDictionary.Add(AlgorhythmType.OddEvenSort, "Odd even sort");
             _nameDictionary.Add(AlgorhythmType.CocktailShakerSort, "Cocktail shaker sort");
-            _nameDictionary.Add(AlgorhythmType.WindowWindowTimSort, "Tim Sort (Window sort, Window merge)");
-            _nameDictionary.Add(AlgorhythmType.InsertionWindowTimSort, "Tim Sort (Insertion, Window merge)");
-            _nameDictionary.Add(AlgorhythmType.InsertionTripleWindowTimSort, "Tim Sort (Insertion, Triple window merge)");
-            _nameDictionary.Add(AlgorhythmType.TripleWindowTripleWindowTimSort, "Tim Sort (Triple window sort, Triple window merge)");
+
+            _nameDictionary.Add(AlgorhythmType.TimSortWindowWindow, "Tim Sort (Window sort, Window merge)");
+            _nameDictionary.Add(AlgorhythmType.TimSortBinaryInterval, "Tim Sort (Binary sort, Interval merge)");
+            _nameDictionary.Add(AlgorhythmType.TimSortInsertionWindow, "Tim Sort (Insertion sort, Window merge)");
+            _nameDictionary.Add(AlgorhythmType.TimSortInsertionTripleWindow, "Tim Sort (Insertion sort, Triple window merge)");
+            _nameDictionary.Add(AlgorhythmType.TimSortTripleWindowTripleWindow, "Tim Sort (Triple window sort, Triple window merge)");
 
             _nameDictionary.Add(AlgorhythmType.DequeMergeSort, "Deque merge sort");
             _nameDictionary.Add(AlgorhythmType.WindowMergeSort, "Window merge sort");

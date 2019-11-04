@@ -10,12 +10,14 @@
         PancakeSort,
         OddEvenSort,
         CocktailShakerSort,
-        WindowWindowTimSort,
         HalfInPlaceMergeSort,
         KindaInPlaceMergeSort,
-        InsertionWindowTimSort,
-        InsertionTripleWindowTimSort,
-        TripleWindowTripleWindowTimSort,
+
+        TimSortWindowWindow,
+        TimSortBinaryInterval,
+        TimSortInsertionWindow,
+        TimSortInsertionTripleWindow,
+        TimSortTripleWindowTripleWindow,
 
         DequeMergeSort,
         WindowMergeSort,

@@ -67,13 +67,15 @@ namespace NumberSorter.Core.Logic
                 case AlgorhythmType.JHeapInsertionSort:
                     return new JHeapSort<T>(comparer, new InsertionSortFactory());
 
-                case AlgorhythmType.InsertionWindowTimSort:
+                case AlgorhythmType.TimSortBinaryInterval:
+                    return new TimSort<T>(comparer, new IntervalMergeSortFactory(new BiasedBinaryPositionLocatorFactory(2)), new BinarySortFactory());
+                case AlgorhythmType.TimSortInsertionWindow:
                     return new TimSort<T>(comparer, new WindowMergeSortFactory(), new InsertionSortFactory());
-                case AlgorhythmType.WindowWindowTimSort:
+                case AlgorhythmType.TimSortWindowWindow:
                     return new TimSort<T>(comparer, new WindowMergeSortFactory(), new WindowMergeSortFactory());
-                case AlgorhythmType.InsertionTripleWindowTimSort:
+                case AlgorhythmType.TimSortInsertionTripleWindow:
                     return new TimSort<T>(comparer, new TripleWindowMergeSortFactory(), new InsertionSortFactory());
-                case AlgorhythmType.TripleWindowTripleWindowTimSort:
+                case AlgorhythmType.TimSortTripleWindowTripleWindow:
                     return new TimSort<T>(comparer, new TripleWindowMergeSortFactory(), new TripleWindowMergeSortFactory());
 
                 case AlgorhythmType.ShellSortCiura:

@@ -232,6 +232,8 @@
     <Compile Include="Benchmarks\MultiMerge\MultiMergeSortGroupBinaryRecursiveBenchmarks.cs" />
     <Compile Include="Benchmarks\MultiMerge\MultiMergeSortGroupBinaryBenchmarks.cs" />
     <Compile Include="Benchmarks\MultiMerge\MultiMergeSortSimpleBinaryBenchmarks.cs" />
+    <Compile Include="Benchmarks\TimSort\TimSortInsertionWindowBenchmarks.cs" />
+    <Compile Include="Benchmarks\TimSort\TimSortBinaryIntervalBenchmarks.cs" />
     <Compile Include="Benchmarks\WorkAreaInPlaceMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\TripleWindowMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ShellSortTokudaBenchmarks.cs" />
@@ -306,6 +308,7 @@
       <Name>NumberSorter.Domain.Tests</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

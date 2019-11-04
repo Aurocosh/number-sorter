@@ -1,4 +1,6 @@
-﻿using NumberSorter.Core.Logic.Algorhythm.PositionLocator.Base;
+﻿using NumberSorter.Core.Algorhythm;
+using NumberSorter.Core.Logic.Algorhythm.Merge.Base;
+using NumberSorter.Core.Logic.Algorhythm.PositionLocator.Base;
 using NumberSorter.Core.Logic.Factories.PositionLocator.Base;
 using NumberSorter.Core.Logic.Utility;
 using System;
@@ -7,7 +9,7 @@ using System.Linq;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class IntervalMergeSort<T> : GenericSortAlgorhythm<T>
+    public class IntervalMergeSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>, ILocalMergeAlgothythm<T>
     {
         private IPositionLocator<T> PositionLocator { get; }
 
@@ -19,6 +21,12 @@ namespace NumberSorter.Core.Logic.Algorhythm
         public override void Sort(IList<T> list)
         {
             var sortRun = new SortRun(0, list.Count);
+            MergeSort(list, sortRun);
+        }
+
+        public void Sort(IList<T> list, int startingIndex, int length)
+        {
+            var sortRun = new SortRun(startingIndex, length);
             MergeSort(list, sortRun);
         }
 
@@ -34,7 +42,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
             Merge(list, halvesOfSortRun.First, halvesOfSortRun.Second);
         }
 
-        private void Merge(IList<T> list, SortRun firstRun, SortRun secondRun)
+        public void Merge(IList<T> list, SortRun firstRun, SortRun secondRun)
         {
             int combinedLength = firstRun.Length + secondRun.Length;
             if (combinedLength < 2)
