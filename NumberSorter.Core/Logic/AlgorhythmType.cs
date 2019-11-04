@@ -43,6 +43,10 @@
         MultiMergeGroupBinaryWindowSort,
         MultiMergeGroupBinaryRecursiveSort,
 
+        IntervalMultiMergeGroupLinearSort,
+        IntervalMultiMergeGroupBinarySort,
+        IntervalMultiMergeGroupBiasedBinarySort,
+
         QuickSortRandomPivot,
         QuickSortMedianOfThree,
         QuickSortRandomPivotCutoffWindow,

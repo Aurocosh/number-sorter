@@ -93,6 +93,13 @@ namespace NumberSorter.Core.Logic
                 case AlgorhythmType.MultiMergeGroupBinaryRecursiveSort:
                     return new RecursiveMultiMergeSortFactory(new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BinaryPositionLocatorFactory()).GetSort(comparer);
 
+                case AlgorhythmType.IntervalMultiMergeGroupLinearSort:
+                    return new IntervalMultiMergeSort<T>(comparer, new InsertionSortFactory(), new SimpleRunLocatorFactory(), new LinearPositionLocatorFactory());
+                case AlgorhythmType.IntervalMultiMergeGroupBinarySort:
+                    return new IntervalMultiMergeSort<T>(comparer, new BinarySortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BinaryPositionLocatorFactory());
+                case AlgorhythmType.IntervalMultiMergeGroupBiasedBinarySort:
+                    return new IntervalMultiMergeSort<T>(comparer, new BinarySortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BiasedBinaryPositionLocatorFactory(2));
+
                 case AlgorhythmType.QuickSortRandomPivot:
                     return new QuickSort<T>(comparer, new RandomPivotSelectorFactory(new Random()), new InsertionSortFactory(), 0);
                 case AlgorhythmType.QuickSortMedianOfThree:

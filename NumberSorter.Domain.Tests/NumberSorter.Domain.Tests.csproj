@@ -76,6 +76,9 @@
     <Compile Include="RotationTests\IntegerGenerators\Dynamic\RotationTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator.cs" />
     <Compile Include="RotationTests\InversionInPlaceRotationTests.cs" />
     <Compile Include="SortTests\CircleSortTests.cs" />
+    <Compile Include="SortTests\IntervalMultiMerge\IntervalMultiMergeSortGroupBiasedBinaryTests.cs" />
+    <Compile Include="SortTests\IntervalMultiMerge\IntervalMultiMergeSortSimpleLinearTests.cs" />
+    <Compile Include="SortTests\IntervalMultiMerge\IntervalMultiMergeSortGroupBinaryTests.cs" />
     <Compile Include="SortTests\JHeapSortInsertionTests.cs" />
     <Compile Include="SortTests\MultiMerge\MultiMergeSortGroupBinaryRecursiveTests.cs" />
     <Compile Include="SortTests\MultiMerge\MultiMergeSortGroupBinaryWindowTests.cs" />

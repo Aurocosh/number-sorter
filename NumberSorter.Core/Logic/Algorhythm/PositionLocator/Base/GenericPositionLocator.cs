@@ -13,6 +13,7 @@ namespace NumberSorter.Core.Logic.Algorhythm.PositionLocator.Base
         public int Compare(T first, T second) => Comparer.Compare(first, second);
         public int Compare(IList<T> list, int first, int second) => Comparer.Compare(list[first], list[second]);
 
-        public abstract int FindPosition(IList<T> list, T element, int runStart, int length);
+        public abstract int FindFirstPosition(IList<T> list, T element, int runStart, int length);
+        public abstract int FindLastPosition(IList<T> list, T element, int runStart, int length);
     }
 }

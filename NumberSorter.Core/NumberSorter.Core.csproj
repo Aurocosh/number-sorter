@@ -73,6 +73,7 @@
     <Compile Include="Logic\Algorhythm\Base\SortRun.cs" />
     <Compile Include="Logic\Algorhythm\PositionLocator\Base\GenericPositionLocator.cs" />
     <Compile Include="Logic\Algorhythm\PositionLocator\Base\IPositionLocator.cs" />
+    <Compile Include="Logic\Algorhythm\PositionLocator\BiasedBinaryPositionLocator.cs" />
     <Compile Include="Logic\Algorhythm\PositionLocator\BinaryPositionLocator.cs" />
     <Compile Include="Logic\Algorhythm\PositionLocator\LinearPositionLocator.cs" />
     <Compile Include="Logic\Algorhythm\GapGenerator\Base\IGapGenerator.cs" />
@@ -88,7 +89,9 @@
     <Compile Include="Logic\Algorhythm\Rotation\InversionInPlaceRotation.cs" />
     <Compile Include="Logic\Algorhythm\Rotation\RecursiveInPlaceRotation.cs" />
     <Compile Include="Logic\Algorhythm\Sort\JHeapSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\IntervalMultiMergeSort.cs" />
     <Compile Include="Logic\Factories\PositionLocator\Base\IPositionLocatorFactory.cs" />
+    <Compile Include="Logic\Factories\PositionLocator\BiasedBinaryPositionLocatorFactory.cs" />
     <Compile Include="Logic\Factories\PositionLocator\BinaryPositionLocatorFactory.cs" />
     <Compile Include="Logic\Factories\PositionLocator\LinearPositionLocatorFactory.cs" />
     <Compile Include="Logic\Factories\LocalMerge\Base\ILocalMergeFactory.cs" />

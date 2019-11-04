@@ -63,7 +63,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
                     if (sortRunComparer.Compare(newRun, nextRun) > 0)
                     {
                         int searchAreaLength = runIndexLimit - nextRunIndex;
-                        int indexToInsert = positionLocator.FindPosition(sortRuns, newRun, nextRunIndex, searchAreaLength);
+                        int indexToInsert = positionLocator.FindFirstPosition(sortRuns, newRun, nextRunIndex, searchAreaLength);
 
                         int newRunIndex = currentRunIndex;
                         while (newRunIndex != indexToInsert)

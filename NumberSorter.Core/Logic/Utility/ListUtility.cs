@@ -69,6 +69,13 @@ namespace NumberSorter.Core.Logic.Utility
                 yield return list.GetRange(i, Math.Min(chunkSize, list.Count - i));
         }
 
+        public static void Copy<T>(IList<T> source, int sourceIndex, IList<T> destination, int destinationIndex, int length)
+        {
+            int upperSourceLimit = sourceIndex + length;
+            while (sourceIndex != upperSourceLimit)
+                destination[destinationIndex++] = source[sourceIndex++];
+        }
+
         public static List<T> GetRange<T>(this IReadOnlyList<T> list, int index, int count)
         {
             int upperLimit = index + count;
