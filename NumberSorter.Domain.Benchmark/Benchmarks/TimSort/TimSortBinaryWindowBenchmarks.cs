@@ -6,11 +6,11 @@ using NumberSorter.Core.Logic.Factories.Sort;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks
 {
-    public class TimSortInsertionWindowBenchmarks : SortBenchmarks
+    public class TimSortBinaryWindowBenchmarks : SortBenchmarks
     {
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {
-            return new TimSort<int>(comparer, new WindowMergeSortFactory(), new InsertionSortFactory());
+            return new TimSort<int>(comparer, new WindowMergeSortFactory(), new BinarySortFactory());
         }
     }
 }
