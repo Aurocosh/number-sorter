@@ -18,13 +18,13 @@
           "$values": [
             {
               "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.NewListProcessor, NumberSorter.Core",
-              "Size": 500000,
+              "Size": 100000,
               "Description": "Fixed list generator"
             },
             {
               "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.ConsecutiveValuesProcessor, NumberSorter.Core",
               "Step": 1,
-              "Start": -250000,
+              "Start": -50000,
               "Description": "Consecutive list generator"
             },
             {
@@ -32,7 +32,7 @@
               "Normal": 200,
               "Inverted": 200,
               "Shuffled": 200,
-              "ShuffleParts": false,
+              "ShuffleParts": true,
               "Description": "List interval processor (Normal, Inverted, Shuffled)"
             }
           ]

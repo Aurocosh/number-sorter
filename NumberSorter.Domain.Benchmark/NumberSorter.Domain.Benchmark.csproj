@@ -232,6 +232,7 @@
     <Compile Include="Benchmarks\MultiMerge\MultiMergeSortGroupBinaryRecursiveBenchmarks.cs" />
     <Compile Include="Benchmarks\MultiMerge\MultiMergeSortGroupBinaryBenchmarks.cs" />
     <Compile Include="Benchmarks\MultiMerge\MultiMergeSortSimpleBinaryBenchmarks.cs" />
+    <Compile Include="Benchmarks\QuickSort\ParallelQuickSortRandomPivotBenchmarks.cs" />
     <Compile Include="Benchmarks\TimSort\TimSortBinaryWindowBenchmarks.cs" />
     <Compile Include="Benchmarks\TimSort\TimSortBinaryIntervalBenchmarks.cs" />
     <Compile Include="Benchmarks\WorkAreaInPlaceMergeSortBenchmarks.cs" />
@@ -264,25 +265,25 @@
     <Compile Include="IntegerGenerators\SortBenchmark_PartiallySorted_DynamicListGenerator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Benchmarks\QuickSortMedianThreePivotBenchmarks.cs" />
-    <Compile Include="Benchmarks\QuickSortRandomPivotBenchmarks.cs" />
+    <Compile Include="Benchmarks\QuickSort\QuickSortMedianThreePivotBenchmarks.cs" />
+    <Compile Include="Benchmarks\QuickSort\QuickSortRandomPivotBenchmarks.cs" />
     <Compile Include="Benchmarks\RecursiveMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\Base\SortBenchmarks.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <EmbeddedResource Include="IntegerGenerators\Custom\Resources\FullySorted\FullySorted1000.json" />
-    <EmbeddedResource Include="IntegerGenerators\Custom\Resources\FullySorted\FullySorted500000.json" />
+    <EmbeddedResource Include="IntegerGenerators\Custom\Resources\FullySorted\FullySorted100000.json" />
     <EmbeddedResource Include="IntegerGenerators\Custom\Resources\Inverted\Inverted1000.json" />
-    <EmbeddedResource Include="IntegerGenerators\Custom\Resources\Inverted\Inverted500000.json" />
+    <EmbeddedResource Include="IntegerGenerators\Custom\Resources\Inverted\Inverted100000.json" />
     <EmbeddedResource Include="IntegerGenerators\Custom\Resources\AlmostSorted\AlmostSorted1000.json" />
-    <EmbeddedResource Include="IntegerGenerators\Custom\Resources\AlmostSorted\AlmostSorted500000.json" />
+    <EmbeddedResource Include="IntegerGenerators\Custom\Resources\AlmostSorted\AlmostSorted100000.json" />
     <EmbeddedResource Include="IntegerGenerators\Custom\Resources\FewUnique\FewUnique1000.json" />
-    <EmbeddedResource Include="IntegerGenerators\Custom\Resources\FewUnique\FewUnique500000.json" />
+    <EmbeddedResource Include="IntegerGenerators\Custom\Resources\FewUnique\FewUnique100000.json" />
     <EmbeddedResource Include="IntegerGenerators\Custom\Resources\Intervals\Intervals1000.json" />
-    <EmbeddedResource Include="IntegerGenerators\Custom\Resources\Intervals\Intervals500000.json" />
+    <EmbeddedResource Include="IntegerGenerators\Custom\Resources\Intervals\Intervals100000.json" />
     <EmbeddedResource Include="IntegerGenerators\Custom\Resources\ShuffledIntervals\ShuffledIntervals1000.json" />
-    <EmbeddedResource Include="IntegerGenerators\Custom\Resources\ShuffledIntervals\ShuffledIntervals500000.json" />
+    <EmbeddedResource Include="IntegerGenerators\Custom\Resources\ShuffledIntervals\ShuffledIntervals100000.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

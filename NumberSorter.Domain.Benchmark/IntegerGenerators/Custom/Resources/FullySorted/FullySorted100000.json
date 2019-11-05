@@ -1,9 +1,9 @@
 {
   "$type": "NumberSorter.Core.CustomGenerators.CustomListGenerator, NumberSorter.Core",
-  "Id": "23a31b3e-b654-45d8-bd81-db970ab35b3c",
-  "Name": "Few unique shuffled",
+  "Id": "702b27d2-230f-4702-974f-5ef4c6a1b0f9",
+  "Name": "Fully sorted -250000 to 249999",
   "Shuffle": false,
-  "Description": "",
+  "Description": "1",
   "ListProcessorSets": {
     "$type": "System.Collections.Generic.List`1[[NumberSorter.Core.CustomGenerators.ListProcessorSet, NumberSorter.Core]], mscorlib",
     "$values": [
@@ -18,23 +18,14 @@
           "$values": [
             {
               "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.NewListProcessor, NumberSorter.Core",
-              "Size": 500,
+              "Size": 100000,
               "Description": "Fixed list generator"
             },
             {
               "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.ConsecutiveValuesProcessor, NumberSorter.Core",
               "Step": 1,
-              "Start": 0,
+              "Start": -50000,
               "Description": "Consecutive list generator"
-            },
-            {
-              "$type": "NumberSorter.Core.CustomGenerators.Processors.Converters.DuplicateValuesProcessor, NumberSorter.Core",
-              "DuplicateCount": 1000,
-              "Description": "List value duplicator"
-            },
-            {
-              "$type": "NumberSorter.Core.CustomGenerators.Processors.Converters.ShuffleValuesProcessor, NumberSorter.Core",
-              "Description": "List value shuffler"
             }
           ]
         }

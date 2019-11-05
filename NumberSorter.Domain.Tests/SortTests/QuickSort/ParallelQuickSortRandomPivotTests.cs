@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using NumberSorter.Core.Algorhythm;
 using NumberSorter.Core.Logic.Algorhythm;
-using NumberSorter.Core.Logic.Factories.PositionLocator;
+using NumberSorter.Core.Logic.Factories.PivotSelector;
+using NumberSorter.Core.Logic.Factories.Sort;
 using NumberSorter.Domain.Tests.SortTests.Base;
 
 namespace NumberSorter.Domain.Tests.SortTests
 {
-    public class IntervalMergeSortTests : SortTestsBase
+    public class ParallelQuickSortRandomPivotTests : SortTestsBase
     {
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {
-            return new IntervalMergeSort<int>(comparer, new BiasedBinaryPositionLocatorFactory(1));
+            return new ParallelQuickSort<int>(comparer, new RandomPivotSelectorFactory(TestsRandomProvider.Random), new InsertionSortFactory(), 0);
         }
     }
 }

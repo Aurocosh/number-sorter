@@ -1,7 +1,7 @@
 {
   "$type": "NumberSorter.Core.CustomGenerators.CustomListGenerator, NumberSorter.Core",
   "Id": "702b27d2-230f-4702-974f-5ef4c6a1b0f9",
-  "Name": "Fully sorted -500 to 500",
+  "Name": "Fully sorted -500 to 499",
   "Shuffle": false,
   "Description": "1",
   "ListProcessorSets": {
@@ -18,7 +18,7 @@
           "$values": [
             {
               "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.NewListProcessor, NumberSorter.Core",
-              "Size": 1001,
+              "Size": 1000,
               "Description": "Fixed list generator"
             },
             {

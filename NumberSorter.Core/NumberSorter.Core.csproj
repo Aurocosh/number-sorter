@@ -93,6 +93,7 @@
     <Compile Include="Logic\Algorhythm\Sort\JHeapSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\IntervalMultiMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\IntervalMergeSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\ParallelQuickSort.cs" />
     <Compile Include="Logic\Factories\PositionLocator\Base\IPositionLocatorFactory.cs" />
     <Compile Include="Logic\Factories\PositionLocator\BiasedBinaryPositionLocatorFactory.cs" />
     <Compile Include="Logic\Factories\PositionLocator\BinaryPositionLocatorFactory.cs" />
