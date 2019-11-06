@@ -47,6 +47,9 @@
         MultiMergeGroupBinaryWindowSort,
         MultiMergeGroupBinaryRecursiveSort,
 
+        KWayMergeSortGroup,
+        KWayMergeSortSimple,
+
         IntervalMultiMergeGroupLinearSort,
         IntervalMultiMergeGroupBinarySort,
         IntervalMultiMergeGroupBiasedBinarySort,

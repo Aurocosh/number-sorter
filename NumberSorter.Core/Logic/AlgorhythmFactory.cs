@@ -98,6 +98,11 @@ namespace NumberSorter.Core.Logic
                 case AlgorhythmType.MultiMergeGroupBinaryRecursiveSort:
                     return new RecursiveMultiMergeSortFactory(new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BinaryPositionLocatorFactory()).GetSort(comparer);
 
+                case AlgorhythmType.KWayMergeSortSimple:
+                    return new KWayMergeSort<T>(comparer, new BinarySortFactory(), new SimpleRunLocatorFactory(), new BiasedBinaryPositionLocatorFactory(2), 8);
+                case AlgorhythmType.KWayMergeSortGroup:
+                    return new KWayMergeSort<T>(comparer, new BinarySortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BiasedBinaryPositionLocatorFactory(2), 8);
+
                 case AlgorhythmType.IntervalMultiMergeGroupLinearSort:
                     return new IntervalMultiMergeSort<T>(comparer, new InsertionSortFactory(), new SimpleRunLocatorFactory(), new LinearPositionLocatorFactory());
                 case AlgorhythmType.IntervalMultiMergeGroupBinarySort:
