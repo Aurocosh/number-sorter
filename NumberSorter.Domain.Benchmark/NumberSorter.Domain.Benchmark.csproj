@@ -224,6 +224,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Benchmarks\IntervalMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\KWayMerge\KWayMergeSortGroupedBenchmarks.cs" />
+    <Compile Include="Benchmarks\KWayMerge\KWayMergeSortSimpleBenchmarks.cs" />
     <Compile Include="Benchmarks\IntervalMultiMerge\IntervalMultiMergeSortGroupBiasedBinaryBenchmarks.cs" />
     <Compile Include="Benchmarks\IntervalMultiMerge\IntervalMultiMergeSortGroupBinaryBenchmarks.cs" />
     <Compile Include="Benchmarks\IntervalMultiMerge\IntervalMultiMergeSortGroupLinearBenchmarks.cs" />

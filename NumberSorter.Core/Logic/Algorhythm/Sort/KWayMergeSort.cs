@@ -63,7 +63,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
                     SortBatch(list, batch);
                 }
             }
-
+            _nextSortRunsQueue.Clear();
 
 
             //int bathSize = 2;
@@ -81,7 +81,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
             return batch;
         }
 
-        public void SortBatch(IList<T> list, SortRun[] sortRuns)
+        private void SortBatch(IList<T> list, SortRun[] sortRuns)
         {
             if (sortRuns.Length == 1)
             {

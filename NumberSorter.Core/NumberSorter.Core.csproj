@@ -90,7 +90,7 @@
     <Compile Include="Logic\Algorhythm\Rotation\Base\ILocalRotationAlgothythm.cs" />
     <Compile Include="Logic\Algorhythm\Rotation\InversionInPlaceRotation.cs" />
     <Compile Include="Logic\Algorhythm\Rotation\RecursiveInPlaceRotation.cs" />
-    <Compile Include="Logic\Algorhythm\Sort\KMultiMergeSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\KWayMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\JHeapSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\IntervalMultiMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\IntervalMergeSort.cs" />
