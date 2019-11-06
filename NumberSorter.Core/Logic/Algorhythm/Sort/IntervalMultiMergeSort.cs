@@ -31,9 +31,9 @@ namespace NumberSorter.Core.Logic.Algorhythm
             if (sortRuns.Count < 2)
                 return;
 
-            var temporaryArray = list.GetRangeAsArray(startingIndex, length);
+            var temporaryArray = new T[length];
 
-            var sortRunComparer = Comparer<SortRun>.Create((x, y) => Compare(temporaryArray[x.FirstIndex], temporaryArray[y.FirstIndex]));
+            var sortRunComparer = Comparer<SortRun>.Create((x, y) => Compare(list[x.FirstIndex], list[y.FirstIndex]));
             RunSortFactory.Sort(sortRuns, sortRunComparer);
 
             int lowRunIndex = 0;
@@ -52,13 +52,13 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
                 int nextRunIndex = lowRunIndex + 1;
                 nextSortRun = sortRuns[nextRunIndex];
-                T nextLimit = temporaryArray[nextSortRun.FirstIndex];
+                T nextLimit = list[nextSortRun.FirstIndex];
 
                 int start = lowSortRun.FirstIndex;
-                int end = elementPositionLocator.FindLastPosition(temporaryArray, nextLimit, lowSortRun.FirstIndex, lowSortRun.Length);
+                int end = elementPositionLocator.FindLastPosition(list, nextLimit, lowSortRun.FirstIndex, lowSortRun.Length);
 
                 int elementsToCopy = end - start + 1;
-                ListUtility.Copy(temporaryArray, start, list, index, elementsToCopy);
+                ListUtility.Copy(list, start, temporaryArray, index, elementsToCopy);
                 index += elementsToCopy;
 
                 var newRun = new SortRun(lowSortRun.FirstIndex + elementsToCopy, lowSortRun.Length - elementsToCopy);
@@ -81,7 +81,8 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 }
             }
 
-            ListUtility.Copy(temporaryArray, nextSortRun.FirstIndex, list, index, nextSortRun.Length);
+            ListUtility.Copy(list, nextSortRun.FirstIndex, temporaryArray, index, nextSortRun.Length);
+            ListUtility.Copy(temporaryArray, 0, list, 0, length);
         }
 
         private int FindEndOfRun(IList<T> list, SortRun sortRun, T upperLimit)

@@ -31,9 +31,9 @@ namespace NumberSorter.Core.Logic.Algorhythm
             if (sortRuns.Count < 2)
                 return;
 
-            var temporaryArray = list.GetRangeAsArray(startingIndex, length);
+            var temporaryArray = new T[length];
 
-            var sortRunComparer = Comparer<SortRun>.Create((x, y) => Compare(temporaryArray[x.FirstIndex], temporaryArray[y.FirstIndex]));
+            var sortRunComparer = Comparer<SortRun>.Create((x, y) => Compare(list[x.FirstIndex], list[y.FirstIndex]));
             RunSortFactory.Sort(sortRuns, sortRunComparer);
 
             int currentRunIndex = 0;
@@ -45,7 +45,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
             while (currentRunIndex != runIndexLimit)
             {
                 var lowestRun = sortRuns[currentRunIndex];
-                list[index++] = temporaryArray[lowestRun.FirstIndex];
+                temporaryArray[index++] = list[lowestRun.FirstIndex];
 
                 var newRun = new SortRun(lowestRun.FirstIndex + 1, lowestRun.Length - 1);
                 sortRuns[currentRunIndex] = newRun;
@@ -74,6 +74,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
                     }
                 }
             }
+            ListUtility.Copy(temporaryArray, 0, list, 0, length);
         }
 
         List<SortRun> FindSortRuns(IList<T> list, int startingIndex, int length)
