@@ -73,6 +73,8 @@
     <Compile Include="Logic\Algorhythm\Base\ArrayRunHalves.cs" />
     <Compile Include="Logic\Algorhythm\Base\IComparingAlgorhythm.cs" />
     <Compile Include="Logic\Algorhythm\Base\SortRun.cs" />
+    <Compile Include="Logic\Algorhythm\IntegerSort\AverageBucketSort.cs" />
+    <Compile Include="Logic\Algorhythm\IntegerSort\Base\IIntegerSortAlgorhythm.cs" />
     <Compile Include="Logic\Algorhythm\PositionLocator\Base\GenericPositionLocator.cs" />
     <Compile Include="Logic\Algorhythm\PositionLocator\Base\IPositionLocator.cs" />
     <Compile Include="Logic\Algorhythm\PositionLocator\BiasedBinaryPositionLocator.cs" />

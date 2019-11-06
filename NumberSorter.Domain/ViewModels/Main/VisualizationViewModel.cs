@@ -256,6 +256,11 @@ namespace NumberSorter.Domain.ViewModels
         {
             if (_filteredLogActions.Count == 0)
                 return;
+            if (index < 0 || index > MaxActionIndex)
+            {
+                CurrentActionIndex = ComparableUtility.Clamp(CurrentActionIndex, 0, MaxActionIndex);
+                return;
+            }
             var action = _filteredLogActions[index];
             SortState = GetState(action.ActionIndex);
         }
@@ -362,7 +367,7 @@ namespace NumberSorter.Domain.ViewModels
 
         private async Task AnimateSort()
         {
-            while (IsAnimating && CurrentActionIndex != MaxActionIndex)
+            while (IsAnimating && CurrentActionIndex < MaxActionIndex)
             {
                 var delay = TimeSpan.FromSeconds(AnimationDelay);
                 await Task.Delay(delay).ConfigureAwait(false);
