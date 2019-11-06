@@ -13,6 +13,7 @@ namespace NumberSorter.Core.Logic
             _nameDictionary.Add(AlgorhythmType.GnomeSort, "Gnome sort");
             _nameDictionary.Add(AlgorhythmType.BubbleSort, "Bubble sort");
             _nameDictionary.Add(AlgorhythmType.CircleSort, "Circle sort");
+            _nameDictionary.Add(AlgorhythmType.SmoothSort, "Smooth sort");
             _nameDictionary.Add(AlgorhythmType.PancakeSort, "Pancake sort");
             _nameDictionary.Add(AlgorhythmType.OddEvenSort, "Odd even sort");
             _nameDictionary.Add(AlgorhythmType.CocktailShakerSort, "Cocktail shaker sort");
@@ -53,8 +54,8 @@ namespace NumberSorter.Core.Logic
             _nameDictionary.Add(AlgorhythmType.MultiMergeGroupBinaryWindowSort, "Multi merge sort (Grouped runs, Binary search, Window merge sort runs)");
             _nameDictionary.Add(AlgorhythmType.MultiMergeGroupBinaryRecursiveSort, "Multi merge sort (Simple runs, Binary search, Recursive)");
 
-            _nameDictionary.Add(AlgorhythmType.KWayMergeSortGroup, "K multi merge sort (Grouped runs)");
-            _nameDictionary.Add(AlgorhythmType.KWayMergeSortSimple, "K multi merge sort (Simple runs)");
+            _nameDictionary.Add(AlgorhythmType.KWayMergeSortGroup, "K way merge sort (Grouped runs)");
+            _nameDictionary.Add(AlgorhythmType.KWayMergeSortSimple, "K way merge sort (Simple runs)");
 
             _nameDictionary.Add(AlgorhythmType.IntervalMultiMergeGroupLinearSort, "Interval multi merge sort (Simple runs, Linear search)");
             _nameDictionary.Add(AlgorhythmType.IntervalMultiMergeGroupBinarySort, "Interval multi merge sort (Grouped runs, Binary search)");

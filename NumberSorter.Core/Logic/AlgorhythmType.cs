@@ -7,6 +7,7 @@
         GnomeSort,
         BubbleSort,
         CircleSort,
+        SmoothSort,
         PancakeSort,
         OddEvenSort,
         CocktailShakerSort,
