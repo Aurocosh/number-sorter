@@ -62,5 +62,8 @@
         QuickSortRandomPivotCutoffTripleWindow,
 
         AverageBucketSort,
+        MSDRadixSortBase2,
+        MSDRadixSortBase4,
+        MSDRadixSortBase16,
     }
 }
