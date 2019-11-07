@@ -9,14 +9,17 @@ namespace NumberSorter.Core.Logic
         {
             switch (algorhythmType)
             {
+                case AlgorhythmType.BitMSDRadixSort:
+                    return new BitLSDRadixSort();
+                case AlgorhythmType.AverageBucketSort:
+                    return new AverageBucketSort();
+
                 case AlgorhythmType.MSDRadixSortBase2:
                     return new MSDRadixSort(2);
                 case AlgorhythmType.MSDRadixSortBase4:
                     return new MSDRadixSort(4);
                 case AlgorhythmType.MSDRadixSortBase16:
                     return new MSDRadixSort(16);
-                case AlgorhythmType.AverageBucketSort:
-                    return new AverageBucketSort();
 
                 default:
                     return null;

@@ -67,7 +67,9 @@ namespace NumberSorter.Core.Logic
             _nameDictionary.Add(AlgorhythmType.QuickSortRandomPivotCutoffInsertion, "Quick sort (Median of three pivot, Insertion cutoff)");
             _nameDictionary.Add(AlgorhythmType.QuickSortRandomPivotCutoffTripleWindow, "Quick sort (Median of three pivot, Triple window cutoff)");
 
+            _nameDictionary.Add(AlgorhythmType.BitMSDRadixSort, "Bit MSD radix sort");
             _nameDictionary.Add(AlgorhythmType.AverageBucketSort, "Average bucket sort");
+
             _nameDictionary.Add(AlgorhythmType.MSDRadixSortBase2, "MSD radix sort (Base 2, Positive and negative separate)");
             _nameDictionary.Add(AlgorhythmType.MSDRadixSortBase4, "MSD radix sort (Base 4, Positive and negative separate)");
             _nameDictionary.Add(AlgorhythmType.MSDRadixSortBase16, "MSD radix sort (Base 16, Positive and negative separate)");

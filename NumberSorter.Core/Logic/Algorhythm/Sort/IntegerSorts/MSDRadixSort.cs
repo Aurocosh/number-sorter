@@ -45,7 +45,7 @@ namespace NumberSorter.Core.Logic.Algorhythm.IntegerSort
 
             int positiveIndex = startingIndex + negativeLength;
 
-            InvertNumbers(list, startingIndex, negativeLength);
+            IntListUtility.InvertNumbers(list, startingIndex, negativeLength);
 
             int highestPower = FindMaxLog(list, startingIndex, negativeLength, BucketCount);
             Sort(list, startingIndex, negativeLength, BucketCount, highestPower);
@@ -53,15 +53,8 @@ namespace NumberSorter.Core.Logic.Algorhythm.IntegerSort
             highestPower = FindMaxLog(list, positiveIndex, positiveLength, BucketCount);
             Sort(list, positiveIndex, positiveLength, BucketCount, highestPower);
 
-            InvertNumbers(list, startingIndex, negativeLength);
+            IntListUtility.InvertNumbers(list, startingIndex, negativeLength);
             ListUtility.InvertPart(list, startingIndex, negativeLength);
-        }
-
-        private void InvertNumbers(IList<int> list, int startingIndex, int length)
-        {
-            int indexLimit = startingIndex + length;
-            for (int i = 0; i != indexLimit; i++)
-                list[i] = -list[i];
         }
 
         private void Sort(IList<int> array, int startingIndex, int length, int radix, int power)
@@ -104,7 +97,7 @@ namespace NumberSorter.Core.Logic.Algorhythm.IntegerSort
             for (int index = buckets.Length - 1; index >= 0; index--)
             {
                 ref var bucket = ref buckets[index];
-                for (int i = 0; i < bucket.Count; i++)
+                for (int i = bucket.Count - 1; i >= 0; i--)
                 {
                     list[lastIndex--] = bucket[i];
                 }
