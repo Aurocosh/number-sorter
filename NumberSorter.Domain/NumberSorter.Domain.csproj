@@ -94,6 +94,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppColors\ColorSet.cs" />
+    <Compile Include="Container\AccessLoggingList.cs" />
+    <Compile Include="Container\Value\ValueWrite.cs" />
     <Compile Include="Utility\ColorConverter.cs" />
     <Compile Include="ViewModels\ColorSets\ColorSetDialogViewModel.cs" />
     <Compile Include="ViewModels\ColorSets\ColorSetSelectDialogViewModel.cs" />
@@ -106,7 +108,7 @@
     <Compile Include="Container\Actions\Base\LogActionType.cs" />
     <Compile Include="Container\Actions\LogMarker.cs" />
     <Compile Include="Container\Actions\LogSwap.cs" />
-    <Compile Include="Container\LoggingList.cs" />
+    <Compile Include="Container\ComparerLoggingList.cs" />
     <Compile Include="Container\Actions\Base\LogAction.cs" />
     <Compile Include="Container\Actions\LogRead.cs" />
     <Compile Include="Container\Actions\LogWrite.cs" />

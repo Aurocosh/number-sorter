@@ -184,22 +184,42 @@ namespace NumberSorter.Domain.ViewModels
             if (viewModel.DialogResult != true || viewModel.SelectedSortType == null)
                 return;
 
-            var accessTrackingList = new LoggingList<int>(InputNumbers.Values, new IntComparer());
-
             var algorhythmType = viewModel.SelectedSortType.AlgorhythmType;
-            var algorhythm = AlgorhythmFactory.GetAlgorhythm(algorhythmType, accessTrackingList);
+            var integerSort = IntAlgorhythmFactory.GetAlgorhythm(algorhythmType);
 
-            GC.Collect();
-            var stopwatch = Stopwatch.StartNew();
+            if (integerSort != null)
+            {
+                var accessTrackingList = new AccessLoggingList<int>(InputNumbers.Values, new IntComparer());
 
-            algorhythm.Sort(accessTrackingList);
+                GC.Collect();
+                var stopwatch = Stopwatch.StartNew();
 
-            stopwatch.Stop();
-            var elapsedTime = stopwatch.ElapsedMilliseconds;
+                integerSort.Sort(accessTrackingList);
 
-            var algorhythmName = AlgorhythmNamer.GetName(algorhythmType);
-            SortingLog = accessTrackingList.GetSortLog(InputNumbers.Name, InputNumbers.Id, algorhythmName, elapsedTime);
-            SaveLogSummary(SortingLog);
+                stopwatch.Stop();
+                var elapsedTime = stopwatch.ElapsedMilliseconds;
+
+                var algorhythmName = AlgorhythmNamer.GetName(algorhythmType);
+                SortingLog = accessTrackingList.GetSortLog(InputNumbers.Name, InputNumbers.Id, algorhythmName, elapsedTime);
+                SaveLogSummary(SortingLog);
+            }
+            else
+            {
+                var accessTrackingList = new ComparerLoggingList<int>(InputNumbers.Values, new IntComparer());
+                var algorhythm = AlgorhythmFactory.GetAlgorhythm(algorhythmType, accessTrackingList);
+
+                GC.Collect();
+                var stopwatch = Stopwatch.StartNew();
+
+                algorhythm.Sort(accessTrackingList);
+
+                stopwatch.Stop();
+                var elapsedTime = stopwatch.ElapsedMilliseconds;
+
+                var algorhythmName = AlgorhythmNamer.GetName(algorhythmType);
+                SortingLog = accessTrackingList.GetSortLog(InputNumbers.Name, InputNumbers.Id, algorhythmName, elapsedTime);
+                SaveLogSummary(SortingLog);
+            }
         }
 
         private void SortHistory()

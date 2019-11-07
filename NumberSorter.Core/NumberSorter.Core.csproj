@@ -66,6 +66,7 @@
     <Compile Include="Generators\RandomIntegerGenerator.cs" />
     <Compile Include="Generators\RandomPartialSortedIntegerGenerator.cs" />
     <Compile Include="Generators\UnmergedFullySortedGenerator.cs" />
+    <Compile Include="Logic\IntAlgorhythmFactory.cs" />
     <Compile Include="Logic\AlgorhythmNameProvider.cs" />
     <Compile Include="Logic\AlgorhythmFactory.cs" />
     <Compile Include="Logic\AlgorhythmType.cs" />

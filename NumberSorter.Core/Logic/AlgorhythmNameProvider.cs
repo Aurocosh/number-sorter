@@ -66,6 +66,8 @@ namespace NumberSorter.Core.Logic
             _nameDictionary.Add(AlgorhythmType.QuickSortRandomPivotCutoffWindow, "Quick sort (Median of three pivot, Window cutoff)");
             _nameDictionary.Add(AlgorhythmType.QuickSortRandomPivotCutoffInsertion, "Quick sort (Median of three pivot, Insertion cutoff)");
             _nameDictionary.Add(AlgorhythmType.QuickSortRandomPivotCutoffTripleWindow, "Quick sort (Median of three pivot, Triple window cutoff)");
+
+            _nameDictionary.Add(AlgorhythmType.AverageBucketSort, "Average bucket sort");
         }
 
         public static string GetName(AlgorhythmType algorhythmType)

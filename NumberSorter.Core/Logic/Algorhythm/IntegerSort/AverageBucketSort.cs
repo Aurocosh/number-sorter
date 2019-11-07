@@ -20,12 +20,12 @@ namespace NumberSorter.Core.Logic.Algorhythm.IntegerSort
             if (length < 2)
                 return;
 
-            int sum = 0;
+            double sum = 0;
             int indexLimit = startingIndex + length;
             for (int i = startingIndex; i != indexLimit; i++)
                 sum += list[i];
 
-            int average = sum / length;
+            double average = sum / length;
 
             int nextBigElementIndex = indexLimit - 1;
             int nextUnsortedIndex = startingIndex;
@@ -38,6 +38,14 @@ namespace NumberSorter.Core.Logic.Algorhythm.IntegerSort
                 else
                     list.Swap(nextUnsortedIndex, nextBigElementIndex--);
             }
+            int firstLength = nextUnsortedIndex - startingIndex;
+            if (firstLength == length)
+                firstLength = length / 2;
+            int secondLength = length - firstLength;
+            int secondIndex = startingIndex + firstLength;
+
+            Sort(list, startingIndex, firstLength);
+            Sort(list, secondIndex, secondLength);
         }
     }
 }

@@ -13,16 +13,18 @@ namespace NumberSorter.Domain.Tests.SortTests.Base
     public abstract class SortTestsBase
     {
         private IComparer<int> _comparer;
+        private IIntegerSortAlgorhythm _integerSort;
         private readonly ISortAlgorhythm<int> _sort;
-
 
         protected SortTestsBase()
         {
             _comparer = new IntComparer();
+            _integerSort = GetIntAlgorhythm();
             _sort = GetAlgorhythm(_comparer);
         }
 
-        protected abstract ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer);
+        protected virtual IIntegerSortAlgorhythm GetIntAlgorhythm() => null;
+        protected virtual ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer) => null;
 
         [Theory]
         [ClassData(typeof(SortTest_RandomUnsorted_StaticListGenerator))]
@@ -69,7 +71,11 @@ namespace NumberSorter.Domain.Tests.SortTests.Base
         private void TestSort(IList<int> input)
         {
             var result = new List<int>(input);
-            _sort.Sort(result);
+
+            if (_integerSort != null)
+                _integerSort.Sort(result);
+            else
+                _sort.Sort(result);
             bool fullySorted = ListUtility.IsSorted(result, _comparer);
             var message = GetResultMessage(fullySorted, input, result);
             Assert.True(fullySorted, message);

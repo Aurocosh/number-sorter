@@ -60,5 +60,7 @@
         QuickSortRandomPivotCutoffWindow,
         QuickSortRandomPivotCutoffInsertion,
         QuickSortRandomPivotCutoffTripleWindow,
+
+        AverageBucketSort,
     }
 }
