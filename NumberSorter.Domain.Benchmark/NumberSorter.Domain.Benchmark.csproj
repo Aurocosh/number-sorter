@@ -228,6 +228,9 @@
     <Compile Include="Benchmarks\IntegerSorts\AverageBucketSortBenchmarks.cs" />
     <Compile Include="Benchmarks\IntegerSorts\BitMSDRadixSort\BitMSDOptimizedRadixSortBenchmarks.cs" />
     <Compile Include="Benchmarks\IntegerSorts\BitMSDRadixSort\BitMSDRadixSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\IntegerSorts\LSDRadixSort\LSDRadixSortBase16Benchmarks.cs" />
+    <Compile Include="Benchmarks\IntegerSorts\LSDRadixSort\LSDRadixSortBase32Benchmarks.cs" />
+    <Compile Include="Benchmarks\IntegerSorts\LSDRadixSort\LSDRadixSortBase4Benchmarks.cs" />
     <Compile Include="Benchmarks\IntegerSorts\MSDRadixSort\MSDRadixSortBase32Benchmarks.cs" />
     <Compile Include="Benchmarks\IntegerSorts\MSDRadixSort\MSDRadixSortBase16Benchmarks.cs" />
     <Compile Include="Benchmarks\IntegerSorts\MSDRadixSort\MSDRadixSortBase4Benchmarks.cs" />
