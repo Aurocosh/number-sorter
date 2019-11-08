@@ -62,8 +62,10 @@
         QuickSortRandomPivotCutoffTripleWindow,
 
         BitLSDRadixSort,
-        BitMSDRadixSort,
         BitLSDOptimizedRadixSort,
+
+        BitMSDRadixSort,
+        BitMSDOptimizedRadixSort,
 
         AverageBucketSort,
 

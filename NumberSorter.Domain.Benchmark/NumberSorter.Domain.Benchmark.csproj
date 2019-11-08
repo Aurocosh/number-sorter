@@ -223,9 +223,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Benchmarks\IntegerSorts\BitLSDOptimizedRadixSortBenchmarks.cs" />
-    <Compile Include="Benchmarks\IntegerSorts\BitLSDRadixSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\IntegerSorts\BitLSDRadixSort\BitLSDOptimizedRadixSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\IntegerSorts\BitLSDRadixSort\BitLSDRadixSortBenchmarks.cs" />
     <Compile Include="Benchmarks\IntegerSorts\AverageBucketSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\IntegerSorts\BitMSDRadixSort\BitMSDOptimizedRadixSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\IntegerSorts\BitMSDRadixSort\BitMSDRadixSortBenchmarks.cs" />
     <Compile Include="Benchmarks\IntegerSorts\MSDRadixSort\MSDRadixSortBase32Benchmarks.cs" />
     <Compile Include="Benchmarks\IntegerSorts\MSDRadixSort\MSDRadixSortBase16Benchmarks.cs" />
     <Compile Include="Benchmarks\IntegerSorts\MSDRadixSort\MSDRadixSortBase4Benchmarks.cs" />

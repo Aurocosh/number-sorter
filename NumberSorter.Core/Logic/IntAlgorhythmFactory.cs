@@ -12,10 +12,13 @@ namespace NumberSorter.Core.Logic
             {
                 case AlgorhythmType.BitLSDRadixSort:
                     return new BitLSDRadixSort();
-                case AlgorhythmType.BitMSDRadixSort:
-                    return new BitMSDRadixSort();
                 case AlgorhythmType.BitLSDOptimizedRadixSort:
                     return new BitLSDOptimizedRadixSort(new LocalSignSeparator());
+
+                case AlgorhythmType.BitMSDRadixSort:
+                    return new BitMSDRadixSort();
+                case AlgorhythmType.BitMSDOptimizedRadixSort:
+                    return new BitMSDOptimizedRadixSort(new LocalSignSeparator());
 
                 case AlgorhythmType.AverageBucketSort:
                     return new AverageBucketSort();
