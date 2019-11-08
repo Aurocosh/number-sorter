@@ -67,6 +67,7 @@
         BitMSDRadixSort,
         BitMSDOptimizedRadixSort,
 
+        AmericanFlagSort,
         AverageBucketSort,
 
         LSDRadixSortBase2,

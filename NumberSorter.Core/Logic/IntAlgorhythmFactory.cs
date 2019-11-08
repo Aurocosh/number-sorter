@@ -10,6 +10,11 @@ namespace NumberSorter.Core.Logic
         {
             switch (algorhythmType)
             {
+                case AlgorhythmType.AmericanFlagSort:
+                    return new AmericanFlagSort(10, new LocalSignSeparator());
+                case AlgorhythmType.AverageBucketSort:
+                    return new AverageBucketSort();
+
                 case AlgorhythmType.BitLSDRadixSort:
                     return new BitLSDRadixSort();
                 case AlgorhythmType.BitLSDOptimizedRadixSort:
@@ -19,9 +24,6 @@ namespace NumberSorter.Core.Logic
                     return new BitMSDRadixSort();
                 case AlgorhythmType.BitMSDOptimizedRadixSort:
                     return new BitMSDOptimizedRadixSort(new LocalSignSeparator());
-
-                case AlgorhythmType.AverageBucketSort:
-                    return new AverageBucketSort();
 
                 case AlgorhythmType.LSDRadixSortBase2:
                     return new LSDRadixSort(2, new LocalSignSeparator());

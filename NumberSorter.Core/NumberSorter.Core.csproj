@@ -71,12 +71,13 @@
     <Compile Include="Logic\Algorhythm\SortBitMaskGenerator\Base\ISortBitMaskGenerator.cs" />
     <Compile Include="Logic\Algorhythm\SortBitMaskGenerator\OnesAndZerosSortBitMaskGenerator.cs" />
     <Compile Include="Logic\Algorhythm\SortBitMaskGenerator\ZerosSortBitMaskGenerator.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\IntegerSorts\AmericanFlagSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\IntegerSorts\BitLSDRadixSort\BitLSDOptimizedRadixSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\IntegerSorts\BitMSDRadixSort\BitMSDOptimizedRadixSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\IntegerSorts\BitMSDRadixSort\BitMSDRadixSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\IntegerSorts\BitLSDRadixSort\BitLSDRadixSort.cs" />
-    <Compile Include="Logic\Algorhythm\Sort\IntegerSorts\LSDRadixSort.cs" />
-    <Compile Include="Logic\Algorhythm\Sort\IntegerSorts\MSDRadixSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\IntegerSorts\RadixSort\LSDRadixSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\IntegerSorts\RadixSort\MSDRadixSort.cs" />
     <Compile Include="Logic\IntAlgorhythmFactory.cs" />
     <Compile Include="Logic\AlgorhythmNameProvider.cs" />
     <Compile Include="Logic\AlgorhythmFactory.cs" />

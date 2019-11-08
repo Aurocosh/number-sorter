@@ -13,6 +13,31 @@ namespace NumberSorter.Core.Logic.Utility
                 list[i] = -list[i];
         }
 
+        public static int FindMinimum(IList<int> list, int startingIndex, int length)
+        {
+            int minimum = int.MaxValue;
+            int indexLimit = startingIndex + length;
+            for (int i = 0; i != indexLimit; i++)
+                minimum = Math.Min(minimum, list[i]);
+            return minimum;
+        }
+
+        public static int FindMaximum(IList<int> list, int startingIndex, int length)
+        {
+            int maximum = int.MinValue;
+            int indexLimit = startingIndex + length;
+            for (int i = 0; i != indexLimit; i++)
+                maximum = Math.Max(maximum, list[i]);
+            return maximum;
+        }
+
+        public static void AddValue(IList<int> list, int startingIndex, int length, int value)
+        {
+            int indexLimit = startingIndex + length;
+            for (int i = 0; i != indexLimit; i++)
+                list[i] += value;
+        }
+
         public static void InvertPartAndNumbers(IList<int> list, int startingIndex, int length)
         {
             int leftIndex = startingIndex;

@@ -73,6 +73,7 @@ namespace NumberSorter.Core.Logic
             _nameDictionary.Add(AlgorhythmType.BitMSDRadixSort, "Bit MSD radix sort");
             _nameDictionary.Add(AlgorhythmType.BitMSDOptimizedRadixSort, "Bit MSD radix sort (Optimized)");
 
+            _nameDictionary.Add(AlgorhythmType.AmericanFlagSort, "American flag sort");
             _nameDictionary.Add(AlgorhythmType.AverageBucketSort, "Average bucket sort");
 
             _nameDictionary.Add(AlgorhythmType.LSDRadixSortBase2, "LSD radix sort (Base 2, Positive and negative separate)");

@@ -223,6 +223,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Benchmarks\IntegerSorts\AmericanFlag\AmericanFlagSort1024Benchmarks.cs" />
+    <Compile Include="Benchmarks\IntegerSorts\AmericanFlag\AmericanFlagSort64Benchmarks.cs" />
+    <Compile Include="Benchmarks\IntegerSorts\AmericanFlag\AmericanFlagSort256Benchmarks.cs" />
     <Compile Include="Benchmarks\IntegerSorts\BitLSDRadixSort\BitLSDOptimizedRadixSortBenchmarks.cs" />
     <Compile Include="Benchmarks\IntegerSorts\BitLSDRadixSort\BitLSDRadixSortBenchmarks.cs" />
     <Compile Include="Benchmarks\IntegerSorts\AverageBucketSortBenchmarks.cs" />
