@@ -72,6 +72,7 @@
     <Compile Include="Logic\Algorhythm\SortBitMaskGenerator\OnesAndZerosSortBitMaskGenerator.cs" />
     <Compile Include="Logic\Algorhythm\SortBitMaskGenerator\ZerosSortBitMaskGenerator.cs" />
     <Compile Include="Logic\Algorhythm\Sort\IntegerSorts\BitLSDOptimizedRadixSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\IntegerSorts\BitMSDRadixSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\IntegerSorts\BitLSDRadixSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\IntegerSorts\MSDRadixSort.cs" />
     <Compile Include="Logic\IntAlgorhythmFactory.cs" />
