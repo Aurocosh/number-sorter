@@ -1,4 +1,5 @@
 ﻿using NumberSorter.Core.Algorhythm;
+using NumberSorter.Core.Logic.Algorhythm.SignSeparator.Base;
 using NumberSorter.Core.Logic.Utility;
 using System;
 using System.Collections.Generic;
@@ -11,15 +12,12 @@ namespace NumberSorter.Core.Logic.Algorhythm.IntegerSort
     public class MSDRadixSort : IIntegerSortAlgorhythm
     {
         private int BucketCount { get; }
+        private ISignSeparatorAlgothythm SignSeparator { get; }
 
-        public MSDRadixSort()
-        {
-            BucketCount = 4;
-        }
-
-        public MSDRadixSort(int bucketCount)
+        public MSDRadixSort(int bucketCount, ISignSeparatorAlgothythm signSeparator)
         {
             BucketCount = bucketCount;
+            SignSeparator = signSeparator;
         }
 
         public void Sort(IList<int> list)
@@ -29,20 +27,8 @@ namespace NumberSorter.Core.Logic.Algorhythm.IntegerSort
 
         public void Sort(IList<int> list, int startingIndex, int length)
         {
-            int nextPositiveIndex = startingIndex + length - 1;
-            int nextUnsortedIndex = startingIndex;
-            int elementsLeft = length;
-            while (elementsLeft-- > 0)
-            {
-                var nextUnsorted = list[nextUnsortedIndex];
-                if (nextUnsorted < 0)
-                    nextUnsortedIndex++;
-                else
-                    list.Swap(nextUnsortedIndex, nextPositiveIndex--);
-            }
-            int negativeLength = nextUnsortedIndex - startingIndex;
+            int negativeLength = SignSeparator.Separate(list, startingIndex, length);
             int positiveLength = length - negativeLength;
-
             int positiveIndex = startingIndex + negativeLength;
 
             IntListUtility.InvertNumbers(list, startingIndex, negativeLength);
@@ -53,8 +39,7 @@ namespace NumberSorter.Core.Logic.Algorhythm.IntegerSort
             highestPower = FindMaxLog(list, positiveIndex, positiveLength, BucketCount);
             Sort(list, positiveIndex, positiveLength, BucketCount, highestPower);
 
-            IntListUtility.InvertNumbers(list, startingIndex, negativeLength);
-            ListUtility.InvertPart(list, startingIndex, negativeLength);
+            IntListUtility.InvertPartAndNumbers(list, startingIndex, negativeLength);
         }
 
         private void Sort(IList<int> array, int startingIndex, int length, int radix, int power)

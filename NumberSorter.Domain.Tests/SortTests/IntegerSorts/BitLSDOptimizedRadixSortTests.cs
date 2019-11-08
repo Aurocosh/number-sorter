@@ -5,11 +5,11 @@ using NumberSorter.Domain.Tests.SortTests.Base;
 
 namespace NumberSorter.Domain.Tests.SortTests
 {
-    public class MSDRadixSortTests : SortTestsBase
+    public class BitLSDOptimizedRadixSortTests : SortTestsBase
     {
         protected override IIntegerSortAlgorhythm GetIntAlgorhythm()
         {
-            return new MSDRadixSort(4, new LocalSignSeparator());
+            return new BitLSDOptimizedRadixSort(new LocalSignSeparator());
         }
     }
 }

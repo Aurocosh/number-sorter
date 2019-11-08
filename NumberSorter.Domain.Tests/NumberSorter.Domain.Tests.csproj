@@ -78,7 +78,8 @@
   <ItemGroup>
     <Compile Include="RotationTests\IntegerGenerators\Dynamic\RotationTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator.cs" />
     <Compile Include="RotationTests\InversionInPlaceRotationTests.cs" />
-    <Compile Include="SortTests\IntegerSorts\BitMSDRadixSortTests.cs" />
+    <Compile Include="SortTests\IntegerSorts\BitLSDOptimizedRadixSortTests.cs" />
+    <Compile Include="SortTests\IntegerSorts\BitLSDRadixSortTests.cs" />
     <Compile Include="SortTests\IntegerSorts\MSDRadixSortTests.cs" />
     <Compile Include="SortTests\IntegerSorts\AverageBucketSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\SmoothSortTests.cs" />

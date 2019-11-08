@@ -66,6 +66,9 @@
     <Compile Include="Generators\RandomIntegerGenerator.cs" />
     <Compile Include="Generators\RandomPartialSortedIntegerGenerator.cs" />
     <Compile Include="Generators\UnmergedFullySortedGenerator.cs" />
+    <Compile Include="Logic\Algorhythm\SignSeparator\Base\ISignSeparatorAlgothythm.cs" />
+    <Compile Include="Logic\Algorhythm\SignSeparator\LocalSignSeparator.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\IntegerSorts\BitLSDOptimizedRadixSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\IntegerSorts\BitLSDRadixSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\IntegerSorts\MSDRadixSort.cs" />
     <Compile Include="Logic\IntAlgorhythmFactory.cs" />

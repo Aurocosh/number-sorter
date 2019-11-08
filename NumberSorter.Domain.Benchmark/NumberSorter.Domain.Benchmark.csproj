@@ -223,6 +223,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Benchmarks\IntegerSorts\BitLSDOptimizedRadixSortBenchmarks.cs" />
     <Compile Include="Benchmarks\IntegerSorts\BitMSDRadixSortBenchmarks.cs" />
     <Compile Include="Benchmarks\IntegerSorts\AverageBucketSortBenchmarks.cs" />
     <Compile Include="Benchmarks\IntegerSorts\MSDRadixSort\MSDRadixSortBase32Benchmarks.cs" />

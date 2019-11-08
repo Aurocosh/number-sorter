@@ -7,11 +7,11 @@ using NumberSorter.Core.Logic.Algorhythm.SignSeparator;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks
 {
-    public class MSDRadixSortBase4Benchmarks : SortBenchmarks
+    public class BitLSDOptimizedRadixSortBenchmarks : SortBenchmarks
     {
         protected override IIntegerSortAlgorhythm GetIntAlgorhythm()
         {
-            return new MSDRadixSort(4, new LocalSignSeparator());
+            return new BitLSDOptimizedRadixSort(new LocalSignSeparator());
         }
     }
 }
