@@ -1,21 +1,26 @@
 ﻿using NumberSorter.Core.Algorhythm;
 using NumberSorter.Core.Logic.Algorhythm.SignSeparator.Base;
+using NumberSorter.Core.Logic.Algorhythm.SortBitMaskGenerator;
+using NumberSorter.Core.Logic.Algorhythm.SortBitMaskGenerator.Base;
 using NumberSorter.Core.Logic.Utility;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NumberSorter.Core.Logic.Algorhythm.IntegerSort
 {
     public class BitLSDOptimizedRadixSort : IIntegerSortAlgorhythm
     {
         private ISignSeparatorAlgothythm SignSeparator { get; }
+        private ISortBitMaskGenerator SortBitMaskGenerator { get; }
 
         public BitLSDOptimizedRadixSort(ISignSeparatorAlgothythm signSeparator)
         {
             SignSeparator = signSeparator;
+            SortBitMaskGenerator = new ZerosSortBitMaskGenerator();
+        }
+
+        public BitLSDOptimizedRadixSort(ISignSeparatorAlgothythm signSeparator, ISortBitMaskGenerator sortBitMaskGenerator) : this(signSeparator)
+        {
+            SortBitMaskGenerator = sortBitMaskGenerator;
         }
 
         public void Sort(IList<int> list)
@@ -39,12 +44,10 @@ namespace NumberSorter.Core.Logic.Algorhythm.IntegerSort
 
         private void SortInts(IList<int> list, int startingIndex, int length)
         {
-            int mask = 0;
-            int indexLimit = startingIndex + length;
-            for (int listIndex = startingIndex; listIndex != indexLimit; listIndex++)
-                mask |= list[listIndex];
+            int mask = SortBitMaskGenerator.GenerateMask(list, startingIndex, length);
 
             int[] buffer = new int[length];
+            int indexLimit = startingIndex + length;
             for (int shift = 31; shift != 0; --shift)
             {
                 bool needToSort = (mask << shift) < 0;
