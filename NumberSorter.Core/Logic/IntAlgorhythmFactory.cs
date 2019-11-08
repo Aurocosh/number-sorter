@@ -23,6 +23,13 @@ namespace NumberSorter.Core.Logic
                 case AlgorhythmType.AverageBucketSort:
                     return new AverageBucketSort();
 
+                case AlgorhythmType.LSDRadixSortBase2:
+                    return new LSDRadixSort(2, new LocalSignSeparator());
+                case AlgorhythmType.LSDRadixSortBase4:
+                    return new LSDRadixSort(4, new LocalSignSeparator());
+                case AlgorhythmType.LSDRadixSortBase16:
+                    return new LSDRadixSort(16, new LocalSignSeparator());
+
                 case AlgorhythmType.MSDRadixSortBase2:
                     return new MSDRadixSort(2, new LocalSignSeparator());
                 case AlgorhythmType.MSDRadixSortBase4:

@@ -1,15 +1,15 @@
 ﻿using NumberSorter.Core.Algorhythm;
-using NumberSorter.Domain.Benchmark.Benchmarks.Base;
 using NumberSorter.Core.Logic.Algorhythm.IntegerSort;
 using NumberSorter.Core.Logic.Algorhythm.SignSeparator;
+using NumberSorter.Domain.Tests.SortTests.Base;
 
-namespace NumberSorter.Domain.Benchmark.Benchmarks
+namespace NumberSorter.Domain.Tests.SortTests
 {
-    public class BitMSDOptimizedRadixSortBenchmarks : SortBenchmarks
+    public class LSDRadixSortTests : SortTestsBase
     {
         protected override IIntegerSortAlgorhythm GetIntAlgorhythm()
         {
-            return new BitMSDOptimizedRadixSort(new LocalSignSeparator());
+            return new LSDRadixSort(4, new LocalSignSeparator());
         }
     }
 }

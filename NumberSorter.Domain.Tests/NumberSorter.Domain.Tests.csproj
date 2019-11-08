@@ -82,6 +82,7 @@
     <Compile Include="SortTests\IntegerSorts\BitMSDRadixSort\BitMSDOptimizedRadixSortTests.cs" />
     <Compile Include="SortTests\IntegerSorts\BitLSDRadixSort\BitLSDOptimizedRadixSortTests.cs" />
     <Compile Include="SortTests\IntegerSorts\BitLSDRadixSort\BitLSDRadixSortTests.cs" />
+    <Compile Include="SortTests\IntegerSorts\LSDRadixSortTests.cs" />
     <Compile Include="SortTests\IntegerSorts\MSDRadixSortTests.cs" />
     <Compile Include="SortTests\IntegerSorts\AverageBucketSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\SmoothSortTests.cs" />

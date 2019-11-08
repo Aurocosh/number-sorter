@@ -75,6 +75,10 @@ namespace NumberSorter.Core.Logic
 
             _nameDictionary.Add(AlgorhythmType.AverageBucketSort, "Average bucket sort");
 
+            _nameDictionary.Add(AlgorhythmType.LSDRadixSortBase2, "LSD radix sort (Base 2, Positive and negative separate)");
+            _nameDictionary.Add(AlgorhythmType.LSDRadixSortBase4, "LSD radix sort (Base 4, Positive and negative separate)");
+            _nameDictionary.Add(AlgorhythmType.LSDRadixSortBase16, "LSD radix sort (Base 16, Positive and negative separate)");
+
             _nameDictionary.Add(AlgorhythmType.MSDRadixSortBase2, "MSD radix sort (Base 2, Positive and negative separate)");
             _nameDictionary.Add(AlgorhythmType.MSDRadixSortBase4, "MSD radix sort (Base 4, Positive and negative separate)");
             _nameDictionary.Add(AlgorhythmType.MSDRadixSortBase16, "MSD radix sort (Base 16, Positive and negative separate)");

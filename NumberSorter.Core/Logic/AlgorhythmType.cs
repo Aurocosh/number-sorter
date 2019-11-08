@@ -69,6 +69,10 @@
 
         AverageBucketSort,
 
+        LSDRadixSortBase2,
+        LSDRadixSortBase4,
+        LSDRadixSortBase16,
+
         MSDRadixSortBase2,
         MSDRadixSortBase4,
         MSDRadixSortBase16,

@@ -5,11 +5,11 @@ using NumberSorter.Core.Logic.Algorhythm.SignSeparator;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks
 {
-    public class BitMSDOptimizedRadixSortBenchmarks : SortBenchmarks
+    public class LSDRadixSortBase32Benchmarks : SortBenchmarks
     {
         protected override IIntegerSortAlgorhythm GetIntAlgorhythm()
         {
-            return new BitMSDOptimizedRadixSort(new LocalSignSeparator());
+            return new LSDRadixSort(32, new LocalSignSeparator());
         }
     }
 }
