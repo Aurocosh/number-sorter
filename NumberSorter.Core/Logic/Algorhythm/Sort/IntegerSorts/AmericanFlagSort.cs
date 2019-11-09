@@ -41,11 +41,9 @@ namespace NumberSorter.Core.Logic.Algorhythm.IntegerSort
 
         private int GetDivisor(IList<int> list, int startingIndex, int length)
         {
-            int maximum = IntListUtility.FindMaximum(list, startingIndex, length);
-            int maxDigits = (int)(Math.Log(maximum) / Math.Log(BucketCount));
-
+            int maxLog = IntListUtility.FindMaxLog(list, startingIndex, length, BucketCount);
             int divisor = 1;
-            for (int i = 0; i < maxDigits; i++)
+            for (int i = 0; i < maxLog; i++)
                 divisor *= BucketCount;
             return divisor;
         }

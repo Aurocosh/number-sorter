@@ -31,6 +31,12 @@ namespace NumberSorter.Core.Logic.Utility
             return maximum;
         }
 
+        public static int FindMaxLog(IList<int> list, int startingIndex, int length, int baseValue)
+        {
+            int maximum = FindMaximum(list, startingIndex, length);
+            return (int)(Math.Log(maximum) / Math.Log(baseValue));
+        }
+
         public static void AddValue(IList<int> list, int startingIndex, int length, int value)
         {
             int indexLimit = startingIndex + length;
