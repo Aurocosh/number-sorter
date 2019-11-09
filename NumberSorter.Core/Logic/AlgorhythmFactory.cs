@@ -123,6 +123,11 @@ namespace NumberSorter.Core.Logic
                 case AlgorhythmType.QuickSortRandomPivotCutoffTripleWindow:
                     return new QuickSort<T>(comparer, new RandomPivotSelectorFactory(new Random()), new TripleWindowMergeSortFactory(), 32);
 
+                case AlgorhythmType.QuickSortLLRandomPivot:
+                    return new QuickSortLL<T>(comparer, new RandomPivotSelectorFactory(new Random()), new InsertionSortFactory(), 0);
+                case AlgorhythmType.QuickSortLLMedianOfThree:
+                    return new QuickSortLL<T>(comparer, new MedianOfThreePivotSelectorFactory(), new InsertionSortFactory(), 0);
+
                 default:
                     return null;
             }

@@ -61,6 +61,9 @@
         QuickSortRandomPivotCutoffInsertion,
         QuickSortRandomPivotCutoffTripleWindow,
 
+        QuickSortLLRandomPivot,
+        QuickSortLLMedianOfThree,
+
         BitLSDRadixSort,
         BitLSDOptimizedRadixSort,
 

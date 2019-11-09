@@ -7,13 +7,13 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class QuickSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
+    public class QuickSortLL<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
     {
         private int CutoffValue { get; }
         private IPivotSelector<T> PivotSelector { get; }
         private IPartialSortAlgorhythm<T> CutoffAlgorhythm { get; }
 
-        public QuickSort(IComparer<T> comparer, IPivotSelectorFactory pivotSelectorFactory, IPartialSortFactory cutoffSortFactory, int cutoffValue) : base(comparer)
+        public QuickSortLL(IComparer<T> comparer, IPivotSelectorFactory pivotSelectorFactory, IPartialSortFactory cutoffSortFactory, int cutoffValue) : base(comparer)
         {
             CutoffValue = cutoffValue;
             PivotSelector = pivotSelectorFactory.GetPivotSelector(comparer);
@@ -32,9 +32,6 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
         private void SortRange(IList<T> list, int startingIndex, int lastIndex)
         {
-            if (startingIndex >= lastIndex)
-                return;
-
             int runRange = lastIndex - startingIndex + 1;
             if (runRange < CutoffValue)
             {
@@ -42,26 +39,31 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 return;
             }
 
-            int pivotIndex = PivotSelector.SelectPivot(list, startingIndex, lastIndex);
-            var pivot = list[pivotIndex];
-
-            int leftIndex = startingIndex;
-            int rightIndex = lastIndex;
-
-            while (leftIndex <= rightIndex)
+            if (startingIndex < lastIndex)
             {
-                while (Compare(list[leftIndex], pivot) < 0)
-                    leftIndex++;
-                while (Compare(list[rightIndex], pivot) > 0)
-                    rightIndex--;
-                if (leftIndex <= rightIndex)
-                    list.Swap(leftIndex++, rightIndex--);
+                int partitionIndex = Partition(list, startingIndex, lastIndex);
+                SortRange(list, startingIndex, partitionIndex - 1);
+                SortRange(list, partitionIndex + 1, lastIndex);
             }
+        }
 
-            if (startingIndex < rightIndex)
-                SortRange(list, startingIndex, rightIndex);
-            if (leftIndex < lastIndex)
-                SortRange(list, leftIndex, lastIndex);
+        private int Partition(IList<T> list, int startingIndex, int lastIndex)
+        {
+            int pivotIndex = PivotSelector.SelectPivot(list, startingIndex, lastIndex);
+            T pivot = list[pivotIndex];
+            list.Swap(pivotIndex, lastIndex);
+
+            int partitionIndex = startingIndex;
+            for (int index = startingIndex; index < lastIndex; index++)
+            {
+                if (Compare(list[index], pivot) < 0)
+                {
+                    list.Swap(partitionIndex, index);
+                    partitionIndex++;
+                }
+            }
+            list.Swap(partitionIndex, lastIndex);
+            return partitionIndex;
         }
     }
 }
