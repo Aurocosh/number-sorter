@@ -128,6 +128,11 @@ namespace NumberSorter.Core.Logic
                 case AlgorhythmType.QuickSortLLMedianOfThree:
                     return new QuickSortLL<T>(comparer, new MedianOfThreePivotSelectorFactory(), new InsertionSortFactory(), 0);
 
+                case AlgorhythmType.DualPivotQuickSort:
+                    return new DualPivotQuickSort<T>(comparer, new InsertionSortFactory(), 0);
+                case AlgorhythmType.DualPivotQuickSortCutoffInsertion:
+                    return new DualPivotQuickSort<T>(comparer, new InsertionSortFactory(), 32);
+
                 default:
                     return null;
             }

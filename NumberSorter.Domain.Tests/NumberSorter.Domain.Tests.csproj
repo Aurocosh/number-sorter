@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="RotationTests\IntegerGenerators\Dynamic\RotationTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator.cs" />
     <Compile Include="RotationTests\InversionInPlaceRotationTests.cs" />
+    <Compile Include="SortTests\ComparassionSorts\DualPivotQuickSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\QuickSortLL\QuickSortLLMedianThreePivotTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\QuickSortLL\QuickSortLLRandomPivotTests.cs" />
     <Compile Include="SortTests\IntegerSorts\AmericanFlagSortTests.cs" />

@@ -223,6 +223,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Benchmarks\ComparassionSorts\DualPivotQuickSort\DualPivotQuickSortCutoffInsertionBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\DualPivotQuickSort\DualPivotQuickSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\QuickSortLL\QuickSortLLMedianThreePivotBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\QuickSortLL\QuickSortLLRandomPivotBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\QuickSortLL\QuickSortLLRandomPivotCutoffInsertionBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\QuickSort\QuickSortRandomPivotCutoffInsertionBenchmarks.cs" />
     <Compile Include="Benchmarks\IntegerSorts\AmericanFlag\AmericanFlagSort1024Benchmarks.cs" />
     <Compile Include="Benchmarks\IntegerSorts\AmericanFlag\AmericanFlagSort64Benchmarks.cs" />
