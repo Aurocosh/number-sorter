@@ -23,19 +23,21 @@ namespace NumberSorter.Core.Logic.Algorhythm.IntegerSort
             if (shift > 31)
                 return;
 
-            int nextBigIndex = startingIndex + length - 1;
-            int nextUnsortedIndex = startingIndex;
-            int unsortedElementCount = length;
-            while (unsortedElementCount-- > 0)
+            int lastIndex = startingIndex + length - 1;
+            int leftIndex = startingIndex;
+            int rightIndex = lastIndex;
+
+            while (leftIndex <= rightIndex)
             {
-                var nextUnsorted = list[nextUnsortedIndex];
-                bool move = (nextUnsorted << shift) >= 0;
-                if (shift == 0 ? !move : move)
-                    nextUnsortedIndex++;
-                else
-                    list.Swap(nextUnsortedIndex, nextBigIndex--);
+                while (leftIndex < lastIndex && (shift == 0 ? (list[leftIndex] << shift) < 0 : (list[leftIndex] << shift) >= 0))
+                    leftIndex++;
+                while (rightIndex >= startingIndex && (shift == 0 ? (list[rightIndex] << shift) >= 0 : (list[rightIndex] << shift) < 0))
+                    rightIndex--;
+                if (leftIndex <= rightIndex)
+                    list.Swap(leftIndex++, rightIndex--);
             }
-            int leftLength = nextUnsortedIndex - startingIndex;
+
+            int leftLength = leftIndex - startingIndex;
             int rightLength = length - leftLength;
 
             Sort(list, startingIndex, leftLength, shift + 1);
