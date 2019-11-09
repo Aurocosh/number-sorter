@@ -223,6 +223,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Benchmarks\ComparassionSorts\QuickSort\QuickSortRandomPivotCutoffInsertionBenchmarks.cs" />
     <Compile Include="Benchmarks\IntegerSorts\AmericanFlag\AmericanFlagSort1024Benchmarks.cs" />
     <Compile Include="Benchmarks\IntegerSorts\AmericanFlag\AmericanFlagSort64Benchmarks.cs" />
     <Compile Include="Benchmarks\IntegerSorts\AmericanFlag\AmericanFlagSort256Benchmarks.cs" />

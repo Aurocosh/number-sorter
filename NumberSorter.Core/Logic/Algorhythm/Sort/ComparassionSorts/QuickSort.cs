@@ -25,37 +25,38 @@ namespace NumberSorter.Core.Logic.Algorhythm
             SortRange(list, 0, list.Count - 1);
         }
 
-        private void SortRange(IList<T> list, int firstIndex, int lastIndex)
+        private void SortRange(IList<T> list, int startingIndex, int lastIndex)
         {
-            if (firstIndex >= lastIndex)
+            if (startingIndex >= lastIndex)
                 return;
 
-            int runRange = lastIndex - firstIndex + 1;
+            int runRange = lastIndex - startingIndex + 1;
             if (runRange < CutoffValue)
             {
-                CutoffAlgorhythm.Sort(list, firstIndex, runRange);
+                CutoffAlgorhythm.Sort(list, startingIndex, runRange);
                 return;
             }
 
-            int pivotIndex = PivotSelector.SelectPivot(list, firstIndex, lastIndex);
+            int pivotIndex = PivotSelector.SelectPivot(list, startingIndex, lastIndex);
             var pivot = list[pivotIndex];
 
-            list.Swap(firstIndex, pivotIndex);
-            pivotIndex = firstIndex;
-            int nextBigElementIndex = lastIndex;
-            int nextUnsortedIndex = pivotIndex + 1;
-            int unsortedElementCount = lastIndex - firstIndex;
-            while (unsortedElementCount-- > 0)
+            int leftIndex = startingIndex;
+            int rightIndex = lastIndex;
+
+            while (leftIndex <= rightIndex)
             {
-                var nextUnsorted = list[nextUnsortedIndex];
-                var comparrassion = Compare(pivot, nextUnsorted);
-                if (comparrassion >= 0)
-                    list.Swap(pivotIndex++, nextUnsortedIndex++);
-                else
-                    list.Swap(nextUnsortedIndex, nextBigElementIndex--);
+                while (Compare(list[leftIndex], pivot) < 0)
+                    leftIndex++;
+                while (Compare(list[rightIndex], pivot) > 0)
+                    rightIndex--;
+                if (leftIndex <= rightIndex)
+                    list.Swap(leftIndex++, rightIndex--);
             }
-            SortRange(list, firstIndex, pivotIndex - 1);
-            SortRange(list, pivotIndex + 1, lastIndex);
+
+            if (startingIndex < rightIndex)
+                SortRange(list, startingIndex, rightIndex);
+            if (leftIndex < lastIndex)
+                SortRange(list, leftIndex, lastIndex);
         }
     }
 }
