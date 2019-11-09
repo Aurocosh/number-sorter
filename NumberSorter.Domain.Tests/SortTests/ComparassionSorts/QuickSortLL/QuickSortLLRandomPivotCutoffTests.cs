@@ -7,11 +7,11 @@ using NumberSorter.Domain.Tests.SortTests.Base;
 
 namespace NumberSorter.Domain.Tests.SortTests
 {
-    public class QuickSortRandomPivotCutoffTests : SortTestsBase
+    public class QuickSortLLRandomPivotCutoffTests : SortTestsBase
     {
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {
-            return new QuickSort<int>(comparer, new RandomPivotSelectorFactory(TestsRandomProvider.Random), new InsertionSortFactory(), 32);
+            return new QuickSortLL<int>(comparer, new RandomPivotSelectorFactory(TestsRandomProvider.Random), new InsertionSortFactory(), 32);
         }
     }
 }

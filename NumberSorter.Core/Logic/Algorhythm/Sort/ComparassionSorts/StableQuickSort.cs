@@ -7,13 +7,13 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class QuickSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
+    public class StableQuickSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
     {
         private int CutoffValue { get; }
         private IPivotSelector<T> PivotSelector { get; }
         private IPartialSortAlgorhythm<T> CutoffAlgorhythm { get; }
 
-        public QuickSort(IComparer<T> comparer, IPivotSelectorFactory pivotSelectorFactory, IPartialSortFactory cutoffSortFactory, int cutoffValue) : base(comparer)
+        public StableQuickSort(IComparer<T> comparer, IPivotSelectorFactory pivotSelectorFactory, IPartialSortFactory cutoffSortFactory, int cutoffValue) : base(comparer)
         {
             CutoffValue = cutoffValue;
             PivotSelector = pivotSelectorFactory.GetPivotSelector(comparer);
@@ -42,26 +42,37 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 return;
             }
 
+            var buffer = new T[runRange];
+
             int pivotIndex = PivotSelector.SelectPivot(list, startingIndex, lastIndex);
             var pivot = list[pivotIndex];
 
-            int leftIndex = startingIndex;
-            int rightIndex = lastIndex;
+            list.Swap(startingIndex, pivotIndex);
 
-            while (leftIndex <= rightIndex)
+            int bufferIndex = 0;
+            int firstIndex = startingIndex + 1;
+
+            int indexLimit = lastIndex + 1;
+            for (int sourceIndex = firstIndex; sourceIndex < indexLimit; sourceIndex++)
             {
-                while (Compare(list[leftIndex], pivot) < 0)
-                    leftIndex++;
-                while (Compare(list[rightIndex], pivot) > 0)
-                    rightIndex--;
-                if (leftIndex <= rightIndex)
-                    list.Swap(leftIndex++, rightIndex--);
+                var value = list[sourceIndex];
+                if (Compare(value, pivot) <= 0)
+                    list[firstIndex++] = value;
+                else
+                    buffer[bufferIndex++] = value;
             }
 
-            if (startingIndex < rightIndex)
-                SortRange(list, startingIndex, rightIndex);
-            if (leftIndex < lastIndex)
-                SortRange(list, leftIndex, lastIndex);
+            int rightLength = bufferIndex;
+            ListUtility.Copy(buffer, 0, list, firstIndex, rightLength);
+
+            pivotIndex = firstIndex - 1;
+            list.Swap(startingIndex, pivotIndex);
+
+            int lastLeftIndex = pivotIndex - 1;
+            if (startingIndex < lastLeftIndex)
+                SortRange(list, startingIndex, lastLeftIndex);
+            if (firstIndex < lastIndex)
+                SortRange(list, firstIndex, lastIndex);
         }
     }
 }

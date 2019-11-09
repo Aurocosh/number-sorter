@@ -61,17 +61,19 @@ namespace NumberSorter.Core.Logic
             _nameDictionary.Add(AlgorhythmType.IntervalMultiMergeGroupBinarySort, "Interval multi merge sort (Grouped runs, Binary search)");
             _nameDictionary.Add(AlgorhythmType.IntervalMultiMergeGroupBiasedBinarySort, "Interval multi merge sort (Grouped runs, Biased binary search)");
 
-            _nameDictionary.Add(AlgorhythmType.QuickSortRandomPivot, "Quick sort (Random pivot)");
-            _nameDictionary.Add(AlgorhythmType.QuickSortMedianOfThree, "Quick sort (Median of three pivot)");
-            _nameDictionary.Add(AlgorhythmType.QuickSortRandomPivotCutoffWindow, "Quick sort (Median of three pivot, Window cutoff)");
-            _nameDictionary.Add(AlgorhythmType.QuickSortRandomPivotCutoffInsertion, "Quick sort (Median of three pivot, Insertion cutoff)");
-            _nameDictionary.Add(AlgorhythmType.QuickSortRandomPivotCutoffTripleWindow, "Quick sort (Median of three pivot, Triple window cutoff)");
+            _nameDictionary.Add(AlgorhythmType.QuickSortRandomPivot, "Quick sort LR (Random pivot)");
+            _nameDictionary.Add(AlgorhythmType.QuickSortMedianPivot, "Quick sort LR (Median of three pivot)");
+            _nameDictionary.Add(AlgorhythmType.QuickSortRandomPivotCutoffInsertion, "Quick sort LR (Median of three pivot, Insertion cutoff)");
+            _nameDictionary.Add(AlgorhythmType.QuickSortRandomPivotCutoffTripleWindow, "Quick sort LR (Median of three pivot, Triple window cutoff)");
 
             _nameDictionary.Add(AlgorhythmType.QuickSortLLRandomPivot, "Quick sort LL (Random pivot)");
-            _nameDictionary.Add(AlgorhythmType.QuickSortLLMedianOfThree, "Quick sort LL (Median of three pivot)");
+            _nameDictionary.Add(AlgorhythmType.QuickSortLLMedianPivot, "Quick sort LL (Median of three pivot)");
 
             _nameDictionary.Add(AlgorhythmType.DualPivotQuickSort, "Dual pivot quick sort");
             _nameDictionary.Add(AlgorhythmType.DualPivotQuickSortCutoffInsertion, "Dual pivot quick sort (Insertion cutoff)");
+
+            _nameDictionary.Add(AlgorhythmType.StableQuickSortRandomPivot, "Stable quick sort (Random pivot)");
+            _nameDictionary.Add(AlgorhythmType.StableQuickSortMedianPivot, "Stable quick sort (Median of three pivot)");
 
             _nameDictionary.Add(AlgorhythmType.BitLSDRadixSort, "Bit LSD radix sort");
             _nameDictionary.Add(AlgorhythmType.BitLSDOptimizedRadixSort, "Bit LSD radix sort (Optimized)");

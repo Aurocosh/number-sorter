@@ -56,16 +56,19 @@
         IntervalMultiMergeGroupBiasedBinarySort,
 
         QuickSortRandomPivot,
-        QuickSortMedianOfThree,
+        QuickSortMedianPivot,
         QuickSortRandomPivotCutoffWindow,
         QuickSortRandomPivotCutoffInsertion,
         QuickSortRandomPivotCutoffTripleWindow,
 
         QuickSortLLRandomPivot,
-        QuickSortLLMedianOfThree,
+        QuickSortLLMedianPivot,
 
         DualPivotQuickSort,
         DualPivotQuickSortCutoffInsertion,
+
+        StableQuickSortRandomPivot,
+        StableQuickSortMedianPivot,
 
         BitLSDRadixSort,
         BitLSDOptimizedRadixSort,

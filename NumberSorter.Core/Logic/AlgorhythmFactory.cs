@@ -113,25 +113,28 @@ namespace NumberSorter.Core.Logic
                     return new IntervalMultiMergeSort<T>(comparer, new BinarySortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BiasedBinaryPositionLocatorFactory(2));
 
                 case AlgorhythmType.QuickSortRandomPivot:
-                    return new QuickSort<T>(comparer, new RandomPivotSelectorFactory(new Random()), new InsertionSortFactory(), 0);
-                case AlgorhythmType.QuickSortMedianOfThree:
-                    return new QuickSort<T>(comparer, new MedianOfThreePivotSelectorFactory(), new InsertionSortFactory(), 0);
-                case AlgorhythmType.QuickSortRandomPivotCutoffInsertion:
-                    return new QuickSort<T>(comparer, new RandomPivotSelectorFactory(new Random()), new InsertionSortFactory(), 32);
+                    return new QuickSort<T>(comparer, new RandomPivotSelectorFactory(new Random()), new InsertionSortFactory(), 8);
+                case AlgorhythmType.QuickSortMedianPivot:
+                    return new QuickSort<T>(comparer, new MedianOfThreePivotSelectorFactory(), new InsertionSortFactory(), 8);
                 case AlgorhythmType.QuickSortRandomPivotCutoffWindow:
                     return new QuickSort<T>(comparer, new RandomPivotSelectorFactory(new Random()), new WindowMergeSortFactory(), 32);
                 case AlgorhythmType.QuickSortRandomPivotCutoffTripleWindow:
                     return new QuickSort<T>(comparer, new RandomPivotSelectorFactory(new Random()), new TripleWindowMergeSortFactory(), 32);
 
                 case AlgorhythmType.QuickSortLLRandomPivot:
-                    return new QuickSortLL<T>(comparer, new RandomPivotSelectorFactory(new Random()), new InsertionSortFactory(), 0);
-                case AlgorhythmType.QuickSortLLMedianOfThree:
-                    return new QuickSortLL<T>(comparer, new MedianOfThreePivotSelectorFactory(), new InsertionSortFactory(), 0);
+                    return new QuickSortLL<T>(comparer, new RandomPivotSelectorFactory(new Random()), new InsertionSortFactory(), 8);
+                case AlgorhythmType.QuickSortLLMedianPivot:
+                    return new QuickSortLL<T>(comparer, new MedianOfThreePivotSelectorFactory(), new InsertionSortFactory(), 8);
 
                 case AlgorhythmType.DualPivotQuickSort:
                     return new DualPivotQuickSort<T>(comparer, new InsertionSortFactory(), 0);
                 case AlgorhythmType.DualPivotQuickSortCutoffInsertion:
-                    return new DualPivotQuickSort<T>(comparer, new InsertionSortFactory(), 32);
+                    return new DualPivotQuickSort<T>(comparer, new InsertionSortFactory(), 16);
+
+                case AlgorhythmType.StableQuickSortRandomPivot:
+                    return new StableQuickSort<T>(comparer, new RandomPivotSelectorFactory(new Random()), new InsertionSortFactory(), 8);
+                case AlgorhythmType.StableQuickSortMedianPivot:
+                    return new StableQuickSort<T>(comparer, new MedianOfThreePivotSelectorFactory(), new InsertionSortFactory(), 8);
 
                 default:
                     return null;

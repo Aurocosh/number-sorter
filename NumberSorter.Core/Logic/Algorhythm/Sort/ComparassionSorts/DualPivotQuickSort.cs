@@ -1,22 +1,18 @@
 ﻿using NumberSorter.Core.Algorhythm;
-using NumberSorter.Core.Logic.Algorhythm.PivotSelector;
-using NumberSorter.Core.Logic.Factories.PivotSelector.Base;
 using NumberSorter.Core.Logic.Factories.Sort.Base;
 using NumberSorter.Core.Logic.Utility;
 using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class QuickSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
+    public class DualPivotQuickSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
     {
         private int CutoffValue { get; }
-        private IPivotSelector<T> PivotSelector { get; }
         private IPartialSortAlgorhythm<T> CutoffAlgorhythm { get; }
 
-        public QuickSort(IComparer<T> comparer, IPivotSelectorFactory pivotSelectorFactory, IPartialSortFactory cutoffSortFactory, int cutoffValue) : base(comparer)
+        public DualPivotQuickSort(IComparer<T> comparer, IPartialSortFactory cutoffSortFactory, int cutoffValue) : base(comparer)
         {
             CutoffValue = cutoffValue;
-            PivotSelector = pivotSelectorFactory.GetPivotSelector(comparer);
             CutoffAlgorhythm = cutoffSortFactory.GetPatrialSort(comparer);
         }
 
@@ -32,7 +28,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
         private void SortRange(IList<T> list, int startingIndex, int lastIndex)
         {
-            if (startingIndex >= lastIndex)
+            if (lastIndex <= startingIndex)
                 return;
 
             int runRange = lastIndex - startingIndex + 1;
@@ -42,26 +38,49 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 return;
             }
 
-            int pivotIndex = PivotSelector.SelectPivot(list, startingIndex, lastIndex);
-            var pivot = list[pivotIndex];
+            if (Compare(list, startingIndex, lastIndex) == 1)
+                list.Swap(startingIndex, lastIndex);
 
-            int leftIndex = startingIndex;
-            int rightIndex = lastIndex;
+            T leftPivot = list[startingIndex];
+            T rightPivot = list[lastIndex];
 
-            while (leftIndex <= rightIndex)
+            int leftIndex = startingIndex + 1;
+            int rightIndex = lastIndex - 1;
+            int middleIndex = leftIndex;
+
+            while (middleIndex <= rightIndex)
             {
-                while (Compare(list[leftIndex], pivot) < 0)
+                if (Compare(list[middleIndex], leftPivot) < 0)
+                {
+                    list.Swap(middleIndex, leftIndex);
                     leftIndex++;
-                while (Compare(list[rightIndex], pivot) > 0)
+                }
+                else if (Compare(list[middleIndex], rightPivot) >= 0)
+                {
+                    while (Compare(list[rightIndex], rightPivot) > 0 && middleIndex < rightIndex)
+                        rightIndex--;
+
+                    list.Swap(middleIndex, rightIndex);
                     rightIndex--;
-                if (leftIndex <= rightIndex)
-                    list.Swap(leftIndex++, rightIndex--);
+
+                    if (Compare(list[middleIndex], leftPivot) < 0)
+                    {
+                        list.Swap(middleIndex, leftIndex);
+                        ++leftIndex;
+                    }
+                }
+                ++middleIndex;
             }
 
-            if (startingIndex < rightIndex)
-                SortRange(list, startingIndex, rightIndex);
-            if (leftIndex < lastIndex)
-                SortRange(list, leftIndex, lastIndex);
+            --leftIndex;
+            ++rightIndex;
+
+            list.Swap(startingIndex, leftIndex);
+            list.Swap(lastIndex, rightIndex);
+
+            SortRange(list, startingIndex, leftIndex - 1);
+            SortRange(list, leftIndex + 1, rightIndex - 1);
+            SortRange(list, rightIndex + 1, lastIndex);
         }
     }
 }
