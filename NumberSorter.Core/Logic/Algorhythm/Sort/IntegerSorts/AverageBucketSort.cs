@@ -1,10 +1,6 @@
 ﻿using NumberSorter.Core.Algorhythm;
 using NumberSorter.Core.Logic.Utility;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NumberSorter.Core.Logic.Algorhythm.IntegerSort
 {
@@ -27,20 +23,24 @@ namespace NumberSorter.Core.Logic.Algorhythm.IntegerSort
 
             double average = sum / length;
 
-            int nextBigElementIndex = indexLimit - 1;
-            int nextUnsortedIndex = startingIndex;
-            int unsortedElementCount = length;
-            while (unsortedElementCount-- > 0)
+            int lastIndex = indexLimit - 1;
+            int leftIndex = startingIndex;
+            int rightIndex = lastIndex;
+
+            while (leftIndex <= rightIndex)
             {
-                var nextUnsorted = list[nextUnsortedIndex];
-                if (nextUnsorted <= average)
-                    nextUnsortedIndex++;
-                else
-                    list.Swap(nextUnsortedIndex, nextBigElementIndex--);
+                while (leftIndex < lastIndex && list[leftIndex] < average)
+                    leftIndex++;
+                while (rightIndex >= startingIndex && list[rightIndex] >= average)
+                    rightIndex--;
+                if (leftIndex <= rightIndex)
+                    list.Swap(leftIndex++, rightIndex--);
             }
-            int firstLength = nextUnsortedIndex - startingIndex;
-            if (firstLength == length)
-                firstLength = length / 2;
+
+            int firstLength = leftIndex - startingIndex;
+            if (firstLength == length || firstLength == 0)
+                return;
+
             int secondLength = length - firstLength;
             int secondIndex = startingIndex + firstLength;
 
