@@ -9,7 +9,7 @@ namespace NumberSorter.Domain.Benchmark.Benchmarks
     {
         protected override IIntegerSortAlgorhythm GetIntAlgorhythm()
         {
-            return new BitLSDOptimizedRadixSort(new LocalSignSeparator());
+            return new BitLSDOptimizedRadixSort(new OptimizedLocalSignSeparator());
         }
     }
 }
