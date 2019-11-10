@@ -34,8 +34,7 @@
         DoubleSelectionSort,
 
         HeapSort,
-        JHeapBinarySort,
-        JHeapInsertionSort,
+        JHeapSort,
 
         ShellSortCiura,
         ShellSortKnuth,

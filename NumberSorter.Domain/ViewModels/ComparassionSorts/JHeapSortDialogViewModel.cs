@@ -10,21 +10,17 @@ using NumberSorter.Domain.Logic;
 
 namespace NumberSorter.Domain.ViewModels
 {
-    public class QuickSortDialogViewModel : ReactiveObject
+    public class JHeapSortDialogViewModel : ReactiveObject
     {
         #region Fields
 
-        private readonly SourceList<PivotSelectorTypeLineViewModel> _pivotTypes = new SourceList<PivotSelectorTypeLineViewModel>();
         private readonly SourceList<ComparassionSortTypeLineViewModel> _cutoffSortTypes = new SourceList<ComparassionSortTypeLineViewModel>();
 
         #endregion Fields
 
         #region Properties
-        [Reactive] public int CutoffValue { get; set; }
         [Reactive] public bool? DialogResult { get; set; }
-        [Reactive] public PivotSelectorTypeLineViewModel SelectedPivotType { get; set; }
-        [Reactive] public ComparassionSortTypeLineViewModel SelectedCutoffSortType { get; set; }
-        public IEnumerable<PivotSelectorTypeLineViewModel> PivotTypes => _pivotTypes.Items;
+        [Reactive] public ComparassionSortTypeLineViewModel SelectedFinisherSortType { get; set; }
         public IEnumerable<ComparassionSortTypeLineViewModel> SortTypes => _cutoffSortTypes.Items;
 
         #endregion Properties
@@ -37,11 +33,9 @@ namespace NumberSorter.Domain.ViewModels
 
         #region Constructors
 
-        public QuickSortDialogViewModel()
+        public JHeapSortDialogViewModel()
         {
             AcceptCommand = ReactiveCommand.Create(Accept);
-
-            CutoffValue = 16;
 
             var algorhythmTypes = EnumUtil.GetValues<ComparassionAlgorhythmType>();
             var sortTypes = algorhythmTypes
@@ -50,16 +44,7 @@ namespace NumberSorter.Domain.ViewModels
             sortTypes.Sort((x, y) => x.Name.CompareTo(y.Name));
             _cutoffSortTypes.AddRange(sortTypes);
 
-            SelectedCutoffSortType = SortTypes.First(x => x.Type == ComparassionAlgorhythmType.InsertionSort);
-
-            var pivotTypes = EnumUtil.GetValues<PivotSelectorType>();
-            var pivotTypeModels = pivotTypes
-                .Select(x => new PivotSelectorTypeLineViewModel(x, PivotSelectorNamer.GetName(x)))
-                .ToList();
-            pivotTypeModels.Sort((x, y) => x.Name.CompareTo(y.Name));
-            _pivotTypes.AddRange(pivotTypeModels);
-
-            SelectedPivotType = PivotTypes.First(x => x.Type == PivotSelectorType.Random);
+            SelectedFinisherSortType = SortTypes.First(x => x.Type == ComparassionAlgorhythmType.BinarySort);
         }
 
         #endregion Constructors

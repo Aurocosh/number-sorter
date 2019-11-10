@@ -189,7 +189,7 @@ namespace NumberSorter.Domain.ViewModels
 
             var accessTrackingList = new ComparerLoggingList<int>(InputNumbers.Values, new IntComparer());
 
-            var algorhythmType = viewModel.SelectedSortType.AlgorhythmType;
+            var algorhythmType = viewModel.SelectedSortType.Type;
             var algorhythm = ComparassionAlgorhythmFactory.GetAlgorhythm(algorhythmType, this, _dialogService);
             if (algorhythm == null)
                 return;

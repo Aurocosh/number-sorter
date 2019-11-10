@@ -40,8 +40,7 @@ namespace NumberSorter.Domain.Logic
             _nameDictionary.Add(ComparassionAlgorhythmType.DoubleSelectionSort, "Double selection sort");
 
             _nameDictionary.Add(ComparassionAlgorhythmType.HeapSort, "Heap sort");
-            _nameDictionary.Add(ComparassionAlgorhythmType.JHeapBinarySort, "J heap sort (Binary sort)");
-            _nameDictionary.Add(ComparassionAlgorhythmType.JHeapInsertionSort, "J heap sort (Insertion sort)");
+            _nameDictionary.Add(ComparassionAlgorhythmType.JHeapSort, "J heap sort");
 
             _nameDictionary.Add(ComparassionAlgorhythmType.ShellSortCiura, "Shell sort (Ciura)");
             _nameDictionary.Add(ComparassionAlgorhythmType.ShellSortKnuth, "Shell sort (Knuth)");

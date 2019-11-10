@@ -30,7 +30,6 @@ namespace NumberSorter
             var dialogService = new DialogService<ReactiveObject>();
             dialogService.RegisterWindowType<MainWindowViewModel, MainWindow>(new WindowViewInitializer<MainWindowViewModel>());
             dialogService.RegisterWindowType<ColorSetDialogViewModel, ColorSetDialog>(new WindowViewInitializer<ColorSetDialogViewModel>());
-            dialogService.RegisterWindowType<QuickSortDialogViewModel, QuickSortDialog>(new WindowViewInitializer<QuickSortDialogViewModel>());
             dialogService.RegisterWindowType<GeneratorsDialogViewModel, GeneratorsDialog>(new WindowViewInitializer<GeneratorsDialogViewModel>());
             dialogService.RegisterWindowType<LogHistoryDialogViewModel, LogHistoryDialog>(new WindowViewInitializer<LogHistoryDialogViewModel>());
             dialogService.RegisterWindowType<NumberGeneratorsViewModel, NumberGeneratorsWindow>(new WindowViewInitializer<NumberGeneratorsViewModel>());
@@ -40,6 +39,9 @@ namespace NumberSorter
             dialogService.RegisterWindowType<ComparassionSortTypeViewModel, ComparassionSortTypeDialog>(new WindowViewInitializer<ComparassionSortTypeViewModel>());
             dialogService.RegisterWindowType<DistributionSortTypeViewModel, DistributionSortTypeDialog>(new WindowViewInitializer<DistributionSortTypeViewModel>());
             dialogService.RegisterWindowType<PartialSortedGeneratorViewModel, PartialSortedGeneratorDialog>(new WindowViewInitializer<PartialSortedGeneratorViewModel>());
+
+            dialogService.RegisterWindowType<JHeapSortDialogViewModel, JHeapSortDialog>(new WindowViewInitializer<JHeapSortDialogViewModel>());
+            dialogService.RegisterWindowType<QuickSortDialogViewModel, QuickSortDialog>(new WindowViewInitializer<QuickSortDialogViewModel>());
 
             WpfInteractions.RegisterInteractions();
 

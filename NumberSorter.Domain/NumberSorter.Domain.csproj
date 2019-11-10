@@ -109,6 +109,7 @@
     <Compile Include="ViewModels\ColorSets\ColorSetDialogViewModel.cs" />
     <Compile Include="ViewModels\ColorSets\ColorSetSelectDialogViewModel.cs" />
     <Compile Include="ViewModels\ColorSets\ColorSetLineViewModel.cs" />
+    <Compile Include="ViewModels\ComparassionSorts\JHeapSortDialogViewModel.cs" />
     <Compile Include="ViewModels\ComparassionSorts\QuickSortDialogViewModel.cs" />
     <Compile Include="ViewModels\DistributionSortType\DistributionSortTypeLineViewModel.cs" />
     <Compile Include="ViewModels\DistributionSortType\DistributionSortTypeViewModel.cs" />

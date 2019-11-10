@@ -8,11 +8,11 @@ namespace NumberSorter.Domain.ViewModels
     public class ComparassionSortTypeLineViewModel : ReactiveObject
     {
         public string Name { get; }
-        public ComparassionAlgorhythmType AlgorhythmType { get; }
+        public ComparassionAlgorhythmType Type { get; }
 
         public ComparassionSortTypeLineViewModel(ComparassionAlgorhythmType algorhythmType, String name)
         {
-            AlgorhythmType = algorhythmType;
+            Type = algorhythmType;
             Name = name;
         }
     }

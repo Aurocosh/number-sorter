@@ -68,10 +68,17 @@ namespace NumberSorter.Domain.Logic
 
                 case ComparassionAlgorhythmType.HeapSort:
                     return new HeapSortFactory();
-                case ComparassionAlgorhythmType.JHeapBinarySort:
-                    return new JHeapSortFactory(new BinarySortFactory());
-                case ComparassionAlgorhythmType.JHeapInsertionSort:
-                    return new JHeapSortFactory(new InsertionSortFactory());
+                case ComparassionAlgorhythmType.JHeapSort:
+                    {
+                        var viewModel = new JHeapSortDialogViewModel();
+                        dialogService.ShowModalPresentation(parentViewModel, viewModel);
+
+                        if (viewModel.DialogResult != true)
+                            return null;
+
+                        var finishSort = GetAlgorhythm(viewModel.SelectedFinisherSortType.Type, parentViewModel, dialogService);
+                        return new JHeapSortFactory(finishSort);
+                    }
 
                 case ComparassionAlgorhythmType.TimSortBinaryInterval:
                     return new TimSortFactory(new IntervalMergeSortFactory(new BiasedBinaryPositionLocatorFactory(2)), new BinarySortFactory());
@@ -128,7 +135,7 @@ namespace NumberSorter.Domain.Logic
                             return null;
 
                         var pivotSelector = PivotSelectorFactory.GetPivotSelector(viewModel.SelectedPivotType.Type);
-                        var cutoffSort = GetAlgorhythm(viewModel.SelectedCutoffSortType.AlgorhythmType, parentViewModel, dialogService);
+                        var cutoffSort = GetAlgorhythm(viewModel.SelectedCutoffSortType.Type, parentViewModel, dialogService);
 
                         switch (algorhythmType)
                         {
