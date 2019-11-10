@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Factories.Sort
 {
-    public class IntervalMergeSortFactory : PartialSortFactory, ILocalMergeFactory
+    public class IntervalMergeSortFactory : GenericSortFactory, ILocalMergeFactory
     {
         private IPositionLocatorFactory PositionLocatorFactory { get; }
 
@@ -17,12 +17,12 @@ namespace NumberSorter.Core.Logic.Factories.Sort
             PositionLocatorFactory = positionLocatorFactory;
         }
 
-        public ILocalMergeAlgothythm<T> GetLocalMerge<T>(IComparer<T> comparer)
+        public override ISortAlgorhythm<T> GetSort<T>(IComparer<T> comparer)
         {
             return new IntervalMergeSort<T>(comparer, PositionLocatorFactory);
         }
 
-        public override IPartialSortAlgorhythm<T> GetPatrialSort<T>(IComparer<T> comparer)
+        public ILocalMergeAlgothythm<T> GetLocalMerge<T>(IComparer<T> comparer)
         {
             return new IntervalMergeSort<T>(comparer, PositionLocatorFactory);
         }

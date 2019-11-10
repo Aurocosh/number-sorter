@@ -1,6 +1,4 @@
 ﻿using NumberSorter.Core.Logic.Factories.Sort.Base;
-using NumberSorter.Core.Logic.Utility;
-using System;
 using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
@@ -14,16 +12,28 @@ namespace NumberSorter.Core.Logic.Algorhythm
             FinalSortFactory = finalSortFactory;
         }
 
-        void MaxHeapify(IList<T> list, int length, int currentParentIndex)
+        public override void Sort(IList<T> list, int startingIndex, int length)
+        {
+            int indexLimit = startingIndex + length;
+            for (int i = indexLimit - 1; i >= startingIndex; i--)
+                MaxHeapify(list, i, indexLimit);
+
+            for (int i = indexLimit - 1; i >= startingIndex; i--)
+                MinHeapify(list, i, indexLimit);
+
+            FinalSortFactory.Sort(list, startingIndex, length, Comparer);
+        }
+
+        private void MaxHeapify(IList<T> list, int currentParentIndex, int indexLimit)
         {
             T parent = list[currentParentIndex];
             int parentIndex = currentParentIndex;
             int childIndex = (2 * (currentParentIndex + 1)) - 1;
 
             bool done = false;
-            while (childIndex < length && !done)
+            while (childIndex < indexLimit && !done)
             {
-                if (childIndex < length - 1 && Compare(list, childIndex, childIndex + 1) >= 0)
+                if (childIndex < indexLimit - 1 && Compare(list, childIndex, childIndex + 1) >= 0)
                     childIndex++;
 
                 if (Compare(parent, list[childIndex]) < 0)
@@ -43,43 +53,32 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 list[parentIndex] = parent;
         }
 
-        void MinHeapify(IList<T> list, int length, int currentParentIndex)
+        private void MinHeapify(IList<T> list, int currentParentIndex, int indexLimit)
         {
-            T parent = list[length - 1 - currentParentIndex];
+            T parent = list[indexLimit - 1 - currentParentIndex];
             int parentIndex = currentParentIndex;
             int childIndex = (2 * (currentParentIndex + 1)) - 1;
 
             bool done = false;
-            while (childIndex < length && !done)
+            while (childIndex < indexLimit && !done)
             {
-                if (childIndex < length - 1 && Compare(list, length - 1 - childIndex, length - 1 - (childIndex + 1)) <= 0)
+                if (childIndex < indexLimit - 1 && Compare(list, indexLimit - 1 - childIndex, indexLimit - 1 - (childIndex + 1)) <= 0)
                     childIndex++;
 
-                if (Compare(parent, list[length - 1 - childIndex]) > 0)
+                if (Compare(parent, list[indexLimit - 1 - childIndex]) > 0)
                 {
                     done = true;
                 }
                 else
                 {
-                    list[length - 1 - parentIndex] = list[length - 1 - childIndex];
+                    list[indexLimit - 1 - parentIndex] = list[indexLimit - 1 - childIndex];
                     parentIndex = childIndex;
                     childIndex = (2 * (parentIndex + 1)) - 1;
                 }
             }
 
             if (parentIndex != currentParentIndex)
-                list[length - 1 - parentIndex] = parent;
-        }
-
-        public override void Sort(IList<T> list)
-        {
-            for (int i = list.Count - 1; i >= 0; i--)
-                MaxHeapify(list, list.Count, i);
-
-            for (int i = list.Count - 1; i >= 0; i--)
-                MinHeapify(list, list.Count, i);
-
-            FinalSortFactory.Sort(list, Comparer);
+                list[indexLimit - 1 - parentIndex] = parent;
         }
     }
 }

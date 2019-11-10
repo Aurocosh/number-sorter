@@ -1,7 +1,5 @@
 ﻿using NumberSorter.Core.Logic.Utility;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
@@ -11,9 +9,9 @@ namespace NumberSorter.Core.Logic.Algorhythm
         {
         }
 
-        public override void Sort(IList<T> list)
+        public override void Sort(IList<T> list, int startingIndex, int length)
         {
-            var sortRun = new SortRun(0, list.Count);
+            var sortRun = new SortRun(startingIndex, length);
             MergeSort(list, sortRun);
         }
 

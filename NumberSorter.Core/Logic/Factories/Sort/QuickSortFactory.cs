@@ -6,13 +6,13 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Factories.Sort
 {
-    public abstract class QuickSortFactory : GenericSortFactory
+    public class QuickSortFactory : GenericSortFactory
     {
-        private int CutoffValue { get; }
-        private IPartialSortFactory CutoffSortFactory { get; }
-        private IPivotSelectorFactory PivotSelectorFactory { get; }
+        protected int CutoffValue { get; }
+        protected ISortFactory CutoffSortFactory { get; }
+        protected IPivotSelectorFactory PivotSelectorFactory { get; }
 
-        protected QuickSortFactory(int cutoffSize, IPartialSortFactory cutoffSortFactory, IPivotSelectorFactory pivotSelectorFactory)
+        public QuickSortFactory(int cutoffSize, ISortFactory cutoffSortFactory, IPivotSelectorFactory pivotSelectorFactory)
         {
             CutoffValue = cutoffSize;
             CutoffSortFactory = cutoffSortFactory;

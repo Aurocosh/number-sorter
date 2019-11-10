@@ -3,6 +3,8 @@ using NumberSorter.Core.Algorhythm;
 using NumberSorter.Domain.Benchmark.Benchmarks.Base;
 using NumberSorter.Core.Logic.Algorhythm;
 using NumberSorter.Core.Logic.Factories.Sort;
+using NumberSorter.Core.Logic.Factories.PivotSelector;
+using NumberSorter.Domain.Benchmark.IntegerGenerators;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks
 {
@@ -10,7 +12,7 @@ namespace NumberSorter.Domain.Benchmark.Benchmarks
     {
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {
-            return new DualPivotQuickSort<int>(comparer, new InsertionSortFactory(), 0);
+            return new DualPivotQuickSort<int>(comparer, new RandomPivotSelectorFactory(BenchmarkRandomProvider.Random), new InsertionSortFactory(), 0);
         }
     }
 }

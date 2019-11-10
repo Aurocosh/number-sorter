@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
@@ -12,6 +13,15 @@ namespace NumberSorter.Core.Logic.Algorhythm
             {
                 actualList.Sort(Comparer);
             }
+            else if (list is T[] actualArray)
+            {
+                Array.Sort(actualArray);
+            }
+        }
+
+        public override void Sort(IList<T> list, int startingIndex, int length)
+        {
+            throw new NotImplementedException();
         }
     }
 }

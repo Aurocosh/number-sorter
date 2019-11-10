@@ -9,19 +9,19 @@ using System.Linq;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class KWayMergeSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
+    public class KWayMergeSort<T> : GenericSortAlgorhythm<T>
     {
         private int BatchSize { get; }
 
         private ISortRunLocator<T> SortRunLocator { get; }
-        private IPartialSortFactory RunSortFactory { get; }
+        private ISortFactory RunSortFactory { get; }
         private IPositionLocatorFactory PositionLocatorFactory { get; }
 
         private T[] _buffer;
         private readonly Queue<SortRun> _sortRunsQueue;
         private readonly Queue<SortRun> _nextSortRunsQueue;
 
-        public KWayMergeSort(IComparer<T> comparer, IPartialSortFactory runSortFactory, ISortRunLocatorFactory sortRunLocatorFactory, IPositionLocatorFactory positionLocatorFactory, int batchSize) : base(comparer)
+        public KWayMergeSort(IComparer<T> comparer, ISortFactory runSortFactory, ISortRunLocatorFactory sortRunLocatorFactory, IPositionLocatorFactory positionLocatorFactory, int batchSize) : base(comparer)
         {
             BatchSize = batchSize;
             _buffer = Array.Empty<T>();
@@ -33,12 +33,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
             SortRunLocator = sortRunLocatorFactory.GetSortRunLocator(comparer);
         }
 
-        public override void Sort(IList<T> list)
-        {
-            Sort(list, 0, list.Count);
-        }
-
-        public void Sort(IList<T> list, int startingIndex, int length)
+        public override void Sort(IList<T> list, int startingIndex, int length)
         {
             _buffer = new T[length];
 

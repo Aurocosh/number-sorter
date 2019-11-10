@@ -122,11 +122,18 @@
     <Compile Include="Logic\Factories\SortRunLocator\Base\ILocalMergeFactory.cs" />
     <Compile Include="Logic\Factories\SortRunLocator\GroupingRunLocatorFactory.cs" />
     <Compile Include="Logic\Factories\SortRunLocator\SimpleRunLocatorFactory.cs" />
-    <Compile Include="Logic\Factories\Sort\Base\IPartialSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Base\ISortFactory.cs" />
+    <Compile Include="Logic\Factories\Sort\StableQuickSortFactory.cs" />
+    <Compile Include="Logic\Factories\Sort\JHeapSortFactory.cs" />
+    <Compile Include="Logic\Factories\Sort\HeapSortFactory.cs" />
+    <Compile Include="Logic\Factories\Sort\IntervalMultiMergeSortFactory.cs" />
+    <Compile Include="Logic\Factories\Sort\DualPivotQuickSortFactory.cs" />
+    <Compile Include="Logic\Factories\Sort\QuickSortLLFactory.cs" />
+    <Compile Include="Logic\Factories\Sort\SmoothSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\RecursiveMultiMergeSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\MultiMergeSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\IntervalMergeSortFactory.cs" />
+    <Compile Include="Logic\Factories\Sort\KWayMergeSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\WorkAreaInPlaceMergeSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\WindowMergeSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\TripleWindowMergeSortFactory.cs" />
@@ -137,7 +144,6 @@
     <Compile Include="Logic\Factories\Sort\GnomeSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\CircleSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\QuickSortFactory.cs" />
-    <Compile Include="Logic\Factories\Sort\Base\PartialSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Base\GenericSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\PancakeSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\OpRecursiveMergeSortFactory.cs" />
@@ -158,7 +164,6 @@
     <Compile Include="Logic\Algorhythm\SortRunLocator\GroupingRunLocator.cs" />
     <Compile Include="Logic\Algorhythm\SortRunLocator\SimpleRunLocator.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\Base\GenericSortAlgorhythm.cs" />
-    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\Base\IPartialSortAlgorhythm.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\Base\ISortAlgorhythm.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\CombSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\CycleSort.cs" />
@@ -187,7 +192,6 @@
     <Compile Include="Logic\Algorhythm\PivotSelector\RandomPivotSelector.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\QuickSortLL.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\RecursiveMergeSort.cs" />
-    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\TempSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\TimSort.cs" />
     <Compile Include="Logic\Comparer\IntComparer.cs" />
     <Compile Include="Logic\Utility\EnumUtils.cs" />

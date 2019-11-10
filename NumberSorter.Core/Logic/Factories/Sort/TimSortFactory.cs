@@ -6,12 +6,12 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Factories.Sort
 {
-    public abstract class TimSortFactory : GenericSortFactory
+    public class TimSortFactory : GenericSortFactory
     {
         private ILocalMergeFactory LocalMergeFactory { get; }
-        private IPartialSortFactory MinrunSortFactory { get; }
+        private ISortFactory MinrunSortFactory { get; }
 
-        protected TimSortFactory(ILocalMergeFactory localMergeFactory, IPartialSortFactory minrunSortFactory)
+        public TimSortFactory(ILocalMergeFactory localMergeFactory, ISortFactory minrunSortFactory)
         {
             LocalMergeFactory = localMergeFactory;
             MinrunSortFactory = minrunSortFactory;

@@ -1,19 +1,13 @@
-﻿using NumberSorter.Core.Algorhythm;
-using NumberSorter.Core.Logic.Utility;
+﻿using NumberSorter.Core.Logic.Utility;
 using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class CircleSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
+    public class CircleSort<T> : GenericSortAlgorhythm<T>
     {
         public CircleSort(IComparer<T> comparer) : base(comparer) { }
 
-        public override void Sort(IList<T> list)
-        {
-            Sort(list, 0, list.Count);
-        }
-
-        public void Sort(IList<T> list, int firstIndex, int length)
+        public override void Sort(IList<T> list, int firstIndex, int length)
         {
             while (!TryToSort(list, firstIndex, length)) ;
         }

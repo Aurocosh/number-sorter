@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Factories.Sort
 {
-    public class SelectionSortFactory : PartialSortFactory
+    public class SelectionSortFactory : GenericSortFactory
     {
-        public override IPartialSortAlgorhythm<T> GetPatrialSort<T>(IComparer<T> comparer)
+        public override ISortAlgorhythm<T> GetSort<T>(IComparer<T> comparer)
         {
             return new SelectionSort<T>(comparer);
         }

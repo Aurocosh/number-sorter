@@ -1,13 +1,10 @@
-﻿using NumberSorter.Core.Algorhythm;
-using NumberSorter.Core.Logic.Algorhythm.Merge.Base;
+﻿using NumberSorter.Core.Logic.Algorhythm.Merge.Base;
 using NumberSorter.Core.Logic.Utility;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class TripleWindowMergeSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>, ILocalMergeAlgothythm<T>
+    public class TripleWindowMergeSort<T> : GenericSortAlgorhythm<T>, ILocalMergeAlgothythm<T>
     {
         private readonly ILocalRotationAlgothythm<T> _localMergeAlgothythm;
 
@@ -16,12 +13,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
             _localMergeAlgothythm = new RecursiveInPlaceRotation<T>();
         }
 
-        public override void Sort(IList<T> list)
-        {
-            Sort(list, 0, list.Count);
-        }
-
-        public void Sort(IList<T> list, int startingIndex, int length)
+        public override void Sort(IList<T> list, int startingIndex, int length)
         {
             var sortRun = new SortRun(startingIndex, length);
             MergeSort(list, sortRun);

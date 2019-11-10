@@ -7,25 +7,20 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class QuickSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
+    public class QuickSort<T> : GenericSortAlgorhythm<T>
     {
         private int CutoffValue { get; }
         private IPivotSelector<T> PivotSelector { get; }
-        private IPartialSortAlgorhythm<T> CutoffAlgorhythm { get; }
+        private ISortAlgorhythm<T> CutoffAlgorhythm { get; }
 
-        public QuickSort(IComparer<T> comparer, IPivotSelectorFactory pivotSelectorFactory, IPartialSortFactory cutoffSortFactory, int cutoffValue) : base(comparer)
+        public QuickSort(IComparer<T> comparer, IPivotSelectorFactory pivotSelectorFactory, ISortFactory cutoffSortFactory, int cutoffValue) : base(comparer)
         {
             CutoffValue = cutoffValue;
             PivotSelector = pivotSelectorFactory.GetPivotSelector(comparer);
-            CutoffAlgorhythm = cutoffSortFactory.GetPatrialSort(comparer);
+            CutoffAlgorhythm = cutoffSortFactory.GetSort(comparer);
         }
 
-        public override void Sort(IList<T> list)
-        {
-            SortRange(list, 0, list.Count - 1);
-        }
-
-        public void Sort(IList<T> list, int startingIndex, int length)
+        public override void Sort(IList<T> list, int startingIndex, int length)
         {
             SortRange(list, startingIndex, startingIndex + list.Count - 1);
         }

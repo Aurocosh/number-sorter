@@ -1,5 +1,4 @@
-﻿using NumberSorter.Core.Algorhythm;
-using NumberSorter.Core.Logic.Utility;
+﻿using NumberSorter.Core.Logic.Utility;
 using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
@@ -8,27 +7,26 @@ namespace NumberSorter.Core.Logic.Algorhythm
     {
         public BubbleSort(IComparer<T> comparer) : base(comparer) { }
 
-        public override void Sort(IList<T> list)
+        public override void Sort(IList<T> list, int startingIndex, int length)
         {
             bool fullySorted = false;
-            int count = list.Count - 1;
-
+            int lastIndex = startingIndex + length - 1;
             while (!fullySorted)
             {
                 fullySorted = true;
-                for (int i = 0; i < count; i++)
+                for (int index = startingIndex; index < lastIndex; index++)
                 {
-                    var first = list[i];
-                    var second = list[i + 1];
+                    var first = list[index];
+                    var second = list[index + 1];
 
                     int comparrassion = Compare(first, second);
                     if (comparrassion > 0)
                     {
-                        list.Swap(i, i + 1);
+                        list.Swap(index, index + 1);
                         fullySorted = false;
                     }
                 }
-                count--;
+                lastIndex--;
             }
         }
     }

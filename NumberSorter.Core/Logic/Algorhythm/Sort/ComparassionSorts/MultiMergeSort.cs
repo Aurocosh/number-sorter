@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class MultiMergeSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
+    public class MultiMergeSort<T> : GenericSortAlgorhythm<T>
     {
         private ISortFactory RunSortFactory { get; }
         private ISortRunLocator<T> SortRunLocator { get; }
@@ -20,12 +20,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
             SortRunLocator = sortRunLocatorFactory.GetSortRunLocator(comparer);
         }
 
-        public override void Sort(IList<T> list)
-        {
-            Sort(list, 0, list.Count);
-        }
-
-        public void Sort(IList<T> list, int startingIndex, int length)
+        public override void Sort(IList<T> list, int startingIndex, int length)
         {
             var sortRuns = FindSortRuns(list, startingIndex, length);
             if (sortRuns.Count < 2)

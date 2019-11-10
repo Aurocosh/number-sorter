@@ -1,42 +1,50 @@
 ﻿using NumberSorter.Core.Algorhythm;
+using NumberSorter.Core.Logic.Algorhythm.PivotSelector;
+using NumberSorter.Core.Logic.Factories.PivotSelector.Base;
 using NumberSorter.Core.Logic.Factories.Sort.Base;
 using NumberSorter.Core.Logic.Utility;
 using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class DualPivotQuickSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
+    public class DualPivotQuickSort<T> : GenericSortAlgorhythm<T>
     {
         private int CutoffValue { get; }
-        private IPartialSortAlgorhythm<T> CutoffAlgorhythm { get; }
+        private IPivotSelector<T> PivotSelector { get; }
+        private ISortAlgorhythm<T> CutoffAlgorhythm { get; }
 
-        public DualPivotQuickSort(IComparer<T> comparer, IPartialSortFactory cutoffSortFactory, int cutoffValue) : base(comparer)
+        public DualPivotQuickSort(IComparer<T> comparer, IPivotSelectorFactory pivotSelectorFactory, ISortFactory cutoffSortFactory, int cutoffValue) : base(comparer)
         {
             CutoffValue = cutoffValue;
-            CutoffAlgorhythm = cutoffSortFactory.GetPatrialSort(comparer);
+            PivotSelector = pivotSelectorFactory.GetPivotSelector(comparer);
+            CutoffAlgorhythm = cutoffSortFactory.GetSort(comparer);
         }
 
-        public override void Sort(IList<T> list)
+        public override void Sort(IList<T> list, int startingIndex, int length)
         {
-            SortRange(list, 0, list.Count - 1);
-        }
-
-        public void Sort(IList<T> list, int startingIndex, int length)
-        {
-            SortRange(list, startingIndex, startingIndex + list.Count - 1);
+            SortRange(list, startingIndex, startingIndex + length - 1);
         }
 
         private void SortRange(IList<T> list, int startingIndex, int lastIndex)
         {
-            if (lastIndex <= startingIndex)
+            int length = lastIndex - startingIndex + 1;
+            if (length < 2)
                 return;
 
-            int runRange = lastIndex - startingIndex + 1;
-            if (runRange < CutoffValue)
+            if (length < CutoffValue)
             {
-                CutoffAlgorhythm.Sort(list, startingIndex, runRange);
+                CutoffAlgorhythm.Sort(list, startingIndex, length);
                 return;
             }
+
+            int firstPivotRangeLength = length / 2;
+            int secondPivotRangeLength = length - firstPivotRangeLength;
+
+            int firstPivotIndex = PivotSelector.SelectPivot(list, startingIndex, startingIndex + firstPivotRangeLength - 1);
+            int secondPivotIndex = PivotSelector.SelectPivot(list, startingIndex + firstPivotRangeLength, lastIndex);
+
+            list.Swap(startingIndex, firstPivotIndex);
+            list.Swap(lastIndex, secondPivotIndex);
 
             if (Compare(list, startingIndex, lastIndex) == 1)
                 list.Swap(startingIndex, lastIndex);

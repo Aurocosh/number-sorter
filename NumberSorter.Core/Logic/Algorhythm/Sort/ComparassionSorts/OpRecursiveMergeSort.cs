@@ -1,7 +1,6 @@
 ﻿using NumberSorter.Core.Logic.Utility;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
@@ -9,14 +8,11 @@ namespace NumberSorter.Core.Logic.Algorhythm
     {
         public OpRecursiveMergeSort(IComparer<T> comparer) : base(comparer) { }
 
-        public override void Sort(IList<T> list)
+        public override void Sort(IList<T> list, int startingIndex, int length)
         {
-            var array = list.ToArray();
+            var array = list.GetRangeAsArray(startingIndex, length);
             var sortedArray = MergeSort(array);
-
-            var length = list.Count;
-            for (int i = 0; i < length; i++)
-                list[i] = sortedArray[i];
+            ListUtility.Copy(sortedArray, 0, list, startingIndex, length);
         }
 
         private T[] MergeSort(T[] array)
@@ -29,7 +25,6 @@ namespace NumberSorter.Core.Logic.Algorhythm
             var secondSorted = MergeSort(halvesOfArray.Second);
 
             return Merge(firstSorted, secondSorted);
-
         }
 
         private T[] Merge(T[] firstArray, T[] secondArray)
@@ -92,6 +87,5 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
             return mergedArray;
         }
-
     }
 }

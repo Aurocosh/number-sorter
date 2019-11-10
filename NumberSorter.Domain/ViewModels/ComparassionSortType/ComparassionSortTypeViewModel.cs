@@ -43,7 +43,7 @@ namespace NumberSorter.Domain.ViewModels
             var sortTypes = algorhythmTypes
                 .Select(x => new ComparassionSortTypeLineViewModel(x, ComparassionAlgorhythmNamer.GetName(x)))
                 .ToList();
-            sortTypes.Sort((x, y) => x.Description.CompareTo(y.Description));
+            sortTypes.Sort((x, y) => x.Name.CompareTo(y.Name));
             _sortTypes.AddRange(sortTypes);
 
             SelectedSortType = SortTypes.First();

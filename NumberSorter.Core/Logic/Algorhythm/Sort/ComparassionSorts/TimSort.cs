@@ -11,12 +11,12 @@ namespace NumberSorter.Core.Logic.Algorhythm
     public class TimSort<T> : GenericSortAlgorhythm<T>
     {
         private ILocalMergeAlgothythm<T> LocalMergeAlgorhythm { get; }   // Used to merge sorted runs
-        private IPartialSortAlgorhythm<T> MinrunSortAlgorhythm { get; }  // Used when sorting something smaller then Minrun
+        private ISortAlgorhythm<T> MinrunSortAlgorhythm { get; }  // Used when sorting something smaller then Minrun
 
-        public TimSort(IComparer<T> comparer, ILocalMergeFactory localMergeFactory, IPartialSortFactory minrunSortFactory) : base(comparer)
+        public TimSort(IComparer<T> comparer, ILocalMergeFactory localMergeFactory, ISortFactory minrunSortFactory) : base(comparer)
         {
             LocalMergeAlgorhythm = localMergeFactory.GetLocalMerge(comparer);
-            MinrunSortAlgorhythm = minrunSortFactory.GetPatrialSort(comparer);
+            MinrunSortAlgorhythm = minrunSortFactory.GetSort(comparer);
         }
 
         private sealed class SortRunStack
@@ -64,7 +64,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
             }
         }
 
-        public override void Sort(IList<T> list)
+        public override void Sort(IList<T> list, int startingIndex, int length)
         {
             if (list.Count < 32)
             {
@@ -74,10 +74,9 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
             var sortRuns = new LinkedList<SortRun>();
 
-            int currentIndex = 0;
-            int listSize = list.Count;
-            int elementsLeft = listSize;
-            int minimalRunLength = GetMinrun(listSize);
+            int currentIndex = startingIndex;
+            int elementsLeft = length;
+            int minimalRunLength = GetMinrun(length);
             while (elementsLeft > 0)
             {
                 var sortRun = FindNextSortRun(list, currentIndex);

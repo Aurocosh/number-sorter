@@ -190,12 +190,14 @@ namespace NumberSorter.Domain.ViewModels
             var accessTrackingList = new ComparerLoggingList<int>(InputNumbers.Values, new IntComparer());
 
             var algorhythmType = viewModel.SelectedSortType.AlgorhythmType;
-            var algorhythm = ComparassionAlgorhythmFactory.GetAlgorhythm(algorhythmType, accessTrackingList, _dialogService);
+            var algorhythm = ComparassionAlgorhythmFactory.GetAlgorhythm(algorhythmType, this, _dialogService);
+            if (algorhythm == null)
+                return;
 
             GC.Collect();
             var stopwatch = Stopwatch.StartNew();
 
-            algorhythm.Sort(accessTrackingList);
+            algorhythm.Sort(accessTrackingList, accessTrackingList);
 
             stopwatch.Stop();
             var elapsedTime = stopwatch.ElapsedMilliseconds;
@@ -214,14 +216,16 @@ namespace NumberSorter.Domain.ViewModels
                 return;
 
             var algorhythmType = viewModel.SelectedSortType.AlgorhythmType;
-            var integerSort = DistributionAlgorhythmFactory.GetAlgorhythm(algorhythmType, _dialogService);
+            var algorhythm = DistributionAlgorhythmFactory.GetAlgorhythm(algorhythmType, _dialogService);
+            if (algorhythm == null)
+                return;
 
             var accessTrackingList = new AccessLoggingList<int>(InputNumbers.Values, new IntComparer());
 
             GC.Collect();
             var stopwatch = Stopwatch.StartNew();
 
-            integerSort.Sort(accessTrackingList);
+            algorhythm.Sort(accessTrackingList);
 
             stopwatch.Stop();
             var elapsedTime = stopwatch.ElapsedMilliseconds;

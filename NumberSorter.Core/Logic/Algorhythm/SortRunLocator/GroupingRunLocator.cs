@@ -9,12 +9,12 @@ namespace NumberSorter.Core.Logic.Algorhythm.SortRunLocator
     public class GroupingRunLocator<T> : GenericRunLocator<T>
     {
         private int MinimalRunLength { get; }
-        private IPartialSortAlgorhythm<T> GroupSortAlgorhythm { get; }
+        private ISortAlgorhythm<T> GroupSortAlgorhythm { get; }
 
-        public GroupingRunLocator(IComparer<T> comparer, IPartialSortFactory groupSortFactory, int minimalRunLength) : base(comparer)
+        public GroupingRunLocator(IComparer<T> comparer, ISortFactory groupSortFactory, int minimalRunLength) : base(comparer)
         {
             MinimalRunLength = minimalRunLength;
-            GroupSortAlgorhythm = groupSortFactory.GetPatrialSort(comparer);
+            GroupSortAlgorhythm = groupSortFactory.GetSort(comparer);
         }
 
         public override SortRun FindNextSortRun(IList<T> list, int runStart, int length)

@@ -55,19 +55,9 @@
         IntervalMultiMergeGroupBinarySort,
         IntervalMultiMergeGroupBiasedBinarySort,
 
-        QuickSortRandomPivot,
-        QuickSortMedianPivot,
-        QuickSortRandomPivotCutoffWindow,
-        QuickSortRandomPivotCutoffInsertion,
-        QuickSortRandomPivotCutoffTripleWindow,
-
-        QuickSortLLRandomPivot,
-        QuickSortLLMedianPivot,
-
+        QuickSort,
+        QuickSortLL,
+        StableQuickSort,
         DualPivotQuickSort,
-        DualPivotQuickSortCutoffInsertion,
-
-        StableQuickSortRandomPivot,
-        StableQuickSortMedianPivot,
     }
 }

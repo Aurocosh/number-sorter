@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class WindowMergeSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>, ILocalMergeAlgothythm<T>
+    public class WindowMergeSort<T> : GenericSortAlgorhythm<T>, ILocalMergeAlgothythm<T>
     {
         private readonly ILocalRotationAlgothythm<T> _localMergeAlgothythm;
 
@@ -14,12 +14,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
             _localMergeAlgothythm = new RecursiveInPlaceRotation<T>();
         }
 
-        public override void Sort(IList<T> list)
-        {
-            Sort(list, 0, list.Count);
-        }
-
-        public void Sort(IList<T> list, int startingIndex, int length)
+        public override void Sort(IList<T> list, int startingIndex, int length)
         {
             var sortRun = new SortRun(startingIndex, length);
             MergeSort(list, sortRun);

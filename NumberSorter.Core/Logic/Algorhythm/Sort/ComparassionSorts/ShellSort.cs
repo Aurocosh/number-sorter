@@ -1,10 +1,9 @@
-﻿using NumberSorter.Core.Algorhythm;
-using NumberSorter.Core.Logic.Algorhythm.GapGenerator.Base;
+﻿using NumberSorter.Core.Logic.Algorhythm.GapGenerator.Base;
 using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class ShellSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
+    public class ShellSort<T> : GenericSortAlgorhythm<T>
     {
         private readonly IGapGenerator _gapGenerator;
 
@@ -13,12 +12,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
             _gapGenerator = gapGenerator;
         }
 
-        public override void Sort(IList<T> list)
-        {
-            Sort(list, 0, list.Count);
-        }
-
-        public void Sort(IList<T> list, int startingIndex, int length)
+        public override void Sort(IList<T> list, int startingIndex, int length)
         {
             var gaps = _gapGenerator.GenerateGaps(length);
 

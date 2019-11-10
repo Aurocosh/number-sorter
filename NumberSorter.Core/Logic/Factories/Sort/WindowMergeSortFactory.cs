@@ -7,14 +7,14 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Factories.Sort
 {
-    public class WindowMergeSortFactory : PartialSortFactory, ILocalMergeFactory
+    public class WindowMergeSortFactory : GenericSortFactory, ILocalMergeFactory
     {
         public ILocalMergeAlgothythm<T> GetLocalMerge<T>(IComparer<T> comparer)
         {
             return new WindowMergeSort<T>(comparer);
         }
 
-        public override IPartialSortAlgorhythm<T> GetPatrialSort<T>(IComparer<T> comparer)
+        public override ISortAlgorhythm<T> GetSort<T>(IComparer<T> comparer)
         {
             return new WindowMergeSort<T>(comparer);
         }

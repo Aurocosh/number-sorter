@@ -29,7 +29,7 @@ namespace NumberSorter.Forms
             this.WhenActivated(disposable =>
             {
                 this.OneWayBind(ViewModel,
-                        x => x.Description,
+                        x => x.Name,
                         x => x.DescriptionTextBlock.Text)
                         .DisposeWith(disposable);
             });

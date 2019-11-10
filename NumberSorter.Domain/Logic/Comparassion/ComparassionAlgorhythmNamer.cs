@@ -61,19 +61,10 @@ namespace NumberSorter.Domain.Logic
             _nameDictionary.Add(ComparassionAlgorhythmType.IntervalMultiMergeGroupBinarySort, "Interval multi merge sort (Grouped runs, Binary search)");
             _nameDictionary.Add(ComparassionAlgorhythmType.IntervalMultiMergeGroupBiasedBinarySort, "Interval multi merge sort (Grouped runs, Biased binary search)");
 
-            _nameDictionary.Add(ComparassionAlgorhythmType.QuickSortRandomPivot, "Quick sort LR (Random pivot)");
-            _nameDictionary.Add(ComparassionAlgorhythmType.QuickSortMedianPivot, "Quick sort LR (Median of three pivot)");
-            _nameDictionary.Add(ComparassionAlgorhythmType.QuickSortRandomPivotCutoffInsertion, "Quick sort LR (Median of three pivot, Insertion cutoff)");
-            _nameDictionary.Add(ComparassionAlgorhythmType.QuickSortRandomPivotCutoffTripleWindow, "Quick sort LR (Median of three pivot, Triple window cutoff)");
-
-            _nameDictionary.Add(ComparassionAlgorhythmType.QuickSortLLRandomPivot, "Quick sort LL (Random pivot)");
-            _nameDictionary.Add(ComparassionAlgorhythmType.QuickSortLLMedianPivot, "Quick sort LL (Median of three pivot)");
-
+            _nameDictionary.Add(ComparassionAlgorhythmType.QuickSort, "Quick sort LR");
+            _nameDictionary.Add(ComparassionAlgorhythmType.QuickSortLL, "Quick sort LL");
+            _nameDictionary.Add(ComparassionAlgorhythmType.StableQuickSort, "Stable quick sort");
             _nameDictionary.Add(ComparassionAlgorhythmType.DualPivotQuickSort, "Dual pivot quick sort");
-            _nameDictionary.Add(ComparassionAlgorhythmType.DualPivotQuickSortCutoffInsertion, "Dual pivot quick sort (Insertion cutoff)");
-
-            _nameDictionary.Add(ComparassionAlgorhythmType.StableQuickSortRandomPivot, "Stable quick sort (Random pivot)");
-            _nameDictionary.Add(ComparassionAlgorhythmType.StableQuickSortMedianPivot, "Stable quick sort (Median of three pivot)");
         }
 
         public static string GetName(ComparassionAlgorhythmType algorhythmType)

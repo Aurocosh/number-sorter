@@ -9,9 +9,9 @@ namespace NumberSorter.Core.Logic.Factories.SortRunLocator
     public class GroupingRunLocatorFactory : ISortRunLocatorFactory
     {
         private int MinimalRunLength { get; }
-        private IPartialSortFactory GroupSortFactory { get; }
+        private ISortFactory GroupSortFactory { get; }
 
-        public GroupingRunLocatorFactory(int minimalRunLength, IPartialSortFactory groupSortFactory)
+        public GroupingRunLocatorFactory(int minimalRunLength, ISortFactory groupSortFactory)
         {
             MinimalRunLength = minimalRunLength;
             GroupSortFactory = groupSortFactory;

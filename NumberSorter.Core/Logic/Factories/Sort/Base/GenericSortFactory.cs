@@ -12,5 +12,11 @@ namespace NumberSorter.Core.Logic.Factories.Sort.Base
             var algorhythm = GetSort(comparer);
             algorhythm.Sort(list);
         }
+
+        public void Sort<T>(IList<T> list, int startingIndex, int length, IComparer<T> comparer)
+        {
+            var algorhythm = GetSort(comparer);
+            algorhythm.Sort(list, startingIndex, length);
+        }
     }
 }

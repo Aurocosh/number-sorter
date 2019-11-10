@@ -7,13 +7,13 @@ namespace NumberSorter.Domain.ViewModels
 {
     public class ComparassionSortTypeLineViewModel : ReactiveObject
     {
-        public string Description { get; }
+        public string Name { get; }
         public ComparassionAlgorhythmType AlgorhythmType { get; }
 
         public ComparassionSortTypeLineViewModel(ComparassionAlgorhythmType algorhythmType, String name)
         {
             AlgorhythmType = algorhythmType;
-            Description = name;
+            Name = name;
         }
     }
 }

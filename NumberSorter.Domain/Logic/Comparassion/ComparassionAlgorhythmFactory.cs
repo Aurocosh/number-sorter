@@ -4,8 +4,10 @@ using NumberSorter.Core.Logic.Algorhythm.GapGenerator;
 using NumberSorter.Core.Logic.Factories.PivotSelector;
 using NumberSorter.Core.Logic.Factories.PositionLocator;
 using NumberSorter.Core.Logic.Factories.Sort;
+using NumberSorter.Core.Logic.Factories.Sort.Base;
 using NumberSorter.Core.Logic.Factories.SortRunLocator;
 using NumberSorter.Domain.DialogService;
+using NumberSorter.Domain.ViewModels;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -14,129 +16,134 @@ namespace NumberSorter.Domain.Logic
 {
     public static class ComparassionAlgorhythmFactory
     {
-        public static ISortAlgorhythm<T> GetAlgorhythm<T>(ComparassionAlgorhythmType algorhythmType, IComparer<T> comparer, IDialogService<ReactiveObject> dialogService)
+        public static ISortFactory GetAlgorhythm(ComparassionAlgorhythmType algorhythmType, ReactiveObject parentViewModel, IDialogService<ReactiveObject> dialogService)
         {
             switch (algorhythmType)
             {
                 case ComparassionAlgorhythmType.CombSort:
-                    return new CombSort<T>(comparer);
+                    return new CombSortFactory();
                 case ComparassionAlgorhythmType.CycleSort:
-                    return new CycleSort<T>(comparer);
+                    return new CycleSortFactory();
                 case ComparassionAlgorhythmType.GnomeSort:
-                    return new GnomeSort<T>(comparer);
+                    return new GnomeSortFactory();
                 case ComparassionAlgorhythmType.CircleSort:
-                    return new CircleSort<T>(comparer);
+                    return new CircleSortFactory();
                 case ComparassionAlgorhythmType.SmoothSort:
-                    return new SmoothSort<T>(comparer);
+                    return new SmoothSortFactory();
                 case ComparassionAlgorhythmType.BubbleSort:
-                    return new BubbleSort<T>(comparer);
+                    return new BubbleSortFactory();
                 case ComparassionAlgorhythmType.PancakeSort:
-                    return new PancakeSort<T>(comparer);
+                    return new PancakeSortFactory();
                 case ComparassionAlgorhythmType.OddEvenSort:
-                    return new OddEvenSort<T>(comparer);
+                    return new OddEvenSortFactory();
                 case ComparassionAlgorhythmType.CocktailShakerSort:
-                    return new CocktailShakerSort<T>(comparer);
+                    return new CocktailShakerSortFactory();
 
                 case ComparassionAlgorhythmType.DequeMergeSort:
-                    return new DequeMergeSort<T>(comparer);
+                    return new DequeMergeSortFactory();
                 case ComparassionAlgorhythmType.WindowMergeSort:
-                    return new WindowMergeSort<T>(comparer);
+                    return new WindowMergeSortFactory();
                 case ComparassionAlgorhythmType.RecursiveMergeSort:
-                    return new RecursiveMergeSort<T>(comparer);
+                    return new RecursiveMergeSortFactory();
                 case ComparassionAlgorhythmType.HalfInPlaceMergeSort:
-                    return new HalfInPlaceMergeSort<T>(comparer);
+                    return new HalfInPlaceMergeSortFactory();
                 case ComparassionAlgorhythmType.KindaInPlaceMergeSort:
-                    return new KindaInPlaceMergeSort<T>(comparer);
+                    return new KindaInPlaceMergeSortFactory();
                 case ComparassionAlgorhythmType.WorkAreaInPlaceMergeSort:
-                    return new WorkAreaInPlaceMergeSort<T>(comparer);
+                    return new WorkAreaInPlaceMergeSortFactory();
                 case ComparassionAlgorhythmType.IntervalMergeSort:
-                    return new IntervalMergeSort<T>(comparer, new BiasedBinaryPositionLocatorFactory(2));
+                    return new IntervalMergeSortFactory(new BiasedBinaryPositionLocatorFactory(2));
                 case ComparassionAlgorhythmType.TripleWindowMergeSort:
-                    return new TripleWindowMergeSort<T>(comparer);
+                    return new TripleWindowMergeSortFactory();
 
                 case ComparassionAlgorhythmType.BinarySort:
-                    return new BinarySort<T>(comparer);
+                    return new BinarySortFactory();
                 case ComparassionAlgorhythmType.InsertionSort:
-                    return new InsertionSort<T>(comparer);
+                    return new InsertionSortFactory();
 
                 case ComparassionAlgorhythmType.SelectionSort:
-                    return new SelectionSort<T>(comparer);
+                    return new SelectionSortFactory();
                 case ComparassionAlgorhythmType.DoubleSelectionSort:
-                    return new DoubleSelectionSort<T>(comparer);
+                    return new DoubleSelectionSortFactory();
 
                 case ComparassionAlgorhythmType.HeapSort:
-                    return new HeapSort<T>(comparer);
+                    return new HeapSortFactory();
                 case ComparassionAlgorhythmType.JHeapBinarySort:
-                    return new JHeapSort<T>(comparer, new BinarySortFactory());
+                    return new JHeapSortFactory(new BinarySortFactory());
                 case ComparassionAlgorhythmType.JHeapInsertionSort:
-                    return new JHeapSort<T>(comparer, new InsertionSortFactory());
+                    return new JHeapSortFactory(new InsertionSortFactory());
 
                 case ComparassionAlgorhythmType.TimSortBinaryInterval:
-                    return new TimSort<T>(comparer, new IntervalMergeSortFactory(new BiasedBinaryPositionLocatorFactory(2)), new BinarySortFactory());
+                    return new TimSortFactory(new IntervalMergeSortFactory(new BiasedBinaryPositionLocatorFactory(2)), new BinarySortFactory());
                 case ComparassionAlgorhythmType.TimSortInsertionWindow:
-                    return new TimSort<T>(comparer, new WindowMergeSortFactory(), new InsertionSortFactory());
+                    return new TimSortFactory(new WindowMergeSortFactory(), new InsertionSortFactory());
                 case ComparassionAlgorhythmType.TimSortWindowWindow:
-                    return new TimSort<T>(comparer, new WindowMergeSortFactory(), new WindowMergeSortFactory());
+                    return new TimSortFactory(new WindowMergeSortFactory(), new WindowMergeSortFactory());
                 case ComparassionAlgorhythmType.TimSortInsertionTripleWindow:
-                    return new TimSort<T>(comparer, new TripleWindowMergeSortFactory(), new InsertionSortFactory());
+                    return new TimSortFactory(new TripleWindowMergeSortFactory(), new InsertionSortFactory());
                 case ComparassionAlgorhythmType.TimSortTripleWindowTripleWindow:
-                    return new TimSort<T>(comparer, new TripleWindowMergeSortFactory(), new TripleWindowMergeSortFactory());
+                    return new TimSortFactory(new TripleWindowMergeSortFactory(), new TripleWindowMergeSortFactory());
 
                 case ComparassionAlgorhythmType.ShellSortCiura:
-                    return new ShellSort<T>(comparer, new CiuraGapGenerator());
+                    return new ShellSortFactory(new CiuraGapGenerator());
                 case ComparassionAlgorhythmType.ShellSortKnuth:
-                    return new ShellSort<T>(comparer, new KnuthGapGenerator());
+                    return new ShellSortFactory(new KnuthGapGenerator());
                 case ComparassionAlgorhythmType.ShellSortTokuda:
-                    return new ShellSort<T>(comparer, new TokudaGapGenerator());
+                    return new ShellSortFactory(new TokudaGapGenerator());
 
                 case ComparassionAlgorhythmType.MultiMergeSimpleLinearSort:
-                    return new MultiMergeSort<T>(comparer, new InsertionSortFactory(), new SimpleRunLocatorFactory(), new LinearPositionLocatorFactory());
+                    return new MultiMergeSortFactory(new InsertionSortFactory(), new SimpleRunLocatorFactory(), new LinearPositionLocatorFactory());
                 case ComparassionAlgorhythmType.MultiMergeGroupLinearSort:
-                    return new MultiMergeSort<T>(comparer, new InsertionSortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new LinearPositionLocatorFactory());
+                    return new MultiMergeSortFactory(new InsertionSortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new LinearPositionLocatorFactory());
                 case ComparassionAlgorhythmType.MultiMergeSimpleBinarySort:
-                    return new MultiMergeSort<T>(comparer, new BinarySortFactory(), new SimpleRunLocatorFactory(), new BinaryPositionLocatorFactory());
+                    return new MultiMergeSortFactory(new BinarySortFactory(), new SimpleRunLocatorFactory(), new BinaryPositionLocatorFactory());
                 case ComparassionAlgorhythmType.MultiMergeGroupBinarySort:
-                    return new MultiMergeSort<T>(comparer, new BinarySortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BinaryPositionLocatorFactory());
+                    return new MultiMergeSortFactory(new BinarySortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BinaryPositionLocatorFactory());
                 case ComparassionAlgorhythmType.MultiMergeGroupBinaryWindowSort:
-                    return new MultiMergeSort<T>(comparer, new WindowMergeSortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BinaryPositionLocatorFactory());
+                    return new MultiMergeSortFactory(new WindowMergeSortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BinaryPositionLocatorFactory());
                 case ComparassionAlgorhythmType.MultiMergeGroupBinaryRecursiveSort:
-                    return new RecursiveMultiMergeSortFactory(new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BinaryPositionLocatorFactory()).GetSort(comparer);
+                    return new RecursiveMultiMergeSortFactory(new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BinaryPositionLocatorFactory());
 
                 case ComparassionAlgorhythmType.KWayMergeSortSimple:
-                    return new KWayMergeSort<T>(comparer, new BinarySortFactory(), new SimpleRunLocatorFactory(), new BiasedBinaryPositionLocatorFactory(2), 8);
+                    return new KWayMergeSortFactory(8, new BinarySortFactory(), new SimpleRunLocatorFactory(), new BiasedBinaryPositionLocatorFactory(2));
                 case ComparassionAlgorhythmType.KWayMergeSortGroup:
-                    return new KWayMergeSort<T>(comparer, new BinarySortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BiasedBinaryPositionLocatorFactory(2), 8);
+                    return new KWayMergeSortFactory(8, new BinarySortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BiasedBinaryPositionLocatorFactory(2));
 
                 case ComparassionAlgorhythmType.IntervalMultiMergeGroupLinearSort:
-                    return new IntervalMultiMergeSort<T>(comparer, new InsertionSortFactory(), new SimpleRunLocatorFactory(), new LinearPositionLocatorFactory());
+                    return new IntervalMultiMergeSortFactory(new InsertionSortFactory(), new SimpleRunLocatorFactory(), new LinearPositionLocatorFactory());
                 case ComparassionAlgorhythmType.IntervalMultiMergeGroupBinarySort:
-                    return new IntervalMultiMergeSort<T>(comparer, new BinarySortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BinaryPositionLocatorFactory());
+                    return new IntervalMultiMergeSortFactory(new BinarySortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BinaryPositionLocatorFactory());
                 case ComparassionAlgorhythmType.IntervalMultiMergeGroupBiasedBinarySort:
-                    return new IntervalMultiMergeSort<T>(comparer, new BinarySortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BiasedBinaryPositionLocatorFactory(2));
+                    return new IntervalMultiMergeSortFactory(new BinarySortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BiasedBinaryPositionLocatorFactory(2));
 
-                case ComparassionAlgorhythmType.QuickSortRandomPivot:
-                    return new QuickSort<T>(comparer, new RandomPivotSelectorFactory(new Random()), new InsertionSortFactory(), 8);
-                case ComparassionAlgorhythmType.QuickSortMedianPivot:
-                    return new QuickSort<T>(comparer, new MedianOfThreePivotSelectorFactory(), new InsertionSortFactory(), 8);
-                case ComparassionAlgorhythmType.QuickSortRandomPivotCutoffWindow:
-                    return new QuickSort<T>(comparer, new RandomPivotSelectorFactory(new Random()), new WindowMergeSortFactory(), 32);
-                case ComparassionAlgorhythmType.QuickSortRandomPivotCutoffTripleWindow:
-                    return new QuickSort<T>(comparer, new RandomPivotSelectorFactory(new Random()), new TripleWindowMergeSortFactory(), 32);
-
-                case ComparassionAlgorhythmType.QuickSortLLRandomPivot:
-                    return new QuickSortLL<T>(comparer, new RandomPivotSelectorFactory(new Random()), new InsertionSortFactory(), 8);
-                case ComparassionAlgorhythmType.QuickSortLLMedianPivot:
-                    return new QuickSortLL<T>(comparer, new MedianOfThreePivotSelectorFactory(), new InsertionSortFactory(), 8);
-
+                case ComparassionAlgorhythmType.QuickSort:
+                case ComparassionAlgorhythmType.QuickSortLL:
+                case ComparassionAlgorhythmType.StableQuickSort:
                 case ComparassionAlgorhythmType.DualPivotQuickSort:
-                    return new DualPivotQuickSort<T>(comparer, new InsertionSortFactory(), 0);
-                case ComparassionAlgorhythmType.DualPivotQuickSortCutoffInsertion:
-                    return new DualPivotQuickSort<T>(comparer, new InsertionSortFactory(), 16);
+                    {
+                        var viewModel = new QuickSortDialogViewModel();
+                        dialogService.ShowModalPresentation(parentViewModel, viewModel);
 
-                case ComparassionAlgorhythmType.StableQuickSortRandomPivot:
-                    return new StableQuickSort<T>(comparer, new RandomPivotSelectorFactory(new Random()), new InsertionSortFactory(), 8);
-                case ComparassionAlgorhythmType.StableQuickSortMedianPivot:
-                    return new StableQuickSort<T>(comparer, new MedianOfThreePivotSelectorFactory(), new InsertionSortFactory(), 8);
+                        if (viewModel.DialogResult != true)
+                            return null;
+
+                        var pivotSelector = PivotSelectorFactory.GetPivotSelector(viewModel.SelectedPivotType.Type);
+                        var cutoffSort = GetAlgorhythm(viewModel.SelectedCutoffSortType.AlgorhythmType, parentViewModel, dialogService);
+
+                        switch (algorhythmType)
+                        {
+                            case ComparassionAlgorhythmType.QuickSort:
+                                return new QuickSortFactory(viewModel.CutoffValue, cutoffSort, pivotSelector);
+                            case ComparassionAlgorhythmType.QuickSortLL:
+                                return new QuickSortLLFactory(viewModel.CutoffValue, cutoffSort, pivotSelector);
+                            case ComparassionAlgorhythmType.StableQuickSort:
+                                return new StableQuickSortFactory(viewModel.CutoffValue, cutoffSort, pivotSelector);
+                            case ComparassionAlgorhythmType.DualPivotQuickSort:
+                                return new DualPivotQuickSortFactory(viewModel.CutoffValue, cutoffSort, pivotSelector);
+                            default:
+                                return null;
+                        }
+                    }
 
                 default:
                     return null;

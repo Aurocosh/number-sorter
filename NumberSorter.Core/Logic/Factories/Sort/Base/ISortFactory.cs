@@ -7,5 +7,6 @@ namespace NumberSorter.Core.Logic.Factories.Sort.Base
     {
         ISortAlgorhythm<T> GetSort<T>(IComparer<T> comparer);
         void Sort<T>(IList<T> list, IComparer<T> comparer);
+        void Sort<T>(IList<T> list, int startingIndex, int length, IComparer<T> comparer);
     }
 }

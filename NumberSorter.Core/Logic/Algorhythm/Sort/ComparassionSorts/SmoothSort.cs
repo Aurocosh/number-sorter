@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class SmoothSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
+    public class SmoothSort<T> : GenericSortAlgorhythm<T>
     {
         private static readonly int[] _leonardoNumbers = {
             1, 1, 3, 5, 9, 15, 25, 41, 67, 109,
@@ -24,12 +24,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
         public SmoothSort(IComparer<T> comparer) : base(comparer) { }
 
-        public override void Sort(IList<T> list)
-        {
-            Sort(list, 0, list.Count);
-        }
-
-        public void Sort(IList<T> list, int startingIndex, int length)
+        public override void Sort(IList<T> list, int startingIndex, int length)
         {
             int low = startingIndex;
             int high = startingIndex + length - 1;

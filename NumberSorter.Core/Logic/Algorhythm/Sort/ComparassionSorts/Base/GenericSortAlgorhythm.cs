@@ -12,7 +12,8 @@ namespace NumberSorter.Core.Logic.Algorhythm
             Comparer = comparer;
         }
 
-        public abstract void Sort(IList<T> list);
+        public virtual void Sort(IList<T> list) => Sort(list, 0, list.Count);
+        public abstract void Sort(IList<T> list, int startingIndex, int length);
         public int Compare(T first, T second) => Comparer.Compare(first, second);
         public int Compare(IList<T> list, int first, int second) => Comparer.Compare(list[first], list[second]);
     }

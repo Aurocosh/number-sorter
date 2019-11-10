@@ -1,15 +1,12 @@
-﻿using NumberSorter.Core.Algorhythm;
-using NumberSorter.Core.Logic.Algorhythm.Merge.Base;
+﻿using NumberSorter.Core.Logic.Algorhythm.Merge.Base;
 using NumberSorter.Core.Logic.Algorhythm.PositionLocator.Base;
 using NumberSorter.Core.Logic.Factories.PositionLocator.Base;
 using NumberSorter.Core.Logic.Utility;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class IntervalMergeSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>, ILocalMergeAlgothythm<T>
+    public class IntervalMergeSort<T> : GenericSortAlgorhythm<T>, ILocalMergeAlgothythm<T>
     {
         private IPositionLocator<T> PositionLocator { get; }
 
@@ -18,13 +15,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
             PositionLocator = positionLocatorFactory.GetPositionLocator(comparer);
         }
 
-        public override void Sort(IList<T> list)
-        {
-            var sortRun = new SortRun(0, list.Count);
-            MergeSort(list, sortRun);
-        }
-
-        public void Sort(IList<T> list, int startingIndex, int length)
+        public override void Sort(IList<T> list, int startingIndex, int length)
         {
             var sortRun = new SortRun(startingIndex, length);
             MergeSort(list, sortRun);

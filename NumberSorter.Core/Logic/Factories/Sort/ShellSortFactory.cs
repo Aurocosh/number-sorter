@@ -6,11 +6,11 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Factories.Sort
 {
-    public abstract class ShellSortFactory : GenericSortFactory
+    public class ShellSortFactory : GenericSortFactory
     {
         private IGapGenerator GapGenerator { get; }
 
-        protected ShellSortFactory(IGapGenerator gapGenerator)
+        public ShellSortFactory(IGapGenerator gapGenerator)
         {
             GapGenerator = gapGenerator;
         }

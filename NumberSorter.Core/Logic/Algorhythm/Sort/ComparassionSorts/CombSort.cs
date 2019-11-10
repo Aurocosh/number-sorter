@@ -1,20 +1,13 @@
-﻿using NumberSorter.Core.Algorhythm;
-using NumberSorter.Core.Logic.Utility;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class CombSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
+    public class CombSort<T> : GenericSortAlgorhythm<T>
     {
         public CombSort(IComparer<T> comparer) : base(comparer) { }
 
-        public override void Sort(IList<T> list)
-        {
-            Sort(list, 0, list.Count);
-        }
-
-        public void Sort(IList<T> list, int startingIndex, int length)
+        public override void Sort(IList<T> list, int startingIndex, int length)
         {
             int currentGap = length;
             const float gapDecreaseFactor = 1.3f;

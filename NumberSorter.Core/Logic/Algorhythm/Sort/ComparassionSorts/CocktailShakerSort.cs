@@ -1,19 +1,13 @@
-﻿using NumberSorter.Core.Algorhythm;
-using NumberSorter.Core.Logic.Utility;
+﻿using NumberSorter.Core.Logic.Utility;
 using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class CocktailShakerSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
+    public class CocktailShakerSort<T> : GenericSortAlgorhythm<T>
     {
         public CocktailShakerSort(IComparer<T> comparer) : base(comparer) { }
 
-        public override void Sort(IList<T> list)
-        {
-            Sort(list, 0, list.Count);
-        }
-
-        public void Sort(IList<T> list, int startingIndex, int length)
+        public override void Sort(IList<T> list, int startingIndex, int length)
         {
             int lowerIndex = 0;
             int middleIndex = startingIndex + length / 2;

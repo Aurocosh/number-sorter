@@ -7,18 +7,13 @@ using System.Linq;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class WorkAreaInPlaceMergeSort<T> : GenericSortAlgorhythm<T>, IPartialSortAlgorhythm<T>
+    public class WorkAreaInPlaceMergeSort<T> : GenericSortAlgorhythm<T>
     {
         public WorkAreaInPlaceMergeSort(IComparer<T> comparer) : base(comparer)
         {
         }
 
-        public override void Sort(IList<T> list)
-        {
-            Sort(list, 0, list.Count);
-        }
-
-        public void Sort(IList<T> list, int startingIndex, int length)
+        public override void Sort(IList<T> list, int startingIndex, int length)
         {
             if (length - startingIndex > 1)
             {
