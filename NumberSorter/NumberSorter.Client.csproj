@@ -133,6 +133,12 @@
     <Compile Include="Forms\ColorSets\ColorSetSelectDialog.xaml.cs">
       <DependentUpon>ColorSetSelectDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\DistributionSortType\DistributionSortTypeDialog.xaml.cs">
+      <DependentUpon>DistributionSortTypeDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DistributionSortType\DistributionSortTypeLineControl.xaml.cs">
+      <DependentUpon>DistributionSortTypeLineControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Generators\GeneratorEditDialog.xaml.cs">
       <DependentUpon>GeneratorEditDialog.xaml</DependentUpon>
     </Compile>
@@ -190,11 +196,11 @@
     <Compile Include="Forms\Visualization\VisualizationTypeDialog.xaml.cs">
       <DependentUpon>VisualizationTypeDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SortType\SortTypeDialog.xaml.cs">
-      <DependentUpon>SortTypeDialog.xaml</DependentUpon>
+    <Compile Include="Forms\ComparassionSortType\ComparassionSortTypeDialog.xaml.cs">
+      <DependentUpon>ComparassionSortTypeDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SortType\SortTypeLineControl.xaml.cs">
-      <DependentUpon>SortTypeLineControl.xaml</DependentUpon>
+    <Compile Include="Forms\ComparassionSortType\ComparassionSortTypeLineControl.xaml.cs">
+      <DependentUpon>ComparassionSortTypeLineControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Interactions\WpfInteractions.cs" />
     <Compile Include="Utility\DialogCloser.cs" />
@@ -206,6 +212,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Forms\ColorSets\ColorSetSelectDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\DistributionSortType\DistributionSortTypeDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\DistributionSortType\DistributionSortTypeLineControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -301,11 +315,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Forms\SortType\SortTypeDialog.xaml">
+    <Page Include="Forms\ComparassionSortType\ComparassionSortTypeDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Forms\SortType\SortTypeLineControl.xaml">
+    <Page Include="Forms\ComparassionSortType\ComparassionSortTypeLineControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

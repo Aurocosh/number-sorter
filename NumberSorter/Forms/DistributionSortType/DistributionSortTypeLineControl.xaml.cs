@@ -21,9 +21,9 @@ namespace NumberSorter.Forms
     /// <summary>
     /// Interaction logic for SortTypeLineControl.xaml
     /// </summary>
-    public partial class SortTypeLineControl : ReactiveUserControl<SortTypeLineViewModel>
+    public partial class DistributionSortTypeLineControl : ReactiveUserControl<DistributionSortTypeLineViewModel>
     {
-        public SortTypeLineControl()
+        public DistributionSortTypeLineControl()
         {
             InitializeComponent();
             this.WhenActivated(disposable =>

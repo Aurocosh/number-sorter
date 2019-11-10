@@ -1,7 +1,7 @@
 ﻿<reactiveui:ReactiveUserControl
-             x:Class="NumberSorter.Forms.SortTypeLineControl"
+             x:Class="NumberSorter.Forms.ComparassionSortTypeLineControl"
              xmlns:viewmodels="clr-namespace:NumberSorter.Domain.ViewModels;assembly=NumberSorter.Domain"
-             x:TypeArguments="viewmodels:SortTypeLineViewModel"
+             x:TypeArguments="viewmodels:ComparassionSortTypeLineViewModel"
              xmlns:reactiveui="http://reactiveui.net"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

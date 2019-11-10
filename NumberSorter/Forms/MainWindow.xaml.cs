@@ -65,7 +65,9 @@ namespace NumberSorter.Forms
                 this.BindCommand(ViewModel, x => x.GeneratePartiallySortedCommand, x => x.GeneratePartiallySortedButton)
                     .DisposeWith(disposable);
 
-                this.BindCommand(ViewModel, x => x.PerformSortCommand, x => x.PerformSortButton)
+                this.BindCommand(ViewModel, x => x.PerformComparassionSortCommand, x => x.PerformComparassionSortButton)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.PerformDistributionSortCommand, x => x.PerformDistributionSortButton)
                     .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.SortHistoryCommand, x => x.SortHistoryButton)
                     .DisposeWith(disposable);

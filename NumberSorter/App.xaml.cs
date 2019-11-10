@@ -29,7 +29,6 @@ namespace NumberSorter
 
             var dialogService = new DialogService<ReactiveObject>();
             dialogService.RegisterWindowType<MainWindowViewModel, MainWindow>(new WindowViewInitializer<MainWindowViewModel>());
-            dialogService.RegisterWindowType<SortTypeViewModel, SortTypeDialog>(new WindowViewInitializer<SortTypeViewModel>());
             dialogService.RegisterWindowType<ColorSetDialogViewModel, ColorSetDialog>(new WindowViewInitializer<ColorSetDialogViewModel>());
             dialogService.RegisterWindowType<GeneratorsDialogViewModel, GeneratorsDialog>(new WindowViewInitializer<GeneratorsDialogViewModel>());
             dialogService.RegisterWindowType<LogHistoryDialogViewModel, LogHistoryDialog>(new WindowViewInitializer<LogHistoryDialogViewModel>());
@@ -37,6 +36,8 @@ namespace NumberSorter
             dialogService.RegisterWindowType<GeneratorEditDialogViewModel, GeneratorEditDialog>(new WindowViewInitializer<GeneratorEditDialogViewModel>());
             dialogService.RegisterWindowType<VisualizationTypeViewModel, VisualizationTypeDialog>(new WindowViewInitializer<VisualizationTypeViewModel>());
             dialogService.RegisterWindowType<ColorSetSelectDialogViewModel, ColorSetSelectDialog>(new WindowViewInitializer<ColorSetSelectDialogViewModel>());
+            dialogService.RegisterWindowType<ComparassionSortTypeViewModel, ComparassionSortTypeDialog>(new WindowViewInitializer<ComparassionSortTypeViewModel>());
+            dialogService.RegisterWindowType<DistributionSortTypeViewModel, DistributionSortTypeDialog>(new WindowViewInitializer<DistributionSortTypeViewModel>());
             dialogService.RegisterWindowType<PartialSortedGeneratorViewModel, PartialSortedGeneratorDialog>(new WindowViewInitializer<PartialSortedGeneratorViewModel>());
 
             WpfInteractions.RegisterInteractions();

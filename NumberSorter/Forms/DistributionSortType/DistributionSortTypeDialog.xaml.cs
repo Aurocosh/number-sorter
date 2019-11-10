@@ -20,9 +20,9 @@ namespace NumberSorter.Forms
     /// <summary>
     /// Interaction logic for SortTypeDialog.xaml
     /// </summary>
-    public partial class SortTypeDialog : ReactiveWindow<SortTypeViewModel>
+    public partial class DistributionSortTypeDialog : ReactiveWindow<DistributionSortTypeViewModel>
     {
-        public SortTypeDialog()
+        public DistributionSortTypeDialog()
         {
             InitializeComponent();
             this.WhenActivated(disposable =>

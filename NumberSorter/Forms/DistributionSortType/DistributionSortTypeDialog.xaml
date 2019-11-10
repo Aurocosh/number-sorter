@@ -1,0 +1,30 @@
+﻿<reactiveui:ReactiveWindow
+        x:TypeArguments="viewmodels:DistributionSortTypeViewModel"
+        x:Class="NumberSorter.Forms.DistributionSortTypeDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NumberSorter.Forms"
+        xmlns:reactiveui="http://reactiveui.net"
+        xmlns:viewmodels="clr-namespace:NumberSorter.Domain.ViewModels;assembly=NumberSorter.Domain"
+        xmlns:utility="clr-namespace:NumberSorter.Utility"
+        utility:DialogCloser.DialogResult = "{Binding DialogResult}"
+        mc:Ignorable="d"
+        Title="SortTypeDialog" Height="450" Width="400"
+        d:DataContext="{d:DesignInstance viewmodels:ComparassionSortTypeViewModel}">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Name="AcceptButton" Content="Accept" Width="80" Margin="5">
+                <Button.InputBindings>
+                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding AcceptCommand}" />
+                </Button.InputBindings>
+            </Button>
+            <Button IsCancel="True" Content="Cancel" Width="80" Margin="5"/>
+        </StackPanel>
+        <ListBox Name="SortTypeList"
+                 HorizontalContentAlignment="Stretch"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+        </ListBox>
+    </DockPanel>
+</reactiveui:ReactiveWindow>

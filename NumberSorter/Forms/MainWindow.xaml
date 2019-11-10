@@ -21,7 +21,8 @@
                 <MenuItem Header="Generate partially sorted list" Name="GeneratePartiallySortedButton"/>
             </MenuItem>
             <MenuItem Header="Sort">
-                <MenuItem Header="Perform sort" Name="PerformSortButton"/>
+                <MenuItem Header="Perform comparassion sort" Name="PerformComparassionSortButton"/>
+                <MenuItem Header="Perform distribution sort" Name="PerformDistributionSortButton"/>
                 <MenuItem Header="Sort history" Name="SortHistoryButton"/>
             </MenuItem>
             <MenuItem Header="Visualization">

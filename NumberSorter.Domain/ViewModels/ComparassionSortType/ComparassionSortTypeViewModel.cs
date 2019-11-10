@@ -8,22 +8,22 @@ using DynamicData;
 using NumberSorter.Core.Logic;
 using System;
 using NumberSorter.Core.Logic.Utility;
-using NumberSorter.Domain.Visualizers;
+using NumberSorter.Domain.Logic;
 
 namespace NumberSorter.Domain.ViewModels
 {
-    public class VisualizationTypeViewModel : ReactiveObject
+    public class ComparassionSortTypeViewModel : ReactiveObject
     {
         #region Fields
 
-        private readonly SourceList<VisualizationTypeLineViewModel> _sortTypes = new SourceList<VisualizationTypeLineViewModel>();
+        private readonly SourceList<ComparassionSortTypeLineViewModel> _sortTypes = new SourceList<ComparassionSortTypeLineViewModel>();
 
         #endregion Fields
 
         #region Properties
         [Reactive] public bool? DialogResult { get; set; }
-        [Reactive] public VisualizationTypeLineViewModel SelectedSortType { get; set; }
-        public IEnumerable<VisualizationTypeLineViewModel> SortTypes => _sortTypes.Items;
+        [Reactive] public ComparassionSortTypeLineViewModel SelectedSortType { get; set; }
+        public IEnumerable<ComparassionSortTypeLineViewModel> SortTypes => _sortTypes.Items;
 
         #endregion Properties
 
@@ -35,17 +35,17 @@ namespace NumberSorter.Domain.ViewModels
 
         #region Constructors
 
-        public VisualizationTypeViewModel()
+        public ComparassionSortTypeViewModel()
         {
             AcceptCommand = ReactiveCommand.Create(Accept);
 
-            var sortTypes = new List<VisualizationTypeLineViewModel>();
-            sortTypes.Add(new VisualizationTypeLineViewModel(VisualizationType.Columns, "Columns visualizer"));
-            sortTypes.Add(new VisualizationTypeLineViewModel(VisualizationType.PositiveColumns, "Positive columns visualizer"));
-            sortTypes.Add(new VisualizationTypeLineViewModel(VisualizationType.Points, "Points visualizer"));
-            sortTypes.Sort((x, y) => x.Name.CompareTo(y.Name));
-
+            var algorhythmTypes = EnumUtil.GetValues<ComparassionAlgorhythmType>();
+            var sortTypes = algorhythmTypes
+                .Select(x => new ComparassionSortTypeLineViewModel(x, ComparassionAlgorhythmNamer.GetName(x)))
+                .ToList();
+            sortTypes.Sort((x, y) => x.Description.CompareTo(y.Description));
             _sortTypes.AddRange(sortTypes);
+
             SelectedSortType = SortTypes.First();
         }
 

@@ -25,6 +25,7 @@ using NumberSorter.Domain.Container;
 using NumberSorter.Domain.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using NumberSorter.Domain.Logic;
 
 namespace NumberSorter.Domain.ViewModels
 {
@@ -64,7 +65,8 @@ namespace NumberSorter.Domain.ViewModels
         public ReactiveCommand<Unit, Unit> ToggleActionsCommand { get; }
         public ReactiveCommand<Unit, Unit> ToggleControlsCommand { get; }
 
-        public ReactiveCommand<Unit, Unit> PerformSortCommand { get; }
+        public ReactiveCommand<Unit, Unit> PerformComparassionSortCommand { get; }
+        public ReactiveCommand<Unit, Unit> PerformDistributionSortCommand { get; }
         public ReactiveCommand<Unit, Unit> SortHistoryCommand { get; }
 
         #endregion Commands
@@ -103,7 +105,8 @@ namespace NumberSorter.Domain.ViewModels
             ToggleActionsCommand = ReactiveCommand.Create(ToggleActionPanel);
             ToggleControlsCommand = ReactiveCommand.Create(ToggleControlPanel);
 
-            PerformSortCommand = ReactiveCommand.Create(SortData, canPerformSort);
+            PerformComparassionSortCommand = ReactiveCommand.Create(PerformComparassionSort, canPerformSort);
+            PerformDistributionSortCommand = ReactiveCommand.Create(PerformDistributionSort, canPerformSort);
             SortHistoryCommand = ReactiveCommand.Create(SortHistory);
 
             LoadDataCommand
@@ -176,50 +179,56 @@ namespace NumberSorter.Domain.ViewModels
         private void ToggleActionPanel() => ShowActions = !ShowActions;
         private void ToggleControlPanel() => ShowControls = !ShowControls;
 
-        private void SortData()
+        private void PerformComparassionSort()
         {
-            var viewModel = new SortTypeViewModel();
+            var viewModel = new ComparassionSortTypeViewModel();
+            _dialogService.ShowModalPresentation(this, viewModel);
+
+            if (viewModel.DialogResult != true || viewModel.SelectedSortType == null)
+                return;
+
+            var accessTrackingList = new ComparerLoggingList<int>(InputNumbers.Values, new IntComparer());
+
+            var algorhythmType = viewModel.SelectedSortType.AlgorhythmType;
+            var algorhythm = ComparassionAlgorhythmFactory.GetAlgorhythm(algorhythmType, accessTrackingList, _dialogService);
+
+            GC.Collect();
+            var stopwatch = Stopwatch.StartNew();
+
+            algorhythm.Sort(accessTrackingList);
+
+            stopwatch.Stop();
+            var elapsedTime = stopwatch.ElapsedMilliseconds;
+
+            var algorhythmName = ComparassionAlgorhythmNamer.GetName(algorhythmType);
+            SortingLog = accessTrackingList.GetSortLog(InputNumbers.Name, InputNumbers.Id, algorhythmName, elapsedTime);
+            SaveLogSummary(SortingLog);
+        }
+
+        private void PerformDistributionSort()
+        {
+            var viewModel = new DistributionSortTypeViewModel();
             _dialogService.ShowModalPresentation(this, viewModel);
 
             if (viewModel.DialogResult != true || viewModel.SelectedSortType == null)
                 return;
 
             var algorhythmType = viewModel.SelectedSortType.AlgorhythmType;
-            var integerSort = IntAlgorhythmFactory.GetAlgorhythm(algorhythmType);
+            var integerSort = DistributionAlgorhythmFactory.GetAlgorhythm(algorhythmType, _dialogService);
 
-            if (integerSort != null)
-            {
-                var accessTrackingList = new AccessLoggingList<int>(InputNumbers.Values, new IntComparer());
+            var accessTrackingList = new AccessLoggingList<int>(InputNumbers.Values, new IntComparer());
 
-                GC.Collect();
-                var stopwatch = Stopwatch.StartNew();
+            GC.Collect();
+            var stopwatch = Stopwatch.StartNew();
 
-                integerSort.Sort(accessTrackingList);
+            integerSort.Sort(accessTrackingList);
 
-                stopwatch.Stop();
-                var elapsedTime = stopwatch.ElapsedMilliseconds;
+            stopwatch.Stop();
+            var elapsedTime = stopwatch.ElapsedMilliseconds;
 
-                var algorhythmName = AlgorhythmNamer.GetName(algorhythmType);
-                SortingLog = accessTrackingList.GetSortLog(InputNumbers.Name, InputNumbers.Id, algorhythmName, elapsedTime);
-                SaveLogSummary(SortingLog);
-            }
-            else
-            {
-                var accessTrackingList = new ComparerLoggingList<int>(InputNumbers.Values, new IntComparer());
-                var algorhythm = AlgorhythmFactory.GetAlgorhythm(algorhythmType, accessTrackingList);
-
-                GC.Collect();
-                var stopwatch = Stopwatch.StartNew();
-
-                algorhythm.Sort(accessTrackingList);
-
-                stopwatch.Stop();
-                var elapsedTime = stopwatch.ElapsedMilliseconds;
-
-                var algorhythmName = AlgorhythmNamer.GetName(algorhythmType);
-                SortingLog = accessTrackingList.GetSortLog(InputNumbers.Name, InputNumbers.Id, algorhythmName, elapsedTime);
-                SaveLogSummary(SortingLog);
-            }
+            var algorhythmName = DistributionAlgorhythmNamer.GetName(algorhythmType);
+            SortingLog = accessTrackingList.GetSortLog(InputNumbers.Name, InputNumbers.Id, algorhythmName, elapsedTime);
+            SaveLogSummary(SortingLog);
         }
 
         private void SortHistory()

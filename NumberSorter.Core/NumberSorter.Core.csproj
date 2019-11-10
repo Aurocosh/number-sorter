@@ -82,10 +82,6 @@
     <Compile Include="Logic\Algorhythm\Sort\IntegerSorts\BitLSDRadixSort\BitLSDRadixSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\IntegerSorts\RadixSort\LSDRadixSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\IntegerSorts\RadixSort\MSDRadixSort.cs" />
-    <Compile Include="Logic\IntAlgorhythmFactory.cs" />
-    <Compile Include="Logic\AlgorhythmNameProvider.cs" />
-    <Compile Include="Logic\AlgorhythmFactory.cs" />
-    <Compile Include="Logic\AlgorhythmType.cs" />
     <Compile Include="Logic\Algorhythm\Base\ArrayHalves.cs" />
     <Compile Include="Logic\Algorhythm\Base\ArrayRunHalves.cs" />
     <Compile Include="Logic\Algorhythm\Base\IComparingAlgorhythm.cs" />

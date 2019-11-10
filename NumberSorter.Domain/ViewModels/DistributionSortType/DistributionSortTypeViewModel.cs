@@ -5,24 +5,23 @@ using System.Reactive;
 using System.Reactive.Linq;
 using ReactiveUI.Fody.Helpers;
 using DynamicData;
-using NumberSorter.Core.Logic;
-using System;
 using NumberSorter.Core.Logic.Utility;
+using NumberSorter.Domain.Logic;
 
 namespace NumberSorter.Domain.ViewModels
 {
-    public class SortTypeViewModel : ReactiveObject
+    public class DistributionSortTypeViewModel : ReactiveObject
     {
         #region Fields
 
-        private readonly SourceList<SortTypeLineViewModel> _sortTypes = new SourceList<SortTypeLineViewModel>();
+        private readonly SourceList<DistributionSortTypeLineViewModel> _sortTypes = new SourceList<DistributionSortTypeLineViewModel>();
 
         #endregion Fields
 
         #region Properties
         [Reactive] public bool? DialogResult { get; set; }
-        [Reactive] public SortTypeLineViewModel SelectedSortType { get; set; }
-        public IEnumerable<SortTypeLineViewModel> SortTypes => _sortTypes.Items;
+        [Reactive] public DistributionSortTypeLineViewModel SelectedSortType { get; set; }
+        public IEnumerable<DistributionSortTypeLineViewModel> SortTypes => _sortTypes.Items;
 
         #endregion Properties
 
@@ -34,13 +33,13 @@ namespace NumberSorter.Domain.ViewModels
 
         #region Constructors
 
-        public SortTypeViewModel()
+        public DistributionSortTypeViewModel()
         {
             AcceptCommand = ReactiveCommand.Create(Accept);
 
-            var algorhythmTypes = EnumUtil.GetValues<AlgorhythmType>();
+            var algorhythmTypes = EnumUtil.GetValues<DistributionAlgorhythmType>();
             var sortTypes = algorhythmTypes
-                .Select(x => new SortTypeLineViewModel(x, AlgorhythmNamer.GetName(x)))
+                .Select(x => new DistributionSortTypeLineViewModel(x, DistributionAlgorhythmNamer.GetName(x)))
                 .ToList();
             sortTypes.Sort((x, y) => x.Description.CompareTo(y.Description));
             _sortTypes.AddRange(sortTypes);
