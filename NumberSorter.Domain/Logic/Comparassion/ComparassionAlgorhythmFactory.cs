@@ -114,12 +114,15 @@ namespace NumberSorter.Domain.Logic
                 case ComparassionAlgorhythmType.KWayMergeSortGroup:
                     return new KWayMergeSortFactory(8, new BinarySortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BiasedBinaryPositionLocatorFactory(2));
 
-                case ComparassionAlgorhythmType.IntervalMultiMergeGroupLinearSort:
-                    return new IntervalMultiMergeSortFactory(new InsertionSortFactory(), new SimpleRunLocatorFactory(), new LinearPositionLocatorFactory());
-                case ComparassionAlgorhythmType.IntervalMultiMergeGroupBinarySort:
-                    return new IntervalMultiMergeSortFactory(new BinarySortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BinaryPositionLocatorFactory());
-                case ComparassionAlgorhythmType.IntervalMultiMergeGroupBiasedBinarySort:
-                    return new IntervalMultiMergeSortFactory(new BinarySortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BiasedBinaryPositionLocatorFactory(2));
+                case ComparassionAlgorhythmType.IntervalMultiMergeSort:
+                    {
+                        var viewModel = new IntervalMultiMergeSortDialogViewModel();
+                        dialogService.ShowModalPresentation(parentViewModel, viewModel);
+                        var sortrunSort = GetAlgorhythm(viewModel.SelectedSortType.Type, parentViewModel, dialogService);
+                        var runLocator = RunLocatorFactory.GetLocator(viewModel.SelectedRunLocatorType.Type, parentViewModel, dialogService);
+                        var positionLocator = PositionLocatorFactory.GetPositionLocator(viewModel.SelectedPositionLocator.Type, parentViewModel, dialogService);
+                        return new IntervalMultiMergeSortFactory(sortrunSort, runLocator, positionLocator);
+                    }
 
                 case ComparassionAlgorhythmType.QuickSort:
                 case ComparassionAlgorhythmType.QuickSortLL:

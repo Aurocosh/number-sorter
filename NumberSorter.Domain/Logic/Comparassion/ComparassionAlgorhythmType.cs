@@ -46,9 +46,7 @@
         KWayMergeSortGroup,
         KWayMergeSortSimple,
 
-        IntervalMultiMergeGroupLinearSort,
-        IntervalMultiMergeGroupBinarySort,
-        IntervalMultiMergeGroupBiasedBinarySort,
+        IntervalMultiMergeSort,
 
         QuickSort,
         QuickSortLL,

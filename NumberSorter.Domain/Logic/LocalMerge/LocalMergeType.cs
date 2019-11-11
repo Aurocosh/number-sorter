@@ -5,6 +5,7 @@
         IntervalLinearSearch,
         IntervalBinarySearch,
         IntervalBiasedBinarySearch,
+        IntervalCustomBiasedBinarySearch,
         Window,
         TripleWindow,
     }

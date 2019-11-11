@@ -133,6 +133,12 @@
     <Compile Include="Forms\ColorSets\ColorSetSelectDialog.xaml.cs">
       <DependentUpon>ColorSetSelectDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ComparassionSorts\IntervalMultiMergeSortDialog.xaml.cs">
+      <DependentUpon>IntervalMultiMergeSortDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RunLocators\GroupingRunLocatorDialog.xaml.cs">
+      <DependentUpon>GroupingRunLocatorDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ComparassionSorts\IntervalMergeSortDialog.xaml.cs">
       <DependentUpon>IntervalMergeSortDialog.xaml</DependentUpon>
     </Compile>
@@ -227,6 +233,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Forms\ColorSets\ColorSetSelectDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\ComparassionSorts\IntervalMultiMergeSortDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\RunLocators\GroupingRunLocatorDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

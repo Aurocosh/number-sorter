@@ -52,9 +52,7 @@ namespace NumberSorter.Domain.Logic
             _nameDictionary.Add(ComparassionAlgorhythmType.KWayMergeSortGroup, "K way merge sort (Grouped runs)");
             _nameDictionary.Add(ComparassionAlgorhythmType.KWayMergeSortSimple, "K way merge sort (Simple runs)");
 
-            _nameDictionary.Add(ComparassionAlgorhythmType.IntervalMultiMergeGroupLinearSort, "Interval multi merge sort (Simple runs, Linear search)");
-            _nameDictionary.Add(ComparassionAlgorhythmType.IntervalMultiMergeGroupBinarySort, "Interval multi merge sort (Grouped runs, Binary search)");
-            _nameDictionary.Add(ComparassionAlgorhythmType.IntervalMultiMergeGroupBiasedBinarySort, "Interval multi merge sort (Grouped runs, Biased binary search)");
+            _nameDictionary.Add(ComparassionAlgorhythmType.IntervalMultiMergeSort, "Interval multi merge sort");
 
             _nameDictionary.Add(ComparassionAlgorhythmType.QuickSort, "Quick sort LR");
             _nameDictionary.Add(ComparassionAlgorhythmType.QuickSortLL, "Quick sort LL");

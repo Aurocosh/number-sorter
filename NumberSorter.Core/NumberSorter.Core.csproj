@@ -119,7 +119,7 @@
     <Compile Include="Logic\Factories\PivotSelector\Base\IPivotSelectorFactory.cs" />
     <Compile Include="Logic\Factories\PivotSelector\MedianOfThreePivotSelectorFactory.cs" />
     <Compile Include="Logic\Factories\PivotSelector\RandomPivotSelectorFactory.cs" />
-    <Compile Include="Logic\Factories\SortRunLocator\Base\ILocalMergeFactory.cs" />
+    <Compile Include="Logic\Factories\SortRunLocator\Base\ISortRunLocatorFactory.cs" />
     <Compile Include="Logic\Factories\SortRunLocator\GroupingRunLocatorFactory.cs" />
     <Compile Include="Logic\Factories\SortRunLocator\SimpleRunLocatorFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Base\ISortFactory.cs" />

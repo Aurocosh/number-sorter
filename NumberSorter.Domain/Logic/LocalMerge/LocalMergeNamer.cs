@@ -11,6 +11,7 @@ namespace NumberSorter.Domain.Logic
             _nameDictionary.Add(LocalMergeType.IntervalLinearSearch, "Normal (Linear search)");
             _nameDictionary.Add(LocalMergeType.IntervalBinarySearch, "Normal (Binary search)");
             _nameDictionary.Add(LocalMergeType.IntervalBiasedBinarySearch, "Normal (Biased binary search)");
+            _nameDictionary.Add(LocalMergeType.IntervalCustomBiasedBinarySearch, "Normal (Custom biased binary search)");
             _nameDictionary.Add(LocalMergeType.Window, "Window");
             _nameDictionary.Add(LocalMergeType.TripleWindow, "Triple window");
         }

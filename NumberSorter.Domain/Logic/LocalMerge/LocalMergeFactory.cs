@@ -2,6 +2,7 @@
 using NumberSorter.Core.Logic.Factories.PositionLocator;
 using NumberSorter.Core.Logic.Factories.Sort;
 using NumberSorter.Domain.DialogService;
+using NumberSorter.Domain.ViewModels;
 using ReactiveUI;
 
 namespace NumberSorter.Domain.Logic
@@ -18,6 +19,12 @@ namespace NumberSorter.Domain.Logic
                     return new IntervalMergeSortFactory(new BinaryPositionLocatorFactory());
                 case LocalMergeType.IntervalBiasedBinarySearch:
                     return new IntervalMergeSortFactory(new BiasedBinaryPositionLocatorFactory(2));
+                case LocalMergeType.IntervalCustomBiasedBinarySearch:
+                    {
+                        var viewModel = new BiasValueDialogViewModel();
+                        dialogService.ShowModalPresentation(parentViewModel, viewModel);
+                        return new IntervalMergeSortFactory(new BiasedBinaryPositionLocatorFactory(viewModel.BiasValue));
+                    }
                 case LocalMergeType.Window:
                     return new WindowMergeSortFactory();
                 case LocalMergeType.TripleWindow:
