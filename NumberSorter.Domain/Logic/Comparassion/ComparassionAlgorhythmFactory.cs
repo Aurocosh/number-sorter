@@ -80,17 +80,14 @@ namespace NumberSorter.Domain.Logic
                         var finalSort = GetAlgorhythm(viewModel.SelectedFinisherSortType.Type, parentViewModel, dialogService);
                         return new JHeapSortFactory(finalSort);
                     }
-
-                case ComparassionAlgorhythmType.TimSortBinaryInterval:
-                    return new TimSortFactory(new IntervalMergeSortFactory(new BiasedBinaryPositionLocatorFactory(2)), new BinarySortFactory());
-                case ComparassionAlgorhythmType.TimSortInsertionWindow:
-                    return new TimSortFactory(new WindowMergeSortFactory(), new InsertionSortFactory());
-                case ComparassionAlgorhythmType.TimSortWindowWindow:
-                    return new TimSortFactory(new WindowMergeSortFactory(), new WindowMergeSortFactory());
-                case ComparassionAlgorhythmType.TimSortInsertionTripleWindow:
-                    return new TimSortFactory(new TripleWindowMergeSortFactory(), new InsertionSortFactory());
-                case ComparassionAlgorhythmType.TimSortTripleWindowTripleWindow:
-                    return new TimSortFactory(new TripleWindowMergeSortFactory(), new TripleWindowMergeSortFactory());
+                case ComparassionAlgorhythmType.TimSort:
+                    {
+                        var viewModel = new TimSortDialogViewModel();
+                        dialogService.ShowModalPresentation(parentViewModel, viewModel);
+                        var localMerge = LocalMergeFactory.GetMerge(viewModel.SelectedMergeType.Type, parentViewModel, dialogService);
+                        var minrunSort = GetAlgorhythm(viewModel.SelectedSortType.Type, parentViewModel, dialogService);
+                        return new TimSortFactory(localMerge, minrunSort);
+                    }
 
                 case ComparassionAlgorhythmType.ShellSortCiura:
                     return new ShellSortFactory(new CiuraGapGenerator());

@@ -8,7 +8,7 @@ namespace NumberSorter.Domain.Logic
 {
     public static class LocalMergeFactory
     {
-        public static ILocalMergeFactory GetPositionLocator(LocalMergeType type, ReactiveObject parentViewModel, IDialogService<ReactiveObject> dialogService)
+        public static ILocalMergeFactory GetMerge(LocalMergeType type, ReactiveObject parentViewModel, IDialogService<ReactiveObject> dialogService)
         {
             switch (type)
             {

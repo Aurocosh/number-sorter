@@ -14,11 +14,7 @@
         HalfInPlaceMergeSort,
         KindaInPlaceMergeSort,
 
-        TimSortWindowWindow,
-        TimSortBinaryInterval,
-        TimSortInsertionWindow,
-        TimSortInsertionTripleWindow,
-        TimSortTripleWindowTripleWindow,
+        TimSort,
 
         DequeMergeSort,
         WindowMergeSort,

@@ -118,11 +118,13 @@
     <Compile Include="ViewModels\ComparassionSorts\JHeapSortDialogViewModel.cs" />
     <Compile Include="ViewModels\ComparassionSorts\BiasValueDialogViewModel.cs" />
     <Compile Include="ViewModels\ComparassionSorts\IntervalMergeSortDialogViewModel.cs" />
+    <Compile Include="ViewModels\ComparassionSorts\TimSortDialogViewModel.cs" />
     <Compile Include="ViewModels\ComparassionSorts\QuickSortDialogViewModel.cs" />
     <Compile Include="ViewModels\DistributionSortType\DistributionSortTypeLineViewModel.cs" />
     <Compile Include="ViewModels\DistributionSortType\DistributionSortTypeViewModel.cs" />
     <Compile Include="ViewModels\Generators\CustomListGenerator\Processors\IntervalValuesProcessorLineViewModel.cs" />
     <Compile Include="ViewModels\Generators\CustomListGenerator\Processors\PartialShuffleValuesProcessorLineViewModel.cs" />
+    <Compile Include="ViewModels\LocalMergeType\LocalMergeTypeLineViewModel.cs" />
     <Compile Include="ViewModels\PositionLocatorType\PositionLocatorTypeLineViewModel.cs" />
     <Compile Include="ViewModels\PivotSelectorType\PivotSelectorTypeLineViewModel.cs" />
     <Compile Include="Visualizers\Base\VisualizationFactory.cs" />

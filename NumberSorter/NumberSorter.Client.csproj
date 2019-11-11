@@ -142,6 +142,9 @@
     <Compile Include="Forms\ComparassionSorts\BiasValueDialog.xaml.cs">
       <DependentUpon>BiasValueDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ComparassionSorts\TimSortDialog.xaml.cs">
+      <DependentUpon>TimSortDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ComparassionSorts\QuickSortDialog.xaml.cs">
       <DependentUpon>QuickSortDialog.xaml</DependentUpon>
     </Compile>
@@ -236,6 +239,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Forms\ComparassionSorts\BiasValueDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\ComparassionSorts\TimSortDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
