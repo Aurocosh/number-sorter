@@ -133,8 +133,14 @@
     <Compile Include="Forms\ColorSets\ColorSetSelectDialog.xaml.cs">
       <DependentUpon>ColorSetSelectDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ComparassionSorts\IntervalMergeSortDialog.xaml.cs">
+      <DependentUpon>IntervalMergeSortDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ComparassionSorts\JHeapSortDialog.xaml.cs">
       <DependentUpon>JHeapSortDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ComparassionSorts\BiasValueDialog.xaml.cs">
+      <DependentUpon>BiasValueDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\ComparassionSorts\QuickSortDialog.xaml.cs">
       <DependentUpon>QuickSortDialog.xaml</DependentUpon>
@@ -221,7 +227,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Forms\ComparassionSorts\IntervalMergeSortDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Forms\ComparassionSorts\JHeapSortDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\ComparassionSorts\BiasValueDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

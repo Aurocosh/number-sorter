@@ -42,6 +42,9 @@ namespace NumberSorter
 
             dialogService.RegisterWindowType<JHeapSortDialogViewModel, JHeapSortDialog>(new WindowViewInitializer<JHeapSortDialogViewModel>());
             dialogService.RegisterWindowType<QuickSortDialogViewModel, QuickSortDialog>(new WindowViewInitializer<QuickSortDialogViewModel>());
+            dialogService.RegisterWindowType<IntervalMergeSortDialogViewModel, IntervalMergeSortDialog>(new WindowViewInitializer<IntervalMergeSortDialogViewModel>());
+
+            dialogService.RegisterWindowType<BiasValueDialogViewModel, BiasValueDialog>(new WindowViewInitializer<BiasValueDialogViewModel>());
 
             WpfInteractions.RegisterInteractions();
 

@@ -52,7 +52,12 @@ namespace NumberSorter.Domain.Logic
                 case ComparassionAlgorhythmType.WorkAreaInPlaceMergeSort:
                     return new WorkAreaInPlaceMergeSortFactory();
                 case ComparassionAlgorhythmType.IntervalMergeSort:
-                    return new IntervalMergeSortFactory(new BiasedBinaryPositionLocatorFactory(2));
+                    {
+                        var viewModel = new IntervalMergeSortDialogViewModel();
+                        dialogService.ShowModalPresentation(parentViewModel, viewModel);
+                        var positionLocator = PositionLocatorFactory.GetPositionLocator(viewModel.SelectedPositionLocator.Type, parentViewModel, dialogService);
+                        return new IntervalMergeSortFactory(positionLocator);
+                    }
                 case ComparassionAlgorhythmType.TripleWindowMergeSort:
                     return new TripleWindowMergeSortFactory();
 
@@ -72,12 +77,8 @@ namespace NumberSorter.Domain.Logic
                     {
                         var viewModel = new JHeapSortDialogViewModel();
                         dialogService.ShowModalPresentation(parentViewModel, viewModel);
-
-                        if (viewModel.DialogResult != true)
-                            return null;
-
-                        var finishSort = GetAlgorhythm(viewModel.SelectedFinisherSortType.Type, parentViewModel, dialogService);
-                        return new JHeapSortFactory(finishSort);
+                        var finalSort = GetAlgorhythm(viewModel.SelectedFinisherSortType.Type, parentViewModel, dialogService);
+                        return new JHeapSortFactory(finalSort);
                     }
 
                 case ComparassionAlgorhythmType.TimSortBinaryInterval:
@@ -130,9 +131,6 @@ namespace NumberSorter.Domain.Logic
                     {
                         var viewModel = new QuickSortDialogViewModel();
                         dialogService.ShowModalPresentation(parentViewModel, viewModel);
-
-                        if (viewModel.DialogResult != true)
-                            return null;
 
                         var pivotSelector = PivotSelectorFactory.GetPivotSelector(viewModel.SelectedPivotType.Type);
                         var cutoffSort = GetAlgorhythm(viewModel.SelectedCutoffSortType.Type, parentViewModel, dialogService);
