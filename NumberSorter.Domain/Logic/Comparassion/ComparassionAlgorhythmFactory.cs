@@ -96,32 +96,34 @@ namespace NumberSorter.Domain.Logic
                 case ComparassionAlgorhythmType.ShellSortTokuda:
                     return new ShellSortFactory(new TokudaGapGenerator());
 
-                case ComparassionAlgorhythmType.MultiMergeSimpleLinearSort:
-                    return new MultiMergeSortFactory(new InsertionSortFactory(), new SimpleRunLocatorFactory(), new LinearPositionLocatorFactory());
-                case ComparassionAlgorhythmType.MultiMergeGroupLinearSort:
-                    return new MultiMergeSortFactory(new InsertionSortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new LinearPositionLocatorFactory());
-                case ComparassionAlgorhythmType.MultiMergeSimpleBinarySort:
-                    return new MultiMergeSortFactory(new BinarySortFactory(), new SimpleRunLocatorFactory(), new BinaryPositionLocatorFactory());
-                case ComparassionAlgorhythmType.MultiMergeGroupBinarySort:
-                    return new MultiMergeSortFactory(new BinarySortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BinaryPositionLocatorFactory());
-                case ComparassionAlgorhythmType.MultiMergeGroupBinaryWindowSort:
-                    return new MultiMergeSortFactory(new WindowMergeSortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BinaryPositionLocatorFactory());
-                case ComparassionAlgorhythmType.MultiMergeGroupBinaryRecursiveSort:
-                    return new RecursiveMultiMergeSortFactory(new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BinaryPositionLocatorFactory());
-
-                case ComparassionAlgorhythmType.KWayMergeSortSimple:
-                    return new KWayMergeSortFactory(8, new BinarySortFactory(), new SimpleRunLocatorFactory(), new BiasedBinaryPositionLocatorFactory(2));
-                case ComparassionAlgorhythmType.KWayMergeSortGroup:
-                    return new KWayMergeSortFactory(8, new BinarySortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BiasedBinaryPositionLocatorFactory(2));
-
-                case ComparassionAlgorhythmType.IntervalMultiMergeSort:
+                case ComparassionAlgorhythmType.KWayMergeSort:
                     {
-                        var viewModel = new IntervalMultiMergeSortDialogViewModel();
+                        var viewModel = new KWayMergeSortDialogViewModel();
                         dialogService.ShowModalPresentation(parentViewModel, viewModel);
                         var sortrunSort = GetAlgorhythm(viewModel.SelectedSortType.Type, parentViewModel, dialogService);
                         var runLocator = RunLocatorFactory.GetLocator(viewModel.SelectedRunLocatorType.Type, parentViewModel, dialogService);
                         var positionLocator = PositionLocatorFactory.GetPositionLocator(viewModel.SelectedPositionLocator.Type, parentViewModel, dialogService);
-                        return new IntervalMultiMergeSortFactory(sortrunSort, runLocator, positionLocator);
+                        return new KWayMergeSortFactory(viewModel.KValue, sortrunSort, runLocator, positionLocator);
+                    }
+
+                case ComparassionAlgorhythmType.MultiMergeSort:
+                case ComparassionAlgorhythmType.IntervalMultiMergeSort:
+                    {
+                        var viewModel = new MultiMergeSortDialogViewModel();
+                        dialogService.ShowModalPresentation(parentViewModel, viewModel);
+                        var sortrunSort = GetAlgorhythm(viewModel.SelectedSortType.Type, parentViewModel, dialogService);
+                        var runLocator = RunLocatorFactory.GetLocator(viewModel.SelectedRunLocatorType.Type, parentViewModel, dialogService);
+                        var positionLocator = PositionLocatorFactory.GetPositionLocator(viewModel.SelectedPositionLocator.Type, parentViewModel, dialogService);
+
+                        switch (algorhythmType)
+                        {
+                            case ComparassionAlgorhythmType.MultiMergeSort:
+                                return new MultiMergeSortFactory(sortrunSort, runLocator, positionLocator);
+                            case ComparassionAlgorhythmType.IntervalMultiMergeSort:
+                                return new IntervalMultiMergeSortFactory(sortrunSort, runLocator, positionLocator);
+                            default:
+                                return null;
+                        }
                     }
 
                 case ComparassionAlgorhythmType.QuickSort:

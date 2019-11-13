@@ -133,8 +133,11 @@
     <Compile Include="Forms\ColorSets\ColorSetSelectDialog.xaml.cs">
       <DependentUpon>ColorSetSelectDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ComparassionSorts\IntervalMultiMergeSortDialog.xaml.cs">
-      <DependentUpon>IntervalMultiMergeSortDialog.xaml</DependentUpon>
+    <Compile Include="Forms\ComparassionSorts\KWayMergeSortDialog.xaml.cs">
+      <DependentUpon>KWayMergeSortDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ComparassionSorts\MultiMergeSortDialog.xaml.cs">
+      <DependentUpon>MultiMergeSortDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\RunLocators\GroupingRunLocatorDialog.xaml.cs">
       <DependentUpon>GroupingRunLocatorDialog.xaml</DependentUpon>
@@ -236,7 +239,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Forms\ComparassionSorts\IntervalMultiMergeSortDialog.xaml">
+    <Page Include="Forms\ComparassionSorts\KWayMergeSortDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\ComparassionSorts\MultiMergeSortDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

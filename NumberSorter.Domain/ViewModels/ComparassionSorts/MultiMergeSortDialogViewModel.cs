@@ -10,7 +10,7 @@ using NumberSorter.Domain.Logic;
 
 namespace NumberSorter.Domain.ViewModels
 {
-    public class IntervalMultiMergeSortDialogViewModel : ReactiveObject
+    public class MultiMergeSortDialogViewModel : ReactiveObject
     {
         #region Fields
 
@@ -40,7 +40,7 @@ namespace NumberSorter.Domain.ViewModels
 
         #region Constructors
 
-        public IntervalMultiMergeSortDialogViewModel()
+        public MultiMergeSortDialogViewModel()
         {
             AcceptCommand = ReactiveCommand.Create(Accept);
 

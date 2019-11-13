@@ -20,9 +20,9 @@ namespace NumberSorter.Forms
     /// <summary>
     /// Interaction logic for SortTypeDialog.xaml
     /// </summary>
-    public partial class IntervalMultiMergeSortDialog : ReactiveWindow<IntervalMultiMergeSortDialogViewModel>
+    public partial class MultiMergeSortDialog : ReactiveWindow<MultiMergeSortDialogViewModel>
     {
-        public IntervalMultiMergeSortDialog()
+        public MultiMergeSortDialog()
         {
             InitializeComponent();
             this.WhenActivated(disposable =>

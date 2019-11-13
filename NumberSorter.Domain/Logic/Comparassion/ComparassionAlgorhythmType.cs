@@ -36,16 +36,8 @@
         ShellSortKnuth,
         ShellSortTokuda,
 
-        MultiMergeGroupLinearSort,
-        MultiMergeSimpleLinearSort,
-        MultiMergeGroupBinarySort,
-        MultiMergeSimpleBinarySort,
-        MultiMergeGroupBinaryWindowSort,
-        MultiMergeGroupBinaryRecursiveSort,
-
-        KWayMergeSortGroup,
-        KWayMergeSortSimple,
-
+        KWayMergeSort,
+        MultiMergeSort,
         IntervalMultiMergeSort,
 
         QuickSort,

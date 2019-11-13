@@ -42,16 +42,8 @@ namespace NumberSorter.Domain.Logic
             _nameDictionary.Add(ComparassionAlgorhythmType.ShellSortKnuth, "Shell sort (Knuth)");
             _nameDictionary.Add(ComparassionAlgorhythmType.ShellSortTokuda, "Shell sort (Tokuda)");
 
-            _nameDictionary.Add(ComparassionAlgorhythmType.MultiMergeGroupLinearSort, "Multi merge sort (Grouped runs, Linear search)");
-            _nameDictionary.Add(ComparassionAlgorhythmType.MultiMergeSimpleLinearSort, "Multi merge sort (Simple runs, Linear search)");
-            _nameDictionary.Add(ComparassionAlgorhythmType.MultiMergeGroupBinarySort, "Multi merge sort (Grouped runs, Binary search)");
-            _nameDictionary.Add(ComparassionAlgorhythmType.MultiMergeSimpleBinarySort, "Multi merge sort (Simple runs, Binary search)");
-            _nameDictionary.Add(ComparassionAlgorhythmType.MultiMergeGroupBinaryWindowSort, "Multi merge sort (Grouped runs, Binary search, Window merge sort runs)");
-            _nameDictionary.Add(ComparassionAlgorhythmType.MultiMergeGroupBinaryRecursiveSort, "Multi merge sort (Simple runs, Binary search, Recursive)");
-
-            _nameDictionary.Add(ComparassionAlgorhythmType.KWayMergeSortGroup, "K way merge sort (Grouped runs)");
-            _nameDictionary.Add(ComparassionAlgorhythmType.KWayMergeSortSimple, "K way merge sort (Simple runs)");
-
+            _nameDictionary.Add(ComparassionAlgorhythmType.KWayMergeSort, "K way merge sort");
+            _nameDictionary.Add(ComparassionAlgorhythmType.MultiMergeSort, "Multi merge sort");
             _nameDictionary.Add(ComparassionAlgorhythmType.IntervalMultiMergeSort, "Interval multi merge sort");
 
             _nameDictionary.Add(ComparassionAlgorhythmType.QuickSort, "Quick sort LR");
