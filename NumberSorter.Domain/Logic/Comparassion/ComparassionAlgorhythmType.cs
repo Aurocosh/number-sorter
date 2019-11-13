@@ -32,9 +32,7 @@
         HeapSort,
         JHeapSort,
 
-        ShellSortCiura,
-        ShellSortKnuth,
-        ShellSortTokuda,
+        ShellSort,
 
         KWayMergeSort,
         MultiMergeSort,

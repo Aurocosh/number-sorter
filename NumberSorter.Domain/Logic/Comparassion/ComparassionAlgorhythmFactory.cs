@@ -88,14 +88,13 @@ namespace NumberSorter.Domain.Logic
                         var minrunSort = GetAlgorhythm(viewModel.SelectedSortType.Type, parentViewModel, dialogService);
                         return new TimSortFactory(localMerge, minrunSort);
                     }
-
-                case ComparassionAlgorhythmType.ShellSortCiura:
-                    return new ShellSortFactory(new CiuraGapGenerator());
-                case ComparassionAlgorhythmType.ShellSortKnuth:
-                    return new ShellSortFactory(new KnuthGapGenerator());
-                case ComparassionAlgorhythmType.ShellSortTokuda:
-                    return new ShellSortFactory(new TokudaGapGenerator());
-
+                case ComparassionAlgorhythmType.ShellSort:
+                    {
+                        var viewModel = new ShellSortDialogViewModel();
+                        dialogService.ShowModalPresentation(parentViewModel, viewModel);
+                        var gapGenerator = GapGeneratorFactory.GetGapGenerator(viewModel.SelectedGapGenerator.Type);
+                        return new ShellSortFactory(gapGenerator);
+                    }
                 case ComparassionAlgorhythmType.KWayMergeSort:
                     {
                         var viewModel = new KWayMergeSortDialogViewModel();

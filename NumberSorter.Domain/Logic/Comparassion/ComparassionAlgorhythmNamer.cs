@@ -38,9 +38,7 @@ namespace NumberSorter.Domain.Logic
             _nameDictionary.Add(ComparassionAlgorhythmType.HeapSort, "Heap sort");
             _nameDictionary.Add(ComparassionAlgorhythmType.JHeapSort, "J heap sort");
 
-            _nameDictionary.Add(ComparassionAlgorhythmType.ShellSortCiura, "Shell sort (Ciura)");
-            _nameDictionary.Add(ComparassionAlgorhythmType.ShellSortKnuth, "Shell sort (Knuth)");
-            _nameDictionary.Add(ComparassionAlgorhythmType.ShellSortTokuda, "Shell sort (Tokuda)");
+            _nameDictionary.Add(ComparassionAlgorhythmType.ShellSort, "Shell sort");
 
             _nameDictionary.Add(ComparassionAlgorhythmType.KWayMergeSort, "K way merge sort");
             _nameDictionary.Add(ComparassionAlgorhythmType.MultiMergeSort, "Multi merge sort");

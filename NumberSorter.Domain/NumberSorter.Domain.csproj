@@ -102,6 +102,9 @@
     <Compile Include="Logic\Distribution\DistributionAlgorhythmType.cs" />
     <Compile Include="Logic\Comparassion\ComparassionAlgorhythmType.cs" />
     <Compile Include="Logic\Distribution\DistributionAlgorhythmFactory.cs" />
+    <Compile Include="Logic\GapGenerator\GapGeneratorFactory.cs" />
+    <Compile Include="Logic\GapGenerator\GapGeneratorNamer.cs" />
+    <Compile Include="Logic\GapGenerator\GapGeneratorType.cs" />
     <Compile Include="Logic\RunLocator\RunLocatorFactory.cs" />
     <Compile Include="Logic\RunLocator\RunLocatorNamer.cs" />
     <Compile Include="Logic\RunLocator\RunLocatorType.cs" />
@@ -119,6 +122,7 @@
     <Compile Include="ViewModels\ColorSets\ColorSetSelectDialogViewModel.cs" />
     <Compile Include="ViewModels\ColorSets\ColorSetLineViewModel.cs" />
     <Compile Include="ViewModels\ComparassionSorts\GroupingRunLocatorDialogViewModel.cs" />
+    <Compile Include="ViewModels\ComparassionSorts\ShellSortDialogViewModel.cs" />
     <Compile Include="ViewModels\ComparassionSorts\JHeapSortDialogViewModel.cs" />
     <Compile Include="ViewModels\ComparassionSorts\BiasValueDialogViewModel.cs" />
     <Compile Include="ViewModels\ComparassionSorts\IntervalMergeSortDialogViewModel.cs" />
@@ -128,6 +132,7 @@
     <Compile Include="ViewModels\ComparassionSorts\QuickSortDialogViewModel.cs" />
     <Compile Include="ViewModels\DistributionSortType\DistributionSortTypeLineViewModel.cs" />
     <Compile Include="ViewModels\DistributionSortType\DistributionSortTypeViewModel.cs" />
+    <Compile Include="ViewModels\EnumTypes\GapGeneratorTypeLineViewModel.cs" />
     <Compile Include="ViewModels\EnumTypes\RunLocatorTypeLineViewModel.cs" />
     <Compile Include="ViewModels\Generators\CustomListGenerator\Processors\IntervalValuesProcessorLineViewModel.cs" />
     <Compile Include="ViewModels\Generators\CustomListGenerator\Processors\PartialShuffleValuesProcessorLineViewModel.cs" />

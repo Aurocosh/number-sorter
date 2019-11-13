@@ -43,6 +43,7 @@ namespace NumberSorter
             dialogService.RegisterWindowType<TimSortDialogViewModel, TimSortDialog>(new WindowViewInitializer<TimSortDialogViewModel>());
             dialogService.RegisterWindowType<JHeapSortDialogViewModel, JHeapSortDialog>(new WindowViewInitializer<JHeapSortDialogViewModel>());
             dialogService.RegisterWindowType<QuickSortDialogViewModel, QuickSortDialog>(new WindowViewInitializer<QuickSortDialogViewModel>());
+            dialogService.RegisterWindowType<ShellSortDialogViewModel, ShellSortDialog>(new WindowViewInitializer<ShellSortDialogViewModel>());
             dialogService.RegisterWindowType<MultiMergeSortDialogViewModel, MultiMergeSortDialog>(new WindowViewInitializer<MultiMergeSortDialogViewModel>());
             dialogService.RegisterWindowType<IntervalMergeSortDialogViewModel, IntervalMergeSortDialog>(new WindowViewInitializer<IntervalMergeSortDialogViewModel>());
 
