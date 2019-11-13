@@ -15,13 +15,16 @@
         KindaInPlaceMergeSort,
 
         TimSort,
+        TimSortCustom,
 
         DequeMergeSort,
         WindowMergeSort,
-        IntervalMergeSort,
         RecursiveMergeSort,
         TripleWindowMergeSort,
         WorkAreaInPlaceMergeSort,
+
+        IntervalMergeSort,
+        IntervalMergeSortCustom,
 
         BinarySort,
         InsertionSort,
@@ -31,16 +34,25 @@
 
         HeapSort,
         JHeapSort,
+        JHeapSortCustom,
 
         ShellSort,
+        ShellSortCustom,
 
         KWayMergeSort,
+        KWayMergeSortCustom,
         MultiMergeSort,
+        MultiMergeSortCustom,
         IntervalMultiMergeSort,
+        IntervalMultiMergeSortCustom,
 
         QuickSort,
+        QuickSortCustom,
         QuickSortLL,
+        QuickSortLLCustom,
         StableQuickSort,
+        StableQuickSortCustom,
         DualPivotQuickSort,
+        DualPivotQuickSortCustom,
     }
 }

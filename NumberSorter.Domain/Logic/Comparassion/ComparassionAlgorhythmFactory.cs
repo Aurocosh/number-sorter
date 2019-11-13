@@ -52,6 +52,8 @@ namespace NumberSorter.Domain.Logic
                 case ComparassionAlgorhythmType.WorkAreaInPlaceMergeSort:
                     return new WorkAreaInPlaceMergeSortFactory();
                 case ComparassionAlgorhythmType.IntervalMergeSort:
+                    return new IntervalMergeSortFactory(new BiasedBinaryPositionLocatorFactory(2));
+                case ComparassionAlgorhythmType.IntervalMergeSortCustom:
                     {
                         var viewModel = new IntervalMergeSortDialogViewModel();
                         dialogService.ShowModalPresentation(parentViewModel, viewModel);
@@ -74,6 +76,8 @@ namespace NumberSorter.Domain.Logic
                 case ComparassionAlgorhythmType.HeapSort:
                     return new HeapSortFactory();
                 case ComparassionAlgorhythmType.JHeapSort:
+                    return new JHeapSortFactory(new BinarySortFactory());
+                case ComparassionAlgorhythmType.JHeapSortCustom:
                     {
                         var viewModel = new JHeapSortDialogViewModel();
                         dialogService.ShowModalPresentation(parentViewModel, viewModel);
@@ -81,6 +85,8 @@ namespace NumberSorter.Domain.Logic
                         return new JHeapSortFactory(finalSort);
                     }
                 case ComparassionAlgorhythmType.TimSort:
+                    return new TimSortFactory(new IntervalMergeSortFactory(new BiasedBinaryPositionLocatorFactory(2)), new BinarySortFactory());
+                case ComparassionAlgorhythmType.TimSortCustom:
                     {
                         var viewModel = new TimSortDialogViewModel();
                         dialogService.ShowModalPresentation(parentViewModel, viewModel);
@@ -89,6 +95,8 @@ namespace NumberSorter.Domain.Logic
                         return new TimSortFactory(localMerge, minrunSort);
                     }
                 case ComparassionAlgorhythmType.ShellSort:
+                    return new ShellSortFactory(new CiuraGapGenerator());
+                case ComparassionAlgorhythmType.ShellSortCustom:
                     {
                         var viewModel = new ShellSortDialogViewModel();
                         dialogService.ShowModalPresentation(parentViewModel, viewModel);
@@ -96,6 +104,8 @@ namespace NumberSorter.Domain.Logic
                         return new ShellSortFactory(gapGenerator);
                     }
                 case ComparassionAlgorhythmType.KWayMergeSort:
+                    return new KWayMergeSortFactory(8, new BinarySortFactory(), new GroupingRunLocatorFactory(16, new BinarySortFactory()), new BiasedBinaryPositionLocatorFactory(2));
+                case ComparassionAlgorhythmType.KWayMergeSortCustom:
                     {
                         var viewModel = new KWayMergeSortDialogViewModel();
                         dialogService.ShowModalPresentation(parentViewModel, viewModel);
@@ -106,7 +116,12 @@ namespace NumberSorter.Domain.Logic
                     }
 
                 case ComparassionAlgorhythmType.MultiMergeSort:
+                    return new MultiMergeSortFactory(new BinarySortFactory(), new GroupingRunLocatorFactory(16, new BinarySortFactory()), new BiasedBinaryPositionLocatorFactory(2));
                 case ComparassionAlgorhythmType.IntervalMultiMergeSort:
+                    return new IntervalMultiMergeSortFactory(new BinarySortFactory(), new GroupingRunLocatorFactory(16, new BinarySortFactory()), new BiasedBinaryPositionLocatorFactory(2));
+
+                case ComparassionAlgorhythmType.MultiMergeSortCustom:
+                case ComparassionAlgorhythmType.IntervalMultiMergeSortCustom:
                     {
                         var viewModel = new MultiMergeSortDialogViewModel();
                         dialogService.ShowModalPresentation(parentViewModel, viewModel);
@@ -116,19 +131,27 @@ namespace NumberSorter.Domain.Logic
 
                         switch (algorhythmType)
                         {
-                            case ComparassionAlgorhythmType.MultiMergeSort:
+                            case ComparassionAlgorhythmType.MultiMergeSortCustom:
                                 return new MultiMergeSortFactory(sortrunSort, runLocator, positionLocator);
-                            case ComparassionAlgorhythmType.IntervalMultiMergeSort:
+                            case ComparassionAlgorhythmType.IntervalMultiMergeSortCustom:
                                 return new IntervalMultiMergeSortFactory(sortrunSort, runLocator, positionLocator);
                             default:
                                 return null;
                         }
                     }
-
                 case ComparassionAlgorhythmType.QuickSort:
+                    return new QuickSortFactory(16, new BinarySortFactory(), new MedianOfThreePivotSelectorFactory());
                 case ComparassionAlgorhythmType.QuickSortLL:
+                    return new QuickSortLLFactory(16, new BinarySortFactory(), new MedianOfThreePivotSelectorFactory());
                 case ComparassionAlgorhythmType.StableQuickSort:
+                    return new StableQuickSortFactory(16, new BinarySortFactory(), new MedianOfThreePivotSelectorFactory());
                 case ComparassionAlgorhythmType.DualPivotQuickSort:
+                    return new DualPivotQuickSortFactory(16, new BinarySortFactory(), new MedianOfThreePivotSelectorFactory());
+
+                case ComparassionAlgorhythmType.QuickSortCustom:
+                case ComparassionAlgorhythmType.QuickSortLLCustom:
+                case ComparassionAlgorhythmType.StableQuickSortCustom:
+                case ComparassionAlgorhythmType.DualPivotQuickSortCustom:
                     {
                         var viewModel = new QuickSortDialogViewModel();
                         dialogService.ShowModalPresentation(parentViewModel, viewModel);
@@ -138,13 +161,13 @@ namespace NumberSorter.Domain.Logic
 
                         switch (algorhythmType)
                         {
-                            case ComparassionAlgorhythmType.QuickSort:
+                            case ComparassionAlgorhythmType.QuickSortCustom:
                                 return new QuickSortFactory(viewModel.CutoffValue, cutoffSort, pivotSelector);
-                            case ComparassionAlgorhythmType.QuickSortLL:
+                            case ComparassionAlgorhythmType.QuickSortLLCustom:
                                 return new QuickSortLLFactory(viewModel.CutoffValue, cutoffSort, pivotSelector);
-                            case ComparassionAlgorhythmType.StableQuickSort:
+                            case ComparassionAlgorhythmType.StableQuickSortCustom:
                                 return new StableQuickSortFactory(viewModel.CutoffValue, cutoffSort, pivotSelector);
-                            case ComparassionAlgorhythmType.DualPivotQuickSort:
+                            case ComparassionAlgorhythmType.DualPivotQuickSortCustom:
                                 return new DualPivotQuickSortFactory(viewModel.CutoffValue, cutoffSort, pivotSelector);
                             default:
                                 return null;

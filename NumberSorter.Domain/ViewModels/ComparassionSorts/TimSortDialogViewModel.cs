@@ -47,7 +47,7 @@ namespace NumberSorter.Domain.ViewModels
             sortTypes.Sort((x, y) => x.Name.CompareTo(y.Name));
             _sortTypes.AddRange(sortTypes);
 
-            SelectedSortType = SortTypes.First(x => x.Type == ComparassionAlgorhythmType.InsertionSort);
+            SelectedSortType = SortTypes.First(x => x.Type == ComparassionAlgorhythmType.BinarySort);
 
             var mergeTypes = EnumUtil.GetValues<LocalMergeType>();
             var pivotTypeModels = mergeTypes
@@ -56,7 +56,7 @@ namespace NumberSorter.Domain.ViewModels
             pivotTypeModels.Sort((x, y) => x.Name.CompareTo(y.Name));
             _mergeTypes.AddRange(pivotTypeModels);
 
-            SelectedMergeType = MergeTypes.First(x => x.Type == LocalMergeType.IntervalLinearSearch);
+            SelectedMergeType = MergeTypes.First(x => x.Type == LocalMergeType.IntervalBiasedBinarySearch);
         }
 
         #endregion Constructors

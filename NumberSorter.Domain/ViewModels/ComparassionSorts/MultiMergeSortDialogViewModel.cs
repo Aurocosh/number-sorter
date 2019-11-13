@@ -51,7 +51,7 @@ namespace NumberSorter.Domain.ViewModels
             sortTypes.Sort((x, y) => x.Name.CompareTo(y.Name));
             _sortTypes.AddRange(sortTypes);
 
-            SelectedSortType = SortTypes.First(x => x.Type == ComparassionAlgorhythmType.InsertionSort);
+            SelectedSortType = SortTypes.First(x => x.Type == ComparassionAlgorhythmType.BinarySort);
 
             var runLocatorTypes = EnumUtil.GetValues<RunLocatorType>();
             var runLocatorModels = runLocatorTypes

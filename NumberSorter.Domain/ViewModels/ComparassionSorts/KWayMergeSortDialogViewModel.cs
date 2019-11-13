@@ -45,6 +45,8 @@ namespace NumberSorter.Domain.ViewModels
         {
             AcceptCommand = ReactiveCommand.Create(Accept);
 
+            KValue = 8;
+
             var algorhythmTypes = EnumUtil.GetValues<ComparassionAlgorhythmType>();
             var sortTypes = algorhythmTypes
                 .Select(x => new ComparassionSortTypeLineViewModel(x, ComparassionAlgorhythmNamer.GetName(x)))
@@ -52,7 +54,7 @@ namespace NumberSorter.Domain.ViewModels
             sortTypes.Sort((x, y) => x.Name.CompareTo(y.Name));
             _sortTypes.AddRange(sortTypes);
 
-            SelectedSortType = SortTypes.First(x => x.Type == ComparassionAlgorhythmType.InsertionSort);
+            SelectedSortType = SortTypes.First(x => x.Type == ComparassionAlgorhythmType.BinarySort);
 
             var runLocatorTypes = EnumUtil.GetValues<RunLocatorType>();
             var runLocatorModels = runLocatorTypes

@@ -50,7 +50,7 @@ namespace NumberSorter.Domain.ViewModels
             sortTypes.Sort((x, y) => x.Name.CompareTo(y.Name));
             _cutoffSortTypes.AddRange(sortTypes);
 
-            SelectedCutoffSortType = SortTypes.First(x => x.Type == ComparassionAlgorhythmType.InsertionSort);
+            SelectedCutoffSortType = SortTypes.First(x => x.Type == ComparassionAlgorhythmType.BinarySort);
 
             var pivotTypes = EnumUtil.GetValues<PivotSelectorType>();
             var pivotTypeModels = pivotTypes

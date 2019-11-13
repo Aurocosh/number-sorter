@@ -19,15 +19,18 @@ namespace NumberSorter.Domain.Logic
             _nameDictionary.Add(ComparassionAlgorhythmType.CocktailShakerSort, "Cocktail shaker sort");
 
             _nameDictionary.Add(ComparassionAlgorhythmType.TimSort, "Tim Sort");
+            _nameDictionary.Add(ComparassionAlgorhythmType.TimSortCustom, "Tim Sort (Custom)");
 
             _nameDictionary.Add(ComparassionAlgorhythmType.DequeMergeSort, "Deque merge sort");
             _nameDictionary.Add(ComparassionAlgorhythmType.WindowMergeSort, "Window merge sort");
-            _nameDictionary.Add(ComparassionAlgorhythmType.IntervalMergeSort, "Interval merge sort");
             _nameDictionary.Add(ComparassionAlgorhythmType.RecursiveMergeSort, "Recursive merge sort");
             _nameDictionary.Add(ComparassionAlgorhythmType.HalfInPlaceMergeSort, "Half in place merge sort");
             _nameDictionary.Add(ComparassionAlgorhythmType.TripleWindowMergeSort, "Triple window merge sort");
             _nameDictionary.Add(ComparassionAlgorhythmType.KindaInPlaceMergeSort, "Kinda in place merge sort");
             _nameDictionary.Add(ComparassionAlgorhythmType.WorkAreaInPlaceMergeSort, "Work area in place merge sort");
+
+            _nameDictionary.Add(ComparassionAlgorhythmType.IntervalMergeSort, "Interval merge sort");
+            _nameDictionary.Add(ComparassionAlgorhythmType.IntervalMergeSortCustom, "Interval merge sort (Custom)");
 
             _nameDictionary.Add(ComparassionAlgorhythmType.InsertionSort, "Insertion sort");
             _nameDictionary.Add(ComparassionAlgorhythmType.BinarySort, "Binary sort");
@@ -37,17 +40,26 @@ namespace NumberSorter.Domain.Logic
 
             _nameDictionary.Add(ComparassionAlgorhythmType.HeapSort, "Heap sort");
             _nameDictionary.Add(ComparassionAlgorhythmType.JHeapSort, "J heap sort");
+            _nameDictionary.Add(ComparassionAlgorhythmType.JHeapSortCustom, "J heap sort (Custom)");
 
-            _nameDictionary.Add(ComparassionAlgorhythmType.ShellSort, "Shell sort");
+            _nameDictionary.Add(ComparassionAlgorhythmType.ShellSort, "Shell sort (Ciura)");
+            _nameDictionary.Add(ComparassionAlgorhythmType.ShellSortCustom, "Shell sort (Custom)");
 
             _nameDictionary.Add(ComparassionAlgorhythmType.KWayMergeSort, "K way merge sort");
+            _nameDictionary.Add(ComparassionAlgorhythmType.KWayMergeSortCustom, "K way merge sort (Custom)");
             _nameDictionary.Add(ComparassionAlgorhythmType.MultiMergeSort, "Multi merge sort");
+            _nameDictionary.Add(ComparassionAlgorhythmType.MultiMergeSortCustom, "Multi merge sort (Custom)");
             _nameDictionary.Add(ComparassionAlgorhythmType.IntervalMultiMergeSort, "Interval multi merge sort");
+            _nameDictionary.Add(ComparassionAlgorhythmType.IntervalMultiMergeSortCustom, "Interval multi merge sort (Custom)");
 
             _nameDictionary.Add(ComparassionAlgorhythmType.QuickSort, "Quick sort LR");
+            _nameDictionary.Add(ComparassionAlgorhythmType.QuickSortCustom, "Quick sort LR (Custom)");
             _nameDictionary.Add(ComparassionAlgorhythmType.QuickSortLL, "Quick sort LL");
+            _nameDictionary.Add(ComparassionAlgorhythmType.QuickSortLLCustom, "Quick sort LL (Custom)");
             _nameDictionary.Add(ComparassionAlgorhythmType.StableQuickSort, "Stable quick sort");
+            _nameDictionary.Add(ComparassionAlgorhythmType.StableQuickSortCustom, "Stable quick sort (Custom)");
             _nameDictionary.Add(ComparassionAlgorhythmType.DualPivotQuickSort, "Dual pivot quick sort");
+            _nameDictionary.Add(ComparassionAlgorhythmType.DualPivotQuickSortCustom, "Dual pivot quick sort (Custom)");
         }
 
         public static string GetName(ComparassionAlgorhythmType algorhythmType)
