@@ -1,4 +1,5 @@
 ﻿using DynamicData;
+using Newtonsoft.Json;
 using NumberSorter.Core.Logic.Utility;
 using NumberSorter.Domain.AppColors;
 using NumberSorter.Domain.Base.Visualizers;
@@ -7,6 +8,7 @@ using NumberSorter.Domain.Container.Actions;
 using NumberSorter.Domain.Container.Actions.Base;
 using NumberSorter.Domain.DialogService;
 using NumberSorter.Domain.Lib;
+using NumberSorter.Domain.Serialization;
 using NumberSorter.Domain.Visualizers;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -14,6 +16,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
@@ -36,6 +39,7 @@ namespace NumberSorter.Domain.ViewModels
         private int _currentWaypointCount = 0;
         private int _displayedActionCount = 5;
 
+        private readonly JsonFileSerializer _jsonFileSerializer;
         private IListVisualizer _listVisualizer = new ColumnListVisualizer();
 
         private readonly SourceList<LogAction<int>> _logActions;
@@ -104,6 +108,13 @@ namespace NumberSorter.Domain.ViewModels
 
         public VisualizationViewModel(IDialogService<ReactiveObject> dialogService)
         {
+            var jsonSerializerSettings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All,
+                Formatting = Formatting.None
+            };
+            _jsonFileSerializer = new JsonFileSerializer(jsonSerializerSettings);
+
             _dialogService = dialogService;
             _logActions = new SourceList<LogAction<int>>();
             _displayedLogActions = new SourceList<LogActionLineViewModel>();
@@ -329,6 +340,8 @@ namespace NumberSorter.Domain.ViewModels
                 return;
 
             ColorSet = viewModel.ColorSet;
+            var activeColorSetPath = Path.Combine(FilePaths.AppDataFolder, "ActiveColorSet.json");
+            _jsonFileSerializer.SaveToJsonFile(activeColorSetPath, ColorSet);
             UpdateVisualization(SortState);
         }
 

@@ -26,6 +26,7 @@ using NumberSorter.Domain.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NumberSorter.Domain.Logic;
+using NumberSorter.Domain.AppColors;
 
 namespace NumberSorter.Domain.ViewModels
 {
@@ -87,6 +88,10 @@ namespace NumberSorter.Domain.ViewModels
             _jsonFileSerializer = new JsonFileSerializer(jsonSerializerSettings);
 
             VisualizationViewModel = new VisualizationViewModel(_dialogService);
+
+            var activeColorSetPath = Path.Combine(FilePaths.AppDataFolder, "ActiveColorSet.json");
+            if (File.Exists(activeColorSetPath))
+                VisualizationViewModel.ColorSet = _jsonFileSerializer.LoadFromJsonFile<ColorSet>(activeColorSetPath);
 
             ShowActions = false;
             ShowControls = true;

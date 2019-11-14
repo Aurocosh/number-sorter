@@ -71,7 +71,7 @@ namespace NumberSorter.Domain.Visualizers
                 int scaledValue = (int)((list[i] + shift) * scaleCoefficient);
                 var yPos = yOrigin - scaledValue;
                 if (scaledValue > 0)
-                    writeableBitmap.FillEllipse(xCurrent, yPos, xCurrent + columnSize - 1, yPos + columnSize - 1, currentColor);
+                    writeableBitmap.FillEllipse(xCurrent, yPos, xCurrent + columnSize, yPos + columnSize, currentColor);
 
                 xCurrent += columnSize + spacerSize;
             }
