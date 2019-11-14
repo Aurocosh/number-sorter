@@ -13,7 +13,7 @@
         utility:DialogCloser.DialogResult = "{Binding DialogResult}"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
-        Title="NumberGeneratorWindow" Height="200" Width="300">
+        Title="Random number generator" Height="200" Width="300">
     <DockPanel d:DataContext="{d:DesignInstance viewmodels:NumberGeneratorsViewModel}">
         <StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Right" Orientation="Horizontal" >
             <Button Name="AcceptButton" Content="Accept" Margin="5"/>

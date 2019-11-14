@@ -13,7 +13,7 @@
         utility:DialogCloser.DialogResult = "{Binding DialogResult}"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
-        Title="PartialSortedGeneratorDialog" Height="280" Width="500">
+        Title="Multiple number runs generator" Height="280" Width="500">
     <DockPanel d:DataContext="{d:DesignInstance viewmodels:PartialSortedGeneratorViewModel}">
         <StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Right" Orientation="Horizontal" >
             <Button Name="AcceptButton" Content="Accept" Margin="5"/>

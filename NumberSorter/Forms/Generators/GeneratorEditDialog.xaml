@@ -17,31 +17,34 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Processor sets">
-                <MenuItem Name="AddListProcessorSetMenuItem" Header="Add new processor set"/>
-                <MenuItem Name="RemoveSelectedProcessorSetMenuItem" Header="Remove selected processor set"/>
+                <MenuItem Header="Add new processor set" Name="AddListProcessorSetMenuItem"/>
+                <MenuItem Header="Remove selected processor set" Name="RemoveSelectedProcessorSetMenuItem"/>
+                <MenuItem Header="Move up selected processor set" Name="MoveUpSelecetedSetMenuItem"/>
+                <MenuItem Header="Move down selected processor set" Name="MoveDownSelecetedSetMenuItem"/>
             </MenuItem>
             <MenuItem Header="Processors">
                 <MenuItem Header="Generators">
-                    <MenuItem Name="AddNewListProcessorMenuItem" Header="Add fixed list generator"/>
-                    <MenuItem Name="AddNewVariableListProcessorMenuItem" Header="Add variable list generator"/>
+                    <MenuItem Header="Add fixed list generator" Name="AddNewListProcessorMenuItem"/>
+                    <MenuItem Header="Add variable list generator" Name="AddNewVariableListProcessorMenuItem"/>
                 </MenuItem>
                 <MenuItem Header="Converters">
-                    <MenuItem Name="AddInvertValuesProcessorMenuItem" Header="Add invert converter"/>
-                    <MenuItem Name="AddShuffleValuesProcessorMenuItem" Header="Add suffle converter"/>
-                    <MenuItem Name="AddIntervalValuesProcessorMenuItem" Header="Add interval converter"/>
-                    <MenuItem Name="AddRandomizeValuesProcessorMenuItem" Header="Add randomizer converter"/>
-                    <MenuItem Name="AddDuplicateValuesProcessorMenuItem" Header="Add duplicating converter"/>
-                    <MenuItem Name="AddConsequtiveValuesProcessorMenuItem" Header="Add consecutive converter"/>
-                    <MenuItem Name="AddPartialShuffleValuesProcessorMenuItem" Header="Add partial suffle converter"/>
+                    <MenuItem Header="Add invert converter" Name="AddInvertValuesProcessorMenuItem"/>
+                    <MenuItem Header="Add suffle converter" Name="AddShuffleValuesProcessorMenuItem"/>
+                    <MenuItem Header="Add interval converter" Name="AddIntervalValuesProcessorMenuItem"/>
+                    <MenuItem Header="Add randomizer converter" Name="AddRandomizeValuesProcessorMenuItem"/>
+                    <MenuItem Header="Add duplicating converter" Name="AddDuplicateValuesProcessorMenuItem"/>
+                    <MenuItem Header="Add consecutive converter" Name="AddConsequtiveValuesProcessorMenuItem"/>
+                    <MenuItem Header="Add partial suffle converter" Name="AddPartialShuffleValuesProcessorMenuItem"/>
                 </MenuItem>
                 <MenuItem Header="Edit processors">
-                    <MenuItem Name="RemoveSelectedProcessorMenuItem" Header="Remove selected processor"/>
-                    <MenuItem Name="ClearAllProcessorsMenuItem" Header="Clear all processors"/>
+                    <MenuItem Header="Remove selected processor" Name="RemoveSelectedProcessorMenuItem"/>
+                    <MenuItem Header="Clear all processors" Name="ClearAllProcessorsMenuItem"/>
+                    <MenuItem Header="Move selected processor up" Name="MoveUpSelectedProcessorMenuItem"/>
+                    <MenuItem Header="Move selected processor down" Name="MoveDownSelectedProcessorMenuItem"/>
                 </MenuItem>
             </MenuItem>
         </Menu>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Name="GenerateButton" Content="Generate" Width="80" Margin="5"/>
             <Button Name="AcceptButton" Content="Accept" Width="80" Margin="5"/>
             <Button IsCancel="True" Content="Cancel" Width="80" Margin="5"/>
         </StackPanel>
@@ -57,7 +60,16 @@
                          Name="SetsList"
                          Margin="5" 
                          HorizontalContentAlignment="Stretch"
-                         ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Add new processor set" Name="AddListProcessorSetContextMenuItem"/>
+                                <MenuItem Header="Remove selected processor set" Name="RemoveSelectedProcessorSetContextMenuItem"/>
+                                <MenuItem Header="Move up selected processor set" Name="MoveUpSelecetedSetContextMenuItem"/>
+                                <MenuItem Header="Move down selected processor set" Name="MoveDownSelecetedSetContextMenuItem"/>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
+                    </ListBox>
                     <GridSplitter Grid.Column="1"/>
                     <TabControl Grid.Column="2">
                         <TabItem Header="Processors">
@@ -65,7 +77,28 @@
                                      Name="ProcessorsList"
                                      Margin="5" 
                                      HorizontalContentAlignment="Stretch"
-                                     ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
+                                     ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                <ListBox.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Add new generator">
+                                            <MenuItem Header="Add fixed list generator" Name="AddNewListProcessorContextMenuItem"/>
+                                            <MenuItem Header="Add variable list generator" Name="AddNewVariableListProcessorContextMenuItem"/>
+                                        </MenuItem>
+                                        <MenuItem Header="Add new converter">
+                                            <MenuItem Header="Add invert converter" Name="AddInvertValuesProcessorContextMenuItem"/>
+                                            <MenuItem Header="Add suffle converter" Name="AddShuffleValuesProcessorContextMenuItem"/>
+                                            <MenuItem Header="Add interval converter" Name="AddIntervalValuesProcessorContextMenuItem"/>
+                                            <MenuItem Header="Add randomizer converter" Name="AddRandomizeValuesProcessorContextMenuItem"/>
+                                            <MenuItem Header="Add duplicating converter" Name="AddDuplicateValuesProcessorContextMenuItem"/>
+                                            <MenuItem Header="Add consecutive converter" Name="AddConsequtiveValuesProcessorContextMenuItem"/>
+                                            <MenuItem Header="Add partial suffle converter" Name="AddPartialShuffleValuesProcessorContextMenuItem"/>
+                                        </MenuItem>
+                                        <MenuItem Header="Remove selected processor" Name="RemoveSelectedProcessorContextMenuItem"/>
+                                        <MenuItem Header="Move selected processor up" Name="MoveUpSelectedProcessorContextMenuItem"/>
+                                        <MenuItem Header="Move selected processor down" Name="MoveDownSelectedProcessorContextMenuItem"/>
+                                    </ContextMenu>
+                                </ListBox.ContextMenu>
+                            </ListBox>
                         </TabItem>
                         <TabItem Header="Settings">
                             <Grid>

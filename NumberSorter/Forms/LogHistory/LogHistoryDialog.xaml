@@ -12,7 +12,7 @@
         xmlns:utility="clr-namespace:NumberSorter.Utility"
         utility:DialogCloser.DialogResult = "{Binding DialogResult}"
         mc:Ignorable="d"
-        Title="Custom generator" Height="450" Width="800"
+        Title="Sort history" Height="450" Width="800"
         d:DataContext="{d:DesignInstance viewmodels:GeneratorEditDialogViewModel}"
         WindowState="Maximized">
     <DockPanel>

@@ -29,16 +29,8 @@ namespace NumberSorter.Forms
             InitializeComponent();
             this.WhenActivated(disposable =>
             {
-                this.OneWayBind(ViewModel, x => x.Name, x => x.NameTextBlock.Text)
+                this.Bind(ViewModel, x => x.Name, x => x.NameTextBlock.Text)
                     .DisposeWith(disposable);
-
-                //LineGrid.Events()
-                //    .MouseDown
-                //    .Where(x => x.ClickCount == 2)
-                //    .Where(x => x.ChangedButton == MouseButton.Left)
-                //    .ObserveOn(RxApp.MainThreadScheduler)
-                //    .InvokeCommand(this, x => x.ViewModel.DoubleClickCommand)
-                //    .DisposeWith(disposable);
             });
         }
     }

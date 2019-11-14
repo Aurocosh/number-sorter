@@ -5,13 +5,10 @@ using NumberSorter.Core.CustomGenerators.Processors.Generators;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NumberSorter.Domain.ViewModels
 {
@@ -52,6 +49,8 @@ namespace NumberSorter.Domain.ViewModels
 
         public ReactiveCommand<Unit, Unit> ClearAllProcessorsCommand { get; }
         public ReactiveCommand<Unit, Unit> RemoveSelectedProcessorCommand { get; }
+        public ReactiveCommand<Unit, Unit> MoveUpSelectedProcessorCommand { get; }
+        public ReactiveCommand<Unit, Unit> MoveDownSelectedProcessorCommand { get; }
 
         #endregion
 
@@ -71,7 +70,7 @@ namespace NumberSorter.Domain.ViewModels
             var sharedProcessorConnection = _listProcessors.Connect().Publish();
 
             var canClearProcessors = sharedProcessorConnection.Count().Select(x => x != 0);
-            var canRemoveProcessor = this.WhenAnyValue(x => x.SelectedListProcessor).Select(x => x != null);
+            var anyProcessorSelected = this.WhenAnyValue(x => x.SelectedListProcessor).Select(x => x != null);
 
             AddNewListProcessorCommand = ReactiveCommand.Create(AddNewListProcessor);
             AddNewVariableListProcessorCommand = ReactiveCommand.Create(AddNewVariableListProcessor);
@@ -85,7 +84,9 @@ namespace NumberSorter.Domain.ViewModels
             AddPartialShuffleValuesProcessorCommand = ReactiveCommand.Create(AddPartialShuffleValuesProcessor);
 
             ClearAllProcessorsCommand = ReactiveCommand.Create(ClearAllProcessors, canClearProcessors);
-            RemoveSelectedProcessorCommand = ReactiveCommand.Create(RemoveSelectedProcessor, canRemoveProcessor);
+            RemoveSelectedProcessorCommand = ReactiveCommand.Create(RemoveSelectedProcessor, anyProcessorSelected);
+            MoveUpSelectedProcessorCommand = ReactiveCommand.Create(MoveUpSelectedProcessor, anyProcessorSelected);
+            MoveDownSelectedProcessorCommand = ReactiveCommand.Create(MoveDownSelectedProcessor, anyProcessorSelected);
 
             this.WhenAnyValue(x => x.Name)
                 .BindTo(ListProcessorSet, x => x.Name);
@@ -136,6 +137,22 @@ namespace NumberSorter.Domain.ViewModels
 
         private void ClearAllProcessors() => _listProcessors.Clear();
         private void RemoveSelectedProcessor() => _listProcessors.Remove(SelectedListProcessor.IListProcessor);
+
+        private void MoveUpSelectedProcessor()
+        {
+            int selectedIndex = ListProcessorViewModels.IndexOf(SelectedListProcessor);
+            int newIndex = selectedIndex - 1;
+            if (newIndex >= 0)
+                _listProcessors.Move(selectedIndex, newIndex);
+        }
+
+        private void MoveDownSelectedProcessor()
+        {
+            int selectedIndex = ListProcessorViewModels.IndexOf(SelectedListProcessor);
+            int newIndex = selectedIndex + 1;
+            if (newIndex < _listProcessors.Count)
+                _listProcessors.Move(selectedIndex, newIndex);
+        }
 
         #endregion
 

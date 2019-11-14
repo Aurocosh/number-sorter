@@ -3,13 +3,10 @@ using NumberSorter.Core.CustomGenerators;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NumberSorter.Domain.ViewModels
 {
@@ -37,7 +34,9 @@ namespace NumberSorter.Domain.ViewModels
 
         #region Commands
 
+        public ReactiveCommand<Unit, Unit> MoveUpProcessorSetCommand { get; }
         public ReactiveCommand<Unit, Unit> AddListProcessorSetCommand { get; }
+        public ReactiveCommand<Unit, Unit> MoveDownProcessorSetCommand { get; }
         public ReactiveCommand<Unit, Unit> ClearAllProcessorsSetsCommand { get; }
         public ReactiveCommand<Unit, Unit> RemoveSelectedProcessorSetCommand { get; }
 
@@ -56,11 +55,13 @@ namespace NumberSorter.Domain.ViewModels
             _listProcessorsSets.AddRange(listGenerator.ListProcessorSets);
             listGenerator.ListProcessorSets.Clear();
 
-            var canRemoveCurrent = this.WhenAnyValue(x => x.SelectedListProcessorSet).Select(x => x != null);
+            var anyProcessorSetSelected = this.WhenAnyValue(x => x.SelectedListProcessorSet).Select(x => x != null);
 
             AddListProcessorSetCommand = ReactiveCommand.Create(AddListProcessorSet);
             ClearAllProcessorsSetsCommand = ReactiveCommand.Create(ClearAllProcessorSets);
-            RemoveSelectedProcessorSetCommand = ReactiveCommand.Create(RemoveSelectedProcessorSet, canRemoveCurrent);
+            MoveUpProcessorSetCommand = ReactiveCommand.Create(MoveUpProcessorSet, anyProcessorSetSelected);
+            MoveDownProcessorSetCommand = ReactiveCommand.Create(MoveDownProcessorSet, anyProcessorSetSelected);
+            RemoveSelectedProcessorSetCommand = ReactiveCommand.Create(RemoveSelectedProcessorSet, anyProcessorSetSelected);
 
             this.WhenAnyValue(x => x.Name)
                 .BindTo(_listGenerator, x => x.Name);
@@ -90,6 +91,22 @@ namespace NumberSorter.Domain.ViewModels
         private void AddListProcessorSet() => _listProcessorsSets.Add(new ListProcessorSet());
         private void ClearAllProcessorSets() => _listProcessorsSets.Clear();
         private void RemoveSelectedProcessorSet() => _listProcessorsSets.Remove(SelectedListProcessorSet.ListProcessorSet);
+
+        private void MoveUpProcessorSet()
+        {
+            int selectedIndex = ListProcessorSetLineViewModels.IndexOf(SelectedListProcessorSet);
+            int newIndex = selectedIndex - 1;
+            if (newIndex >= 0)
+                _listProcessorsSets.Move(selectedIndex, newIndex);
+        }
+
+        private void MoveDownProcessorSet()
+        {
+            int selectedIndex = ListProcessorSetLineViewModels.IndexOf(SelectedListProcessorSet);
+            int newIndex = selectedIndex + 1;
+            if (newIndex < _listProcessorsSets.Count)
+                _listProcessorsSets.Move(selectedIndex, newIndex);
+        }
 
         #endregion Command functions
     }

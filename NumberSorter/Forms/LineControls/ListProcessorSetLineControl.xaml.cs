@@ -18,9 +18,6 @@ using System.Windows.Shapes;
 
 namespace NumberSorter.Forms
 {
-    /// <summary>
-    /// Interaction logic for SortTypeLineControl.xaml
-    /// </summary>
     public partial class ListProcessorSetLineControl : ReactiveUserControl<ListProcessorSetViewModel>
     {
         public ListProcessorSetLineControl()
@@ -28,9 +25,7 @@ namespace NumberSorter.Forms
             InitializeComponent();
             this.WhenActivated(disposable =>
             {
-                this.OneWayBind(ViewModel,
-                        x => x.ListProcessorSet.Name,
-                        x => x.NameTextBlock.Text)
+                this.Bind(ViewModel, x => x.Name, x => x.NameTextBlock.Text)
                         .DisposeWith(disposable);
             });
         }
