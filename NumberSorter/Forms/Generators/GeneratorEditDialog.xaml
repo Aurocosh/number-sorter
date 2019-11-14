@@ -19,6 +19,7 @@
             <MenuItem Header="Processor sets">
                 <MenuItem Header="Add new processor set" Name="AddListProcessorSetMenuItem"/>
                 <MenuItem Header="Remove selected processor set" Name="RemoveSelectedProcessorSetMenuItem"/>
+                <Separator/>
                 <MenuItem Header="Move up selected processor set" Name="MoveUpSelecetedSetMenuItem"/>
                 <MenuItem Header="Move down selected processor set" Name="MoveDownSelecetedSetMenuItem"/>
             </MenuItem>
@@ -35,10 +36,12 @@
                     <MenuItem Header="Add duplicating converter" Name="AddDuplicateValuesProcessorMenuItem"/>
                     <MenuItem Header="Add consecutive converter" Name="AddConsequtiveValuesProcessorMenuItem"/>
                     <MenuItem Header="Add partial suffle converter" Name="AddPartialShuffleValuesProcessorMenuItem"/>
+                    <MenuItem Header="Add partial consecutive converter" Name="AddPartialConsecutiveValuesProcessorMenuItem"/>
                 </MenuItem>
                 <MenuItem Header="Edit processors">
                     <MenuItem Header="Remove selected processor" Name="RemoveSelectedProcessorMenuItem"/>
                     <MenuItem Header="Clear all processors" Name="ClearAllProcessorsMenuItem"/>
+                    <Separator/>
                     <MenuItem Header="Move selected processor up" Name="MoveUpSelectedProcessorMenuItem"/>
                     <MenuItem Header="Move selected processor down" Name="MoveDownSelectedProcessorMenuItem"/>
                 </MenuItem>
@@ -65,6 +68,7 @@
                             <ContextMenu>
                                 <MenuItem Header="Add new processor set" Name="AddListProcessorSetContextMenuItem"/>
                                 <MenuItem Header="Remove selected processor set" Name="RemoveSelectedProcessorSetContextMenuItem"/>
+                                <Separator/>
                                 <MenuItem Header="Move up selected processor set" Name="MoveUpSelecetedSetContextMenuItem"/>
                                 <MenuItem Header="Move down selected processor set" Name="MoveDownSelecetedSetContextMenuItem"/>
                             </ContextMenu>
@@ -92,8 +96,10 @@
                                             <MenuItem Header="Add duplicating converter" Name="AddDuplicateValuesProcessorContextMenuItem"/>
                                             <MenuItem Header="Add consecutive converter" Name="AddConsequtiveValuesProcessorContextMenuItem"/>
                                             <MenuItem Header="Add partial suffle converter" Name="AddPartialShuffleValuesProcessorContextMenuItem"/>
+                                            <MenuItem Header="Add partial consecutive converter" Name="AddPartialConsecutiveValuesProcessorContextMenuItem"/>
                                         </MenuItem>
                                         <MenuItem Header="Remove selected processor" Name="RemoveSelectedProcessorContextMenuItem"/>
+                                        <Separator/>
                                         <MenuItem Header="Move selected processor up" Name="MoveUpSelectedProcessorContextMenuItem"/>
                                         <MenuItem Header="Move selected processor down" Name="MoveDownSelectedProcessorContextMenuItem"/>
                                     </ContextMenu>

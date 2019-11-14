@@ -134,6 +134,7 @@
     <Compile Include="ViewModels\DistributionSortType\DistributionSortTypeViewModel.cs" />
     <Compile Include="ViewModels\EnumTypes\GapGeneratorTypeLineViewModel.cs" />
     <Compile Include="ViewModels\EnumTypes\RunLocatorTypeLineViewModel.cs" />
+    <Compile Include="ViewModels\Generators\CustomListGenerator\Processors\PartialConsecutiveValuesProcessorLineViewModel.cs" />
     <Compile Include="ViewModels\Generators\CustomListGenerator\Processors\IntervalValuesProcessorLineViewModel.cs" />
     <Compile Include="ViewModels\Generators\CustomListGenerator\Processors\PartialShuffleValuesProcessorLineViewModel.cs" />
     <Compile Include="ViewModels\EnumTypes\LocalMergeTypeLineViewModel.cs" />

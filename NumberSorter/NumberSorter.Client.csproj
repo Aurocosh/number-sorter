@@ -142,6 +142,9 @@
     <Compile Include="Forms\ComparassionSorts\MultiMergeSortDialog.xaml.cs">
       <DependentUpon>MultiMergeSortDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\LineControls\Processors\PartialConsecutiveValuesProcessorLineControl.xaml.cs">
+      <DependentUpon>PartialConsecutiveValuesProcessorLineControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\RunLocators\GroupingRunLocatorDialog.xaml.cs">
       <DependentUpon>GroupingRunLocatorDialog.xaml</DependentUpon>
     </Compile>
@@ -251,6 +254,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Forms\ComparassionSorts\MultiMergeSortDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\LineControls\Processors\PartialConsecutiveValuesProcessorLineControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

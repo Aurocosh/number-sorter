@@ -125,6 +125,8 @@ namespace NumberSorter.Forms
                     .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.AddPartialShuffleValuesProcessorCommand, x => x.AddPartialShuffleValuesProcessorMenuItem)
                     .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.AddPartialConsecutiveValuesProcessorCommand, x => x.AddPartialConsecutiveValuesProcessorMenuItem)
+                    .DisposeWith(disposable);
 
                 this.BindCommand(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.ClearAllProcessorsCommand, x => x.ClearAllProcessorsMenuItem)
                     .DisposeWith(disposable);
@@ -153,6 +155,8 @@ namespace NumberSorter.Forms
                 this.BindCommand(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.AddConsequtiveValuesProcessorCommand, x => x.AddConsequtiveValuesProcessorContextMenuItem)
                     .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.AddPartialShuffleValuesProcessorCommand, x => x.AddPartialShuffleValuesProcessorContextMenuItem)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.AddPartialConsecutiveValuesProcessorCommand, x => x.AddPartialConsecutiveValuesProcessorContextMenuItem)
                     .DisposeWith(disposable);
 
                 this.BindCommand(ViewModel, x => x.ListGenerator.SelectedListProcessorSet.RemoveSelectedProcessorCommand, x => x.RemoveSelectedProcessorContextMenuItem)

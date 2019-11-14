@@ -46,6 +46,7 @@ namespace NumberSorter.Domain.ViewModels
         public ReactiveCommand<Unit, Unit> AddDuplicateValuesProcessorCommand { get; }
         public ReactiveCommand<Unit, Unit> AddConsequtiveValuesProcessorCommand { get; }
         public ReactiveCommand<Unit, Unit> AddPartialShuffleValuesProcessorCommand { get; }
+        public ReactiveCommand<Unit, Unit> AddPartialConsecutiveValuesProcessorCommand { get; }
 
         public ReactiveCommand<Unit, Unit> ClearAllProcessorsCommand { get; }
         public ReactiveCommand<Unit, Unit> RemoveSelectedProcessorCommand { get; }
@@ -82,6 +83,7 @@ namespace NumberSorter.Domain.ViewModels
             AddDuplicateValuesProcessorCommand = ReactiveCommand.Create(AddDuplicateValuesProcessor);
             AddConsequtiveValuesProcessorCommand = ReactiveCommand.Create(AddConsequtiveValuesProcessor);
             AddPartialShuffleValuesProcessorCommand = ReactiveCommand.Create(AddPartialShuffleValuesProcessor);
+            AddPartialConsecutiveValuesProcessorCommand = ReactiveCommand.Create(AddPartialConsecutiveValuesProcessor);
 
             ClearAllProcessorsCommand = ReactiveCommand.Create(ClearAllProcessors, canClearProcessors);
             RemoveSelectedProcessorCommand = ReactiveCommand.Create(RemoveSelectedProcessor, anyProcessorSelected);
@@ -134,6 +136,7 @@ namespace NumberSorter.Domain.ViewModels
         private void AddDuplicateValuesProcessor() => _listProcessors.Add(new DuplicateValuesProcessor());
         private void AddConsequtiveValuesProcessor() => _listProcessors.Add(new ConsecutiveValuesProcessor());
         private void AddPartialShuffleValuesProcessor() => _listProcessors.Add(new PartialShuffleValuesProcessor());
+        private void AddPartialConsecutiveValuesProcessor() => _listProcessors.Add(new PartialConsecutiveValuesProcessor());
 
         private void ClearAllProcessors() => _listProcessors.Clear();
         private void RemoveSelectedProcessor() => _listProcessors.Remove(SelectedListProcessor.IListProcessor);
@@ -176,6 +179,8 @@ namespace NumberSorter.Domain.ViewModels
                 return new InvertValuesProcessorLineViewModel(invertValuesProcessor);
             else if (processor is IntervalValuesProcessor intervalValuesProcessor)
                 return new IntervalValuesProcessorLineViewModel(intervalValuesProcessor);
+            else if (processor is PartialConsecutiveValuesProcessor partialConsecutiveValuesProcessor)
+                return new PartialConsecutiveValuesProcessorLineViewModel(partialConsecutiveValuesProcessor);
             return null;
         }
     }

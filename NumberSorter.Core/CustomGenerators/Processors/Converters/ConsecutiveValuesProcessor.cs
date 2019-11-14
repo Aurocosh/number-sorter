@@ -16,7 +16,7 @@ namespace NumberSorter.Core.CustomGenerators.Processors.Generators
 
         public ConsecutiveValuesProcessor()
         {
-            Step = 0;
+            Step = 1;
             Start = 0;
         }
 
