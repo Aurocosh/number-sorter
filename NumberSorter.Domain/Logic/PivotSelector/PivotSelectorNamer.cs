@@ -8,6 +8,9 @@ namespace NumberSorter.Domain.Logic
 
         static PivotSelectorNamer()
         {
+            _nameDictionary.Add(PivotSelectorType.Last, "Last");
+            _nameDictionary.Add(PivotSelectorType.First, "First");
+            _nameDictionary.Add(PivotSelectorType.Center, "Center");
             _nameDictionary.Add(PivotSelectorType.Random, "Random pivot");
             _nameDictionary.Add(PivotSelectorType.MedianOfThree, "Median of three");
         }

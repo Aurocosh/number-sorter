@@ -10,10 +10,16 @@ namespace NumberSorter.Domain.Logic
         {
             switch (algorhythmType)
             {
-                case PivotSelectorType.Random:
-                    return new RandomPivotSelectorFactory(new Random());
+                case PivotSelectorType.Last:
+                    return new LastPivotSelectorFactory();
+                case PivotSelectorType.First:
+                    return new FirstPivotSelectorFactory();
+                case PivotSelectorType.Center:
+                    return new CenterPivotSelectorFactory();
                 case PivotSelectorType.MedianOfThree:
                     return new MedianOfThreePivotSelectorFactory();
+                case PivotSelectorType.Random:
+                    return new RandomPivotSelectorFactory(new Random());
                 default:
                     return null;
             }
