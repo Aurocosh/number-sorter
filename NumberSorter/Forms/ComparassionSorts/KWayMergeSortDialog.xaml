@@ -12,13 +12,13 @@
         xmlns:utility="clr-namespace:NumberSorter.Utility"
         utility:DialogCloser.DialogResult = "{Binding DialogResult}"
         mc:Ignorable="d"
-        Title="SortTypeDialog" Height="180" Width="400"
+        Title="K way merge sort custom settings" Height="180" Width="400"
         d:DataContext="{d:DesignInstance viewmodels:KWayMergeSortDialogViewModel}">
     <DockPanel>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Name="AcceptButton" Content="Accept" Width="80" Margin="5"/>
         </StackPanel>
-        <Grid>
+        <Grid Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -29,7 +29,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Content="Sort algorhythm"/>
+            <Label Grid.Row="0" Grid.Column="0" Content="K value"/>
             <xctk:IntegerUpDown Grid.Row="0" Grid.Column="1" Value="8" Minimum="2" Name="KValueIntegerUpDown"/>
             <Label Grid.Row="1" Grid.Column="0" Content="Sort algorhythm"/>
             <ComboBox Grid.Row="1" Grid.Column="1" Name="SortComboBox" DisplayMemberPath="Name"/>

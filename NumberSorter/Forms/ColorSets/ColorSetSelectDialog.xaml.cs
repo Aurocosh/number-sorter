@@ -1,19 +1,6 @@
 ﻿using NumberSorter.Domain.ViewModels;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reactive.Disposables;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace NumberSorter.Forms
 {
@@ -41,6 +28,13 @@ namespace NumberSorter.Forms
                 this.BindCommand(ViewModel, x => x.EditSelectedCommand, x => x.EditSelectedButton)
                     .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.DeleteSelectedCommand, x => x.DeleteSelectedButton)
+                    .DisposeWith(disposable);
+
+                this.BindCommand(ViewModel, x => x.AddNewCommand, x => x.AddNewContextButton)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.EditSelectedCommand, x => x.EditSelectedContextButton)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.DeleteSelectedCommand, x => x.DeleteSelectedContextButton)
                     .DisposeWith(disposable);
 
                 this.BindCommand(ViewModel, x => x.AcceptCommand, x => x.AcceptButton)

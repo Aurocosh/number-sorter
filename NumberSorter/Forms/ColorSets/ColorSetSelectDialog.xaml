@@ -11,15 +11,13 @@
         xmlns:utility="clr-namespace:NumberSorter.Utility"
         utility:DialogCloser.DialogResult = "{Binding DialogResult}"
         mc:Ignorable="d"
-        Title="SortTypeDialog" Height="450" Width="400"
+        Title="Color sets" Height="450" Width="400"
         d:DataContext="{d:DesignInstance viewmodels:ColorSetSelectDialogViewModel}">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Color sets">
-                <MenuItem Header="Add new" Name="AddNewButton"/>
-                <MenuItem Header="Edit selected" Name="EditSelectedButton"/>
-                <MenuItem Header="Delete selected" Name="DeleteSelectedButton"/>
-            </MenuItem>
+            <MenuItem Header="Add new" Name="AddNewButton"/>
+            <MenuItem Header="Edit selected" Name="EditSelectedButton"/>
+            <MenuItem Header="Delete selected" Name="DeleteSelectedButton"/>
         </Menu>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Name="AcceptButton" Content="Accept" Width="80" Margin="5"/>
@@ -28,6 +26,14 @@
         <ListBox Name="ColorSetList"
                  HorizontalContentAlignment="Stretch"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                 DisplayMemberPath="{Binding Name}"/>
+                 DisplayMemberPath="{Binding Name}">
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Add new" Name="AddNewContextButton"/>
+                    <MenuItem Header="Edit selected" Name="EditSelectedContextButton"/>
+                    <MenuItem Header="Delete selected" Name="DeleteSelectedContextButton"/>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+        </ListBox>
     </DockPanel>
 </reactiveui:ReactiveWindow>

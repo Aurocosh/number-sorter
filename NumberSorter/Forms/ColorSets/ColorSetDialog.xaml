@@ -12,7 +12,7 @@
         xmlns:utility="clr-namespace:NumberSorter.Utility"
         utility:DialogCloser.DialogResult = "{Binding DialogResult}"
         mc:Ignorable="d"
-        Title="SortTypeDialog" Height="450" Width="400"
+        Title="Color set settings" Height="450" Width="400"
         d:DataContext="{d:DesignInstance viewmodels:ColorSetDialogViewModel}">
     <DockPanel>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
