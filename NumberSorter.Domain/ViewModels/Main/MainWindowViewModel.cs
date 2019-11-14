@@ -88,7 +88,7 @@ namespace NumberSorter.Domain.ViewModels
 
             VisualizationViewModel = new VisualizationViewModel(_dialogService);
 
-            ShowActions = true;
+            ShowActions = false;
             ShowControls = true;
 
             InputNumbers = new UnsortedInput<int>();

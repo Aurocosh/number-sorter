@@ -38,9 +38,6 @@ namespace NumberSorter.Domain.ViewModels
 
         private IListVisualizer _listVisualizer = new ColumnListVisualizer();
 
-        //private readonly List<LogAction<int>> previousHidden;
-        //private readonly List<LogAction<int>> nextHidden;
-
         private readonly SourceList<LogAction<int>> _logActions;
         private readonly SourceList<LogActionLineViewModel> _displayedLogActions;
 
