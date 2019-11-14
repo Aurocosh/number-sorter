@@ -69,15 +69,17 @@ namespace NumberSorter.Domain.Visualizers
             int maxModule = list.Max(Math.Abs);
             double scaleCoefficient = (yRange - 10) / (maxModule + shift);
 
-            int xCurrent = 0;
             int elementsFits = width / spacePerElement;
             int elementToDraw = Math.Min(list.Count, elementsFits);
+            int takenSpace = elementToDraw * (columnSize + spacerSize);
+            int leftoverSpace = width - takenSpace;
+            int xCurrent = leftoverSpace / 2;
             for (int i = 0; i < elementToDraw; i++)
             {
                 var currentColor = VisualizationColors.GetColumnColor(colorSet, sortState, i);
                 int scaledValue = (int)((list[i] + shift) * scaleCoefficient);
                 if (scaledValue > 0)
-                    writeableBitmap.FillRectangle(xCurrent, yOrigin - scaledValue, xCurrent + columnSize - 1, yOrigin - 5, currentColor);
+                    writeableBitmap.FillRectangle(xCurrent, yOrigin - scaledValue, xCurrent + columnSize, yOrigin - 5, currentColor);
 
                 xCurrent += columnSize + spacerSize;
             }

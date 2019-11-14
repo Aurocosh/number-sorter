@@ -65,9 +65,11 @@ namespace NumberSorter.Domain.Visualizers
             int maxModule = list.Max(Math.Abs);
             double scaleCoefficient = yRange / maxModule;
 
-            int xCurrent = 0;
             int elementsFits = width / spacePerElement;
             int elementToDraw = Math.Min(list.Count, elementsFits);
+            int takenSpace = elementToDraw * (columnSize + spacerSize);
+            int leftoverSpace = width - takenSpace;
+            int xCurrent = leftoverSpace / 2;
             for (int i = 0; i < elementToDraw; i++)
             {
                 var currentColor = VisualizationColors.GetColumnColor(colorSet, sortState, i);
