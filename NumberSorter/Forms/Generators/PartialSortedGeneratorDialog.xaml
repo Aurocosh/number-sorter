@@ -19,7 +19,7 @@
             <Button Name="AcceptButton" Content="Accept" Margin="5"/>
             <Button Content="Cancel" Margin="5" IsCancel="True"/>
         </StackPanel>
-        <Grid>
+        <Grid Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>

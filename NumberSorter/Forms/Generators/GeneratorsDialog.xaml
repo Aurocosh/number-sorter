@@ -40,7 +40,15 @@
                  Name="ListGeneratorsList"
                  Margin="5" 
                  HorizontalContentAlignment="Stretch"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Name="NewGeneratorContextMenuItem" Header="New generator" />
+                        <MenuItem Name="RemoveSelectedContextMenuItem" Header="Remove selected" />
+                        <MenuItem Name="SerializeGeneratorContextMenuItem" Header="Serialize generator" />
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+            </ListBox>
             <GridSplitter Grid.Column="1"/>
             <TextBox Grid.Column="2"
                  Name="DescriptionTextBox"
