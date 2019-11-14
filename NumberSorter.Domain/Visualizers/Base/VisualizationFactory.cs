@@ -9,9 +9,13 @@ namespace NumberSorter.Domain.Visualizers
             switch (algorhythmType)
             {
                 case VisualizationType.Columns:
-                    return new ColumnListVisualizer();
+                    return new ColumnListVisualizer(1, 30, 5, 0.8f);
+                case VisualizationType.ColumnsNoSpacers:
+                    return new ColumnListVisualizer(1, 30, 0, 1f);
                 case VisualizationType.PositiveColumns:
-                    return new PositiveColumnListVisualizer();
+                    return new PositiveColumnListVisualizer(1, 30, 5, 0.8f);
+                case VisualizationType.PositiveColumnsNoSpacers:
+                    return new PositiveColumnListVisualizer(1, 30, 0, 1f);
                 case VisualizationType.Points:
                     return new PointsListVisualizer();
                 default:

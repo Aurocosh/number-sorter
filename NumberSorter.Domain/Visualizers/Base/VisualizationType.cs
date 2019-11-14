@@ -3,7 +3,9 @@
     public enum VisualizationType
     {
         Columns,
+        ColumnsNoSpacers,
         PositiveColumns,
+        PositiveColumnsNoSpacers,
         Points,
     }
 }

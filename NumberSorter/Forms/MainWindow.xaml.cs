@@ -87,6 +87,16 @@ namespace NumberSorter.Forms
                 this.Bind(ViewModel, x => x.VisualizationViewModel.ComparassionActions, x => x.ComparassionsCheck.IsChecked)
                     .DisposeWith(disposable);
 
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.ElementsDoNotFit, x => x.FitWarningTextBlock.Visibility, vmToViewConverterOverride: new VisibilityBindingTypeConverter())
+                    .DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.ElementsDoNotFit, x => x.FitCountTextBlock.Visibility, vmToViewConverterOverride: new VisibilityBindingTypeConverter())
+                    .DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.ElementsDoNotFit, x => x.FitMessageTextBlock.Visibility, vmToViewConverterOverride: new VisibilityBindingTypeConverter())
+                    .DisposeWith(disposable);
+
+                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.MissingElementCount, x => x.FitCountTextBlock.Text)
+                    .DisposeWith(disposable);
+
                 #endregion
 
                 #region Action counters
@@ -135,9 +145,9 @@ namespace NumberSorter.Forms
 
                 #region Commands
 
-                this.BindCommand(ViewModel, x => x.ToggleActionsCommand, x => x.ToggleActionsButton)
+                this.BindCommand(ViewModel, x => x.ToggleActionsCommand, x => x.ToggleActionsMenuItem)
                     .DisposeWith(disposable);
-                this.BindCommand(ViewModel, x => x.ToggleControlsCommand, x => x.ToggleControlsButton)
+                this.BindCommand(ViewModel, x => x.ToggleControlsCommand, x => x.ToggleControlsMenuItem)
                     .DisposeWith(disposable);
 
                 this.BindCommand(ViewModel, x => x.VisualizationViewModel.PlayPauseCommand, x => x.PlayButton)

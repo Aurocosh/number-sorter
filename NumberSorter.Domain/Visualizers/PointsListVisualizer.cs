@@ -21,7 +21,7 @@ namespace NumberSorter.Domain.Visualizers
 
         private float _columnProportion = 0.8f;
 
-        public void Redraw(WriteableBitmap writeableBitmap, SortState<int> sortState, ColorSet colorSet)
+        public int Redraw(WriteableBitmap writeableBitmap, SortState<int> sortState, ColorSet colorSet)
         {
             int width = (int)Math.Floor(writeableBitmap.Width);
             int height = (int)Math.Floor(writeableBitmap.Height);
@@ -34,13 +34,12 @@ namespace NumberSorter.Domain.Visualizers
             var list = sortState.State;
 
             if (list.Count == 0)
-                return;
+                return 0;
 
             int size = list.Count;
-            if (width < (_minColumnSize * size) + (_minSpacerSize * (size - 1)))
-                return;
-
             int spacePerElement = width / size;
+            if (spacePerElement == 0)
+                spacePerElement = 1;
 
             int columnSize;
             int spacerSize;
@@ -65,7 +64,9 @@ namespace NumberSorter.Domain.Visualizers
             double scaleCoefficient = yRange / (maxPositive + shift);
 
             int xCurrent = 0;
-            for (int i = 0; i < list.Count; i++)
+            int elementsFits = width / spacePerElement;
+            int elementToDraw = Math.Min(list.Count, elementsFits);
+            for (int i = 0; i < elementToDraw; i++)
             {
                 var currentColor = VisualizationColors.GetColumnColor(colorSet, sortState, i);
                 int scaledValue = (int)((list[i] + shift) * scaleCoefficient);
@@ -75,6 +76,7 @@ namespace NumberSorter.Domain.Visualizers
 
                 xCurrent += columnSize + spacerSize;
             }
+            return list.Count - elementToDraw;
         }
     }
 }

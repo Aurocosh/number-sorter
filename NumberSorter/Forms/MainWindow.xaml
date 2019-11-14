@@ -29,6 +29,10 @@
                 <MenuItem Header="Change color set" Name="ChangeColorSetButton"/>
                 <MenuItem Header="Change visualization type" Name="ChangeVisualizationButton"/>
             </MenuItem>
+            <MenuItem Header="Settings">
+                <MenuItem Header="Toggle actions" Name="ToggleActionsMenuItem"/>
+                <MenuItem Header="Toggle controls" Name="ToggleControlsMenuItem"/>
+            </MenuItem>
         </Menu>
         <TabControl>
             <TabItem Header="Main">
@@ -56,12 +60,11 @@
             </TabItem>
             <TabItem Header="Sort vizualization">
                 <DockPanel Margin="5">
-                    <DockPanel DockPanel.Dock="Bottom" Margin="0 5 0 0">
-                        <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" HorizontalAlignment="Left">
-                            <Button Name="ToggleControlsButton" Content="Toggle controls" Width="100"/>
-                        </StackPanel>
-                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
-                            <ToggleButton Name="ToggleActionsButton" Content="Toggle actions" Width="100"/>
+                    <Grid DockPanel.Dock="Bottom" Margin="0 5 0 0">
+                        <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Text="Warning! " Name="FitWarningTextBlock" Foreground="Red"/>
+                            <TextBlock Text="25" Name="FitCountTextBlock" Foreground="Red"/>
+                            <TextBlock Text=" elements do not fit on screen!" Name="FitMessageTextBlock" Foreground="Red"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <Button Name="PlayButton" Content="Play" Width="80" Margin="0 0 5 0"/>
@@ -70,7 +73,7 @@
                             <Button Name="PreviousButton" Content="Previous" Width="80" Margin="10 0 5 0"/>
                             <Button Name="NextButton" Content="Next" Width="80"/>
                         </StackPanel>
-                    </DockPanel>
+                    </Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*" x:Name="ControlPanelColumn"/>

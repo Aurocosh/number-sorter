@@ -40,7 +40,7 @@ namespace NumberSorter.Domain.ViewModels
         private int _displayedActionCount = 5;
 
         private readonly JsonFileSerializer _jsonFileSerializer;
-        private IListVisualizer _listVisualizer = new ColumnListVisualizer();
+        private IListVisualizer _listVisualizer = new ColumnListVisualizer(1, 30, 5, 0.8f);
 
         private readonly SourceList<LogAction<int>> _logActions;
         private readonly SourceList<LogActionLineViewModel> _displayedLogActions;
@@ -55,6 +55,8 @@ namespace NumberSorter.Domain.ViewModels
         #endregion Fields
 
         #region Properties
+        [Reactive] public bool ElementsDoNotFit { get; set; }
+        [Reactive] public int MissingElementCount { get; set; }
 
         [Reactive] public bool IsAnimating { get; set; }
         [Reactive] public bool ShowActionLog { get; set; }
@@ -121,6 +123,9 @@ namespace NumberSorter.Domain.ViewModels
 
             _sortStateCache = new LimitedDictionary<int, SortState<int>>(_cacheSize);
             _sortWaypointStateCache = new LimitedDictionary<int, SortState<int>>(_waypointCacheSize);
+
+            ElementsDoNotFit = false;
+            MissingElementCount = 0;
 
             IsAnimating = false;
             ShowActionLog = true;
@@ -390,7 +395,8 @@ namespace NumberSorter.Domain.ViewModels
 
         private void UpdateVisualization(SortState<int> currentListState)
         {
-            _listVisualizer.Redraw(VisualizationImage, currentListState, ColorSet);
+            MissingElementCount = _listVisualizer.Redraw(VisualizationImage, currentListState, ColorSet);
+            ElementsDoNotFit = MissingElementCount > 0;
         }
 
         private void UpdataDisplayedActions()

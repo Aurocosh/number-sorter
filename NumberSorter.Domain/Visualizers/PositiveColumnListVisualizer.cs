@@ -13,15 +13,20 @@ namespace NumberSorter.Domain.Visualizers
 {
     public class PositiveColumnListVisualizer : IListVisualizer
     {
-        private const int _minColumnSize = 1;
-        private const int _desiredColumnSize = 30;
+        private int MinColumnSize { get; } = 1;
+        private int DesiredColumnSize { get; } = 30;
+        private int DesiredSpacerSize { get; } = 5;
+        private float ColumnProportion { get; } = 0.8f;
 
-        private const int _minSpacerSize = 0;
-        private const int _desiredSpacerSize = 5;
+        public PositiveColumnListVisualizer(int minColumnSize, int desiredColumnSize, int desiredSpacerSize, float columnProportion)
+        {
+            MinColumnSize = minColumnSize;
+            DesiredColumnSize = desiredColumnSize;
+            DesiredSpacerSize = desiredSpacerSize;
+            ColumnProportion = columnProportion;
+        }
 
-        private float _columnProportion = 0.8f;
-
-        public void Redraw(WriteableBitmap writeableBitmap, SortState<int> sortState, ColorSet colorSet)
+        public int Redraw(WriteableBitmap writeableBitmap, SortState<int> sortState, ColorSet colorSet)
         {
             int width = (int)Math.Floor(writeableBitmap.Width);
             int height = (int)Math.Floor(writeableBitmap.Height);
@@ -35,29 +40,28 @@ namespace NumberSorter.Domain.Visualizers
             var list = sortState.State;
 
             if (list.Count == 0)
-                return;
+                return 0;
 
             int size = list.Count;
-            if (width < (_minColumnSize * size) + (_minSpacerSize * (size - 1)))
-                return;
-
             int spacePerElement = width / size;
+            if (spacePerElement == 0)
+                spacePerElement = 1;
 
             int columnSize;
             int spacerSize;
-            if (spacePerElement >= _desiredColumnSize + _desiredSpacerSize)
+            if (spacePerElement >= DesiredColumnSize + DesiredSpacerSize)
             {
-                columnSize = _desiredColumnSize;
-                spacerSize = _desiredSpacerSize;
+                columnSize = DesiredColumnSize;
+                spacerSize = DesiredSpacerSize;
             }
-            else if (spacePerElement / _minColumnSize <= 1)
+            else if (spacePerElement / MinColumnSize <= 1)
             {
                 columnSize = 1;
                 spacerSize = 0;
             }
             else
             {
-                columnSize = (int)Math.Floor(spacePerElement * _columnProportion);
+                columnSize = (int)Math.Floor(spacePerElement * ColumnProportion);
                 spacerSize = spacePerElement - columnSize;
             }
 
@@ -66,7 +70,9 @@ namespace NumberSorter.Domain.Visualizers
             double scaleCoefficient = (yRange - 10) / (maxModule + shift);
 
             int xCurrent = 0;
-            for (int i = 0; i < list.Count; i++)
+            int elementsFits = width / spacePerElement;
+            int elementToDraw = Math.Min(list.Count, elementsFits);
+            for (int i = 0; i < elementToDraw; i++)
             {
                 var currentColor = VisualizationColors.GetColumnColor(colorSet, sortState, i);
                 int scaledValue = (int)((list[i] + shift) * scaleCoefficient);
@@ -75,6 +81,7 @@ namespace NumberSorter.Domain.Visualizers
 
                 xCurrent += columnSize + spacerSize;
             }
+            return list.Count - elementToDraw;
         }
     }
 }
