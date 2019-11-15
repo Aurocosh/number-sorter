@@ -21,6 +21,9 @@ namespace NumberSorter.Domain.Container.Actions
         [JsonProperty]
         public override int SecondtWrittenIndex { get; }
 
+        public override IReadOnlyList<T> HighlightedValues => new T[] { FirstValue, SecondValue };
+        public override IReadOnlyList<int> HighlightedIndexes => new int[] { FirstWrittenIndex, SecondtWrittenIndex };
+
         public LogSwap(int actionIndex, int firstWrittenIndex, int secondWrittenIndex, T firstValue, T secondValue) : base(actionIndex, LogActionType.LogWrite)
         {
             FirstWrittenIndex = firstWrittenIndex;

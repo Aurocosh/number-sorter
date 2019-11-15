@@ -29,6 +29,9 @@ namespace NumberSorter.Domain.Container.Actions.Base
         public virtual int WriteCount => 0;
         public virtual int ComparassionCount => 0;
 
+        public virtual IReadOnlyList<T> HighlightedValues => Array.Empty<T>();
+        public virtual IReadOnlyList<int> HighlightedIndexes => Array.Empty<int>();
+
         protected LogAction(int actionIndex, LogActionType actionType)
         {
             ActionIndex = actionIndex;

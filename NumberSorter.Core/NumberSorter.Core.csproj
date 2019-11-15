@@ -201,6 +201,7 @@
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\RecursiveMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\TimSort.cs" />
     <Compile Include="Logic\Comparer\IntComparer.cs" />
+    <Compile Include="Logic\Utility\EnumerableExtensions.cs" />
     <Compile Include="Logic\Utility\EnumUtils.cs" />
     <Compile Include="Logic\Utility\IListExtensions.cs" />
     <Compile Include="Logic\Utility\ArrayUtility.cs" />

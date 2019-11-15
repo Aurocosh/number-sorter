@@ -17,6 +17,9 @@ namespace NumberSorter.Domain.Container.Actions
         [JsonProperty]
         public override int ReadIndex { get; }
 
+        public override IReadOnlyList<T> HighlightedValues => new T[] { Value };
+        public override IReadOnlyList<int> HighlightedIndexes => new int[] { ReadIndex };
+
         public LogRead(int actionIndex, int readIndex, T value) : base(actionIndex, LogActionType.LogRead)
         {
             Value = value;

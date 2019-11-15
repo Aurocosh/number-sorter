@@ -41,6 +41,9 @@
     <Reference Include="DynamicData, Version=6.13.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DynamicData.6.13.9\lib\net461\DynamicData.dll</HintPath>
     </Reference>
+    <Reference Include="NAudio, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.9.0\lib\net35\NAudio.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3-beta2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -94,6 +97,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppColors\ColorSet.cs" />
+    <Compile Include="Audiolizers\Base\IStateAudiolizer.cs" />
+    <Compile Include="Audiolizers\MidiIndexAudiolizer.cs" />
+    <Compile Include="Audiolizers\MidiAudiolizer.cs" />
     <Compile Include="Container\AccessLoggingList.cs" />
     <Compile Include="Container\Value\ValueWrite.cs" />
     <Compile Include="Logic\Comparassion\ComparassionAlgorhythmFactory.cs" />

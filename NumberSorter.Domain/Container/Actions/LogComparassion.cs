@@ -24,6 +24,9 @@ namespace NumberSorter.Domain.Container.Actions
         [JsonProperty]
         public override int SecondComparedIndex { get; }
 
+        public override IReadOnlyList<T> HighlightedValues => new T[] { FirstValue, SecondValue };
+        public override IReadOnlyList<int> HighlightedIndexes => new int[] { FirstComparedIndex, SecondComparedIndex };
+
         public LogComparassion(int actionIndex, int firstComparedIndex, int secondComparedIndex, T firstValue, T secondValue, int comparassionResult) : base(actionIndex, LogActionType.LogComparassion)
         {
             FirstComparedIndex = firstComparedIndex;

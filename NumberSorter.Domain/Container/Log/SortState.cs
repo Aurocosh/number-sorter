@@ -1,9 +1,6 @@
 ﻿using NumberSorter.Domain.Container.Actions.Base;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NumberSorter.Domain.Container
 {
@@ -12,6 +9,8 @@ namespace NumberSorter.Domain.Container
         private readonly T[] _stateArray;
 
         public IReadOnlyList<T> State => _stateArray;
+        public IReadOnlyList<T> HighlightedValues { get; }
+        public IReadOnlyList<int> HighlightedIndexes { get; }
 
         public int ReadIndex { get; }
 
@@ -26,10 +25,11 @@ namespace NumberSorter.Domain.Container
         public int WriteCount { get; }
         public int ComparassionCount { get; }
 
-
         public SortState(T[] state)
         {
             _stateArray = state;
+            HighlightedValues = Array.Empty<T>();
+            HighlightedIndexes = Array.Empty<int>();
 
             ReadIndex = -1;
 
@@ -40,9 +40,11 @@ namespace NumberSorter.Domain.Container
             SecondComparedIndex = -1;
         }
 
-        public SortState(T[] stateArray, int readIndex, int firstWrittenIndex, int secondWrittenIndex, int comparassionResult, int firstComparedIndex, int secondComparedIndex, int readCount, int writeCount, int comparassionCount)
+        public SortState(T[] stateArray, IReadOnlyList<T> highlightedValues, IReadOnlyList<int> highlightedIndexes, int readIndex, int firstWrittenIndex, int secondWrittenIndex, int comparassionResult, int firstComparedIndex, int secondComparedIndex, int readCount, int writeCount, int comparassionCount)
         {
             _stateArray = stateArray;
+            HighlightedValues = highlightedValues;
+            HighlightedIndexes = highlightedIndexes;
 
             ReadIndex = readIndex;
 
@@ -74,13 +76,14 @@ namespace NumberSorter.Domain.Container
             int comparassionCount = ComparassionCount + logAction.ComparassionCount;
 
             var arrayState = _stateArray;
+
             if (logAction.WriteCount > 0)
             {
                 arrayState = CopyState();
                 logAction.TransformStateArray(arrayState);
             }
 
-            return new SortState<T>(arrayState, readIndex, firstWrittenIndex, secondWrittenIndex, comparassionResult, firstComparedIndex, secondComparedIndex, readCount, writeCount, comparassionCount);
+            return new SortState<T>(arrayState, logAction.HighlightedValues, logAction.HighlightedIndexes, readIndex, firstWrittenIndex, secondWrittenIndex, comparassionResult, firstComparedIndex, secondComparedIndex, readCount, writeCount, comparassionCount);
         }
 
         private T[] CopyState()

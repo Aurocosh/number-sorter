@@ -250,7 +250,11 @@ namespace NumberSorter.Domain.ViewModels
 
         #endregion Command functions
 
-        private void SetUnsortedInput(UnsortedInput<int> input) => InputNumbers = input;
+        private void SetUnsortedInput(UnsortedInput<int> input)
+        {
+            InputNumbers = input;
+            SortingLog = new SortLog<int>(input.Name, input.Id, input.Values, input.Values);
+        }
 
         private void SaveLogSummary(SortLog<int> sortLog)
         {

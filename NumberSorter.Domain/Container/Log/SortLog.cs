@@ -2,11 +2,8 @@
 using NumberSorter.Domain.Container.Actions;
 using NumberSorter.Domain.Container.Actions.Base;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NumberSorter.Domain.Container
 {
@@ -23,6 +20,20 @@ namespace NumberSorter.Domain.Container
             InputState = new SortState<T>(Array.Empty<T>());
             FinalState = new SortState<T>(Array.Empty<T>());
             ActionLog = new List<LogAction<T>>();
+        }
+
+        public SortLog(string inputName, Guid inputId, IReadOnlyList<T> inputState, IReadOnlyList<T> finalState)
+        {
+            var actionLog = new List<LogAction<T>>(1)
+            {
+                new LogMarker<T>(0, "Initial state of list"),
+            };
+
+            InputState = new SortState<T>(inputState.ToArray());
+            FinalState = new SortState<T>(finalState.ToArray());
+
+            Summary = new LogSummary(false, 0, "Unsorted", inputId, inputName, inputState.Count, 0, 0, 0);
+            ActionLog = actionLog;
         }
 
         public SortLog(string inputName, Guid inputId, IReadOnlyList<T> inputState, IReadOnlyList<T> finalState, IReadOnlyList<LogAction<T>> actionLog, IComparer<T> comparer, float elapsedTime, string algorhythmName)

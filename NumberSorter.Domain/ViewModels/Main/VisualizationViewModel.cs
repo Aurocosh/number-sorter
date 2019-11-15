@@ -1,7 +1,10 @@
 ﻿using DynamicData;
+using NAudio.Midi;
 using Newtonsoft.Json;
 using NumberSorter.Core.Logic.Utility;
 using NumberSorter.Domain.AppColors;
+using NumberSorter.Domain.Audiolizers;
+using NumberSorter.Domain.Audiolizers.Base;
 using NumberSorter.Domain.Base.Visualizers;
 using NumberSorter.Domain.Container;
 using NumberSorter.Domain.Container.Actions;
@@ -41,6 +44,7 @@ namespace NumberSorter.Domain.ViewModels
 
         private readonly JsonFileSerializer _jsonFileSerializer;
         private IListVisualizer _listVisualizer = new ColumnListVisualizer(1, 30, 5, 0.8f);
+        private IStateAudiolizer _stateAudiolizer = new MidiValueAudiolizer();
 
         private readonly SourceList<LogAction<int>> _logActions;
         private readonly SourceList<LogActionLineViewModel> _displayedLogActions;
@@ -397,6 +401,7 @@ namespace NumberSorter.Domain.ViewModels
         {
             MissingElementCount = _listVisualizer.Redraw(VisualizationImage, currentListState, ColorSet);
             ElementsDoNotFit = MissingElementCount > 0;
+            _stateAudiolizer.Play(currentListState);
         }
 
         private void UpdataDisplayedActions()
@@ -423,6 +428,7 @@ namespace NumberSorter.Domain.ViewModels
             _sortStateCache.Clear();
             _sortWaypointStateCache.Clear();
             _logActions.AddRange(SortingLog.ActionLog.Where(ActionFilter));
+            _stateAudiolizer.Init(SortingLog);
             CurrentActionIndex = 0;
         }
     }
