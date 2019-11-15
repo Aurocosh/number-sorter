@@ -34,11 +34,15 @@ namespace NumberSorter
             dialogService.RegisterWindowType<LogHistoryDialogViewModel, LogHistoryDialog>(new WindowViewInitializer<LogHistoryDialogViewModel>());
             dialogService.RegisterWindowType<NumberGeneratorsViewModel, NumberGeneratorsWindow>(new WindowViewInitializer<NumberGeneratorsViewModel>());
             dialogService.RegisterWindowType<GeneratorEditDialogViewModel, GeneratorEditDialog>(new WindowViewInitializer<GeneratorEditDialogViewModel>());
-            dialogService.RegisterWindowType<VisualizationTypeViewModel, VisualizationTypeDialog>(new WindowViewInitializer<VisualizationTypeViewModel>());
             dialogService.RegisterWindowType<ColorSetSelectDialogViewModel, ColorSetSelectDialog>(new WindowViewInitializer<ColorSetSelectDialogViewModel>());
             dialogService.RegisterWindowType<ComparassionSortTypeViewModel, ComparassionSortTypeDialog>(new WindowViewInitializer<ComparassionSortTypeViewModel>());
             dialogService.RegisterWindowType<DistributionSortTypeViewModel, DistributionSortTypeDialog>(new WindowViewInitializer<DistributionSortTypeViewModel>());
             dialogService.RegisterWindowType<PartialSortedGeneratorViewModel, PartialSortedGeneratorDialog>(new WindowViewInitializer<PartialSortedGeneratorViewModel>());
+
+            dialogService.RegisterWindowType<MidiAudiolizerSettingsDialogViewModel, MidiAudiolizerSettingsDialog>(new WindowViewInitializer<MidiAudiolizerSettingsDialogViewModel>());
+
+            dialogService.RegisterWindowType<AudiolizerTypeDialogViewModel, AudiolizerTypeDialog>(new WindowViewInitializer<AudiolizerTypeDialogViewModel>());
+            dialogService.RegisterWindowType<VisualizationTypeViewModel, VisualizationTypeDialog>(new WindowViewInitializer<VisualizationTypeViewModel>());
 
             dialogService.RegisterWindowType<TimSortDialogViewModel, TimSortDialog>(new WindowViewInitializer<TimSortDialogViewModel>());
             dialogService.RegisterWindowType<JHeapSortDialogViewModel, JHeapSortDialog>(new WindowViewInitializer<JHeapSortDialogViewModel>());

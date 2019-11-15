@@ -1,6 +1,8 @@
 ﻿using NAudio.Midi;
 using NumberSorter.Domain.Audiolizers.Base;
 using NumberSorter.Domain.Container;
+using NumberSorter.Domain.Logic;
+using System;
 
 namespace NumberSorter.Domain.Audiolizers
 {
@@ -14,11 +16,12 @@ namespace NumberSorter.Domain.Audiolizers
 
         private MidiOut MidiOut { get; }
 
-        public MidiIndexAudiolizer()
+        // Range of notes is from 0 to 127
+        public MidiIndexAudiolizer(int minNote, int maxNote, MidiInstrumentType instrumentType)
         {
-            // Range of notes is from 0 to 127
-            MinNote = 30;
-            MaxNote = 120;
+            MinNote = minNote;
+            MaxNote = maxNote;
+
             NoteRange = MaxNote - MinNote;
 
             ElementCount = 0;
@@ -27,7 +30,7 @@ namespace NumberSorter.Domain.Audiolizers
             {
                 Volume = 65535
             };
-            MidiOut.Send(MidiMessage.ChangePatch(4, 1).RawData);
+            MidiOut.Send(MidiMessage.ChangePatch((int)instrumentType, 1).RawData);
         }
 
         public void Init(SortLog<int> sortLog)
@@ -42,6 +45,18 @@ namespace NumberSorter.Domain.Audiolizers
                 int note = (int)(value / (double)ElementCount * NoteRange) + MinNote;
                 MidiOut.Send(new NoteEvent(0, 1, MidiCommandCode.NoteOn, note, 127 - (note / 2)).GetAsShortMessage());
             }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+                MidiOut.Dispose();
         }
     }
 }

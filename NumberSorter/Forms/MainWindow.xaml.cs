@@ -136,19 +136,7 @@ namespace NumberSorter.Forms
                 this.OneWayBind(ViewModel, x => x.VisualizationViewModel.ActionButtonText, x => x.PlayButton.Content)
                     .DisposeWith(disposable);
 
-                //this.Bind(ViewModel, x => x.VisualizationViewModel.ShowActionLog, x => x.LogButton.IsChecked)
-                //    .DisposeWith(disposable);
-                //this.OneWayBind(ViewModel, x => x.VisualizationViewModel.ShowActionLog, x => x.LogActionPanel.Visibility, vmToViewConverterOverride: new VisibilityBindingTypeConverter())
-                //    .DisposeWith(disposable);
-                //this.OneWayBind(ViewModel, x => x.VisualizationViewModel.ShowActionLog, x => x.LogActionPanelSplitter.Visibility, vmToViewConverterOverride: new VisibilityBindingTypeConverter())
-                //    .DisposeWith(disposable);
-
                 #region Commands
-
-                this.BindCommand(ViewModel, x => x.ToggleActionsCommand, x => x.ToggleActionsMenuItem)
-                    .DisposeWith(disposable);
-                this.BindCommand(ViewModel, x => x.ToggleControlsCommand, x => x.ToggleControlsMenuItem)
-                    .DisposeWith(disposable);
 
                 this.BindCommand(ViewModel, x => x.VisualizationViewModel.PlayPauseCommand, x => x.PlayButton)
                     .DisposeWith(disposable);
@@ -177,9 +165,15 @@ namespace NumberSorter.Forms
                 this.BindCommand(ViewModel, x => x.VisualizationViewModel.PlusOneStepCommand, x => x.NextButton)
                     .DisposeWith(disposable);
 
-                this.BindCommand(ViewModel, x => x.VisualizationViewModel.ChangeColorSetCommand, x => x.ChangeColorSetButton)
+                this.BindCommand(ViewModel, x => x.ToggleActionsCommand, x => x.ToggleActionsMenuItem)
                     .DisposeWith(disposable);
-                this.BindCommand(ViewModel, x => x.VisualizationViewModel.ChangeVisualizationTypeCommand, x => x.ChangeVisualizationButton)
+                this.BindCommand(ViewModel, x => x.ToggleControlsCommand, x => x.ToggleControlsMenuItem)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.VisualizationViewModel.ChangeColorSetCommand, x => x.ChangeColorSetMenuItem)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.VisualizationViewModel.ChangeVisualizationTypeCommand, x => x.ChangeVisualizationMenuItem)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.VisualizationViewModel.ChangeAudoilizerTypeCommand, x => x.ChangeAudiolizerMenuItem)
                     .DisposeWith(disposable);
 
                 #endregion

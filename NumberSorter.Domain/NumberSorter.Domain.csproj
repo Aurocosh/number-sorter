@@ -98,10 +98,13 @@
   <ItemGroup>
     <Compile Include="AppColors\ColorSet.cs" />
     <Compile Include="Audiolizers\Base\IStateAudiolizer.cs" />
+    <Compile Include="Logic\Audiolizer\AudiolizerFactory.cs" />
+    <Compile Include="Logic\Audiolizer\AudiolizerType.cs" />
     <Compile Include="Audiolizers\MidiIndexAudiolizer.cs" />
-    <Compile Include="Audiolizers\MidiAudiolizer.cs" />
+    <Compile Include="Audiolizers\MidiValueAudiolizer.cs" />
     <Compile Include="Container\AccessLoggingList.cs" />
     <Compile Include="Container\Value\ValueWrite.cs" />
+    <Compile Include="Logic\Audiolizer\AudiolizerNamer.cs" />
     <Compile Include="Logic\Comparassion\ComparassionAlgorhythmFactory.cs" />
     <Compile Include="Logic\Distribution\DistributionAlgorhythmNamer.cs" />
     <Compile Include="Logic\Comparassion\ComparassionAlgorhythmNamer.cs" />
@@ -111,6 +114,8 @@
     <Compile Include="Logic\GapGenerator\GapGeneratorFactory.cs" />
     <Compile Include="Logic\GapGenerator\GapGeneratorNamer.cs" />
     <Compile Include="Logic\GapGenerator\GapGeneratorType.cs" />
+    <Compile Include="Logic\MidiInstruments\MidiInstrumentsNamer.cs" />
+    <Compile Include="Logic\MidiInstruments\MidiInstrumentType.cs" />
     <Compile Include="Logic\RunLocator\RunLocatorFactory.cs" />
     <Compile Include="Logic\RunLocator\RunLocatorNamer.cs" />
     <Compile Include="Logic\RunLocator\RunLocatorType.cs" />
@@ -124,6 +129,9 @@
     <Compile Include="Logic\PositionLocator\PositionLocatorNamer.cs" />
     <Compile Include="Logic\PositionLocator\PositionLocatorType.cs" />
     <Compile Include="Utility\ColorConverter.cs" />
+    <Compile Include="ViewModels\AudiolizerSettings\MidiAudiolizerSettingsDialogViewModel.cs" />
+    <Compile Include="ViewModels\Audiolizers\AudiolizerTypeLineViewModel.cs" />
+    <Compile Include="ViewModels\Audiolizers\AudiolizerTypeDialogViewModel.cs" />
     <Compile Include="ViewModels\ColorSets\ColorSetDialogViewModel.cs" />
     <Compile Include="ViewModels\ColorSets\ColorSetSelectDialogViewModel.cs" />
     <Compile Include="ViewModels\ColorSets\ColorSetLineViewModel.cs" />
@@ -138,6 +146,7 @@
     <Compile Include="ViewModels\ComparassionSorts\QuickSortDialogViewModel.cs" />
     <Compile Include="ViewModels\DistributionSortType\DistributionSortTypeLineViewModel.cs" />
     <Compile Include="ViewModels\DistributionSortType\DistributionSortTypeViewModel.cs" />
+    <Compile Include="ViewModels\EnumTypes\MidiInstrumentTypeLineViewModel.cs" />
     <Compile Include="ViewModels\EnumTypes\GapGeneratorTypeLineViewModel.cs" />
     <Compile Include="ViewModels\EnumTypes\RunLocatorTypeLineViewModel.cs" />
     <Compile Include="ViewModels\Generators\CustomListGenerator\Processors\PartialConsecutiveValuesProcessorLineViewModel.cs" />
@@ -199,8 +208,8 @@
     <Compile Include="ViewModels\Generators\PartialSortedGeneratorViewModel.cs" />
     <Compile Include="ViewModels\ComparassionSortType\ComparassionSortTypeLineViewModel.cs" />
     <Compile Include="ViewModels\Generators\GeneratorsDialogViewModel.cs" />
-    <Compile Include="ViewModels\VisualizationType\VisualizationTypeLineViewModel.cs" />
-    <Compile Include="ViewModels\VisualizationType\VisualizationTypeViewModel.cs" />
+    <Compile Include="ViewModels\Visualizers\VisualizationTypeLineViewModel.cs" />
+    <Compile Include="ViewModels\Visualizers\VisualizationTypeViewModel.cs" />
     <Compile Include="ViewModels\ComparassionSortType\ComparassionSortTypeViewModel.cs" />
     <Compile Include="Visualizers\Base\IListVisualizer.cs" />
     <Compile Include="Visualizers\PointsListVisualizer.cs" />

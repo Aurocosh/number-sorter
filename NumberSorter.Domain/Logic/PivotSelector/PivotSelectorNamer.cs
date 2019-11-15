@@ -15,11 +15,6 @@ namespace NumberSorter.Domain.Logic
             _nameDictionary.Add(PivotSelectorType.MedianOfThree, "Median of three");
         }
 
-        public static string GetName(PivotSelectorType algorhythmType)
-        {
-            if (_nameDictionary.TryGetValue(algorhythmType, out string name))
-                return name;
-            return "Algorhythm name is unknown";
-        }
+        public static string GetName(PivotSelectorType type) => _nameDictionary[type];
     }
 }

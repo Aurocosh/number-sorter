@@ -11,6 +11,7 @@ using NumberSorter.Domain.Container.Actions;
 using NumberSorter.Domain.Container.Actions.Base;
 using NumberSorter.Domain.DialogService;
 using NumberSorter.Domain.Lib;
+using NumberSorter.Domain.Logic;
 using NumberSorter.Domain.Serialization;
 using NumberSorter.Domain.Visualizers;
 using ReactiveUI;
@@ -44,7 +45,7 @@ namespace NumberSorter.Domain.ViewModels
 
         private readonly JsonFileSerializer _jsonFileSerializer;
         private IListVisualizer _listVisualizer = new ColumnListVisualizer(1, 30, 5, 0.8f);
-        private IStateAudiolizer _stateAudiolizer = new MidiValueAudiolizer();
+        private IStateAudiolizer _stateAudiolizer = new MidiValueAudiolizer(30, 120, MidiInstrumentType.HonkyTonkPiano);
 
         private readonly SourceList<LogAction<int>> _logActions;
         private readonly SourceList<LogActionLineViewModel> _displayedLogActions;
@@ -103,6 +104,7 @@ namespace NumberSorter.Domain.ViewModels
         public ReactiveCommand<Unit, Unit> PlusThousandStepsCommand { get; }
 
         public ReactiveCommand<Unit, Unit> ChangeColorSetCommand { get; }
+        public ReactiveCommand<Unit, Unit> ChangeAudoilizerTypeCommand { get; }
         public ReactiveCommand<Unit, Unit> ChangeVisualizationTypeCommand { get; }
         public ReactiveCommand<SizeChangedEventArgs, Unit> ResizeCanvasCommand { get; }
 
@@ -172,6 +174,7 @@ namespace NumberSorter.Domain.ViewModels
             PlusThousandStepsCommand = ReactiveCommand.Create(PlusThousandSteps, isLogSet);
 
             ChangeColorSetCommand = ReactiveCommand.Create(ChangeColorSet);
+            ChangeAudoilizerTypeCommand = ReactiveCommand.Create(ChangeAudiolizerType);
             ChangeVisualizationTypeCommand = ReactiveCommand.Create(ChangeVisualizationType);
             ResizeCanvasCommand = ReactiveCommand.Create<SizeChangedEventArgs>(ResizeCanvas);
 
@@ -354,8 +357,26 @@ namespace NumberSorter.Domain.ViewModels
             UpdateVisualization(SortState);
         }
 
+        private void ChangeAudiolizerType()
+        {
+            IsAnimating = false;
+
+            var viewModel = new AudiolizerTypeDialogViewModel();
+            _dialogService.ShowModalPresentation(this, viewModel);
+
+            if (viewModel.DialogResult != true || viewModel.SelectedAudiolizerType == null)
+                return;
+
+            _stateAudiolizer.Dispose();
+            var audiolizerType = viewModel.SelectedAudiolizerType.Type;
+            _stateAudiolizer = AudiolizerFactory.GetAudiolizer(audiolizerType, this, _dialogService);
+            _stateAudiolizer.Init(SortingLog);
+        }
+
         private void ChangeVisualizationType()
         {
+            IsAnimating = false;
+
             var viewModel = new VisualizationTypeViewModel();
             _dialogService.ShowModalPresentation(this, viewModel);
 

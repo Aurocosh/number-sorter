@@ -127,6 +127,15 @@
     </ApplicationDefinition>
     <Compile Include="DialogService\DialogService.cs" />
     <Compile Include="DialogService\WindowViewInitializer.cs" />
+    <Compile Include="Forms\AudiolizerSettings\MidiAudiolizerSettingsDialog.xaml.cs">
+      <DependentUpon>MidiAudiolizerSettingsDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Audiolizers\AudiolizerTypeDialog.xaml.cs">
+      <DependentUpon>AudiolizerTypeDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Audiolizers\AudiolizerTypeLineControl.xaml.cs">
+      <DependentUpon>AudiolizerTypeLineControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ColorSets\ColorSetLineControl.xaml.cs">
       <DependentUpon>ColorSetLineControl.xaml</DependentUpon>
     </Compile>
@@ -237,6 +246,18 @@
     <Compile Include="Forms\Generators\NumberGeneratorsWindow.xaml.cs">
       <DependentUpon>NumberGeneratorsWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Forms\AudiolizerSettings\MidiAudiolizerSettingsDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\Audiolizers\AudiolizerTypeDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\Audiolizers\AudiolizerTypeLineControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Forms\ColorSets\ColorSetLineControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

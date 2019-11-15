@@ -25,13 +25,14 @@
                 <MenuItem Header="Perform distribution sort" Name="PerformDistributionSortButton"/>
                 <MenuItem Header="Sort history" Name="SortHistoryButton"/>
             </MenuItem>
-            <MenuItem Header="Visualization">
-                <MenuItem Header="Change color set" Name="ChangeColorSetButton"/>
-                <MenuItem Header="Change visualization type" Name="ChangeVisualizationButton"/>
-            </MenuItem>
             <MenuItem Header="Settings">
                 <MenuItem Header="Toggle actions" Name="ToggleActionsMenuItem"/>
                 <MenuItem Header="Toggle controls" Name="ToggleControlsMenuItem"/>
+                <Separator/>
+                <MenuItem Header="Change color set" Name="ChangeColorSetMenuItem"/>
+                <MenuItem Header="Change visualization type" Name="ChangeVisualizationMenuItem"/>
+                <Separator/>
+                <MenuItem Header="Change audiolizer" Name="ChangeAudiolizerMenuItem"/>
             </MenuItem>
         </Menu>
         <TabControl>
