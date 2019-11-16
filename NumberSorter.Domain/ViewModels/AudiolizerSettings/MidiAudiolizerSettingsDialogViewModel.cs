@@ -42,7 +42,7 @@ namespace NumberSorter.Domain.ViewModels
             AcceptCommand = ReactiveCommand.Create(Accept);
 
             MinNote = 30;
-            MaxNote = 120;
+            MaxNote = 100;
 
             var instrumentTypes = EnumUtil.GetValues<MidiInstrumentType>()
                 .Select(x => new MidiInstrumentTypeLineViewModel(x, MidiInstrumentNamer.GetName(x)))

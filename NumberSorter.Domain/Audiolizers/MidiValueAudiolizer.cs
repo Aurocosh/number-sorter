@@ -50,7 +50,7 @@ namespace NumberSorter.Domain.Audiolizers
             {
                 var absValue = value - Minimum;
                 int note = (int)(absValue / (double)Range * NoteRange) + MinNote;
-                MidiOut.Send(new NoteEvent(0, 1, MidiCommandCode.NoteOn, note, 127 - note / 2).GetAsShortMessage());
+                MidiOut.Send(new NoteOnEvent(0, 1, note, 127 - (note / 2), 1).GetAsShortMessage());
             }
         }
 
