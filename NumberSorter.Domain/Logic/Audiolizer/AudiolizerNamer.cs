@@ -8,6 +8,7 @@ namespace NumberSorter.Domain.Logic
 
         static AudiolizerNamer()
         {
+            _nameDictionary.Add(AudiolizerType.DummyAudiolizer, "Dummy audiolizer (No sound)");
             _nameDictionary.Add(AudiolizerType.MidiValueAudiolizer, "Midi value audiolizer");
             _nameDictionary.Add(AudiolizerType.MidiValueAudiolizerCustom, "Midi value audiolizer (Custom)");
             _nameDictionary.Add(AudiolizerType.MidiIndexAudiolizer, "Midi index audiolizer");

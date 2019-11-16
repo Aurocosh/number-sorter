@@ -12,6 +12,8 @@ namespace NumberSorter.Domain.Logic
         {
             switch (type)
             {
+                case AudiolizerType.DummyAudiolizer:
+                    return new DummyAudiolizer();
                 case AudiolizerType.MidiValueAudiolizer:
                     return new MidiValueAudiolizer(30, 120, MidiInstrumentType.HonkyTonkPiano);
                 case AudiolizerType.MidiValueAudiolizerCustom:

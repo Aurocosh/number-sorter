@@ -12,6 +12,10 @@ namespace NumberSorter.Domain.Visualizers
                     return new ColumnListVisualizer(1, 30, 5, 0.8f);
                 case VisualizationType.ColumnsNoSpacers:
                     return new ColumnListVisualizer(1, 30, 0, 1f);
+                case VisualizationType.ScaledColumnVisualizer:
+                    return new ScaledColumnListVisualizer(4, 1);
+                case VisualizationType.ScaledColumnNoSpacerVisualizer:
+                    return new ScaledColumnListVisualizer(5, 0);
                 case VisualizationType.PositiveColumns:
                     return new PositiveColumnListVisualizer(1, 30, 5, 0.8f);
                 case VisualizationType.PositiveColumnsNoSpacers:

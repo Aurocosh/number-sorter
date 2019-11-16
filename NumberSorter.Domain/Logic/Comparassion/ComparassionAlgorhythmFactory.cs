@@ -104,7 +104,7 @@ namespace NumberSorter.Domain.Logic
                         return new ShellSortFactory(gapGenerator);
                     }
                 case ComparassionAlgorhythmType.KWayMergeSort:
-                    return new KWayMergeSortFactory(8, new BinarySortFactory(), new GroupingRunLocatorFactory(16, new BinarySortFactory()), new BiasedBinaryPositionLocatorFactory(2));
+                    return new KWayMergeSortFactory(4, new BinarySortFactory(), new GroupingRunLocatorFactory(16, new BinarySortFactory()), new BiasedBinaryPositionLocatorFactory(2));
                 case ComparassionAlgorhythmType.KWayMergeSortCustom:
                     {
                         var viewModel = new KWayMergeSortDialogViewModel();

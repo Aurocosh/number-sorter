@@ -30,7 +30,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Content="K value"/>
-            <xctk:IntegerUpDown Grid.Row="0" Grid.Column="1" Value="8" Minimum="2" Name="KValueIntegerUpDown"/>
+            <xctk:IntegerUpDown Grid.Row="0" Grid.Column="1" Value="4" Minimum="2" Name="KValueIntegerUpDown"/>
             <Label Grid.Row="1" Grid.Column="0" Content="Sort algorhythm"/>
             <ComboBox Grid.Row="1" Grid.Column="1" Name="SortComboBox" DisplayMemberPath="Name"/>
             <Label Grid.Row="2" Grid.Column="0" Content="Position locator"/>

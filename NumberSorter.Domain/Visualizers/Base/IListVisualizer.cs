@@ -6,6 +6,6 @@ namespace NumberSorter.Domain.Base.Visualizers
 {
     public interface IListVisualizer
     {
-        int Redraw(WriteableBitmap writeableBitmap, SortState<int> sortState, ColorSet colorSet);
+        WriteableBitmap Redraw(WriteableBitmap writeableBitmap, SortState<int> sortState, ColorSet colorSet, out int missingCount);
     }
 }

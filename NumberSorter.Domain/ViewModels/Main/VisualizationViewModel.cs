@@ -1,13 +1,10 @@
 ﻿using DynamicData;
-using NAudio.Midi;
 using Newtonsoft.Json;
 using NumberSorter.Core.Logic.Utility;
 using NumberSorter.Domain.AppColors;
-using NumberSorter.Domain.Audiolizers;
 using NumberSorter.Domain.Audiolizers.Base;
 using NumberSorter.Domain.Base.Visualizers;
 using NumberSorter.Domain.Container;
-using NumberSorter.Domain.Container.Actions;
 using NumberSorter.Domain.Container.Actions.Base;
 using NumberSorter.Domain.DialogService;
 using NumberSorter.Domain.Lib;
@@ -17,19 +14,15 @@ using NumberSorter.Domain.Visualizers;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 
 namespace NumberSorter.Domain.ViewModels
 {
@@ -44,8 +37,8 @@ namespace NumberSorter.Domain.ViewModels
         private int _displayedActionCount = 5;
 
         private readonly JsonFileSerializer _jsonFileSerializer;
-        private IListVisualizer _listVisualizer = new ColumnListVisualizer(1, 30, 5, 0.8f);
-        private IStateAudiolizer _stateAudiolizer = new MidiValueAudiolizer(30, 120, MidiInstrumentType.HonkyTonkPiano);
+        private IListVisualizer _listVisualizer;
+        private IStateAudiolizer _stateAudiolizer;
 
         private readonly SourceList<LogAction<int>> _logActions;
         private readonly SourceList<LogActionLineViewModel> _displayedLogActions;
@@ -129,6 +122,9 @@ namespace NumberSorter.Domain.ViewModels
 
             _sortStateCache = new LimitedDictionary<int, SortState<int>>(_cacheSize);
             _sortWaypointStateCache = new LimitedDictionary<int, SortState<int>>(_waypointCacheSize);
+
+            _listVisualizer = VisualizationFactory.GetVisualizer(VisualizationType.ScaledColumnNoSpacerVisualizer);
+            _stateAudiolizer = AudiolizerFactory.GetAudiolizer(AudiolizerType.DummyAudiolizer, this, dialogService);
 
             ElementsDoNotFit = false;
             MissingElementCount = 0;
@@ -420,7 +416,8 @@ namespace NumberSorter.Domain.ViewModels
 
         private void UpdateVisualization(SortState<int> currentListState)
         {
-            MissingElementCount = _listVisualizer.Redraw(VisualizationImage, currentListState, ColorSet);
+            VisualizationImage = _listVisualizer.Redraw(VisualizationImage, currentListState, ColorSet, out int missingElements);
+            MissingElementCount = missingElements;
             ElementsDoNotFit = MissingElementCount > 0;
             _stateAudiolizer.Play(currentListState);
         }

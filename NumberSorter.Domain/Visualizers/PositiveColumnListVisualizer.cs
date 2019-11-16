@@ -26,7 +26,7 @@ namespace NumberSorter.Domain.Visualizers
             ColumnProportion = columnProportion;
         }
 
-        public int Redraw(WriteableBitmap writeableBitmap, SortState<int> sortState, ColorSet colorSet)
+        public WriteableBitmap Redraw(WriteableBitmap writeableBitmap, SortState<int> sortState, ColorSet colorSet, out int missingCount)
         {
             int width = (int)Math.Floor(writeableBitmap.Width);
             int height = (int)Math.Floor(writeableBitmap.Height);
@@ -39,8 +39,9 @@ namespace NumberSorter.Domain.Visualizers
 
             var list = sortState.State;
 
+            missingCount = 0;
             if (list.Count == 0)
-                return 0;
+                return writeableBitmap;
 
             int size = list.Count;
             int spacePerElement = width / size;
@@ -83,7 +84,9 @@ namespace NumberSorter.Domain.Visualizers
 
                 xCurrent += columnSize + spacerSize;
             }
-            return list.Count - elementToDraw;
+
+            missingCount = list.Count - elementToDraw;
+            return writeableBitmap;
         }
     }
 }

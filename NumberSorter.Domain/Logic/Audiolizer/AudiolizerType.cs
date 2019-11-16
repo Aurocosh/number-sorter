@@ -2,6 +2,7 @@
 {
     public enum AudiolizerType
     {
+        DummyAudiolizer,
         MidiValueAudiolizer,
         MidiValueAudiolizerCustom,
         MidiIndexAudiolizer,

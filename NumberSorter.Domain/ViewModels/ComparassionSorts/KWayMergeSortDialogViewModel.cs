@@ -45,7 +45,7 @@ namespace NumberSorter.Domain.ViewModels
         {
             AcceptCommand = ReactiveCommand.Create(Accept);
 
-            KValue = 8;
+            KValue = 4;
 
             var algorhythmTypes = EnumUtil.GetValues<ComparassionAlgorhythmType>();
             var sortTypes = algorhythmTypes
