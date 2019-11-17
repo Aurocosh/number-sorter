@@ -4,8 +4,6 @@
     {
         Columns,
         ColumnsNoSpacers,
-        ScaledColumnVisualizer,
-        ScaledColumnNoSpacerVisualizer,
         PositiveColumns,
         PositiveColumnsNoSpacers,
         Points,

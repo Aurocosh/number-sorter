@@ -30,6 +30,9 @@ namespace NumberSorter.Domain.ViewModels
     {
         #region Fields
 
+        private int _canvasWidth;
+        private int _canvasHeigth;
+
         private int _cacheSize = 100;
         private int _waypointRange = 20;
         private int _waypointCacheSize = 100;
@@ -116,6 +119,9 @@ namespace NumberSorter.Domain.ViewModels
             };
             _jsonFileSerializer = new JsonFileSerializer(jsonSerializerSettings);
 
+            _canvasWidth = 700;
+            _canvasHeigth = 480;
+
             _dialogService = dialogService;
             _logActions = new SourceList<LogAction<int>>();
             _displayedLogActions = new SourceList<LogActionLineViewModel>();
@@ -123,7 +129,7 @@ namespace NumberSorter.Domain.ViewModels
             _sortStateCache = new LimitedDictionary<int, SortState<int>>(_cacheSize);
             _sortWaypointStateCache = new LimitedDictionary<int, SortState<int>>(_waypointCacheSize);
 
-            _listVisualizer = VisualizationFactory.GetVisualizer(VisualizationType.ScaledColumnNoSpacerVisualizer);
+            _listVisualizer = VisualizationFactory.GetVisualizer(VisualizationType.ColumnsNoSpacers);
             _stateAudiolizer = AudiolizerFactory.GetAudiolizer(AudiolizerType.DummyAudiolizer, this, dialogService);
 
             ElementsDoNotFit = false;
@@ -144,8 +150,10 @@ namespace NumberSorter.Domain.ViewModels
             ActionButtonText = "Animate";
 
             SortingLog = new SortLog<int>();
+            VisualizationImage = _listVisualizer.Init(SortingLog, _canvasWidth, _canvasHeigth);
+            _stateAudiolizer.Init(SortingLog);
+
             SortState = SortingLog.InputState;
-            VisualizationImage = BitmapFactory.New(700, 480);
 
             var canAnimate = this.WhenAnyValue(x => x.TotalActionCount)
                 .Merge(this.WhenAnyValue(x => x.CurrentActionIndex))
@@ -211,9 +219,7 @@ namespace NumberSorter.Domain.ViewModels
                 .Subscribe(_ => UpdataDisplayedActions());
 
             this.WhenAnyValue(x => x.SortingLog)
-                .Do(x => SortState = x.InputState)
-                .Do(_ => UpdateActionLog())
-                .Subscribe(_ => UpdataDisplayedActions());
+                .Subscribe(InitSortLog);
 
             this.WhenAnyValue(x => x.ReadActions)
                 .Subscribe(_ => UpdateActionLog());
@@ -381,16 +387,17 @@ namespace NumberSorter.Domain.ViewModels
 
             var visualizationType = viewModel.SelectedSortType.VisualizationType;
             _listVisualizer = VisualizationFactory.GetVisualizer(visualizationType);
+            _listVisualizer.Init(SortingLog, _canvasWidth, _canvasHeigth);
             UpdateVisualization(SortState);
         }
 
         private void ResizeCanvas(SizeChangedEventArgs e)
         {
             var size = e.NewSize;
-            int width = (int)size.Width;
-            int heigth = (int)size.Height;
+            _canvasWidth = (int)size.Width;
+            _canvasHeigth = (int)size.Height;
 
-            VisualizationImage = BitmapFactory.New(width, heigth);
+            VisualizationImage = _listVisualizer.Init(SortingLog, _canvasWidth, _canvasHeigth);
             UpdateVisualization(SortState);
         }
 
@@ -416,8 +423,7 @@ namespace NumberSorter.Domain.ViewModels
 
         private void UpdateVisualization(SortState<int> currentListState)
         {
-            VisualizationImage = _listVisualizer.Redraw(VisualizationImage, currentListState, ColorSet, out int missingElements);
-            MissingElementCount = missingElements;
+            MissingElementCount = _listVisualizer.Redraw(VisualizationImage, currentListState, ColorSet); ;
             ElementsDoNotFit = MissingElementCount > 0;
             _stateAudiolizer.Play(currentListState);
         }
@@ -440,13 +446,21 @@ namespace NumberSorter.Domain.ViewModels
             }
         }
 
+        private void InitSortLog(SortLog<int> sortLog)
+        {
+            VisualizationImage = _listVisualizer.Init(sortLog, _canvasWidth, _canvasHeigth);
+            _stateAudiolizer.Init(sortLog);
+            SortState = SortingLog.InputState;
+            UpdateActionLog();
+            UpdataDisplayedActions();
+        }
+
         private void UpdateActionLog()
         {
             _logActions.Clear();
             _sortStateCache.Clear();
             _sortWaypointStateCache.Clear();
             _logActions.AddRange(SortingLog.ActionLog.Where(ActionFilter));
-            _stateAudiolizer.Init(SortingLog);
             CurrentActionIndex = 0;
         }
     }

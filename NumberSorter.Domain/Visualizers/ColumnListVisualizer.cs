@@ -10,25 +10,45 @@ namespace NumberSorter.Domain.Visualizers
 {
     public class ColumnListVisualizer : IListVisualizer
     {
-        private int MinColumnSize { get; } = 1;
-        private int DesiredColumnSize { get; } = 30;
-        private int DesiredSpacerSize { get; } = 5;
-        private float ColumnProportion { get; } = 0.8f;
+        private int ColumnSize { get; set; }
+        private int SpacerSize { get; set; }
 
-        public ColumnListVisualizer(int minColumnSize, int desiredColumnSize, int desiredSpacerSize, float columnProportion)
+        private int MinColumnSize { get; }
+        private int MinSpacerSize { get; }
+        private float ColumnProportion { get; }
+
+        public ColumnListVisualizer(int minColumnSize, int minSpacerSize, float columnProportion)
         {
+            ColumnSize = minColumnSize;
+            SpacerSize = minSpacerSize;
             MinColumnSize = minColumnSize;
-            DesiredColumnSize = desiredColumnSize;
-            DesiredSpacerSize = desiredSpacerSize;
+            MinSpacerSize = minSpacerSize;
             ColumnProportion = columnProportion;
         }
 
-        public WriteableBitmap Redraw(WriteableBitmap writeableBitmap, SortState<int> sortState, ColorSet colorSet, out int missingCount)
+        public WriteableBitmap Init(SortLog<int> sortLog, int width, int height)
         {
-            int width = (int)Math.Floor(writeableBitmap.Width);
-            int height = (int)Math.Floor(writeableBitmap.Height);
+            int elementCount = Math.Max(1, sortLog.InputState.State.Count);
+            int spacePerElement = width / elementCount;
 
-            int yRange = height / 2;
+            ColumnSize = (int)(spacePerElement * ColumnProportion);
+            ColumnSize = Math.Max(ColumnSize, MinColumnSize);
+
+            SpacerSize = spacePerElement - ColumnSize;
+            SpacerSize = Math.Max(SpacerSize, MinSpacerSize);
+
+            spacePerElement = ColumnSize + SpacerSize;
+            int rawWidth = sortLog.InputState.State.Count * spacePerElement;
+            if (rawWidth < width)
+                rawWidth = width;
+            return BitmapFactory.New(rawWidth, height);
+        }
+
+        public int Redraw(WriteableBitmap writeableBitmap, SortState<int> sortState, ColorSet colorSet)
+        {
+            int width = writeableBitmap.PixelWidth;
+
+            int yRange = writeableBitmap.PixelHeight / 2;
             int yOrigin = yRange;
 
             writeableBitmap.Clear(colorSet.BackgroundColor);
@@ -36,60 +56,37 @@ namespace NumberSorter.Domain.Visualizers
 
             var list = sortState.State;
 
-            missingCount = 0;
             if (list.Count == 0)
-                return writeableBitmap;
+                return 0;
 
             int size = list.Count;
-            int spacePerElement = width / size;
-            if (spacePerElement == 0)
-                spacePerElement = 1;
-
-            int columnSize;
-            int spacerSize;
-            if (spacePerElement >= DesiredColumnSize + DesiredSpacerSize)
-            {
-                columnSize = DesiredColumnSize;
-                spacerSize = DesiredSpacerSize;
-            }
-            else if (spacePerElement / MinColumnSize <= 1)
-            {
-                columnSize = 1;
-                spacerSize = 0;
-            }
-            else
-            {
-                columnSize = (int)Math.Floor(spacePerElement * ColumnProportion);
-                spacerSize = spacePerElement - columnSize;
-            }
+            int spacePerElement = ColumnSize + SpacerSize;
 
             int maxModule = list.Max(Math.Abs);
             double scaleCoefficient = yRange / maxModule;
 
             int elementsFits = width / spacePerElement;
-            int elementToDraw = Math.Min(list.Count, elementsFits);
-            int takenSpace = elementToDraw * (columnSize + spacerSize);
+            int takenSpace = size * spacePerElement;
             int leftoverSpace = width - takenSpace;
             int xCurrent = leftoverSpace / 2;
-            for (int i = 0; i < elementToDraw; i++)
+            for (int i = 0; i < size; i++)
             {
                 var currentColor = VisualizationColors.GetColumnColor(colorSet, sortState, i);
 
                 int scaledValue = (int)(list[i] * scaleCoefficient);
                 if (scaledValue > 0)
                 {
-                    writeableBitmap.FillRectangle(xCurrent, yOrigin - scaledValue, xCurrent + columnSize, yOrigin, currentColor);
+                    writeableBitmap.FillRectangle(xCurrent, yOrigin - scaledValue, xCurrent + ColumnSize, yOrigin, currentColor);
                 }
                 else if (scaledValue < 0)
                 {
-                    writeableBitmap.FillRectangle(xCurrent, yOrigin + 1, xCurrent + columnSize, yOrigin - scaledValue, currentColor);
+                    writeableBitmap.FillRectangle(xCurrent, yOrigin + 1, xCurrent + ColumnSize, yOrigin - scaledValue, currentColor);
                 }
 
-                xCurrent += columnSize + spacerSize;
+                xCurrent += spacePerElement;
             }
 
-            missingCount = list.Count - elementToDraw;
-            return writeableBitmap;
+            return 0;
         }
     }
 }

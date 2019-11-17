@@ -152,7 +152,7 @@
                         </Grid>
                         <GridSplitter Grid.Column="1" Width="10" ShowsPreview="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                         <Border Grid.Column="2" Background="LightGray" Margin="5 0 5 0" Name="VisualizationCanvas">
-                            <Image Name="VisualizationImage"/>
+                            <Image Name="VisualizationImage" Stretch="Fill" RenderOptions.BitmapScalingMode="Fant"/>
                         </Border>
                         <GridSplitter Grid.Column="3" Name="LogActionPanelSplitter" Width="10" ShowsPreview="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                         <Grid Grid.Column="4" Name="LogActionPanel" >

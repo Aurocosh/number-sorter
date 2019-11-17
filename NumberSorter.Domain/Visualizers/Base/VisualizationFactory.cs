@@ -9,19 +9,15 @@ namespace NumberSorter.Domain.Visualizers
             switch (algorhythmType)
             {
                 case VisualizationType.Columns:
-                    return new ColumnListVisualizer(1, 30, 5, 0.8f);
+                    return new ColumnListVisualizer(4, 1, 0.8f);
                 case VisualizationType.ColumnsNoSpacers:
-                    return new ColumnListVisualizer(1, 30, 0, 1f);
-                case VisualizationType.ScaledColumnVisualizer:
-                    return new ScaledColumnListVisualizer(4, 1);
-                case VisualizationType.ScaledColumnNoSpacerVisualizer:
-                    return new ScaledColumnListVisualizer(5, 0);
+                    return new ColumnListVisualizer(5, 0, 0.8f);
                 case VisualizationType.PositiveColumns:
-                    return new PositiveColumnListVisualizer(1, 30, 5, 0.8f);
+                    return new PositiveColumnListVisualizer(4, 1, 0.8f);
                 case VisualizationType.PositiveColumnsNoSpacers:
-                    return new PositiveColumnListVisualizer(1, 30, 0, 1f);
+                    return new PositiveColumnListVisualizer(5, 0, 0.8f);
                 case VisualizationType.Points:
-                    return new PointsListVisualizer();
+                    return new PointsListVisualizer(5, 0, 0.9f);
                 default:
                     return null;
             }
