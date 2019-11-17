@@ -63,7 +63,7 @@ namespace NumberSorter.Domain.Visualizers
             int spacePerElement = ColumnSize + SpacerSize;
 
             int maxModule = list.Max(Math.Abs);
-            double scaleCoefficient = yRange / maxModule;
+            double scaleCoefficient = yRange / (double)maxModule;
 
             int elementsFits = width / spacePerElement;
             int takenSpace = size * spacePerElement;
@@ -73,7 +73,7 @@ namespace NumberSorter.Domain.Visualizers
             {
                 var currentColor = VisualizationColors.GetColumnColor(colorSet, sortState, i);
                 var ghostlyColor = currentColor;
-                ghostlyColor.ScA = 0.05f;
+                ghostlyColor.ScA = 0.1f;
 
                 int scaledValue = (int)(list[i] * scaleCoefficient);
                 if (scaledValue > 0)

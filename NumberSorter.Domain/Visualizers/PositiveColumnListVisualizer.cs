@@ -65,7 +65,7 @@ namespace NumberSorter.Domain.Visualizers
 
                 int shift = Math.Abs(list.Min());
                 int maxModule = list.Max(Math.Abs);
-                double scaleCoefficient = (yRange - 10) / (maxModule + shift);
+                double scaleCoefficient = (yRange - 10) / (double)(maxModule + shift);
 
                 int takenSpace = size * spacePerElement;
                 int leftoverSpace = width - takenSpace;

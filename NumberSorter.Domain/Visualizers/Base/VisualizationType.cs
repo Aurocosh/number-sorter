@@ -9,5 +9,6 @@
         PositiveColumns,
         PositiveColumnsNoSpacers,
         Points,
+        Squares,
     }
 }

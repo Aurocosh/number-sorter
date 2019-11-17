@@ -44,6 +44,7 @@ namespace NumberSorter.Domain.ViewModels
             sortTypes.Add(new VisualizationTypeLineViewModel(VisualizationType.PositiveColumns, "Positive columns visualizer"));
             sortTypes.Add(new VisualizationTypeLineViewModel(VisualizationType.PositiveColumnsNoSpacers, "Positive columns visualizer (No spacer)"));
             sortTypes.Add(new VisualizationTypeLineViewModel(VisualizationType.Points, "Points visualizer"));
+            sortTypes.Add(new VisualizationTypeLineViewModel(VisualizationType.Squares, "Squares visualizer"));
             sortTypes.Sort((x, y) => x.Name.CompareTo(y.Name));
 
             _sortTypes.AddRange(sortTypes);

@@ -11,7 +11,7 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:NumberSorter"
         mc:Ignorable="d"
-        Title="MainWindow" Width="1200" Height="800">
+        Title="MainWindow" Width="1200" Height="800" WindowState="Maximized">
     <DockPanel d:DataContext="{d:DesignInstance viewmodels:MainWindowViewModel}">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Input data">

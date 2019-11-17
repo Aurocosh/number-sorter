@@ -3,12 +3,11 @@ using NumberSorter.Domain.Base.Visualizers;
 using NumberSorter.Domain.Container;
 using System;
 using System.Linq;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace NumberSorter.Domain.Visualizers
 {
-    public class ColumnListVisualizer : IListVisualizer
+    public class SquaresListVisualizer : IListVisualizer
     {
         private int ColumnSize { get; set; }
         private int SpacerSize { get; set; }
@@ -17,7 +16,7 @@ namespace NumberSorter.Domain.Visualizers
         private int MinSpacerSize { get; }
         private float ColumnProportion { get; }
 
-        public ColumnListVisualizer(int minColumnSize, int minSpacerSize, float columnProportion)
+        public SquaresListVisualizer(int minColumnSize, int minSpacerSize, float columnProportion)
         {
             ColumnSize = minColumnSize;
             SpacerSize = minSpacerSize;
@@ -48,45 +47,37 @@ namespace NumberSorter.Domain.Visualizers
         {
             int width = writeableBitmap.PixelWidth;
 
-            int yRange = writeableBitmap.PixelHeight / 2;
-            int yOrigin = yRange;
+            int yRange = writeableBitmap.PixelHeight - 20;
+            int yOrigin = yRange + 10;
 
-            writeableBitmap.Clear(colorSet.BackgroundColor);
-            writeableBitmap.DrawLine(0, yOrigin, width, yOrigin, Colors.Gray);
-
-            var list = sortState.State;
-
-            if (list.Count == 0)
-                return 0;
-
-            int size = list.Count;
-            int spacePerElement = ColumnSize + SpacerSize;
-
-            int maxModule = list.Max(Math.Abs);
-            double scaleCoefficient = yRange / (double)maxModule;
-
-            int elementsFits = width / spacePerElement;
-            int takenSpace = size * spacePerElement;
-            int leftoverSpace = width - takenSpace;
-            int xCurrent = leftoverSpace / 2;
-            for (int i = 0; i < size; i++)
+            using (writeableBitmap.GetBitmapContext())
             {
-                var currentColor = VisualizationColors.GetColumnColor(colorSet, sortState, i);
+                writeableBitmap.Clear(colorSet.BackgroundColor);
 
-                int scaledValue = (int)(list[i] * scaleCoefficient);
-                if (scaledValue > 0)
-                {
-                    writeableBitmap.FillRectangle(xCurrent, yOrigin - scaledValue, xCurrent + ColumnSize, yOrigin, currentColor);
-                }
-                else if (scaledValue < 0)
-                {
-                    writeableBitmap.FillRectangle(xCurrent, yOrigin + 1, xCurrent + ColumnSize, yOrigin - scaledValue, currentColor);
-                }
+                var list = sortState.State;
+                if (list.Count == 0)
+                    return 0;
 
-                xCurrent += spacePerElement;
+                int spacePerElement = ColumnSize + SpacerSize;
+
+                int shift = Math.Abs(Math.Min(list.Min(), 0));
+                int maxPositive = list.Max();
+                double scaleCoefficient = yRange / (double)(maxPositive + shift);
+
+                int leftoverSpace = width - (list.Count * spacePerElement);
+                int xCurrent = leftoverSpace / 2;
+                for (int i = 0; i < list.Count; i++)
+                {
+                    var currentColor = VisualizationColors.GetColumnColor(colorSet, sortState, i);
+                    int scaledValue = (int)((list[i] + shift) * scaleCoefficient);
+                    var yPos = yOrigin - scaledValue;
+                    if (scaledValue > 0)
+                        writeableBitmap.FillRectangle(xCurrent, yPos, xCurrent + ColumnSize, yPos + ColumnSize, currentColor);
+
+                    xCurrent += spacePerElement;
+                }
+                return 0;
             }
-
-            return 0;
         }
     }
 }

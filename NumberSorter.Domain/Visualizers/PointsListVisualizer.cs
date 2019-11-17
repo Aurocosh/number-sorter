@@ -47,8 +47,8 @@ namespace NumberSorter.Domain.Visualizers
         {
             int width = writeableBitmap.PixelWidth;
 
-            int yRange = writeableBitmap.PixelHeight;
-            int yOrigin = yRange - 20;
+            int yRange = writeableBitmap.PixelHeight - 20;
+            int yOrigin = yRange + 10;
 
             using (writeableBitmap.GetBitmapContext())
             {
@@ -62,7 +62,7 @@ namespace NumberSorter.Domain.Visualizers
 
                 int shift = Math.Abs(Math.Min(list.Min(), 0));
                 int maxPositive = list.Max();
-                double scaleCoefficient = yRange / (maxPositive + shift);
+                double scaleCoefficient = yRange / (double)(maxPositive + shift);
 
                 int leftoverSpace = width - (list.Count * spacePerElement);
                 int xCurrent = leftoverSpace / 2;

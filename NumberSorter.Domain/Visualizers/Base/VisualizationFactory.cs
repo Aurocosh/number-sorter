@@ -22,6 +22,8 @@ namespace NumberSorter.Domain.Visualizers
                     return new PositiveColumnListVisualizer(5, 0, 0.8f);
                 case VisualizationType.Points:
                     return new PointsListVisualizer(5, 0, 0.9f);
+                case VisualizationType.Squares:
+                    return new SquaresListVisualizer(5, 0, 0.9f);
                 default:
                     return null;
             }
