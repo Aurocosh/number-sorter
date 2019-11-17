@@ -4,6 +4,8 @@
     {
         Columns,
         ColumnsNoSpacers,
+        GhostlyColumns,
+        GhostlyColumnsNoSpacers,
         PositiveColumns,
         PositiveColumnsNoSpacers,
         Points,

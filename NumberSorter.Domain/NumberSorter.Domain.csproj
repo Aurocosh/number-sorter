@@ -213,6 +213,7 @@
     <Compile Include="ViewModels\Visualizers\VisualizationTypeViewModel.cs" />
     <Compile Include="ViewModels\ComparassionSortType\ComparassionSortTypeViewModel.cs" />
     <Compile Include="Visualizers\Base\IListVisualizer.cs" />
+    <Compile Include="Visualizers\GhostlyColumnListVisualizer.cs" />
     <Compile Include="Visualizers\PointsListVisualizer.cs" />
     <Compile Include="Visualizers\PositiveColumnListVisualizer.cs" />
     <Compile Include="Visualizers\ColumnListVisualizer.cs" />

@@ -39,6 +39,8 @@ namespace NumberSorter.Domain.ViewModels
             var sortTypes = new List<VisualizationTypeLineViewModel>();
             sortTypes.Add(new VisualizationTypeLineViewModel(VisualizationType.Columns, "Columns visualizer"));
             sortTypes.Add(new VisualizationTypeLineViewModel(VisualizationType.ColumnsNoSpacers, "Columns visualizer (No spacers)"));
+            sortTypes.Add(new VisualizationTypeLineViewModel(VisualizationType.GhostlyColumns, "Ghostly columns visualizer"));
+            sortTypes.Add(new VisualizationTypeLineViewModel(VisualizationType.GhostlyColumnsNoSpacers, "Ghostly columns visualizer (No spacers)"));
             sortTypes.Add(new VisualizationTypeLineViewModel(VisualizationType.PositiveColumns, "Positive columns visualizer"));
             sortTypes.Add(new VisualizationTypeLineViewModel(VisualizationType.PositiveColumnsNoSpacers, "Positive columns visualizer (No spacer)"));
             sortTypes.Add(new VisualizationTypeLineViewModel(VisualizationType.Points, "Points visualizer"));
