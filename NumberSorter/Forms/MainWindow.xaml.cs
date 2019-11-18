@@ -1,16 +1,11 @@
 ﻿using Microsoft.Win32;
 using NumberSorter.Domain.Converters;
-using NumberSorter.Domain.Interactions;
 using NumberSorter.Domain.ViewModels;
 using ReactiveUI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -32,28 +27,24 @@ namespace NumberSorter.Forms
             InitializeComponent();
             this.WhenActivated(disposable =>
             {
-                #region Main binds
-
-                this.OneWayBind(ViewModel, x => x.InputText, x => x.InputTextBox.Text)
+                this.Bind(ViewModel, x => x.Topmost, x => x.Topmost)
                     .DisposeWith(disposable);
-                this.OneWayBind(ViewModel, x => x.OutputText, x => x.OutputTextBox.Text)
+                this.Bind(ViewModel, x => x.ResizeMode, x => x.ResizeMode)
                     .DisposeWith(disposable);
-                this.OneWayBind(ViewModel, x => x.InfoText, x => x.InfoTextBox.Text)
+                this.Bind(ViewModel, x => x.WindowState, x => x.WindowState)
                     .DisposeWith(disposable);
-                this.OneWayBind(ViewModel, x => x.ResultText, x => x.ResultTextBox.Text)
+                this.Bind(ViewModel, x => x.WindowStyle, x => x.WindowStyle)
                     .DisposeWith(disposable);
 
-                this.OneWayBind(ViewModel, x => x.ShowActions, x => x.ActionListColumn.Width, vmToViewConverterOverride: new BoolToColumnVisibilityBindingTypeConverter(new GridLength(1, GridUnitType.Star)))
+                this.OneWayBind(ViewModel, x => x.ShowControls, x => x.MenuStrip.Visibility, vmToViewConverterOverride: new VisibilityBindingTypeConverter())
                     .DisposeWith(disposable);
-                this.OneWayBind(ViewModel, x => x.ShowActions, x => x.ActionsSplitterColumn.Width, vmToViewConverterOverride: new BoolToColumnVisibilityBindingTypeConverter(new GridLength(0, GridUnitType.Auto)))
-                    .DisposeWith(disposable);
-
-                this.OneWayBind(ViewModel, x => x.ShowControls, x => x.ControlPanelColumn.Width, vmToViewConverterOverride: new BoolToColumnVisibilityBindingTypeConverter(new GridLength(1, GridUnitType.Star)))
-                    .DisposeWith(disposable);
-                this.OneWayBind(ViewModel, x => x.ShowControls, x => x.ControlSplitterColumn.Width, vmToViewConverterOverride: new BoolToColumnVisibilityBindingTypeConverter(new GridLength(0, GridUnitType.Auto)))
+                this.OneWayBind(ViewModel, x => x.ShowControls, x => x.ControlPanel.Visibility, vmToViewConverterOverride: new VisibilityBindingTypeConverter())
                     .DisposeWith(disposable);
 
-                #region Commands
+                this.OneWayBind(ViewModel, x => x.Margin, x => x.MainDockPanel.Margin)
+                    .DisposeWith(disposable);
+
+                #region Menu commands
 
                 this.BindCommand(ViewModel, x => x.LoadDataCommand, x => x.LoadFromFileButton)
                     .DisposeWith(disposable);
@@ -73,10 +64,7 @@ namespace NumberSorter.Forms
 
                 #endregion
 
-                #endregion
-
                 #region Visualization binds
-
 
                 #region Action filters
 
@@ -85,16 +73,6 @@ namespace NumberSorter.Forms
                 this.Bind(ViewModel, x => x.VisualizationViewModel.WriteActions, x => x.WritesCheck.IsChecked)
                     .DisposeWith(disposable);
                 this.Bind(ViewModel, x => x.VisualizationViewModel.ComparassionActions, x => x.ComparassionsCheck.IsChecked)
-                    .DisposeWith(disposable);
-
-                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.ElementsDoNotFit, x => x.FitWarningTextBlock.Visibility, vmToViewConverterOverride: new VisibilityBindingTypeConverter())
-                    .DisposeWith(disposable);
-                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.ElementsDoNotFit, x => x.FitCountTextBlock.Visibility, vmToViewConverterOverride: new VisibilityBindingTypeConverter())
-                    .DisposeWith(disposable);
-                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.ElementsDoNotFit, x => x.FitMessageTextBlock.Visibility, vmToViewConverterOverride: new VisibilityBindingTypeConverter())
-                    .DisposeWith(disposable);
-
-                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.MissingElementCount, x => x.FitCountTextBlock.Text)
                     .DisposeWith(disposable);
 
                 #endregion
@@ -118,9 +96,6 @@ namespace NumberSorter.Forms
                 #endregion
 
                 this.OneWayBind(ViewModel, x => x.VisualizationViewModel.VisualizationImage, x => x.VisualizationImage.Source)
-                    .DisposeWith(disposable);
-
-                this.OneWayBind(ViewModel, x => x.VisualizationViewModel.LogActions, x => x.LogActionList.ItemsSource)
                     .DisposeWith(disposable);
 
                 this.Bind(ViewModel, x => x.VisualizationViewModel.AnimationDelay, x => x.AnimationSpeedUpDown.Value)
@@ -160,13 +135,6 @@ namespace NumberSorter.Forms
                 this.BindCommand(ViewModel, x => x.VisualizationViewModel.PlusThousandStepsCommand, x => x.PlusThousandStepButton)
                     .DisposeWith(disposable);
 
-                this.BindCommand(ViewModel, x => x.VisualizationViewModel.MinusOneStepCommand, x => x.PreviousButton)
-                    .DisposeWith(disposable);
-                this.BindCommand(ViewModel, x => x.VisualizationViewModel.PlusOneStepCommand, x => x.NextButton)
-                    .DisposeWith(disposable);
-
-                this.BindCommand(ViewModel, x => x.ToggleActionsCommand, x => x.ToggleActionsMenuItem)
-                    .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.ToggleControlsCommand, x => x.ToggleControlsMenuItem)
                     .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.VisualizationViewModel.ChangeColorSetCommand, x => x.ChangeColorSetMenuItem)
@@ -183,6 +151,12 @@ namespace NumberSorter.Forms
                     .Throttle(TimeSpan.FromSeconds(0.25f))
                     .ObserveOn(RxApp.MainThreadScheduler)
                     .InvokeCommand(this, x => x.ViewModel.VisualizationViewModel.ResizeCanvasCommand)
+                    .DisposeWith(disposable);
+
+                this.Events()
+                    .KeyUp
+                    .ObserveOn(RxApp.MainThreadScheduler)
+                    .InvokeCommand(this, x => x.ViewModel.KeyPressCommand)
                     .DisposeWith(disposable);
 
                 #endregion

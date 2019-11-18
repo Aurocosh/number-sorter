@@ -184,9 +184,6 @@
     <Compile Include="Forms\LineControls\ListProcessorSetLineControl.xaml.cs">
       <DependentUpon>ListProcessorSetLineControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LineControls\LogActionLineControl.xaml.cs">
-      <DependentUpon>LogActionLineControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Forms\LineControls\ListGeneratorLineControl.xaml.cs">
       <DependentUpon>ListGeneratorLineControl.xaml</DependentUpon>
     </Compile>
@@ -321,10 +318,6 @@
     <Page Include="Forms\LineControls\ListProcessorSetLineControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Forms\LineControls\LogActionLineControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\LineControls\ListGeneratorLineControl.xaml">
       <Generator>MSBuild:Compile</Generator>

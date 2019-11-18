@@ -1,0 +1,22 @@
+﻿<reactiveui:ReactiveWindow
+        x:TypeArguments="viewmodels:VisualizationWindowViewModel"
+        x:Class="NumberSorter.Forms.VisualizationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:reactiveui="http://reactiveui.net"
+        xmlns:viewmodels="clr-namespace:NumberSorter.Domain.ViewModels;assembly=NumberSorter.Domain"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:local="clr-namespace:NumberSorter"
+        xmlns:utility="clr-namespace:NumberSorter.Utility"
+        utility:DialogCloser.DialogResult = "{Binding DialogResult}"
+        mc:Ignorable="d"
+        Title="MainWindow" Width="1200" Height="800" WindowState="Maximized" WindowStyle="None">
+    <DockPanel d:DataContext="{d:DesignInstance viewmodels:VisualizationViewModel}">
+        <Border Grid.Column="2" Background="LightGray" Name="VisualizationCanvas">
+            <Image Name="VisualizationImage" Stretch="Fill" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+        </Border>
+    </DockPanel>
+</reactiveui:ReactiveWindow>

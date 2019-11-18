@@ -195,7 +195,6 @@
     <Compile Include="ViewModels\Generators\CustomListGenerator\Processors\NewVariableListProcessorLineViewModel.cs" />
     <Compile Include="ViewModels\Generators\CustomListGenerator\Processors\NewListProcessorLineViewModel.cs" />
     <Compile Include="ViewModels\Generators\CustomListGenerator\Processors\Base\ListProcessorViewModel.cs" />
-    <Compile Include="ViewModels\Controls\LogActionLineViewModel.cs" />
     <Compile Include="ViewModels\FileOpenViewModel.cs" />
     <Compile Include="ViewModels\Generators\CustomListGenerator\ListProcessorSetViewModel.cs" />
     <Compile Include="ViewModels\Generators\CustomListGenerator\CustomListGeneratorViewModel.cs" />

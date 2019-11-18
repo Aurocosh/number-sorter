@@ -44,14 +44,11 @@ namespace NumberSorter.Domain.ViewModels
         private IStateAudiolizer _stateAudiolizer;
 
         private readonly SourceList<LogAction<int>> _logActions;
-        private readonly SourceList<LogActionLineViewModel> _displayedLogActions;
-
         private readonly IDialogService<ReactiveObject> _dialogService;
         private readonly LimitedDictionary<int, SortState<int>> _sortStateCache;
         private readonly LimitedDictionary<int, SortState<int>> _sortWaypointStateCache;
 
         private readonly ReadOnlyObservableCollection<LogAction<int>> _filteredLogActions;
-        private readonly ReadOnlyObservableCollection<LogActionLineViewModel> _logActionViewModels;
 
         #endregion Fields
 
@@ -76,9 +73,9 @@ namespace NumberSorter.Domain.ViewModels
         [Reactive] public SortState<int> SortState { get; private set; }
         [Reactive] public WriteableBitmap VisualizationImage { get; private set; }
 
+        public bool CanAnimate { [ObservableAsProperty]get; }
         public int MaxActionIndex { [ObservableAsProperty]get; }
         public int TotalActionCount { [ObservableAsProperty]get; }
-        public ReadOnlyObservableCollection<LogActionLineViewModel> LogActions => _logActionViewModels;
 
         #endregion Properties
 
@@ -124,8 +121,6 @@ namespace NumberSorter.Domain.ViewModels
 
             _dialogService = dialogService;
             _logActions = new SourceList<LogAction<int>>();
-            _displayedLogActions = new SourceList<LogActionLineViewModel>();
-
             _sortStateCache = new LimitedDictionary<int, SortState<int>>(_cacheSize);
             _sortWaypointStateCache = new LimitedDictionary<int, SortState<int>>(_waypointCacheSize);
 
@@ -141,7 +136,7 @@ namespace NumberSorter.Domain.ViewModels
             ReadActions = false;
             WriteActions = true;
             MarkersActions = true;
-            ComparassionActions = false;
+            ComparassionActions = true;
 
             AnimationDelay = 0.05f;
             CurrentActionIndex = 0;
@@ -161,6 +156,8 @@ namespace NumberSorter.Domain.ViewModels
 
             var isLogSet = this.WhenAnyValue(x => x.TotalActionCount)
                 .Select(x => x > 0);
+
+            canAnimate.ToPropertyEx(this, x => x.CanAnimate);
 
             PlayPauseCommand = ReactiveCommand.Create(PlayOrPause, canAnimate);
             ResetCommand = ReactiveCommand.Create(Reset, isLogSet);
@@ -198,13 +195,6 @@ namespace NumberSorter.Domain.ViewModels
                 .Select(x => Math.Max(x.Count, 0))
                 .ToPropertyEx(this, x => x.TotalActionCount);
 
-            _displayedLogActions
-                .Connect()
-                .ObserveOnDispatcher()
-                .Bind(out _logActionViewModels)
-                .DisposeMany()
-                .Subscribe();
-
             this.WhenAnyValue(x => x.IsAnimating)
                 .Subscribe(_ => UpdateAnimationStatus());
 
@@ -213,10 +203,6 @@ namespace NumberSorter.Domain.ViewModels
 
             this.WhenAnyValue(x => x.CurrentActionIndex)
                 .Subscribe(SetActionIndex);
-
-            this.WhenAnyValue(x => x.CurrentActionIndex)
-                .Throttle(TimeSpan.FromSeconds(0.1f))
-                .Subscribe(_ => UpdataDisplayedActions());
 
             this.WhenAnyValue(x => x.SortingLog)
                 .Subscribe(InitSortLog);
@@ -232,6 +218,12 @@ namespace NumberSorter.Domain.ViewModels
         }
 
         #endregion Constructors
+
+        public void PlayOrPauseAnimation()
+        {
+            if (CanAnimate)
+                PlayOrPause();
+        }
 
         #region Command functions
 
@@ -428,31 +420,12 @@ namespace NumberSorter.Domain.ViewModels
             _stateAudiolizer.Play(currentListState);
         }
 
-        private void UpdataDisplayedActions()
-        {
-            _displayedLogActions.Clear();
-            if (_filteredLogActions.Count == 0)
-                return;
-            if (IsAnimating)
-                return;
-
-            int currentIndex = ComparableUtility.Clamp(CurrentActionIndex - _displayedActionCount, 0, MaxActionIndex);
-            int finalIndex = ComparableUtility.Clamp(CurrentActionIndex + _displayedActionCount, 0, MaxActionIndex);
-
-            while (currentIndex <= finalIndex)
-            {
-                var viewModel = new LogActionLineViewModel(currentIndex == CurrentActionIndex, _filteredLogActions[currentIndex++]);
-                _displayedLogActions.Add(viewModel);
-            }
-        }
-
         private void InitSortLog(SortLog<int> sortLog)
         {
             VisualizationImage = _listVisualizer.Init(sortLog, _canvasWidth, _canvasHeigth);
             _stateAudiolizer.Init(sortLog);
             SortState = SortingLog.InputState;
             UpdateActionLog();
-            UpdataDisplayedActions();
         }
 
         private void UpdateActionLog()

@@ -43,13 +43,19 @@ namespace NumberSorter.Domain.ViewModels
 
         public VisualizationViewModel VisualizationViewModel { get; }
 
-        [Reactive] public bool ShowActions { get; set; }
+        [Reactive] public Thickness Margin { get; set; }
+        [Reactive] public bool IsFullscreen { get; set; }
         [Reactive] public bool ShowControls { get; set; }
 
         [Reactive] public string InputText { get; set; }
         [Reactive] public string OutputText { get; set; }
         [Reactive] public string InfoText { get; set; }
         [Reactive] public string ResultText { get; set; }
+
+        [Reactive] public bool Topmost { get; set; }
+        [Reactive] public ResizeMode ResizeMode { get; set; }
+        [Reactive] public WindowState WindowState { get; set; }
+        [Reactive] public WindowStyle WindowStyle { get; set; }
 
         [Reactive] public UnsortedInput<int> InputNumbers { get; set; }
         [Reactive] public SortLog<int> SortingLog { get; set; }
@@ -63,8 +69,8 @@ namespace NumberSorter.Domain.ViewModels
         public ReactiveCommand<Unit, UnsortedInput<int>> GenerateCustomCommand { get; }
         public ReactiveCommand<Unit, UnsortedInput<int>> GeneratePartiallySortedCommand { get; }
 
-        public ReactiveCommand<Unit, Unit> ToggleActionsCommand { get; }
         public ReactiveCommand<Unit, Unit> ToggleControlsCommand { get; }
+        public ReactiveCommand<KeyEventArgs, Unit> KeyPressCommand { get; }
 
         public ReactiveCommand<Unit, Unit> PerformComparassionSortCommand { get; }
         public ReactiveCommand<Unit, Unit> PerformDistributionSortCommand { get; }
@@ -93,8 +99,15 @@ namespace NumberSorter.Domain.ViewModels
             if (File.Exists(activeColorSetPath))
                 VisualizationViewModel.ColorSet = _jsonFileSerializer.LoadFromJsonFile<ColorSet>(activeColorSetPath);
 
-            ShowActions = false;
+            Topmost = false;
+            ResizeMode = ResizeMode.CanResize;
+            WindowStyle = WindowStyle.SingleBorderWindow;
+            WindowState = WindowState.Maximized;
+
+            Margin = new Thickness(5);
+
             ShowControls = true;
+            IsFullscreen = false;
 
             InputNumbers = new UnsortedInput<int>();
             SortingLog = new SortLog<int>();
@@ -107,8 +120,8 @@ namespace NumberSorter.Domain.ViewModels
             GenerateCustomCommand = ReactiveCommand.CreateFromObservable(GenerateCustom);
             GeneratePartiallySortedCommand = ReactiveCommand.CreateFromObservable(GeneratePartiallySorted);
 
-            ToggleActionsCommand = ReactiveCommand.Create(ToggleActionPanel);
             ToggleControlsCommand = ReactiveCommand.Create(ToggleControlPanel);
+            KeyPressCommand = ReactiveCommand.Create<KeyEventArgs>(KeyPress);
 
             PerformComparassionSortCommand = ReactiveCommand.Create(PerformComparassionSort, canPerformSort);
             PerformDistributionSortCommand = ReactiveCommand.Create(PerformDistributionSort, canPerformSort);
@@ -181,8 +194,48 @@ namespace NumberSorter.Domain.ViewModels
             return Observable.Return(viewModel.InputNumbers);
         }
 
-        private void ToggleActionPanel() => ShowActions = !ShowActions;
-        private void ToggleControlPanel() => ShowControls = !ShowControls;
+        private void KeyPress(KeyEventArgs eventArgs)
+        {
+            switch (eventArgs.Key)
+            {
+                case Key.F:
+                    ToggleFullscreen();
+                    break;
+                case Key.V:
+                    ToggleControlPanel();
+                    break;
+                case Key.Space:
+                    VisualizationViewModel.PlayOrPauseAnimation();
+                    break;
+            }
+        }
+
+        private void ToggleFullscreen()
+        {
+            IsFullscreen = !IsFullscreen;
+            ShowControls = !IsFullscreen;
+            if (IsFullscreen)
+            {
+                WindowStyle = WindowStyle.None;
+                ResizeMode = ResizeMode.NoResize;
+                WindowState = WindowState.Maximized;
+                Topmost = true;
+                Margin = new Thickness(0);
+            }
+            else
+            {
+                WindowStyle = WindowStyle.SingleBorderWindow;
+                ResizeMode = ResizeMode.CanResize;
+                WindowState = WindowState.Normal;
+                Topmost = false;
+                Margin = new Thickness(5);
+            }
+        }
+
+        private void ToggleControlPanel()
+        {
+            ShowControls = !ShowControls;
+        }
 
         private void PerformComparassionSort()
         {
