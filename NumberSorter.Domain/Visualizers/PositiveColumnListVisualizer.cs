@@ -72,7 +72,7 @@ namespace NumberSorter.Domain.Visualizers
                 int xCurrent = leftoverSpace / 2;
                 for (int i = 0; i < size; i++)
                 {
-                    var currentColor = VisualizationColors.GetColumnColor(colorSet, sortState, i);
+                    var currentColor = VisualizationColors.GetColumnColor(colorSet, sortState, i, out bool isNormal);
                     int scaledValue = (int)((list[i] + shift) * scaleCoefficient);
                     if (scaledValue > 0)
                         writeableBitmap.FillRectangle(xCurrent, yOrigin - scaledValue, xCurrent + ColumnSize, yOrigin - 5, currentColor);

@@ -5,8 +5,9 @@ namespace NumberSorter.Domain.AppColors
 {
     public static class VisualizationColors
     {
-        public static Color GetColumnColor(ColorSet colorSet, SortState<int> sortState, int columnIndex)
+        public static Color GetColumnColor(ColorSet colorSet, SortState<int> sortState, int columnIndex, out bool isNormal)
         {
+            isNormal = false;
             if (columnIndex == sortState.FirstComparedIndex)
             {
                 if (sortState.ComparassionResult < 0)
@@ -35,6 +36,7 @@ namespace NumberSorter.Domain.AppColors
             }
             else
             {
+                isNormal = true;
                 return colorSet.NormalColor;
             }
         }

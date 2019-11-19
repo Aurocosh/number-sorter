@@ -71,9 +71,12 @@ namespace NumberSorter.Domain.Visualizers
             int xCurrent = leftoverSpace / 2;
             for (int i = 0; i < size; i++)
             {
-                var currentColor = VisualizationColors.GetColumnColor(colorSet, sortState, i);
+                var currentColor = VisualizationColors.GetColumnColor(colorSet, sortState, i, out bool isNormal);
                 var ghostlyColor = currentColor;
-                ghostlyColor.ScA = 0.1f;
+                if (isNormal)
+                    ghostlyColor.ScA = 0.001f;
+                else
+                    ghostlyColor.ScA = 0.3f;
 
                 int scaledValue = (int)(list[i] * scaleCoefficient);
                 if (scaledValue > 0)

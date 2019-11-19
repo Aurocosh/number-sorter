@@ -153,6 +153,12 @@ namespace NumberSorter.Forms
                     .InvokeCommand(this, x => x.ViewModel.VisualizationViewModel.ResizeCanvasCommand)
                     .DisposeWith(disposable);
 
+                VisualizationCanvas.Events()
+                    .MouseUp
+                    .ObserveOn(RxApp.MainThreadScheduler)
+                    .InvokeCommand(this, x => x.ViewModel.MouseButtonCommand)
+                    .DisposeWith(disposable);
+
                 this.Events()
                     .KeyUp
                     .ObserveOn(RxApp.MainThreadScheduler)

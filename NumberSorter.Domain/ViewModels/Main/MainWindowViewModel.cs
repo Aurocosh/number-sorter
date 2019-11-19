@@ -71,6 +71,7 @@ namespace NumberSorter.Domain.ViewModels
 
         public ReactiveCommand<Unit, Unit> ToggleControlsCommand { get; }
         public ReactiveCommand<KeyEventArgs, Unit> KeyPressCommand { get; }
+        public ReactiveCommand<MouseButtonEventArgs, Unit> MouseButtonCommand { get; }
 
         public ReactiveCommand<Unit, Unit> PerformComparassionSortCommand { get; }
         public ReactiveCommand<Unit, Unit> PerformDistributionSortCommand { get; }
@@ -122,6 +123,7 @@ namespace NumberSorter.Domain.ViewModels
 
             ToggleControlsCommand = ReactiveCommand.Create(ToggleControlPanel);
             KeyPressCommand = ReactiveCommand.Create<KeyEventArgs>(KeyPress);
+            MouseButtonCommand = ReactiveCommand.Create<MouseButtonEventArgs>(MouseButtonPressed);
 
             PerformComparassionSortCommand = ReactiveCommand.Create(PerformComparassionSort, canPerformSort);
             PerformDistributionSortCommand = ReactiveCommand.Create(PerformDistributionSort, canPerformSort);
@@ -210,6 +212,22 @@ namespace NumberSorter.Domain.ViewModels
             }
         }
 
+        private void MouseButtonPressed(MouseButtonEventArgs eventArgs)
+        {
+            switch (eventArgs.ChangedButton)
+            {
+                case MouseButton.Left:
+                    VisualizationViewModel.PlayOrPauseAnimation();
+                    break;
+                case MouseButton.Right:
+                    ToggleControlPanel();
+                    break;
+                case MouseButton.Middle:
+                    ToggleFullscreen();
+                    break;
+            }
+        }
+
         private void ToggleFullscreen()
         {
             IsFullscreen = !IsFullscreen;
@@ -218,8 +236,9 @@ namespace NumberSorter.Domain.ViewModels
             {
                 WindowStyle = WindowStyle.None;
                 ResizeMode = ResizeMode.NoResize;
+                WindowState = WindowState.Normal;
                 WindowState = WindowState.Maximized;
-                Topmost = true;
+                Topmost = false;
                 Margin = new Thickness(0);
             }
             else
