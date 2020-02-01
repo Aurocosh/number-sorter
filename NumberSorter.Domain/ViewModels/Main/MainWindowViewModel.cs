@@ -320,6 +320,11 @@ namespace NumberSorter.Domain.ViewModels
                 InputNumbers = viewModel.InputNumbers;
         }
 
+        private void Generate()
+        {
+
+        }
+
         #endregion Command functions
 
         private void SetUnsortedInput(UnsortedInput<int> input)

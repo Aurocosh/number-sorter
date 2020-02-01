@@ -19,6 +19,7 @@ namespace NumberSorter.Domain.ViewModels
         #endregion Fields
 
         #region Properties
+
         [Reactive] public bool? DialogResult { get; set; }
         [Reactive] public AudiolizerTypeLineViewModel SelectedAudiolizerType { get; set; }
         public IEnumerable<AudiolizerTypeLineViewModel> AudiolizerTypes => _audiolizerTypes.Items;
