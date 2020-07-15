@@ -11,22 +11,27 @@
         PancakeSort,
         OddEvenSort,
         CocktailShakerSort,
-        HalfInPlaceMergeSort,
-        KindaInPlaceMergeSort,
 
         TimSort,
         TimSortCustom,
 
         DequeMergeSort,
-        WindowMergeSort,
         RecursiveMergeSort,
+
+        WindowMergeSort,
+        HalfInPlaceMergeSort,
+        KindaInPlaceMergeSort,
         TripleWindowMergeSort,
         WorkAreaInPlaceMergeSort,
 
-        BottomUpIntervalMergeSort,
-
         IntervalMergeSort,
         IntervalMergeSortCustom,
+
+        WindowBottomUpMergeSort,
+        TripleWindowBottomUpMergeSort,
+
+        IntervalBottomUpMergeSort,
+        IntervalBottomUpMergeSortCustom,
 
         BinarySort,
         InsertionSort,

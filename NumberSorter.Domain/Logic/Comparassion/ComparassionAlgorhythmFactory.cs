@@ -39,20 +39,22 @@ namespace NumberSorter.Domain.Logic
                 case ComparassionAlgorhythmType.CocktailShakerSort:
                     return new CocktailShakerSortFactory();
 
-                case ComparassionAlgorhythmType.DequeMergeSort:
-                    return new DequeMergeSortFactory();
-                case ComparassionAlgorhythmType.WindowMergeSort:
-                    return new WindowMergeSortFactory();
                 case ComparassionAlgorhythmType.RecursiveMergeSort:
                     return new RecursiveMergeSortFactory();
+                case ComparassionAlgorhythmType.DequeMergeSort:
+                    return new DequeMergeSortFactory();
+
+                case ComparassionAlgorhythmType.WindowMergeSort:
+                    return new WindowMergeSortFactory();
                 case ComparassionAlgorhythmType.HalfInPlaceMergeSort:
                     return new HalfInPlaceMergeSortFactory();
                 case ComparassionAlgorhythmType.KindaInPlaceMergeSort:
                     return new KindaInPlaceMergeSortFactory();
+                case ComparassionAlgorhythmType.TripleWindowMergeSort:
+                    return new TripleWindowMergeSortFactory();
                 case ComparassionAlgorhythmType.WorkAreaInPlaceMergeSort:
                     return new WorkAreaInPlaceMergeSortFactory();
-                case ComparassionAlgorhythmType.BottomUpIntervalMergeSort:
-                    return new BottomUpIntervalMergeSortFactory(new BiasedBinaryPositionLocatorFactory(2));
+
                 case ComparassionAlgorhythmType.IntervalMergeSort:
                     return new IntervalMergeSortFactory(new BiasedBinaryPositionLocatorFactory(2));
                 case ComparassionAlgorhythmType.IntervalMergeSortCustom:
@@ -62,8 +64,21 @@ namespace NumberSorter.Domain.Logic
                         var positionLocator = PositionLocatorFactory.GetPositionLocator(viewModel.SelectedPositionLocator.Type, parentViewModel, dialogService);
                         return new IntervalMergeSortFactory(positionLocator);
                     }
-                case ComparassionAlgorhythmType.TripleWindowMergeSort:
-                    return new TripleWindowMergeSortFactory();
+
+                case ComparassionAlgorhythmType.WindowBottomUpMergeSort:
+                    return new BottomUpMergeSortFactory(new WindowMergeSortFactory());
+                case ComparassionAlgorhythmType.TripleWindowBottomUpMergeSort:
+                    return new BottomUpMergeSortFactory(new TripleWindowMergeSortFactory());
+
+                case ComparassionAlgorhythmType.IntervalBottomUpMergeSort:
+                    return new BottomUpMergeSortFactory(new IntervalMergeSortFactory(new BiasedBinaryPositionLocatorFactory(2)));
+                case ComparassionAlgorhythmType.IntervalBottomUpMergeSortCustom:
+                    {
+                        var viewModel = new IntervalMergeSortDialogViewModel();
+                        dialogService.ShowModalPresentation(parentViewModel, viewModel);
+                        var positionLocator = PositionLocatorFactory.GetPositionLocator(viewModel.SelectedPositionLocator.Type, parentViewModel, dialogService);
+                        return new BottomUpMergeSortFactory(new IntervalMergeSortFactory(positionLocator));
+                    }
 
                 case ComparassionAlgorhythmType.BinarySort:
                     return new BinarySortFactory();

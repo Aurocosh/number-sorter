@@ -29,7 +29,11 @@ namespace NumberSorter.Domain.Logic
             _nameDictionary.Add(ComparassionAlgorhythmType.KindaInPlaceMergeSort, "Kinda in place merge sort");
             _nameDictionary.Add(ComparassionAlgorhythmType.WorkAreaInPlaceMergeSort, "Work area in place merge sort");
 
-            _nameDictionary.Add(ComparassionAlgorhythmType.BottomUpIntervalMergeSort, "Bottom up interval merge sort");
+            _nameDictionary.Add(ComparassionAlgorhythmType.WindowBottomUpMergeSort, "Window merge sort (Bottom up)");
+            _nameDictionary.Add(ComparassionAlgorhythmType.TripleWindowBottomUpMergeSort, "Triple window merge sort (Bottom up)");
+
+            _nameDictionary.Add(ComparassionAlgorhythmType.IntervalBottomUpMergeSort, "Interval merge sort (Bottom up)");
+            _nameDictionary.Add(ComparassionAlgorhythmType.IntervalBottomUpMergeSortCustom, "Interval merge sort (Bottom up, Custom)");
 
             _nameDictionary.Add(ComparassionAlgorhythmType.IntervalMergeSort, "Interval merge sort");
             _nameDictionary.Add(ComparassionAlgorhythmType.IntervalMergeSortCustom, "Interval merge sort (Custom)");
