@@ -23,6 +23,8 @@
         TripleWindowMergeSort,
         WorkAreaInPlaceMergeSort,
 
+        BottomUpIntervalMergeSort,
+
         IntervalMergeSort,
         IntervalMergeSortCustom,
 

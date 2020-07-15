@@ -51,6 +51,8 @@ namespace NumberSorter.Domain.Logic
                     return new KindaInPlaceMergeSortFactory();
                 case ComparassionAlgorhythmType.WorkAreaInPlaceMergeSort:
                     return new WorkAreaInPlaceMergeSortFactory();
+                case ComparassionAlgorhythmType.BottomUpIntervalMergeSort:
+                    return new BottomUpIntervalMergeSortFactory(new BiasedBinaryPositionLocatorFactory(2));
                 case ComparassionAlgorhythmType.IntervalMergeSort:
                     return new IntervalMergeSortFactory(new BiasedBinaryPositionLocatorFactory(2));
                 case ComparassionAlgorhythmType.IntervalMergeSortCustom:

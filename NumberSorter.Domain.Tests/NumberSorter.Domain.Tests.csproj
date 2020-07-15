@@ -98,6 +98,7 @@
     <Compile Include="RotationTests\InversionInPlaceRotationTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\DualPivotQuickSort\DualPivotQuickSortCutoffTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\DualPivotQuickSort\DualPivotQuickSortTests.cs" />
+    <Compile Include="SortTests\ComparassionSorts\BottomUpIntervalMergeSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\QuickSortLL\QuickSortLLMedianThreePivotTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\QuickSortLL\QuickSortLLRandomPivotCutoffTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\StableQuickSort\StableQuickSortMedianThreePivotTests.cs" />
