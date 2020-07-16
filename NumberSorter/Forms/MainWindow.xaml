@@ -54,6 +54,8 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -83,15 +85,17 @@
                 <CheckBox Grid.Row="9" Grid.ColumnSpan="2" Content="Show reads" Name="ReadsCheck" IsChecked="False"/>
                 <CheckBox Grid.Row="10" Grid.ColumnSpan="2"  Content="Show writes" Name="WritesCheck" IsChecked="True"/>
                 <CheckBox Grid.Row="11" Grid.ColumnSpan="2"  Content="Show markers" Name="MarkersCheck" IsChecked="True"/>
-                <CheckBox Grid.Row="12" Grid.ColumnSpan="2"  Content="Show comparassions" Name="ComparassionsCheck" IsChecked="True"/>
+                <CheckBox Grid.Row="12" Grid.ColumnSpan="2" Content="Show reads (Writ)" Name="SwapReadsCheck" IsChecked="False"/>
+                <CheckBox Grid.Row="13" Grid.ColumnSpan="2" Content="Show reads (Comp)" Name="CompareReadsCheck" IsChecked="False"/>
+                <CheckBox Grid.Row="14" Grid.ColumnSpan="2"  Content="Show comparassions" Name="ComparassionsCheck" IsChecked="True"/>
 
-                <Label Grid.Row="14" Grid.Column="0" Content="Animation delay"/>
-                <xctk:DoubleUpDown Grid.Row="14" Grid.Column="1" Name="AnimationSpeedUpDown" Value="0.05" Minimum="0.005" Maximum="1" Increment="0.005" FormatString="F2"/>
+                <Label Grid.Row="16" Grid.Column="0" Content="Animation delay"/>
+                <xctk:DoubleUpDown Grid.Row="16" Grid.Column="1" Name="AnimationSpeedUpDown" Value="0.05" Minimum="0.005" Maximum="1" Increment="0.005" FormatString="F2"/>
 
-                <Label Grid.Row="15" Grid.Column="0" Content="Current action index"/>
-                <xctk:IntegerUpDown Grid.Row="15" Grid.Column="1" Value="0" Minimum="0" Name="ActionIndexUpDown"/>
+                <Label Grid.Row="17" Grid.Column="0" Content="Current action index"/>
+                <xctk:IntegerUpDown Grid.Row="17" Grid.Column="1" Value="0" Minimum="0" Name="ActionIndexUpDown"/>
 
-                <UniformGrid Grid.Row="16" Grid.Column="0" Grid.ColumnSpan="2" Columns="2" >
+                <UniformGrid Grid.Row="18" Grid.Column="0" Grid.ColumnSpan="2" Columns="2" >
 
                     <Button Name="PlayButton" Content="Play"/>
                     <Button Name="ResetButton" Content="Reset"/>

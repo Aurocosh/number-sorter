@@ -72,6 +72,12 @@ namespace NumberSorter.Forms
                     .DisposeWith(disposable);
                 this.Bind(ViewModel, x => x.VisualizationViewModel.WriteActions, x => x.WritesCheck.IsChecked)
                     .DisposeWith(disposable);
+                this.Bind(ViewModel, x => x.VisualizationViewModel.MarkersActions, x => x.MarkersCheck.IsChecked)
+                    .DisposeWith(disposable);
+                this.Bind(ViewModel, x => x.VisualizationViewModel.SwapReadActions, x => x.SwapReadsCheck.IsChecked)
+                    .DisposeWith(disposable);
+                this.Bind(ViewModel, x => x.VisualizationViewModel.CompareReadActions, x => x.CompareReadsCheck.IsChecked)
+                    .DisposeWith(disposable);
                 this.Bind(ViewModel, x => x.VisualizationViewModel.ComparassionActions, x => x.ComparassionsCheck.IsChecked)
                     .DisposeWith(disposable);
 

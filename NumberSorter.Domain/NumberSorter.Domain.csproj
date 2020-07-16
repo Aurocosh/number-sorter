@@ -99,6 +99,8 @@
     <Compile Include="AppColors\ColorSet.cs" />
     <Compile Include="Audiolizers\Base\IStateAudiolizer.cs" />
     <Compile Include="Audiolizers\DummyAudiolizer.cs" />
+    <Compile Include="Container\Actions\LogSwapRead.cs" />
+    <Compile Include="Container\Actions\LogCompareRead.cs" />
     <Compile Include="Logic\Audiolizer\AudiolizerFactory.cs" />
     <Compile Include="Logic\Audiolizer\AudiolizerType.cs" />
     <Compile Include="Audiolizers\MidiIndexAudiolizer.cs" />

@@ -62,6 +62,8 @@ namespace NumberSorter.Domain.ViewModels
         [Reactive] public bool ReadActions { get; set; }
         [Reactive] public bool WriteActions { get; set; }
         [Reactive] public bool MarkersActions { get; set; }
+        [Reactive] public bool SwapReadActions { get; set; }
+        [Reactive] public bool CompareReadActions { get; set; }
         [Reactive] public bool ComparassionActions { get; set; }
 
         [Reactive] public double AnimationDelay { get; set; }
@@ -133,9 +135,11 @@ namespace NumberSorter.Domain.ViewModels
             IsAnimating = false;
             ShowActionLog = true;
 
-            ReadActions = false;
+            ReadActions = true;
             WriteActions = true;
             MarkersActions = true;
+            SwapReadActions = false;
+            CompareReadActions = false;
             ComparassionActions = true;
 
             AnimationDelay = 0.05f;
@@ -213,6 +217,10 @@ namespace NumberSorter.Domain.ViewModels
                 .Subscribe(_ => UpdateActionLog());
             this.WhenAnyValue(x => x.MarkersActions)
                 .Subscribe(_ => UpdateActionLog());
+            this.WhenAnyValue(x => x.SwapReadActions)
+                .Subscribe(_ => UpdateActionLog());
+            this.WhenAnyValue(x => x.CompareReadActions)
+                .Subscribe(_ => UpdateActionLog());
             this.WhenAnyValue(x => x.ComparassionActions)
                 .Subscribe(_ => UpdateActionLog());
         }
@@ -260,6 +268,10 @@ namespace NumberSorter.Domain.ViewModels
                     return WriteActions;
                 case LogActionType.LogMarker:
                     return MarkersActions;
+                case LogActionType.LogSwapRead:
+                    return SwapReadActions;
+                case LogActionType.LogCompareRead:
+                    return CompareReadActions;
                 case LogActionType.LogComparassion:
                     return ComparassionActions;
             }

@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using NumberSorter.Core.Logic.Utility;
 
 namespace NumberSorter.Domain.Container
 {
@@ -57,9 +58,49 @@ namespace NumberSorter.Domain.Container
 
             var startingState = new List<T>(_startingState);
             var finalState = _list.Select(x => x.Value).ToList();
-            var actionLog = new List<LogAction<T>>(_actionLog);
+            var actionLog = new List<LogAction<T>>(_actionLog.Count);
+            if (_actionLog.Count < 3)
+                ListUtility.Copy(_actionLog, 0, actionLog, 0, _actionLog.Count);
+            else
+            {
+                LogAction<T> next = _actionLog[1];
+                LogAction<T> secondNext = _actionLog[2];
+
+                int i = 0;
+                do
+                {
+                    LogAction<T> current = _actionLog[i];
+                    LogAction<T> actionToAdd = ProcessRead(current, next);
+                    actionToAdd = ProcessRead(actionToAdd, secondNext);
+
+                    actionLog.Add(actionToAdd);
+
+                    current = next;
+                    next = secondNext;
+                    secondNext = _actionLog[i + 3];
+
+                    i++;
+
+                } while (i < _actionLog.Count - 3);
+
+                actionLog.Add(ProcessRead(next, secondNext));
+                actionLog.Add(secondNext);
+            }
 
             return new SortLog<T>(inputName, inputId, startingState, finalState, actionLog, _comparer, elapsedTime, algorhythmName);
+        }
+
+        private LogAction<T> ProcessRead(LogAction<T> current, LogAction<T> next)
+        {
+            if (!(current is LogRead<T> read))
+                return current;
+
+            if (next is LogSwap<T> swap && (read.ReadIndex == swap.FirstWrittenIndex || read.ReadIndex == swap.SecondtWrittenIndex))
+                return new LogSwapRead<T>(read.ActionIndex, read.ReadIndex, read.Value);
+            if (next is LogComparassion<T> compare && (read.ReadIndex == compare.FirstComparedIndex || read.ReadIndex == compare.SecondComparedIndex))
+                return new LogCompareRead<T>(read.ActionIndex, read.ReadIndex, read.Value);
+
+            return current;
         }
 
         private void LogMarker(string markerText)
