@@ -17,8 +17,8 @@ using BenchmarkDotNet.Reports;
 namespace NumberSorter.Domain.Benchmark.Benchmarks.Base
 {
     //[RPlotExporter]
-    //[CsvMeasurementsExporter]
-    //[XmlExporterAttribute.Brief]
+    [HtmlExporter]
+    [JsonExporterAttribute.Brief]
     [Orderer(SummaryOrderPolicy.Method, MethodOrderPolicy.Alphabetical)]
     public abstract class SortBenchmarks
     {
