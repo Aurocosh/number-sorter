@@ -280,6 +280,9 @@
   <ItemGroup>
     <Compile Include="Benchmarks\ComparassionSorts\DualPivotQuickSort\DualPivotQuickSortCutoffInsertionBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\DualPivotQuickSort\DualPivotQuickSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\IntervalIterativeMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\TripleWindowIterativeMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\WindowMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\QuickSortLL\QuickSortLLMedianThreePivotBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\QuickSortLL\QuickSortLLRandomPivotBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\QuickSortLL\QuickSortLLRandomPivotCutoffInsertionBenchmarks.cs" />
@@ -298,7 +301,7 @@
     <Compile Include="Benchmarks\IntegerSorts\MSDRadixSort\MSDRadixSortBase32Benchmarks.cs" />
     <Compile Include="Benchmarks\IntegerSorts\MSDRadixSort\MSDRadixSortBase16Benchmarks.cs" />
     <Compile Include="Benchmarks\IntegerSorts\MSDRadixSort\MSDRadixSortBase4Benchmarks.cs" />
-    <Compile Include="Benchmarks\ComparassionSorts\IntervalMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\RecursiveMerge\IntervalMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\HeapSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\SmoothSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\KWayMerge\KWayMergeSortGroupedBenchmarks.cs" />
@@ -314,8 +317,8 @@
     <Compile Include="Benchmarks\ComparassionSorts\QuickSort\ParallelQuickSortRandomPivotBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\TimSort\TimSortBinaryWindowBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\TimSort\TimSortBinaryIntervalBenchmarks.cs" />
-    <Compile Include="Benchmarks\ComparassionSorts\WorkAreaInPlaceMergeSortBenchmarks.cs" />
-    <Compile Include="Benchmarks\ComparassionSorts\TripleWindowMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\RecursiveMerge\WorkAreaInPlaceMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\RecursiveMerge\TripleWindowMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\ShellSortTokudaBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\ShellSortCiuraBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\SelectionSortBenchmarks.cs" />
@@ -329,12 +332,12 @@
     <Compile Include="Benchmarks\ComparassionSorts\CombSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\CocktailShakerSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\BinarySortBenchmarks.cs" />
-    <Compile Include="Benchmarks\ComparassionSorts\OpRecursiveMergeSorBenchmarkst.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\RecursiveMerge\OpRecursiveMergeSorBenchmarkst.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\CSharpDefaultSortBenchmarks.cs" />
-    <Compile Include="Benchmarks\ComparassionSorts\DequeMergeSortBenchmarks.cs" />
-    <Compile Include="Benchmarks\ComparassionSorts\HalfInPlaceMergeSortBenchmarks.cs" />
-    <Compile Include="Benchmarks\ComparassionSorts\KindaInPlaceMergeSortBenchmarks.cs" />
-    <Compile Include="Benchmarks\ComparassionSorts\WindowMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\RecursiveMerge\DequeMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\RecursiveMerge\HalfInPlaceMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\RecursiveMerge\KindaInPlaceMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\RecursiveMerge\WindowMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\BubbleSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\InsertionSortBenchmarks.cs" />
     <Compile Include="IntegerGenerators\BenchmarkRandomProvider.cs" />
@@ -388,9 +391,7 @@
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.3.0.0\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.3.0.0\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Benchmarks\ComparassionSorts\NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
