@@ -160,7 +160,6 @@
     <Compile Include="ViewModels\EnumTypes\PivotSelectorTypeLineViewModel.cs" />
     <Compile Include="Visualizers\Base\VisualizationFactory.cs" />
     <Compile Include="Visualizers\Base\VisualizationType.cs" />
-    <Compile Include="Comparer\IntComparer.cs" />
     <Compile Include="Container\Actions\Base\LogActionType.cs" />
     <Compile Include="Container\Actions\LogMarker.cs" />
     <Compile Include="Container\Actions\LogSwap.cs" />

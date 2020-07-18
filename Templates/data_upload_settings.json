@@ -1,0 +1,10 @@
+{
+	"Enabled" : true,
+    "Connection": {
+        "Host": "localhost",
+        "Port": 1111,
+        "Database": "localhost",
+		"Role": "user",
+        "Password": "pass"
+    }
+}

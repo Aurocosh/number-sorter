@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NumberSorter.Domain.Serialization
 {
-    internal sealed class JsonErrorLogger
+    public sealed class JsonErrorLogger
     {
         public bool HasErrors => _errors.Count > 0;
         public IReadOnlyCollection<string> Errors => _errors;

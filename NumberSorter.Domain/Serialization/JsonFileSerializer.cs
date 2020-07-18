@@ -5,13 +5,15 @@ using System.IO;
 
 namespace NumberSorter.Domain.Serialization
 {
-    internal sealed class JsonFileSerializer
+    public sealed class JsonFileSerializer
     {
+        private readonly bool _logErrorsToConsole;
         private readonly JsonErrorLogger _jsonErrorLogger;
         private readonly JsonSerializerSettings _jsonSerializerSettings;
 
-        public JsonFileSerializer(JsonSerializerSettings jsonSerializerSettings)
+        public JsonFileSerializer(JsonSerializerSettings jsonSerializerSettings, bool logToConsole = false)
         {
+            _logErrorsToConsole = logToConsole;
             _jsonErrorLogger = new JsonErrorLogger();
             _jsonSerializerSettings = jsonSerializerSettings;
             _jsonSerializerSettings.Error = _jsonErrorLogger.LogError;
@@ -26,6 +28,11 @@ namespace NumberSorter.Domain.Serialization
             string json = JsonConvert.SerializeObject(objectToSerialize, _jsonSerializerSettings);
             File.WriteAllText(filePath, json);
 
+            if (_logErrorsToConsole && _jsonErrorLogger.HasErrors)
+            {
+                var errorString = string.Join("\n", _jsonErrorLogger.Errors);
+                Console.WriteLine(errorString);
+            }
             return !_jsonErrorLogger.HasErrors;
         }
 
@@ -37,6 +44,12 @@ namespace NumberSorter.Domain.Serialization
 
             _jsonErrorLogger.Clear();
             var obj = JsonConvert.DeserializeObject<T>(json, _jsonSerializerSettings);
+
+            if (_logErrorsToConsole && _jsonErrorLogger.HasErrors)
+            {
+                var errorString = string.Join("\n", _jsonErrorLogger.Errors);
+                Console.WriteLine(errorString);
+            }
             return obj;
         }
 

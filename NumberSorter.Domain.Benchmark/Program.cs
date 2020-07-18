@@ -1,14 +1,18 @@
 ﻿using BenchmarkDotNet.Running;
+using NumberSorter.Domain.Benchmark.Benchmarks.Upload;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NumberSorter.Domain.Benchmark
 {
     public static class Program
     {
-        public static void Main(string[] args) => BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
+        public static void Main(string[] args)
+        {
+            BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
+            //BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args, new DebugInProcessConfig());
+
+            var databaseUploader = new DatabaseUploader();
+            databaseUploader.Upload();
+        }
     }
 }
