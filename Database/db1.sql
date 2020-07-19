@@ -13,7 +13,7 @@ ALTER FUNCTION cap_first OWNER TO db_user;
 CREATE OR REPLACE FUNCTION split_pascal(value text)
 	RETURNS text AS
 $BODY$
-SELECT regexp_replace(value , '(\w)([A-Z])','\1 \2','g')
+SELECT regexp_replace(regexp_replace(value , '(\w)([A-Z][a-z])','\1 \2','g'), '([a-z])([A-Z\d])','\1 \2','g')
 $BODY$
 LANGUAGE SQL
 IMMUTABLE
@@ -121,6 +121,41 @@ ORDER BY method_name,
 	memory_allocated,
 	mean ASC;
 ALTER TABLE sort_report_comparassion_by_memory OWNER TO db_user;
+
+CREATE OR REPLACE VIEW public.sort_report_comparassion_by_memory_pretty AS
+	SELECT sort_report_comparassion_by_memory."position",
+		sort_report_comparassion_by_memory.sort_name,
+		sort_report_comparassion_by_memory.method_name,
+		sort_report_comparassion_by_memory.value,
+		to_char(sort_report_comparassion_by_memory.mean, '999G999G999G999'::text) AS mean,
+		sort_report_comparassion_by_memory.memory_allocated,
+		pg_size_pretty(sort_report_comparassion_by_memory.memory_allocated::numeric) AS memory_pretty,
+		sort_report_comparassion_by_memory.memory_gen0_collections,
+		sort_report_comparassion_by_memory.memory_gen1_collections,
+		sort_report_comparassion_by_memory.memory_gen2_collections,
+		sort_report_comparassion_by_memory.standard_error,
+		sort_report_comparassion_by_memory.standard_deviation,
+		sort_report_comparassion_by_memory.host_environment_info_id
+	FROM sort_report_comparassion_by_memory;
+ALTER TABLE public.sort_report_comparassion_by_memory_pretty OWNER TO db_user;
+
+CREATE OR REPLACE VIEW public.sort_report_comparassion_by_time_pretty AS
+	SELECT sort_report_comparassion_by_time."position",
+		sort_report_comparassion_by_time.sort_name,
+		sort_report_comparassion_by_time.method_name,
+		sort_report_comparassion_by_time.value,
+		to_char(sort_report_comparassion_by_time.mean, '999G999G999G999'::text) AS mean,
+		sort_report_comparassion_by_time.compared_to_best,
+		sort_report_comparassion_by_time.memory_allocated,
+		pg_size_pretty(sort_report_comparassion_by_time.memory_allocated::numeric) AS memory_pretty,
+		sort_report_comparassion_by_time.memory_gen0_collections,
+		sort_report_comparassion_by_time.memory_gen1_collections,
+		sort_report_comparassion_by_time.memory_gen2_collections,
+		sort_report_comparassion_by_time.standard_error,
+		sort_report_comparassion_by_time.standard_deviation,
+		sort_report_comparassion_by_time.host_environment_info_id
+	FROM sort_report_comparassion_by_time;
+ALTER TABLE public.sort_report_comparassion_by_time_pretty OWNER TO db_user;
 
 CREATE OR REPLACE VIEW recent_sort_position_sums_by_time AS
 	SELECT sort_name,

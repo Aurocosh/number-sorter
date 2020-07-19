@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class RecursiveMergeSort<T> : GenericSortAlgorhythm<T>
+    public class ArrayMergeSort<T> : GenericSortAlgorhythm<T>
     {
-        public RecursiveMergeSort(IComparer<T> comparer) : base(comparer) { }
+        public ArrayMergeSort(IComparer<T> comparer) : base(comparer) { }
 
         public override void Sort(IList<T> list, int startingIndex, int length)
         {
