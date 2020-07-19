@@ -1,4 +1,5 @@
-﻿using NumberSorter.Core.Logic.Factories.LocalMerge.Base;
+﻿using NumberSorter.Core.Logic.Algorhythm.LocalMerge.Base;
+using NumberSorter.Core.Logic.Factories.LocalMerge.Base;
 using NumberSorter.Core.Logic.Utility;
 using System.Collections.Generic;
 

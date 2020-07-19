@@ -1,4 +1,5 @@
-﻿using NumberSorter.Core.Logic.Factories.LocalMerge.Base;
+﻿using NumberSorter.Core.Logic.Factories.LocalMerge;
+using NumberSorter.Core.Logic.Factories.LocalMerge.Base;
 using NumberSorter.Core.Logic.Factories.PositionLocator;
 using NumberSorter.Domain.DialogService;
 using NumberSorter.Domain.ViewModels;

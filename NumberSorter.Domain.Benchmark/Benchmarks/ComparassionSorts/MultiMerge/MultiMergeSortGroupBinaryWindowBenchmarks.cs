@@ -5,6 +5,7 @@ using NumberSorter.Core.Logic.Algorhythm;
 using NumberSorter.Core.Logic.Factories.Sort;
 using NumberSorter.Core.Logic.Factories.SortRunLocator;
 using NumberSorter.Core.Logic.Factories.PositionLocator;
+using NumberSorter.Core.Logic.Factories.LocalMerge;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks
 {

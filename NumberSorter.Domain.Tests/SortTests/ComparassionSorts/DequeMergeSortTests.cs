@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using NumberSorter.Core.Algorhythm;
 using NumberSorter.Core.Logic.Algorhythm;
+using NumberSorter.Core.Logic.Factories.LocalMerge;
 using NumberSorter.Domain.Tests.SortTests.Base;
 
 namespace NumberSorter.Domain.Tests.SortTests
