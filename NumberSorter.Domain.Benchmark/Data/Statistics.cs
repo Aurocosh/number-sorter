@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace NumberSorter.Domain.Benchmark.Benchmarks.Data
+namespace NumberSorter.Domain.Benchmark.Data
 {
     [ComplexType]
     internal sealed class Statistics

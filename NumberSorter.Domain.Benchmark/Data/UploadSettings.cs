@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NumberSorter.Domain.Benchmark.Benchmarks.Data
+namespace NumberSorter.Domain.Benchmark.Data
 {
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse); 
     internal sealed class Connection

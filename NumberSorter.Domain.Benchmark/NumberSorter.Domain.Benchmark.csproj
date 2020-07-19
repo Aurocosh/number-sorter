@@ -365,6 +365,7 @@
     <Compile Include="Data\ChronometerFrequency.cs" />
     <Compile Include="Data\ConfidenceInterval.cs" />
     <Compile Include="Data\HostEnvironmentInfo.cs" />
+    <Compile Include="Data\Memory.cs" />
     <Compile Include="Data\Percentiles.cs" />
     <Compile Include="Data\ReportData.cs" />
     <Compile Include="Data\Statistics.cs" />

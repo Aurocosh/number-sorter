@@ -1,4 +1,4 @@
-﻿using NumberSorter.Domain.Benchmark.Benchmarks.Data;
+﻿using NumberSorter.Domain.Benchmark.Data;
 using System.Data.Entity;
 
 namespace NumberSorter.Domain.Benchmark.Context

@@ -1,3 +1,5 @@
+CREATE EXTENSION tablefunc;
+
 CREATE OR REPLACE FUNCTION cap_first(value text)
 	RETURNS text AS
 $BODY$
@@ -49,7 +51,11 @@ CREATE OR REPLACE VIEW benchmark_overview AS
 		ROUND(b.statistics_median::numeric, 2) AS median,
 		ROUND(b.statistics_mean::numeric, 2) AS mean,
 		ROUND(b.statistics_standard_error::numeric, 2) AS standard_error,
-		ROUND(b.statistics_standard_deviation::numeric, 2) AS standard_deviation
+		ROUND(b.statistics_standard_deviation::numeric, 2) AS standard_deviation,
+		memory_bytes_allocated_per_operation AS memory_allocated,
+		memory_gen0_collections,
+		memory_gen1_collections,
+		memory_gen2_collections
 	FROM benchmark AS b
 	JOIN report_sort_names AS rsn ON rsn.report_id = b.report_id
 	JOIN benchmark_method_names AS bmn ON bmn.benchmark_id = b.id
@@ -74,13 +80,17 @@ ORDER BY type,
 	created;
 ALTER TABLE most_recent_reports_by_type_and_env OWNER TO db_user;
 
-CREATE OR REPLACE VIEW sort_report_comparassion_by_type AS 
+CREATE OR REPLACE VIEW sort_report_comparassion_by_time AS 
 SELECT row_number() OVER( PARTITION BY method_name,value ORDER BY mean) AS position,
 	sort_name,
 	method_name,
 	value,
 	mean,
 	round(mean / (min(mean) OVER( PARTITION BY method_name,value ORDER BY mean)),2) AS compared_to_best,
+	memory_allocated,
+	memory_gen0_collections,
+	memory_gen1_collections,
+	memory_gen2_collections,
 	standard_error,
 	standard_deviation,
 	host_environment_info_id
@@ -89,12 +99,34 @@ JOIN benchmark_overview AS bo ON bo.report_id = mrr.report_id
 ORDER BY method_name,
 	value,
 	mean ASC;
-ALTER TABLE sort_report_comparassion_by_type OWNER TO db_user;
+ALTER TABLE sort_report_comparassion_by_time OWNER TO db_user;
 
-CREATE OR REPLACE VIEW recent_sort_position_sums AS
+CREATE OR REPLACE VIEW sort_report_comparassion_by_memory AS 
+SELECT row_number() OVER( PARTITION BY method_name,value ORDER BY memory_allocated,mean) AS position,
+	sort_name,
+	method_name,
+	value,
+	memory_allocated,
+	mean,
+	memory_gen0_collections,
+	memory_gen1_collections,
+	memory_gen2_collections,
+	standard_error,
+	standard_deviation,
+	host_environment_info_id
+FROM most_recent_reports_by_type_and_env AS mrr
+JOIN benchmark_overview AS bo ON bo.report_id = mrr.report_id
+ORDER BY method_name,
+	value,
+	memory_allocated,
+	mean ASC;
+ALTER TABLE sort_report_comparassion_by_memory OWNER TO db_user;
+
+CREATE OR REPLACE VIEW recent_sort_position_sums_by_time AS
 	SELECT sort_name,
 		position,
 		mean,
+		memory_allocated,
 		first_count,
 		second_count,
 		third_count,
@@ -104,29 +136,71 @@ CREATE OR REPLACE VIEW recent_sort_position_sums AS
 		SELECT sort_name,
 			SUM(position) AS position,
 			SUM(mean) AS mean,
+			SUM(memory_allocated) AS memory_allocated,
 			COUNT(CASE WHEN position = 1 THEN 1 END) AS first_count,
 			COUNT(CASE WHEN position = 2 THEN 1 END) AS second_count,
 			COUNT(CASE WHEN position = 3 THEN 1 END) AS third_count,
 			COUNT(CASE WHEN position = 4 THEN 1 END) AS fourth_count,
 			COUNT(CASE WHEN position = 5 THEN 1 END) AS fifth_count
-		FROM sort_report_comparassion_by_type
+		FROM sort_report_comparassion_by_time
 		GROUP BY sort_name
 	) AS t
 	ORDER BY position;
-ALTER TABLE recent_sort_position_sums OWNER TO db_user;
+ALTER TABLE recent_sort_position_sums_by_time OWNER TO db_user;
 
-CREATE OR REPLACE VIEW top_three_sorts_by_method AS
+CREATE OR REPLACE VIEW recent_sort_position_sums_by_memory AS
+	SELECT sort_name,
+		position,
+		memory_allocated,
+		mean,
+		first_count,
+		second_count,
+		third_count,
+		fourth_count,
+		fifth_count
+	FROM (
+		SELECT sort_name,
+			SUM(position) AS position,
+			SUM(memory_allocated) AS memory_allocated,
+			SUM(mean) AS mean,
+			COUNT(CASE WHEN position = 1 THEN 1 END) AS first_count,
+			COUNT(CASE WHEN position = 2 THEN 1 END) AS second_count,
+			COUNT(CASE WHEN position = 3 THEN 1 END) AS third_count,
+			COUNT(CASE WHEN position = 4 THEN 1 END) AS fourth_count,
+			COUNT(CASE WHEN position = 5 THEN 1 END) AS fifth_count
+		FROM sort_report_comparassion_by_memory
+		GROUP BY sort_name
+	) AS t
+	ORDER BY position;
+ALTER TABLE recent_sort_position_sums_by_memory OWNER TO db_user;
+
+CREATE OR REPLACE VIEW top_three_sorts_by_time AS
 	SELECT *
 	FROM crosstab(
 	  'SELECT format(''%s (%s)'', method_name, value),
 			position,
 			sort_name	
-		FROM sort_report_comparassion_by_type
+		FROM sort_report_comparassion_by_time
 		WHERE position < 4
 	   ORDER by 1,2',
 		
 	  'select m from generate_series(1,3) m'
 	)
 	AS ct(method text, first text, second text, third text);
-ALTER TABLE top_three_sorts_by_method OWNER TO db_user;
+ALTER TABLE top_three_sorts_by_time OWNER TO db_user;
+
+CREATE OR REPLACE VIEW top_three_sorts_by_memory AS
+	SELECT *
+	FROM crosstab(
+	  'SELECT format(''%s (%s)'', method_name, value),
+			position,
+			sort_name	
+		FROM sort_report_comparassion_by_memory
+		WHERE position < 4
+	   ORDER by 1,2',
+		
+	  'select m from generate_series(1,3) m'
+	)
+	AS ct(method text, first text, second text, third text);
+ALTER TABLE top_three_sorts_by_memory OWNER TO db_user;
 

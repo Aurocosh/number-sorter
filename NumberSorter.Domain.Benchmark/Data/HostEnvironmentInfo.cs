@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
-namespace NumberSorter.Domain.Benchmark.Benchmarks.Data
+namespace NumberSorter.Domain.Benchmark.Data
 {
     [Table("host_environment_info")]
     internal sealed class HostEnvironmentInfo

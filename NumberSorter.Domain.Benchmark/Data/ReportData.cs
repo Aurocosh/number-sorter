@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NumberSorter.Domain.Benchmark.Benchmarks.Data
+namespace NumberSorter.Domain.Benchmark.Data
 {
     [Table("report_data")]
     internal sealed class ReportData
@@ -31,5 +31,11 @@ namespace NumberSorter.Domain.Benchmark.Benchmarks.Data
 
         [ForeignKey("ReportId")]
         public List<BenchmarkResult> Benchmarks { get; set; }
+
+        public void FillBlanks()
+        {
+            foreach (var benchmark in Benchmarks)
+                benchmark.FillBlanks();
+        }
     }
 }

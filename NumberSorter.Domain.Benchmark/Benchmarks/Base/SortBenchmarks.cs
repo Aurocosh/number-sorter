@@ -16,6 +16,7 @@ using BenchmarkDotNet.Reports;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks.Base
 {
+    [MemoryDiagnoser]
     //[RPlotExporter]
     [HtmlExporter]
     [JsonExporterAttribute.Brief]

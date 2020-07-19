@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Internal;
 using Newtonsoft.Json;
 using Npgsql;
-using NumberSorter.Domain.Benchmark.Benchmarks.Data;
+using NumberSorter.Domain.Benchmark.Data;
 using NumberSorter.Domain.Benchmark.Context;
 using NumberSorter.Domain.Serialization;
 using System;
@@ -52,9 +52,6 @@ namespace NumberSorter.Domain.Benchmark.Benchmarks.Upload
 
             using (var context = new ReportContext(settings.Connection.ConnectionString))
             {
-                var reps = context.ReportDatas.ToArray();
-                Console.WriteLine($"We have {reps.Length} envs(s).");
-
                 foreach (var reportPath in Directory.GetFiles(reportsPath, "*.json", SearchOption.TopDirectoryOnly))
                 {
                     var report = jsonFileSerializer.LoadFromJsonFile<ReportData>(reportPath);
@@ -100,6 +97,8 @@ namespace NumberSorter.Domain.Benchmark.Benchmarks.Upload
 
                     if (existingInfo != null)
                         report.HostEnvironmentInfo = existingInfo;
+
+                    report.FillBlanks();
 
                     context.ReportDatas.Add(report);
                     context.SaveChanges();

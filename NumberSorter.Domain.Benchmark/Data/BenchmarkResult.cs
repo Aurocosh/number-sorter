@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace NumberSorter.Domain.Benchmark.Benchmarks.Data
+namespace NumberSorter.Domain.Benchmark.Data
 {
     [Table("benchmark")]
     internal sealed class BenchmarkResult
@@ -26,7 +26,17 @@ namespace NumberSorter.Domain.Benchmark.Benchmarks.Data
         public string Parameters { get; set; }
         [Column("full_name")]
         public string FullName { get; set; }
-        [Column("statistics")]
+
+        //[Column("statistics")]
         public Statistics Statistics { get; set; }
+        public Memory Memory { get; set; }
+
+        public void FillBlanks()
+        {
+            if (Statistics == null)
+                Statistics = new Statistics();
+            if (Memory == null)
+                Memory = new Memory();
+        }
     }
 }
