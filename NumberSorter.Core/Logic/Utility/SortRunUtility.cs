@@ -1,8 +1,6 @@
 ﻿using NumberSorter.Core.Logic.Algorhythm;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace NumberSorter.Core.Logic.Utility
 {

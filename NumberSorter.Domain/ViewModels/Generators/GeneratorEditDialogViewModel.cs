@@ -1,18 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using ReactiveUI;
+﻿using ReactiveUI;
 using System.Reactive;
-using System.Reactive.Linq;
 using ReactiveUI.Fody.Helpers;
-using DynamicData;
-using NumberSorter.Core.Logic;
 using NumberSorter.Core.CustomGenerators;
-using System.Collections.ObjectModel;
-using System;
-using NumberSorter.Core.CustomGenerators.Base;
-using NumberSorter.Core.CustomGenerators.Context;
-using NumberSorter.Core.CustomGenerators.Processors.Generators;
-using NumberSorter.Core.CustomGenerators.Processors.Converters;
 using NumberSorter.Domain.DialogService;
 
 namespace NumberSorter.Domain.ViewModels

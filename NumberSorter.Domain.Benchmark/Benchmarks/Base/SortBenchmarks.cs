@@ -3,16 +3,9 @@ using BenchmarkDotNet.Exporters;
 using BenchmarkDotNet.Order;
 using NumberSorter.Core.Algorhythm;
 using NumberSorter.Domain.Benchmark.IntegerGenerators;
-using NumberSorter.Core.Logic.Algorhythm;
 using NumberSorter.Core.Logic.Comparer;
-using NumberSorter.Domain.Tests;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BenchmarkDotNet.Configs;
-using BenchmarkDotNet.Reports;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks.Base
 {

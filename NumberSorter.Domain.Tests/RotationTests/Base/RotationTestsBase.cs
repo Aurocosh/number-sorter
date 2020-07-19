@@ -1,10 +1,7 @@
-﻿using AutoFixture.Xunit2;
-using NumberSorter.Core.Algorhythm;
-using NumberSorter.Core.Logic.Algorhythm;
+﻿using NumberSorter.Core.Logic.Algorhythm;
 using NumberSorter.Core.Logic.Algorhythm.Merge.Base;
 using NumberSorter.Core.Logic.Comparer;
 using NumberSorter.Domain.Tests.RotationTests.Base.IntegerGenerators.Dynamic;
-using System;
 using System.Collections.Generic;
 using Xunit;
 

@@ -15,23 +15,29 @@
         TimSort,
         TimSortCustom,
 
-        DequeMergeSort,
-        RecursiveMergeSort,
+        ArrayMergeSort,
 
-        WindowMergeSort,
+        DequeMergeSort,
         HalfInPlaceMergeSort,
         KindaInPlaceMergeSort,
+
+        WindowMergeSort,
         TripleWindowMergeSort,
-        WorkAreaInPlaceMergeSort,
 
         IntervalMergeSort,
         IntervalMergeSortCustom,
+
+        DequeBottomUpMergeSort,
+        HalfInPlaceBottomUpMergeSort,
+        KindaInPlaceBottomUpMergeSort,
 
         WindowBottomUpMergeSort,
         TripleWindowBottomUpMergeSort,
 
         IntervalBottomUpMergeSort,
         IntervalBottomUpMergeSortCustom,
+
+        WorkAreaInPlaceMergeSort,
 
         BinarySort,
         InsertionSort,

@@ -1,7 +1,6 @@
 ﻿using NumberSorter.Core.Algorhythm;
 using NumberSorter.Core.Logic.Algorhythm.SignSeparator.Base;
 using NumberSorter.Core.Logic.Utility;
-using System;
 using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm.IntegerSort

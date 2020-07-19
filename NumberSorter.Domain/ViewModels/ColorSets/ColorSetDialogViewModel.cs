@@ -1,14 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using ReactiveUI;
+﻿using ReactiveUI;
 using System.Reactive;
 using System.Reactive.Linq;
 using ReactiveUI.Fody.Helpers;
-using DynamicData;
-using NumberSorter.Core.Logic;
 using System;
-using NumberSorter.Core.Logic.Utility;
-using NumberSorter.Domain.Visualizers;
 using NumberSorter.Domain.AppColors;
 using System.Windows.Media;
 using NumberSorter.Domain.Interactions;

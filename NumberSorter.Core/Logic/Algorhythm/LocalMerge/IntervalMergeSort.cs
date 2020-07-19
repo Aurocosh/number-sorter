@@ -1,39 +1,21 @@
-﻿using NumberSorter.Core.Logic.Algorhythm.Merge.Base;
+﻿using NumberSorter.Core.Logic.Algorhythm.LocalMerge.Base;
 using NumberSorter.Core.Logic.Algorhythm.PositionLocator.Base;
 using NumberSorter.Core.Logic.Factories.PositionLocator.Base;
 using NumberSorter.Core.Logic.Utility;
 using System.Collections.Generic;
 
-namespace NumberSorter.Core.Logic.Algorhythm
+namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
 {
-    public class IntervalMergeSort<T> : GenericSortAlgorhythm<T>, ILocalMergeAlgothythm<T>
+    public class IntervalMerge<T> : GenericMergeAlgorhythm<T>
     {
         private IPositionLocator<T> PositionLocator { get; }
 
-        public IntervalMergeSort(IComparer<T> comparer, IPositionLocatorFactory positionLocatorFactory) : base(comparer)
+        public IntervalMerge(IComparer<T> comparer, IPositionLocatorFactory positionLocatorFactory) : base(comparer)
         {
             PositionLocator = positionLocatorFactory.GetPositionLocator(comparer);
         }
 
-        public override void Sort(IList<T> list, int startingIndex, int length)
-        {
-            var sortRun = new SortRun(startingIndex, length);
-            MergeSort(list, sortRun);
-        }
-
-        private void MergeSort(IList<T> list, SortRun sortRun)
-        {
-            if (sortRun.Length <= 1)
-                return;
-
-            var halvesOfSortRun = SortRunUtility.SplitSortRun(sortRun);
-            MergeSort(list, halvesOfSortRun.First);
-            MergeSort(list, halvesOfSortRun.Second);
-
-            Merge(list, halvesOfSortRun.First, halvesOfSortRun.Second);
-        }
-
-        public void Merge(IList<T> list, SortRun firstRun, SortRun secondRun)
+        public override void Merge(IList<T> list, SortRun firstRun, SortRun secondRun)
         {
             int combinedLength = firstRun.Length + secondRun.Length;
             if (combinedLength < 2)

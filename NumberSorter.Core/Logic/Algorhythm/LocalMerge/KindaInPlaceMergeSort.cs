@@ -1,33 +1,16 @@
-﻿using NumberSorter.Core.Logic.Utility;
+﻿using NumberSorter.Core.Logic.Algorhythm.LocalMerge.Base;
+using NumberSorter.Core.Logic.Utility;
 using System.Collections.Generic;
 
-namespace NumberSorter.Core.Logic.Algorhythm
+namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
 {
-    public class KindaInPlaceMergeSort<T> : GenericSortAlgorhythm<T>
+    public class KindaInPlaceMerge<T> : GenericMergeAlgorhythm<T>
     {
-        public KindaInPlaceMergeSort(IComparer<T> comparer) : base(comparer)
+        public KindaInPlaceMerge(IComparer<T> comparer) : base(comparer)
         {
         }
 
-        public override void Sort(IList<T> list, int startingIndex, int length)
-        {
-            var sortRun = new SortRun(startingIndex, length);
-            MergeSort(list, sortRun);
-        }
-
-        private void MergeSort(IList<T> list, SortRun sortRun)
-        {
-            if (sortRun.Length <= 1)
-                return;
-
-            var halvesOfSortRun = SortRunUtility.SplitSortRun(sortRun);
-            MergeSort(list, halvesOfSortRun.First);
-            MergeSort(list, halvesOfSortRun.Second);
-
-            Merge(list, halvesOfSortRun.First, halvesOfSortRun.Second);
-        }
-
-        private void Merge(IList<T> list, SortRun firstRun, SortRun secondRun)
+        public override void Merge(IList<T> list, SortRun firstRun, SortRun secondRun)
         {
             if (firstRun.Length + secondRun.Length < 2)
                 return;
@@ -65,12 +48,6 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
             while (unsortedInFirst-- > 0)
                 list[firstIndex++] = temporartArray[temporaryIndex++];
-
-            //first = SortRunUtility.RunToString(list, firstRun);
-            //second = SortRunUtility.RunToString(list, secondRun);
-            //Console.WriteLine($"\nAfter {first}   {second}");
-            //if (!IsSorted(list, firstRun.Start, firstRun.Length + secondRun.Length))
-            //    Console.WriteLine("Not sorted");
         }
     }
 }

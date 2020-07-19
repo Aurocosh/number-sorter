@@ -1,7 +1,7 @@
 ﻿using NumberSorter.Core.Algorhythm;
 using System.Collections.Generic;
 
-namespace NumberSorter.Core.Logic.Algorhythm.Merge.Base
+namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge.Base
 {
     public interface ILocalMergeAlgothythm<T> : IComparingAlgorhythm<T>
     {

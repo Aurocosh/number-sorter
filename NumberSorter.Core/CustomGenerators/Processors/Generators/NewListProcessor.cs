@@ -1,10 +1,4 @@
 ﻿using NumberSorter.Core.CustomGenerators.Base;
-using NumberSorter.Core.Logic.Utility;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NumberSorter.Core.CustomGenerators.Processors.Generators
 {

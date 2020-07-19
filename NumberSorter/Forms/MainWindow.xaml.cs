@@ -3,7 +3,6 @@ using NumberSorter.Domain.Converters;
 using NumberSorter.Domain.ViewModels;
 using ReactiveUI;
 using System;
-using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Windows;

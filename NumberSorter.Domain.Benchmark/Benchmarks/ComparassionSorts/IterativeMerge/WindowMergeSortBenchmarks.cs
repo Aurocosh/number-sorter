@@ -2,7 +2,6 @@
 using NumberSorter.Core.Algorhythm;
 using NumberSorter.Domain.Benchmark.Benchmarks.Base;
 using NumberSorter.Core.Logic.Algorhythm;
-using NumberSorter.Core.Logic.Factories.Sort;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks
 {
@@ -10,7 +9,8 @@ namespace NumberSorter.Domain.Benchmark.Benchmarks
     {
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {
-            return new BottomUpMergeSort<int>(comparer, new WindowMergeSortFactory());
+            var merge = new WindowMergeFactory();
+            return new BottomUpMergeSort<int>(comparer, merge);
         }
     }
 }

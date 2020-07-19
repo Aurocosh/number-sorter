@@ -10,7 +10,7 @@ namespace NumberSorter.Domain.Tests.SortTests
     {
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {
-            return new TimSort<int>(comparer, new WindowMergeSortFactory(), new InsertionSortFactory());
+            return new TimSort<int>(comparer, new WindowMergeFactory(), new InsertionSortFactory());
         }
     }
 }

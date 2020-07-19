@@ -1,12 +1,9 @@
 ﻿using NumberSorter.Core.Logic.Factories.LocalMerge.Base;
-using NumberSorter.Core.Logic.Factories.PositionLocator;
 using NumberSorter.Core.Logic.Factories.Sort;
-using NumberSorter.Core.Logic.Factories.Sort.Base;
 using NumberSorter.Core.Logic.Factories.SortRunLocator;
 using NumberSorter.Domain.DialogService;
 using NumberSorter.Domain.ViewModels;
 using ReactiveUI;
-using System.Collections.Generic;
 
 namespace NumberSorter.Domain.Logic
 {

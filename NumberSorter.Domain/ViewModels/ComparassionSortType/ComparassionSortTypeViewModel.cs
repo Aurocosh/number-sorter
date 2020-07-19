@@ -5,8 +5,6 @@ using System.Reactive;
 using System.Reactive.Linq;
 using ReactiveUI.Fody.Helpers;
 using DynamicData;
-using NumberSorter.Core.Logic;
-using System;
 using NumberSorter.Core.Logic.Utility;
 using NumberSorter.Domain.Logic;
 

@@ -353,7 +353,10 @@
   <ItemGroup>
     <Compile Include="Benchmarks\ComparassionSorts\DualPivotQuickSort\DualPivotQuickSortCutoffInsertionBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\DualPivotQuickSort\DualPivotQuickSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\DequeIterativeMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\HalfInPlaceIterativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\IntervalIterativeMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\KindaInPlaceIterativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\TripleWindowIterativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\WindowMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\QuickSortLL\QuickSortLLMedianThreePivotBenchmarks.cs" />
@@ -400,7 +403,7 @@
     <Compile Include="Benchmarks\ComparassionSorts\QuickSort\ParallelQuickSortRandomPivotBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\TimSort\TimSortBinaryWindowBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\TimSort\TimSortBinaryIntervalBenchmarks.cs" />
-    <Compile Include="Benchmarks\ComparassionSorts\RecursiveMerge\WorkAreaInPlaceMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\Merge\WorkAreaInPlaceMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\RecursiveMerge\TripleWindowMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\ShellSortTokudaBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\ShellSortCiuraBenchmarks.cs" />
@@ -415,7 +418,7 @@
     <Compile Include="Benchmarks\ComparassionSorts\CombSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\CocktailShakerSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\BinarySortBenchmarks.cs" />
-    <Compile Include="Benchmarks\ComparassionSorts\RecursiveMerge\OpRecursiveMergeSorBenchmarkst.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\Merge\OpRecursiveMergeSorBenchmarkst.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\CSharpDefaultSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\RecursiveMerge\DequeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\RecursiveMerge\HalfInPlaceMergeSortBenchmarks.cs" />

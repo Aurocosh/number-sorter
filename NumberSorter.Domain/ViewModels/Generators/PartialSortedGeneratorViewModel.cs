@@ -3,7 +3,6 @@ using NumberSorter.Domain.Container;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
-using System.Collections.Generic;
 using System.Reactive;
 using System.Reactive.Linq;
 

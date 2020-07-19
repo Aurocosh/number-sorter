@@ -1,8 +1,5 @@
-﻿using NumberSorter.Core.Logic;
-using NumberSorter.Domain.AppColors;
-using NumberSorter.Domain.Visualizers;
+﻿using NumberSorter.Domain.AppColors;
 using ReactiveUI;
-using System;
 using System.Windows.Media;
 
 namespace NumberSorter.Domain.ViewModels

@@ -1,39 +1,20 @@
-﻿using NumberSorter.Core.Algorhythm;
+﻿using NumberSorter.Core.Logic.Algorhythm.LocalMerge.Base;
 using NumberSorter.Core.Logic.Algorhythm.Merge.Base;
 using NumberSorter.Core.Logic.Utility;
 using System.Collections.Generic;
 
-namespace NumberSorter.Core.Logic.Algorhythm
+namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
 {
-    public class WindowMergeSort<T> : GenericSortAlgorhythm<T>, ILocalMergeAlgothythm<T>
+    public class WindowMerge<T> : GenericMergeAlgorhythm<T>
     {
         private readonly ILocalRotationAlgothythm<T> _localMergeAlgothythm;
 
-        public WindowMergeSort(IComparer<T> comparer) : base(comparer)
+        public WindowMerge(IComparer<T> comparer) : base(comparer)
         {
             _localMergeAlgothythm = new RecursiveInPlaceRotation<T>();
         }
 
-        public override void Sort(IList<T> list, int startingIndex, int length)
-        {
-            var sortRun = new SortRun(startingIndex, length);
-            MergeSort(list, sortRun);
-        }
-
-        private void MergeSort(IList<T> list, SortRun sortRun)
-        {
-            if (sortRun.Length <= 1)
-                return;
-
-            var halvesOfSortRun = SortRunUtility.SplitSortRun(sortRun);
-            MergeSort(list, halvesOfSortRun.First);
-            MergeSort(list, halvesOfSortRun.Second);
-
-            Merge(list, halvesOfSortRun.First, halvesOfSortRun.Second);
-        }
-
-
-        public void Merge(IList<T> list, SortRun firstRun, SortRun secondRun)
+        public override void Merge(IList<T> list, SortRun firstRun, SortRun secondRun)
         {
             //var first = SortRunUtility.RunToString(list, firstRun);
             //var second = SortRunUtility.RunToString(list, secondRun);

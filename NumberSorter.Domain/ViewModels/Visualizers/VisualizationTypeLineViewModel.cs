@@ -1,7 +1,5 @@
-﻿using NumberSorter.Core.Logic;
-using NumberSorter.Domain.Visualizers;
+﻿using NumberSorter.Domain.Visualizers;
 using ReactiveUI;
-using System;
 
 namespace NumberSorter.Domain.ViewModels
 {

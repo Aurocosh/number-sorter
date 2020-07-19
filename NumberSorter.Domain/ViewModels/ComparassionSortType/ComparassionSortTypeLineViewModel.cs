@@ -1,5 +1,4 @@
-﻿using NumberSorter.Core.Logic;
-using NumberSorter.Domain.Logic;
+﻿using NumberSorter.Domain.Logic;
 using ReactiveUI;
 using System;
 

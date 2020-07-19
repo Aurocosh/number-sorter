@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NumberSorter.Core.CustomGenerators.Base;
-using NumberSorter.Core.Logic.Utility;
+﻿using NumberSorter.Core.CustomGenerators.Base;
 
 namespace NumberSorter.Core.CustomGenerators.Processors.Converters
 {

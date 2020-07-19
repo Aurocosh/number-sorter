@@ -1,10 +1,6 @@
 ﻿using Newtonsoft.Json;
 using NumberSorter.Domain.Container.Actions.Base;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NumberSorter.Domain.Container.Actions
 {

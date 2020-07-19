@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Factories.Sort
 {
-    public class HalfInPlaceMergeSortFactory : GenericSortFactory
+    public class ArrayMergeSortFactory : GenericSortFactory
     {
         public override ISortAlgorhythm<T> GetSort<T>(IComparer<T> comparer)
         {
-            return new HalfInPlaceMergeSort<T>(comparer);
+            return new ArrayMergeSort<T>(comparer);
         }
     }
 }

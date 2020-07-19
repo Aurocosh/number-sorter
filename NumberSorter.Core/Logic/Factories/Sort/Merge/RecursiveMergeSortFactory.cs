@@ -1,22 +1,23 @@
 ﻿using NumberSorter.Core.Algorhythm;
 using NumberSorter.Core.Logic.Algorhythm;
-using NumberSorter.Core.Logic.Algorhythm.Merge.Base;
 using NumberSorter.Core.Logic.Factories.LocalMerge.Base;
 using NumberSorter.Core.Logic.Factories.Sort.Base;
 using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Factories.Sort
 {
-    public class WindowMergeSortFactory : GenericSortFactory, ILocalMergeFactory
+    public class RecursiveMergeSortFactory : GenericSortFactory
     {
-        public ILocalMergeAlgothythm<T> GetLocalMerge<T>(IComparer<T> comparer)
+        private ILocalMergeFactory LocalMergeFactory { get; }
+
+        public RecursiveMergeSortFactory(ILocalMergeFactory localMergeFactory)
         {
-            return new WindowMergeSort<T>(comparer);
+            LocalMergeFactory = localMergeFactory;
         }
 
         public override ISortAlgorhythm<T> GetSort<T>(IComparer<T> comparer)
         {
-            return new WindowMergeSort<T>(comparer);
+            return new RecursiveMergeSort<T>(comparer, LocalMergeFactory);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using NumberSorter.Core.Logic.Algorhythm.Merge.Base;
+﻿using NumberSorter.Core.Logic.Algorhythm.LocalMerge.Base;
 using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Factories.LocalMerge.Base

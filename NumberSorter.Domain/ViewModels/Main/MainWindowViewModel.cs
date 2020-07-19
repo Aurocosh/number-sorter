@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
 using System.Windows.Input;
 using System.Windows;
 using ReactiveUI;
@@ -13,18 +9,12 @@ using ReactiveUI.Fody.Helpers;
 using System.IO;
 using System.Text.RegularExpressions;
 using NumberSorter.Domain.DialogService;
-using NumberSorter.Core.Logic;
 using NumberSorter.Core.Logic.Comparer;
 using System.Diagnostics;
 using NumberSorter.Domain.Interactions;
-using System.Windows.Media.Imaging;
-using System.Windows.Media;
-using NumberSorter.Domain.Base.Visualizers;
-using NumberSorter.Domain.Visualizers;
 using NumberSorter.Domain.Container;
 using NumberSorter.Domain.Serialization;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using NumberSorter.Domain.Logic;
 using NumberSorter.Domain.AppColors;
 

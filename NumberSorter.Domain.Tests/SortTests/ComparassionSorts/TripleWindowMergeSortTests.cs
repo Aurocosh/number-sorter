@@ -9,7 +9,7 @@ namespace NumberSorter.Domain.Tests.SortTests
     {
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {
-            return new TripleWindowMergeSort<int>(comparer);
+            return new RecursiveMergeSort<int>(comparer, new TripleWindowMergeFactory());
         }
     }
 }

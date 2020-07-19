@@ -1,20 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using ReactiveUI;
 using System.Reactive;
 using System.Reactive.Linq;
 using ReactiveUI.Fody.Helpers;
 using DynamicData;
-using NumberSorter.Core.Logic;
 using System.Collections.ObjectModel;
 using System;
 using NumberSorter.Domain.DialogService;
 using NumberSorter.Domain.Container;
 using NumberSorter.Domain.Serialization;
 using System.IO;
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
-using DynamicData.Binding;
 
 namespace NumberSorter.Domain.ViewModels
 {

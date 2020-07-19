@@ -1,6 +1,5 @@
 ﻿using BenchmarkDotNet.Running;
 using NumberSorter.Domain.Benchmark.Benchmarks.Upload;
-using System;
 
 namespace NumberSorter.Domain.Benchmark
 {

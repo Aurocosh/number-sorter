@@ -1,6 +1,4 @@
-﻿using NumberSorter.Core.Algorhythm;
-using NumberSorter.Core.Logic.Algorhythm;
-using NumberSorter.Core.Logic.Algorhythm.GapGenerator;
+﻿using NumberSorter.Core.Logic.Algorhythm.GapGenerator;
 using NumberSorter.Core.Logic.Factories.PivotSelector;
 using NumberSorter.Core.Logic.Factories.PositionLocator;
 using NumberSorter.Core.Logic.Factories.Sort;
@@ -9,8 +7,6 @@ using NumberSorter.Core.Logic.Factories.SortRunLocator;
 using NumberSorter.Domain.DialogService;
 using NumberSorter.Domain.ViewModels;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
 
 namespace NumberSorter.Domain.Logic
 {
@@ -39,46 +35,55 @@ namespace NumberSorter.Domain.Logic
                 case ComparassionAlgorhythmType.CocktailShakerSort:
                     return new CocktailShakerSortFactory();
 
-                case ComparassionAlgorhythmType.RecursiveMergeSort:
-                    return new RecursiveMergeSortFactory();
-                case ComparassionAlgorhythmType.DequeMergeSort:
-                    return new DequeMergeSortFactory();
+                case ComparassionAlgorhythmType.ArrayMergeSort:
+                    return new ArrayMergeSortFactory();
 
-                case ComparassionAlgorhythmType.WindowMergeSort:
-                    return new WindowMergeSortFactory();
+                case ComparassionAlgorhythmType.DequeMergeSort:
+                    return new RecursiveMergeSortFactory(new DequeMergeFactory());
                 case ComparassionAlgorhythmType.HalfInPlaceMergeSort:
-                    return new HalfInPlaceMergeSortFactory();
+                    return new RecursiveMergeSortFactory(new HalfInPlaceMergeFactory());
                 case ComparassionAlgorhythmType.KindaInPlaceMergeSort:
-                    return new KindaInPlaceMergeSortFactory();
+                    return new RecursiveMergeSortFactory(new KindaInPlaceMergeFactory());
+
                 case ComparassionAlgorhythmType.TripleWindowMergeSort:
-                    return new TripleWindowMergeSortFactory();
-                case ComparassionAlgorhythmType.WorkAreaInPlaceMergeSort:
-                    return new WorkAreaInPlaceMergeSortFactory();
+                    return new RecursiveMergeSortFactory(new TripleWindowMergeFactory());
+                case ComparassionAlgorhythmType.WindowMergeSort:
+                    return new RecursiveMergeSortFactory(new WindowMergeFactory());
 
                 case ComparassionAlgorhythmType.IntervalMergeSort:
-                    return new IntervalMergeSortFactory(new BiasedBinaryPositionLocatorFactory(2));
+                    return new RecursiveMergeSortFactory(new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2)));
                 case ComparassionAlgorhythmType.IntervalMergeSortCustom:
                     {
                         var viewModel = new IntervalMergeSortDialogViewModel();
                         dialogService.ShowModalPresentation(parentViewModel, viewModel);
                         var positionLocator = PositionLocatorFactory.GetPositionLocator(viewModel.SelectedPositionLocator.Type, parentViewModel, dialogService);
-                        return new IntervalMergeSortFactory(positionLocator);
+                        return new RecursiveMergeSortFactory(new IntervalMergeFactory(positionLocator));
                     }
 
+                case ComparassionAlgorhythmType.DequeBottomUpMergeSort:
+                    return new BottomUpMergeSortFactory(new DequeMergeFactory());
+                case ComparassionAlgorhythmType.HalfInPlaceBottomUpMergeSort:
+                    return new BottomUpMergeSortFactory(new HalfInPlaceMergeFactory());
+                case ComparassionAlgorhythmType.KindaInPlaceBottomUpMergeSort:
+                    return new BottomUpMergeSortFactory(new KindaInPlaceMergeFactory());
+
                 case ComparassionAlgorhythmType.WindowBottomUpMergeSort:
-                    return new BottomUpMergeSortFactory(new WindowMergeSortFactory());
+                    return new BottomUpMergeSortFactory(new WindowMergeFactory());
                 case ComparassionAlgorhythmType.TripleWindowBottomUpMergeSort:
-                    return new BottomUpMergeSortFactory(new TripleWindowMergeSortFactory());
+                    return new BottomUpMergeSortFactory(new TripleWindowMergeFactory());
 
                 case ComparassionAlgorhythmType.IntervalBottomUpMergeSort:
-                    return new BottomUpMergeSortFactory(new IntervalMergeSortFactory(new BiasedBinaryPositionLocatorFactory(2)));
+                    return new BottomUpMergeSortFactory(new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2)));
                 case ComparassionAlgorhythmType.IntervalBottomUpMergeSortCustom:
                     {
                         var viewModel = new IntervalMergeSortDialogViewModel();
                         dialogService.ShowModalPresentation(parentViewModel, viewModel);
                         var positionLocator = PositionLocatorFactory.GetPositionLocator(viewModel.SelectedPositionLocator.Type, parentViewModel, dialogService);
-                        return new BottomUpMergeSortFactory(new IntervalMergeSortFactory(positionLocator));
+                        return new BottomUpMergeSortFactory(new IntervalMergeFactory(positionLocator));
                     }
+
+                case ComparassionAlgorhythmType.WorkAreaInPlaceMergeSort:
+                    return new WorkAreaInPlaceMergeSortFactory();
 
                 case ComparassionAlgorhythmType.BinarySort:
                     return new BinarySortFactory();
@@ -102,7 +107,7 @@ namespace NumberSorter.Domain.Logic
                         return new JHeapSortFactory(finalSort);
                     }
                 case ComparassionAlgorhythmType.TimSort:
-                    return new TimSortFactory(new IntervalMergeSortFactory(new BiasedBinaryPositionLocatorFactory(2)), new BinarySortFactory());
+                    return new TimSortFactory(new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2)), new BinarySortFactory());
                 case ComparassionAlgorhythmType.TimSortCustom:
                     {
                         var viewModel = new TimSortDialogViewModel();

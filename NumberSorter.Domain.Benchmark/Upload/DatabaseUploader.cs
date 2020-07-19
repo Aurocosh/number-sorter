@@ -1,19 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore.Internal;
 using Newtonsoft.Json;
-using Npgsql;
 using NumberSorter.Domain.Benchmark.Data;
 using NumberSorter.Domain.Benchmark.Context;
 using NumberSorter.Domain.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks.Upload
 {

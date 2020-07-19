@@ -9,7 +9,8 @@ namespace NumberSorter.Domain.Benchmark.Benchmarks
     {
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {
-            return new KindaInPlaceMergeSort<int>(comparer);
+            var merge = new KindaInPlaceMergeFactory();
+            return new RecursiveMergeSort<int>(comparer, merge);
         }
     }
 }
