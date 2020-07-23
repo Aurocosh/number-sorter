@@ -108,14 +108,20 @@ namespace NumberSorter.Domain.Logic
                         return new JHeapSortFactory(finalSort);
                     }
                 case ComparassionAlgorhythmType.TimSort:
-                    return new TimSortFactory(new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2)), new BinarySortFactory());
+                    {
+                        var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2));
+                        var merger = new LinkedListMergerFactory(merge);
+                        var minrunSort = new BinarySortFactory();
+                        return new TimSortFactory(merger, minrunSort);
+                    }
                 case ComparassionAlgorhythmType.TimSortCustom:
                     {
                         var viewModel = new TimSortDialogViewModel();
                         dialogService.ShowModalPresentation(parentViewModel, viewModel);
                         var localMerge = LocalMergeFactory.GetMerge(viewModel.SelectedMergeType.Type, parentViewModel, dialogService);
+                        var merger = new LinkedListMergerFactory(localMerge);
                         var minrunSort = GetAlgorhythm(viewModel.SelectedSortType.Type, parentViewModel, dialogService);
-                        return new TimSortFactory(localMerge, minrunSort);
+                        return new TimSortFactory(merger, minrunSort);
                     }
                 case ComparassionAlgorhythmType.ShellSort:
                     return new ShellSortFactory(new CiuraGapGenerator());

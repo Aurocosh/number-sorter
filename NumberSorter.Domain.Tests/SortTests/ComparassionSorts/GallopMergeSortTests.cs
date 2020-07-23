@@ -2,16 +2,15 @@
 using NumberSorter.Core.Algorhythm;
 using NumberSorter.Core.Logic.Algorhythm;
 using NumberSorter.Core.Logic.Factories.LocalMerge;
-using NumberSorter.Core.Logic.Factories.Sort;
 using NumberSorter.Domain.Tests.SortTests.Base;
 
 namespace NumberSorter.Domain.Tests.SortTests
 {
-    public class TimSortInsertionWindowSortTests : SortTestsBase
+    public class GallopMergeSortTests : SortTestsBase
     {
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {
-            return new TimSort<int>(comparer, new WindowMergeFactory(), new InsertionSortFactory());
+            return new BottomUpMergeSort<int>(comparer, new GallopMergeFactory());
         }
     }
 }

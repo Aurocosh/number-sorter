@@ -8,18 +8,18 @@ namespace NumberSorter.Core.Logic.Factories.Sort
 {
     public class TimSortFactory : GenericSortFactory
     {
-        private ILocalMergeFactory LocalMergeFactory { get; }
+        private IRunMergerFactory MergerFactory { get; }
         private ISortFactory MinrunSortFactory { get; }
 
-        public TimSortFactory(ILocalMergeFactory localMergeFactory, ISortFactory minrunSortFactory)
+        public TimSortFactory(IRunMergerFactory mergerFactory, ISortFactory minrunSortFactory)
         {
-            LocalMergeFactory = localMergeFactory;
+            MergerFactory = mergerFactory;
             MinrunSortFactory = minrunSortFactory;
         }
 
         public override ISortAlgorhythm<T> GetSort<T>(IComparer<T> comparer)
         {
-            return new TimSort<T>(comparer, LocalMergeFactory, MinrunSortFactory);
+            return new TimSort<T>(comparer, MergerFactory, MinrunSortFactory);
         }
     }
 }

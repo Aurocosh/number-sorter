@@ -67,9 +67,12 @@
     <Compile Include="Generators\RandomIntegerGenerator.cs" />
     <Compile Include="Generators\RandomPartialSortedIntegerGenerator.cs" />
     <Compile Include="Generators\UnmergedFullySortedGenerator.cs" />
+    <Compile Include="Logic\Algorhythm\LocalMerge\GallopMerge.cs" />
     <Compile Include="Logic\Algorhythm\PivotSelector\CenterPivotSelector.cs" />
     <Compile Include="Logic\Algorhythm\PivotSelector\LastPivotSelector.cs" />
     <Compile Include="Logic\Algorhythm\PivotSelector\FirstPivotSelector.cs" />
+    <Compile Include="Logic\Algorhythm\RunMerger\Base\IRunMerger.cs" />
+    <Compile Include="Logic\Algorhythm\RunMerger\ArrayRunMerger.cs" />
     <Compile Include="Logic\Algorhythm\SignSeparator\Base\ISignSeparatorAlgothythm.cs" />
     <Compile Include="Logic\Algorhythm\SignSeparator\OptimizedLocalSignSeparator.cs" />
     <Compile Include="Logic\Algorhythm\SignSeparator\LocalSignSeparator.cs" />
@@ -78,6 +81,7 @@
     <Compile Include="Logic\Algorhythm\SortBitMaskGenerator\ZerosSortBitMaskGenerator.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\MergeSort\RecursiveMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\MergeSort\BottomUpMergeSort.cs" />
+    <Compile Include="Logic\Algorhythm\RunMerger\LinkedListRunMerger.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\StableQuickSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\QuickSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\DualPivotQuickSort.cs" />
@@ -117,6 +121,7 @@
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\IntervalMultiMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\LocalMerge\IntervalMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\ParallelQuickSort.cs" />
+    <Compile Include="Logic\Factories\LocalMerge\GallopMergeFactory.cs" />
     <Compile Include="Logic\Factories\PivotSelector\CenterPivotSelectorFactory.cs" />
     <Compile Include="Logic\Factories\PivotSelector\LastPivotSelectorFactory.cs" />
     <Compile Include="Logic\Factories\PivotSelector\FirstPivotSelectorFactory.cs" />
@@ -128,6 +133,9 @@
     <Compile Include="Logic\Factories\PivotSelector\Base\IPivotSelectorFactory.cs" />
     <Compile Include="Logic\Factories\PivotSelector\MedianOfThreePivotSelectorFactory.cs" />
     <Compile Include="Logic\Factories\PivotSelector\RandomPivotSelectorFactory.cs" />
+    <Compile Include="Logic\Factories\RunMerger\Base\ILocalMergeFactory.cs" />
+    <Compile Include="Logic\Factories\RunMerger\ArrayMergerFactory.cs" />
+    <Compile Include="Logic\Factories\RunMerger\LinkedListMergerFactory.cs" />
     <Compile Include="Logic\Factories\SortRunLocator\Base\ISortRunLocatorFactory.cs" />
     <Compile Include="Logic\Factories\SortRunLocator\GroupingRunLocatorFactory.cs" />
     <Compile Include="Logic\Factories\SortRunLocator\SimpleRunLocatorFactory.cs" />

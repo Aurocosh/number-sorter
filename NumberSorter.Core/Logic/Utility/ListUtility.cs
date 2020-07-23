@@ -75,6 +75,22 @@ namespace NumberSorter.Core.Logic.Utility
                 destination[destinationIndex++] = source[sourceIndex++];
         }
 
+        public static void CopyBuffered<T>(IList<T> source, int sourceIndex, IList<T> destination, int destinationIndex, int length)
+        {
+            var buffer = source.GetRangeAsArray(sourceIndex, length);
+            Copy(buffer, 0, destination, destinationIndex, length);
+        }
+
+        public static void CopyReversed<T>(IList<T> source, int sourceIndex, IList<T> destination, int destinationIndex, int length)
+        {
+            int lowerSourceLimit = sourceIndex - 1;
+            int shift = length - 1;
+            sourceIndex += shift;
+            destinationIndex += shift;
+            while (sourceIndex != lowerSourceLimit)
+                destination[destinationIndex--] = source[sourceIndex--];
+        }
+
         public static List<T> GetRange<T>(this IReadOnlyList<T> list, int index, int count)
         {
             int upperLimit = index + count;

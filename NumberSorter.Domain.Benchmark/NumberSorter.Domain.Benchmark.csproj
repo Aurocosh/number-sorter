@@ -353,6 +353,7 @@
   <ItemGroup>
     <Compile Include="Benchmarks\ComparassionSorts\DualPivotQuickSort\DualPivotQuickSortCutoffInsertionBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\DualPivotQuickSort\DualPivotQuickSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\GallopIterativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\DequeIterativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\HalfInPlaceIterativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\IntervalIterativeMergeSortBenchmarks.cs" />
@@ -363,6 +364,10 @@
     <Compile Include="Benchmarks\ComparassionSorts\QuickSortLL\QuickSortLLRandomPivotBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\QuickSortLL\QuickSortLLRandomPivotCutoffInsertionBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\QuickSort\QuickSortRandomPivotCutoffInsertionBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\TimSort\TimSortBinaryIntervalLinkedBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\TimSort\TimSortBinaryWindowLinkedBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\TimSort\TimSortGallopLinkedBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\TimSort\TimSortGallopArrayBenchmarks.cs" />
     <Compile Include="Context\ReportContext.cs" />
     <Compile Include="Data\BenchmarkResult.cs" />
     <Compile Include="Data\ChronometerFrequency.cs" />
@@ -401,8 +406,8 @@
     <Compile Include="Benchmarks\ComparassionSorts\MultiMerge\MultiMergeSortGroupBinaryBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\MultiMerge\MultiMergeSortSimpleBinaryBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\QuickSort\ParallelQuickSortRandomPivotBenchmarks.cs" />
-    <Compile Include="Benchmarks\ComparassionSorts\TimSort\TimSortBinaryWindowBenchmarks.cs" />
-    <Compile Include="Benchmarks\ComparassionSorts\TimSort\TimSortBinaryIntervalBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\TimSort\TimSortBinaryWindowArrayBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\TimSort\TimSortBinaryIntervalArrayBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\Merge\WorkAreaInPlaceMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\RecursiveMerge\TripleWindowMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\ShellSortTokudaBenchmarks.cs" />

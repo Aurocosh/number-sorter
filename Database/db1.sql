@@ -239,3 +239,25 @@ CREATE OR REPLACE VIEW top_three_sorts_by_memory AS
 	AS ct(method text, first text, second text, third text);
 ALTER TABLE top_three_sorts_by_memory OWNER TO db_user;
 
+CREATE OR REPLACE VIEW previous_sort_report_comparassion_by_time AS 
+SELECT report_id,
+	row_number() OVER( PARTITION BY method_name,value,sort_name ORDER BY mean) AS position,
+	sort_name,
+	method_name,
+	value,
+	mean,
+	round(mean / (min(mean) OVER( PARTITION BY method_name,value,sort_name ORDER BY mean)),2) AS compared_to_best,
+	memory_allocated,
+	memory_gen0_collections,
+	memory_gen1_collections,
+	memory_gen2_collections,
+	standard_error,
+	standard_deviation,
+	host_environment_info_id
+FROM report_data AS rd
+JOIN benchmark_overview AS bo ON bo.report_id = rd.id
+ORDER BY method_name,
+	value,
+	sort_name,
+	report_id DESC;
+ALTER TABLE previous_sort_report_comparassion_by_time OWNER TO db_user;

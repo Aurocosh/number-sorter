@@ -124,6 +124,11 @@
     <Compile Include="SortTests\ComparassionSorts\QuickSortLL\QuickSortLLRandomPivotCutoffTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\StableQuickSort\StableQuickSortMedianThreePivotTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\StableQuickSort\StableQuickSortRandomPivotCutoffTests.cs" />
+    <Compile Include="SortTests\ComparassionSorts\TimSort\TimSortBinaryIntervalSortLinkedTests.cs" />
+    <Compile Include="SortTests\ComparassionSorts\TimSort\TimSortGallopSortLinkedTests.cs" />
+    <Compile Include="SortTests\ComparassionSorts\TimSort\TimSortGallopSortArrayTests.cs" />
+    <Compile Include="SortTests\ComparassionSorts\GallopMergeSortTests.cs" />
+    <Compile Include="SortTests\ComparassionSorts\TimSort\TimSortInsertionWindowSortLinkedTests.cs" />
     <Compile Include="SortTests\IntegerSorts\AmericanFlagSortTests.cs" />
     <Compile Include="SortTests\IntegerSorts\BitMSDRadixSort\BitMSDRadixSortTests.cs" />
     <Compile Include="SortTests\IntegerSorts\BitMSDRadixSort\BitMSDOptimizedRadixSortTests.cs" />
@@ -160,9 +165,8 @@
     <Compile Include="SortTests\ComparassionSorts\DoubleSelectionSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\OddEvenSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\SelectionSortTests.cs" />
-    <Compile Include="SortTests\ComparassionSorts\InsertionWindowTimSortTests.cs" />
-    <Compile Include="SortTests\ComparassionSorts\TimSort\TimSortInsertionWindowSortTests.cs" />
-    <Compile Include="SortTests\ComparassionSorts\TimSort\TimSortBinaryIntervalSortTests.cs" />
+    <Compile Include="SortTests\ComparassionSorts\TimSort\TimSortInsertionWindowSortArrayTests.cs" />
+    <Compile Include="SortTests\ComparassionSorts\TimSort\TimSortBinaryIntervalSortArrayTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\TripleWindowMergeSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\WorkAreaInPlaceMergeSortTests.cs" />
     <Compile Include="TestsRandomProvider.cs" />

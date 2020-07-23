@@ -3,16 +3,18 @@ using NumberSorter.Core.Algorhythm;
 using NumberSorter.Domain.Benchmark.Benchmarks.Base;
 using NumberSorter.Core.Logic.Algorhythm;
 using NumberSorter.Core.Logic.Factories.Sort;
-using NumberSorter.Core.Logic.Factories.PositionLocator;
 using NumberSorter.Core.Logic.Factories.LocalMerge;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks
 {
-    public class TimSortBinaryIntervalBenchmarks : SortBenchmarks
+    public class TimSortGallopLinkedBenchmarks : SortBenchmarks
     {
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {
-            return new TimSort<int>(comparer, new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2)), new BinarySortFactory());
+            var merge = new GallopMergeFactory();
+            var merger = new LinkedListMergerFactory(merge);
+            var minrunSort = new BinarySortFactory();
+            return new TimSort<int>(comparer, merger, minrunSort);
         }
     }
 }
