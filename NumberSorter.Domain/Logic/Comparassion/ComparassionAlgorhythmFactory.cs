@@ -207,7 +207,13 @@ namespace NumberSorter.Domain.Logic
                 case ComparassionAlgorhythmType.StrandSort:
                     {
                         var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2));
-                        return new StrandMergeSortFactory(merge);
+                        return new StrandSortFactory(merge);
+                    }
+                case ComparassionAlgorhythmType.StrandMergerSort:
+                    {
+                        var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2));
+                        var merger = new LinkedListMergerFactory(merge);
+                        return new StrandMergerSortFactory(merger);
                     }
 
                 default:

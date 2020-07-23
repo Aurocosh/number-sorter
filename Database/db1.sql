@@ -77,7 +77,7 @@ SELECT DISTINCT ON (type, host_environment_info_id)
 FROM report_data
 ORDER BY type,
 	host_environment_info_id,
-	created;
+	created DESC;
 ALTER TABLE most_recent_reports_by_type_and_env OWNER TO db_user;
 
 CREATE OR REPLACE VIEW sort_report_comparassion_by_time AS 

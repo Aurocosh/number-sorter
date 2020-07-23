@@ -68,6 +68,7 @@
         DualPivotQuickSort,
         DualPivotQuickSortCustom,
 
-        StrandSort
+        StrandSort,
+        StrandMergerSort,
     }
 }

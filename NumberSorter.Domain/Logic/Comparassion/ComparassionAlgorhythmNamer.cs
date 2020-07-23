@@ -75,6 +75,7 @@ namespace NumberSorter.Domain.Logic
             _nameDictionary.Add(ComparassionAlgorhythmType.DualPivotQuickSortCustom, "Dual pivot quick sort (Custom)");
 
             _nameDictionary.Add(ComparassionAlgorhythmType.StrandSort, "Strand sort");
+            _nameDictionary.Add(ComparassionAlgorhythmType.StrandMergerSort, "Strand sort (Merger)");
         }
 
         public static string GetName(ComparassionAlgorhythmType algorhythmType)

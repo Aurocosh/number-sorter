@@ -351,7 +351,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Benchmarks\ComparassionSorts\StrandSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\Strand\StrandSortMergerBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\Strand\StrandSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\DualPivotQuickSort\DualPivotQuickSortCutoffInsertionBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\DualPivotQuickSort\DualPivotQuickSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\GallopIterativeMergeSortBenchmarks.cs" />

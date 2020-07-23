@@ -111,6 +111,12 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
         private SortRun MergeRuns(SortRun leftRun, SortRun rightRun)
         {
+            if (leftRun.FirstIndex > rightRun.FirstIndex)
+            {
+                var temp = leftRun;
+                leftRun = rightRun;
+                rightRun = temp;
+            }
             _localMergeAlgorhythm.Merge(_list, leftRun, rightRun);
             return new SortRun(leftRun.Start, leftRun.Length + rightRun.Length);
         }

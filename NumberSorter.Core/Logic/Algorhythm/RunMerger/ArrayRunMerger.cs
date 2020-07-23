@@ -73,6 +73,13 @@ namespace NumberSorter.Core.Logic.Algorhythm
             var leftRun = _sortRuns[runIndex];
             var rightRun = _sortRuns[runIndex + 1];
 
+            if (leftRun.FirstIndex > rightRun.FirstIndex)
+            {
+                var temp = leftRun;
+                leftRun = rightRun;
+                rightRun = temp;
+            }
+
             _sortRuns[runIndex] = leftRun.Expand(rightRun.Length);
             if (runIndex == _stackSize - 3)
                 _sortRuns[runIndex + 1] = _sortRuns[runIndex + 2];

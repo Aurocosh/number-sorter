@@ -6,11 +6,11 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Factories.Sort
 {
-    public class StrandMergeSortFactory : GenericSortFactory
+    public class StrandSortFactory : GenericSortFactory
     {
         private ILocalMergeFactory LocalMergeFactory { get; }
 
-        public StrandMergeSortFactory(ILocalMergeFactory localMergeFactory)
+        public StrandSortFactory(ILocalMergeFactory localMergeFactory)
         {
             LocalMergeFactory = localMergeFactory;
         }
