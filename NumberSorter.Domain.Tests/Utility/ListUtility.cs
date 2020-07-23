@@ -17,5 +17,23 @@ namespace NumberSorter.Domain.Tests
             }
             return true;
         }
+
+        public static bool IsSortedValuesValid<T>(IList<T> input, IList<T> result, IComparer<T> comparer)
+        {
+            var sorted = new List<T>(input);
+            sorted.Sort(comparer);
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                var first = sorted[i];
+                var second = result[i];
+
+                int comparassion = comparer.Compare(first, second);
+                if (comparassion != 0)
+                    return false;
+            }
+
+            return true;
+        }
     }
 }

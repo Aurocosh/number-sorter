@@ -209,6 +209,12 @@ namespace NumberSorter.Domain.Logic
                         var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2));
                         return new StrandSortFactory(merge);
                     }
+                case ComparassionAlgorhythmType.DualStrandSort:
+                    {
+                        var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2));
+                        var merger = new LinkedListMergerFactory(merge);
+                        return new DualStrandSortFactory(merger);
+                    }
                 case ComparassionAlgorhythmType.StrandMergerSort:
                     {
                         var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2));

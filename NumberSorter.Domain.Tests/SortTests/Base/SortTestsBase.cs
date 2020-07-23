@@ -73,9 +73,13 @@ namespace NumberSorter.Domain.Tests.SortTests.Base
                 _integerSort.Sort(result);
             else
                 _sort.Sort(result);
+
             bool fullySorted = ListUtility.IsSorted(result, _comparer);
-            var message = GetResultMessage(fullySorted, input, result);
-            Assert.True(fullySorted, message);
+            bool validSortedValues = ListUtility.IsSortedValuesValid(input, result, _comparer);
+            bool sorted = fullySorted && validSortedValues;
+
+            var message = GetResultMessage(sorted && validSortedValues, input, result);
+            Assert.True(sorted, message);
         }
 
         private static string GetResultMessage(bool isFullySorted, IList<int> input, IList<int> result)
