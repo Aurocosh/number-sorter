@@ -73,6 +73,8 @@ namespace NumberSorter.Domain.Logic
             _nameDictionary.Add(ComparassionAlgorhythmType.StableQuickSortCustom, "Stable quick sort (Custom)");
             _nameDictionary.Add(ComparassionAlgorhythmType.DualPivotQuickSort, "Dual pivot quick sort");
             _nameDictionary.Add(ComparassionAlgorhythmType.DualPivotQuickSortCustom, "Dual pivot quick sort (Custom)");
+
+            _nameDictionary.Add(ComparassionAlgorhythmType.StrandSort, "Strand sort");
         }
 
         public static string GetName(ComparassionAlgorhythmType algorhythmType)

@@ -17,14 +17,13 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
 
         public override void Merge(IList<T> list, SortRun firstRun, SortRun secondRun)
         {
-            int combinedLength = firstRun.Length + secondRun.Length;
-            if (combinedLength < 2)
+            if (firstRun.Length == 0 || secondRun.Length == 0)
                 return;
             int edgeComparassion = Compare(list, firstRun.LastIndex, secondRun.FirstIndex);
             if (edgeComparassion <= 0)
                 return;
 
-            if (combinedLength == 2 && edgeComparassion > 0)
+            if (firstRun.Length + secondRun.Length == 2 && edgeComparassion > 0)
             {
                 list.Swap(firstRun.FirstIndex, secondRun.FirstIndex);
                 return;
