@@ -119,6 +119,7 @@
     <Compile Include="RotationTests\InversionInPlaceRotationTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\Strand\StrandSortMergerTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\Strand\DualStrandSortTests.cs" />
+    <Compile Include="SortTests\ComparassionSorts\Strand\LinkedListStrandSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\Strand\StrandSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\DualPivotQuickSort\DualPivotQuickSortCutoffTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\DualPivotQuickSort\DualPivotQuickSortTests.cs" />
