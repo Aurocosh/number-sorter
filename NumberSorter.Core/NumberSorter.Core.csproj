@@ -82,6 +82,7 @@
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\StrandSort\DualStrandSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\StrandSort\LinkedListStrandSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\StrandSort\StrandInPlaceSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\StrandSort\StrandFixedBufferSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\StrandSort\StrandSortMerger.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\StrandSort\StrandSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\MergeSort\RecursiveMergeSort.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="Logic\Factories\SortRunLocator\SimpleRunLocatorFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Base\ISortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Strand\DualStrandSortFactory.cs" />
+    <Compile Include="Logic\Factories\Sort\Strand\StrandFixedBufferSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Strand\StrandMergerSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Strand\StrandInPlaceSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Strand\StrandSortFactory.cs" />

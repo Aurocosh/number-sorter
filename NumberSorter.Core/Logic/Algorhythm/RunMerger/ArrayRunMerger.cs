@@ -17,7 +17,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
             _list = list;
             _stackSize = 0;
 
-            int stackMaxLength = (int)Math.Ceiling(Math.Log(list.Count, 2));
+            int stackMaxLength = (int)Math.Max(4, Math.Ceiling(Math.Log(list.Count, 2)));
             _sortRuns = new SortRun[stackMaxLength];
 
             _localMergeAlgorhythm = localMergeAlgorhythm;

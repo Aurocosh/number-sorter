@@ -72,5 +72,6 @@
         DualStrandSort,
         StrandMergerSort,
         StrandInPlaceSort,
+        StrandFixedBufferSort,
     }
 }

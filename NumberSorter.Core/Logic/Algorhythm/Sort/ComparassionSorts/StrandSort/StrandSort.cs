@@ -20,8 +20,8 @@ namespace NumberSorter.Core.Logic.Algorhythm
             var buffer = new T[bufferMaxSize];
 
             int resultSize = 0;
-            int elementsInSource = length;
-            while (elementsInSource > 0)
+            int elementsUnsorted = length;
+            while (elementsUnsorted > 0)
             {
                 T nextInBuffer = list[0];
                 buffer[0] = nextInBuffer;
@@ -29,8 +29,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 int bufferIndex = 1;
                 int sourceNextIndex = 1;
                 int sourceTargetIndex = 0;
-                int sourceLimitIndex = elementsInSource;
-
+                int sourceLimitIndex = startingIndex + elementsUnsorted;
                 while (sourceNextIndex < sourceLimitIndex)
                 {
                     T nextInSource = list[sourceNextIndex++];
@@ -46,12 +45,12 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 }
 
                 int bufferSize = bufferIndex;
-                elementsInSource -= bufferSize;
+                elementsUnsorted -= bufferSize;
 
-                ListUtility.Copy(buffer, 0, list, startingIndex + elementsInSource, bufferSize);
+                ListUtility.Copy(buffer, 0, list, startingIndex + elementsUnsorted, bufferSize);
 
-                var leftRun = new SortRun(startingIndex + elementsInSource, bufferSize);
-                var rightRun = new SortRun(startingIndex + elementsInSource + bufferSize, resultSize);
+                var leftRun = new SortRun(startingIndex + elementsUnsorted, bufferSize);
+                var rightRun = new SortRun(startingIndex + elementsUnsorted + bufferSize, resultSize);
 
                 LocalMergeAlgorhythm.Merge(list, leftRun, rightRun);
 
