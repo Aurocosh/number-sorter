@@ -21,19 +21,18 @@ namespace NumberSorter.Core.Logic.Algorhythm
             var buffer = new T[bufferMaxSize];
 
             int resultSize = 0;
-            int elementsUnsorted = length;
             int firstUnsortedIndex = startingIndex;
-            while (elementsUnsorted > 0)
+            int lastUnsortedIndex = startingIndex + length - 1;
+            while (firstUnsortedIndex <= lastUnsortedIndex)
             {
                 T nextValue = list[firstUnsortedIndex];
 
                 int bufferIndex = 0;
                 int nextUnsortedIndex = firstUnsortedIndex + 1;
                 int unsortedTargetIndex = nextUnsortedIndex;
-                int unsortedIndexLimit = startingIndex + length;
                 int bufferIndexLimit = bufferMaxSize;
 
-                while (nextUnsortedIndex < unsortedIndexLimit)
+                while (nextUnsortedIndex <= lastUnsortedIndex)
                 {
                     T nextUnsorted = list[nextUnsortedIndex];
                     if (Compare(nextUnsorted, nextValue) >= 0)
@@ -64,7 +63,6 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 LocalMergeAlgorhythm.Merge(list, leftRun, rightRun);
 
                 resultSize += newRunSize;
-                elementsUnsorted -= newRunSize;
                 firstUnsortedIndex += newRunSize;
             }
         }

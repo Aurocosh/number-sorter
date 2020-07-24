@@ -16,24 +16,22 @@ namespace NumberSorter.Core.Logic.Algorhythm
         public override void Sort(IList<T> list, int startingIndex, int length)
         {
             int resultSize = 0;
-            int elementsUnsorted = length;
-            int nextUnsortedIndex = startingIndex;
-            while (elementsUnsorted > 0)
+            int firstUnsortedIndex = startingIndex;
+            int lastUnsortedIndex = startingIndex + length - 1;
+            while (firstUnsortedIndex <= lastUnsortedIndex)
             {
-                T nextValue = list[nextUnsortedIndex];
-                int sourceNextIndex = nextUnsortedIndex + 1;
-                int targetIndex = sourceNextIndex;
-                int sourceLimitIndex = nextUnsortedIndex + elementsUnsorted;
-
-                while (sourceNextIndex < sourceLimitIndex)
+                T nextValue = list[firstUnsortedIndex];
+                int nextUnsortedIndex = firstUnsortedIndex + 1;
+                int targetIndex = nextUnsortedIndex;
+                while (nextUnsortedIndex < lastUnsortedIndex)
                 {
-                    T nextUnsorted = list[sourceNextIndex];
+                    T nextUnsorted = list[nextUnsortedIndex];
                     if (Compare(nextUnsorted, nextValue) >= 0)
                     {
-                        int toIndex = sourceNextIndex;
+                        int toIndex = nextUnsortedIndex;
                         if (toIndex != targetIndex)
                         {
-                            int fromIndex = sourceNextIndex - 1;
+                            int fromIndex = nextUnsortedIndex - 1;
                             do
                             {
                                 list[toIndex--] = list[fromIndex--];
@@ -43,18 +41,17 @@ namespace NumberSorter.Core.Logic.Algorhythm
                         list[targetIndex++] = nextUnsorted;
                         nextValue = nextUnsorted;
                     }
-                    sourceNextIndex++;
+                    nextUnsortedIndex++;
                 }
 
-                int newRunSize = targetIndex - nextUnsortedIndex;
+                int newRunSize = targetIndex - firstUnsortedIndex;
 
                 var leftRun = new SortRun(startingIndex, resultSize);
-                var rightRun = new SortRun(nextUnsortedIndex, newRunSize);
+                var rightRun = new SortRun(firstUnsortedIndex, newRunSize);
 
                 LocalMergeAlgorhythm.Merge(list, leftRun, rightRun);
 
-                nextUnsortedIndex += newRunSize;
-                elementsUnsorted -= newRunSize;
+                firstUnsortedIndex += newRunSize;
                 resultSize += newRunSize;
             }
         }

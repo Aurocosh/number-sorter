@@ -20,7 +20,6 @@ namespace NumberSorter.Core.Logic.Algorhythm
             int bufferMaxSize = list.Count;
             var buffer = new T[bufferMaxSize];
 
-            int elementsUnsorted = length;
             int firstUnsortedIndex = startingIndex;
             int lastBufferIndex = bufferMaxSize - 1;
             int lastUnsortedIndex = startingIndex + length - 1;
@@ -28,7 +27,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
             int startingBufferIndex = lastBufferIndex - 1;
             int startingUnsortedIndex = lastUnsortedIndex - 1;
 
-            while (elementsUnsorted > 0)
+            while (firstUnsortedIndex <= lastUnsortedIndex)
             {
                 T nextInBuffer = list[lastUnsortedIndex];
                 buffer[lastBufferIndex] = nextInBuffer;
@@ -51,8 +50,6 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 }
 
                 int bufferSize = lastBufferIndex - bufferIndex;
-                elementsUnsorted -= bufferSize;
-
                 ListUtility.Copy(buffer, bufferIndex + 1, list, firstUnsortedIndex, bufferSize);
 
                 var rightRun = new SortRun(firstUnsortedIndex, bufferSize);
