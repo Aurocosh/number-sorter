@@ -19,42 +19,49 @@ namespace NumberSorter.Core.Logic.Algorhythm
             int bufferMaxSize = list.Count;
             var buffer = new T[bufferMaxSize];
 
-            int resultSize = 0;
+            int elementsSorted = 0;
             int elementsUnsorted = length;
+            int firstUnsortedIndex = startingIndex;
+            int lastBufferIndex = bufferMaxSize - 1;
+            int lastUnsortedIndex = startingIndex + length - 1;
+
+            int startingBufferIndex = lastBufferIndex - 1;
+            int startingUnsortedIndex = lastUnsortedIndex - 1;
+
             while (elementsUnsorted > 0)
             {
-                T nextInBuffer = list[0];
-                buffer[0] = nextInBuffer;
+                T nextInBuffer = list[lastUnsortedIndex];
+                buffer[lastBufferIndex] = nextInBuffer;
 
-                int bufferIndex = 1;
-                int sourceNextIndex = 1;
-                int sourceTargetIndex = 0;
-                int sourceLimitIndex = startingIndex + elementsUnsorted;
-                while (sourceNextIndex < sourceLimitIndex)
+                int bufferIndex = startingBufferIndex;
+                int nextUnsortedIndex = startingUnsortedIndex;
+                int unsortedTargetIndex = lastUnsortedIndex;
+                while (nextUnsortedIndex >= firstUnsortedIndex)
                 {
-                    T nextInSource = list[sourceNextIndex++];
-                    if (Compare(nextInSource, nextInBuffer) >= 0)
+                    T nextUnsorted = list[nextUnsortedIndex--];
+                    if (Compare(nextUnsorted, nextInBuffer) <= 0)
                     {
-                        buffer[bufferIndex++] = nextInSource;
-                        nextInBuffer = nextInSource;
+                        buffer[bufferIndex--] = nextUnsorted;
+                        nextInBuffer = nextUnsorted;
                     }
                     else
                     {
-                        list[sourceTargetIndex++] = nextInSource;
+                        list[unsortedTargetIndex--] = nextUnsorted;
                     }
                 }
 
-                int bufferSize = bufferIndex;
+                int bufferSize = lastBufferIndex - bufferIndex;
                 elementsUnsorted -= bufferSize;
 
-                ListUtility.Copy(buffer, 0, list, startingIndex + elementsUnsorted, bufferSize);
+                ListUtility.Copy(buffer, bufferIndex + 1, list, firstUnsortedIndex, bufferSize);
 
-                var leftRun = new SortRun(startingIndex + elementsUnsorted, bufferSize);
-                var rightRun = new SortRun(startingIndex + elementsUnsorted + bufferSize, resultSize);
+                var leftRun = new SortRun(startingIndex, elementsSorted);
+                var rightRun = new SortRun(firstUnsortedIndex, bufferSize);
 
                 LocalMergeAlgorhythm.Merge(list, leftRun, rightRun);
 
-                resultSize += bufferSize;
+                elementsSorted += bufferSize;
+                firstUnsortedIndex += bufferSize;
             }
         }
     }

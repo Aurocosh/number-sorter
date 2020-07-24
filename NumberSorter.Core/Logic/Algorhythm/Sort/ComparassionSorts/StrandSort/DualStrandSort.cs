@@ -15,80 +15,78 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
         public override void Sort(IList<T> list, int startingIndex, int length)
         {
+            var merger = RunMergerFactory.GetMerger(Comparer, list);
+
             int bufferMaxSize = list.Count;
             var buffer = new T[bufferMaxSize];
 
-            var merger = RunMergerFactory.GetMerger(Comparer, list);
-
-            int resultSize = 0;
             int elementsUnsorted = length;
+            int firstUnsortedIndex = startingIndex;
+            int lastBufferIndex = bufferMaxSize - 1;
+            int lastUnsortedIndex = startingIndex + length - 1;
+
+            int startingBufferIndex = lastBufferIndex - 1;
+            int startingUnsortedIndex = lastUnsortedIndex - 1;
+
             while (elementsUnsorted > 0)
             {
-                T nextInBuffer = list[startingIndex];
-                buffer[0] = nextInBuffer;
+                T nextInBuffer = list[lastUnsortedIndex];
+                buffer[lastBufferIndex] = nextInBuffer;
 
-                int bufferIndex = 1;
-                int sourceNextIndex = 1;
-                int sourceTargetIndex = startingIndex;
-                int sourceIndexLimit = elementsUnsorted;
-
-                while (sourceNextIndex < sourceIndexLimit)
+                int bufferIndex = startingBufferIndex;
+                int nextUnsortedIndex = startingUnsortedIndex;
+                int unsortedTargetIndex = lastUnsortedIndex;
+                while (nextUnsortedIndex >= firstUnsortedIndex)
                 {
-                    T nextInSource = list[sourceNextIndex++];
-                    if (Compare(nextInSource, nextInBuffer) >= 0)
+                    T nextUnsorted = list[nextUnsortedIndex--];
+                    if (Compare(nextUnsorted, nextInBuffer) <= 0)
                     {
-                        buffer[bufferIndex++] = nextInSource;
-                        nextInBuffer = nextInSource;
+                        buffer[bufferIndex--] = nextUnsorted;
+                        nextInBuffer = nextUnsorted;
                     }
                     else
                     {
-                        list[sourceTargetIndex++] = nextInSource;
+                        list[unsortedTargetIndex--] = nextUnsorted;
                     }
                 }
 
-                int bufferLength = bufferIndex;
-
-                elementsUnsorted -= bufferLength;
-                ListUtility.Copy(buffer, 0, list, startingIndex + elementsUnsorted, bufferLength);
-                var directRun = new SortRun(startingIndex + elementsUnsorted, bufferLength);
+                int bufferSize = lastBufferIndex - bufferIndex;
+                ListUtility.Copy(buffer, bufferIndex + 1, list, firstUnsortedIndex, bufferSize);
+                var directRun = new SortRun(firstUnsortedIndex, bufferSize);
                 merger.Push(directRun);
 
-                resultSize += bufferLength;
+                elementsUnsorted -= bufferSize;
+                firstUnsortedIndex += bufferSize;
 
                 if (elementsUnsorted > 0)
                 {
-                    int bufferLast = buffer.Length - 1;
+                    nextInBuffer = list[lastUnsortedIndex];
+                    buffer[0] = nextInBuffer;
 
-                    nextInBuffer = list[startingIndex];
-                    buffer[bufferLast] = nextInBuffer;
-
-                    bufferIndex = bufferLast - 1;
-                    sourceNextIndex = 1;
-                    sourceTargetIndex = startingIndex;
-                    sourceIndexLimit = elementsUnsorted;
-
-                    while (sourceNextIndex < sourceIndexLimit)
+                    bufferIndex = 1;
+                    nextUnsortedIndex = startingUnsortedIndex;
+                    unsortedTargetIndex = lastUnsortedIndex;
+                    while (nextUnsortedIndex >= firstUnsortedIndex)
                     {
-                        T nextInSource = list[sourceNextIndex++];
-                        if (Compare(nextInSource, nextInBuffer) <= 0)
+                        T nextUnsorted = list[nextUnsortedIndex--];
+                        if (Compare(nextUnsorted, nextInBuffer) >= 0)
                         {
-                            buffer[bufferIndex--] = nextInSource;
-                            nextInBuffer = nextInSource;
+                            buffer[bufferIndex++] = nextUnsorted;
+                            nextInBuffer = nextUnsorted;
                         }
                         else
                         {
-                            list[sourceTargetIndex++] = nextInSource;
+                            list[unsortedTargetIndex--] = nextUnsorted;
                         }
                     }
 
-                    bufferLength = bufferLast - bufferIndex;
-
-                    elementsUnsorted -= bufferLength;
-                    ListUtility.Copy(buffer, bufferIndex + 1, list, startingIndex + elementsUnsorted, bufferLength);
-                    var invertedRun = new SortRun(startingIndex + elementsUnsorted, bufferLength);
+                    bufferSize = bufferIndex;
+                    ListUtility.Copy(buffer, 0, list, firstUnsortedIndex, bufferSize);
+                    var invertedRun = new SortRun(firstUnsortedIndex, bufferSize);
                     merger.Push(invertedRun);
 
-                    resultSize += bufferLength;
+                    elementsUnsorted -= bufferSize;
+                    firstUnsortedIndex += bufferSize;
                 }
             }
 
