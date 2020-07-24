@@ -221,6 +221,11 @@ namespace NumberSorter.Domain.Logic
                         var merger = new LinkedListMergerFactory(merge);
                         return new StrandMergerSortFactory(merger);
                     }
+                case ComparassionAlgorhythmType.StrandInPlaceSort:
+                    {
+                        var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2));
+                        return new StrandInPlaceSortFactory(merge);
+                    }
 
                 default:
                     return null;

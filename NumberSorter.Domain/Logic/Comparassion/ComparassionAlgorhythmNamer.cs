@@ -77,6 +77,7 @@ namespace NumberSorter.Domain.Logic
             _nameDictionary.Add(ComparassionAlgorhythmType.StrandSort, "Strand sort");
             _nameDictionary.Add(ComparassionAlgorhythmType.DualStrandSort, "Dual strand sort");
             _nameDictionary.Add(ComparassionAlgorhythmType.StrandMergerSort, "Strand sort (Merger)");
+            _nameDictionary.Add(ComparassionAlgorhythmType.StrandInPlaceSort, "Strand sort (In place)");
         }
 
         public static string GetName(ComparassionAlgorhythmType algorhythmType)
