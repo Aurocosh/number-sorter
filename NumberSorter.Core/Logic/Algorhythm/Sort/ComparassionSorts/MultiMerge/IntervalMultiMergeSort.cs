@@ -70,28 +70,23 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 }
 
                 int searchAreaLength = runIndexLimit - nextRunIndex;
-                int indexToInsert = sortRunPositionLocator.FindFirstPosition(sortRuns, newRun, nextRunIndex, searchAreaLength) - 1;
+                int newIndexOfCurrent = sortRunPositionLocator.FindLastPosition(sortRuns, newRun, nextRunIndex, searchAreaLength) - 1;
 
-                int newRunIndex = lowRunIndex;
-                while (newRunIndex != indexToInsert)
-                {
-                    sortRuns.Swap(newRunIndex, newRunIndex + 1);
-                    newRunIndex++;
-                }
+                var plannedRun = sortRuns[lowRunIndex];
+
+                int targetIndex = lowRunIndex;
+                int sourceIndex = targetIndex + 1;
+                while (targetIndex < newIndexOfCurrent)
+                    sortRuns[targetIndex++] = sortRuns[sourceIndex++];
+
+                sortRuns[newIndexOfCurrent] = plannedRun;
+
+                //var firstsaf = sortRuns.Select(x => list[x.FirstIndex].ToString()).ToList();
+                //var firStraf = string.Join(",", firstsaf);
             }
 
             ListUtility.Copy(list, nextSortRun.FirstIndex, temporaryArray, index, nextSortRun.Length);
             ListUtility.Copy(temporaryArray, 0, list, 0, length);
-        }
-
-        private int FindEndOfRun(IList<T> list, SortRun sortRun, T upperLimit)
-        {
-            int index = sortRun.FirstIndex;
-            int indexLimit = index + sortRun.Length;
-
-            while (index != indexLimit && Compare(upperLimit, list[index]) >= 0)
-                index++;
-            return index - 1;
         }
 
         List<SortRun> FindSortRuns(IList<T> list, int startingIndex, int length)

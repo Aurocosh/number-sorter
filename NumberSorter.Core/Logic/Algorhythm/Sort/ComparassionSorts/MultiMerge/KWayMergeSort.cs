@@ -125,14 +125,16 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 }
 
                 int searchAreaLength = runIndexLimit - nextRunIndex;
-                int indexToInsert = sortRunPositionLocator.FindLastPosition(sortRuns, newRun, nextRunIndex, searchAreaLength) - 1;
+                int newIndexOfCurrent = sortRunPositionLocator.FindLastPosition(sortRuns, newRun, nextRunIndex, searchAreaLength) - 1;
 
-                int newRunIndex = lowRunIndex;
-                while (newRunIndex != indexToInsert)
-                {
-                    sortRuns.Swap(newRunIndex, newRunIndex + 1);
-                    newRunIndex++;
-                }
+                var plannedRun = sortRuns[lowRunIndex];
+
+                int targetIndex = lowRunIndex;
+                int sourceIndex = targetIndex + 1;
+                while (targetIndex < newIndexOfCurrent)
+                    sortRuns[targetIndex++] = sortRuns[sourceIndex++];
+
+                sortRuns[newIndexOfCurrent] = plannedRun;
             }
 
             ListUtility.Copy(list, nextSortRun.FirstIndex, _buffer, index, nextSortRun.Length);

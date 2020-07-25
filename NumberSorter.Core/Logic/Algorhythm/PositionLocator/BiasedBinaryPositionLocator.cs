@@ -1,5 +1,4 @@
-﻿using NumberSorter.Core.Logic.Algorhythm.PositionLocator.Base;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm.PositionLocator
 {

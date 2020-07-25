@@ -29,10 +29,7 @@ namespace NumberSorter.Core.Logic.Algorhythm.PositionLocator
         protected int BinarySearchFirstHi(IList<T> list, T elementToInsert, int low, int high)
         {
             if (high <= low)
-            {
-                Console.WriteLine("low: " + low);
                 return (Compare(list[high], elementToInsert) < 0) ? high + 1 : high;
-            }
 
             int index = (low + high) / 2;
             int comparassion = Compare(list[index], elementToInsert);

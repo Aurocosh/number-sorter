@@ -88,9 +88,9 @@
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\MergeSort\RecursiveMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\MergeSort\BottomUpMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\RunMerger\LinkedListRunMerger.cs" />
-    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\StableQuickSort.cs" />
-    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\QuickSort.cs" />
-    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\DualPivotQuickSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\QuickSort\StableQuickSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\QuickSort\QuickSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\QuickSort\DualPivotQuickSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\IntegerSorts\AmericanFlagSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\IntegerSorts\BitLSDRadixSort\BitLSDOptimizedRadixSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\IntegerSorts\BitMSDRadixSort\BitMSDOptimizedRadixSort.cs" />
@@ -122,9 +122,9 @@
     <Compile Include="Logic\Algorhythm\Rotation\InversionInPlaceRotation.cs" />
     <Compile Include="Logic\Algorhythm\Rotation\RecursiveInPlaceRotation.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\SmoothSort.cs" />
-    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\KWayMergeSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\MultiMerge\KWayMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\JHeapSort.cs" />
-    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\IntervalMultiMergeSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\MultiMerge\IntervalMultiMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\LocalMerge\IntervalMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\ParallelQuickSort.cs" />
     <Compile Include="Logic\Factories\LocalMerge\GallopMergeFactory.cs" />
@@ -198,7 +198,7 @@
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\CombSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\CycleSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\CircleSort.cs" />
-    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\MultiMergeSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\MultiMerge\MultiMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\PancakeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\ShellSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\GnomeSort.cs" />
@@ -220,7 +220,7 @@
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\OpRecursiveMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\PivotSelector\MedianThreePivotSelector.cs" />
     <Compile Include="Logic\Algorhythm\PivotSelector\RandomPivotSelector.cs" />
-    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\QuickSortLL.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\QuickSort\QuickSortLL.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\ArrayMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\TimSort.cs" />
     <Compile Include="Logic\Comparer\IntComparer.cs" />

@@ -4,6 +4,8 @@ using NumberSorter.Core.Logic.Factories.PositionLocator.Base;
 using NumberSorter.Core.Logic.Factories.Sort.Base;
 using NumberSorter.Core.Logic.Utility;
 using System.Collections.Generic;
+using System.Linq;
+using System.Xml;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
@@ -26,50 +28,63 @@ namespace NumberSorter.Core.Logic.Algorhythm
             if (sortRuns.Count < 2)
                 return;
 
-            var temporaryArray = new T[length];
+            var buffer = new T[length];
 
             var sortRunComparer = Comparer<SortRun>.Create((x, y) => Compare(list[x.FirstIndex], list[y.FirstIndex]));
             RunSortFactory.Sort(sortRuns, sortRunComparer);
 
-            int currentRunIndex = 0;
+            int lowRunIndex = 0;
             int runIndexLimit = sortRuns.Count;
+            int lastRunIndex = sortRuns.Count - 1;
 
-            int index = startingIndex;
+            int bufferIndex = startingIndex;
             var positionLocator = PositionLocatorFactory.GetPositionLocator(sortRunComparer);
 
-            while (currentRunIndex != runIndexLimit)
+            while (lowRunIndex != lastRunIndex)
             {
-                var lowestRun = sortRuns[currentRunIndex];
-                temporaryArray[index++] = list[lowestRun.FirstIndex];
+                //var firsts = sortRuns.Select(x => list[x.FirstIndex].ToString()).ToList();
+                //var firStr = string.Join(",", firsts);
 
-                var newRun = new SortRun(lowestRun.FirstIndex + 1, lowestRun.Length - 1);
-                sortRuns[currentRunIndex] = newRun;
+                var lowestRun = sortRuns[lowRunIndex];
+
+                int nextRunIndex = lowRunIndex + 1;
+                var nextRun = sortRuns[nextRunIndex];
+                var nextRunValue = list[nextRun.FirstIndex];
+
+                int currentRunValueIndex = lowestRun.FirstIndex;
+                int currentRunIndexLimit = lowestRun.FirstIndex + lowestRun.Length;
+                while (currentRunValueIndex < currentRunIndexLimit && Compare(list[currentRunValueIndex], nextRunValue) <= 0)
+                    buffer[bufferIndex++] = list[currentRunValueIndex++];
+
+                int newRunLength = currentRunIndexLimit - currentRunValueIndex;
+                var newRun = new SortRun(currentRunValueIndex, newRunLength);
+                sortRuns[lowRunIndex] = newRun;
 
                 if (newRun.Length == 0)
                 {
-                    currentRunIndex++;
+                    lowRunIndex++;
                     continue;
                 }
 
-                int nextRunIndex = currentRunIndex + 1;
-                if (nextRunIndex != runIndexLimit)
-                {
-                    var nextRun = sortRuns[nextRunIndex];
-                    if (sortRunComparer.Compare(newRun, nextRun) > 0)
-                    {
-                        int searchAreaLength = runIndexLimit - nextRunIndex;
-                        int indexToInsert = positionLocator.FindFirstPosition(sortRuns, newRun, nextRunIndex, searchAreaLength) - 1;
+                //var firsts2 = sortRuns.Select(x => list[x.FirstIndex].ToString()).ToList();
+                //var firStr2 = string.Join(",", firsts2);
 
-                        int newRunIndex = currentRunIndex;
-                        while (newRunIndex != indexToInsert)
-                        {
-                            sortRuns.Swap(newRunIndex, newRunIndex + 1);
-                            newRunIndex++;
-                        }
-                    }
-                }
+                int searchAreaLength = runIndexLimit - nextRunIndex;
+                int newIndexOfCurrent = positionLocator.FindLastPosition(sortRuns, newRun, nextRunIndex, searchAreaLength) - 1;
+
+                var plannedRun = sortRuns[lowRunIndex];
+
+                int targetIndex = lowRunIndex;
+                int sourceIndex = targetIndex + 1;
+                while (targetIndex < newIndexOfCurrent)
+                    sortRuns[targetIndex++] = sortRuns[sourceIndex++];
+
+                sortRuns[newIndexOfCurrent] = plannedRun;
             }
-            ListUtility.Copy(temporaryArray, 0, list, 0, length);
+
+            var lastSortRun = sortRuns[lastRunIndex];
+            ListUtility.Copy(list, lastSortRun.FirstIndex, buffer, bufferIndex, lastSortRun.Length);
+            ListUtility.Copy(buffer, 0, list, 0, length);
         }
 
         List<SortRun> FindSortRuns(IList<T> list, int startingIndex, int length)
