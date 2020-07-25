@@ -15,11 +15,15 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 var currentValue = list[index];
                 int indexToInsert = BinarySearch(list, currentValue, startingIndex, index - 1);
 
-                int currentIndex = index;
-                while (currentIndex != indexToInsert)
+                if (index != indexToInsert)
                 {
-                    list.Swap(currentIndex - 1, currentIndex);
-                    currentIndex--;
+                    int targetIndex = index;
+                    int sourceIndex = targetIndex - 1;
+
+                    while (targetIndex != indexToInsert)
+                        list[targetIndex--] = list[sourceIndex--];
+
+                    list[indexToInsert] = currentValue;
                 }
             }
         }
