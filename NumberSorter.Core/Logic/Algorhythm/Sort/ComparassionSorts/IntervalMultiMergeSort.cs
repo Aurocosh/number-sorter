@@ -4,6 +4,7 @@ using NumberSorter.Core.Logic.Factories.PositionLocator.Base;
 using NumberSorter.Core.Logic.Factories.Sort.Base;
 using NumberSorter.Core.Logic.Utility;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
@@ -52,12 +53,15 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 int start = lowSortRun.FirstIndex;
                 int end = elementPositionLocator.FindLastPosition(list, nextLimit, lowSortRun.FirstIndex, lowSortRun.Length);
 
-                int elementsToCopy = end - start + 1;
+                int elementsToCopy = end - start;
                 ListUtility.Copy(list, start, temporaryArray, index, elementsToCopy);
                 index += elementsToCopy;
 
                 var newRun = new SortRun(lowSortRun.FirstIndex + elementsToCopy, lowSortRun.Length - elementsToCopy);
                 sortRuns[lowRunIndex] = newRun;
+
+                //var firsts = sortRuns.Select(x => list[x.FirstIndex].ToString()).ToList();
+                //var firStr = string.Join(",", firsts);
 
                 if (newRun.Length == 0)
                 {
@@ -66,7 +70,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 }
 
                 int searchAreaLength = runIndexLimit - nextRunIndex;
-                int indexToInsert = sortRunPositionLocator.FindFirstPosition(sortRuns, newRun, nextRunIndex, searchAreaLength);
+                int indexToInsert = sortRunPositionLocator.FindFirstPosition(sortRuns, newRun, nextRunIndex, searchAreaLength) - 1;
 
                 int newRunIndex = lowRunIndex;
                 while (newRunIndex != indexToInsert)

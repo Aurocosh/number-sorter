@@ -2,6 +2,7 @@
 using NumberSorter.Core.Logic.Algorhythm.PositionLocator.Base;
 using NumberSorter.Core.Logic.Factories.PositionLocator.Base;
 using NumberSorter.Core.Logic.Utility;
+using System;
 using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
@@ -10,7 +11,7 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
     {
         private IPositionLocator<T> PositionLocator { get; }
 
-        public IntervalMerge(IComparer<T> comparer, IPositionLocatorFactory positionLocatorFactory) : base(comparer)
+        public IntervalMerge(IComparer<T> comparer, IPositionLocatorFactory positionLocatorFactory, IList<T> list) : base(comparer)
         {
             PositionLocator = positionLocatorFactory.GetPositionLocator(comparer);
         }
@@ -38,7 +39,7 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
             T nextFromSecond = list[secondIndex];
             int firstPosition = PositionLocator.FindLastPosition(list, nextFromSecond, firstIndex, unsortedInFirst);
 
-            int skipCount = firstPosition - firstIndex + 1;
+            int skipCount = firstPosition - firstIndex;
             firstIndex += skipCount;
             unsortedInFirst -= skipCount;
 
@@ -49,12 +50,13 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
             {
                 T nextFromFirst = temporaryArray[temporaryIndex];
                 int secondPosition = PositionLocator.FindLastPosition(list, nextFromFirst, secondIndex, unsortedInSecond);
-                if (secondPosition >= secondIndex)
+                if (secondPosition > secondIndex)
                 {
-                    int copyCount = secondPosition - secondIndex + 1;
+                    int copyCount = secondPosition - secondIndex;
                     ListUtility.Copy(list, secondIndex, list, firstIndex, copyCount);
                     firstIndex += copyCount;
                     secondIndex += copyCount;
+
                     unsortedInSecond -= copyCount;
                     if (unsortedInSecond == 0)
                         break;
@@ -62,9 +64,9 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
 
                 nextFromSecond = list[secondIndex];
                 firstPosition = PositionLocator.FindLastPosition(temporaryArray, nextFromSecond, temporaryIndex, unsortedInFirst);
-                if (firstPosition >= temporaryIndex)
+                if (firstPosition > temporaryIndex)
                 {
-                    int copyCount = firstPosition - temporaryIndex + 1;
+                    int copyCount = firstPosition - temporaryIndex;
                     ListUtility.Copy(temporaryArray, temporaryIndex, list, firstIndex, copyCount);
                     firstIndex += copyCount;
                     temporaryIndex += copyCount;

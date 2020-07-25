@@ -1,20 +1,21 @@
-﻿using NumberSorter.Core.Logic.Algorhythm.LocalMerge.Base;
-using NumberSorter.Core.Logic.Factories.LocalMerge.Base;
+﻿using NumberSorter.Core.Logic.Factories.LocalMerge.Base;
 using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
     public class LinkedListStrandSort<T> : GenericSortAlgorhythm<T>
     {
-        private ILocalMergeAlgothythm<T> LocalMergeAlgorhythm { get; }
+        private ILocalMergeFactory LocalMergeFactory { get; }
 
         public LinkedListStrandSort(IComparer<T> comparer, ILocalMergeFactory localMergeFactory) : base(comparer)
         {
-            LocalMergeAlgorhythm = localMergeFactory.GetLocalMerge(comparer);
+            LocalMergeFactory = localMergeFactory;
         }
 
         public override void Sort(IList<T> list, int startingIndex, int length)
         {
+            var localMerge = LocalMergeFactory.GetLocalMerge(Comparer, list);
+
             var source = new LinkedList<T>();
             var buffer = new LinkedList<T>();
 
@@ -50,7 +51,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 foreach (var value in buffer)
                     list[targetIndex++] = value;
 
-                LocalMergeAlgorhythm.Merge(list, leftRun, rightRun);
+                localMerge.Merge(list, leftRun, rightRun);
 
                 resultSize += buffer.Count;
                 buffer.Clear();

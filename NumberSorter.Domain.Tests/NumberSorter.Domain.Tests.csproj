@@ -115,6 +115,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PositionTests\Base\PositionTestsBase.cs" />
+    <Compile Include="PositionTests\BiasedBinaryPositionTestsBaseTests.cs" />
+    <Compile Include="PositionTests\BinaryPositionTestsBaseTests.cs" />
+    <Compile Include="PositionTests\LinearPositionTestsBaseTests.cs" />
     <Compile Include="RotationTests\IntegerGenerators\Dynamic\RotationTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator.cs" />
     <Compile Include="RotationTests\InversionInPlaceRotationTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\Strand\StrandFixedBufferSortTests.cs" />

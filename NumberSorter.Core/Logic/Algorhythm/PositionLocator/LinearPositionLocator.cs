@@ -12,19 +12,19 @@ namespace NumberSorter.Core.Logic.Algorhythm.PositionLocator
             int index = runStart;
             int indexLimit = runStart + length;
 
-            while (index != indexLimit && Compare(element, list[index]) > 0)
+            while (index != indexLimit && Compare(list[index], element) < 0)
                 index++;
-            return index - 1;
+            return index;
         }
 
         public override int FindLastPosition(IList<T> list, T element, int runStart, int length)
         {
             int index = runStart;
-            int indexLimit = index + length;
+            int indexLimit = runStart + length;
 
-            while (index != indexLimit && Compare(element, list[index]) >= 0)
+            while (index != indexLimit && Compare(list[index], element) <= 0)
                 index++;
-            return index - 1;
+            return index;
         }
     }
 }

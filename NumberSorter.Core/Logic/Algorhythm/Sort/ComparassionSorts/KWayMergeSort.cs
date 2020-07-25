@@ -111,7 +111,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 int start = lowSortRun.FirstIndex;
                 int end = elementPositionLocator.FindLastPosition(list, nextLimit, lowSortRun.FirstIndex, lowSortRun.Length);
 
-                int elementsToCopy = end - start + 1;
+                int elementsToCopy = end - start;
                 ListUtility.Copy(list, start, _buffer, index, elementsToCopy);
                 index += elementsToCopy;
 
@@ -125,7 +125,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 }
 
                 int searchAreaLength = runIndexLimit - nextRunIndex;
-                int indexToInsert = sortRunPositionLocator.FindFirstPosition(sortRuns, newRun, nextRunIndex, searchAreaLength);
+                int indexToInsert = sortRunPositionLocator.FindLastPosition(sortRuns, newRun, nextRunIndex, searchAreaLength) - 1;
 
                 int newRunIndex = lowRunIndex;
                 while (newRunIndex != indexToInsert)

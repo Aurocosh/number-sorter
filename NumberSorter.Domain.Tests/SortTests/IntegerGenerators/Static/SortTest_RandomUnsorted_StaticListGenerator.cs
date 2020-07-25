@@ -11,6 +11,7 @@ namespace NumberSorter.Domain.Tests.SortTests.Base.IntegerGenerators.Static
         {
             _data = new List<object[]>
             {
+                new object[] {new List<int>(_list8)},
                 new object[] {new List<int>(_list1)},
                 new object[] {new List<int>(_list2)},
                 new object[] {new List<int>(_list3)},
@@ -19,7 +20,6 @@ namespace NumberSorter.Domain.Tests.SortTests.Base.IntegerGenerators.Static
 
                 new object[] {new List<int>(_list6)},
                 new object[] {new List<int>(_list7)},
-                new object[] {new List<int>(_list8)},
                 new object[] {new List<int>(_list9)},
                 new object[] {new List<int>(_list10)},
 

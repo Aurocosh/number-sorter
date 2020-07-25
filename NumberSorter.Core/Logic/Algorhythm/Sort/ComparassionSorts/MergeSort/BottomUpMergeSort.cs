@@ -1,5 +1,4 @@
-﻿using NumberSorter.Core.Logic.Algorhythm.LocalMerge.Base;
-using NumberSorter.Core.Logic.Factories.LocalMerge.Base;
+﻿using NumberSorter.Core.Logic.Factories.LocalMerge.Base;
 using System;
 using System.Collections.Generic;
 
@@ -7,11 +6,11 @@ namespace NumberSorter.Core.Logic.Algorhythm
 {
     public class BottomUpMergeSort<T> : GenericSortAlgorhythm<T>
     {
-        private ILocalMergeAlgothythm<T> LocalMergeAlgorhythm { get; }
+        private ILocalMergeFactory LocalMergeFactory { get; }
 
         public BottomUpMergeSort(IComparer<T> comparer, ILocalMergeFactory localMergeFactory) : base(comparer)
         {
-            LocalMergeAlgorhythm = localMergeFactory.GetLocalMerge(comparer);
+            LocalMergeFactory = localMergeFactory;
         }
 
         public override void Sort(IList<T> list, int startingIndex, int length)
@@ -28,13 +27,15 @@ namespace NumberSorter.Core.Logic.Algorhythm
             int listSize = list.Count;
             int limit = sortRun.FirstIndex + list.Count;
 
+            var localMerge = LocalMergeFactory.GetLocalMerge(Comparer, list);
+
             for (int runSize = 1; runSize < listSize; runSize += runSize)
             {
                 int step = runSize + runSize;
                 for (int startingIndex = sortRun.FirstIndex; startingIndex < limit - runSize; startingIndex += step)
                 {
                     int secondSize = Math.Min(runSize, listSize - (startingIndex + runSize));
-                    LocalMergeAlgorhythm.Merge(list, new SortRun(startingIndex, runSize), new SortRun(startingIndex + runSize, secondSize));
+                    localMerge.Merge(list, new SortRun(startingIndex, runSize), new SortRun(startingIndex + runSize, secondSize));
                 }
             }
         }

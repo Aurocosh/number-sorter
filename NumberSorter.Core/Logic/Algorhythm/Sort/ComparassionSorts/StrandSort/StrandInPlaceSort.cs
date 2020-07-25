@@ -6,15 +6,17 @@ namespace NumberSorter.Core.Logic.Algorhythm
 {
     public class StrandInPlaceSort<T> : GenericSortAlgorhythm<T>
     {
-        private ILocalMergeAlgothythm<T> LocalMergeAlgorhythm { get; }
+        private ILocalMergeFactory LocalMergeFactory { get; }
 
         public StrandInPlaceSort(IComparer<T> comparer, ILocalMergeFactory localMergeFactory) : base(comparer)
         {
-            LocalMergeAlgorhythm = localMergeFactory.GetLocalMerge(comparer);
+            LocalMergeFactory = localMergeFactory;
         }
 
         public override void Sort(IList<T> list, int startingIndex, int length)
         {
+            var localMerge = LocalMergeFactory.GetLocalMerge(Comparer, list);
+
             int resultSize = 0;
             int firstUnsortedIndex = startingIndex;
             int lastUnsortedIndex = startingIndex + length - 1;
@@ -49,7 +51,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 var leftRun = new SortRun(startingIndex, resultSize);
                 var rightRun = new SortRun(firstUnsortedIndex, newRunSize);
 
-                LocalMergeAlgorhythm.Merge(list, leftRun, rightRun);
+                localMerge.Merge(list, leftRun, rightRun);
 
                 firstUnsortedIndex += newRunSize;
                 resultSize += newRunSize;

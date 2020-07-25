@@ -16,7 +16,7 @@ namespace NumberSorter.Core.Logic.Factories.LocalMerge
 
         public IRunMerger GetMerger<T>(IComparer<T> comparer, IList<T> list)
         {
-            var merge = _mergeFactory.GetLocalMerge(comparer);
+            var merge = _mergeFactory.GetLocalMerge(comparer, list);
             return new ArrayRunMerger<T>(list, merge);
         }
     }

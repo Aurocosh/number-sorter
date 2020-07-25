@@ -7,7 +7,7 @@ namespace NumberSorter.Core.Logic.Factories.LocalMerge
 {
     public class KindaInPlaceMergeFactory : ILocalMergeFactory
     {
-        public ILocalMergeAlgothythm<T> GetLocalMerge<T>(IComparer<T> comparer)
+        public ILocalMergeAlgothythm<T> GetLocalMerge<T>(IComparer<T> comparer, IList<T> list)
         {
             return new KindaInPlaceMerge<T>(comparer);
         }

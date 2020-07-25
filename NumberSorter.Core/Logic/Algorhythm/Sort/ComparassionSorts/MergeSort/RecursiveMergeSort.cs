@@ -7,16 +7,18 @@ namespace NumberSorter.Core.Logic.Algorhythm
 {
     public class RecursiveMergeSort<T> : GenericSortAlgorhythm<T>
     {
-        private ILocalMergeAlgothythm<T> LocalMergeAlgorhythm { get; }
+        private readonly ILocalMergeFactory _localMergeFactory;
+        private ILocalMergeAlgothythm<T> _localMergeAlgothythm;
 
         public RecursiveMergeSort(IComparer<T> comparer, ILocalMergeFactory localMergeFactory) : base(comparer)
         {
-            LocalMergeAlgorhythm = localMergeFactory.GetLocalMerge(comparer);
+            _localMergeFactory = localMergeFactory;
         }
 
         public override void Sort(IList<T> list, int startingIndex, int length)
         {
             var sortRun = new SortRun(startingIndex, length);
+            _localMergeAlgothythm = _localMergeFactory.GetLocalMerge(Comparer, list);
             MergeSort(list, sortRun);
         }
 
@@ -29,7 +31,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
             MergeSort(list, halvesOfSortRun.First);
             MergeSort(list, halvesOfSortRun.Second);
 
-            LocalMergeAlgorhythm.Merge(list, halvesOfSortRun.First, halvesOfSortRun.Second);
+            _localMergeAlgothythm.Merge(list, halvesOfSortRun.First, halvesOfSortRun.Second);
         }
     }
 }

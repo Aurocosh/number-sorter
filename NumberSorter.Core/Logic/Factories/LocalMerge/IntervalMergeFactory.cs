@@ -15,9 +15,9 @@ namespace NumberSorter.Core.Logic.Factories.LocalMerge
             PositionLocatorFactory = positionLocatorFactory;
         }
 
-        public ILocalMergeAlgothythm<T> GetLocalMerge<T>(IComparer<T> comparer)
+        public ILocalMergeAlgothythm<T> GetLocalMerge<T>(IComparer<T> comparer, IList<T> list)
         {
-            return new IntervalMerge<T>(comparer, PositionLocatorFactory);
+            return new IntervalMerge<T>(comparer, PositionLocatorFactory, list);
         }
     }
 }

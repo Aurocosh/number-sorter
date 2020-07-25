@@ -5,6 +5,6 @@ namespace NumberSorter.Core.Logic.Factories.LocalMerge.Base
 {
     public interface ILocalMergeFactory
     {
-        ILocalMergeAlgothythm<T> GetLocalMerge<T>(IComparer<T> comparer);
+        ILocalMergeAlgothythm<T> GetLocalMerge<T>(IComparer<T> comparer, IList<T> list);
     }
 }

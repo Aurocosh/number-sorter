@@ -75,6 +75,16 @@ namespace NumberSorter.Core.Logic.Utility
                 destination[destinationIndex++] = source[sourceIndex++];
         }
 
+        public static void CopySet<T>(IList<T> source, int sourceIndex, IList<T> destination, int destinationIndex, int length, T value)
+        {
+            int upperSourceLimit = sourceIndex + length;
+            while (sourceIndex != upperSourceLimit)
+            {
+                destination[destinationIndex++] = source[sourceIndex];
+                source[sourceIndex++] = value;
+            }
+        }
+
         public static void CopyBuffered<T>(IList<T> source, int sourceIndex, IList<T> destination, int destinationIndex, int length)
         {
             var buffer = source.GetRangeAsArray(sourceIndex, length);
@@ -98,6 +108,13 @@ namespace NumberSorter.Core.Logic.Utility
             for (int i = index; i < upperLimit; i++)
                 result.Add(list[i]);
             return result;
+        }
+
+        public static void SetRange<T>(this IList<T> list, int index, int count, T value)
+        {
+            int upperLimit = index + count;
+            for (int i = index; i < upperLimit; i++)
+                list[i] = value;
         }
     }
 }

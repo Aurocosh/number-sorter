@@ -1,4 +1,5 @@
 ﻿using NumberSorter.Core.Logic.Algorhythm.PositionLocator.Base;
+using System;
 using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm.PositionLocator
@@ -9,40 +10,67 @@ namespace NumberSorter.Core.Logic.Algorhythm.PositionLocator
 
         public override int FindFirstPosition(IList<T> list, T element, int runStart, int length)
         {
-            return BinarySearchFirst(list, element, runStart, runStart + length - 1);
+            return BinarySearchFirstLo(list, element, runStart, runStart + length - 1);
         }
 
-        private int BinarySearchFirst(IList<T> list, T elementToInsert, int low, int high)
+        protected int BinarySearchFirstLo(IList<T> list, T elementToInsert, int low, int high)
         {
             if (high <= low)
-                return (Compare(list[low], elementToInsert) > 0) ? low - 1 : low;
+                return (Compare(list[low], elementToInsert) < 0) ? low + 1 : low;
 
             int index = (low + high) / 2;
-            int comparassion = Compare(elementToInsert, list[index]);
-            if (comparassion == 0)
-                return index;
-            else if (comparassion > 0)
-                return BinarySearchFirst(list, elementToInsert, index + 1, high);
+            int comparassion = Compare(list[index], elementToInsert);
+            if (comparassion < 0)
+                return BinarySearchFirstHi(list, elementToInsert, index + 1, high);
             else
-                return BinarySearchFirst(list, elementToInsert, low, index - 1);
+                return BinarySearchFirstLo(list, elementToInsert, low, index - 1);
+        }
+
+        protected int BinarySearchFirstHi(IList<T> list, T elementToInsert, int low, int high)
+        {
+            if (high <= low)
+            {
+                Console.WriteLine("low: " + low);
+                return (Compare(list[high], elementToInsert) < 0) ? high + 1 : high;
+            }
+
+            int index = (low + high) / 2;
+            int comparassion = Compare(list[index], elementToInsert);
+            if (comparassion < 0)
+                return BinarySearchFirstHi(list, elementToInsert, index + 1, high);
+            else
+                return BinarySearchFirstLo(list, elementToInsert, low, index - 1);
         }
 
         public override int FindLastPosition(IList<T> list, T element, int runStart, int length)
         {
-            return BinarySearchLast(list, element, runStart, runStart + length - 1);
+            return BinarySearchLastLo(list, element, runStart, runStart + length - 1);
         }
 
-        private int BinarySearchLast(IList<T> list, T elementToInsert, int low, int high)
+        protected int BinarySearchLastLo(IList<T> list, T elementToInsert, int low, int high)
         {
             if (high <= low)
-                return (Compare(list[low], elementToInsert) > 0) ? low - 1 : low;
+                return (Compare(list[low], elementToInsert) <= 0) ? low + 1 : low;
+
+            int index = (low + high) / 2;
+            int comparassion = Compare(list[index], elementToInsert);
+            if (comparassion <= 0)
+                return BinarySearchLastHi(list, elementToInsert, index + 1, high);
+            else
+                return BinarySearchLastLo(list, elementToInsert, low, index - 1);
+        }
+
+        protected int BinarySearchLastHi(IList<T> list, T elementToInsert, int low, int high)
+        {
+            if (high <= low)
+                return (Compare(list[high], elementToInsert) <= 0) ? high + 1 : high;
 
             int index = (low + high) / 2;
             int comparassion = Compare(elementToInsert, list[index]);
             if (comparassion >= 0)
-                return BinarySearchFirst(list, elementToInsert, index + 1, high);
+                return BinarySearchLastHi(list, elementToInsert, index + 1, high);
             else
-                return BinarySearchFirst(list, elementToInsert, low, index - 1);
+                return BinarySearchLastLo(list, elementToInsert, low, index - 1);
         }
     }
 }
