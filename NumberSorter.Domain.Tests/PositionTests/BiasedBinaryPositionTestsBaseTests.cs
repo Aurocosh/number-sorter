@@ -8,7 +8,7 @@ namespace NumberSorter.Domain.Tests.PositionTests
     {
         protected override IPositionLocatorFactory GetAlgorhythm()
         {
-            return new BiasedBinaryPositionLocatorFactory(2);
+            return new BiasedBinaryPositionLocatorFactory(8);
         }
     }
 }

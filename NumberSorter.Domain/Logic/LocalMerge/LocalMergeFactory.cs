@@ -19,7 +19,7 @@ namespace NumberSorter.Domain.Logic
                 case LocalMergeType.IntervalBinarySearch:
                     return new IntervalMergeFactory(new BinaryPositionLocatorFactory());
                 case LocalMergeType.IntervalBiasedBinarySearch:
-                    return new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(1));
+                    return new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(8));
                 case LocalMergeType.IntervalCustomBiasedBinarySearch:
                     {
                         var viewModel = new BiasValueDialogViewModel();
@@ -32,7 +32,7 @@ namespace NumberSorter.Domain.Logic
                     return new TripleWindowMergeFactory();
 
                 case LocalMergeType.Buffer:
-                    return new BufferMergeFactory(new BiasedBinaryPositionLocatorFactory(1));
+                    return new BufferMergeFactory(new BiasedBinaryPositionLocatorFactory(8));
                 case LocalMergeType.Deque:
                     return new DequeMergeFactory();
                 case LocalMergeType.Gallop:
@@ -43,13 +43,13 @@ namespace NumberSorter.Domain.Logic
                     return new KindaInPlaceMergeFactory();
                 case LocalMergeType.Rotation:
                     {
-                        var position = new BiasedBinaryPositionLocatorFactory(1);
+                        var position = new BiasedBinaryPositionLocatorFactory(8);
                         var rotation = new RecursiveInPlaceRotationFactory();
                         return new RotationMergeFactory(position, rotation);
                     }
                 case LocalMergeType.BufferRotation:
                     {
-                        var position = new BiasedBinaryPositionLocatorFactory(1);
+                        var position = new BiasedBinaryPositionLocatorFactory(8);
                         var rotation = new RecursiveInPlaceRotationFactory();
                         return new BufferRotationMergeFactory(position, rotation);
                     }

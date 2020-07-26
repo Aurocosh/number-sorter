@@ -359,6 +359,7 @@
     <Compile Include="Benchmarks\ComparassionSorts\ShellSort\ShellSortKnuthBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\Strand\DualStrandSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\Strand\LinkedListStrandSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\Strand\StrandFixedBufferSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\Strand\StrandInPlaceSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\Strand\StrandSortMergerBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\Strand\StrandSortBenchmarks.cs" />

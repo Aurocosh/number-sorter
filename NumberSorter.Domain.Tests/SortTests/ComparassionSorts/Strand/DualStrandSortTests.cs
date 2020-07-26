@@ -11,7 +11,7 @@ namespace NumberSorter.Domain.Tests.SortTests
     {
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {
-            var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2));
+            var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(8));
             var merger = new LinkedListMergerFactory(merge);
             return new DualStrandSort<int>(comparer, merger);
         }

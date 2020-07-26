@@ -16,7 +16,7 @@ namespace NumberSorter.Domain.Logic
                 case PositionLocatorType.Binary:
                     return new BinaryPositionLocatorFactory();
                 case PositionLocatorType.BiasedBinary:
-                    return new BiasedBinaryPositionLocatorFactory(2);
+                    return new BiasedBinaryPositionLocatorFactory(8);
                 default:
                     return null;
             }

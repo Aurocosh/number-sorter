@@ -53,24 +53,24 @@ namespace NumberSorter.Domain.Logic
                     return new RecursiveMergeSortFactory(new WindowMergeFactory());
 
                 case ComparassionAlgorhythmType.BufferMergeSort:
-                    return new RecursiveMergeSortFactory(new BufferMergeFactory(new BiasedBinaryPositionLocatorFactory(2)));
+                    return new RecursiveMergeSortFactory(new BufferMergeFactory(new BiasedBinaryPositionLocatorFactory(8)));
                 case ComparassionAlgorhythmType.RotationMergeSort:
                     {
-                        var position = new BiasedBinaryPositionLocatorFactory(1);
+                        var position = new BiasedBinaryPositionLocatorFactory(8);
                         var rotation = new RecursiveInPlaceRotationFactory();
                         var merge = new RotationMergeFactory(position, rotation);
                         return new RecursiveMergeSortFactory(merge);
                     }
                 case ComparassionAlgorhythmType.BufferRotationMergeSort:
                     {
-                        var position = new BiasedBinaryPositionLocatorFactory(1);
+                        var position = new BiasedBinaryPositionLocatorFactory(8);
                         var rotation = new RecursiveInPlaceRotationFactory();
                         var merge = new BufferRotationMergeFactory(position, rotation);
                         return new RecursiveMergeSortFactory(merge);
                     }
 
                 case ComparassionAlgorhythmType.IntervalMergeSort:
-                    return new RecursiveMergeSortFactory(new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2)));
+                    return new RecursiveMergeSortFactory(new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(8)));
                 case ComparassionAlgorhythmType.IntervalMergeSortCustom:
                     {
                         var viewModel = new IntervalMergeSortDialogViewModel();
@@ -92,24 +92,24 @@ namespace NumberSorter.Domain.Logic
                     return new BottomUpMergeSortFactory(new TripleWindowMergeFactory());
 
                 case ComparassionAlgorhythmType.BufferBottomUpMergeSort:
-                    return new BottomUpMergeSortFactory(new BufferMergeFactory(new BiasedBinaryPositionLocatorFactory(2)));
+                    return new BottomUpMergeSortFactory(new BufferMergeFactory(new BiasedBinaryPositionLocatorFactory(8)));
                 case ComparassionAlgorhythmType.RotationBottomUpMergeSort:
                     {
-                        var position = new BiasedBinaryPositionLocatorFactory(1);
+                        var position = new BiasedBinaryPositionLocatorFactory(8);
                         var rotation = new RecursiveInPlaceRotationFactory();
                         var merge = new RotationMergeFactory(position, rotation);
                         return new BottomUpMergeSortFactory(merge);
                     }
                 case ComparassionAlgorhythmType.BufferRotationBottomUpMergeSort:
                     {
-                        var position = new BiasedBinaryPositionLocatorFactory(1);
+                        var position = new BiasedBinaryPositionLocatorFactory(8);
                         var rotation = new RecursiveInPlaceRotationFactory();
                         var merge = new BufferRotationMergeFactory(position, rotation);
                         return new BottomUpMergeSortFactory(merge);
                     }
 
                 case ComparassionAlgorhythmType.IntervalBottomUpMergeSort:
-                    return new BottomUpMergeSortFactory(new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2)));
+                    return new BottomUpMergeSortFactory(new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(8)));
                 case ComparassionAlgorhythmType.IntervalBottomUpMergeSortCustom:
                     {
                         var viewModel = new IntervalMergeSortDialogViewModel();
@@ -144,7 +144,7 @@ namespace NumberSorter.Domain.Logic
                     }
                 case ComparassionAlgorhythmType.TimSort:
                     {
-                        var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2));
+                        var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(8));
                         var merger = new LinkedListMergerFactory(merge);
                         var minrunSort = new BinarySortFactory();
                         return new TimSortFactory(merger, minrunSort);
@@ -168,7 +168,7 @@ namespace NumberSorter.Domain.Logic
                         return new ShellSortFactory(gapGenerator);
                     }
                 case ComparassionAlgorhythmType.KWayMergeSort:
-                    return new KWayMergeSortFactory(4, new BinarySortFactory(), new GroupingRunLocatorFactory(16, new BinarySortFactory()), new BiasedBinaryPositionLocatorFactory(2));
+                    return new KWayMergeSortFactory(4, new BinarySortFactory(), new GroupingRunLocatorFactory(16, new BinarySortFactory()), new BiasedBinaryPositionLocatorFactory(8));
                 case ComparassionAlgorhythmType.KWayMergeSortCustom:
                     {
                         var viewModel = new KWayMergeSortDialogViewModel();
@@ -180,9 +180,9 @@ namespace NumberSorter.Domain.Logic
                     }
 
                 case ComparassionAlgorhythmType.MultiMergeSort:
-                    return new MultiMergeSortFactory(new BinarySortFactory(), new GroupingRunLocatorFactory(16, new BinarySortFactory()), new BiasedBinaryPositionLocatorFactory(2));
+                    return new MultiMergeSortFactory(new BinarySortFactory(), new GroupingRunLocatorFactory(16, new BinarySortFactory()), new BiasedBinaryPositionLocatorFactory(8));
                 case ComparassionAlgorhythmType.IntervalMultiMergeSort:
-                    return new IntervalMultiMergeSortFactory(new BinarySortFactory(), new GroupingRunLocatorFactory(16, new BinarySortFactory()), new BiasedBinaryPositionLocatorFactory(2));
+                    return new IntervalMultiMergeSortFactory(new BinarySortFactory(), new GroupingRunLocatorFactory(16, new BinarySortFactory()), new BiasedBinaryPositionLocatorFactory(8));
 
                 case ComparassionAlgorhythmType.MultiMergeSortCustom:
                 case ComparassionAlgorhythmType.IntervalMultiMergeSortCustom:
@@ -240,29 +240,29 @@ namespace NumberSorter.Domain.Logic
 
                 case ComparassionAlgorhythmType.StrandSort:
                     {
-                        var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2));
+                        var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(8));
                         return new StrandSortFactory(merge);
                     }
                 case ComparassionAlgorhythmType.DualStrandSort:
                     {
-                        var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2));
+                        var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(8));
                         var merger = new LinkedListMergerFactory(merge);
                         return new DualStrandSortFactory(merger);
                     }
                 case ComparassionAlgorhythmType.StrandMergerSort:
                     {
-                        var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2));
+                        var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(8));
                         var merger = new LinkedListMergerFactory(merge);
                         return new StrandMergerSortFactory(merger);
                     }
                 case ComparassionAlgorhythmType.StrandInPlaceSort:
                     {
-                        var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2));
+                        var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(8));
                         return new StrandInPlaceSortFactory(merge);
                     }
                 case ComparassionAlgorhythmType.StrandFixedBufferSort:
                     {
-                        var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2));
+                        var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(8));
                         return new StrandFixedBufferSortFactory(merge);
                     }
 

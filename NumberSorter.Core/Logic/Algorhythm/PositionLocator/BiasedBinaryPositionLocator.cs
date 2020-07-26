@@ -17,18 +17,29 @@ namespace NumberSorter.Core.Logic.Algorhythm.PositionLocator
 
         public override int FindFirstPosition(IList<T> list, T element, int runStart, int length)
         {
-            if (length < 2)
+            switch (length)
             {
-                if (length == 1 && Compare(list[runStart], element) < 0)
-                    return runStart + 1;
-                return runStart;
+                case 0:
+                    return runStart;
+                case 1:
+                    return Compare(list[runStart], element) < 0 ? runStart + 1 : runStart;
             }
-            int bias = length < MinLength ? 1 : IndexBias;
-            return BiasedBinarySearchFirst(list, element, runStart, runStart + length - 1, bias);
+
+            int index = runStart + 1;
+            int comparassion = Compare(list[index], element);
+            if (comparassion < 0)
+                return BiasedBinarySearchFirstHi(list, element, index + 1, runStart + length - 1, length);
+            else
+                return BinarySearchFirstLo(list, element, runStart, index - 1);
         }
 
-        private int BiasedBinarySearchFirst(IList<T> list, T elementToInsert, int low, int high, int bias)
+        private int BiasedBinarySearchFirstHi(IList<T> list, T elementToInsert, int low, int high, int length)
         {
+            if (high <= low)
+                return (Compare(list[high], elementToInsert) < 0) ? high + 1 : high;
+
+            int bias = length < MinLength ? 0 : IndexBias;
+
             int index = low + bias;
             int comparassion = Compare(list[index], elementToInsert);
             if (comparassion < 0)
@@ -43,19 +54,29 @@ namespace NumberSorter.Core.Logic.Algorhythm.PositionLocator
 
         public override int FindLastPosition(IList<T> list, T element, int runStart, int length)
         {
-            if (length < 2)
+            switch (length)
             {
-                if (length == 1 && Compare(list[runStart], element) <= 0)
-                    return runStart + 1;
-                return runStart;
+                case 0:
+                    return runStart;
+                case 1:
+                    return Compare(list[runStart], element) <= 0 ? runStart + 1 : runStart;
             }
 
-            int bias = length < MinLength ? 1 : IndexBias;
-            return BiasedBinarySearchLast(list, element, runStart, runStart + length - 1, bias);
+            int index = runStart + 1;
+            int comparassion = Compare(list[index], element);
+            if (comparassion <= 0)
+                return BiasedBinarySearchLast(list, element, index + 1, runStart + length - 1, length);
+            else
+                return BinarySearchLastLo(list, element, runStart, index - 1);
         }
 
-        private int BiasedBinarySearchLast(IList<T> list, T elementToInsert, int low, int high, int bias)
+        private int BiasedBinarySearchLast(IList<T> list, T elementToInsert, int low, int high, int length)
         {
+            if (high <= low)
+                return (Compare(list[high], elementToInsert) <= 0) ? high + 1 : high;
+
+            int bias = length < MinLength ? 0 : IndexBias;
+
             int index = low + bias;
             int comparassion = Compare(list[index], elementToInsert);
             if (comparassion <= 0)

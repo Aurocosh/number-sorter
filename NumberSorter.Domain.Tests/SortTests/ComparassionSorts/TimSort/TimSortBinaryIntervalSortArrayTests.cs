@@ -12,7 +12,7 @@ namespace NumberSorter.Domain.Tests.SortTests
     {
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {
-            var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2));
+            var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(8));
             var merger = new ArrayMergerFactory(merge);
             var minrunSort = new InsertionSortFactory();
             return new TimSort<int>(comparer, merger, minrunSort);
