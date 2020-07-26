@@ -26,6 +26,7 @@
 
         BufferMergeSort,
         RotationMergeSort,
+        BufferRotationMergeSort,
 
         IntervalMergeSort,
         IntervalMergeSortCustom,
@@ -39,6 +40,7 @@
 
         BufferBottomUpMergeSort,
         RotationBottomUpMergeSort,
+        BufferRotationBottomUpMergeSort,
 
         IntervalBottomUpMergeSort,
         IntervalBottomUpMergeSortCustom,

@@ -14,5 +14,6 @@
         HalfInPlace,
         KindaInPlace,
         Rotation,
+        BufferRotation,
     }
 }

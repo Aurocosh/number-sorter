@@ -68,6 +68,7 @@
     <Compile Include="Generators\RandomPartialSortedIntegerGenerator.cs" />
     <Compile Include="Generators\UnmergedFullySortedGenerator.cs" />
     <Compile Include="Logic\Algorhythm\GapGenerator\CiuraExtendedGapGenerator.cs" />
+    <Compile Include="Logic\Algorhythm\LocalMerge\BufferRotationMerge.cs" />
     <Compile Include="Logic\Algorhythm\LocalMerge\RotationMerge.cs" />
     <Compile Include="Logic\Algorhythm\LocalMerge\GallopMerge.cs" />
     <Compile Include="Logic\Algorhythm\LocalMerge\BufferMerge.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\MultiMerge\IntervalMultiMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\LocalMerge\IntervalMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\ParallelQuickSort.cs" />
+    <Compile Include="Logic\Factories\LocalMerge\BufferRotationMergeFactory.cs" />
     <Compile Include="Logic\Factories\LocalMerge\RotationMergeFactory.cs" />
     <Compile Include="Logic\Factories\LocalMerge\GallopMergeFactory.cs" />
     <Compile Include="Logic\Factories\LocalMerge\BufferMergeFactory.cs" />

@@ -47,6 +47,12 @@ namespace NumberSorter.Domain.Logic
                         var rotation = new RecursiveInPlaceRotationFactory();
                         return new RotationMergeFactory(position, rotation);
                     }
+                case LocalMergeType.BufferRotation:
+                    {
+                        var position = new BiasedBinaryPositionLocatorFactory(1);
+                        var rotation = new RecursiveInPlaceRotationFactory();
+                        return new BufferRotationMergeFactory(position, rotation);
+                    }
 
                 default:
                     return null;

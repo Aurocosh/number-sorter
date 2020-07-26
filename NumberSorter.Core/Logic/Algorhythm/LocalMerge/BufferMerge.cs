@@ -65,13 +65,7 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
 
                         if (spaceInBuffer == 0)
                         {
-                            int targetIndex = secondIndex - 1;
-                            int sourceIndex = firstIndex + unsortedInFirst - 1;
-                            int targetIndexLimit = targetIndex - unsortedInFirst;
-                            while (targetIndex > targetIndexLimit)
-                                list[targetIndex--] = list[sourceIndex--];
-
-                            ListUtility.Copy(buffer, 0, list, resultIndex, _bufferMaxSize);
+                            ClearBuffer(list, firstIndex, secondIndex, resultIndex, unsortedInFirst, _bufferMaxSize);
                             resultIndex += _bufferMaxSize;
                             firstIndex = resultIndex;
 
@@ -102,13 +96,7 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
 
                         if (spaceInBuffer == 0)
                         {
-                            int targetIndex = secondIndex - 1;
-                            int sourceIndex = firstIndex + unsortedInFirst - 1;
-                            int targetIndexLimit = targetIndex - unsortedInFirst;
-                            while (targetIndex > targetIndexLimit)
-                                list[targetIndex--] = list[sourceIndex--];
-
-                            ListUtility.Copy(buffer, 0, list, resultIndex, _bufferMaxSize);
+                            ClearBuffer(list, firstIndex, secondIndex, resultIndex, unsortedInFirst, _bufferMaxSize);
                             resultIndex += _bufferMaxSize;
                             firstIndex = resultIndex;
 
@@ -122,22 +110,25 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
                 }
             }
 
-            {
-                int targetIndex = secondIndex - 1;
-                int sourceIndex = firstIndex + unsortedInFirst - 1;
-                int targetIndexLimit = targetIndex - unsortedInFirst;
-                while (targetIndex > targetIndexLimit)
-                    list[targetIndex--] = list[sourceIndex--];
-
-                int leftInBuffer = bufferIndex;
-                ListUtility.Copy(buffer, 0, list, resultIndex, leftInBuffer);
-            }
+            int leftInBuffer = bufferIndex;
+            ClearBuffer(list, firstIndex, secondIndex, resultIndex, unsortedInFirst, leftInBuffer);
 
             //first = SortRunUtility.RunToString(list, firstRun);
             //second = SortRunUtility.RunToString(list, secondRun);
             //Console.WriteLine($"\nAfter {first}   {second}");
             //if (!IsSorted(list, firstRun.Start, firstRun.Length + secondRun.Length))
             //    Console.WriteLine("Not sorted");
+        }
+
+        private void ClearBuffer(IList<T> list, int firstIndex, int secondIndex, int resultIndex, int firstLength, int elementsInBuffer)
+        {
+            int targetIndex = secondIndex - 1;
+            int sourceIndex = firstIndex + firstLength - 1;
+            int targetIndexLimit = targetIndex - firstLength;
+            while (targetIndex > targetIndexLimit)
+                list[targetIndex--] = list[sourceIndex--];
+
+            ListUtility.Copy(_buffer, 0, list, resultIndex, elementsInBuffer);
         }
     }
 }
