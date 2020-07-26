@@ -25,6 +25,8 @@
         TripleWindowMergeSort,
 
         BufferMergeSort,
+        RotationMergeSort,
+
         IntervalMergeSort,
         IntervalMergeSortCustom,
 
@@ -36,6 +38,8 @@
         TripleWindowBottomUpMergeSort,
 
         BufferBottomUpMergeSort,
+        RotationBottomUpMergeSort,
+
         IntervalBottomUpMergeSort,
         IntervalBottomUpMergeSortCustom,
 

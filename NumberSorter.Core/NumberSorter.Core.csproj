@@ -68,6 +68,7 @@
     <Compile Include="Generators\RandomPartialSortedIntegerGenerator.cs" />
     <Compile Include="Generators\UnmergedFullySortedGenerator.cs" />
     <Compile Include="Logic\Algorhythm\GapGenerator\CiuraExtendedGapGenerator.cs" />
+    <Compile Include="Logic\Algorhythm\LocalMerge\RotationMerge.cs" />
     <Compile Include="Logic\Algorhythm\LocalMerge\GallopMerge.cs" />
     <Compile Include="Logic\Algorhythm\LocalMerge\BufferMerge.cs" />
     <Compile Include="Logic\Algorhythm\PivotSelector\CenterPivotSelector.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\MultiMerge\IntervalMultiMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\LocalMerge\IntervalMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\ParallelQuickSort.cs" />
+    <Compile Include="Logic\Factories\LocalMerge\RotationMergeFactory.cs" />
     <Compile Include="Logic\Factories\LocalMerge\GallopMergeFactory.cs" />
     <Compile Include="Logic\Factories\LocalMerge\BufferMergeFactory.cs" />
     <Compile Include="Logic\Factories\PivotSelector\CenterPivotSelectorFactory.cs" />
@@ -143,6 +145,9 @@
     <Compile Include="Logic\Factories\PivotSelector\Base\IPivotSelectorFactory.cs" />
     <Compile Include="Logic\Factories\PivotSelector\MedianOfThreePivotSelectorFactory.cs" />
     <Compile Include="Logic\Factories\PivotSelector\RandomPivotSelectorFactory.cs" />
+    <Compile Include="Logic\Factories\Rotation\Base\ILocalRotationFactory.cs" />
+    <Compile Include="Logic\Factories\Rotation\RecursiveInPlaceRotationFactory.cs" />
+    <Compile Include="Logic\Factories\Rotation\InversionInPlaceRotationFactory.cs" />
     <Compile Include="Logic\Factories\RunMerger\Base\ILocalMergeFactory.cs" />
     <Compile Include="Logic\Factories\RunMerger\ArrayMergerFactory.cs" />
     <Compile Include="Logic\Factories\RunMerger\LinkedListMergerFactory.cs" />

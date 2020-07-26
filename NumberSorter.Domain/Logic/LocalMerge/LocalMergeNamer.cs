@@ -19,6 +19,7 @@ namespace NumberSorter.Domain.Logic
             _nameDictionary.Add(LocalMergeType.Gallop, "Gallop");
             _nameDictionary.Add(LocalMergeType.HalfInPlace, "HalfInPlace");
             _nameDictionary.Add(LocalMergeType.KindaInPlace, "KindaInPlace");
+            _nameDictionary.Add(LocalMergeType.Rotation, "Rotation");
         }
 
         public static string GetName(LocalMergeType algorhythmType)

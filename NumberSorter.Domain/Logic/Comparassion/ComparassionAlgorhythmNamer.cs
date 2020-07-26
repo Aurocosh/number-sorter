@@ -31,6 +31,8 @@ namespace NumberSorter.Domain.Logic
             _nameDictionary.Add(ComparassionAlgorhythmType.TripleWindowMergeSort, "Triple window merge sort");
 
             _nameDictionary.Add(ComparassionAlgorhythmType.BufferMergeSort, "Buffer merge sort");
+            _nameDictionary.Add(ComparassionAlgorhythmType.RotationMergeSort, "Rotation merge sort");
+
             _nameDictionary.Add(ComparassionAlgorhythmType.IntervalMergeSort, "Interval merge sort");
             _nameDictionary.Add(ComparassionAlgorhythmType.IntervalMergeSortCustom, "Interval merge sort (Custom)");
 
@@ -42,6 +44,8 @@ namespace NumberSorter.Domain.Logic
             _nameDictionary.Add(ComparassionAlgorhythmType.TripleWindowBottomUpMergeSort, "Triple window merge sort (Bottom up)");
 
             _nameDictionary.Add(ComparassionAlgorhythmType.BufferBottomUpMergeSort, "Buffer merge sort (Bottom up)");
+            _nameDictionary.Add(ComparassionAlgorhythmType.RotationBottomUpMergeSort, "Rotation merge sort (Bottom up)");
+
             _nameDictionary.Add(ComparassionAlgorhythmType.IntervalBottomUpMergeSort, "Interval merge sort (Bottom up)");
             _nameDictionary.Add(ComparassionAlgorhythmType.IntervalBottomUpMergeSortCustom, "Interval merge sort (Bottom up, Custom)");
 

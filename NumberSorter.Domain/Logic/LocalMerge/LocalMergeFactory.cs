@@ -1,6 +1,7 @@
 ﻿using NumberSorter.Core.Logic.Factories.LocalMerge;
 using NumberSorter.Core.Logic.Factories.LocalMerge.Base;
 using NumberSorter.Core.Logic.Factories.PositionLocator;
+using NumberSorter.Core.Logic.Factories.Sort;
 using NumberSorter.Domain.DialogService;
 using NumberSorter.Domain.ViewModels;
 using ReactiveUI;
@@ -40,6 +41,12 @@ namespace NumberSorter.Domain.Logic
                     return new HalfInPlaceMergeFactory();
                 case LocalMergeType.KindaInPlace:
                     return new KindaInPlaceMergeFactory();
+                case LocalMergeType.Rotation:
+                    {
+                        var position = new BiasedBinaryPositionLocatorFactory(1);
+                        var rotation = new RecursiveInPlaceRotationFactory();
+                        return new RotationMergeFactory(position, rotation);
+                    }
 
                 default:
                     return null;

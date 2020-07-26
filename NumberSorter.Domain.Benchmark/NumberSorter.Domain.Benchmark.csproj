@@ -352,6 +352,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Benchmarks\ComparassionSorts\Binary\BinaryOptimizedSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\RotationIterativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\BufferIterativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\ShellSort\ShellSortCiuraExtendedBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\ShellSort\ShellSortKnuthBenchmarks.cs" />

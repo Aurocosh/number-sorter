@@ -13,5 +13,6 @@
         Gallop,
         HalfInPlace,
         KindaInPlace,
+        Rotation,
     }
 }
