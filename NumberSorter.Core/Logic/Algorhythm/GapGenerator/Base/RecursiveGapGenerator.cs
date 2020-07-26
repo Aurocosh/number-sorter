@@ -9,7 +9,7 @@ namespace NumberSorter.Core.Logic.Algorhythm.GapGenerator.Base
             var gaps = new List<int>(16);
 
             int gap = 1;
-            int index = 0;
+            int index = 1;
             int maxGap = MaxGap(arraySize);
             while (gap < maxGap)
             {

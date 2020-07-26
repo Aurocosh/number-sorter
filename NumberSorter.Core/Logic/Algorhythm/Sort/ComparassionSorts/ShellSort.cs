@@ -17,20 +17,20 @@ namespace NumberSorter.Core.Logic.Algorhythm
             var gaps = _gapGenerator.GenerateGaps(length);
 
             int gapIndex = gaps.Length - 1;
-            int upperlimitIndex = startingIndex + length;
+            int indexLimit = startingIndex + length;
             while (gapIndex >= 0)
             {
-                int subIndex;
                 int gap = gaps[gapIndex];
-                int lowerLimitIndex = startingIndex + gap;
-                for (int index = lowerLimitIndex; index != upperlimitIndex; index++)
+                int startingGappedIndex = startingIndex + gap;
+                for (int index = startingGappedIndex; index != indexLimit; index++)
                 {
+                    int reverseIndex;
                     T temp = list[index];
-                    for (subIndex = index; subIndex >= lowerLimitIndex && Compare(list[subIndex - gap], temp) > 0; subIndex -= gap)
+                    for (reverseIndex = index; reverseIndex >= startingGappedIndex && Compare(list[reverseIndex - gap], temp) > 0; reverseIndex -= gap)
                     {
-                        list[subIndex] = list[subIndex - gap];
+                        list[reverseIndex] = list[reverseIndex - gap];
                     }
-                    list[subIndex] = temp;
+                    list[reverseIndex] = temp;
                 }
 
                 gapIndex--;

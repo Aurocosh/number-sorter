@@ -11,6 +11,8 @@ namespace NumberSorter.Domain.Logic
             {
                 case GapGeneratorType.Ciura:
                     return new CiuraGapGenerator();
+                case GapGeneratorType.CiuraExtended:
+                    return new CiuraExtendedGapGenerator();
                 case GapGeneratorType.Knuth:
                     return new KnuthGapGenerator();
                 case GapGeneratorType.Tokuda:

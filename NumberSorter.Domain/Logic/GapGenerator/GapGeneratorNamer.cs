@@ -9,6 +9,7 @@ namespace NumberSorter.Domain.Logic
         static GapGeneratorNamer()
         {
             _nameDictionary.Add(GapGeneratorType.Ciura, "Ciura gaps");
+            _nameDictionary.Add(GapGeneratorType.CiuraExtended, "Ciura gaps (Extended)");
             _nameDictionary.Add(GapGeneratorType.Knuth, "Knuth gaps");
             _nameDictionary.Add(GapGeneratorType.Tokuda, "Tokuda gaps");
         }

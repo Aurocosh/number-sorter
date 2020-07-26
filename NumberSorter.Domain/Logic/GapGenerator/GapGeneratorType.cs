@@ -3,6 +3,7 @@
     public enum GapGeneratorType
     {
         Ciura,
+        CiuraExtended,
         Knuth,
         Tokuda,
     }

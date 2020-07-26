@@ -67,6 +67,7 @@
     <Compile Include="Generators\RandomIntegerGenerator.cs" />
     <Compile Include="Generators\RandomPartialSortedIntegerGenerator.cs" />
     <Compile Include="Generators\UnmergedFullySortedGenerator.cs" />
+    <Compile Include="Logic\Algorhythm\GapGenerator\CiuraExtendedGapGenerator.cs" />
     <Compile Include="Logic\Algorhythm\LocalMerge\GallopMerge.cs" />
     <Compile Include="Logic\Algorhythm\PivotSelector\CenterPivotSelector.cs" />
     <Compile Include="Logic\Algorhythm\PivotSelector\LastPivotSelector.cs" />
@@ -206,8 +207,8 @@
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\GnomeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\CocktailShakerSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\OddEvenSort.cs" />
-    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\DoubleSelectionSort.cs" />
-    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\SelectionSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\Selection\DoubleSelectionSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\Selection\SelectionSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\Binary\BinarySort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\BubbleSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\CSharpDefaultSort.cs" />
