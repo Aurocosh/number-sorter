@@ -351,6 +351,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Benchmarks\ComparassionSorts\Binary\BinaryOptimizedSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\Strand\DualStrandSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\Strand\LinkedListStrandSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\Strand\StrandInPlaceSortBenchmarks.cs" />
@@ -427,7 +428,7 @@
     <Compile Include="Benchmarks\ComparassionSorts\CycleSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\CombSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\CocktailShakerSortBenchmarks.cs" />
-    <Compile Include="Benchmarks\ComparassionSorts\BinarySortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\Binary\BinarySortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\Merge\OpRecursiveMergeSorBenchmarkst.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\CSharpDefaultSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\RecursiveMerge\DequeMergeSortBenchmarks.cs" />

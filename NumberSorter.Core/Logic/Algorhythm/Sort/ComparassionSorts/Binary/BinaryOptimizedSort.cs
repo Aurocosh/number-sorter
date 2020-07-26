@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {
-    public class BinarySort<T> : GenericSortAlgorhythm<T>
+    public class BinaryOptimizedSort<T> : GenericSortAlgorhythm<T>
     {
-        public BinarySort(IComparer<T> comparer) : base(comparer) { }
+        public BinaryOptimizedSort(IComparer<T> comparer) : base(comparer) { }
 
         public override void Sort(IList<T> list, int startingIndex, int length)
         {
@@ -20,8 +20,9 @@ namespace NumberSorter.Core.Logic.Algorhythm
                     int targetIndex = index;
                     int sourceIndex = targetIndex - 1;
 
-                    while (targetIndex != indexToInsert)
+                    do
                         list[targetIndex--] = list[sourceIndex--];
+                    while (targetIndex != indexToInsert);
 
                     list[indexToInsert] = currentValue;
                 }

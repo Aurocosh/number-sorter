@@ -79,6 +79,7 @@
     <Compile Include="Logic\Algorhythm\SortBitMaskGenerator\Base\ISortBitMaskGenerator.cs" />
     <Compile Include="Logic\Algorhythm\SortBitMaskGenerator\OnesAndZerosSortBitMaskGenerator.cs" />
     <Compile Include="Logic\Algorhythm\SortBitMaskGenerator\ZerosSortBitMaskGenerator.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\Binary\BinaryOptimizedSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\StrandSort\DualStrandSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\StrandSort\LinkedListStrandSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\StrandSort\StrandInPlaceSort.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="Logic\Factories\SortRunLocator\GroupingRunLocatorFactory.cs" />
     <Compile Include="Logic\Factories\SortRunLocator\SimpleRunLocatorFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Base\ISortFactory.cs" />
+    <Compile Include="Logic\Factories\Sort\Binary\BinaryOptimizedSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Strand\DualStrandSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Strand\StrandFixedBufferSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Strand\StrandMergerSortFactory.cs" />
@@ -188,7 +190,7 @@
     <Compile Include="Logic\Factories\Sort\CombSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\CocktailShakerSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\BubbleSortFactory.cs" />
-    <Compile Include="Logic\Factories\Sort\BinarySortFactory.cs" />
+    <Compile Include="Logic\Factories\Sort\Binary\BinarySortFactory.cs" />
     <Compile Include="Logic\Algorhythm\SortRunLocator\Base\GenericRunLocator.cs" />
     <Compile Include="Logic\Algorhythm\SortRunLocator\Base\ISortRunLocator.cs" />
     <Compile Include="Logic\Algorhythm\SortRunLocator\GroupingRunLocator.cs" />
@@ -206,7 +208,7 @@
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\OddEvenSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\DoubleSelectionSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\SelectionSort.cs" />
-    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\BinarySort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\Binary\BinarySort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\BubbleSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\CSharpDefaultSort.cs" />
     <Compile Include="Logic\Algorhythm\LocalMerge\DequeMerge.cs" />

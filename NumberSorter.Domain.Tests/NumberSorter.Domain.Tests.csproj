@@ -121,6 +121,7 @@
     <Compile Include="PositionTests\LinearPositionTestsBaseTests.cs" />
     <Compile Include="RotationTests\IntegerGenerators\Dynamic\RotationTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator.cs" />
     <Compile Include="RotationTests\InversionInPlaceRotationTests.cs" />
+    <Compile Include="SortTests\ComparassionSorts\Binary\BinaryOptimizedSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\Strand\StrandFixedBufferSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\Strand\StrandSortMergerTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\Strand\DualStrandSortTests.cs" />
@@ -168,7 +169,7 @@
     <Compile Include="SortTests\ComparassionSorts\ShellSortKnuthTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\ShellSortTokudaTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\CycleSortTests.cs" />
-    <Compile Include="SortTests\ComparassionSorts\BinarySortTests.cs" />
+    <Compile Include="SortTests\ComparassionSorts\Binary\BinarySortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\CombSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\GnomeSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\CocktailShakerSortTests.cs" />
