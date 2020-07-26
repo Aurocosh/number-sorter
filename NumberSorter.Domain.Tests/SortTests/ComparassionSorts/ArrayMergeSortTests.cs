@@ -5,7 +5,7 @@ using NumberSorter.Domain.Tests.SortTests.Base;
 
 namespace NumberSorter.Domain.Tests.SortTests
 {
-    public class RecursiveMergeSortTests : SortTestsBase
+    public class ArrayMergeSortTests : SortTestsBase
     {
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {

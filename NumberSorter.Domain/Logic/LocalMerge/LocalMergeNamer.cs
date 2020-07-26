@@ -14,6 +14,11 @@ namespace NumberSorter.Domain.Logic
             _nameDictionary.Add(LocalMergeType.IntervalCustomBiasedBinarySearch, "Normal (Custom biased binary search)");
             _nameDictionary.Add(LocalMergeType.Window, "Window");
             _nameDictionary.Add(LocalMergeType.TripleWindow, "Triple window");
+            _nameDictionary.Add(LocalMergeType.Buffer, "Buffer");
+            _nameDictionary.Add(LocalMergeType.Deque, "Deque");
+            _nameDictionary.Add(LocalMergeType.Gallop, "Gallop");
+            _nameDictionary.Add(LocalMergeType.HalfInPlace, "HalfInPlace");
+            _nameDictionary.Add(LocalMergeType.KindaInPlace, "KindaInPlace");
         }
 
         public static string GetName(LocalMergeType algorhythmType)

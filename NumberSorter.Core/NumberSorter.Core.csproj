@@ -69,6 +69,7 @@
     <Compile Include="Generators\UnmergedFullySortedGenerator.cs" />
     <Compile Include="Logic\Algorhythm\GapGenerator\CiuraExtendedGapGenerator.cs" />
     <Compile Include="Logic\Algorhythm\LocalMerge\GallopMerge.cs" />
+    <Compile Include="Logic\Algorhythm\LocalMerge\BufferMerge.cs" />
     <Compile Include="Logic\Algorhythm\PivotSelector\CenterPivotSelector.cs" />
     <Compile Include="Logic\Algorhythm\PivotSelector\LastPivotSelector.cs" />
     <Compile Include="Logic\Algorhythm\PivotSelector\FirstPivotSelector.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="Logic\Algorhythm\LocalMerge\IntervalMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\ParallelQuickSort.cs" />
     <Compile Include="Logic\Factories\LocalMerge\GallopMergeFactory.cs" />
+    <Compile Include="Logic\Factories\LocalMerge\BufferMergeFactory.cs" />
     <Compile Include="Logic\Factories\PivotSelector\CenterPivotSelectorFactory.cs" />
     <Compile Include="Logic\Factories\PivotSelector\LastPivotSelectorFactory.cs" />
     <Compile Include="Logic\Factories\PivotSelector\FirstPivotSelectorFactory.cs" />

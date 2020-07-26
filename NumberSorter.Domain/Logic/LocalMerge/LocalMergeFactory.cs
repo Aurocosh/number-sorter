@@ -18,7 +18,7 @@ namespace NumberSorter.Domain.Logic
                 case LocalMergeType.IntervalBinarySearch:
                     return new IntervalMergeFactory(new BinaryPositionLocatorFactory());
                 case LocalMergeType.IntervalBiasedBinarySearch:
-                    return new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2));
+                    return new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(1));
                 case LocalMergeType.IntervalCustomBiasedBinarySearch:
                     {
                         var viewModel = new BiasValueDialogViewModel();
@@ -29,6 +29,18 @@ namespace NumberSorter.Domain.Logic
                     return new WindowMergeFactory();
                 case LocalMergeType.TripleWindow:
                     return new TripleWindowMergeFactory();
+
+                case LocalMergeType.Buffer:
+                    return new BufferMergeFactory(new BiasedBinaryPositionLocatorFactory(1));
+                case LocalMergeType.Deque:
+                    return new DequeMergeFactory();
+                case LocalMergeType.Gallop:
+                    return new GallopMergeFactory();
+                case LocalMergeType.HalfInPlace:
+                    return new HalfInPlaceMergeFactory();
+                case LocalMergeType.KindaInPlace:
+                    return new KindaInPlaceMergeFactory();
+
                 default:
                     return null;
             }

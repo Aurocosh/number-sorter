@@ -75,6 +75,20 @@ namespace NumberSorter.Core.Logic.Utility
                 destination[destinationIndex++] = source[sourceIndex++];
         }
 
+        public static void Swap<T>(IList<T> source, int sourceIndex, IList<T> destination, int destinationIndex, int length)
+        {
+            int upperSourceLimit = sourceIndex + length;
+            while (sourceIndex != upperSourceLimit)
+            {
+                var temp = destination[destinationIndex];
+                destination[destinationIndex] = source[sourceIndex];
+                source[destinationIndex] = temp;
+
+                destinationIndex++;
+                sourceIndex++;
+            }
+        }
+
         public static void CopySet<T>(IList<T> source, int sourceIndex, IList<T> destination, int destinationIndex, int length, T value)
         {
             int upperSourceLimit = sourceIndex + length;

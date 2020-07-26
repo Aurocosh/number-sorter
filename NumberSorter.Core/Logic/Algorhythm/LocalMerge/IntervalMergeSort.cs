@@ -9,10 +9,12 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
 {
     public class IntervalMerge<T> : GenericMergeAlgorhythm<T>
     {
+        private T[] _buffer;
         private IPositionLocator<T> PositionLocator { get; }
 
         public IntervalMerge(IComparer<T> comparer, IPositionLocatorFactory positionLocatorFactory, IList<T> list) : base(comparer)
         {
+            _buffer = Array.Empty<T>();
             PositionLocator = positionLocatorFactory.GetPositionLocator(comparer);
         }
 
@@ -20,15 +22,8 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
         {
             if (firstRun.Length == 0 || secondRun.Length == 0)
                 return;
-            int edgeComparassion = Compare(list, firstRun.LastIndex, secondRun.FirstIndex);
-            if (edgeComparassion <= 0)
+            if (Compare(list, firstRun.LastIndex, secondRun.FirstIndex) <= 0)
                 return;
-
-            if (firstRun.Length + secondRun.Length == 2 && edgeComparassion > 0)
-            {
-                list.Swap(firstRun.FirstIndex, secondRun.FirstIndex);
-                return;
-            }
 
             int firstIndex = firstRun.Start;
             int secondIndex = secondRun.Start;
@@ -43,40 +38,40 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
             firstIndex += skipCount;
             unsortedInFirst -= skipCount;
 
-            int temporaryIndex = 0;
-            var temporaryArray = list.GetRangeAsArray(firstIndex, unsortedInFirst);
+            int bufferIndex = 0;
+
+            if (_buffer.Length < unsortedInFirst)
+                _buffer = new T[unsortedInFirst];
+
+            var buffer = _buffer;
+            ListUtility.Copy(list, firstIndex, buffer, 0, unsortedInFirst);
 
             while (true)
             {
-                T nextFromFirst = temporaryArray[temporaryIndex];
+                T nextFromFirst = buffer[bufferIndex];
                 int secondPosition = PositionLocator.FindLastPosition(list, nextFromFirst, secondIndex, unsortedInSecond);
-                if (secondPosition > secondIndex)
-                {
-                    int copyCount = secondPosition - secondIndex;
-                    ListUtility.Copy(list, secondIndex, list, firstIndex, copyCount);
-                    firstIndex += copyCount;
-                    secondIndex += copyCount;
 
-                    unsortedInSecond -= copyCount;
-                    if (unsortedInSecond == 0)
-                        break;
-                }
+                int copyCount = secondPosition - secondIndex;
+                ListUtility.Copy(list, secondIndex, list, firstIndex, copyCount);
+                firstIndex += copyCount;
+                secondIndex += copyCount;
+
+                unsortedInSecond -= copyCount;
+                if (unsortedInSecond == 0)
+                    break;
 
                 nextFromSecond = list[secondIndex];
-                firstPosition = PositionLocator.FindLastPosition(temporaryArray, nextFromSecond, temporaryIndex, unsortedInFirst);
-                if (firstPosition > temporaryIndex)
-                {
-                    int copyCount = firstPosition - temporaryIndex;
-                    ListUtility.Copy(temporaryArray, temporaryIndex, list, firstIndex, copyCount);
-                    firstIndex += copyCount;
-                    temporaryIndex += copyCount;
-                    unsortedInFirst -= copyCount;
-                    if (unsortedInFirst == 0)
-                        break;
-                }
+                firstPosition = PositionLocator.FindLastPosition(buffer, nextFromSecond, bufferIndex, unsortedInFirst);
+                copyCount = firstPosition - bufferIndex;
+                ListUtility.Copy(buffer, bufferIndex, list, firstIndex, copyCount);
+                firstIndex += copyCount;
+                bufferIndex += copyCount;
+                unsortedInFirst -= copyCount;
+                if (unsortedInFirst == 0)
+                    break;
             }
 
-            ListUtility.Copy(temporaryArray, temporaryIndex, list, firstIndex, unsortedInFirst);
+            ListUtility.Copy(buffer, bufferIndex, list, firstIndex, unsortedInFirst);
 
             //first = SortRunUtility.RunToString(list, firstRun);
             //second = SortRunUtility.RunToString(list, secondRun);

@@ -8,5 +8,10 @@
         IntervalCustomBiasedBinarySearch,
         Window,
         TripleWindow,
+        Buffer,
+        Deque,
+        Gallop,
+        HalfInPlace,
+        KindaInPlace,
     }
 }

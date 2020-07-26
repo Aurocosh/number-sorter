@@ -52,6 +52,8 @@ namespace NumberSorter.Domain.Logic
                 case ComparassionAlgorhythmType.WindowMergeSort:
                     return new RecursiveMergeSortFactory(new WindowMergeFactory());
 
+                case ComparassionAlgorhythmType.BufferMergeSort:
+                    return new RecursiveMergeSortFactory(new BufferMergeFactory(new BiasedBinaryPositionLocatorFactory(2)));
                 case ComparassionAlgorhythmType.IntervalMergeSort:
                     return new RecursiveMergeSortFactory(new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2)));
                 case ComparassionAlgorhythmType.IntervalMergeSortCustom:
@@ -74,6 +76,8 @@ namespace NumberSorter.Domain.Logic
                 case ComparassionAlgorhythmType.TripleWindowBottomUpMergeSort:
                     return new BottomUpMergeSortFactory(new TripleWindowMergeFactory());
 
+                case ComparassionAlgorhythmType.BufferBottomUpMergeSort:
+                    return new BottomUpMergeSortFactory(new BufferMergeFactory(new BiasedBinaryPositionLocatorFactory(2)));
                 case ComparassionAlgorhythmType.IntervalBottomUpMergeSort:
                     return new BottomUpMergeSortFactory(new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(2)));
                 case ComparassionAlgorhythmType.IntervalBottomUpMergeSortCustom:

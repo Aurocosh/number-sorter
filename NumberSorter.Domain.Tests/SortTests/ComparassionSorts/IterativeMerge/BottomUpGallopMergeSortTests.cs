@@ -6,7 +6,7 @@ using NumberSorter.Domain.Tests.SortTests.Base;
 
 namespace NumberSorter.Domain.Tests.SortTests
 {
-    public class GallopMergeSortTests : SortTestsBase
+    public class BottomUpGallopMergeSortTests : SortTestsBase
     {
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {
