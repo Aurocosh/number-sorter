@@ -10,6 +10,8 @@ namespace NumberSorter.Core.Logic.Algorhythm.PositionLocator
 
         public override int FindFirstPosition(IList<T> list, T element, int runStart, int length)
         {
+            if (length == 0)
+                return runStart;
             return BinarySearchFirstLo(list, element, runStart, runStart + length - 1);
         }
 
@@ -41,6 +43,8 @@ namespace NumberSorter.Core.Logic.Algorhythm.PositionLocator
 
         public override int FindLastPosition(IList<T> list, T element, int runStart, int length)
         {
+            if (length == 0)
+                return runStart;
             return BinarySearchLastLo(list, element, runStart, runStart + length - 1);
         }
 

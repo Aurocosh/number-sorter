@@ -3,6 +3,7 @@ using NumberSorter.Core.Logic.Factories.LocalMerge.Base;
 using NumberSorter.Core.Logic.Factories.PositionLocator.Base;
 using NumberSorter.Core.Logic.Factories.Sort.Base;
 using NumberSorter.Core.Logic.Utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
@@ -53,8 +54,9 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
                 int currentRunValueIndex = lowestRun.FirstIndex;
                 int currentRunIndexLimit = lowestRun.FirstIndex + lowestRun.Length;
-                while (currentRunValueIndex < currentRunIndexLimit && Compare(list[currentRunValueIndex], nextRunValue) <= 0)
+                do
                     buffer[bufferIndex++] = list[currentRunValueIndex++];
+                while (currentRunValueIndex < currentRunIndexLimit && Compare(list[currentRunValueIndex], nextRunValue) <= 0);
 
                 int newRunLength = currentRunIndexLimit - currentRunValueIndex;
                 var newRun = new SortRun(currentRunValueIndex, newRunLength);
@@ -69,15 +71,16 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 //var firsts2 = sortRuns.Select(x => list[x.FirstIndex].ToString()).ToList();
                 //var firStr2 = string.Join(",", firsts2);
 
-                int searchAreaLength = runIndexLimit - nextRunIndex;
-                int newIndexOfCurrent = positionLocator.FindLastPosition(sortRuns, newRun, nextRunIndex, searchAreaLength) - 1;
+                int searchAreaLength = runIndexLimit - nextRunIndex - 1;
+                int newIndexOfCurrent = positionLocator.FindLastPosition(sortRuns, newRun, nextRunIndex + 1, searchAreaLength) - 1;
 
                 var plannedRun = sortRuns[lowRunIndex];
 
                 int targetIndex = lowRunIndex;
                 int sourceIndex = targetIndex + 1;
-                while (targetIndex < newIndexOfCurrent)
+                do
                     sortRuns[targetIndex++] = sortRuns[sourceIndex++];
+                while (targetIndex < newIndexOfCurrent);
 
                 sortRuns[newIndexOfCurrent] = plannedRun;
             }

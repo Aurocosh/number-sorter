@@ -124,15 +124,16 @@ namespace NumberSorter.Core.Logic.Algorhythm
                     continue;
                 }
 
-                int searchAreaLength = runIndexLimit - nextRunIndex;
-                int newIndexOfCurrent = sortRunPositionLocator.FindLastPosition(sortRuns, newRun, nextRunIndex, searchAreaLength) - 1;
+                int searchAreaLength = runIndexLimit - nextRunIndex - 1;
+                int newIndexOfCurrent = sortRunPositionLocator.FindLastPosition(sortRuns, newRun, nextRunIndex + 1, searchAreaLength) - 1;
 
                 var plannedRun = sortRuns[lowRunIndex];
 
                 int targetIndex = lowRunIndex;
                 int sourceIndex = targetIndex + 1;
-                while (targetIndex < newIndexOfCurrent)
+                do
                     sortRuns[targetIndex++] = sortRuns[sourceIndex++];
+                while (targetIndex < newIndexOfCurrent);
 
                 sortRuns[newIndexOfCurrent] = plannedRun;
             }
