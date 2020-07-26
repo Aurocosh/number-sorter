@@ -67,31 +67,29 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
                     while (unsortedInSecond > 0)
                     {
                         nextFromSecond = list[secondIndex];
-                        firstPosition = _positionLocator.FindLastPosition(list, nextFromSecond, firstIndex, unsortedInFirst);
+                        int firstIndexStart = firstIndex;
+                        int firstIndexLimit = firstIndex + Math.Min(spacesInBuffer, unsortedInFirst);
+                        do
+                            _buffer[bufferIndex++] = list[firstIndex++];
+                        while (firstIndex < firstIndexLimit && Compare(list[firstIndex], nextFromSecond) <= 0);
 
-                        int copyCount = firstPosition - firstIndex;
-                        int elementsToCopy = Math.Min(spacesInBuffer, copyCount);
-                        ListUtility.Copy(list, firstIndex, _buffer, bufferIndex, elementsToCopy);
-
-                        bufferIndex += elementsToCopy;
-                        firstIndex += elementsToCopy;
-                        spacesInBuffer -= elementsToCopy;
-                        unsortedInFirst -= elementsToCopy;
+                        int movedFromFirst = firstIndex - firstIndexStart;
+                        spacesInBuffer -= movedFromFirst;
+                        unsortedInFirst -= movedFromFirst;
 
                         if (spacesInBuffer == 0 || unsortedInFirst == 0)
                             break;
 
                         nextFromFirst = list[firstIndex];
-                        secondPosition = _positionLocator.FindLastPosition(list, nextFromFirst, secondIndex, unsortedInSecond);
+                        int secondIndexStart = secondIndex;
+                        int secondIndexLimit = secondIndex + Math.Min(spacesInBuffer, unsortedInSecond);
+                        do
+                            _buffer[bufferIndex++] = list[secondIndex++];
+                        while (secondIndex < secondIndexLimit && Compare(list[secondIndex], nextFromFirst) <= 0);
 
-                        copyCount = secondPosition - secondIndex;
-                        elementsToCopy = Math.Min(spacesInBuffer, copyCount);
-                        ListUtility.Copy(list, secondIndex, _buffer, bufferIndex, elementsToCopy);
-
-                        bufferIndex += elementsToCopy;
-                        secondIndex += elementsToCopy;
-                        spacesInBuffer -= elementsToCopy;
-                        unsortedInSecond -= elementsToCopy;
+                        int movedFromSecond = secondIndex - secondIndexStart;
+                        spacesInBuffer -= movedFromSecond;
+                        unsortedInSecond -= movedFromSecond;
 
                         if (spacesInBuffer == 0 || unsortedInSecond == 0)
                             break;
