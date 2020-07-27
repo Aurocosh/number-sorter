@@ -355,6 +355,7 @@
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\BufferRotationIterativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\RotationIterativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\BufferIterativeMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\MultiMerge\MultiMergeSortGroupBiasedBinaryBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\ShellSort\ShellSortCiuraExtendedBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\ShellSort\ShellSortKnuthBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\Strand\DualStrandSortBenchmarks.cs" />
@@ -414,7 +415,6 @@
     <Compile Include="Benchmarks\ComparassionSorts\IntervalMultiMerge\IntervalMultiMergeSortGroupLinearBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\JHeapSortBinaryBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\MultiMerge\MultiMergeSortGroupBinaryWindowBenchmarks.cs" />
-    <Compile Include="Benchmarks\ComparassionSorts\MultiMerge\MultiMergeSortGroupBinaryRecursiveBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\MultiMerge\MultiMergeSortGroupBinaryBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\MultiMerge\MultiMergeSortSimpleBinaryBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\QuickSort\QuickSortLR\ParallelQuickSortRandomPivotBenchmarks.cs" />
