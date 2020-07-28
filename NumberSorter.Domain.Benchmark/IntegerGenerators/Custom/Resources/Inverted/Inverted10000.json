@@ -1,7 +1,7 @@
 {
   "$type": "NumberSorter.Core.CustomGenerators.CustomListGenerator, NumberSorter.Core",
-  "Id": "48ae4f33-5d5e-4f76-8d1c-e0a3b8b6539f",
-  "Name": "Almost sorted. Almost no misplaced",
+  "Id": "a9eb66f3-5963-472a-ac88-a411001fda3d",
+  "Name": "Inverted",
   "Shuffle": false,
   "Description": "",
   "ListProcessorSets": {
@@ -18,19 +18,14 @@
           "$values": [
             {
               "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.NewListProcessor, NumberSorter.Core",
-              "Size": 100000,
+              "Size": 10000,
               "Description": "Fixed list generator"
             },
             {
               "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.ConsecutiveValuesProcessor, NumberSorter.Core",
-              "Step": 1,
-              "Start": -50000,
+              "Step": -1,
+              "Start": 5000,
               "Description": "Consecutive list generator"
-            },
-            {
-              "$type": "NumberSorter.Core.CustomGenerators.Processors.Converters.PartialShuffleValuesProcessor, NumberSorter.Core",
-              "ShuffleCount": 1000,
-              "Description": "List value partial shuffler"
             }
           ]
         }

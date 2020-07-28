@@ -1,18 +1,20 @@
-﻿using System.Collections.Generic;
-using NumberSorter.Core.Algorhythm;
-using NumberSorter.Domain.Benchmark.Benchmarks.Base;
-using NumberSorter.Core.Logic.Algorhythm;
+﻿using NumberSorter.Domain.Benchmark.Benchmarks.Base;
 using NumberSorter.Core.Logic.Factories.Sort;
 using NumberSorter.Core.Logic.Factories.SortRunLocator;
 using NumberSorter.Core.Logic.Factories.PositionLocator;
+using NumberSorter.Core.Logic.Factories.Sort.Base;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks
 {
-    public class MultiMergeSortGroupBiasedBinaryBenchmarks : SortBenchmarks
+    public class MultiMergeSortGroupBiasedBinaryBenchmarks : ComparassionSortBenchmarks
     {
-        protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
+        protected override ISortFactory GetSortFactory()
         {
-            return new MultiMergeSort<int>(comparer, new InsertionSortFactory(), new GroupingRunLocatorFactory(32, new BinarySortFactory()), new BiasedBinaryPositionLocatorFactory(8));
+            var runSort = new InsertionSortFactory();
+            var grouping = new GroupingRunLocatorFactory(32, new BinarySortFactory());
+            var positionLocator = new BiasedBinaryPositionLocatorFactory(8);
+
+            return new MultiMergeSortFactory(runSort, grouping, positionLocator);
         }
     }
 }

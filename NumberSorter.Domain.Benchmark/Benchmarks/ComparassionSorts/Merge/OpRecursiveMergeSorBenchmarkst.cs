@@ -1,15 +1,14 @@
-﻿using System.Collections.Generic;
-using NumberSorter.Core.Algorhythm;
-using NumberSorter.Domain.Benchmark.Benchmarks.Base;
-using NumberSorter.Core.Logic.Algorhythm;
+﻿using NumberSorter.Domain.Benchmark.Benchmarks.Base;
+using NumberSorter.Core.Logic.Factories.Sort;
+using NumberSorter.Core.Logic.Factories.Sort.Base;
 
 namespace NumberSorter.Domain.Tests.SortTests
 {
-    public class OpRecursiveMergeSortBenchmarks : SortBenchmarks
+    public class OpRecursiveMergeSortBenchmarks : ComparassionSortBenchmarks
     {
-        protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
+        protected override ISortFactory GetSortFactory()
         {
-            return new OpRecursiveMergeSort<int>(comparer);
+            return new OpRecursiveMergeSortFactory();
         }
     }
 }

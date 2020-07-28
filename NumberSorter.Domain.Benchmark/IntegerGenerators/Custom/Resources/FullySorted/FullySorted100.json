@@ -1,9 +1,9 @@
 {
   "$type": "NumberSorter.Core.CustomGenerators.CustomListGenerator, NumberSorter.Core",
-  "Id": "a9eb66f3-5963-472a-ac88-a411001fda3d",
-  "Name": "Inverted 50000 to -49999",
+  "Id": "702b27d2-230f-4702-974f-5ef4c6a1b0f9",
+  "Name": "Fully sorted",
   "Shuffle": false,
-  "Description": "",
+  "Description": "1",
   "ListProcessorSets": {
     "$type": "System.Collections.Generic.List`1[[NumberSorter.Core.CustomGenerators.ListProcessorSet, NumberSorter.Core]], mscorlib",
     "$values": [
@@ -18,13 +18,13 @@
           "$values": [
             {
               "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.NewListProcessor, NumberSorter.Core",
-              "Size": 100000,
+              "Size": 100,
               "Description": "Fixed list generator"
             },
             {
               "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.ConsecutiveValuesProcessor, NumberSorter.Core",
-              "Step": -1,
-              "Start": 50000,
+              "Step": 1,
+              "Start": -50,
               "Description": "Consecutive list generator"
             }
           ]

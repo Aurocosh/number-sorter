@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using NumberSorter.Core.Algorhythm;
-using NumberSorter.Domain.Benchmark.Benchmarks.Base;
-using NumberSorter.Core.Logic.Algorhythm;
+﻿using NumberSorter.Domain.Benchmark.Benchmarks.Base;
 using NumberSorter.Core.Logic.Algorhythm.GapGenerator;
+using NumberSorter.Core.Logic.Factories.Sort.Base;
+using NumberSorter.Core.Logic.Factories.Sort;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks
 {
-    public class ShellSortCiuraExtendedBenchmarks : SortBenchmarks
+    public class ShellSortCiuraExtendedBenchmarks : ComparassionSortBenchmarks
     {
-        protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
+        protected override ISortFactory GetSortFactory()
         {
-            return new ShellSort<int>(comparer, new CiuraExtendedGapGenerator());
+            var gapGenerator = new CiuraExtendedGapGenerator();
+            return new ShellSortFactory(gapGenerator);
         }
     }
 }

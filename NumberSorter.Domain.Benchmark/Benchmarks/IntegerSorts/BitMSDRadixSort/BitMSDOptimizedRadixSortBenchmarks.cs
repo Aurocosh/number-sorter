@@ -5,9 +5,9 @@ using NumberSorter.Core.Logic.Algorhythm.SignSeparator;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks
 {
-    public class BitMSDOptimizedRadixSortBenchmarks : SortBenchmarks
+    public class BitMSDOptimizedRadixSortBenchmarks : IntegerSortBenchmarks
     {
-        protected override IIntegerSortAlgorhythm GetIntAlgorhythm()
+        protected override IIntegerSortAlgorhythm GetSortAlgorithm()
         {
             return new BitMSDOptimizedRadixSort(new OptimizedLocalSignSeparator());
         }

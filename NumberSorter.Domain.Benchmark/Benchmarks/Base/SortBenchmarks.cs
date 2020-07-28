@@ -1,11 +1,10 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Exporters;
 using BenchmarkDotNet.Order;
-using NumberSorter.Core.Algorhythm;
 using NumberSorter.Domain.Benchmark.IntegerGenerators;
-using NumberSorter.Core.Logic.Comparer;
 using System.Collections.Generic;
-using System.Linq;
+using NumberSorter.Core.Generators;
+using NumberSorter.Core.CustomGenerators.Context;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks.Base
 {
@@ -16,103 +15,83 @@ namespace NumberSorter.Domain.Benchmark.Benchmarks.Base
     [Orderer(SummaryOrderPolicy.Method, MethodOrderPolicy.Alphabetical)]
     public abstract class SortBenchmarks
     {
-        static SortBenchmarks()
+        private readonly BenchmarkDataManager _dataManager;
+
+        protected SortBenchmarks()
         {
+            _dataManager = new BenchmarkDataManager();
+
+            var randomGenerator = new RandomIntegerGenerator(BenchmarkRandomProvider.Random);
+
+            var randomUnsorted100 = randomGenerator.Generate(int.MinValue, int.MaxValue, 1000).ToArray();
+            _dataManager.AddDataSet("Random unsorted (100)", randomUnsorted100);
+
+            var randomUnsorted10000 = randomGenerator.Generate(int.MinValue, int.MaxValue, 1000).ToArray();
+            _dataManager.AddDataSet("Random unsorted (10000)", randomUnsorted10000);
+
+            // Templated int lists
+            var context = new CustomConverterContext(BenchmarkRandomProvider.Random);
+            var templateGenerator = new TemplateListGenerator(context);
+
+            // Fully sorted
+            var fullySorted100 = templateGenerator.Generate("FullySorted.FullySorted100");
+            _dataManager.AddDataSet("Fully sorted (100)", fullySorted100);
+
+            var fullySorted10000 = templateGenerator.Generate("FullySorted.FullySorted10000");
+            _dataManager.AddDataSet("Fully sorted (10000)", fullySorted10000);
+
+            // Almost sorted
+            var almostSorted100 = templateGenerator.Generate("AlmostSorted.AlmostSorted100");
+            _dataManager.AddDataSet("Almost sorted (100)", almostSorted100);
+
+            var almostSorted10000 = templateGenerator.Generate("AlmostSorted.AlmostSorted10000");
+            _dataManager.AddDataSet("Almost sorted (10000)", almostSorted10000);
+
+            // Few unique
+            var fewUnique100 = templateGenerator.Generate("FewUnique.FewUnique100");
+            _dataManager.AddDataSet("Few unique (100)", fewUnique100);
+
+            var fewUnique10000 = templateGenerator.Generate("FewUnique.FewUnique10000");
+            _dataManager.AddDataSet("Few unique (10000)", fewUnique10000);
+
+            // Inverted
+            var inverted100 = templateGenerator.Generate("Inverted.Inverted100");
+            _dataManager.AddDataSet("Inverted (100)", inverted100);
+
+            var inverted10000 = templateGenerator.Generate("Inverted.Inverted10000");
+            _dataManager.AddDataSet("Inverted (10000)", inverted10000);
+
+            // Intervals
+            var intervals100 = templateGenerator.Generate("Intervals.Intervals100");
+            _dataManager.AddDataSet("Intervals (100)", intervals100);
+
+            var intervals10000 = templateGenerator.Generate("Intervals.Intervals10000");
+            _dataManager.AddDataSet("Intervals (10000)", intervals10000);
+
+            // Shuffled intervals
+            var shuffledIntervals100 = templateGenerator.Generate("ShuffledIntervals.ShuffledIntervals100");
+            _dataManager.AddDataSet("Shuffled intervals (100)", shuffledIntervals100);
+
+            var shuffledIntervals10000 = templateGenerator.Generate("ShuffledIntervals.ShuffledIntervals10000");
+            _dataManager.AddDataSet("Shuffled intervals (10000)", shuffledIntervals10000);
         }
 
-        private IComparer<int> Comparer { get; }
-        private readonly ISortAlgorhythm<int> _sort;
-        private readonly IIntegerSortAlgorhythm _integerSort;
+        public IEnumerable<object[]> SortParameters => _dataManager.GenerateParameters();
 
-        public SortBenchmarks()
+        [IterationSetup]
+        public void IterationSetup()
         {
-            Comparer = new IntComparer();
-            _sort = GetAlgorhythm(Comparer);
-            _integerSort = GetIntAlgorhythm();
-        }
-
-        public IEnumerable<object[]> Custom_Inverted_DynamicList() => new SortBenchmark_Custom_DynamicListGenerator("Inverted").ToList();
-        public IEnumerable<object[]> Custom_Intervals_DynamicList() => new SortBenchmark_Custom_DynamicListGenerator("Intervals").ToList();
-        public IEnumerable<object[]> Custom_FewUnique_DynamicList() => new SortBenchmark_Custom_DynamicListGenerator("FewUnique").ToList();
-        public IEnumerable<object[]> Custom_FullySorted_DynamicList() => new SortBenchmark_Custom_DynamicListGenerator("FullySorted").ToList();
-        public IEnumerable<object[]> Custom_AlmostSorted_DynamicList() => new SortBenchmark_Custom_DynamicListGenerator("AlmostSorted").ToList();
-        public IEnumerable<object[]> Custom_ShuffledIntervals_DynamicList() => new SortBenchmark_Custom_DynamicListGenerator("ShuffledIntervals").ToList();
-        public IEnumerable<object[]> TwoFullySortedParts_FirstBiggerThenSecond_DynamicList() => new SortBenchmark_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator().ToList();
-        public IEnumerable<object[]> RandomUnsorted_DynamicList() => new SortBenchmark_RandomUnsorted_DynamicListGenerator().ToList();
-        //public IEnumerable<object[]> PartiallySorted_DynamicList() => new SortBenchmark_PartiallySorted_DynamicListGenerator().ToList();
-
-        protected virtual ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer) => null;
-        protected virtual IIntegerSortAlgorhythm GetIntAlgorhythm() => null;
-
-        [Benchmark]
-        [ArgumentsSource(nameof(Custom_Inverted_DynamicList))]
-        public void Custom_Inverted_Dynamic(int size, IList<int> testData)
-        {
-            Sort(testData);
-        }
-
-        [Benchmark]
-        [ArgumentsSource(nameof(Custom_FewUnique_DynamicList))]
-        public void Custom_FewUnique_Dynamic(int size, IList<int> testData)
-        {
-            Sort(testData);
-        }
-
-        [Benchmark]
-        [ArgumentsSource(nameof(Custom_FullySorted_DynamicList))]
-        public void Custom_FullySorted_Dynamic(int size, IList<int> testData)
-        {
-            Sort(testData);
-        }
-
-        [Benchmark]
-        [ArgumentsSource(nameof(Custom_AlmostSorted_DynamicList))]
-        public void Custom_AlmostSorted_Dynamic(int size, IList<int> testData)
-        {
-            Sort(testData);
-        }
-
-        [Benchmark]
-        [ArgumentsSource(nameof(Custom_Intervals_DynamicList))]
-        public void Custom_Intervals_Dynamic(int size, IList<int> testData)
-        {
-            Sort(testData);
-        }
-
-        [Benchmark]
-        [ArgumentsSource(nameof(Custom_ShuffledIntervals_DynamicList))]
-        public void Custom_ShuffledIntervals_Dynamic(int size, IList<int> testData)
-        {
-            Sort(testData);
-        }
-
-        [Benchmark]
-        [ArgumentsSource(nameof(TwoFullySortedParts_FirstBiggerThenSecond_DynamicList))]
-        public void TwoFullySortedParts_FirstBiggerThenSecond_Dynamic(int size, List<int> testData)
-        {
-            Sort(testData);
+            _dataManager.Refresh();
         }
 
         [Benchmark]
-        [ArgumentsSource(nameof(RandomUnsorted_DynamicList))]
-        public void RandomUnsorted_Dynamic(int size, List<int> testData)
+        [ArgumentsSource(nameof(SortParameters))]
+        public void Sort(string name, int index)
         {
-            Sort(testData);
+            var list = _dataManager.GetDataSet(index);
+            Sort(list);
         }
 
-        private void Sort(IList<int> list)
-        {
-            if (_integerSort != null)
-                _integerSort.Sort(list);
-            else
-                _sort.Sort(list);
-        }
-
-        //[Benchmark]
-        //[ArgumentsSource(nameof(PartiallySorted_DynamicList))]
-        //public void PartiallySorted_Dynamic(int size, string name, List<int> testData)
-        //{
-        //    _sort.Sort(testData);
-        //}
+        protected abstract void Sort(int[] list);
     }
 }

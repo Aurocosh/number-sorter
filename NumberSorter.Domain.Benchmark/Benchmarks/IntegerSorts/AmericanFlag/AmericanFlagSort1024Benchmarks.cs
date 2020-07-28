@@ -5,9 +5,9 @@ using NumberSorter.Core.Logic.Algorhythm.SignSeparator;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks
 {
-    public class AmericanFlagSort1024Benchmarks : SortBenchmarks
+    public class AmericanFlagSort1024Benchmarks : IntegerSortBenchmarks
     {
-        protected override IIntegerSortAlgorhythm GetIntAlgorhythm()
+        protected override IIntegerSortAlgorhythm GetSortAlgorithm()
         {
             return new AmericanFlagSort(1024, new OptimizedLocalSignSeparator());
         }

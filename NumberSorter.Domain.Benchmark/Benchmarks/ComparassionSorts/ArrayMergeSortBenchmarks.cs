@@ -1,14 +1,14 @@
 ﻿using NumberSorter.Domain.Benchmark.Benchmarks.Base;
-using NumberSorter.Core.Logic.Factories.Sort.Base;
 using NumberSorter.Core.Logic.Factories.Sort;
+using NumberSorter.Core.Logic.Factories.Sort.Base;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks
 {
-    public class InsertionSortBenchmarks : ComparassionSortBenchmarks
+    public class ArrayMergeSortBenchmarks : ComparassionSortBenchmarks
     {
         protected override ISortFactory GetSortFactory()
         {
-            return new InsertionSortFactory();
+            return new ArrayMergeSortFactory();
         }
     }
 }

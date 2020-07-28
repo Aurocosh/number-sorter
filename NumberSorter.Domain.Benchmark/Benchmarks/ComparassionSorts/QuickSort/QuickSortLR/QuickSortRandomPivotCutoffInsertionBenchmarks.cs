@@ -1,18 +1,18 @@
-﻿using System.Collections.Generic;
-using NumberSorter.Core.Algorhythm;
-using NumberSorter.Domain.Benchmark.Benchmarks.Base;
-using NumberSorter.Core.Logic.Algorhythm;
+﻿using NumberSorter.Domain.Benchmark.Benchmarks.Base;
 using NumberSorter.Core.Logic.Factories.PivotSelector;
 using NumberSorter.Domain.Benchmark.IntegerGenerators;
 using NumberSorter.Core.Logic.Factories.Sort;
+using NumberSorter.Core.Logic.Factories.Sort.Base;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks
 {
-    public class QuickSortRandomPivotCutoffInsertionBenchmarks : SortBenchmarks
+    public class QuickSortRandomPivotCutoffInsertionBenchmarks : ComparassionSortBenchmarks
     {
-        protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
+        protected override ISortFactory GetSortFactory()
         {
-            return new QuickSort<int>(comparer, new RandomPivotSelectorFactory(BenchmarkRandomProvider.Random), new InsertionSortFactory(), 32);
+            var pivotSelector = new RandomPivotSelectorFactory(BenchmarkRandomProvider.Random);
+            var cutoffSort = new InsertionSortFactory();
+            return new QuickSortLLFactory(32, cutoffSort, pivotSelector);
         }
     }
 }

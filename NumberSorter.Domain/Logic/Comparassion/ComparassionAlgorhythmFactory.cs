@@ -1,5 +1,4 @@
-﻿using NumberSorter.Core.Logic.Algorhythm;
-using NumberSorter.Core.Logic.Algorhythm.GapGenerator;
+﻿using NumberSorter.Core.Logic.Algorhythm.GapGenerator;
 using NumberSorter.Core.Logic.Factories.LocalMerge;
 using NumberSorter.Core.Logic.Factories.PivotSelector;
 using NumberSorter.Core.Logic.Factories.PositionLocator;

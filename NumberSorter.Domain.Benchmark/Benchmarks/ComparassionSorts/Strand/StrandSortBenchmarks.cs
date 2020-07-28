@@ -1,18 +1,17 @@
-﻿using System.Collections.Generic;
-using NumberSorter.Core.Algorhythm;
-using NumberSorter.Domain.Benchmark.Benchmarks.Base;
-using NumberSorter.Core.Logic.Algorhythm;
+﻿using NumberSorter.Domain.Benchmark.Benchmarks.Base;
 using NumberSorter.Core.Logic.Factories.PositionLocator;
 using NumberSorter.Core.Logic.Factories.LocalMerge;
+using NumberSorter.Core.Logic.Factories.Sort.Base;
+using NumberSorter.Core.Logic.Factories.Sort;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks
 {
-    public class StrandSortBenchmarks : SortBenchmarks
+    public class StrandSortBenchmarks : ComparassionSortBenchmarks
     {
-        protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
+        protected override ISortFactory GetSortFactory()
         {
             var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(8));
-            return new StrandSort<int>(comparer, merge);
+            return new StrandSortFactory(merge);
         }
     }
 }

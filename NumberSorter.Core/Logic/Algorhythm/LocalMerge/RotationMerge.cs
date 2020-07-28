@@ -3,8 +3,6 @@ using NumberSorter.Core.Logic.Algorhythm.Merge.Base;
 using NumberSorter.Core.Logic.Algorhythm.PositionLocator.Base;
 using NumberSorter.Core.Logic.Factories.LocalMerge.Base;
 using NumberSorter.Core.Logic.Factories.PositionLocator.Base;
-using NumberSorter.Core.Logic.Utility;
-using System;
 using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge

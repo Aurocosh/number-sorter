@@ -18,7 +18,7 @@
           "$values": [
             {
               "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.NewListProcessor, NumberSorter.Core",
-              "Size": 100,
+              "Size": 50,
               "Description": "Fixed list generator"
             },
             {
@@ -29,7 +29,7 @@
             },
             {
               "$type": "NumberSorter.Core.CustomGenerators.Processors.Converters.DuplicateValuesProcessor, NumberSorter.Core",
-              "DuplicateCount": 1000,
+              "DuplicateCount": 200,
               "Description": "List value duplicator"
             },
             {

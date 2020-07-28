@@ -160,6 +160,7 @@
     <Compile Include="Logic\Factories\Sort\Binary\BinaryOptimizedSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Strand\DualStrandSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Strand\StrandFixedBufferSortFactory.cs" />
+    <Compile Include="Logic\Factories\Sort\Strand\StrandLinkedListSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Strand\StrandMergerSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Strand\StrandInPlaceSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Strand\StrandSortFactory.cs" />

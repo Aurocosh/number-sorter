@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
-using NumberSorter.Core.Algorhythm;
-using NumberSorter.Domain.Benchmark.Benchmarks.Base;
-using NumberSorter.Core.Logic.Algorhythm;
+﻿using NumberSorter.Domain.Benchmark.Benchmarks.Base;
 using NumberSorter.Core.Logic.Factories.PivotSelector;
 using NumberSorter.Core.Logic.Factories.Sort;
+using NumberSorter.Core.Logic.Factories.Sort.Base;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks
 {
-    public class QuickSortMedianThreePivotBenchmarks : SortBenchmarks
+    public class QuickSortMedianThreePivotBenchmarks : ComparassionSortBenchmarks
     {
-        protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
+        protected override ISortFactory GetSortFactory()
         {
-            return new QuickSort<int>(comparer, new MedianOfThreePivotSelectorFactory(), new InsertionSortFactory(), 0);
+            var pivotSelector = new MedianOfThreePivotSelectorFactory();
+            var cutoffSort = new InsertionSortFactory();
+            return new QuickSortLLFactory(0, cutoffSort, pivotSelector);
         }
     }
 }

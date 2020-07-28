@@ -1,9 +1,9 @@
 {
   "$type": "NumberSorter.Core.CustomGenerators.CustomListGenerator, NumberSorter.Core",
-  "Id": "905a1f82-f577-495d-a222-ccfa084b3c8c",
-  "Name": "Interval generator",
+  "Id": "702b27d2-230f-4702-974f-5ef4c6a1b0f9",
+  "Name": "Fully sorted",
   "Shuffle": false,
-  "Description": "",
+  "Description": "1",
   "ListProcessorSets": {
     "$type": "System.Collections.Generic.List`1[[NumberSorter.Core.CustomGenerators.ListProcessorSet, NumberSorter.Core]], mscorlib",
     "$values": [
@@ -18,22 +18,14 @@
           "$values": [
             {
               "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.NewListProcessor, NumberSorter.Core",
-              "Size": 100000,
+              "Size": 10000,
               "Description": "Fixed list generator"
             },
             {
               "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.ConsecutiveValuesProcessor, NumberSorter.Core",
               "Step": 1,
-              "Start": -50000,
+              "Start": -5000,
               "Description": "Consecutive list generator"
-            },
-            {
-              "$type": "NumberSorter.Core.CustomGenerators.Processors.Converters.IntervalValuesProcessor, NumberSorter.Core",
-              "Normal": 200,
-              "Inverted": 200,
-              "Shuffled": 200,
-              "ShuffleParts": false,
-              "Description": "List interval processor (Normal, Inverted, Shuffled)"
             }
           ]
         }

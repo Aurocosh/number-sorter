@@ -3,10 +3,7 @@ using NumberSorter.Core.Logic.Factories.LocalMerge.Base;
 using NumberSorter.Core.Logic.Factories.PositionLocator.Base;
 using NumberSorter.Core.Logic.Factories.Sort.Base;
 using NumberSorter.Core.Logic.Utility;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Xml;
 
 namespace NumberSorter.Core.Logic.Algorhythm
 {

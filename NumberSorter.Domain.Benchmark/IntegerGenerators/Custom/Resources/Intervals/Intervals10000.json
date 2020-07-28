@@ -18,13 +18,13 @@
           "$values": [
             {
               "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.NewListProcessor, NumberSorter.Core",
-              "Size": 1000,
+              "Size": 10000,
               "Description": "Fixed list generator"
             },
             {
               "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.ConsecutiveValuesProcessor, NumberSorter.Core",
               "Step": 1,
-              "Start": -500,
+              "Start": -5000,
               "Description": "Consecutive list generator"
             },
             {

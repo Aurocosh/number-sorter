@@ -1,7 +1,7 @@
 {
   "$type": "NumberSorter.Core.CustomGenerators.CustomListGenerator, NumberSorter.Core",
-  "Id": "a9eb66f3-5963-472a-ac88-a411001fda3d",
-  "Name": "Inverted 50 to -49",
+  "Id": "905a1f82-f577-495d-a222-ccfa084b3c8c",
+  "Name": "Interval generator",
   "Shuffle": false,
   "Description": "",
   "ListProcessorSets": {
@@ -18,14 +18,22 @@
           "$values": [
             {
               "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.NewListProcessor, NumberSorter.Core",
-              "Size": 100,
+              "Size": 10000,
               "Description": "Fixed list generator"
             },
             {
               "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.ConsecutiveValuesProcessor, NumberSorter.Core",
-              "Step": -1,
-              "Start": 50,
+              "Step": 1,
+              "Start": -5000,
               "Description": "Consecutive list generator"
+            },
+            {
+              "$type": "NumberSorter.Core.CustomGenerators.Processors.Converters.IntervalValuesProcessor, NumberSorter.Core",
+              "Normal": 20,
+              "Inverted": 20,
+              "Shuffled": 20,
+              "ShuffleParts": true,
+              "Description": "List interval processor (Normal, Inverted, Shuffled)"
             }
           ]
         }

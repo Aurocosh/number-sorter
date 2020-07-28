@@ -4,9 +4,9 @@ using NumberSorter.Core.Logic.Algorhythm.IntegerSort;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks
 {
-    public class AverageBucketSortBenchmarks : SortBenchmarks
+    public class AverageBucketSortBenchmarks : IntegerSortBenchmarks
     {
-        protected override IIntegerSortAlgorhythm GetIntAlgorhythm()
+        protected override IIntegerSortAlgorhythm GetSortAlgorithm()
         {
             return new AverageBucketSort();
         }

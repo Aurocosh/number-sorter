@@ -1,7 +1,6 @@
 ﻿using NumberSorter.Core.Logic.Factories.LocalMerge;
 using NumberSorter.Core.Logic.Factories.LocalMerge.Base;
 using NumberSorter.Core.Logic.Factories.PositionLocator;
-using NumberSorter.Core.Logic.Factories.Sort;
 using NumberSorter.Domain.DialogService;
 using NumberSorter.Domain.ViewModels;
 using ReactiveUI;
