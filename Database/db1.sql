@@ -20,21 +20,31 @@ RETURNS NULL ON NULL INPUT;
 ALTER FUNCTION split_pascal OWNER TO db_user;
 
 CREATE OR REPLACE VIEW report_sort_names AS 
-	SELECT id AS report_id,
-		cap_first(lower(split_pascal(substring(type from '^(.*)Benchmarks')))) AS sort_name
-	FROM report_data;
+	SELECT report_id,
+		sort_name,
+		dense_rank() OVER(ORDER BY sort_name)::int AS sort_name_id
+	FROM (
+		SELECT id AS report_id,
+			cap_first(lower(split_pascal(substring(type from '^(.*)Benchmarks')))) AS sort_name
+		FROM report_data	
+	) AS t;
 ALTER TABLE report_sort_names OWNER TO db_user;
  
 CREATE OR REPLACE VIEW benchmark_method_names AS 
-	SELECT id AS benchmark_id,
-		substring(full_name from 'name:\s\"([^\"]*)\"') AS method_name
-	FROM benchmark;
+	SELECT benchmark_id,
+		dataset_name,
+		dense_rank() OVER( ORDER BY dataset_name)::int AS dataset_id
+	FROM (
+		SELECT id AS benchmark_id,
+		substring(full_name from 'name:\s\"([^\"]*)\"') AS dataset_name
+		FROM benchmark
+	) AS t;
 ALTER TABLE benchmark_method_names OWNER TO db_user;
 
 CREATE OR REPLACE VIEW benchmark_overview AS 
 	SELECT b.report_id,
 		rsn.sort_name,
-		bmn.method_name,
+		bmn.dataset_name,
 		ROUND(b.statistics_median::numeric, 2) AS median,
 		ROUND(b.statistics_mean::numeric, 2) AS mean,
 		ROUND(b.statistics_standard_error::numeric, 2) AS standard_error,
@@ -42,7 +52,9 @@ CREATE OR REPLACE VIEW benchmark_overview AS
 		memory_bytes_allocated_per_operation AS memory_allocated,
 		memory_gen0_collections,
 		memory_gen1_collections,
-		memory_gen2_collections
+		memory_gen2_collections,
+		bmn.dataset_id,
+		rsn.sort_name_id
 	FROM benchmark AS b
 	JOIN report_sort_names AS rsn ON rsn.report_id = b.report_id
 	JOIN benchmark_method_names AS bmn ON bmn.benchmark_id = b.id;
@@ -66,29 +78,31 @@ ORDER BY type,
 ALTER TABLE most_recent_reports_by_type_and_env OWNER TO db_user;
 
 CREATE OR REPLACE VIEW sort_report_comparassion_by_time AS 
-SELECT row_number() OVER( PARTITION BY host_environment_info_id,method_name ORDER BY mean) AS position,
+SELECT row_number() OVER( PARTITION BY host_environment_info_id,dataset_name ORDER BY mean) AS position,
 	sort_name,
-	method_name,
+	dataset_name,
 	mean,
-	round(mean / (min(mean) OVER( PARTITION BY host_environment_info_id,method_name ORDER BY mean)),2) AS compared_to_best,
+	round(mean / (min(mean) OVER( PARTITION BY host_environment_info_id,dataset_name ORDER BY mean)),2) AS compared_to_best,
 	memory_allocated,
 	memory_gen0_collections,
 	memory_gen1_collections,
 	memory_gen2_collections,
 	standard_error,
 	standard_deviation,
-	host_environment_info_id
+	host_environment_info_id,
+	dataset_id,
+	sort_name_id
 FROM most_recent_reports_by_type_and_env AS mrr
 JOIN benchmark_overview AS bo ON bo.report_id = mrr.report_id
 ORDER BY host_environment_info_id,
-	method_name,
+	dataset_name,
 	mean ASC;
 ALTER TABLE sort_report_comparassion_by_time OWNER TO db_user;
 
 CREATE OR REPLACE VIEW sort_report_comparassion_by_memory AS 
-SELECT row_number() OVER( PARTITION BY host_environment_info_id,method_name ORDER BY memory_allocated,mean) AS position,
+SELECT row_number() OVER( PARTITION BY host_environment_info_id,dataset_name ORDER BY memory_allocated,mean) AS position,
 	sort_name,
-	method_name,
+	dataset_name,
 	memory_allocated,
 	mean,
 	memory_gen0_collections,
@@ -96,11 +110,13 @@ SELECT row_number() OVER( PARTITION BY host_environment_info_id,method_name ORDE
 	memory_gen2_collections,
 	standard_error,
 	standard_deviation,
-	host_environment_info_id
+	host_environment_info_id,
+	dataset_id,
+	sort_name_id
 FROM most_recent_reports_by_type_and_env AS mrr
 JOIN benchmark_overview AS bo ON bo.report_id = mrr.report_id
 ORDER BY host_environment_info_id,
-	method_name,
+	dataset_name,
 	memory_allocated,
 	mean ASC;
 ALTER TABLE sort_report_comparassion_by_memory OWNER TO db_user;
@@ -108,7 +124,7 @@ ALTER TABLE sort_report_comparassion_by_memory OWNER TO db_user;
 CREATE OR REPLACE VIEW public.sort_report_comparassion_by_memory_pretty AS
 	SELECT sort_report_comparassion_by_memory."position",
 		sort_report_comparassion_by_memory.sort_name,
-		sort_report_comparassion_by_memory.method_name,
+		sort_report_comparassion_by_memory.dataset_name,
 		to_char(sort_report_comparassion_by_memory.mean, '999G999G999G999'::text) AS mean,
 		sort_report_comparassion_by_memory.memory_allocated,
 		pg_size_pretty(sort_report_comparassion_by_memory.memory_allocated::numeric) AS memory_pretty,
@@ -117,14 +133,16 @@ CREATE OR REPLACE VIEW public.sort_report_comparassion_by_memory_pretty AS
 		sort_report_comparassion_by_memory.memory_gen2_collections,
 		sort_report_comparassion_by_memory.standard_error,
 		sort_report_comparassion_by_memory.standard_deviation,
-		sort_report_comparassion_by_memory.host_environment_info_id
+		sort_report_comparassion_by_memory.host_environment_info_id,
+		dataset_id,
+		sort_name_id
 	FROM sort_report_comparassion_by_memory;
 ALTER TABLE public.sort_report_comparassion_by_memory_pretty OWNER TO db_user;
 
 CREATE OR REPLACE VIEW public.sort_report_comparassion_by_time_pretty AS
 	SELECT sort_report_comparassion_by_time."position",
 		sort_report_comparassion_by_time.sort_name,
-		sort_report_comparassion_by_time.method_name,
+		sort_report_comparassion_by_time.dataset_name,
 		to_char(sort_report_comparassion_by_time.mean, '999G999G999G999'::text) AS mean,
 		sort_report_comparassion_by_time.compared_to_best,
 		sort_report_comparassion_by_time.memory_allocated,
@@ -134,7 +152,9 @@ CREATE OR REPLACE VIEW public.sort_report_comparassion_by_time_pretty AS
 		sort_report_comparassion_by_time.memory_gen2_collections,
 		sort_report_comparassion_by_time.standard_error,
 		sort_report_comparassion_by_time.standard_deviation,
-		sort_report_comparassion_by_time.host_environment_info_id
+		sort_report_comparassion_by_time.host_environment_info_id,
+		dataset_id,
+		sort_name_id
 	FROM sort_report_comparassion_by_time;
 ALTER TABLE public.sort_report_comparassion_by_time_pretty OWNER TO db_user;
 
@@ -198,22 +218,24 @@ ALTER TABLE recent_sort_position_sums_by_memory OWNER TO db_user;
 
 CREATE OR REPLACE VIEW previous_sort_report_comparassion_by_time AS 
 SELECT report_id,
-	row_number() OVER( PARTITION BY host_environment_info_id,method_name,sort_name ORDER BY mean) AS position,
+	row_number() OVER( PARTITION BY host_environment_info_id,dataset_name,sort_name ORDER BY mean) AS position,
 	sort_name,
-	method_name,
+	dataset_name,
 	mean,
-	round(mean / (min(mean) OVER( PARTITION BY host_environment_info_id,method_name,sort_name ORDER BY mean)),2) AS compared_to_best,
+	round(mean / (min(mean) OVER( PARTITION BY host_environment_info_id,dataset_name,sort_name ORDER BY mean)),2) AS compared_to_best,
 	memory_allocated,
 	memory_gen0_collections,
 	memory_gen1_collections,
 	memory_gen2_collections,
 	standard_error,
 	standard_deviation,
-	host_environment_info_id
+	host_environment_info_id,
+	dataset_id,
+	sort_name_id
 FROM report_data AS rd
 JOIN benchmark_overview AS bo ON bo.report_id = rd.id
 ORDER BY host_environment_info_id,
-	method_name,
+	dataset_name,
 	sort_name,
 	report_id DESC;
 ALTER TABLE previous_sort_report_comparassion_by_time OWNER TO db_user;
