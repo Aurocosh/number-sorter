@@ -30,6 +30,7 @@ namespace NumberSorter.Domain.Tests.PositionTests.Base
         [InlineData(new object[] { 3, 2, new int[] { 1, 2 } })]
         [InlineData(new object[] { 2, 1, new int[] { 1, 2 } })]
         [InlineData(new object[] { 2, 2, new int[] { 1, 1, 3 } })]
+        [InlineData(new object[] { 3, 2, new int[] { 1, 2, 4, 5 } })]
         public void FindFirtsPosition(int value, int firstPosition, int[] input)
         {
             var position = _locator.FindFirstPosition(input, value, 0, input.Length);
@@ -47,6 +48,7 @@ namespace NumberSorter.Domain.Tests.PositionTests.Base
         [InlineData(new object[] { 3, 2, new int[] { 1, 2 } })]
         [InlineData(new object[] { 2, 2, new int[] { 1, 2 } })]
         [InlineData(new object[] { 2, 2, new int[] { 1, 1, 3 } })]
+        [InlineData(new object[] { 3, 2, new int[] { 1, 2, 4, 5 } })]
         public void FindLastPosition(int value, int lastPosition, int[] input)
         {
             var position = _locator.FindLastPosition(input, value, 0, input.Length);

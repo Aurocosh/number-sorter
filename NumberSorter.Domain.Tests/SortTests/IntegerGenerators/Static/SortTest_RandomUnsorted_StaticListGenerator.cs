@@ -11,13 +11,13 @@ namespace NumberSorter.Domain.Tests.SortTests.Base.IntegerGenerators.Static
         {
             _data = new List<object[]>
             {
-                new object[] {new List<int>(_list5)},
+                new object[] {new List<int>(_list6)},
                 new object[] {new List<int>(_list1)},
                 new object[] {new List<int>(_list2)},
                 new object[] {new List<int>(_list3)},
                 new object[] {new List<int>(_list4)},
+                new object[] {new List<int>(_list5)},
 
-                new object[] {new List<int>(_list6)},
                 new object[] {new List<int>(_list7)},
                 new object[] {new List<int>(_list8)},
                 new object[] {new List<int>(_list9)},
@@ -31,7 +31,8 @@ namespace NumberSorter.Domain.Tests.SortTests.Base.IntegerGenerators.Static
         public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        private static readonly List<int> _list1 = new List<int> { -5, -2, -1, 1, 3, -4, -3, 2 };
+        //private static readonly List<int> _list1 = new List<int> { -5, -2, -1, 1, 3, -4, -3, 2 };
+        private static readonly List<int> _list1 = new List<int> { 1, 2, 4, 4, 3, 4, 7, 8 };
         private static readonly List<int> _list2 = new List<int> { 2, -1, -2, -4, -3, -5, 3, 1 };
         private static readonly List<int> _list3 = new List<int> { 1, 5, 4, 3, 6, 7, 2 };
         private static readonly List<int> _list4 = new List<int> { 2139676882, -3270172, 825182513, -1379076222, 1326457835, -210964631, -416608107, -1696025342 };

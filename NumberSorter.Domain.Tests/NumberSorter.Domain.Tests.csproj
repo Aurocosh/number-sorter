@@ -116,6 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PositionTests\Base\PositionTestsBase.cs" />
+    <Compile Include="PositionTests\InvBiasedBinaryPositionTestsBaseTests.cs" />
     <Compile Include="PositionTests\BiasedBinaryPositionTestsBaseTests.cs" />
     <Compile Include="PositionTests\BinaryPositionTestsBaseTests.cs" />
     <Compile Include="PositionTests\LinearPositionTestsBaseTests.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="RotationTests\InversionInPlaceRotationTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\Binary\BinaryOptimizedSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\IterativeMerge\BottomUpBufferRotationMergeSortTests.cs" />
+    <Compile Include="SortTests\ComparassionSorts\IterativeMerge\BottomUpRelativeMergeSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\IterativeMerge\BottomUpWindowMergeSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\IterativeMerge\BottomUpRotationMergeSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\IterativeMerge\BottomUpBufferMergeSortTests.cs" />

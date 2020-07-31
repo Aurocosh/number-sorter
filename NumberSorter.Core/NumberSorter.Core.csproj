@@ -72,9 +72,11 @@
     <Compile Include="Logic\Algorhythm\LocalMerge\RotationMerge.cs" />
     <Compile Include="Logic\Algorhythm\LocalMerge\GallopMerge.cs" />
     <Compile Include="Logic\Algorhythm\LocalMerge\BufferMerge.cs" />
+    <Compile Include="Logic\Algorhythm\LocalMerge\RelativeMerge.cs" />
     <Compile Include="Logic\Algorhythm\PivotSelector\CenterPivotSelector.cs" />
     <Compile Include="Logic\Algorhythm\PivotSelector\LastPivotSelector.cs" />
     <Compile Include="Logic\Algorhythm\PivotSelector\FirstPivotSelector.cs" />
+    <Compile Include="Logic\Algorhythm\PositionLocator\InvBiasedBinaryPositionLocator.cs" />
     <Compile Include="Logic\Algorhythm\RunMerger\Base\IRunMerger.cs" />
     <Compile Include="Logic\Algorhythm\RunMerger\ArrayRunMerger.cs" />
     <Compile Include="Logic\Algorhythm\SignSeparator\Base\ISignSeparatorAlgothythm.cs" />
@@ -133,6 +135,7 @@
     <Compile Include="Logic\Algorhythm\LocalMerge\IntervalMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\ParallelQuickSort.cs" />
     <Compile Include="Logic\Factories\LocalMerge\BufferRotationMergeFactory.cs" />
+    <Compile Include="Logic\Factories\LocalMerge\RelativeMergeFactory.cs" />
     <Compile Include="Logic\Factories\LocalMerge\RotationMergeFactory.cs" />
     <Compile Include="Logic\Factories\LocalMerge\GallopMergeFactory.cs" />
     <Compile Include="Logic\Factories\LocalMerge\BufferMergeFactory.cs" />
@@ -140,6 +143,7 @@
     <Compile Include="Logic\Factories\PivotSelector\LastPivotSelectorFactory.cs" />
     <Compile Include="Logic\Factories\PivotSelector\FirstPivotSelectorFactory.cs" />
     <Compile Include="Logic\Factories\PositionLocator\Base\IPositionLocatorFactory.cs" />
+    <Compile Include="Logic\Factories\PositionLocator\InvBiasedBinaryPositionLocatorFactory.cs" />
     <Compile Include="Logic\Factories\PositionLocator\BiasedBinaryPositionLocatorFactory.cs" />
     <Compile Include="Logic\Factories\PositionLocator\BinaryPositionLocatorFactory.cs" />
     <Compile Include="Logic\Factories\PositionLocator\LinearPositionLocatorFactory.cs" />

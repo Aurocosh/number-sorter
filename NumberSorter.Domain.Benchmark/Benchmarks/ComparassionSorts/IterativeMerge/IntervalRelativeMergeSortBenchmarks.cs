@@ -6,11 +6,13 @@ using NumberSorter.Core.Logic.Factories.Sort;
 
 namespace NumberSorter.Domain.Benchmark.Benchmarks
 {
-    public class IntervalIterativeMergeSortBenchmarks : ComparassionSortBenchmarks
+    public class RelativeMergeSortBenchmarks : ComparassionSortBenchmarks
     {
         protected override ISortFactory GetSortFactory()
         {
-            var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(16));
+            var locator = new BiasedBinaryPositionLocatorFactory(8);
+            var inversedLocator = new InvBiasedBinaryPositionLocatorFactory(8);
+            var merge = new RelativeMergeFactory(locator, inversedLocator);
             return new BottomUpMergeSortFactory(merge);
         }
     }

@@ -356,6 +356,7 @@
     <Compile Include="Benchmarks\Base\ComparassionSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\Binary\BinaryOptimizedSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\BufferRotationIterativeMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\IntervalRelativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\RotationIterativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\BufferIterativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\MultiMerge\MultiMergeSortGroupBiasedBinaryBenchmarks.cs" />
