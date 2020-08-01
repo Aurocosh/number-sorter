@@ -8,8 +8,8 @@ namespace NumberSorter.Domain.Benchmark
     {
         public static void Main(string[] args)
         {
-            //BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
-            BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args, new DebugInProcessConfig());
+            BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
+            //BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args, new DebugInProcessConfig());
 
             var databaseUploader = new DatabaseUploader();
             databaseUploader.Upload();
