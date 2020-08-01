@@ -76,6 +76,7 @@
     <Compile Include="Logic\Algorhythm\PivotSelector\CenterPivotSelector.cs" />
     <Compile Include="Logic\Algorhythm\PivotSelector\LastPivotSelector.cs" />
     <Compile Include="Logic\Algorhythm\PivotSelector\FirstPivotSelector.cs" />
+    <Compile Include="Logic\Algorhythm\PositionLocator\IterativeBinaryPositionLocator.cs" />
     <Compile Include="Logic\Algorhythm\PositionLocator\InvBiasedBinaryPositionLocator.cs" />
     <Compile Include="Logic\Algorhythm\RunMerger\Base\IRunMerger.cs" />
     <Compile Include="Logic\Algorhythm\RunMerger\ArrayRunMerger.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="Logic\Factories\PivotSelector\LastPivotSelectorFactory.cs" />
     <Compile Include="Logic\Factories\PivotSelector\FirstPivotSelectorFactory.cs" />
     <Compile Include="Logic\Factories\PositionLocator\Base\IPositionLocatorFactory.cs" />
+    <Compile Include="Logic\Factories\PositionLocator\IterativeBinaryPositionLocatorFactory.cs" />
     <Compile Include="Logic\Factories\PositionLocator\InvBiasedBinaryPositionLocatorFactory.cs" />
     <Compile Include="Logic\Factories\PositionLocator\BiasedBinaryPositionLocatorFactory.cs" />
     <Compile Include="Logic\Factories\PositionLocator\BinaryPositionLocatorFactory.cs" />

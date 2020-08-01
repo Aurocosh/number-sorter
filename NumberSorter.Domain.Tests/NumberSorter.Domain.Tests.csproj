@@ -116,6 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PositionTests\Base\PositionTestsBase.cs" />
+    <Compile Include="PositionTests\IterativeBinaryPositionTestsBaseTests.cs" />
     <Compile Include="PositionTests\InvBiasedBinaryPositionTestsBaseTests.cs" />
     <Compile Include="PositionTests\BiasedBinaryPositionTestsBaseTests.cs" />
     <Compile Include="PositionTests\BinaryPositionTestsBaseTests.cs" />
