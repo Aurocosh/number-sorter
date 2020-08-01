@@ -11,10 +11,10 @@ namespace NumberSorter.Core.Logic.Algorhythm.PositionLocator
         {
             if (length == 0)
                 return runStart;
-            return BinarySearchFirstLo(list, element, runStart, runStart + length - 1);
+            return BinarySearchFirst(list, element, runStart, runStart + length - 1);
         }
 
-        protected int BinarySearchFirstLo(IList<T> list, T elementToInsert, int low, int high)
+        protected int BinarySearchFirst(IList<T> list, T elementToInsert, int low, int high)
         {
             if (high <= low)
                 return (Compare(list[low], elementToInsert) < 0) ? low + 1 : low;
@@ -22,32 +22,19 @@ namespace NumberSorter.Core.Logic.Algorhythm.PositionLocator
             int index = (low + high) / 2;
             int comparassion = Compare(list[index], elementToInsert);
             if (comparassion < 0)
-                return BinarySearchFirstHi(list, elementToInsert, index + 1, high);
+                return BinarySearchFirst(list, elementToInsert, index + 1, high);
             else
-                return BinarySearchFirstLo(list, elementToInsert, low, index - 1);
-        }
-
-        protected int BinarySearchFirstHi(IList<T> list, T elementToInsert, int low, int high)
-        {
-            if (high <= low)
-                return (Compare(list[high], elementToInsert) < 0) ? high + 1 : high;
-
-            int index = (low + high) / 2;
-            int comparassion = Compare(list[index], elementToInsert);
-            if (comparassion < 0)
-                return BinarySearchFirstHi(list, elementToInsert, index + 1, high);
-            else
-                return BinarySearchFirstLo(list, elementToInsert, low, index - 1);
+                return BinarySearchFirst(list, elementToInsert, low, index - 1);
         }
 
         public override int FindLastPosition(IList<T> list, T element, int runStart, int length)
         {
             if (length == 0)
                 return runStart;
-            return BinarySearchLastLo(list, element, runStart, runStart + length - 1);
+            return BinarySearchLast(list, element, runStart, runStart + length - 1);
         }
 
-        protected int BinarySearchLastLo(IList<T> list, T elementToInsert, int low, int high)
+        protected int BinarySearchLast(IList<T> list, T elementToInsert, int low, int high)
         {
             if (high <= low)
                 return (Compare(list[low], elementToInsert) <= 0) ? low + 1 : low;
@@ -55,22 +42,9 @@ namespace NumberSorter.Core.Logic.Algorhythm.PositionLocator
             int index = (low + high) / 2;
             int comparassion = Compare(list[index], elementToInsert);
             if (comparassion <= 0)
-                return BinarySearchLastHi(list, elementToInsert, index + 1, high);
+                return BinarySearchLast(list, elementToInsert, index + 1, high);
             else
-                return BinarySearchLastLo(list, elementToInsert, low, index - 1);
-        }
-
-        protected int BinarySearchLastHi(IList<T> list, T elementToInsert, int low, int high)
-        {
-            if (high <= low)
-                return (Compare(list[high], elementToInsert) <= 0) ? high + 1 : high;
-
-            int index = (low + high) / 2;
-            int comparassion = Compare(elementToInsert, list[index]);
-            if (comparassion >= 0)
-                return BinarySearchLastHi(list, elementToInsert, index + 1, high);
-            else
-                return BinarySearchLastLo(list, elementToInsert, low, index - 1);
+                return BinarySearchLast(list, elementToInsert, low, index - 1);
         }
     }
 }

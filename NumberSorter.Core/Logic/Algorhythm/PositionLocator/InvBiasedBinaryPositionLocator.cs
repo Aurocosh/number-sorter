@@ -30,7 +30,7 @@ namespace NumberSorter.Core.Logic.Algorhythm.PositionLocator
             if (comparassion < 0)
                 return BiasedBinarySearchFirstHi(list, element, index + 1, runStart + length - 1, length);
             else
-                return BinarySearchFirstLo(list, element, runStart, index - 1);
+                return BinarySearchFirst(list, element, runStart, index - 1);
         }
 
         private int BiasedBinarySearchFirstHi(IList<T> list, T elementToInsert, int low, int high, int length)
@@ -43,9 +43,9 @@ namespace NumberSorter.Core.Logic.Algorhythm.PositionLocator
             int index = high - bias;
             int comparassion = Compare(list[index], elementToInsert);
             if (comparassion < 0)
-                return BinarySearchFirstHi(list, elementToInsert, index + 1, high);
+                return BinarySearchFirst(list, elementToInsert, index + 1, high);
             else
-                return BinarySearchFirstLo(list, elementToInsert, low, index - 1);
+                return BinarySearchFirst(list, elementToInsert, low, index - 1);
         }
 
         #endregion
@@ -67,7 +67,7 @@ namespace NumberSorter.Core.Logic.Algorhythm.PositionLocator
             if (comparassion <= 0)
                 return BiasedBinarySearchLast(list, element, index + 1, runStart + length - 1, length);
             else
-                return BinarySearchLastLo(list, element, runStart, index - 1);
+                return BinarySearchLast(list, element, runStart, index - 1);
         }
 
         private int BiasedBinarySearchLast(IList<T> list, T elementToInsert, int low, int high, int length)
@@ -80,9 +80,9 @@ namespace NumberSorter.Core.Logic.Algorhythm.PositionLocator
             int index = high - bias;
             int comparassion = Compare(list[index], elementToInsert);
             if (comparassion <= 0)
-                return BinarySearchLastHi(list, elementToInsert, index + 1, high);
+                return BinarySearchLast(list, elementToInsert, index + 1, high);
             else
-                return BinarySearchLastLo(list, elementToInsert, low, index - 1);
+                return BinarySearchLast(list, elementToInsert, low, index - 1);
         }
 
         #endregion
