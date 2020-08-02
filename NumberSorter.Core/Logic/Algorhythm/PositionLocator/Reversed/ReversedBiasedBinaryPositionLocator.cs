@@ -2,12 +2,12 @@
 
 namespace NumberSorter.Core.Logic.Algorhythm.PositionLocator
 {
-    public class InvBiasedBinaryPositionLocator<T> : BinaryPositionLocator<T>
+    public class ReversedBiasedBinaryPositionLocator<T> : BinaryPositionLocator<T>
     {
         private int IndexBias { get; }
         private int MinLength { get; }
 
-        public InvBiasedBinaryPositionLocator(IComparer<T> comparer, int indexBias) : base(comparer)
+        public ReversedBiasedBinaryPositionLocator(IComparer<T> comparer, int indexBias) : base(comparer)
         {
             IndexBias = indexBias;
             MinLength = IndexBias * 3;

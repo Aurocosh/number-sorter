@@ -39,9 +39,7 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
             unsortedInFirst -= skipCount;
 
             int bufferIndex = 0;
-
-            if (_buffer.Length < unsortedInFirst)
-                _buffer = new T[unsortedInFirst];
+            ResiseBufferIfNeeded(unsortedInFirst);
 
             var buffer = _buffer;
             ListUtility.Copy(list, firstIndex, buffer, 0, unsortedInFirst);
@@ -78,6 +76,23 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
             //Console.WriteLine($"\nAfter {first}   {second}");
             //if (!IsSorted(list, firstRun.Start, firstRun.Length + secondRun.Length))
             //    Console.WriteLine("Not sorted");
+        }
+
+        private void ResiseBufferIfNeeded(int minCapacity)
+        {
+            if (_buffer.Length < minCapacity)
+            {
+                var newSize = minCapacity;
+                newSize |= newSize >> 1;
+                newSize |= newSize >> 2;
+                newSize |= newSize >> 4;
+                newSize |= newSize >> 8;
+                newSize |= newSize >> 16;
+                newSize++;
+
+                newSize = newSize > minCapacity ? newSize : minCapacity;
+                _buffer = new T[newSize];
+            }
         }
     }
 }

@@ -355,10 +355,12 @@
     <Compile Include="Benchmarks\Base\IntegerSortBenchmarks.cs" />
     <Compile Include="Benchmarks\Base\ComparassionSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\Binary\BinaryOptimizedSortBenchmarks.cs" />
-    <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\IntervalIterativeMergeSortBenchmarks - Copy.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\CompositIntervalMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\IntervalIterativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\IterBinIntervalIterativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\BufferRotationIterativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\BinIntervalIterativeMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\CompositRelativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\RelativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\RotationIterativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\BufferIterativeMergeSortBenchmarks.cs" />

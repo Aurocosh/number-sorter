@@ -4,11 +4,11 @@ using NumberSorter.Domain.Tests.PositionTests.Base;
 
 namespace NumberSorter.Domain.Tests.PositionTests
 {
-    public class BiasedBinaryPositionTestsBaseTests : PositionTestsBase
+    public class CompositPositionLocatorTests : PositionTestsBase
     {
         protected override IPositionLocatorFactory GetAlgorhythm()
         {
-            return new BiasedBinaryPositionLocatorFactory(8);
+            return new CompositPositionLocatorFactory(16);
         }
     }
 }

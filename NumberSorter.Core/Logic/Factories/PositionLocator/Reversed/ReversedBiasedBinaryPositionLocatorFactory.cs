@@ -5,18 +5,18 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Factories.PositionLocator
 {
-    public class InvBiasedBinaryPositionLocatorFactory : IPositionLocatorFactory
+    public class ReversedBiasedBinaryPositionLocatorFactory : IPositionLocatorFactory
     {
         private int IndexBias { get; }
 
-        public InvBiasedBinaryPositionLocatorFactory(int indexBias)
+        public ReversedBiasedBinaryPositionLocatorFactory(int indexBias)
         {
             IndexBias = indexBias;
         }
 
         public IPositionLocator<T> GetPositionLocator<T>(IComparer<T> comparer)
         {
-            return new InvBiasedBinaryPositionLocator<T>(comparer, IndexBias);
+            return new ReversedBiasedBinaryPositionLocator<T>(comparer, IndexBias);
         }
     }
 }

@@ -4,7 +4,7 @@ using NumberSorter.Domain.Tests.PositionTests.Base;
 
 namespace NumberSorter.Domain.Tests.PositionTests
 {
-    public class IterativeBinaryPositionTestsBaseTests : PositionTestsBase
+    public class IterativeBinaryPositionTests : PositionTestsBase
     {
         protected override IPositionLocatorFactory GetAlgorhythm()
         {

@@ -116,12 +116,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PositionTests\Base\PositionTestsBase.cs" />
+    <Compile Include="PositionTests\ReversedCompositPositionLocatorTests.cs" />
     <Compile Include="PositionTests\IterativeBiasedBinaryPositionLocatorTests.cs" />
-    <Compile Include="PositionTests\IterativeBinaryPositionTestsBaseTests.cs" />
-    <Compile Include="PositionTests\InvBiasedBinaryPositionTestsBaseTests.cs" />
-    <Compile Include="PositionTests\BiasedBinaryPositionTestsBaseTests.cs" />
-    <Compile Include="PositionTests\BinaryPositionTestsBaseTests.cs" />
-    <Compile Include="PositionTests\LinearPositionTestsBaseTests.cs" />
+    <Compile Include="PositionTests\IterativeBinaryPositionTests.cs" />
+    <Compile Include="PositionTests\CompositPositionLocatorTests.cs" />
+    <Compile Include="PositionTests\ReversedBiasedBinaryPositionTests.cs" />
+    <Compile Include="PositionTests\BiasedBinaryPositionTests.cs" />
+    <Compile Include="PositionTests\BinaryPositionTests.cs" />
+    <Compile Include="PositionTests\LinearPositionTests.cs" />
     <Compile Include="RotationTests\IntegerGenerators\Dynamic\RotationTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator.cs" />
     <Compile Include="RotationTests\InversionInPlaceRotationTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\Binary\BinaryOptimizedSortTests.cs" />
