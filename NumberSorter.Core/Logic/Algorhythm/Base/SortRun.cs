@@ -10,6 +10,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
         public int FirstIndex => Start;
         public int MiddleIndex => Start + (Length / 2);
         public int LastIndex => Start + Length - 1;
+        public int ImdexLimit => Start + Length;
 
         public SortRun(int start, int length)
         {

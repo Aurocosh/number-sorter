@@ -30,19 +30,17 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
         private int MergeTemp(IList<T> list, SortRun firstRun, SortRun secondRun, int firstSepIndex)
         {
             int firstIndex = firstRun.Start;
-            int firstLength = firstRun.Length;
+            int firstIndexLimit = firstRun.ImdexLimit;
 
             int secondIndex = secondRun.Start;
-            int lastSecondIndex = secondRun.LastIndex;
+            int lastIndexLimit = secondRun.ImdexLimit;
 
             T nextFromSecond = list[secondIndex];
             while (firstIndex < secondIndex && Compare(list[firstIndex], nextFromSecond) <= 0)
                 firstIndex++;
 
-            firstLength -= firstIndex - firstRun.FirstIndex;
-
             int tempIndex = secondIndex;
-            int indexLimit = secondIndex + Math.Min(firstLength, secondRun.Length);
+            int indexLimit = secondIndex + Math.Min(firstIndexLimit - firstIndex, secondRun.Length);
             if (secondIndex < indexLimit)
             {
                 T nextFromFirst = list[firstIndex];
@@ -51,64 +49,61 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
                 while (secondIndex < indexLimit && Compare(list[secondIndex], nextFromFirst) < 0);
             }
 
-            int tempLength = secondIndex - tempIndex;
-            firstLength -= tempLength;
-
-            while (firstLength > 0 && secondIndex <= lastSecondIndex)
+            while (firstIndex < firstIndexLimit && secondIndex < lastIndexLimit)
             {
                 T nextFromFirst = list[firstIndex];
                 if (Compare(nextFromFirst, list[secondIndex]) <= 0)
                 {
-                    FetchNext(list, ref firstIndex, ref firstLength, ref tempIndex, ref tempLength);
+                    FetchNext(list, ref firstIndex, firstIndexLimit, ref tempIndex, secondIndex);
                 }
                 else
                 {
-                    var left = new SortRun(tempIndex, tempLength);
-                    var right = new SortRun(secondIndex, lastSecondIndex - secondIndex + 1);
+                    var left = new SortRun(tempIndex, secondIndex - tempIndex);
+                    var right = new SortRun(secondIndex, lastIndexLimit - secondIndex);
 
                     int takenFromSecond = MergeTemp(list, left, right, firstIndex);
-                    tempLength += takenFromSecond;
                     secondIndex += takenFromSecond;
 
-                    FetchNext(list, ref firstIndex, ref firstLength, ref tempIndex, ref tempLength);
+                    FetchNext(list, ref firstIndex, firstIndexLimit, ref tempIndex, secondIndex);
                 }
             }
 
-            if (tempLength > 0)
+            if (tempIndex < secondIndex)
             {
-                if (firstLength > 0)
+                if (firstIndex < firstIndexLimit)
                 {
-                    var first = new SortRun(firstIndex, firstLength);
-                    var second = new SortRun(tempIndex, tempLength);
+                    var first = new SortRun(firstIndex, firstIndexLimit - firstIndex);
+                    var second = new SortRun(tempIndex, secondIndex - tempIndex);
 
                     _localMergeAlgothythm.Rotate(list, first, second);
                 }
-                else if (secondIndex <= lastSecondIndex)
+                else if (secondIndex < lastIndexLimit)
                 {
 
-                    var left = new SortRun(tempIndex, tempLength);
-                    var right = new SortRun(secondIndex, lastSecondIndex - secondIndex + 1);
+                    var left = new SortRun(tempIndex, secondIndex - tempIndex);
+                    var right = new SortRun(secondIndex, lastIndexLimit - secondIndex);
 
                     int takenFromSecond = MergeTemp(list, left, right, firstSepIndex);
-                    tempLength += takenFromSecond;
                     secondIndex += takenFromSecond;
 
-                    if (firstLength > 0)
-                        FetchNext(list, ref firstIndex, ref firstLength, ref tempIndex, ref tempLength);
+                    if (firstIndex < firstIndexLimit)
+                        FetchNext(list, ref firstIndex, firstIndexLimit, ref tempIndex, secondIndex);
                 }
             }
-            else if (tempLength == 0 && firstSepIndex < firstRun.FirstIndex)
+            else if (tempIndex == secondIndex - 1 && firstSepIndex < firstRun.FirstIndex)
             {
                 T nextFromFirst = list[firstSepIndex];
-                while (secondIndex <= lastSecondIndex && Compare(list[secondIndex], nextFromFirst) < 0)
+                while (secondIndex < lastIndexLimit && Compare(list[secondIndex], nextFromFirst) < 0)
                     secondIndex++;
             }
 
             return secondIndex - secondRun.FirstIndex;
         }
 
-        private void FetchNext(IList<T> list, ref int firstIndex, ref int firstLength, ref int tempIndex, ref int tempLength)
+        private void FetchNext(IList<T> list, ref int firstIndex, int firstIndexLimit, ref int tempIndex, int secondIndex)
         {
+            int firstLength = firstIndexLimit - firstIndex;
+            int tempLength = secondIndex - tempIndex;
             if (firstLength < tempLength)
             {
                 var first = new SortRun(firstIndex, firstLength);
@@ -116,20 +111,18 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
 
                 _localMergeAlgothythm.Rotate(list, first, second);
                 tempIndex = firstIndex + tempLength;
-                tempLength = firstLength;
-                firstLength = 0;
+                firstIndex += firstLength;
             }
             else
             {
                 int fromIndex = firstIndex;
                 int toIndex = tempIndex;
-                int firstIndexLimit = fromIndex + tempLength;
+                int fromIndexLimit = fromIndex + tempLength;
                 do
                     list.Swap(fromIndex++, toIndex++);
-                while (fromIndex != firstIndexLimit);
+                while (fromIndex != fromIndexLimit);
 
                 firstIndex += tempLength;
-                firstLength -= tempLength;
             }
         }
     }
