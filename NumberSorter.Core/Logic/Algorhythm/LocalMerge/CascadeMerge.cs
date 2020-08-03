@@ -33,7 +33,7 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
             int firstLength = firstRun.Length;
 
             int secondIndex = secondRun.Start;
-            int secondLength = secondRun.Length;
+            int lastSecondIndex = secondRun.LastIndex;
 
             T nextFromSecond = list[secondIndex];
             while (firstIndex < secondIndex && Compare(list[firstIndex], nextFromSecond) <= 0)
@@ -42,7 +42,7 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
             firstLength -= firstIndex - firstRun.FirstIndex;
 
             int tempIndex = secondIndex;
-            int indexLimit = secondIndex + Math.Min(firstLength, secondLength);
+            int indexLimit = secondIndex + Math.Min(firstLength, secondRun.Length);
             if (secondIndex < indexLimit)
             {
                 T nextFromFirst = list[firstIndex];
@@ -53,9 +53,8 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
 
             int tempLength = secondIndex - tempIndex;
             firstLength -= tempLength;
-            secondLength -= tempLength;
 
-            while (firstLength > 0 && secondLength > 0)
+            while (firstLength > 0 && secondIndex <= lastSecondIndex)
             {
                 T nextFromFirst = list[firstIndex];
                 if (Compare(nextFromFirst, list[secondIndex]) <= 0)
@@ -65,12 +64,11 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
                 else
                 {
                     var left = new SortRun(tempIndex, tempLength);
-                    var right = new SortRun(secondIndex, secondLength);
+                    var right = new SortRun(secondIndex, lastSecondIndex - secondIndex + 1);
 
                     int takenFromSecond = MergeTemp(list, left, right, firstIndex);
                     tempLength += takenFromSecond;
                     secondIndex += takenFromSecond;
-                    secondLength -= takenFromSecond;
 
                     FetchNext(list, ref firstIndex, ref firstLength, ref tempIndex, ref tempLength);
                 }
@@ -85,14 +83,15 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
 
                     _localMergeAlgothythm.Rotate(list, first, second);
                 }
-                else if (secondLength > 0)
+                else if (secondIndex <= lastSecondIndex)
                 {
+
                     var left = new SortRun(tempIndex, tempLength);
-                    var right = new SortRun(secondIndex, secondLength);
+                    var right = new SortRun(secondIndex, lastSecondIndex - secondIndex + 1);
 
                     int takenFromSecond = MergeTemp(list, left, right, firstSepIndex);
                     tempLength += takenFromSecond;
-                    secondLength -= takenFromSecond;
+                    secondIndex += takenFromSecond;
 
                     if (firstLength > 0)
                         FetchNext(list, ref firstIndex, ref firstLength, ref tempIndex, ref tempLength);
@@ -100,16 +99,12 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
             }
             else if (tempLength == 0 && firstSepIndex < firstRun.FirstIndex)
             {
-                indexLimit = secondIndex + secondLength;
                 T nextFromFirst = list[firstSepIndex];
-                while (secondIndex < indexLimit && Compare(list[secondIndex], nextFromFirst) < 0)
-                {
+                while (secondIndex <= lastSecondIndex && Compare(list[secondIndex], nextFromFirst) < 0)
                     secondIndex++;
-                    secondLength--;
-                }
             }
 
-            return secondRun.Length - secondLength;
+            return secondIndex - secondRun.FirstIndex;
         }
 
         private void FetchNext(IList<T> list, ref int firstIndex, ref int firstLength, ref int tempIndex, ref int tempLength)
