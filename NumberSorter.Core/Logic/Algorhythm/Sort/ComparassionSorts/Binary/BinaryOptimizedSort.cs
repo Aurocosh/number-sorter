@@ -8,6 +8,9 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
         public override void Sort(IList<T> list, int startingIndex, int length)
         {
+            if (length == 0)
+                return;
+
             int indexLimit = startingIndex + length;
             for (int index = startingIndex + 1; index != indexLimit; index++)
             {

@@ -133,6 +133,7 @@
     <Compile Include="SortTests\ComparassionSorts\IterativeMerge\BottomUpWindowMergeSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\IterativeMerge\BottomUpRotationMergeSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\IterativeMerge\BottomUpBufferMergeSortTests.cs" />
+    <Compile Include="SortTests\ComparassionSorts\PresortIterativeMerge\PresortBottomUpIntervalMergeSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\ShellSort\ShellSortCiuraExtendedTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\Strand\StrandFixedBufferSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\Strand\StrandSortMergerTests.cs" />

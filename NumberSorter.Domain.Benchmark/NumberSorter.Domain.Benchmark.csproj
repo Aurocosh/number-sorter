@@ -366,8 +366,10 @@
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\BufferIterativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\SliceIterativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\MultiMerge\MultiMergeSortGroupBiasedBinaryBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\PresortIterativeMerge\PresortGallopMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\ShellSort\ShellSortCiuraExtendedBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\ShellSort\ShellSortKnuthBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\PresortIterativeMerge\PresortIntervalMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\Strand\DualStrandSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\Strand\StrandLinkedListSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\Strand\StrandFixedBufferSortBenchmarks.cs" />

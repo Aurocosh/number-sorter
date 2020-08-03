@@ -91,6 +91,7 @@
     <Compile Include="Logic\Algorhythm\SortBitMaskGenerator\OnesAndZerosSortBitMaskGenerator.cs" />
     <Compile Include="Logic\Algorhythm\SortBitMaskGenerator\ZerosSortBitMaskGenerator.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\Binary\BinaryOptimizedSort.cs" />
+    <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\MergeSort\PresortBottomUpMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\MergeSort\ParallelMergeSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\StrandSort\DualStrandSort.cs" />
     <Compile Include="Logic\Algorhythm\Sort\ComparassionSorts\StrandSort\LinkedListStrandSort.cs" />
@@ -173,6 +174,7 @@
     <Compile Include="Logic\Factories\SortRunLocator\SimpleRunLocatorFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Base\ISortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Binary\BinaryOptimizedSortFactory.cs" />
+    <Compile Include="Logic\Factories\Sort\Merge\PresortBottomUpMergeSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Merge\ParallelIterativeMergeSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Parallel\ParallelQuickSortFactory.cs" />
     <Compile Include="Logic\Factories\Sort\Strand\DualStrandSortFactory.cs" />

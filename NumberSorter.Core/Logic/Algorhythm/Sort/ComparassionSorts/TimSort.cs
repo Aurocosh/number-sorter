@@ -89,7 +89,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
         private static int GetMinrun(int n)
         {
-            int r = 0;           /* станет 1 если среди сдвинутых битов будет хотя бы 1 ненулевой */
+            int r = 0;
             while (n >= _minrun)
             {
                 r |= n & 1;
