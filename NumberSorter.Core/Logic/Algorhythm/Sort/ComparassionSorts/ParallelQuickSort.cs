@@ -24,7 +24,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
         public override void Sort(IList<T> list, int startingIndex, int length)
         {
-            int parallelDepth = Environment.ProcessorCount;
+            int parallelDepth = (int)Math.Ceiling(Math.Log(Environment.ProcessorCount, 2));
             SortRange(list, startingIndex, startingIndex + list.Count - 1, parallelDepth);
         }
 
@@ -43,31 +43,30 @@ namespace NumberSorter.Core.Logic.Algorhythm
             int pivotIndex = PivotSelector.SelectPivot(list, firstIndex, lastIndex);
             var pivot = list[pivotIndex];
 
-            list.Swap(firstIndex, pivotIndex);
-            pivotIndex = firstIndex;
-            int nextBigElementIndex = lastIndex;
-            int nextUnsortedIndex = pivotIndex + 1;
-            int unsortedElementCount = lastIndex - firstIndex;
-            while (unsortedElementCount-- > 0)
+            int leftIndex = firstIndex;
+            int rightIndex = lastIndex;
+
+            while (leftIndex <= rightIndex)
             {
-                var nextUnsorted = list[nextUnsortedIndex];
-                var comparrassion = Compare(pivot, nextUnsorted);
-                if (comparrassion >= 0)
-                    list.Swap(pivotIndex++, nextUnsortedIndex++);
-                else
-                    list.Swap(nextUnsortedIndex, nextBigElementIndex--);
+                while (Compare(list[leftIndex], pivot) < 0)
+                    leftIndex++;
+                while (Compare(list[rightIndex], pivot) > 0)
+                    rightIndex--;
+                if (leftIndex <= rightIndex)
+                    list.Swap(leftIndex++, rightIndex--);
             }
+
             if (parallelDepth > 0)
             {
                 parallelDepth--;
                 Parallel.Invoke(
-                    () => SortRange(list, firstIndex, pivotIndex - 1, parallelDepth),
-                    () => SortRange(list, pivotIndex + 1, lastIndex, parallelDepth));
+                    () => SortRange(list, firstIndex, rightIndex, parallelDepth),
+                    () => SortRange(list, leftIndex, lastIndex, parallelDepth));
             }
             else
             {
-                SortRange(list, firstIndex, pivotIndex - 1, 0);
-                SortRange(list, pivotIndex + 1, lastIndex, 0);
+                SortRange(list, firstIndex, rightIndex, 0);
+                SortRange(list, leftIndex, lastIndex, 0);
             }
         }
     }
