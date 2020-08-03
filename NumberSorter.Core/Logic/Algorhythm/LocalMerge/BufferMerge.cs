@@ -15,7 +15,8 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
 
         public BufferMerge(IComparer<T> comparer, IPositionLocatorFactory positionLocatorFactory, IList<T> list) : base(comparer)
         {
-            _bufferMaxSize = (int)Math.Max(4, Math.Ceiling(Math.Log(list.Count, 2)));
+            //_bufferMaxSize = (int)Math.Max(4, Math.Ceiling(Math.Log(list.Count, 2)));
+            _bufferMaxSize = (int)Math.Max(4, list.Count / 2);
             _buffer = new T[_bufferMaxSize];
             PositionLocator = positionLocatorFactory.GetPositionLocator(comparer);
         }

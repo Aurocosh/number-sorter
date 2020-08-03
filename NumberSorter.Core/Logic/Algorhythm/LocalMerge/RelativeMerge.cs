@@ -49,7 +49,6 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
             int lengthChange = lastSecondIndex - secondPosition + 1;
             unsortedInSecond -= lengthChange;
 
-
             if (unsortedInFirst <= unsortedInSecond)
             {
                 ResiseBufferIfNeeded(unsortedInFirst, list.Count);

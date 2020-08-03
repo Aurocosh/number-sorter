@@ -129,6 +129,7 @@
     <Compile Include="SortTests\ComparassionSorts\Binary\BinaryOptimizedSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\IterativeMerge\BottomUpBufferRotationMergeSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\IterativeMerge\BottomUpRelativeMergeSortTests.cs" />
+    <Compile Include="SortTests\ComparassionSorts\IterativeMerge\BottomUpCascadeMergeSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\IterativeMerge\BottomUpWindowMergeSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\IterativeMerge\BottomUpRotationMergeSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\IterativeMerge\BottomUpBufferMergeSortTests.cs" />
