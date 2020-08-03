@@ -30,10 +30,10 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
         private int MergeTemp(IList<T> list, SortRun firstRun, SortRun secondRun, int firstSepIndex)
         {
             int firstIndex = firstRun.Start;
-            int firstIndexLimit = firstRun.ImdexLimit;
+            int firstIndexLimit = firstRun.IndexLimit;
 
             int secondIndex = secondRun.Start;
-            int lastIndexLimit = secondRun.ImdexLimit;
+            int lastIndexLimit = secondRun.IndexLimit;
 
             T nextFromSecond = list[secondIndex];
             while (firstIndex < secondIndex && Compare(list[firstIndex], nextFromSecond) <= 0)

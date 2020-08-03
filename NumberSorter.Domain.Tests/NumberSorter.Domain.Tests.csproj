@@ -176,7 +176,8 @@
     <Compile Include="SortTests\ComparassionSorts\MultiMerge\MultiMerge\MultiMergeSortSimpleBinaryTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\MultiMerge\MultiMerge\MultiMergeSortSimpleLinearTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\PancakeSortTests.cs" />
-    <Compile Include="SortTests\ComparassionSorts\QuickSort\QuickSortLR\ParallelQuickSortRandomPivotTests.cs" />
+    <Compile Include="SortTests\Parallel\ParallelIterativeIntervalMergeSortTests.cs" />
+    <Compile Include="SortTests\Parallel\ParallelQuickSortRandomPivotTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\ShellSort\ShellSortCiuraTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\ShellSort\ShellSortKnuthTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\ShellSort\ShellSortTokudaTests.cs" />

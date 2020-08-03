@@ -24,17 +24,17 @@ namespace NumberSorter.Core.Logic.Algorhythm
             if (sortRun.Length <= 1)
                 return;
 
-            int listSize = list.Count;
-            int limit = sortRun.FirstIndex + list.Count;
+            int totalSize = sortRun.Length;
+            int limit = sortRun.IndexLimit;
 
             var localMerge = LocalMergeFactory.GetLocalMerge(Comparer, list);
 
-            for (int runSize = 1; runSize < listSize; runSize += runSize)
+            for (int runSize = 1; runSize < totalSize; runSize += runSize)
             {
                 int step = runSize + runSize;
                 for (int startingIndex = sortRun.FirstIndex; startingIndex < limit - runSize; startingIndex += step)
                 {
-                    int secondSize = Math.Min(runSize, listSize - (startingIndex + runSize));
+                    int secondSize = Math.Min(runSize, limit - (startingIndex + runSize));
                     localMerge.Merge(list, new SortRun(startingIndex, runSize), new SortRun(startingIndex + runSize, secondSize));
                 }
             }

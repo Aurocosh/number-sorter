@@ -391,6 +391,9 @@
     <Compile Include="Benchmarks\ComparassionSorts\TimSort\TimSortBinaryWindowLinkedBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\TimSort\TimSortGallopLinkedBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\TimSort\TimSortGallopArrayBenchmarks.cs" />
+    <Compile Include="Benchmarks\Parallel\ParallelGallopIterativeMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\Parallel\ParallelSliceIterativeMergeSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\Parallel\ParallelIntervalIterativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\Parallel\ParallelQuickSortRandomPivotCutoffInsertionBenchmarks.cs" />
     <Compile Include="Context\ReportContext.cs" />
     <Compile Include="Data\BenchmarkResult.cs" />
