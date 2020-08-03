@@ -6,11 +6,11 @@ using NumberSorter.Domain.Tests.SortTests.Base;
 
 namespace NumberSorter.Domain.Tests.SortTests
 {
-    public class BottomUpCascadeMergeSortTests : SortTestsBase
+    public class BottomUpSliceMergeSortTests : SortTestsBase
     {
         protected override ISortAlgorhythm<int> GetAlgorhythm(IComparer<int> comparer)
         {
-            return new BottomUpMergeSort<int>(comparer, new CascadeMergeFactory());
+            return new BottomUpMergeSort<int>(comparer, new SliceMergeFactory());
         }
     }
 }

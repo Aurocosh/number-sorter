@@ -8,18 +8,18 @@ using System.Xml;
 
 namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
 {
-    public class CascadeMerge<T> : GenericMergeAlgorhythm<T>
+    public class SliceMerge<T> : GenericMergeAlgorhythm<T>
     {
         private readonly ILocalRotationAlgothythm<T> _localMergeAlgothythm;
 
-        public CascadeMerge(IComparer<T> comparer) : base(comparer)
+        public SliceMerge(IComparer<T> comparer) : base(comparer)
         {
             _localMergeAlgothythm = new RecursiveInPlaceRotation<T>();
         }
 
         public override void Merge(IList<T> list, SortRun firstRun, SortRun secondRun)
         {
-            if (firstRun.Length + secondRun.Length < 2)
+            if (firstRun.Length == 0 || secondRun.Length == 0)
                 return;
             if (Compare(list, firstRun.LastIndex, secondRun.FirstIndex) <= 0)
                 return;
@@ -79,7 +79,6 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
                 }
                 else if (secondIndex < lastIndexLimit)
                 {
-
                     var left = new SortRun(tempIndex, secondIndex - tempIndex);
                     var right = new SortRun(secondIndex, lastIndexLimit - secondIndex);
 

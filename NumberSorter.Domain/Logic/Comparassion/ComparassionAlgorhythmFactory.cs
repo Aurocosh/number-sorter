@@ -46,10 +46,10 @@ namespace NumberSorter.Domain.Logic
                 case ComparassionAlgorhythmType.KindaInPlaceMergeSort:
                     return new RecursiveMergeSortFactory(new KindaInPlaceMergeFactory());
 
+                case ComparassionAlgorhythmType.SliceMergeSort:
+                    return new RecursiveMergeSortFactory(new SliceMergeFactory());
                 case ComparassionAlgorhythmType.WindowMergeSort:
                     return new RecursiveMergeSortFactory(new WindowMergeFactory());
-                case ComparassionAlgorhythmType.CascadeMergeSort:
-                    return new RecursiveMergeSortFactory(new CascadeMergeFactory());
                 case ComparassionAlgorhythmType.TripleWindowMergeSort:
                     return new RecursiveMergeSortFactory(new TripleWindowMergeFactory());
 
@@ -87,10 +87,10 @@ namespace NumberSorter.Domain.Logic
                 case ComparassionAlgorhythmType.KindaInPlaceBottomUpMergeSort:
                     return new BottomUpMergeSortFactory(new KindaInPlaceMergeFactory());
 
+                case ComparassionAlgorhythmType.SliceBottomUpMergeSort:
+                    return new BottomUpMergeSortFactory(new SliceMergeFactory());
                 case ComparassionAlgorhythmType.WindowBottomUpMergeSort:
                     return new BottomUpMergeSortFactory(new WindowMergeFactory());
-                case ComparassionAlgorhythmType.CascadeBottomUpMergeSort:
-                    return new BottomUpMergeSortFactory(new CascadeMergeFactory());
                 case ComparassionAlgorhythmType.TripleWindowBottomUpMergeSort:
                     return new BottomUpMergeSortFactory(new TripleWindowMergeFactory());
 

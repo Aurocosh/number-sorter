@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Factories.LocalMerge
 {
-    public class CascadeMergeFactory : ILocalMergeFactory
+    public class SliceMergeFactory : ILocalMergeFactory
     {
         public ILocalMergeAlgothythm<T> GetLocalMerge<T>(IComparer<T> comparer, IList<T> list)
         {
-            return new CascadeMerge<T>(comparer);
+            return new SliceMerge<T>(comparer);
         }
     }
 }

@@ -21,7 +21,7 @@
         HalfInPlaceMergeSort,
         KindaInPlaceMergeSort,
 
-        CascadeMergeSort,
+        SliceMergeSort,
         WindowMergeSort,
         TripleWindowMergeSort,
 
@@ -36,7 +36,7 @@
         HalfInPlaceBottomUpMergeSort,
         KindaInPlaceBottomUpMergeSort,
 
-        CascadeBottomUpMergeSort,
+        SliceBottomUpMergeSort,
         WindowBottomUpMergeSort,
         TripleWindowBottomUpMergeSort,
 
