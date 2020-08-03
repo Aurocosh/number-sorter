@@ -73,7 +73,7 @@
     <Compile Include="Logic\Algorhythm\LocalMerge\GallopMerge.cs" />
     <Compile Include="Logic\Algorhythm\LocalMerge\BufferMerge.cs" />
     <Compile Include="Logic\Algorhythm\LocalMerge\RelativeMerge.cs" />
-    <Compile Include="Logic\Algorhythm\LocalMerge\TempMerge.cs" />
+    <Compile Include="Logic\Algorhythm\LocalMerge\CascadeMerge.cs" />
     <Compile Include="Logic\Algorhythm\PivotSelector\CenterPivotSelector.cs" />
     <Compile Include="Logic\Algorhythm\PivotSelector\LastPivotSelector.cs" />
     <Compile Include="Logic\Algorhythm\PivotSelector\FirstPivotSelector.cs" />

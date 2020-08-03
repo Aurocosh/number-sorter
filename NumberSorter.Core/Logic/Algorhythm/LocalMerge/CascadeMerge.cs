@@ -24,7 +24,7 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
             if (Compare(list, firstRun.LastIndex, secondRun.FirstIndex) <= 0)
                 return;
 
-            MergeTemp(list, firstRun, secondRun, secondRun.FirstIndex);
+            MergeTemp(list, firstRun, secondRun, secondRun.LastIndex + 1);
         }
 
         private int MergeTemp(IList<T> list, SortRun firstRun, SortRun secondRun, int firstSepIndex)
@@ -73,7 +73,7 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
                     var left = new SortRun(tempIndex, tempLength);
                     var right = new SortRun(secondIndex, secondLength);
 
-                    int takenFromSecond = MergeTemp(list, left, right, firstSepIndex);
+                    int takenFromSecond = MergeTemp(list, left, right, firstIndex);
                     tempLength += takenFromSecond;
                     secondIndex += takenFromSecond;
                     secondLength -= takenFromSecond;
@@ -84,7 +84,6 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
 
             if (tempLength > 0)
             {
-
                 if (firstLength > 0)
                 {
                     var first = new SortRun(firstIndex, firstLength);
@@ -103,6 +102,16 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
 
                     if (firstLength > 0)
                         Swap(list, ref firstIndex, ref firstLength, ref tempIndex, ref tempLength);
+                }
+            }
+            else if (tempLength == 0 && firstSepIndex < firstRun.FirstIndex)
+            {
+                indexLimit = secondIndex + secondLength;
+                nextFromFirst = list[firstSepIndex];
+                while (secondIndex < indexLimit && Compare(list[secondIndex], nextFromFirst) < 0)
+                {
+                    secondIndex++;
+                    secondLength--;
                 }
             }
 
@@ -139,22 +148,6 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
                 firstIndex += tempLength;
                 firstLength -= tempLength;
             }
-        }
-
-        private void RotateTemporary(IList<T> list, int tempStartIndex, int tempLength, int firstSourceIndex)
-        {
-            var firstLength = firstSourceIndex - tempStartIndex;
-            var secondLength = tempLength - firstLength;
-
-            var leftRun = new SortRun(tempStartIndex, firstLength);
-            var rightRun = new SortRun(firstSourceIndex, secondLength);
-
-            _localMergeAlgothythm.Rotate(list, leftRun, rightRun);
-        }
-
-        private static int WrapTempIndex(int index, int start, int max)
-        {
-            return index > max ? start : index;
         }
     }
 }
