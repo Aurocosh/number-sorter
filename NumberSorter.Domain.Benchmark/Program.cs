@@ -1,5 +1,4 @@
-﻿using BenchmarkDotNet.Configs;
-using BenchmarkDotNet.Running;
+﻿using BenchmarkDotNet.Running;
 using NumberSorter.Domain.Benchmark.Benchmarks.Upload;
 
 namespace NumberSorter.Domain.Benchmark

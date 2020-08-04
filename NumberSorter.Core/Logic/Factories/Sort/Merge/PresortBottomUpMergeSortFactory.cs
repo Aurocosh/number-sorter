@@ -1,6 +1,5 @@
 ﻿using NumberSorter.Core.Algorhythm;
 using NumberSorter.Core.Logic.Algorhythm;
-using NumberSorter.Core.Logic.Factories.LocalMerge;
 using NumberSorter.Core.Logic.Factories.LocalMerge.Base;
 using NumberSorter.Core.Logic.Factories.Sort.Base;
 using System.Collections.Generic;
