@@ -14,7 +14,8 @@ namespace NumberSorter.Domain.Tests.SortTests
         {
             var sort = new BinaryOptimizedSortFactory();
             var merge = new IntervalMergeFactory(new BiasedBinaryPositionLocatorFactory(8));
-            return new PresortBottomUpMergeSort<int>(comparer, sort, merge);
+            var rotation = new RecursiveInPlaceRotationFactory();
+            return new PresortBottomUpMergeSort<int>(comparer, sort, merge, rotation);
         }
     }
 }

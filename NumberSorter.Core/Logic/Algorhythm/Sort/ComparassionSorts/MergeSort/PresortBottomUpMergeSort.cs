@@ -11,11 +11,13 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
         private ISortFactory SmallRunSortFactory { get; }
         private ILocalMergeFactory LocalMergeFactory { get; }
+        private ILocalRotationFactory LocalRotationFactory { get; }
 
-        public PresortBottomUpMergeSort(IComparer<T> comparer, ISortFactory smallRunSortFactory, ILocalMergeFactory localMergeFactory) : base(comparer)
+        public PresortBottomUpMergeSort(IComparer<T> comparer, ISortFactory smallRunSortFactory, ILocalMergeFactory localMergeFactory, ILocalRotationFactory localRotationFactory) : base(comparer)
         {
             SmallRunSortFactory = smallRunSortFactory;
             LocalMergeFactory = localMergeFactory;
+            LocalRotationFactory = localRotationFactory;
         }
 
         public override void Sort(IList<T> list, int startingIndex, int length)
@@ -35,6 +37,7 @@ namespace NumberSorter.Core.Logic.Algorhythm
 
             var Presort = SmallRunSortFactory.GetSort(Comparer);
             var localMerge = LocalMergeFactory.GetLocalMerge(Comparer, list);
+            var localRotation = LocalRotationFactory.GetLocalRotator(Comparer, list);
 
             int minrun = GetMinrun(totalSize);
 
@@ -58,7 +61,20 @@ namespace NumberSorter.Core.Logic.Algorhythm
                 for (int startingRunIndex = sortRun.FirstIndex; startingRunIndex < limit - runSize; startingRunIndex += step)
                 {
                     int secondSize = Math.Min(runSize, limit - (startingRunIndex + runSize));
-                    localMerge.Merge(list, new SortRun(startingRunIndex, runSize), new SortRun(startingRunIndex + runSize, secondSize));
+                    var first = new SortRun(startingRunIndex, runSize);
+                    var second = new SortRun(startingRunIndex + runSize, secondSize);
+
+                    T firstFromFirst = list[first.FirstIndex];
+                    T lastFromSecond = list[second.LastIndex];
+
+                    if (Compare(lastFromSecond, firstFromFirst) < 0)
+                    {
+                        localRotation.Rotate(list, first, second);
+                    }
+                    else
+                    {
+                        localMerge.Merge(list, first, second);
+                    }
                 }
             }
         }

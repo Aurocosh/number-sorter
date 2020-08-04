@@ -12,7 +12,8 @@ namespace NumberSorter.Domain.Benchmark.Benchmarks
         {
             var sort = new BinaryOptimizedSortFactory();
             var merge = new GallopMergeFactory();
-            return new PresortBottomUpMergeSortFactory(sort, merge);
+            var rotation = new RecursiveInPlaceRotationFactory();
+            return new PresortBottomUpMergeSortFactory(sort, merge, rotation);
         }
     }
 }

@@ -82,6 +82,7 @@
     <Compile Include="Logic\Algorhythm\PositionLocator\Direct\IterativeBinaryPositionLocator.cs" />
     <Compile Include="Logic\Algorhythm\PositionLocator\Reversed\ReversedCompositPositionLocator.cs" />
     <Compile Include="Logic\Algorhythm\PositionLocator\Reversed\ReversedBiasedBinaryPositionLocator.cs" />
+    <Compile Include="Logic\Algorhythm\Rotation\IterativeInPlaceRotation.cs" />
     <Compile Include="Logic\Algorhythm\RunMerger\Base\IRunMerger.cs" />
     <Compile Include="Logic\Algorhythm\RunMerger\ArrayRunMerger.cs" />
     <Compile Include="Logic\Algorhythm\SignSeparator\Base\ISignSeparatorAlgothythm.cs" />

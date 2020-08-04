@@ -126,6 +126,7 @@
     <Compile Include="PositionTests\LinearPositionTests.cs" />
     <Compile Include="RotationTests\IntegerGenerators\Dynamic\RotationTest_TwoFullySortedParts_FirstBiggerThenSecond_DynamicListGenerator.cs" />
     <Compile Include="RotationTests\InversionInPlaceRotationTests.cs" />
+    <Compile Include="RotationTests\IterativeInPlaceRotationTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\Binary\BinaryOptimizedSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\IterativeMerge\BottomUpBufferRotationMergeSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\IterativeMerge\BottomUpRelativeMergeSortTests.cs" />
