@@ -29,16 +29,15 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
 
         public override void Merge(IList<T> list, SortRun firstRun, SortRun secondRun)
         {
+            if (firstRun.Length == 0 || secondRun.Length == 0)
+                return;
+            if (Compare(list, firstRun.LastIndex, secondRun.FirstIndex) <= 0)
+                return;
             InternalMerge(list, firstRun, secondRun, 1);
         }
 
         private void InternalMerge(IList<T> list, SortRun firstRun, SortRun secondRun, int depth)
         {
-            if (firstRun.Length == 0 || secondRun.Length == 0)
-                return;
-            if (Compare(list, firstRun.LastIndex, secondRun.FirstIndex) <= 0)
-                return;
-
             if (firstRun.Length + secondRun.Length < _minRun || depth > _maxDepth)
             {
                 _limitMerge.Merge(list, firstRun, secondRun);
@@ -69,7 +68,8 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
                     newStart++;
 
                 var left = new SortRun(newStart, secondRun.FirstIndex - newStart);
-                InternalMerge(list, left, secondRun, depth);
+                if (Compare(list[left.LastIndex], firstFromSecond) > 0)
+                    InternalMerge(list, left, secondRun, depth);
                 return;
             }
 
@@ -90,11 +90,30 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
 
             var leftA = new SortRun(firstIndex, leftLengthA);
             var leftB = new SortRun(middleIndex, rightLengthA);
-            InternalMerge(list, leftA, leftB, depth);
+            if (leftA.Length != 0 && leftB.Length != 0 && Compare(list, leftA.LastIndex, leftB.FirstIndex) > 0)
+                InternalMerge(list, leftA, leftB, depth);
 
             var rightA = new SortRun(middleIndex + rightLengthA, leftLengthB);
             var rightB = new SortRun(positionInSecond + 1, rightLengthB);
-            InternalMerge(list, rightA, rightB, depth);
+            if (rightA.Length != 0 && rightB.Length != 0 && Compare(list, rightA.LastIndex, rightB.FirstIndex) > 0)
+                InternalMerge(list, rightA, rightB, depth);
+        }
+
+
+
+        public static bool IsSorted<T>(IList<T> list, SortRun sortRun, IComparer<T> comparer)
+        {
+            int limit = sortRun.LastIndex;
+            for (int i = sortRun.FirstIndex; i < limit; i++)
+            {
+                var first = list[i];
+                var second = list[i + 1];
+
+                int comparassion = comparer.Compare(first, second);
+                if (comparassion > 0)
+                    return false;
+            }
+            return true;
         }
     }
 }

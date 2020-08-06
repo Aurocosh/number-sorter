@@ -68,7 +68,7 @@
     <Compile Include="Generators\RandomPartialSortedIntegerGenerator.cs" />
     <Compile Include="Generators\UnmergedFullySortedGenerator.cs" />
     <Compile Include="Logic\Algorhythm\GapGenerator\CiuraExtendedGapGenerator.cs" />
-    <Compile Include="Logic\Algorhythm\LocalMerge\BinaryWindowMerge.cs" />
+    <Compile Include="Logic\Algorhythm\LocalMerge\SwapWindowMerge.cs" />
     <Compile Include="Logic\Algorhythm\LocalMerge\BufferRotationMerge.cs" />
     <Compile Include="Logic\Algorhythm\LocalMerge\RotationMerge.cs" />
     <Compile Include="Logic\Algorhythm\LocalMerge\GallopMerge.cs" />
