@@ -1,28 +1,49 @@
-﻿using NumberSorter.Core.Logic.Algorhythm.LocalMerge.Base;
+﻿using NumberSorter.Core.Algorhythm;
+using NumberSorter.Core.Logic.Algorhythm.LocalMerge.Base;
 using NumberSorter.Core.Logic.Algorhythm.Merge.Base;
 using NumberSorter.Core.Logic.Algorhythm.PositionLocator;
 using NumberSorter.Core.Logic.Algorhythm.PositionLocator.Base;
+using NumberSorter.Core.Logic.Factories.LocalMerge;
 using System.Collections.Generic;
 
 namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
 {
-    public class BinarySwapMerge<T> : GenericMergeAlgorhythm<T>
+    public class SwapWindowMerge<T> : GenericMergeAlgorhythm<T>
     {
+        private readonly int _minRun;
+        private readonly int _maxDepth;
+
+        private readonly ILocalMergeAlgothythm<T> _limitMerge;
         private readonly IPositionLocator<T> _positionLocator;
         private readonly ILocalRotationAlgothythm<T> _localRotationAlgothythm;
 
-        public BinarySwapMerge(IComparer<T> comparer) : base(comparer)
+        public SwapWindowMerge(IComparer<T> comparer, int maxDepth) : base(comparer)
         {
+            _minRun = 32;
+            _maxDepth = maxDepth;
+
+            _limitMerge = new WindowMerge<T>(comparer);
             _positionLocator = new BinaryPositionLocator<T>(comparer);
             _localRotationAlgothythm = new RecursiveInPlaceRotation<T>();
         }
 
         public override void Merge(IList<T> list, SortRun firstRun, SortRun secondRun)
         {
+            InternalMerge(list, firstRun, secondRun, 1);
+        }
+
+        private void InternalMerge(IList<T> list, SortRun firstRun, SortRun secondRun, int depth)
+        {
             if (firstRun.Length == 0 || secondRun.Length == 0)
                 return;
             if (Compare(list, firstRun.LastIndex, secondRun.FirstIndex) <= 0)
                 return;
+
+            if (firstRun.Length + secondRun.Length < _minRun || depth > _maxDepth)
+            {
+                _limitMerge.Merge(list, firstRun, secondRun);
+                return;
+            }
 
             T firstFromFirst = list[firstRun.FirstIndex];
             T lastFromSecond = list[secondRun.LastIndex];
@@ -31,6 +52,8 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
                 _localRotationAlgothythm.Rotate(list, firstRun, secondRun);
                 return;
             }
+
+            depth++;
 
             int firstIndex = firstRun.Start;
             int lastFirstIndex = firstRun.LastIndex;
@@ -44,8 +67,9 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
                 int newStart = middleIndex + 1;
                 while (newStart < secondRun.FirstIndex && Compare(middleFromFirst, list[newStart]) == 0)
                     newStart++;
+
                 var left = new SortRun(newStart, secondRun.FirstIndex - newStart);
-                Merge(list, left, secondRun);
+                InternalMerge(list, left, secondRun, depth);
                 return;
             }
 
@@ -66,11 +90,11 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
 
             var leftA = new SortRun(firstIndex, leftLengthA);
             var leftB = new SortRun(middleIndex, rightLengthA);
-            Merge(list, leftA, leftB);
+            InternalMerge(list, leftA, leftB, depth);
 
             var rightA = new SortRun(middleIndex + rightLengthA, leftLengthB);
             var rightB = new SortRun(positionInSecond + 1, rightLengthB);
-            Merge(list, rightA, rightB);
+            InternalMerge(list, rightA, rightB, depth);
         }
     }
 }

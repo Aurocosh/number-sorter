@@ -28,6 +28,7 @@
         WindowMergeSort,
         BinarySwapMergeSort,
         TripleWindowMergeSort,
+        SwapWindowMergeSort,
 
         BufferMergeSort,
         RotationMergeSort,
@@ -44,6 +45,7 @@
         WindowBottomUpMergeSort,
         BinarySwapBottomUpMergeSort,
         TripleWindowBottomUpMergeSort,
+        SwapWindowBottomUpMergeSort,
 
         BufferBottomUpMergeSort,
         RotationBottomUpMergeSort,

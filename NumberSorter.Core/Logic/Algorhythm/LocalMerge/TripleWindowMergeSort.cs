@@ -22,7 +22,7 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
             //Console.WriteLine($"\n\nFirst ({firstRun.Start},{firstRun.Length}) Second ({secondRun.Start},{secondRun.Length})");
             //Console.WriteLine($"\nStart {first}   {second}");
 
-            if (firstRun.Length + secondRun.Length < 2)
+            if (firstRun.Length == 0 || secondRun.Length == 0)
                 return;
             if (Compare(list, firstRun.LastIndex, secondRun.FirstIndex) <= 0)
                 return;

@@ -355,6 +355,7 @@
     <Compile Include="Benchmarks\Base\IntegerSortBenchmarks.cs" />
     <Compile Include="Benchmarks\Base\ComparassionSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\Binary\BinaryOptimizedSortBenchmarks.cs" />
+    <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\SwapWindowIterativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\IterativeMerge\BinarySwapIterativeMergeSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\Wiki\WikiBufferSortBenchmarks.cs" />
     <Compile Include="Benchmarks\ComparassionSorts\Wiki\WikiNoBufferSortBenchmarks.cs" />

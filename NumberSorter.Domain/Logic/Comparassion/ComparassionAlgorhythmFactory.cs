@@ -57,6 +57,8 @@ namespace NumberSorter.Domain.Logic
                     return new RecursiveMergeSortFactory(new WindowMergeFactory());
                 case ComparassionAlgorhythmType.BinarySwapMergeSort:
                     return new RecursiveMergeSortFactory(new BinarySwapMergeFactory());
+                case ComparassionAlgorhythmType.SwapWindowMergeSort:
+                    return new RecursiveMergeSortFactory(new SwapWindowMergeFactory(8));
                 case ComparassionAlgorhythmType.TripleWindowMergeSort:
                     return new RecursiveMergeSortFactory(new TripleWindowMergeFactory());
 
@@ -100,6 +102,8 @@ namespace NumberSorter.Domain.Logic
                     return new BottomUpMergeSortFactory(new WindowMergeFactory());
                 case ComparassionAlgorhythmType.BinarySwapBottomUpMergeSort:
                     return new BottomUpMergeSortFactory(new BinarySwapMergeFactory());
+                case ComparassionAlgorhythmType.SwapWindowBottomUpMergeSort:
+                    return new RecursiveMergeSortFactory(new SwapWindowMergeFactory(8));
                 case ComparassionAlgorhythmType.TripleWindowBottomUpMergeSort:
                     return new BottomUpMergeSortFactory(new TripleWindowMergeFactory());
 

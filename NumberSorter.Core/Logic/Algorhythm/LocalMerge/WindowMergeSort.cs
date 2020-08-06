@@ -15,7 +15,7 @@ namespace NumberSorter.Core.Logic.Algorhythm.LocalMerge
 
         public override void Merge(IList<T> list, SortRun firstRun, SortRun secondRun)
         {
-            if (firstRun.Length + secondRun.Length < 2)
+            if (firstRun.Length == 0 || secondRun.Length == 0)
                 return;
             if (Compare(list, firstRun.LastIndex, secondRun.FirstIndex) <= 0)
                 return;
