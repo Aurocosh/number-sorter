@@ -17,12 +17,16 @@
 
         ArrayMergeSort,
 
+        WikiBufferSort,
+        WikiNoBufferSort,
+
         DequeMergeSort,
         HalfInPlaceMergeSort,
         KindaInPlaceMergeSort,
 
         SliceMergeSort,
         WindowMergeSort,
+        BinarySwapMergeSort,
         TripleWindowMergeSort,
 
         BufferMergeSort,
@@ -38,6 +42,7 @@
 
         SliceBottomUpMergeSort,
         WindowBottomUpMergeSort,
+        BinarySwapBottomUpMergeSort,
         TripleWindowBottomUpMergeSort,
 
         BufferBottomUpMergeSort,

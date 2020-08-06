@@ -128,6 +128,7 @@
     <Compile Include="RotationTests\InversionInPlaceRotationTests.cs" />
     <Compile Include="RotationTests\IterativeInPlaceRotationTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\Binary\BinaryOptimizedSortTests.cs" />
+    <Compile Include="SortTests\ComparassionSorts\IterativeMerge\BottomUpBinarySwapMergeSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\Wiki\WikiBufferSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\Wiki\WikiNoBufferSortTests.cs" />
     <Compile Include="SortTests\ComparassionSorts\IterativeMerge\BottomUpBufferRotationMergeSortTests.cs" />

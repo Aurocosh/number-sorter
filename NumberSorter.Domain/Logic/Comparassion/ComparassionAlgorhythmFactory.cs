@@ -39,6 +39,11 @@ namespace NumberSorter.Domain.Logic
                 case ComparassionAlgorhythmType.ArrayMergeSort:
                     return new ArrayMergeSortFactory();
 
+                case ComparassionAlgorhythmType.WikiBufferSort:
+                    return new WikiSortFactory(512);
+                case ComparassionAlgorhythmType.WikiNoBufferSort:
+                    return new WikiSortFactory(0);
+
                 case ComparassionAlgorhythmType.DequeMergeSort:
                     return new RecursiveMergeSortFactory(new DequeMergeFactory());
                 case ComparassionAlgorhythmType.HalfInPlaceMergeSort:
@@ -50,6 +55,8 @@ namespace NumberSorter.Domain.Logic
                     return new RecursiveMergeSortFactory(new SliceMergeFactory());
                 case ComparassionAlgorhythmType.WindowMergeSort:
                     return new RecursiveMergeSortFactory(new WindowMergeFactory());
+                case ComparassionAlgorhythmType.BinarySwapMergeSort:
+                    return new RecursiveMergeSortFactory(new BinarySwapMergeFactory());
                 case ComparassionAlgorhythmType.TripleWindowMergeSort:
                     return new RecursiveMergeSortFactory(new TripleWindowMergeFactory());
 
@@ -91,6 +98,8 @@ namespace NumberSorter.Domain.Logic
                     return new BottomUpMergeSortFactory(new SliceMergeFactory());
                 case ComparassionAlgorhythmType.WindowBottomUpMergeSort:
                     return new BottomUpMergeSortFactory(new WindowMergeFactory());
+                case ComparassionAlgorhythmType.BinarySwapBottomUpMergeSort:
+                    return new BottomUpMergeSortFactory(new BinarySwapMergeFactory());
                 case ComparassionAlgorhythmType.TripleWindowBottomUpMergeSort:
                     return new BottomUpMergeSortFactory(new TripleWindowMergeFactory());
 
