@@ -1,0 +1,40 @@
+{
+  "$type": "NumberSorter.Core.CustomGenerators.CustomListGenerator, NumberSorter.Core",
+  "Id": "dde36bae-4581-48a6-9449-c0a4c215a36f",
+  "Name": "Almost sorted",
+  "Shuffle": false,
+  "Description": "",
+  "ListProcessorSets": {
+    "$type": "System.Collections.Generic.List`1[[NumberSorter.Core.CustomGenerators.ListProcessorSet, NumberSorter.Core]], mscorlib",
+    "$values": [
+      {
+        "$type": "NumberSorter.Core.CustomGenerators.ListProcessorSet, NumberSorter.Core",
+        "Name": "Processor set",
+        "IsSameList": false,
+        "MinRepeatValue": 1,
+        "MaxRepeatValue": 1,
+        "ListProcessors": {
+          "$type": "System.Collections.Generic.List`1[[NumberSorter.Core.CustomGenerators.IListProcessor, NumberSorter.Core]], mscorlib",
+          "$values": [
+            {
+              "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.NewListProcessor, NumberSorter.Core",
+              "Size": 200,
+              "Description": "Fixed list generator"
+            },
+            {
+              "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.ConsecutiveValuesProcessor, NumberSorter.Core",
+              "Step": 1,
+              "Start": -100,
+              "Description": "Consecutive list generator"
+            },
+            {
+              "$type": "NumberSorter.Core.CustomGenerators.Processors.Converters.PartialShuffleValuesProcessor, NumberSorter.Core",
+              "ShuffleCount": 50,
+              "Description": "List value partial shuffler"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

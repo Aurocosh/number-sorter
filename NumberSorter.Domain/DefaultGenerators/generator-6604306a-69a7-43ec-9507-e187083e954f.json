@@ -1,0 +1,61 @@
+{
+  "$type": "NumberSorter.Core.CustomGenerators.CustomListGenerator, NumberSorter.Core",
+  "Id": "6604306a-69a7-43ec-9507-e187083e954f",
+  "Name": "Saw tooth 500",
+  "Shuffle": false,
+  "Description": "",
+  "ListProcessorSets": {
+    "$type": "System.Collections.Generic.List`1[[NumberSorter.Core.CustomGenerators.ListProcessorSet, NumberSorter.Core]], mscorlib",
+    "$values": [
+      {
+        "$type": "NumberSorter.Core.CustomGenerators.ListProcessorSet, NumberSorter.Core",
+        "Name": "Processor set",
+        "IsSameList": true,
+        "MinRepeatValue": 5,
+        "MaxRepeatValue": 5,
+        "ListProcessors": {
+          "$type": "System.Collections.Generic.List`1[[NumberSorter.Core.CustomGenerators.IListProcessor, NumberSorter.Core]], mscorlib",
+          "$values": [
+            {
+              "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.NewListProcessor, NumberSorter.Core",
+              "Size": 100,
+              "Description": "Fixed list generator"
+            },
+            {
+              "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.PartialConsecutiveValuesProcessor, NumberSorter.Core",
+              "Count": 25,
+              "StartingIndex": 0,
+              "Step": 1,
+              "StartingValue": -25,
+              "Description": "Partial consecutive list generator"
+            },
+            {
+              "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.PartialConsecutiveValuesProcessor, NumberSorter.Core",
+              "Count": 25,
+              "StartingIndex": 25,
+              "Step": 1,
+              "StartingValue": 1,
+              "Description": "Partial consecutive list generator"
+            },
+            {
+              "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.PartialConsecutiveValuesProcessor, NumberSorter.Core",
+              "Count": 25,
+              "StartingIndex": 50,
+              "Step": -1,
+              "StartingValue": 25,
+              "Description": "Partial consecutive list generator"
+            },
+            {
+              "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.PartialConsecutiveValuesProcessor, NumberSorter.Core",
+              "Count": 25,
+              "StartingIndex": 75,
+              "Step": -1,
+              "StartingValue": -1,
+              "Description": "Partial consecutive list generator"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

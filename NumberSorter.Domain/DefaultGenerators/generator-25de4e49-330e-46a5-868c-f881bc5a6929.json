@@ -1,0 +1,58 @@
+{
+  "$type": "NumberSorter.Core.CustomGenerators.CustomListGenerator, NumberSorter.Core",
+  "Id": "25de4e49-330e-46a5-868c-f881bc5a6929",
+  "Name": "121 to 140 , 1 to 120",
+  "Shuffle": false,
+  "Description": "",
+  "ListProcessorSets": {
+    "$type": "System.Collections.Generic.List`1[[NumberSorter.Core.CustomGenerators.ListProcessorSet, NumberSorter.Core]], mscorlib",
+    "$values": [
+      {
+        "$type": "NumberSorter.Core.CustomGenerators.ListProcessorSet, NumberSorter.Core",
+        "Name": "121 to 140",
+        "IsSameList": false,
+        "MinRepeatValue": 1,
+        "MaxRepeatValue": 1,
+        "ListProcessors": {
+          "$type": "System.Collections.Generic.List`1[[NumberSorter.Core.CustomGenerators.IListProcessor, NumberSorter.Core]], mscorlib",
+          "$values": [
+            {
+              "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.NewListProcessor, NumberSorter.Core",
+              "Size": 20,
+              "Description": "Fixed list generator"
+            },
+            {
+              "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.ConsecutiveValuesProcessor, NumberSorter.Core",
+              "Step": 1,
+              "Start": 121,
+              "Description": "Consecutive list generator"
+            }
+          ]
+        }
+      },
+      {
+        "$type": "NumberSorter.Core.CustomGenerators.ListProcessorSet, NumberSorter.Core",
+        "Name": "1 to 120",
+        "IsSameList": false,
+        "MinRepeatValue": 1,
+        "MaxRepeatValue": 1,
+        "ListProcessors": {
+          "$type": "System.Collections.Generic.List`1[[NumberSorter.Core.CustomGenerators.IListProcessor, NumberSorter.Core]], mscorlib",
+          "$values": [
+            {
+              "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.NewListProcessor, NumberSorter.Core",
+              "Size": 120,
+              "Description": "Fixed list generator"
+            },
+            {
+              "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.ConsecutiveValuesProcessor, NumberSorter.Core",
+              "Step": 1,
+              "Start": 1,
+              "Description": "Consecutive list generator"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

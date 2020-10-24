@@ -15,6 +15,8 @@ using Newtonsoft.Json;
 using System.IO;
 using NumberSorter.Domain.Serialization;
 using NumberSorter.Domain.Container;
+using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace NumberSorter.Domain.ViewModels
 {
@@ -96,6 +98,9 @@ namespace NumberSorter.Domain.ViewModels
                 .Bind(out _listGeneratorsViewModels)
                 .DisposeMany()
                 .Subscribe();
+
+            if (!Directory.Exists(FilePaths.GeneratorsFolder))
+                CreateDefaultGenerators();
 
             _listGenerators.AddRange(LoadGenerators());
         }
@@ -191,6 +196,36 @@ namespace NumberSorter.Domain.ViewModels
 
             string[] filePaths = Directory.GetFiles(FilePaths.GeneratorsFolder);
             return filePaths.Select(x => _jsonFileSerializer.LoadFromJsonFile<CustomListGenerator>(x)).Where(x => x != null);
+        }
+
+        private void CreateDefaultGenerators()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourses = assembly.GetManifestResourceNames();
+
+            var myRegex = new Regex(@"NumberSorter\.Domain\.DefaultGenerators.*\.json");
+            var generatorTemplates = resourses.Where(x => myRegex.IsMatch(x));
+            var generatorJsons = generatorTemplates.Select(x => ReadResourceFile(assembly, x));
+
+            var jsonSerializerSettings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All,
+                Formatting = Formatting.Indented
+            };
+
+            var generators = generatorJsons.Select(x => JsonConvert.DeserializeObject<CustomListGenerator>(x, jsonSerializerSettings));
+            foreach (var generator in generators)
+            {
+                var filePath = GetGeneratorPath(generator);
+                _jsonFileSerializer.SaveToJsonFile(filePath, generator);
+            }
+        }
+
+        private static string ReadResourceFile(Assembly assembly, string filename)
+        {
+            using (var stream = assembly.GetManifestResourceStream(filename))
+            using (var reader = new StreamReader(stream))
+                return reader.ReadToEnd();
         }
 
         private static string GetGeneratorPath(CustomListGenerator listGenerator)

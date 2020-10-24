@@ -103,7 +103,7 @@ namespace NumberSorter.Domain.Logic
                 case ComparassionAlgorhythmType.BinarySwapBottomUpMergeSort:
                     return new BottomUpMergeSortFactory(new BinarySwapMergeFactory());
                 case ComparassionAlgorhythmType.SwapWindowBottomUpMergeSort:
-                    return new RecursiveMergeSortFactory(new SwapWindowMergeFactory(8));
+                    return new BottomUpMergeSortFactory(new SwapWindowMergeFactory(8));
                 case ComparassionAlgorhythmType.TripleWindowBottomUpMergeSort:
                     return new BottomUpMergeSortFactory(new TripleWindowMergeFactory());
 

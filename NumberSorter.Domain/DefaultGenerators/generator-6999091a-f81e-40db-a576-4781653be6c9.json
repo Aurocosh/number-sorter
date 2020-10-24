@@ -1,0 +1,84 @@
+{
+  "$type": "NumberSorter.Core.CustomGenerators.CustomListGenerator, NumberSorter.Core",
+  "Id": "6999091a-f81e-40db-a576-4781653be6c9",
+  "Name": "Sorted, reversed and random",
+  "Shuffle": true,
+  "Description": "",
+  "ListProcessorSets": {
+    "$type": "System.Collections.Generic.List`1[[NumberSorter.Core.CustomGenerators.ListProcessorSet, NumberSorter.Core]], mscorlib",
+    "$values": [
+      {
+        "$type": "NumberSorter.Core.CustomGenerators.ListProcessorSet, NumberSorter.Core",
+        "Name": "direct",
+        "IsSameList": true,
+        "MinRepeatValue": 2,
+        "MaxRepeatValue": 2,
+        "ListProcessors": {
+          "$type": "System.Collections.Generic.List`1[[NumberSorter.Core.CustomGenerators.IListProcessor, NumberSorter.Core]], mscorlib",
+          "$values": [
+            {
+              "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.NewVariableListProcessor, NumberSorter.Core",
+              "MinSize": 50,
+              "MaxSize": 100,
+              "Description": "Variable list generator"
+            },
+            {
+              "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.ConsecutiveValuesProcessor, NumberSorter.Core",
+              "Step": 1,
+              "Start": -50,
+              "Description": "Consecutive list generator"
+            }
+          ]
+        }
+      },
+      {
+        "$type": "NumberSorter.Core.CustomGenerators.ListProcessorSet, NumberSorter.Core",
+        "Name": "reversed",
+        "IsSameList": true,
+        "MinRepeatValue": 2,
+        "MaxRepeatValue": 2,
+        "ListProcessors": {
+          "$type": "System.Collections.Generic.List`1[[NumberSorter.Core.CustomGenerators.IListProcessor, NumberSorter.Core]], mscorlib",
+          "$values": [
+            {
+              "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.NewVariableListProcessor, NumberSorter.Core",
+              "MinSize": 50,
+              "MaxSize": 100,
+              "Description": "Variable list generator"
+            },
+            {
+              "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.ConsecutiveValuesProcessor, NumberSorter.Core",
+              "Step": -1,
+              "Start": 50,
+              "Description": "Consecutive list generator"
+            }
+          ]
+        }
+      },
+      {
+        "$type": "NumberSorter.Core.CustomGenerators.ListProcessorSet, NumberSorter.Core",
+        "Name": "Random",
+        "IsSameList": false,
+        "MinRepeatValue": 3,
+        "MaxRepeatValue": 3,
+        "ListProcessors": {
+          "$type": "System.Collections.Generic.List`1[[NumberSorter.Core.CustomGenerators.IListProcessor, NumberSorter.Core]], mscorlib",
+          "$values": [
+            {
+              "$type": "NumberSorter.Core.CustomGenerators.Processors.Generators.NewVariableListProcessor, NumberSorter.Core",
+              "MinSize": 50,
+              "MaxSize": 100,
+              "Description": "Variable list generator"
+            },
+            {
+              "$type": "NumberSorter.Core.CustomGenerators.Processors.Converters.RandomizeValuesProcessor, NumberSorter.Core",
+              "Minimum": -50,
+              "Maximum": 50,
+              "Description": "List value randomizer"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -222,6 +222,28 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <EmbeddedResource Include="DefaultGenerators\generator-23a31b3e-b654-45d8-bd81-db970ab35b3c.json" />
+    <EmbeddedResource Include="DefaultGenerators\generator-25de4e49-330e-46a5-868c-f881bc5a6929.json" />
+    <EmbeddedResource Include="DefaultGenerators\generator-2e31effd-bcbf-49e9-a85d-b108c3403ab4.json" />
+    <EmbeddedResource Include="DefaultGenerators\generator-3e8c755b-3183-45c5-b9dd-6655c366e5dc.json" />
+    <EmbeddedResource Include="DefaultGenerators\generator-48ae4f33-5d5e-4f76-8d1c-e0a3b8b6539f.json" />
+    <EmbeddedResource Include="DefaultGenerators\generator-623bd82b-b85d-4e63-9384-2a05c770d241.json" />
+    <EmbeddedResource Include="DefaultGenerators\generator-6604306a-69a7-43ec-9507-e187083e954f.json" />
+    <EmbeddedResource Include="DefaultGenerators\generator-6999091a-f81e-40db-a576-4781353be6c9.json" />
+    <EmbeddedResource Include="DefaultGenerators\generator-6999091a-f81e-40db-a576-4781653be6c9.json" />
+    <EmbeddedResource Include="DefaultGenerators\generator-702b27d2-230f-4702-974f-5ef4c6a1b0f9.json" />
+    <EmbeddedResource Include="DefaultGenerators\generator-775aa951-0a07-45e2-9930-304a6bc0e89d.json" />
+    <EmbeddedResource Include="DefaultGenerators\generator-7d266440-beb6-43db-97fb-748429a598cd.json" />
+    <EmbeddedResource Include="DefaultGenerators\generator-805dd061-fd7d-4346-86ea-e3b6cbbcb5e5.json" />
+    <EmbeddedResource Include="DefaultGenerators\generator-80a3818f-0382-4cbe-9458-1498749345a9.json" />
+    <EmbeddedResource Include="DefaultGenerators\generator-8eeb3eb2-ef73-40b5-bb5c-077c887f644c.json" />
+    <EmbeddedResource Include="DefaultGenerators\generator-905a1f82-f577-495d-a222-ccfa084b3c8c.json" />
+    <EmbeddedResource Include="DefaultGenerators\generator-a9eb66f3-5963-472a-ac88-a411001fda3d.json" />
+    <EmbeddedResource Include="DefaultGenerators\generator-c625f7fe-bfb8-4bb4-b786-f1093eeece07.json" />
+    <EmbeddedResource Include="DefaultGenerators\generator-c9db26f3-5963-472a-ac38-a411004fda3d.json" />
+    <EmbeddedResource Include="DefaultGenerators\generator-dde36bae-4581-48a6-9449-c0a4c215a36f.json" />
+    <EmbeddedResource Include="DefaultGenerators\generator-e67087f4-634b-4c84-a6e2-9b46008e0fe6.json" />
+    <EmbeddedResource Include="DefaultGenerators\generator-f7d301e2-5c9c-4518-aa3a-457e4e48a4cf.json" />
     <None Include="FodyWeavers.xml" />
     <None Include="packages.config" />
   </ItemGroup>

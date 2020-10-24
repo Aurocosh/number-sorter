@@ -18,8 +18,6 @@
             <MenuItem Header="Generators">
                 <MenuItem Name="NewGeneratorMenuItem" Header="New generator" />
                 <MenuItem Name="RemoveSelectedMenuItem" Header="Remove selected" />
-                <Separator />
-                <MenuItem Header="Remove all" />
             </MenuItem>
             <MenuItem Header="Serialization">
                 <MenuItem Name="SerializeGeneratorMenuItem" Header="Serialize generator" />
