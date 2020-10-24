@@ -17,6 +17,7 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Generators">
                 <MenuItem Name="NewGeneratorMenuItem" Header="New generator" />
+                <MenuItem Name="EditGeneratorMenuItem" Header="Edit selected" />
                 <MenuItem Name="RemoveSelectedMenuItem" Header="Remove selected" />
             </MenuItem>
             <MenuItem Header="Serialization">
@@ -42,6 +43,7 @@
                 <ListBox.ContextMenu>
                     <ContextMenu>
                         <MenuItem Name="NewGeneratorContextMenuItem" Header="New generator" />
+                        <MenuItem Name="EditGeneratorContextMenuItem" Header="Edit selected" />
                         <MenuItem Name="RemoveSelectedContextMenuItem" Header="Remove selected" />
                         <MenuItem Name="SerializeGeneratorContextMenuItem" Header="Serialize generator" />
                     </ContextMenu>

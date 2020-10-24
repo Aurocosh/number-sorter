@@ -36,6 +36,8 @@ namespace NumberSorter.Forms
 
                 this.BindCommand(ViewModel, x => x.AddNewGeneratorCommand, x => x.NewGeneratorMenuItem)
                     .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.EditGeneratorCommand, x => x.EditGeneratorMenuItem)
+                    .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.RemoveSelectedGeneratorCommand, x => x.RemoveSelectedMenuItem)
                     .DisposeWith(disposable);
 
@@ -45,6 +47,8 @@ namespace NumberSorter.Forms
                     .DisposeWith(disposable);
 
                 this.BindCommand(ViewModel, x => x.AddNewGeneratorCommand, x => x.NewGeneratorContextMenuItem)
+                    .DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.EditGeneratorCommand, x => x.EditGeneratorContextMenuItem)
                     .DisposeWith(disposable);
                 this.BindCommand(ViewModel, x => x.RemoveSelectedGeneratorCommand, x => x.RemoveSelectedContextMenuItem)
                     .DisposeWith(disposable);
