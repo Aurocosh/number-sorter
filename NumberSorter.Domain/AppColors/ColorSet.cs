@@ -28,7 +28,7 @@ namespace NumberSorter.Domain.AppColors
             WriteColor = Colors.Purple;
             NormalColor = Colors.White;
 
-            BackgroundColor = Colors.LightGray;
+            BackgroundColor = Colors.Gray;
 
             CompareEqualColor = Colors.Blue;
             CompareBiggerColor = Colors.Red;

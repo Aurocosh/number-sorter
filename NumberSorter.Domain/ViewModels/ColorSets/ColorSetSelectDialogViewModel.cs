@@ -12,6 +12,8 @@ using System.IO;
 using NumberSorter.Domain.Serialization;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace NumberSorter.Domain.ViewModels
 {
@@ -77,6 +79,9 @@ namespace NumberSorter.Domain.ViewModels
                 .DisposeMany()
                 .Subscribe();
 
+            if (!Directory.Exists(FilePaths.ColorSetsFolder))
+                CreateDefaultColorSets();
+
             _colorSets.AddRange(LoadColorSets());
         }
 
@@ -130,6 +135,36 @@ namespace NumberSorter.Domain.ViewModels
         #endregion Command functions
 
         #region Functions
+
+        private void CreateDefaultColorSets()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourses = assembly.GetManifestResourceNames();
+
+            var myRegex = new Regex(@"NumberSorter\.Domain\.DefaultColorSets.*\.json");
+            var colorSetsTemplates = resourses.Where(x => myRegex.IsMatch(x));
+            var colorSetsJsons = colorSetsTemplates.Select(x => ReadResourceFile(assembly, x));
+
+            var jsonSerializerSettings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All,
+                Formatting = Formatting.Indented
+            };
+
+            var colorSets = colorSetsJsons.Select(x => JsonConvert.DeserializeObject<ColorSet>(x, jsonSerializerSettings));
+            foreach (var colorSet in colorSets)
+            {
+                var filePath = GetColorSetPath(colorSet);
+                _jsonFileSerializer.SaveToJsonFile(filePath, colorSet);
+            }
+        }
+
+        private static string ReadResourceFile(Assembly assembly, string filename)
+        {
+            using (var stream = assembly.GetManifestResourceStream(filename))
+            using (var reader = new StreamReader(stream))
+                return reader.ReadToEnd();
+        }
 
         private IEnumerable<ColorSet> LoadColorSets()
         {

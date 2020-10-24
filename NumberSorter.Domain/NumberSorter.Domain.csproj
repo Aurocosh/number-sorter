@@ -244,6 +244,11 @@
     <EmbeddedResource Include="DefaultGenerators\generator-dde36bae-4581-48a6-9449-c0a4c215a36f.json" />
     <EmbeddedResource Include="DefaultGenerators\generator-e67087f4-634b-4c84-a6e2-9b46008e0fe6.json" />
     <EmbeddedResource Include="DefaultGenerators\generator-f7d301e2-5c9c-4518-aa3a-457e4e48a4cf.json" />
+    <EmbeddedResource Include="DefaultColorSets\color-set-1f3fb87e-9145-4f06-9240-c74d5a6ca453.json" />
+    <EmbeddedResource Include="DefaultColorSets\color-set-58c9aa2b-5f51-4ae6-8dae-bfe101c96a2b.json" />
+    <EmbeddedResource Include="DefaultColorSets\color-set-7b9e09ad-0939-41c4-a5dd-5e8733763ce7.json" />
+    <EmbeddedResource Include="DefaultColorSets\color-set-98c785c3-5b22-4c96-85d9-dce2f5050d82.json" />
+    <EmbeddedResource Include="DefaultColorSets\color-set-aefe97a0-22f3-42a6-9cd1-aac1482056e3.json" />
     <None Include="FodyWeavers.xml" />
     <None Include="packages.config" />
   </ItemGroup>

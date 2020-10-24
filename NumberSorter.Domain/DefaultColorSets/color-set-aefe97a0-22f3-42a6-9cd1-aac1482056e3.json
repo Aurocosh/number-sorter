@@ -1,0 +1,1 @@
+{"$type":"NumberSorter.Domain.AppColors.ColorSet, NumberSorter.Domain","Id":"aefe97a0-22f3-42a6-9cd1-aac1482056e3","Name":"Default color set","ReadColor":"#FFF27C0D","WriteColor":"#FF800080","NormalColor":"#FFFFFFFF","BackgroundColor":"#FF808080","CompareEqualColor":"#FF0000FF","CompareBiggerColor":"#FFFF0000","CompareLesserColor":"#FF008000"}
