@@ -11,15 +11,15 @@ namespace NumberSorter.Domain.Visualizers
                 case VisualizationType.Columns:
                     return new ColumnListVisualizer(4, 1, 0.8f);
                 case VisualizationType.ColumnsNoSpacers:
-                    return new ColumnListVisualizer(5, 0, 0.8f);
+                    return new ColumnListVisualizer(5, 0, 1.0f);
                 case VisualizationType.GhostlyColumns:
                     return new GhostlyColumnListVisualizer(4, 1, 0.8f);
                 case VisualizationType.GhostlyColumnsNoSpacers:
-                    return new GhostlyColumnListVisualizer(5, 0, 0.8f);
+                    return new GhostlyColumnListVisualizer(5, 0, 1.0f);
                 case VisualizationType.PositiveColumns:
                     return new PositiveColumnListVisualizer(4, 1, 0.8f);
                 case VisualizationType.PositiveColumnsNoSpacers:
-                    return new PositiveColumnListVisualizer(5, 0, 0.8f);
+                    return new PositiveColumnListVisualizer(5, 0, 1.0f);
                 case VisualizationType.Points:
                     return new PointsListVisualizer(5, 0, 0.9f);
                 case VisualizationType.Squares:

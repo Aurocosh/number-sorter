@@ -126,7 +126,7 @@ namespace NumberSorter.Domain.ViewModels
             _sortStateCache = new LimitedDictionary<int, SortState<int>>(_cacheSize);
             _sortWaypointStateCache = new LimitedDictionary<int, SortState<int>>(_waypointCacheSize);
 
-            _listVisualizer = VisualizationFactory.GetVisualizer(VisualizationType.GhostlyColumnsNoSpacers);
+            _listVisualizer = VisualizationFactory.GetVisualizer(VisualizationType.GhostlyColumns);
             _stateAudiolizer = AudiolizerFactory.GetAudiolizer(AudiolizerType.DummyAudiolizer, this, dialogService);
 
             ElementsDoNotFit = false;

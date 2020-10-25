@@ -11,7 +11,7 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:NumberSorter"
         mc:Ignorable="d"
-        Title="MainWindow" Width="1200" Height="800">
+        Title="Number sorter" Width="1200" Height="800">
     <DockPanel d:DataContext="{d:DesignInstance viewmodels:MainWindowViewModel}">
         <Menu DockPanel.Dock="Top" Name="MenuStrip">
             <MenuItem Header="Input data">
@@ -21,7 +21,7 @@
                 <MenuItem Header="Generate partially sorted list" Name="GeneratePartiallySortedButton"/>
             </MenuItem>
             <MenuItem Header="Sort">
-                <MenuItem Header="Perform comparassion sort" Name="PerformComparassionSortButton"/>
+                <MenuItem Header="Perform comparison sort" Name="PerformComparassionSortButton"/>
                 <MenuItem Header="Perform distribution sort" Name="PerformDistributionSortButton"/>
                 <MenuItem Header="Sort history" Name="SortHistoryButton"/>
             </MenuItem>
