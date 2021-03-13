@@ -59,6 +59,8 @@
         BinarySort,
         InsertionSort,
 
+        FragmentSort,
+
         SelectionSort,
         DoubleSelectionSort,
 

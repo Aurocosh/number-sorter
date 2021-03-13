@@ -65,6 +65,8 @@ namespace NumberSorter.Domain.Logic
             _nameDictionary.Add(ComparassionAlgorhythmType.InsertionSort, "Insertion sort");
             _nameDictionary.Add(ComparassionAlgorhythmType.BinarySort, "Binary sort");
 
+            _nameDictionary.Add(ComparassionAlgorhythmType.FragmentSort, "Fragment sort");
+
             _nameDictionary.Add(ComparassionAlgorhythmType.SelectionSort, "Selection sort");
             _nameDictionary.Add(ComparassionAlgorhythmType.DoubleSelectionSort, "Double selection sort");
 

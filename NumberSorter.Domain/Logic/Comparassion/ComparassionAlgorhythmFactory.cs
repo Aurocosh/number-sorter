@@ -142,6 +142,9 @@ namespace NumberSorter.Domain.Logic
                 case ComparassionAlgorhythmType.InsertionSort:
                     return new InsertionSortFactory();
 
+                case ComparassionAlgorhythmType.FragmentSort:
+                    return new FragmentSortFactory(16, new BinaryOptimizedSortFactory());
+
                 case ComparassionAlgorhythmType.SelectionSort:
                     return new SelectionSortFactory();
                 case ComparassionAlgorhythmType.DoubleSelectionSort:
